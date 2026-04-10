@@ -19,5 +19,12 @@
     "tag": "CRM",
     "color": 1,
     "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
+  },
+  {
+    "file": "index.html",
+    "title": "CRM Dashboard Demo",
+    "tag": "CRM",
+    "color": 1,
+    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
   }
 ]

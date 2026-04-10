@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Vault | Secret Systems .io — Classified Access Only</title>
+<meta name="description" content="Enter The Vault — Secret Systems' classified collection of premium automation systems, elite client resources, and proprietary growth tools. PIN access required."/>
+<meta name="keywords" content="Secret Systems vault, AI automation systems, GoHighLevel elite tools, classified digital systems"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/vault.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://secretsystems.io/vault.html"/>
+<meta property="og:title" content="The Vault | Secret Systems .io"/>
+<meta property="og:description" content="Classified access only. Enter your PIN to open The Vault."/>
+<meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"The Vault — Secret Systems","url":"https://secretsystems.io/vault.html","description":"Exclusive classified resource portal for Secret Systems clients and partners.","isPartOf":{"@type":"WebSite","name":"Secret Systems .io","url":"https://secretsystems.io"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════
+   ROOT
+════════════════════════════════════════ */
+:root{
+  --g:#c9a84c; --g2:#f0c060; --gd:#7a5f1e;
+  --void:#000204; --ink:#04090f; --steel:#0c1220;
+  --white:#eef4ff; --dim:#506070;
+  --red:#ff2244; --green:#00ff88;
+  --dw:348px; --dh:408px; --thick:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  background:var(--void);color:var(--white);
+  font-family:'Outfit',sans-serif;
+  cursor:none;user-select:none;
+}
+
+/* ════════════════════════════════════════
+   CURSOR
+════════════════════════════════════════ */
+#cur{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 12px 4px rgba(201,168,76,.45);mix-blend-mode:screen;transition:width .2s,height .2s;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(201,168,76,.32);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(0,2,4,.9);backdrop-filter:blur(22px);border-bottom:1px solid rgba(201,168,76,.13);}
+.nl{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;letter-spacing:.04em;}
+.nl .d{color:var(--g);}
+.nl .i{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--g);opacity:.75;font-weight:300;}
+nav ul{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+nav ul a{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+nav ul a:hover,nav ul a.act{color:var(--g);}
+.nc{border:1px solid var(--g)!important;color:var(--g)!important;padding:.38rem 1.1rem;font-weight:700!important;transition:background .2s!important,color .2s!important;}
+.nc:hover{background:var(--g)!important;color:var(--void)!important;}
+@media(max-width:680px){nav ul{display:none;}}
+
+/* ════════════════════════════════════════
+   STAGE
+════════════════════════════════════════ */
+#stage{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* ════════════════════════════════════════
+   ENVIRONMENT
+════════════════════════════════════════ */
+#env{
+  position:absolute;inset:-5%;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -2%,rgba(201,168,76,.065) 0%,transparent 100%),
+    linear-gradient(180deg,#000608 0%,#010305 55%,#000204 100%);
+}
+#env::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent 0,transparent 79px,rgba(201,168,76,.012) 80px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 119px,rgba(201,168,76,.008) 120px);
+}
+#floor{
+  position:absolute;bottom:-5%;left:-20%;right:-20%;height:52%;
+  transform:perspective(480px) rotateX(72deg);
+  transform-origin:50% 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,.038) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,.038) 1px,transparent 1px);
+  background-size:70px 70px;
+}
+/* ceiling strip */
+#ceiling{
+  position:absolute;top:67px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.35),transparent);
+  box-shadow:0 0 40px 10px rgba(201,168,76,.09);
+}
+/* wall sconces */
+.sc{position:absolute;top:33%;width:3px;height:55px;background:linear-gradient(180deg,rgba(201,168,76,.45),transparent);}
+#scl{left:7%;}#scr{right:7%;}
+.sc::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.75),rgba(201,168,76,.15));box-shadow:0 0 18px 7px rgba(201,168,76,.13);}
+
+/* ════════════════════════════════════════
+   PARTICLES
+════════════════════════════════════════ */
+#pc{position:absolute;inset:0;pointer-events:none;z-index:2;}
+
+/* ════════════════════════════════════════
+   VAULT WALL
+════════════════════════════════════════ */
+#vwall{
+  position:relative;z-index:10;
+  width:460px;height:520px;
+  background:linear-gradient(140deg,#111520 0%,#0a0e18 32%,#07090f 65%,#050810 100%);
+  border:3px solid #1a1f2e;
+  border-radius:3px;
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,.07),
+    0 0 0 28px #020408,
+    0 0 0 29px rgba(201,168,76,.06),
+    0 50px 130px rgba(0,0,0,.95),
+    inset 0 0 60px rgba(0,0,0,.7);
+}
+#vwall::before{
+  content:'';position:absolute;inset:0;border-radius:3px;
+  background-image:
+    repeating-linear-gradient(0deg,transparent 0,transparent 7px,rgba(255,255,255,.004) 8px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 11px,rgba(255,255,255,.003) 12px);
+}
+#vwall::after{content:'';position:absolute;inset:18px;border:1px solid rgba(201,168,76,.08);border-radius:2px;pointer-events:none;}
+.wr{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35%30%,#2a3040,#0c1018);box-shadow:0 1px 3px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.04);}
+
+/* ════════════════════════════════════════
+   CAVITY
+════════════════════════════════════════ */
+#cavity{
+  position:absolute;inset:36px;
+  background:radial-gradient(ellipse at 50% 40%,#040c18 0%,#010408 55%,#000204 100%);
+  border-radius:2px;overflow:hidden;
+}
+#cavity::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,.016) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+#cavity::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.45),transparent);box-shadow:0 0 25px 8px rgba(201,168,76,.1);}
+
+/* light flood from open vault */
+#vflood{
+  position:absolute;inset:36px;
+  background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,.22) 0%,rgba(201,168,76,.06) 40%,transparent 70%);
+  opacity:0;border-radius:2px;
+  transition:opacity 1.2s ease;
+  pointer-events:none;
+}
+
+/* ════════════════════════════════════════
+   3D DOOR
+════════════════════════════════════════ */
+#door-wrap{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:var(--dw);height:var(--dh);
+  transform-style:preserve-3d;
+  transform-origin:left center;
+  /* JS sets rotateY to open */
+}
+
+/* BACK FACE */
+#se-back{
+  position:absolute;inset:0;
+  transform:translateZ(calc(-1 * var(--thick)/2));
+  background:linear-gradient(150deg,#08101a,#050c14,#030810);
+  border:2px solid rgba(201,168,76,.05);
+  backface-visibility:hidden;
+}
+#se-back::after{content:'';position:absolute;inset:14px;border:1px solid rgba(201,168,76,.035);}
+
+/* TOP EDGE */
+#se-t{
+  position:absolute;
+  width:var(--dw);height:var(--thick);
+  left:0;top:0;
+  transform:translateZ(calc(var(--thick)/2)) translateY(calc(-1 * var(--thick))) rotateX(90deg);
+  transform-origin:center bottom;
+  background:linear-gradient(90deg,#07101a,#0e1828,#131e2c,#0e1828,#07101a);
+  border-bottom:1px solid rgba(201,168,76,.05);
+  backface-visibility:hidden;
+}
+/* BOTTOM EDGE */
+#se-b{
+  position:absolute;
+  width:var(--dw);height:var(--thick);
+  left:0;bottom:0;
+  transform:translateZ(calc(var(--thick)/2)) translateY(var(--thick)) rotateX(-90deg);
+  transform-origin:center top;
+  background:linear-gradient(90deg,#07101a,#0e1828,#131e2c,#0e1828,#07101a);
+  border-top:1px solid rgba(201,168,76,.05);
+  backface-visibility:hidden;
+}
+/* RIGHT EDGE (latch) */
+#se-r{
+  position:absolute;
+  width:var(--thick);height:var(--dh);
+  right:0;top:0;
+  transform:translateZ(calc(var(--thick)/2)) translateX(var(--thick)) rotateY(90deg);
+  transform-origin:left center;
+  background:linear-gradient(180deg,#07101a,#121c28,#101828,#121c28,#07101a);
+  border-left:1px solid rgba(201,168,76,.09);
+  backface-visibility:hidden;
+}
+/* LEFT EDGE (hinge) */
+#se-l{
+  position:absolute;
+  width:var(--thick);height:var(--dh);
+  left:0;top:0;
+  transform:translateZ(calc(var(--thick)/2)) translateX(calc(-1 * var(--thick))) rotateY(-90deg);
+  transform-origin:right center;
+  background:linear-gradient(180deg,#07101a,#0d1825,#0b1520,#0d1825,#07101a);
+  border-right:1px solid rgba(201,168,76,.06);
+  backface-visibility:hidden;
+  display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:2rem 0;
+}
+.er{width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35%35%,#3a4555,#111820);border:1px solid rgba(201,168,76,.12);}
+
+/* FRONT FACE */
+#df{
+  position:absolute;inset:0;
+  transform:translateZ(calc(var(--thick)/2));
+  background:linear-gradient(155deg,
+    #3a4055 0%,#272f42 10%,
+    #1c2335 24%,#232b3e 38%,
+    #272f42 52%,#1a2030 68%,
+    #131820 100%);
+  border:3px solid #161c28;
+  border-radius:4px;
+  overflow:hidden;
+  backface-visibility:hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(201,168,76,.1),
+    inset 0 0 0 7px rgba(0,0,0,.2),
+    inset 3px 3px 18px rgba(255,255,255,.025),
+    inset -3px -3px 18px rgba(0,0,0,.38);
+}
+#df::before{content:'';position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.045) 0%,transparent 35%,rgba(0,0,0,.06) 68%,rgba(255,255,255,.018) 100%);pointer-events:none;}
+#df::after{content:'';position:absolute;inset:8px;border:2px solid rgba(201,168,76,.19);border-radius:3px;pointer-events:none;}
+
+/* inner panel */
+#dp{position:absolute;inset:24px;background:linear-gradient(150deg,#171e2e,#101520,#0b1018);border:1px solid rgba(201,168,76,.1);border-radius:2px;}
+#dp::before{content:'';position:absolute;inset:10px;border:1px solid rgba(201,168,76,.05);border-radius:1px;}
+
+/* gold trim */
+.gt{position:absolute;background:linear-gradient(90deg,transparent,var(--gd),var(--g),var(--g2),var(--g),var(--gd),transparent);}
+.gth{height:1.5px;left:22px;right:22px;}
+.gtv{width:1.5px;top:22px;bottom:22px;}
+
+/* corner marks */
+.ck{position:absolute;width:16px;height:16px;border-color:rgba(201,168,76,.48);border-style:solid;}
+
+/* ════════════════════════════════════════
+   BOLTS
+════════════════════════════════════════ */
+.bcol{position:absolute;display:flex;flex-direction:column;gap:56px;top:50%;transform:translateY(-50%);}
+#bcr{right:-17px;}
+#bcl{left:-17px;}
+.bl{width:34px;height:22px;position:relative;display:flex;align-items:center;}
+.bsh{
+  position:absolute;width:100%;height:13px;border-radius:7px;
+  background:linear-gradient(180deg,#4a5568,#2d3748,#1e2535,#2d3748,#4a5568);
+  box-shadow:0 2px 5px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1),inset 0 -1px 2px rgba(0,0,0,.4);
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+}
+.bsh::before{content:'';position:absolute;top:2px;left:8px;right:8px;height:3px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);}
+.bsh::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 38%32%,#5a6880,#2d3748,#141820);border:1px solid rgba(201,168,76,.22);box-shadow:0 2px 4px rgba(0,0,0,.5);}
+#bcl .bsh::after{right:auto;left:-4px;}
+
+/* ════════════════════════════════════════
+   WHEEL
+════════════════════════════════════════ */
+#ww{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;}
+#wheel{
+  width:120px;height:120px;position:relative;
+  transition:transform 1.4s cubic-bezier(.4,0,.2,1);
+}
+#wheel::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,
+    #38404f 0deg,#1e2535 22deg,#434d60 44deg,#293040 66deg,
+    #38404f 88deg,#1e2535 110deg,#434d60 132deg,#293040 154deg,
+    #38404f 176deg,#1e2535 198deg,#434d60 220deg,#293040 242deg,
+    #38404f 264deg,#1e2535 286deg,#434d60 308deg,#293040 330deg,
+    #38404f 352deg,#1e2535 360deg);
+  border:2.5px solid rgba(201,168,76,.42);
+  box-shadow:0 0 0 1px rgba(201,168,76,.07),0 0 20px rgba(201,168,76,.1),inset 0 0 22px rgba(0,0,0,.55);
+}
+#wheel::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 38%32%,#525d70,#252f40,#111820);border:2px solid rgba(201,168,76,.32);box-shadow:inset 0 2px 5px rgba(255,255,255,.08),inset 0 -2px 5px rgba(0,0,0,.5);}
+.sp{position:absolute;top:50%;left:50%;height:5px;width:44px;transform-origin:0 50%;margin-top:-2.5px;background:linear-gradient(90deg,rgba(201,168,76,.55),#2d3748 42%,#1a2030);border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.5);}
+
+/* door logo */
+#dlogo{position:absolute;top:18%;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;}
+.dem{width:46px;height:46px;margin:0 auto .65rem;border-radius:50%;background:radial-gradient(circle at 40%35%,rgba(201,168,76,.13),rgba(0,0,0,.5));border:1.5px solid rgba(201,168,76,.33);display:flex;align-items:center;justify-content:center;font-size:1.35rem;box-shadow:0 0 18px rgba(201,168,76,.07),inset 0 0 8px rgba(0,0,0,.4);}
+.dlt{font-family:'Syne',sans-serif;font-weight:800;font-size:.68rem;letter-spacing:.3em;color:rgba(201,168,76,.58);text-transform:uppercase;}
+.dls{font-family:'JetBrains Mono',monospace;font-size:.44rem;letter-spacing:.28em;color:rgba(201,168,76,.3);display:block;margin-top:.28rem;text-transform:uppercase;}
+
+/* serial plate */
+#splate{position:absolute;bottom:15%;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(0,0,0,.42);border:1px solid rgba(201,168,76,.13);padding:.33rem .95rem;font-family:'JetBrains Mono',monospace;font-size:.44rem;color:rgba(201,168,76,.38);letter-spacing:.15em;text-transform:uppercase;}
+
+/* hinge */
+#hinge{position:absolute;left:-2px;top:50%;transform:translate(-50%,-50%);width:22px;height:110px;display:flex;flex-direction:column;justify-content:space-between;z-index:40;}
+.hb{width:22px;height:32px;background:linear-gradient(90deg,#4a5568,#2d3748,#1a2030,#2d3748,#4a5568);border-radius:50% 10px 10px 50%;border:1.5px solid rgba(201,168,76,.18);box-shadow:inset 0 1px 3px rgba(255,255,255,.07),2px 0 6px rgba(0,0,0,.5);}
+
+/* ════════════════════════════════════════
+   PIN PAD
+════════════════════════════════════════ */
+#pinpad{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:all;
+}
+#pbox{
+  background:linear-gradient(145deg,#06101a,#040c14,#020810);
+  border:1.5px solid rgba(201,168,76,.28);
+  padding:2.2rem 2rem;
+  width:300px;
+  position:relative;
+  box-shadow:0 0 0 1px rgba(201,168,76,.07),0 0 80px rgba(0,0,0,.9),0 0 120px rgba(201,168,76,.03);
+  opacity:0;transform:translateY(18px) scale(.96);
+  animation:pinIn .55s .2s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes pinIn{to{opacity:1;transform:translateY(0) scale(1);}}
+/* corner accents */
+#pbox::before{content:'';position:absolute;top:-1px;left:-1px;width:18px;height:18px;border-top:2px solid var(--g);border-left:2px solid var(--g);}
+#pbox::after{content:'';position:absolute;bottom:-1px;right:-1px;width:18px;height:18px;border-bottom:2px solid var(--g);border-right:2px solid var(--g);}
+
+.pe{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.42);text-align:center;margin-bottom:.45rem;}
+.ph{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;text-align:center;margin-bottom:.28rem;}
+.ps{font-size:.75rem;color:var(--dim);text-align:center;margin-bottom:1.6rem;}
+
+/* display */
+#disp{
+  background:#000810;
+  border:1px solid rgba(201,168,76,.22);
+  padding:.75rem 1rem;
+  font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;
+  letter-spacing:.5em;color:var(--g);text-align:center;
+  margin-bottom:1.3rem;min-height:56px;
+  display:flex;align-items:center;justify-content:center;
+  text-shadow:0 0 12px rgba(201,168,76,.45);
+  box-shadow:inset 0 0 18px rgba(0,0,0,.5);
+  position:relative;overflow:hidden;
+}
+#disp::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);pointer-events:none;}
+
+/* numpad */
+#npad{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-bottom:.4rem;}
+.kb{
+  background:linear-gradient(145deg,#131e2c,#0c1520);
+  border:1px solid rgba(201,168,76,.13);
+  color:var(--white);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+  padding:.82rem;cursor:pointer;
+  transition:background .15s,border-color .15s,transform .1s;
+  position:relative;overflow:hidden;
+}
+.kb:hover{background:linear-gradient(145deg,#1c2a3a,#141e2c);border-color:rgba(201,168,76,.35);color:var(--g);}
+.kb:active{transform:scale(.93);}
+/* ripple */
+.kb::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(201,168,76,.15),transparent 65%);opacity:0;transition:opacity .15s;}
+.kb:active::after{opacity:1;}
+.kb.del{font-size:.78rem;letter-spacing:.05em;color:var(--dim);}
+.kb.del:hover{color:var(--red);border-color:rgba(255,34,68,.28);}
+.kb.zero{grid-column:1/3;}
+
+.kb-enter{
+  width:100%;background:linear-gradient(145deg,#0e1c10,#081008);
+  border:1px solid rgba(0,255,136,.2);
+  color:var(--green);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.88rem;cursor:pointer;
+  transition:all .18s;margin-top:.4rem;
+}
+.kb-enter:hover{background:var(--green);color:var(--void);border-color:var(--green);box-shadow:0 0 22px rgba(0,255,136,.25);}
+.kb-enter:active{transform:scale(.97);}
+
+#pstatus{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;text-align:center;
+  color:rgba(201,168,76,.35);margin-top:.9rem;min-height:1rem;
+  transition:color .25s;
+}
+#pstatus.err{color:var(--red);animation:shake .38s;}
+#pstatus.ok{color:var(--green);}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}50%{transform:translateX(3px);}}
+
+/* ════════════════════════════════════════
+   VAULT INTERIOR (slides up after unlock)
+════════════════════════════════════════ */
+#interior{
+  position:fixed;inset:0;
+  background:linear-gradient(180deg,#000608 0%,#010510 55%,#000305 100%);
+  z-index:300;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform 1.1s cubic-bezier(.4,0,.15,1);
+  pointer-events:none;
+}
+#interior.open{transform:translateY(0);pointer-events:all;}
+
+/* interior nav */
+.in{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(0,2,4,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.13);}
+.in-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:var(--white);text-decoration:none;}
+.in-logo .d{color:var(--g);}
+.ibadge{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.2em;padding:.24rem .65rem;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.26);color:var(--g);text-transform:uppercase;}
+.in-links{display:flex;align-items:center;gap:1.5rem;}
+.in-links a{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.in-links a:hover{color:var(--g);}
+
+/* hero */
+.ih{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem 2rem 5rem;position:relative;}
+.ih::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);box-shadow:0 0 45px 10px rgba(201,168,76,.1);}
+.ie{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:.8rem;justify-content:center;margin-bottom:1.5rem;opacity:0;animation:ir .85s .3s forwards;}
+.ie::before,.ie::after{content:'';display:block;width:40px;height:1px;background:var(--g);}
+.ih1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.5rem,9vw,7.5rem);line-height:.88;letter-spacing:-.03em;opacity:0;animation:ir .85s .5s forwards;}
+.ih1 .gold{color:var(--g);}
+.ih1 .ghost{-webkit-text-stroke:1.5px rgba(201,168,76,.33);color:transparent;}
+.id{font-size:1rem;font-weight:300;color:var(--dim);max-width:490px;line-height:1.75;margin-top:1.8rem;opacity:0;animation:ir .85s .72s forwards;}
+.ia{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2.5rem;opacity:0;animation:ir .85s .95s forwards;}
+@keyframes ir{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ticker */
+.ticker{border-top:1px solid rgba(201,168,76,.11);border-bottom:1px solid rgba(201,168,76,.11);background:rgba(201,168,76,.012);padding:.8rem 0;overflow:hidden;}
+.ti-i{display:flex;gap:3rem;animation:tk 22s linear infinite;white-space:nowrap;}
+.ti{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:rgba(201,168,76,.38);text-transform:uppercase;display:flex;align-items:center;gap:.9rem;flex-shrink:0;}
+.ti::before{content:'◆';color:var(--g);font-size:.38rem;}
+@keyframes tk{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* sections */
+.is{padding:5.5rem 3rem;max-width:1200px;margin:0 auto;}
+.ie2{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--g);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem;}
+.ie2::before{content:'';display:block;width:16px;height:1px;background:var(--g);}
+.ih2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1;letter-spacing:-.02em;margin-bottom:1.4rem;}
+.ih2 span{color:var(--g);}
+
+/* vault cards */
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.08);margin-top:3rem;}
+.vc{background:linear-gradient(150deg,#0a1420,#060d18);padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:background .3s;}
+.vc:hover{background:linear-gradient(150deg,#0e1a28,#090f1c);}
+.vc::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--gd),var(--g),var(--g2));transform:scaleX(0);transform-origin:left;transition:transform .42s;}
+.vc:hover::before{transform:scaleX(1);}
+.vn{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.36);margin-bottom:.9rem;}
+.vi{font-size:1.7rem;margin-bottom:.9rem;display:block;}
+.vt{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.6rem;}
+.vd{font-size:.82rem;color:var(--dim);line-height:1.65;}
+.vtag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;padding:.17rem .5rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15);color:var(--g);margin-top:.9rem;}
+.vl{display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g);text-decoration:none;margin-top:.7rem;transition:letter-spacing .2s;}
+.vl:hover{letter-spacing:.17em;}
+
+/* feature card */
+.vf{background:linear-gradient(135deg,#0b1825,rgba(201,168,76,.022));border:1px solid rgba(201,168,76,.15);padding:3rem;position:relative;overflow:hidden;margin-bottom:1px;}
+.vf::before{content:'';position:absolute;top:-1px;left:-1px;width:30px;height:30px;border-top:2px solid var(--g);border-left:2px solid var(--g);}
+.vf::after{content:'';position:absolute;bottom:-1px;right:-1px;width:30px;height:30px;border-bottom:2px solid var(--g);border-right:2px solid var(--g);}
+.vfe{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.42);margin-bottom:.9rem;}
+.vfh{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:.9rem;}
+.vfh span{color:var(--g);}
+.vfp{font-size:.88rem;color:var(--dim);line-height:1.75;max-width:580px;}
+.vfst{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(201,168,76,.1);flex-wrap:wrap;}
+.vfsn{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:var(--g);line-height:1;}
+.vfsl{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,168,76,.38);margin-top:.25rem;}
+
+/* terminal */
+.vterm{background:#010810;border:1px solid rgba(201,168,76,.14);font-family:'JetBrains Mono',monospace;font-size:.75rem;}
+.vtb{background:rgba(201,168,76,.03);padding:.6rem .9rem;border-bottom:1px solid rgba(201,168,76,.08);display:flex;align-items:center;gap:.44rem;font-size:.64rem;color:rgba(201,168,76,.34);}
+.vtt{width:9px;height:9px;border-radius:50%;}
+.vtc{padding:1.3rem;line-height:2.1;}
+.vtl{opacity:0;animation:fl .08s forwards;}
+.vtl:nth-child(1){animation-delay:.2s}.vtl:nth-child(2){animation-delay:.7s}.vtl:nth-child(3){animation-delay:1.3s}.vtl:nth-child(4){animation-delay:1.9s}.vtl:nth-child(5){animation-delay:2.5s}.vtl:nth-child(6){animation-delay:3.1s}.vtl:nth-child(7){animation-delay:3.7s}.vtl:nth-child(8){animation-delay:4.3s}
+@keyframes fl{from{opacity:0;}to{opacity:1;}}
+.tg{color:#4eff9f}.to{color:var(--g)}.tw{color:var(--white)}.ty{color:#ffe066}.tm{color:rgba(201,168,76,.34)}
+.tblink{animation:bl 1s infinite;}
+@keyframes bl{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* pricing */
+.vpg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,.08);margin-top:3rem;}
+.vpc{background:linear-gradient(150deg,#0a1420,#060d18);padding:2.4rem 2rem;}
+.vpc.hot{background:linear-gradient(150deg,#0c1a22,rgba(201,168,76,.04));border:1px solid rgba(201,168,76,.19);position:relative;}
+.vpc.hot::after{content:'VAULT PICK';position:absolute;top:1rem;right:1rem;font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.14em;color:var(--g);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.24);padding:.17rem .5rem;}
+.vpp{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.38);margin-bottom:.9rem;}
+.vpa{font-family:'Syne',sans-serif;font-weight:800;font-size:2.7rem;line-height:1;color:var(--white);margin-bottom:.25rem;}
+.vpa sup{font-size:.92rem;color:var(--g);vertical-align:top;margin-top:.44rem;}
+.vpd{font-size:.74rem;color:rgba(201,168,76,.38);margin-bottom:1.8rem;}
+.vpb{display:block;text-align:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:.74rem;text-decoration:none;transition:all .22s;}
+.vpc .vpb{border:1px solid rgba(201,168,76,.24);color:var(--g);}
+.vpc .vpb:hover,.vpc.hot .vpb{background:var(--g);color:#000;border-color:var(--g);}
+
+/* cta */
+.vcta{text-align:center;padding:6rem 2rem;border-top:1px solid rgba(201,168,76,.1);}
+.vcta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:1.3rem;}
+.vcta h2 span{color:var(--g);}
+.vcta p{font-size:.92rem;color:var(--dim);max-width:430px;margin:0 auto 2.5rem;}
+.vcta-b{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* vault footer */
+.vfoot{background:#000103;border-top:1px solid rgba(201,168,76,.09);padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.vflogo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:var(--white);}
+.vflogo .d{color:var(--g);}
+.vfcopy{font-family:'JetBrains Mono',monospace;font-size:.54rem;color:rgba(201,168,76,.26);letter-spacing:.1em;}
+.vflinks{display:flex;gap:1.3rem;}
+.vflinks a{font-size:.64rem;color:rgba(201,168,76,.28);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.vflinks a:hover{color:var(--g);}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .62s,transform .62s;}
+.rv.on{opacity:1;transform:translateY(0);}
+
+/* buttons */
+.bg{display:inline-flex;align-items:center;gap:.5rem;background:var(--g);color:#000;font-family:'Outfit',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.9rem;text-decoration:none;transition:all .22s;}
+.bg:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.25);}
+.bo{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(201,168,76,.33);color:var(--g);font-family:'Outfit',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.9rem;text-decoration:none;transition:all .22s;}
+.bo:hover{border-color:var(--g);background:rgba(201,168,76,.04);}
+
+@media(max-width:760px){
+  #vwall{width:300px;height:360px;}
+  :root{--dw:232px;--dh:288px;--thick:28px;}
+  #wheel{width:82px;height:82px;}
+  .bcol{gap:38px;}#bcr{right:-13px;}#bcl{left:-13px;}
+  .vg,.vpg{grid-template-columns:1fr;}
+  .is{padding:4rem 1.5rem;}
+  .vf{padding:2rem 1.5rem;}
+  .ih{padding:5rem 1.5rem 4rem;}
+  .vfoot{flex-direction:column;text-align:center;}
+  #pbox{width:270px;padding:1.8rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
+  <ul>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="automation.html">AI &amp; Automation</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="vault.html" class="act">The Vault</a></li>
+    <li><a href="contact.html" class="nc">Get Access</a></li>
+  </ul>
+</nav>
+
+<!-- STAGE -->
+<div id="stage">
+  <div id="env"></div>
+  <div id="floor"></div>
+  <div id="ceiling"></div>
+  <div class="sc" id="scl"></div>
+  <div class="sc" id="scr"></div>
+  <canvas id="pc"></canvas>
+
+  <!-- VAULT WALL -->
+  <div id="vwall">
+    <div class="wr" style="top:14px;left:14px;"></div>
+    <div class="wr" style="top:14px;right:14px;"></div>
+    <div class="wr" style="bottom:14px;left:14px;"></div>
+    <div class="wr" style="bottom:14px;right:14px;"></div>
+    <div class="wr" style="top:50%;left:14px;transform:translateY(-50%);"></div>
+    <div class="wr" style="top:50%;right:14px;transform:translateY(-50%);"></div>
+
+    <!-- dark cavity -->
+    <div id="cavity"></div>
+    <!-- warm flood when open -->
+    <div id="vflood"></div>
+
+    <!-- 3D DOOR -->
+    <div id="door-wrap">
+      <div id="se-back"></div>
+      <div id="se-t"></div>
+      <div id="se-b"></div>
+      <div id="se-r"></div>
+      <div id="se-l"><div class="er"></div><div class="er"></div><div class="er"></div><div class="er"></div></div>
+
+      <!-- FRONT FACE -->
+      <div id="df">
+        <div id="dp"></div>
+
+        <div class="gt gth" style="top:48px;"></div>
+        <div class="gt gth" style="bottom:48px;"></div>
+        <div class="gt gtv" style="left:48px;"></div>
+        <div class="gt gtv" style="right:48px;"></div>
+
+        <div class="ck" style="top:34px;left:34px;border-width:2px 0 0 2px;"></div>
+        <div class="ck" style="top:34px;right:34px;border-width:2px 2px 0 0;"></div>
+        <div class="ck" style="bottom:34px;left:34px;border-width:0 0 2px 2px;"></div>
+        <div class="ck" style="bottom:34px;right:34px;border-width:0 2px 2px 0;"></div>
+
+        <!-- LEFT BOLTS -->
+        <div class="bcol" id="bcl">
+          <div class="bl" id="bl1"><div class="bsh"></div></div>
+          <div class="bl" id="bl2"><div class="bsh"></div></div>
+          <div class="bl" id="bl3"><div class="bsh"></div></div>
+        </div>
+        <!-- RIGHT BOLTS -->
+        <div class="bcol" id="bcr">
+          <div class="bl" id="br1"><div class="bsh"></div></div>
+          <div class="bl" id="br2"><div class="bsh"></div></div>
+          <div class="bl" id="br3"><div class="bsh"></div></div>
+        </div>
+
+        <!-- WHEEL -->
+        <div id="ww">
+          <div id="wheel">
+            <div class="sp" style="transform:rotate(0deg)"></div>
+            <div class="sp" style="transform:rotate(40deg)"></div>
+            <div class="sp" style="transform:rotate(80deg)"></div>
+            <div class="sp" style="transform:rotate(120deg)"></div>
+            <div class="sp" style="transform:rotate(160deg)"></div>
+            <div class="sp" style="transform:rotate(200deg)"></div>
+            <div class="sp" style="transform:rotate(240deg)"></div>
+            <div class="sp" style="transform:rotate(280deg)"></div>
+            <div class="sp" style="transform:rotate(320deg)"></div>
+          </div>
+        </div>
+
+        <div id="dlogo"><div class="dem">🔐</div><div class="dlt">Secret Systems</div><span class="dls">Classified Access</span></div>
+        <div id="splate">SS-VAULT-MK4 · SN:2025-0001 · CLASS IV CERTIFIED</div>
+        <div id="hinge"><div class="hb"></div><div class="hb"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN PAD -->
+<div id="pinpad">
+  <div id="pbox">
+    <div class="pe">Secret Systems // Vault Access</div>
+    <h2 class="ph">Enter PIN</h2>
+    <p class="ps">Authorized personnel only.</p>
+    <div id="disp"><span id="dots">_ _ _ _</span></div>
+    <div id="npad">
+      <button class="kb" onclick="key('1')">1</button>
+      <button class="kb" onclick="key('2')">2</button>
+      <button class="kb" onclick="key('3')">3</button>
+      <button class="kb" onclick="key('4')">4</button>
+      <button class="kb" onclick="key('5')">5</button>
+      <button class="kb" onclick="key('6')">6</button>
+      <button class="kb" onclick="key('7')">7</button>
+      <button class="kb" onclick="key('8')">8</button>
+      <button class="kb" onclick="key('9')">9</button>
+      <button class="kb zero" onclick="key('0')">0</button>
+      <button class="kb del" onclick="del()">⌫</button>
+    </div>
+    <button class="kb-enter" onclick="submit()">UNLOCK VAULT</button>
+    <div id="pstatus">AWAITING AUTHORIZATION</div>
+  </div>
+</div>
+
+<!-- INTERIOR -->
+<div id="interior">
+  <div class="in">
+    <a href="index.html" class="in-logo">Secret Systems<span class="d">.</span><span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--g);opacity:.72;font-weight:300;">io</span></a>
+    <div class="in-links">
+      <a href="services.html">Services</a>
+      <a href="automation.html">Automation</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <span class="ibadge">🔓 VAULT ACCESS</span>
+    </div>
+  </div>
+
+  <div class="ih">
+    <div class="ie">Access Granted · Welcome Inside</div>
+    <h1 class="ih1">You're&nbsp;In<br><span class="ghost">The&nbsp;</span><span class="gold">Vault</span></h1>
+    <p class="id">This is where Secret Systems keeps its most powerful tools, proprietary systems, and elite-level resources — built to give your business an unfair advantage.</p>
+    <div class="ia">
+      <a href="contact.html" class="bg">Deploy My System →</a>
+      <a href="catalog.html" class="bo">Browse Full Catalog</a>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ti-i">
+      <span class="ti">Classified Systems</span><span class="ti">AI Lead Response</span><span class="ti">Elite CRM Architecture</span><span class="ti">Auto-Dial Engine</span><span class="ti">Review Domination</span><span class="ti">Funnel Intelligence</span><span class="ti">GoHighLevel Mastery</span><span class="ti">SMS Blast Campaigns</span>
+      <span class="ti">Classified Systems</span><span class="ti">AI Lead Response</span><span class="ti">Elite CRM Architecture</span><span class="ti">Auto-Dial Engine</span><span class="ti">Review Domination</span><span class="ti">Funnel Intelligence</span><span class="ti">GoHighLevel Mastery</span><span class="ti">SMS Blast Campaigns</span>
+    </div>
+  </div>
+
+  <div class="is rv">
+    <p class="ie2">Flagship System</p>
+    <h2 class="ih2">The Complete <span>AI Sales Machine</span></h2>
+    <div class="vf">
+      <div class="vfe">CLASSIFIED · PROPRIETARY BUILD</div>
+      <h3 class="vfh">Built to <span>Close Deals While You Sleep</span></h3>
+      <p class="vfp">The full-stack system we deploy for top clients — AI lead response, GoHighLevel CRM, multi-channel follow-up, reputation management, and analytics. It runs 24/7, captures every lead, qualifies relentlessly, and delivers booked appointments without a single manual touchpoint.</p>
+      <div class="vfst">
+        <div><div class="vfsn">60s</div><div class="vfsl">Max Lead Response</div></div>
+        <div><div class="vfsn">3×</div><div class="vfsl">Avg Booking Increase</div></div>
+        <div><div class="vfsn">24/7</div><div class="vfsl">Always Running</div></div>
+        <div><div class="vfsn">0</div><div class="vfsl">Extra Staff Needed</div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,.08);">
+      <div class="vterm">
+        <div class="vtb"><div class="vtt" style="background:#ff5f57;"></div><div class="vtt" style="background:#febc2e;"></div><div class="vtt" style="background:#28c840;"></div><span style="margin-left:.4rem;">vault // ai.engine.live</span></div>
+        <div class="vtc">
+          <div class="vtl"><span class="tm"># </span><span class="to">VAULT SYSTEM ONLINE</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">AI engine: </span><span class="ty">ACTIVE</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">Auto-dial: </span><span class="ty">RUNNING</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">Review campaigns: </span><span class="ty">3 LIVE</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">CRM pipelines: </span><span class="ty">SYNCED</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">Leads captured: </span><span class="to">47 today</span></div>
+          <div class="vtl"><span class="tg">✓ </span><span class="tw">Appointments: </span><span class="to">12 booked</span></div>
+          <div class="vtl"><span class="tm">_ </span><span class="tblink">█</span></div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(150deg,#0a1420,#060d18);border:1px solid rgba(201,168,76,.1);padding:2rem;display:flex;flex-direction:column;gap:.75rem;justify-content:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.36);margin-bottom:.4rem;">SYSTEM COMPONENTS</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>AI Lead Response Bot (60s)</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>GoHighLevel CRM — Full Config</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>Auto-Dial Follow-Up Engine</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>SMS + Email Drip Sequences</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>5-Star Review Generator</div>
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem;color:var(--white);"><span style="color:var(--g);">◆</span>Missed Call Text-Back</div>
+        <a href="contact.html" class="bg" style="margin-top:.6rem;justify-content:center;font-size:.78rem;padding:.7rem;">Deploy This System →</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(201,168,76,.012);border-top:1px solid rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.08);">
+  <div class="is rv">
+    <p class="ie2">Vault Resources</p>
+    <h2 class="ih2">Proprietary <span>Systems &amp; Tools</span></h2>
+    <div class="vg">
+      <div class="vc"><div class="vn">01 · AI</div><span class="vi">🤖</span><h3 class="vt">AI Lead Qualifier</h3><p class="vd">60-second response, smart qualification, automatic calendar booking — 24/7, no staff needed.</p><span class="vtag">48hr Deploy</span><a href="automation.html" class="vl">View Details →</a></div>
+      <div class="vc"><div class="vn">02 · REPUTATION</div><span class="vi">⭐</span><h3 class="vt">5-Star Review Machine</h3><p class="vd">14 reviews to 97+ in 60 days — triggered automatically on job completion with smart filtering.</p><span class="vtag">+83 Reviews Avg</span><a href="services.html#reviews" class="vl">View Details →</a></div>
+      <div class="vc"><div class="vn">03 · OUTREACH</div><span class="vi">📞</span><h3 class="vt">Auto-Dial Dominator</h3><p class="vd">Works your lead list 24/7 — voicemails, outcome logging, SMS follow-up. Zero staff required.</p><span class="vtag">0 Staff Required</span><a href="automation.html" class="vl">View Details →</a></div>
+      <div class="vc"><div class="vn">04 · CRM</div><span class="vi">📊</span><h3 class="vt">Elite GHL Pipeline</h3><p class="vd">Custom GoHighLevel CRM built around your exact sales process. Nothing generic, ever.</p><span class="vtag">100% Custom</span><a href="services.html#crm" class="vl">View Details →</a></div>
+      <div class="vc"><div class="vn">05 · CONVERSION</div><span class="vi">🎯</span><h3 class="vt">Funnel Stack</h3><p class="vd">Multi-step funnels wired to your CRM from click one — opt-in, offer, upsell, follow-up.</p><span class="vtag">CRM Connected</span><a href="services.html#web" class="vl">View Details →</a></div>
+      <div class="vc"><div class="vn">06 · MARKETING</div><span class="vi">📱</span><h3 class="vt">SMS Blast System</h3><p class="vd">98% open rate. Mass campaigns, re-engagement, reminders — all managed and tracked.</p><span class="vtag">98% Open Rate</span><a href="services.html#sms" class="vl">View Details →</a></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="is rv">
+    <p class="ie2">Vault Pricing</p>
+    <h2 class="ih2">Since You're In the <span>Vault</span></h2>
+    <div class="vpg">
+      <div class="vpc"><div class="vpp">Starter</div><div class="vpa"><sup>$</sup>497</div><div class="vpd">/month · Foundation systems</div><a href="contact.html" class="vpb">Get Started</a></div>
+      <div class="vpc hot"><div class="vpp">Growth</div><div class="vpa"><sup>$</sup>997</div><div class="vpd">/month · Full AI automation</div><a href="contact.html" class="vpb">Get Started</a></div>
+      <div class="vpc"><div class="vpp">Machine</div><div class="vpa" style="font-size:2rem;"><sup>$</sup>1,997</div><div class="vpd">/month · Full infrastructure</div><a href="contact.html" class="vpb">Get Started</a></div>
+    </div>
+    <div style="text-align:center;margin-top:1.8rem;"><a href="pricing.html" class="bo" style="font-size:.78rem;">Full Pricing Breakdown →</a></div>
+  </div>
+
+  <div class="vcta rv">
+    <p class="ie2" style="justify-content:center;">You Found It</p>
+    <h2>Now Let's Build Your <span>Secret System</span></h2>
+    <p>You made it into the vault. That tells us you're serious. Let's build the exact infrastructure your business needs to dominate.</p>
+    <div class="vcta-b">
+      <a href="contact.html" class="bg">Book a Strategy Call →</a>
+      <a href="catalog.html" class="bo">Browse All Services</a>
+    </div>
+  </div>
+
+  <div class="vfoot">
+    <div class="vflogo">Secret Systems<span class="d">.</span><span style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--g);opacity:.72;font-weight:300;">io</span></div>
+    <div class="vfcopy">🔓 VAULT ACCESS ACTIVE · © 2025 SECRET SYSTEMS LLC · ALL RIGHTS RESERVED</div>
+    <div class="vflinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════
+   CURSOR
+════════════════════════════════════ */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function lr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lr);})();
+document.querySelectorAll('a,button,.kb,.kb-enter').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='42px';ring.style.height='42px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='28px';ring.style.height='28px';});
+});
+
+/* ════════════════════════════════════
+   PARTICLES
+════════════════════════════════════ */
+const canvas=document.getElementById('pc'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+const rs=()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;};
+rs();window.addEventListener('resize',rs);
+class Pt{constructor(){this.reset();}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.16;this.vy=(Math.random()-.5)*.16;this.r=Math.random()*.85+.2;this.a=Math.random()*.15+.03;}
+tick(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();}
+draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${this.a})`;ctx.fill();}}
+for(let i=0;i<70;i++)pts.push(new Pt());
+(function loop(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.tick();p.draw();});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(201,168,76,${.03*(1-d/120)})`;ctx.lineWidth=.4;ctx.stroke();}
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ════════════════════════════════════
+   AUDIO
+════════════════════════════════════ */
+let ac;
+function beep(freq,dur,vol=.06){
+  try{
+    if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();
+    const o=ac.createOscillator(),g=ac.createGain();
+    o.connect(g);g.connect(ac.destination);
+    o.frequency.value=freq;o.type='sine';
+    g.gain.setValueAtTime(vol,ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+dur/1000);
+    o.start();o.stop(ac.currentTime+dur/1000);
+  }catch(e){}
+}
+
+/* ════════════════════════════════════
+   PIN LOGIC
+════════════════════════════════════ */
+const PIN='1234'; // ← change this
+let entered='';
+const dots=document.getElementById('dots');
+const status=document.getElementById('pstatus');
+const pbox=document.getElementById('pbox');
+
+function updateDots(){
+  const filled=Array(entered.length).fill('●').join(' ');
+  const empty=Array(Math.max(0,PIN.length-entered.length)).fill('_').join(' ');
+  dots.textContent=filled+(filled&&empty?' ':'')+empty;
+}
+updateDots();
+
+function key(k){
+  if(entered.length>=PIN.length)return;
+  entered+=k; updateDots();
+  status.textContent='ENTERING...'; status.className='';
+  beep(700,35,.05);
+}
+function del(){
+  if(!entered.length)return;
+  entered=entered.slice(0,-1); updateDots();
+  status.textContent='AWAITING AUTHORIZATION'; status.className='';
+  beep(350,35,.04);
+}
+function submit(){
+  if(entered.length<PIN.length){
+    status.textContent='INCOMPLETE CODE'; status.className='err'; beep(180,180,.07); return;
+  }
+  if(entered===PIN){
+    status.textContent='✓ ACCESS GRANTED'; status.className='ok';
+    beep(880,70,.08); setTimeout(()=>beep(1100,100,.1),110);
+    setTimeout(openVault,800);
+  } else {
+    entered=''; updateDots();
+    status.textContent='✗ INVALID PIN — DENIED'; status.className='err';
+    beep(160,220,.08); pbox.style.animation='none'; void pbox.offsetWidth; pbox.style.animation='';
+  }
+}
+
+/* keyboard */
+document.addEventListener('keydown',e=>{
+  if(e.key>='0'&&e.key<='9')key(e.key);
+  else if(e.key==='Backspace'||e.key==='Delete')del();
+  else if(e.key==='Enter')submit();
+});
+
+/* ════════════════════════════════════
+   OPEN SEQUENCE
+════════════════════════════════════ */
+function openVault(){
+  /* 1 — hide pin pad */
+  document.getElementById('pinpad').style.transition='opacity .45s';
+  document.getElementById('pinpad').style.opacity='0';
+  setTimeout(()=>document.getElementById('pinpad').style.display='none',480);
+
+  /* 2 — wheel spins */
+  document.getElementById('wheel').style.transform='rotate(720deg)';
+
+  /* 3 — bolts retract with stagger */
+  setTimeout(()=>{
+    ['bl1','bl2','bl3'].forEach((id,i)=>setTimeout(()=>{
+      const b=document.getElementById(id).querySelector('.bsh');
+      b.style.transform='translateX(-26px)';
+    },i*80));
+    ['br1','br2','br3'].forEach((id,i)=>setTimeout(()=>{
+      const b=document.getElementById(id).querySelector('.bsh');
+      b.style.transform='translateX(26px)';
+    },i*80));
+  },700);
+
+  /* 4 — door swings open */
+  setTimeout(()=>{
+    const dw=document.getElementById('door-wrap');
+    dw.style.transition='transform 2s cubic-bezier(.25,.46,.45,.94)';
+    dw.style.transformOrigin='left center';
+    dw.style.transform='translateX(-20px) rotateY(-115deg) translateX(20px)';
+    /* light flood */
+    document.getElementById('vflood').style.opacity='1';
+    beep(220,500,.04);
+  },1350);
+
+  /* 5 — interior slides up */
+  setTimeout(()=>{
+    const inter=document.getElementById('interior');
+    inter.classList.add('open');
+    inter.scrollTop=0;
+    /* reveal */
+    setTimeout(setupReveal,400);
+  },3200);
+}
+
+function setupReveal(){
+  const inter=document.getElementById('interior');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});
+  },{root:inter,threshold:.1});
+  inter.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+}
+</script>
+</body>
+</html>

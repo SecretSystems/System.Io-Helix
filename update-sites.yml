@@ -1,0 +1,34 @@
+name: Update Sites Index
+
+on:
+  push:
+    paths:
+      - 'sites/*.html'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Generate sites/index.json
+        run: |
+          echo '[' > sites/index.json
+          first=true
+          for f in sites/*.html; do
+            name=$(basename "$f" .html)
+            title=$(grep -o '<title>[^<]*</title>' "$f" | sed 's/<[^>]*>//g' | head -1)
+            if [ -z "$title" ]; then title="$name"; fi
+            if [ "$first" = true ]; then first=false; else echo ',' >> sites/index.json; fi
+            echo "  {\"file\":\"$name.html\",\"title\":\"$title\",\"tag\":\"Website\",\"color\":0,\"desc\":\"\"}" >> sites/index.json
+          done
+          echo ']' >> sites/index.json
+          cat sites/index.json
+
+      - name: Commit updated index
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add sites/index.json
+          git diff --staged --quiet || git commit -m "Auto-update sites/index.json"
+          git push

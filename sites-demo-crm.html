@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CRM Dashboard — GoHighLevel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0d1117;color:#e6edf3;font-family:'Outfit',sans-serif;display:flex;min-height:100vh;}
+.sidebar{width:220px;background:#161b22;border-right:1px solid #30363d;padding:1.5rem 1rem;flex-shrink:0;}
+.sb-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:2rem;padding:.5rem;}
+.sb-logo span{color:#00c8ff;}
+.sb-item{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:4px;font-size:.8rem;color:#8b949e;cursor:pointer;margin-bottom:.2rem;}
+.sb-item.active{background:#1f2937;color:#00c8ff;}
+.sb-item:hover{background:#1f2937;color:#e6edf3;}
+.main{flex:1;padding:1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.topbar h1{font-family:'Syne',sans-serif;font-size:1.4rem;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;}
+.stat{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:1.2rem;}
+.stat-label{font-size:.7rem;color:#8b949e;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#00c8ff;}
+.stat-sub{font-size:.72rem;color:#3fb950;margin-top:.2rem;}
+.pipeline{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:1.2rem;}
+.pipe-h{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8b949e;margin-bottom:1rem;display:flex;justify-content:space-between;}
+.stages{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;}
+.stage{background:#0d1117;border:1px solid #30363d;border-radius:4px;padding:.8rem .6rem;}
+.stage-name{font-size:.62rem;color:#8b949e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;}
+.lead-card{background:#1f2937;border-radius:3px;padding:.5rem .6rem;margin-bottom:.4rem;font-size:.7rem;}
+.lead-name{color:#e6edf3;font-weight:600;}
+.lead-val{color:#3fb950;font-size:.65rem;}
+.badge-cnt{display:inline-block;background:#00c8ff22;border:1px solid #00c8ff44;color:#00c8ff;font-family:'JetBrains Mono',monospace;font-size:.58rem;padding:.1rem .4rem;border-radius:3px;float:right;}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sb-logo">Secret<span>CRM</span></div>
+  <div class="sb-item active">📊 Dashboard</div>
+  <div class="sb-item">👥 Contacts</div>
+  <div class="sb-item">📋 Pipeline</div>
+  <div class="sb-item">🤖 Automations</div>
+  <div class="sb-item">📱 Conversations</div>
+  <div class="sb-item">⭐ Reviews</div>
+  <div class="sb-item">📈 Reports</div>
+</div>
+<div class="main">
+  <div class="topbar"><h1>Dashboard</h1><div style="font-size:.72rem;color:#8b949e;font-family:'JetBrains Mono',monospace;">HVAC Pro LLC</div></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-label">New Leads</div><div class="stat-val">47</div><div class="stat-sub">↑ 12 today</div></div>
+    <div class="stat"><div class="stat-label">Booked</div><div class="stat-val">12</div><div class="stat-sub">↑ 3 today</div></div>
+    <div class="stat"><div class="stat-label">Reviews</div><div class="stat-val">4.9★</div><div class="stat-sub">97 total</div></div>
+    <div class="stat"><div class="stat-label">Revenue</div><div class="stat-val">$34k</div><div class="stat-sub">↑ this month</div></div>
+  </div>
+  <div class="pipeline">
+    <div class="pipe-h"><span>Sales Pipeline</span><span>20 active deals</span></div>
+    <div class="stages">
+      <div class="stage"><div class="stage-name">New Lead <span class="badge-cnt">8</span></div><div class="lead-card"><div class="lead-name">Mike D.</div><div class="lead-val">AC Repair</div></div><div class="lead-card"><div class="lead-name">Sarah K.</div><div class="lead-val">New Install</div></div></div>
+      <div class="stage"><div class="stage-name">Contacted <span class="badge-cnt">5</span></div><div class="lead-card"><div class="lead-name">James R.</div><div class="lead-val">$3,200</div></div><div class="lead-card"><div class="lead-name">Lisa M.</div><div class="lead-val">$1,800</div></div></div>
+      <div class="stage"><div class="stage-name">Quoted <span class="badge-cnt">4</span></div><div class="lead-card"><div class="lead-name">Tom B.</div><div class="lead-val">$5,400</div></div></div>
+      <div class="stage"><div class="stage-name">Booked <span class="badge-cnt">2</span></div><div class="lead-card"><div class="lead-name">Amy C.</div><div class="lead-val">Thu 2pm</div></div></div>
+      <div class="stage"><div class="stage-name">Won <span class="badge-cnt">1</span></div><div class="lead-card"><div class="lead-name">Dave H.</div><div class="lead-val" style="color:#00c8ff;">✓ $4,100</div></div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

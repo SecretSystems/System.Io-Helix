@@ -1,0 +1,23 @@
+[
+  {
+    "file": "taylor-made.html",
+    "title": "Taylor Made Land Services",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Black & orange industrial website for a South Louisiana land clearing company."
+  },
+  {
+    "file": "demo-funnel.html",
+    "title": "Lead Gen Funnel Demo",
+    "tag": "Funnel",
+    "color": 3,
+    "desc": "High-converting lead capture funnel with CRM integration and AI follow-up."
+  },
+  {
+    "file": "demo-crm.html",
+    "title": "CRM Dashboard Demo",
+    "tag": "CRM",
+    "color": 1,
+    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
+  }
+]

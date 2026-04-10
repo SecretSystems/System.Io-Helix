@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Past Work | Web Design Portfolio | Secret Systems .io</title>
+<meta name="description" content="Browse Secret Systems' portfolio of web design, CRM builds, automation systems, and landing pages. Live previews of every site we've built."/>
+<meta name="keywords" content="Secret Systems portfolio, web design work, website examples, GoHighLevel builds, Louisiana web design portfolio"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/work.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://secretsystems.io/work.html"/>
+<meta property="og:title" content="Past Work | Secret Systems .io"/>
+<meta property="og:description" content="Live previews of every website and funnel we've built. See the work, then request yours."/>
+<meta property="og:site_name" content="Secret Systems .io"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Secret Systems Portfolio","url":"https://secretsystems.io/work.html","isPartOf":{"@type":"WebSite","name":"Secret Systems .io","url":"https://secretsystems.io"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════ BASE ════════════════ */
+:root{
+  --void:#020408;--deep:#070d14;--card:#0f1c2a;
+  --border:rgba(0,200,255,0.12);--cyan:#00c8ff;--cyan2:#00ffe0;
+  --white:#e8f4ff;--muted:#4a6a82;--text:#a8c8e0;
+  --hh:4.5rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;min-height:100vh;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9997;}
+
+/* ════════════════ CURSOR ════════════════ */
+#cur{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;box-shadow:0 0 10px rgba(0,200,255,.5);transition:width .18s,height .18s;}
+#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(0,200,255,.32);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
+
+/* ════════════════ NAV ════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;height:var(--hh);background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nl{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--white);text-decoration:none;letter-spacing:.05em;}
+.nl .d{color:var(--cyan);}
+.nl .i{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--cyan);opacity:.8;font-weight:300;}
+nav ul{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+nav ul a{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s;position:relative;}
+nav ul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+nav ul a:hover,nav ul a.act{color:var(--cyan);}
+nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
+.nc{border:1px solid var(--cyan)!important;color:var(--cyan)!important;padding:.4rem 1.1rem;font-weight:600!important;transition:background .2s!important,color .2s!important;}
+.nc:hover{background:var(--cyan)!important;color:var(--void)!important;}
+.nc::after{display:none!important;}
+@media(max-width:768px){nav ul{display:none;}}
+
+/* ════════════════ PAGE HERO ════════════════ */
+.page-hero{padding:calc(var(--hh) + 3.5rem) 3rem 3rem;border-bottom:1px solid var(--border);position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+.eyebrow::before{content:'';display:block;width:18px;height:1px;background:var(--cyan);}
+.ph{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4.5rem);line-height:.95;letter-spacing:-.02em;}
+.ph span{color:var(--cyan);}
+.ph-sub{font-size:.95rem;color:var(--text);margin-top:1rem;max-width:540px;line-height:1.7;}
+
+/* ════════════════ TOOLBAR ════════════════ */
+.toolbar{
+  position:sticky;top:var(--hh);z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.8rem 3rem;
+  background:rgba(2,4,8,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;gap:.6rem;
+}
+.filters{display:flex;gap:.4rem;flex-wrap:wrap;}
+.fbtn{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid rgba(0,200,255,.16);color:var(--muted);padding:.38rem .85rem;cursor:pointer;transition:all .18s;}
+.fbtn:hover{border-color:rgba(0,200,255,.4);color:var(--cyan);}
+.fbtn.on{background:var(--cyan);color:var(--void);border-color:var(--cyan);font-weight:700;}
+.req-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,200,255,.08);border:1px solid var(--cyan);color:var(--cyan);padding:.42rem 1.1rem;cursor:pointer;transition:all .18s;}
+.req-btn:hover{background:var(--cyan);color:var(--void);}
+
+/* ════════════════ GRID ════════════════ */
+.grid-wrap{padding:2.5rem 3rem 5rem;position:relative;z-index:1;}
+#portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1.5rem;
+}
+
+/* ════════════════ CARDS ════════════════ */
+.pcard{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+  position:relative;
+  cursor:pointer;
+}
+.pcard:hover{
+  border-color:rgba(0,200,255,.4);
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px rgba(0,200,255,.08);
+}
+/* color top bar */
+.pcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent);z-index:2;
+}
+.pcard[data-c="0"]{--accent:linear-gradient(90deg,#00c8ff,#00ffe0);}
+.pcard[data-c="1"]{--accent:linear-gradient(90deg,#c9a84c,#f0c060);}
+.pcard[data-c="2"]{--accent:linear-gradient(90deg,#ff2244,#ff6060);}
+.pcard[data-c="3"]{--accent:linear-gradient(90deg,#00ff88,#00c860);}
+.pcard[data-c="4"]{--accent:linear-gradient(90deg,#a855f7,#c084fc);}
+
+/* ── PREVIEW WINDOW ── */
+.preview-wrap{
+  position:relative;
+  width:100%;
+  padding-bottom:56.25%; /* 16:9 */
+  background:#010508;
+  overflow:hidden;
+}
+.preview-wrap iframe{
+  position:absolute;
+  top:0;left:0;
+  width:200%;height:200%;
+  transform:scale(.5);
+  transform-origin:top left;
+  border:none;
+  pointer-events:none;
+  background:#010508;
+}
+/* loading shimmer */
+.preview-wrap::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(0,200,255,.04) 50%,transparent 100%);
+  background-size:200% 100%;
+  animation:shimmer 2s infinite;
+  z-index:1;
+  pointer-events:none;
+  opacity:1;
+  transition:opacity .5s;
+}
+.preview-wrap.loaded::after{opacity:0;}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+
+/* browser chrome decoration */
+.browser-bar{
+  display:flex;align-items:center;gap:.4rem;
+  padding:.4rem .7rem;
+  background:#0a1018;
+  border-bottom:1px solid rgba(0,200,255,.08);
+  position:relative;z-index:2;
+}
+.bdot{width:7px;height:7px;border-radius:50%;}
+.url-bar{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:.18rem .55rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* ── CARD INFO ── */
+.card-info{padding:1rem 1.2rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;flex:1;}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;}
+.pcard[data-c="0"] .card-tag{color:#00c8ff;}
+.pcard[data-c="1"] .card-tag{color:#c9a84c;}
+.pcard[data-c="2"] .card-tag{color:#ff4060;}
+.pcard[data-c="3"] .card-tag{color:#00ff88;}
+.pcard[data-c="4"] .card-tag{color:#a855f7;}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;line-height:1.2;color:var(--white);}
+.card-desc{font-size:.78rem;color:var(--text);line-height:1.6;}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.3rem;padding-top:.8rem;border-top:1px solid rgba(0,200,255,.08);}
+.view-link{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);text-decoration:none;transition:letter-spacing .2s;}
+.view-link:hover{letter-spacing:.16em;}
+.view-link::after{content:' →';}
+.card-num{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--muted);}
+
+/* ── EMPTY STATE ── */
+#empty{display:none;text-align:center;padding:5rem 2rem;color:var(--muted);}
+#empty .e-icon{font-size:3rem;margin-bottom:1rem;opacity:.5;}
+#empty h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:.6rem;color:var(--text);}
+#empty p{font-size:.88rem;line-height:1.7;}
+#empty code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.15);padding:.15rem .4rem;color:var(--cyan);}
+
+/* ── LOADING STATE ── */
+#loading{text-align:center;padding:5rem 2rem;color:var(--muted);}
+#loading .spin{width:32px;height:32px;border:2px solid rgba(0,200,255,.15);border-top:2px solid var(--cyan);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ════════════════ REQUEST MODAL ════════════════ */
+#ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s;}
+#ov.open{opacity:1;pointer-events:all;}
+#modal{background:linear-gradient(145deg,#080e18,#04090f);border:1px solid var(--border);width:min(540px,92vw);max-height:90vh;overflow-y:auto;padding:2.5rem;position:relative;transform:translateY(20px) scale(.97);transition:transform .32s cubic-bezier(.4,0,.2,1);}
+#ov.open #modal{transform:translateY(0) scale(1);}
+#modal::before{content:'';position:absolute;top:-1px;left:-1px;width:26px;height:26px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+#modal::after{content:'';position:absolute;bottom:-1px;right:-1px;width:26px;height:26px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.mcl{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .2s;}
+.mcl:hover{color:var(--white);}
+.mey{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--cyan);margin-bottom:.55rem;}
+.mh{font-family:'Syne',sans-serif;font-weight:800;font-size:1.45rem;margin-bottom:.35rem;}
+.ms{font-size:.8rem;color:var(--text);margin-bottom:1.7rem;line-height:1.6;}
+.fg{display:flex;flex-direction:column;gap:.32rem;margin-bottom:.9rem;}
+.fg label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.03);border:1px solid rgba(0,200,255,.12);color:var(--white);font-family:'Outfit',sans-serif;font-size:.86rem;padding:.72rem .95rem;outline:none;transition:border-color .2s;width:100%;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--cyan);background:rgba(0,200,255,.025);}
+.fg select option{background:var(--deep);}
+.fg textarea{resize:vertical;min-height:90px;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.msub{width:100%;background:var(--cyan);color:var(--void);font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.88rem;cursor:pointer;transition:background .2s,transform .12s;margin-top:.3rem;}
+.msub:hover{background:var(--cyan2);transform:translateY(-1px);}
+.msuc{display:none;text-align:center;padding:2.5rem 1rem;}
+.msuc h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--cyan);margin-bottom:.8rem;}
+.msuc p{font-size:.85rem;color:var(--text);line-height:1.7;}
+.msuc a{color:var(--cyan);}
+
+/* ════════════════ FOOTER ════════════════ */
+footer{background:#020407;border-top:1px solid var(--border);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;}
+.flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;}
+.flogo .d{color:var(--cyan);}
+.flogo .i{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);opacity:.8;font-weight:300;}
+.fcopy{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;}
+.flinks{display:flex;gap:1.3rem;}
+.flinks a{font-size:.68rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.flinks a:hover{color:var(--cyan);}
+
+@media(max-width:600px){
+  .page-hero,.toolbar,.grid-wrap,footer{padding-left:1.5rem;padding-right:1.5rem;}
+  #portfolio-grid{grid-template-columns:1fr;}
+  .toolbar{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
+  <ul>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="automation.html">AI &amp; Automation</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="work.html" class="act">Past Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="vault.html">🔐 Vault</a></li>
+    <li><a href="contact.html" class="nc">Get Access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="eyebrow">Portfolio</p>
+  <h1 class="ph">Past <span>Work</span></h1>
+  <p class="ph-sub">Live previews of every site we've built. Click any card to open the full page. Add your own by uploading to the <code>sites/</code> folder.</p>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="filters">
+    <button class="fbtn on" data-f="all">All</button>
+    <button class="fbtn" data-f="Website">Websites</button>
+    <button class="fbtn" data-f="Funnel">Funnels</button>
+    <button class="fbtn" data-f="CRM">CRM Builds</button>
+    <button class="fbtn" data-f="Automation">Automation</button>
+    <button class="fbtn" data-f="Marketing">Marketing</button>
+  </div>
+  <button class="req-btn" id="req-btn">Request a Site →</button>
+</div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div id="loading"><div class="spin"></div><p style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;">Loading portfolio...</p></div>
+  <div id="portfolio-grid"></div>
+  <div id="empty">
+    <div class="e-icon">📁</div>
+    <h3>No sites yet</h3>
+    <p>Drop any <code>.html</code> file into the <code>sites/</code> folder in your GitHub repo<br/>and update <code>sites/index.json</code> — it'll appear here automatically.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="flogo">Secret Systems<span class="d">.</span><span class="i">io</span></a>
+  <div class="fcopy">© 2025 SECRET SYSTEMS LLC · ALL RIGHTS RESERVED</div>
+  <div class="flinks"><a href="index.html">Home</a><a href="catalog.html">Catalog</a><a href="contact.html">Contact</a></div>
+</footer>
+
+<!-- REQUEST MODAL -->
+<div id="ov">
+  <div id="modal">
+    <button class="mcl" id="mcl">✕</button>
+    <div id="mfw">
+      <p class="mey">Secret Systems // New Project</p>
+      <h2 class="mh">Request Your Website</h2>
+      <p class="ms">Tell us what you need. We'll send a custom proposal within 24 hours.</p>
+      <form id="mform" novalidate>
+        <div class="fr">
+          <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required/></div>
+          <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required/></div>
+        </div>
+        <div class="fg"><label>Business Name *</label><input type="text" placeholder="Your Company LLC" required/></div>
+        <div class="fr">
+          <div class="fg"><label>Phone *</label><input type="tel" placeholder="(555) 000-0000" required/></div>
+          <div class="fg"><label>Email *</label><input type="email" placeholder="you@company.com" required/></div>
+        </div>
+        <div class="fg">
+          <label>Project Type *</label>
+          <select required>
+            <option value="">Select project type...</option>
+            <option>Business Website (5–10 pages)</option>
+            <option>Landing Page / Lead Funnel</option>
+            <option>GoHighLevel CRM Build</option>
+            <option>Complete Digital System</option>
+            <option>E-commerce Store</option>
+            <option>Other — let's talk</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Budget Range</label>
+          <select>
+            <option value="">Select range...</option>
+            <option>Under $1,000</option>
+            <option>$1,000 – $3,000</option>
+            <option>$3,000 – $7,500</option>
+            <option>$7,500+</option>
+            <option>Monthly retainer preferred</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Project Details *</label>
+          <textarea placeholder="What does your business do? What do you need the site to accomplish?" required></textarea>
+        </div>
+        <button type="submit" class="msub">Send My Request →</button>
+      </form>
+    </div>
+    <div class="msuc" id="msuc">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">✅</div>
+      <h3>Request Received!</h3>
+      <p>We'll review your details and reach out within 24 hours.<br/><br/>
+      Browse our <a href="catalog.html">service catalog</a> or <a href="pricing.html">pricing plans</a>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   CURSOR
+════════════════════════════════════════ */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function lr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(lr);})();
+function bigCur(){cur.style.width='16px';cur.style.height='16px';curR.style.width='44px';curR.style.height='44px';}
+function smCur(){cur.style.width='10px';cur.style.height='10px';curR.style.width='30px';curR.style.height='30px';}
+
+/* ════════════════════════════════════════
+   LOAD SITES FROM sites/index.json
+   
+   HOW TO ADD A NEW SITE:
+   1. Upload your .html file to the /sites/ folder in GitHub
+   2. Edit sites/index.json and add an entry:
+      { "file":"yourfile.html", "title":"Client Name", "tag":"Website", "color":0, "desc":"Short description." }
+   3. Commit — the grid updates automatically.
+   
+   color: 0=cyan(web) 1=gold(crm) 2=red(auto) 3=green(funnel) 4=purple(marketing)
+   tag can be: Website, Funnel, CRM, Automation, Marketing
+════════════════════════════════════════ */
+const grid = document.getElementById('portfolio-grid');
+const loading = document.getElementById('loading');
+const empty = document.getElementById('empty');
+let allSites = [];
+let currentFilter = 'all';
+
+async function loadSites() {
+  try {
+    // Add cache-bust so it always fetches fresh
+    const res = await fetch('sites/index.json?v=' + Date.now());
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    allSites = data;
+    loading.style.display = 'none';
+    renderGrid(allSites);
+  } catch(e) {
+    // If no json yet, show empty state with instructions
+    loading.style.display = 'none';
+    empty.style.display = 'block';
+  }
+}
+
+/* ════════════════════════════════════════
+   RENDER CARDS
+════════════════════════════════════════ */
+function renderGrid(sites) {
+  grid.innerHTML = '';
+  if (!sites || sites.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  sites.forEach((s, i) => {
+    const filePath = 'sites/' + s.file;
+    const liveUrl = s.url || filePath;
+    const card = document.createElement('div');
+    card.className = 'pcard';
+    card.dataset.c = s.color !== undefined ? s.color : 0;
+    card.dataset.tag = s.tag || 'Website';
+
+    card.innerHTML = `
+      <div class="browser-bar">
+        <div class="bdot" style="background:#ff5f57;"></div>
+        <div class="bdot" style="background:#febc2e;"></div>
+        <div class="bdot" style="background:#28c840;"></div>
+        <div class="url-bar">secretsystems.io/sites/${s.file}</div>
+      </div>
+      <div class="preview-wrap" id="pw-${i}">
+        <iframe
+          src="${filePath}"
+          title="${s.title || s.file}"
+          loading="lazy"
+          sandbox="allow-same-origin allow-scripts"
+          scrolling="no"
+        ></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-tag">${s.tag || 'Website'}</div>
+        <div class="card-title">${s.title || s.file}</div>
+        ${s.desc ? `<div class="card-desc">${s.desc}</div>` : ''}
+        <div class="card-foot">
+          <a class="view-link" href="${liveUrl}" target="_blank" rel="noopener">View Full Site</a>
+          <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+        </div>
+      </div>`;
+
+    // Mark loaded when iframe fires
+    const iframe = card.querySelector('iframe');
+    const pw = card.querySelector('.preview-wrap');
+    iframe.addEventListener('load', () => pw.classList.add('loaded'));
+
+    // Click card body (not the link) opens the site
+    card.addEventListener('click', e => {
+      if (e.target.closest('.view-link')) return;
+      window.open(liveUrl, '_blank');
+    });
+
+    card.addEventListener('mouseenter', bigCur);
+    card.addEventListener('mouseleave', smCur);
+
+    // Staggered reveal animation
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity .5s ${i * 80}ms, transform .5s ${i * 80}ms`;
+    grid.appendChild(card);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    });
+  });
+}
+
+/* ════════════════════════════════════════
+   FILTER
+════════════════════════════════════════ */
+document.querySelectorAll('.fbtn').forEach(btn => {
+  btn.addEventListener('mouseenter', bigCur);
+  btn.addEventListener('mouseleave', smCur);
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    currentFilter = btn.dataset.f;
+    const filtered = currentFilter === 'all'
+      ? allSites
+      : allSites.filter(s => s.tag === currentFilter);
+    renderGrid(filtered);
+  });
+});
+
+/* ════════════════════════════════════════
+   MODAL
+════════════════════════════════════════ */
+const ov = document.getElementById('ov');
+document.getElementById('req-btn').addEventListener('click', () => ov.classList.add('open'));
+document.getElementById('mcl').addEventListener('click', () => ov.classList.remove('open'));
+ov.addEventListener('click', e => { if(e.target === ov) ov.classList.remove('open'); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') ov.classList.remove('open'); });
+
+document.getElementById('mform').addEventListener('submit', e => {
+  e.preventDefault();
+  const req = e.target.querySelectorAll('[required]');
+  let ok = true;
+  req.forEach(f => {
+    if(!f.value.trim()){f.style.borderColor='#ff2244';ok=false;}
+    else f.style.borderColor='rgba(0,200,255,.12)';
+  });
+  if(!ok) return;
+  document.getElementById('mfw').style.display = 'none';
+  document.getElementById('msuc').style.display = 'block';
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', bigCur);
+  el.addEventListener('mouseleave', smCur);
+});
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+loadSites();
+</script>
+</body>
+</html>

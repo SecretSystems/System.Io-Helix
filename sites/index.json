@@ -33,5 +33,11 @@
     "tag": "CRM",
     "color": 1,
     "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
-  }
+  },
+  {
+    "file": "Cajun pressure/Cajun pressure.html",
+    "title": "Lead Gen Funnel Demo",
+    "tag": "Funnel",
+    "color": 3,
+    "desc": "High-converting lead capture funnel with CRM integration and AI follow-up."
 ]

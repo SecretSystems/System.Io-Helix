@@ -7,6 +7,13 @@
     "desc": "Black & orange industrial website for a South Louisiana land clearing company."
   },
   {
+    "file": " Index.html",
+    "title": "CRM Dashboard Demo",
+    "tag": "CRM",
+    "color": 1,
+    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
+  },
+  {
     "file": "demo-funnel.html",
     "title": "Lead Gen Funnel Demo",
     "tag": "Funnel",

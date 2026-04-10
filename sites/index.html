@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cajun Pressure Copy | Soft Washing, Pressure Washing & Line Striping in Lafayette</title>
+<meta name="description" content="Cajun Pressure Copy delivers soft washing, pressure washing, power washing, and line striping services in Lafayette and Acadiana.">
+<style>
+:root{
+  --bg:#07141c;
+  --bg2:#0b1f2b;
+  --panel:rgba(255,255,255,.08);
+  --panel2:rgba(255,255,255,.12);
+  --text:#eef6fb;
+  --muted:rgba(238,246,251,.74);
+  --soft:rgba(238,246,251,.1);
+  --line:rgba(255,255,255,.12);
+  --accent:#f7b84b;
+  --accent2:#4fd1c5;
+  --accent3:#d7f0ff;
+  --shadow:0 24px 60px rgba(0,0,0,.35);
+  --radius:28px;
+  --radius2:20px;
+  --max:1180px;
+  --pad:clamp(18px,2vw,28px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(1200px 800px at 18% -10%, rgba(79,209,197,.18), transparent 45%),
+    radial-gradient(900px 700px at 100% 0%, rgba(247,184,75,.14), transparent 40%),
+    linear-gradient(180deg, #061018 0%, #0a1822 45%, #061018 100%);
+  color:var(--text);
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+::selection{background:rgba(247,184,75,.28)}
+.wrap{width:min(var(--max),calc(100% - 2*var(--pad)));margin:0 auto}
+
+.nav{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter:saturate(180%) blur(18px);
+  background:linear-gradient(180deg, rgba(6,16,24,.86), rgba(6,16,24,.62));
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:14px 0;
+}
+.brand{
+  display:flex;align-items:center;gap:14px;min-width:0;
+}
+.brand img{
+  width:50px;height:50px;object-fit:cover;border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 10px 24px rgba(0,0,0,.24);
+  background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+}
+.brand-mark{
+  width:50px;height:50px;border-radius:16px;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255,255,255,.38), transparent 22%),
+    linear-gradient(145deg, rgba(247,184,75,.34), rgba(79,209,197,.22));
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 10px 24px rgba(0,0,0,.24);
+  font-weight:800;letter-spacing:.08em;color:#fff;
+}
+.brand-copy{min-width:0}
+.brand-copy strong{
+  display:block;font-size:14px;letter-spacing:.08em;text-transform:uppercase
+}
+.brand-copy span{
+  display:block;font-size:12px;color:var(--muted);margin-top:2px
+}
+.nav-links{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:14px}
+.nav-links a{transition:.25s ease}
+.nav-links a:hover{color:#fff}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 18px;border-radius:999px;
+  background:linear-gradient(135deg, var(--accent), #ffd77a);
+  color:#1b1204;font-weight:700;box-shadow:0 14px 36px rgba(247,184,75,.24);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 18px 42px rgba(247,184,75,.3)}
+.hero{
+  padding:30px 0 24px;
+}
+.hero-shell{
+  position:relative;
+  overflow:hidden;
+  border-radius:36px;
+  min-height:760px;
+  background:
+    linear-gradient(180deg, rgba(4,12,18,.2), rgba(4,12,18,.78)),
+    url('images/cover.jpg') center/cover no-repeat;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:var(--shadow);
+}
+.hero-shell::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(79,209,197,.26), transparent 40%),
+    radial-gradient(780px 420px at 82% 18%, rgba(247,184,75,.18), transparent 42%),
+    linear-gradient(115deg, rgba(5,13,20,.8), rgba(5,13,20,.28) 52%, rgba(5,13,20,.74));
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.08fr .92fr;gap:24px;
+  min-height:760px;
+  padding:28px;
+}
+.hero-left{
+  align-self:end;
+  width:min(620px,100%);
+  padding:18px 10px 12px 4px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:999px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:var(--accent3);font-size:13px;letter-spacing:.03em;
+  margin-bottom:20px;
+  backdrop-filter:blur(12px);
+}
+.kicker i{
+  width:9px;height:9px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 0 0 6px rgba(247,184,75,.14);
+  display:inline-block
+}
+h1{
+  margin:0;
+  font-size:clamp(44px,6vw,78px);
+  line-height:.94;
+  letter-spacing:-.05em;
+  text-wrap:balance;
+}
+.lead{
+  margin:22px 0 0;
+  max-width:58ch;
+  color:rgba(238,246,251,.82);
+  font-size:clamp(17px,1.55vw,20px);
+  line-height:1.7;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  margin-top:30px;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 22px;border-radius:999px;font-weight:700;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  border:1px solid transparent;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--accent), #ffd77a);
+  color:#211603;
+  box-shadow:0 16px 38px rgba(247,184,75,.22);
+}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.14);
+  color:#fff
+}
+.btn-secondary:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+.hero-points{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  margin-top:28px;max-width:640px;
+}
+.point{
+  padding:16px 16px 15px;border-radius:20px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+}
+.point strong{display:block;font-size:18px}
+.point span{display:block;color:var(--muted);font-size:13px;margin-top:6px;line-height:1.5}
+.hero-right{
+  align-self:end;
+  display:grid;gap:16px;
+  padding-top:70px;
+}
+.hero-card{
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(9,22,32,.82), rgba(9,22,32,.5));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 18px 50px rgba(0,0,0,.24);
+  backdrop-filter:blur(14px);
+}
+.status{
+  padding:22px;
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+}
+.status img{
+  width:86px;height:86px;border-radius:24px;object-fit:cover;
+  border:1px solid rgba(255,255,255,.16);
+}
+.status h2{
+  margin:0;font-size:24px;line-height:1.05;letter-spacing:-.03em
+}
+.status p{
+  margin:8px 0 0;color:var(--muted);line-height:1.7;font-size:14px
+}
+.metrics{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+  overflow:hidden;
+}
+.metric{
+  padding:18px 18px 20px;border-top:1px solid rgba(255,255,255,.08);
+}
+.metric:not(:last-child){border-right:1px solid rgba(255,255,255,.08)}
+.metric strong{display:block;font-size:26px;letter-spacing:-.03em}
+.metric span{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.5}
+.featured-strip{
+  margin-top:18px;
+  padding:18px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  background:linear-gradient(135deg, rgba(247,184,75,.12), rgba(79,209,197,.08));
+  border:1px solid rgba(255,255,255,.1);
+}
+.featured-strip div{min-width:0}
+.featured-strip strong{display:block;font-size:16px}
+.featured-strip span{display:block;color:var(--muted);font-size:13px;margin-top:5px;line-height:1.5}
+.phone-pill{
+  padding:12px 14px;border-radius:999px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);font-weight:700;white-space:nowrap
+}
+section{padding:34px 0}
+.section-label{
+  display:flex;align-items:center;gap:10px;color:var(--accent3);font-size:13px;letter-spacing:.14em;text-transform:uppercase
+}
+.section-label::before{
+  content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)
+}
+.section-head{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:end;
+  margin-bottom:20px;
+}
+.section-head h2{
+  margin:10px 0 0;font-size:clamp(30px,3.8vw,52px);line-height:1.02;letter-spacing:-.04em
+}
+.section-head p{
+  margin:0;color:var(--muted);line-height:1.8;max-width:58ch
+}
+.services{
+  padding-top:18px;
+}
+.service-layout{
+  display:grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap:16px;
+}
+.service-main{
+  display:grid;gap:16px;
+}
+.service-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.055));
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 18px 42px rgba(0,0,0,.16);
+  padding:24px;
+  min-height:210px;
+}
+.service-card::after{
+  content:"";
+  position:absolute;inset:auto -40px -40px auto;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle, rgba(247,184,75,.16), transparent 68%);
+  pointer-events:none;
+}
+.service-card h3{
+  margin:0 0 10px;font-size:24px;letter-spacing:-.03em
+}
+.service-card p{
+  margin:0;color:var(--muted);line-height:1.76;max-width:46ch
+}
+.service-tag{
+  display:inline-flex;margin-bottom:16px;
+  padding:8px 12px;border-radius:999px;
+  background:rgba(79,209,197,.12);
+  border:1px solid rgba(79,209,197,.18);
+  color:#d8fffb;font-size:12px;letter-spacing:.08em;text-transform:uppercase
+}
+.service-side{
+  display:grid;gap:16px;
+}
+.side-panel{
+  border-radius:28px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.045));
+  border:1px solid rgba(255,255,255,.1);
+}
+.side-panel img{
+  width:100%;height:240px;object-fit:cover;
+}
+.side-panel .copy{
+  padding:22px;
+}
+.side-panel .copy strong{
+  font-size:20px;display:block;margin-bottom:8px
+}
+.side-panel .copy p{
+  margin:0;color:var(--muted);line-height:1.75
+}
+.about{
+  padding-top:20px;
+}
+.about-shell{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch;
+}
+.about-media{
+  border-radius:32px;overflow:hidden;position:relative;
+  min-height:520px;
+  background:linear-gradient(135deg, rgba(247,184,75,.12), rgba(79,209,197,.08));
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:var(--shadow);
+}
+.about-media img{
+  width:100%;height:100%;object-fit:cover;
+}
+.about-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(5,13,20,.06), rgba(5,13,20,.42));
+}
+.about-panel{
+  border-radius:32px;
+  background:linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.1);
+  padding:28px;
+  box-shadow:0 18px 40px rgba(0,0,0,.16);
+}
+.about-panel h3{
+  margin:0 0 14px;font-size:clamp(28px,3vw,42px);line-height:1.05;letter-spacing:-.04em
+}
+.about-panel p{
+  margin:0;color:var(--muted);line-height:1.86;font-size:16px
+}
+.about-list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
+  margin-top:24px;
+}
+.about-item{
+  padding:16px 16px 15px;border-radius:20px;
+  background:rgba(6,16,24,.34);
+  border:1px solid rgba(255,255,255,.08);
+}
+.about-item strong{display:block;font-size:15px}
+.about-item span{display:block;margin-top:6px;color:var(--muted);line-height:1.6;font-size:13px}
+.why{
+  padding-top:18px;
+}
+.why-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;
+}
+.why-card{
+  padding:22px;border-radius:26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.1);
+  min-height:210px;
+}
+.why-card .num{
+  display:inline-flex;width:42px;height:42px;border-radius:14px;
+  align-items:center;justify-content:center;
+  background:linear-gradient(135deg, rgba(247,184,75,.24), rgba(79,209,197,.18));
+  border:1px solid rgba(255,255,255,.12);
+  font-weight:800;margin-bottom:14px
+}
+.why-card h3{margin:0 0 10px;font-size:21px;letter-spacing:-.03em}
+.why-card p{margin:0;color:var(--muted);line-height:1.76}
+.cta{
+  padding-top:24px;
+}
+.cta-shell{
+  border-radius:34px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(247,184,75,.14), rgba(79,209,197,.1)),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:var(--shadow);
+}
+.cta-inner{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:18px;
+  padding:28px;
+  align-items:center;
+}
+.cta-inner h2{
+  margin:0;font-size:clamp(30px,4vw,50px);line-height:1.02;letter-spacing:-.04em
+}
+.cta-inner p{
+  margin:14px 0 0;color:var(--muted);line-height:1.8;max-width:56ch
+}
+.cta-box{
+  justify-self:end;
+  width:100%;
+  max-width:420px;
+  padding:22px;
+  border-radius:26px;
+  background:rgba(6,16,24,.36);
+  border:1px solid rgba(255,255,255,.08);
+}
+.cta-box strong{display:block;font-size:16px;margin-bottom:10px}
+.cta-box span{display:block;color:var(--muted);line-height:1.7;font-size:14px}
+.contact{
+  padding-top:18px;
+}
+.contact-grid{
+  display:grid;grid-template-columns:.92fr 1.08fr;gap:18px;
+}
+.contact-card{
+  border-radius:30px;
+  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 18px 42px rgba(0,0,0,.16);
+  padding:26px;
+}
+.contact-card h3{margin:0 0 14px;font-size:26px;letter-spacing:-.03em}
+.contact-item{
+  padding:16px 0;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;gap:20px;align-items:flex-start;
+}
+.contact-item:first-of-type{border-top:none;padding-top:4px}
+.contact-item span{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.contact-item a,.contact-item div{font-weight:600;line-height:1.6}
+.formish{
+  border-radius:30px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(5,13,20,.86), rgba(5,13,20,.72)),
+    url('images/feature.jpg') center/cover no-repeat;
+  border:1px solid rgba(255,255,255,.1);
+  min-height:100%;
+  padding:28px;
+  display:flex;
+  align-items:flex-end;
+}
+.formish-panel{
+  width:100%;
+  max-width:430px;
+  margin-left:auto;
+  padding:22px;
+  border-radius:24px;
+  background:rgba(7,20,28,.62);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+}
+.formish-panel h3{margin:0 0 10px;font-size:24px}
+.formish-panel p{margin:0;color:var(--muted);line-height:1.75}
+.footer{
+  padding:30px 0 36px;
+  color:var(--muted);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:22px;
+}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-brand img,
+.footer-brand .brand-mark{width:44px;height:44px;border-radius:14px}
+.small{font-size:13px;line-height:1.7}
+@media (max-width: 960px){
+  .nav-links{display:none}
+  .hero-grid,.section-head,.service-layout,.about-shell,.why-grid,.cta-inner,.contact-grid{
+    grid-template-columns:1fr
+  }
+  .hero-shell,.hero-grid{min-height:auto}
+  .hero-grid{padding:20px}
+  .hero-right{padding-top:8px}
+  .hero-points{grid-template-columns:1fr}
+  .services .service-card,.service-side,.about-media,.contact-card,.formish{min-height:auto}
+  .about-media{min-height:360px}
+  .formish{padding:18px}
+}
+@media (max-width: 560px){
+  .nav-inner{padding:12px 0}
+  .nav-cta{padding:11px 14px;font-size:13px}
+  .hero-shell{border-radius:28px}
+  .hero-grid{padding:16px}
+  h1{font-size:40px}
+  .lead{font-size:16px}
+  .metrics{grid-template-columns:1fr}
+  .metric:not(:last-child){border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .about-list{grid-template-columns:1fr}
+  .contact-item{flex-direction:column;gap:6px}
+  section{padding:28px 0}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Cajun pressure copy home">
+      <img src="images/profile.jpg" alt="Cajun pressure copy logo">
+      <div class="brand-copy">
+        <strong>Cajun pressure copy</strong>
+        <span>Soft washing • pressure washing • line striping</span>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="tel:+13372588818">(337) 258-8818</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-shell">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="kicker"><i></i> Lafayette crews for clean surfaces, sharp pavement, and dependable service</div>
+          <h1>Exterior cleaning and line striping that keeps Acadiana looking sharp.</h1>
+          <p class="lead">Cajun pressure copy handles soft washing, pressure washing, power washing, and professional line striping with the kind of finish that makes a property look maintained, safe, and ready for business.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:+13372588818">Call (337) 258-8818</a>
+            <a class="btn btn-secondary" href="mailto:hello@secretsystems.com">Email Us</a>
+          </div>
+          <div class="hero-points" aria-label="Highlights">
+            <div class="point">
+              <strong>Soft washing</strong>
+              <span>Ideal for siding, roofs, and delicate surfaces that need a safe, thorough clean.</span>
+            </div>
+            <div class="point">
+              <strong>Pressure washing</strong>
+              <span>Concrete, storefronts, driveways, and high-traffic areas restored with precision.</span>
+            </div>
+            <div class="point">
+              <strong>Line striping</strong>
+              <span>Crisp parking lines and layout markings that improve curb appeal and traffic flow.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <article class="hero-card status">
+            <img src="images/profile.jpg" alt="Business profile image">
+            <div>
+              <h2>Helping Acadiana stay clean</h2>
+              <p>Local service built for property owners who want consistent results without the runaround.</p>
+            </div>
+          </article>
+          <article class="hero-card metrics" aria-label="Service metrics">
+            <div class="metric">
+              <strong>3</strong>
+              <span>core services delivered with a single streamlined team</span>
+            </div>
+            <div class="metric">
+              <strong>Lafayette</strong>
+              <span>serving homes, businesses, and properties across the area</span>
+            </div>
+            <div class="metric">
+              <strong>Clean</strong>
+              <span>finishes that look polished from the first pass to the final detail</span>
+            </div>
+          </article>
+          <article class="hero-card featured-strip">
+            <div>
+              <strong>Fast contact, clear communication, real workmanship.</strong>
+              <span>One call is enough to get a conversation started.</span>
+            </div>
+            <div class="phone-pill">(337) 258-8818</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Services</div>
+          <h2>Practical exterior work presented with a premium finish.</h2>
+        </div>
+        <p>Built for property owners who care about appearance, maintenance, and a result that holds up in real use. Each service is tailored to the surface, the condition, and the outcome needed.</p>
+      </div>
+      <div class="service-layout">
+        <div class="service-main">
+          <article class="service-card">
+            <div class="service-tag">Soft washing</div>
+            <h3>Gentle cleaning for roofs, siding, and other sensitive surfaces</h3>
+            <p>Soft washing is the right choice when a property needs a deep clean without unnecessary wear. We use the method that fits the material, helping remove buildup while protecting the finish beneath it.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-tag">Pressure washing</div>
+            <h3>Restoration for concrete, driveways, storefronts, and heavy-use areas</h3>
+            <p>When grime, stains, and weather exposure take over, pressure washing brings surfaces back to life. It is a strong way to improve curb appeal, make entrances look cared for, and keep exterior areas presentable.</p>
+          </article>
+        </div>
+        <div class="service-side">
+          <article class="side-panel">
+            <img src="images/supporting.jpg" alt="Supporting service image">
+            <div class="copy">
+              <strong>Power washing with a clean, controlled approach</strong>
+              <p>For tougher jobs and surfaces that need more force, we apply the right pressure with attention to detail and a professional finish.</p>
+            </div>
+          </article>
+          <article class="service-card" style="min-height:unset">
+            <div class="service-tag">Line striping</div>
+            <h3>Sharp markings that organize parking lots and improve first impressions</h3>
+            <p>Fresh line striping helps properties look orderly and function better. It supports traffic flow, parking clarity, and a more polished appearance for businesses in Lafayette and surrounding Acadiana communities.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label">About</div>
+          <h2>Helping Acadiana stay clean.</h2>
+        </div>
+        <p>Cajun pressure copy brings together exterior washing and striping work in a way that feels organized, responsive, and dependable. The goal is simple: keep properties looking good and functioning well without cutting corners.</p>
+      </div>
+      <div class="about-shell">
+        <figure class="about-media">
+          <img src="images/feature.jpg" alt="Feature image highlighting exterior work">
+        </figure>
+        <div class="about-panel">
+          <h3>Built for property owners who expect more than a quick rinse.</h3>
+          <p>Every surface has its own needs. Siding calls for a different approach than concrete, and a parking lot needs more than a simple wash. We focus on the details that matter so the result looks intentional, not rushed. From residential exterior cleaning to commercial pavement marking, our work is aimed at making the property cleaner, safer, and easier to maintain.</p>
+          <div class="about-list">
+            <div class="about-item">
+              <strong>Surface-specific care</strong>
+              <span>Methods chosen to match the material and the level of buildup.</span>
+            </div>
+            <div class="about-item">
+              <strong>Professional presentation</strong>
+              <span>Clean edges, neat finishes, and a result that feels complete.</span>
+            </div>
+            <div class="about-item">
+              <strong>Local understanding</strong>
+              <span>Service tuned to the needs of Lafayette and the Acadiana climate.</span>
+            </div>
+            <div class="about-item">
+              <strong>Reliable communication</strong>
+              <span>Simple scheduling and straightforward contact from start to finish.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="why">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Why choose us</div>
+          <h2>Trust built on clarity, consistency, and a clean result.</h2>
+        </div>
+        <p>It is not just about equipment. It is about showing up prepared, using the right method, and leaving the property looking better than when we arrived.</p>
+      </div>
+      <div class="why-grid">
+        <article class="why-card">
+          <div class="num">01</div>
+          <h3>Method matched to the job</h3>
+          <p>Soft washing for delicate materials, pressure washing for deeper cleaning, and line striping for clean, visible pavement markings.</p>
+        </article>
+        <article class="why-card">
+          <div class="num">02</div>
+          <h3>Professional finish matters</h3>
+          <p>The details are what people notice first. We aim for a result that looks crisp, clean, and ready for customers, tenants, or guests.</p>
+        </article>
+        <article class="why-card">
+          <div class="num">03</div>
+          <h3>Local service with accountability</h3>
+          <p>Based around Lafayette and focused on Acadiana, so communication stays direct and the work stays personal.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-shell">
+      <div class="cta-inner">
+        <div>
+          <div class="section-label">Featured call to action</div>
+          <h2>Ready to restore the look of your property?</h2>
+          <p>Whether it is a one-time exterior cleaning or fresh striping that makes your parking lot easier to navigate, Cajun pressure copy is ready to help you move forward with a clean, professional result.</p>
+        </div>
+        <div class="cta-box">
+          <strong>Speak with Cajun pressure copy</strong>
+          <span>Call today or send a message to discuss the surfaces, the condition, and the outcome you want for your property in Lafayette.</span>
+          <div class="hero-actions" style="margin-top:18px">
+            <a class="btn btn-primary" href="tel:+13372588818">Call now</a>
+            <a class="btn btn-secondary" href="mailto:hello@secretsystems.com">Send email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Contact</div>
+          <h2>Simple ways to reach the team.</h2>
+        </div>
+        <p>Use the contact information below to start a conversation about soft washing, pressure washing, power washing, or line striping in Lafayette and the surrounding area.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Direct contact</h3>
+          <div class="contact-item">
+            <span>Phone</span>
+            <a href="tel:+13372588818">(337) 258-8818</a>
+          </div>
+          <div class="contact-item">
+            <span>Email</span>
+            <a href="mailto:hello@secretsystems.com">hello@secretsystems.com</a>
+          </div>
+          <div class="contact-item">
+            <span>City</span>
+            <div>Lafayette</div>
+          </div>
+          <div class="contact-item">
+            <span>Primary service area</span>
+            <div>Acadiana</div>
+          </div>
+        </div>
+        <div class="formish">
+          <div class="formish-panel">
+            <h3>Tell us what needs attention.</h3>
+            <p>Share the property type, the surface condition, and whether you need exterior cleaning, pavement striping, or both. We will take it from there with a clear plan and a professional finish.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="images/profile.jpg" alt="Cajun pressure copy logo">
+      <div>
+        <div style="font-weight:800;letter-spacing:.04em;color:#fff">Cajun pressure copy</div>
+        <div class="small">Helping Acadiana stay clean</div>
+      </div>
+    </div>
+    <div class="small">Lafayette • Soft washing • Pressure washing • Power washing • Line striping</div>
+    <div class="small"><a href="tel:+13372588818">(337) 258-8818</a> · <a href="mailto:hello@secretsystems.com">hello@secretsystems.com</a></div>
+  </div>
+</footer>
+</body>
+</html>

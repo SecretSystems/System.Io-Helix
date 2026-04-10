@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Secret Systems .io | The Infrastructure Behind Your Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#020408;
+  --deep:#070d14;
+  --surface:#0d1520;
+  --card:#0f1c2a;
+  --border:rgba(0,200,255,0.1);
+  --cyan:#00c8ff;
+  --cyan2:#00ffe0;
+  --cyan-glow:rgba(0,200,255,0.12);
+  --white:#e8f4ff;
+  --muted:#4a6a82;
+  --text:#a8c8e0;
+  --danger:#ff3c6e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--cyan);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s,width 0.3s,height 0.3s,opacity 0.3s;
+  mix-blend-mode:screen;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(0,200,255,0.4);border-radius:50%;
+  pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease,width 0.3s,height 0.3s;
+}
+body:hover #cursor{opacity:1;}
+
+/* ── SCANLINE OVERLAY ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+  pointer-events:none;z-index:9998;
+}
+
+/* ── PARTICLE CANVAS ── */
+#particle-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.6;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  background:rgba(2,4,8,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
+  color:var(--white);text-decoration:none;letter-spacing:0.05em;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.nav-logo .dot{color:var(--cyan);}
+.nav-logo .io{
+  font-family:'JetBrains Mono',monospace;font-size:0.85rem;
+  color:var(--cyan);opacity:0.8;font-weight:300;
+}
+.nav-links{
+  display:flex;gap:2rem;list-style:none;align-items:center;
+}
+.nav-links a{
+  font-size:0.82rem;font-weight:500;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--text);text-decoration:none;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--cyan);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.25s;
+}
+.nav-links a:hover{color:var(--cyan);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{
+  background:transparent!important;
+  border:1px solid var(--cyan)!important;
+  color:var(--cyan)!important;
+  padding:0.5rem 1.4rem;
+  font-size:0.8rem!important;
+  font-weight:600!important;
+  letter-spacing:0.12em!important;
+  transition:background 0.2s!important,color 0.2s!important;
+}
+.nav-cta:hover{background:var(--cyan)!important;color:var(--void)!important;}
+.nav-cta::after{display:none!important;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;
+  padding:8rem 3rem 4rem;
+  position:relative;z-index:1;
+  max-width:1400px;margin:0 auto;
+  width:100%;
+}
+.hero-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.78rem;
+  font-weight:400;letter-spacing:0.25em;color:var(--cyan);
+  text-transform:uppercase;margin-bottom:2rem;
+  display:flex;align-items:center;gap:0.8rem;
+  opacity:0;animation:fadeUp 0.8s 0.3s forwards;
+}
+.hero-label::before{
+  content:'';display:block;width:30px;height:1px;background:var(--cyan);
+}
+.hero h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3.5rem,8vw,8rem);line-height:0.92;
+  letter-spacing:-0.02em;
+  opacity:0;animation:fadeUp 0.8s 0.5s forwards;
+}
+.hero h1 .line2{
+  display:block;
+  -webkit-text-stroke:1.5px rgba(0,200,255,0.5);
+  color:transparent;
+}
+.hero h1 .accent{color:var(--cyan);}
+.hero-desc{
+  font-size:1.1rem;font-weight:300;color:var(--text);
+  max-width:550px;line-height:1.7;margin-top:2rem;margin-bottom:3rem;
+  opacity:0;animation:fadeUp 0.8s 0.7s forwards;
+}
+.hero-actions{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.8s 0.9s forwards;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--cyan);color:var(--void);
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.9rem 2rem;text-decoration:none;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.btn-primary::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transition:left 0.4s;
+}
+.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,200,255,0.3);}
+.btn-primary:hover::before{left:100%;}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  border:1px solid rgba(0,200,255,0.3);color:var(--text);
+  font-family:'Outfit',sans-serif;font-weight:500;
+  font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.9rem 2rem;text-decoration:none;
+  transition:all 0.25s;
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* scrolling ticker */
+.ticker-wrap{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:rgba(0,200,255,0.03);
+  padding:1rem 0;overflow:hidden;
+  opacity:0;animation:fadeIn 1s 1.2s forwards;
+}
+.ticker{
+  display:flex;gap:3rem;
+  animation:ticker 30s linear infinite;
+  white-space:nowrap;
+}
+.ticker-item{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  font-weight:400;letter-spacing:0.15em;color:var(--muted);
+  text-transform:uppercase;display:flex;align-items:center;gap:1rem;
+  flex-shrink:0;
+}
+.ticker-item::before{content:'◆';color:var(--cyan);font-size:0.5rem;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── SECTION WRAPPER ── */
+.section{
+  padding:7rem 3rem;
+  position:relative;z-index:1;
+  max-width:1400px;margin:0 auto;
+  width:100%;
+}
+
+/* ── EYEBROW / TITLE ── */
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;
+}
+.eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--cyan);}
+.big-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,4vw,3.8rem);line-height:1;
+  letter-spacing:-0.02em;margin-bottom:1.5rem;
+}
+.big-title span{color:var(--cyan);}
+.sub-text{font-size:1rem;color:var(--text);max-width:500px;line-height:1.7;}
+
+/* ── SERVICES SECTION ── */
+#services-section{
+  background:linear-gradient(180deg,var(--void) 0%,var(--deep) 100%);
+}
+.services-intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;
+  align-items:end;margin-bottom:5rem;
+}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+}
+.service-tile{
+  background:var(--card);
+  padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.service-tile::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.service-tile:hover{background:#121f2d;}
+.service-tile:hover::before{transform:scaleX(1);}
+.tile-num{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  color:var(--muted);letter-spacing:0.2em;margin-bottom:1.5rem;
+}
+.tile-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.tile-name{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+  margin-bottom:0.7rem;letter-spacing:0.02em;
+}
+.tile-desc{font-size:0.88rem;color:var(--text);line-height:1.65;}
+
+/* ── FEATURES / HOW IT WORKS ── */
+#how{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.steps-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:3rem;margin-top:4rem;
+}
+.step{position:relative;}
+.step::after{
+  content:'→';position:absolute;top:1.5rem;right:-1.5rem;
+  color:var(--muted);font-size:1.2rem;
+  display:none;
+}
+.step:not(:last-child)::after{display:block;}
+.step-num{
+  font-family:'JetBrains Mono',monospace;font-size:2.5rem;
+  font-weight:300;color:rgba(0,200,255,0.2);
+  margin-bottom:1rem;line-height:1;
+}
+.step-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1.05rem;margin-bottom:0.6rem;
+}
+.step-desc{font-size:0.88rem;color:var(--text);line-height:1.65;}
+
+/* ── AUTOMATION SHOWCASE ── */
+#automation{
+  position:relative;overflow:hidden;
+}
+.auto-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+}
+.auto-list{
+  display:flex;flex-direction:column;gap:1.5rem;
+  margin-top:2.5rem;
+}
+.auto-item{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.5rem;
+  border:1px solid var(--border);
+  background:rgba(0,200,255,0.02);
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,background 0.3s;
+  cursor:default;
+}
+.auto-item:hover{
+  border-color:rgba(0,200,255,0.3);
+  background:rgba(0,200,255,0.05);
+}
+.auto-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--cyan);transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.3s;
+}
+.auto-item:hover::before{transform:scaleY(1);}
+.auto-icon{
+  width:42px;height:42px;flex-shrink:0;
+  display:grid;place-items:center;
+  background:var(--cyan-glow);border:1px solid var(--border);
+  font-size:1.1rem;
+}
+.auto-title{
+  font-family:'Syne',sans-serif;font-weight:600;
+  font-size:0.95rem;margin-bottom:0.35rem;
+}
+.auto-desc{font-size:0.83rem;color:var(--text);line-height:1.6;}
+
+/* terminal window */
+.terminal{
+  background:#030a0f;
+  border:1px solid rgba(0,200,255,0.2);
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.8rem;
+  overflow:hidden;
+}
+.terminal-bar{
+  background:rgba(0,200,255,0.06);
+  padding:0.7rem 1rem;
+  border-bottom:1px solid rgba(0,200,255,0.1);
+  display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;
+  color:var(--muted);
+}
+.terminal-dot{width:10px;height:10px;border-radius:50%;}
+.terminal-body{padding:1.5rem;line-height:2;}
+.t-line{opacity:0;animation:typeIn 0.1s forwards;}
+.t-green{color:#4eff9f;}
+.t-cyan{color:var(--cyan);}
+.t-muted{color:var(--muted);}
+.t-white{color:var(--white);}
+.t-yellow{color:#ffe066;}
+.cursor-blink{animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* ── PRICING ── */
+#pricing-section{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);margin-top:4rem;
+}
+.price-card{
+  background:var(--card);padding:2.5rem 2rem;
+  position:relative;overflow:hidden;transition:background 0.3s;
+}
+.price-card.featured{
+  background:#0d1e30;
+}
+.price-card.featured::before{
+  content:'MOST POPULAR';
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.2em;color:var(--cyan);
+  background:rgba(0,200,255,0.1);
+  border:1px solid rgba(0,200,255,0.3);
+  padding:0.25rem 0.6rem;
+}
+.price-plan{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+}
+.price-amount{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:3rem;line-height:1;color:var(--white);
+  margin-bottom:0.3rem;
+}
+.price-amount sup{font-size:1.2rem;vertical-align:top;margin-top:0.5rem;color:var(--cyan);}
+.price-period{font-size:0.82rem;color:var(--muted);margin-bottom:2rem;}
+.price-features{
+  list-style:none;display:flex;flex-direction:column;gap:0.7rem;
+  margin-bottom:2rem;
+}
+.price-features li{
+  font-size:0.85rem;color:var(--text);
+  display:flex;align-items:center;gap:0.6rem;
+}
+.price-features li::before{content:'✓';color:var(--cyan);font-weight:700;}
+.price-features li.off{color:var(--muted);}
+.price-features li.off::before{content:'—';color:var(--muted);}
+.btn-price{
+  display:block;text-align:center;
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.85rem 1rem;text-decoration:none;
+  border:1px solid rgba(0,200,255,0.3);color:var(--text);
+  transition:all 0.25s;
+}
+.btn-price:hover,.price-card.featured .btn-price{
+  background:var(--cyan);color:var(--void);border-color:var(--cyan);
+}
+
+/* ── CATALOG CTA ── */
+#catalog-cta{
+  background:linear-gradient(135deg,var(--deep) 0%,rgba(0,200,255,0.04) 100%);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.catalog-inner{max-width:700px;margin:0 auto;}
+.catalog-inner .big-title{font-size:clamp(2rem,4vw,3.5rem);}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--void);}
+.test-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:4rem;
+}
+.test-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:2rem;position:relative;
+}
+.test-card::before{
+  content:'"';position:absolute;top:-0.5rem;left:1.5rem;
+  font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;
+  color:rgba(0,200,255,0.1);line-height:1;
+}
+.test-stars{color:var(--cyan);font-size:0.85rem;margin-bottom:1rem;letter-spacing:0.1em;}
+.test-text{font-size:0.9rem;color:var(--text);line-height:1.7;margin-bottom:1.5rem;}
+.test-author{
+  font-family:'Syne',sans-serif;font-weight:600;font-size:0.88rem;
+}
+.test-role{font-size:0.78rem;color:var(--muted);margin-top:0.2rem;}
+
+/* ── CONTACT ── */
+#contact-section{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:start;
+}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem;margin-top:2rem;}
+.field-group{display:flex;flex-direction:column;gap:0.4rem;}
+.field-group label{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.field-group input,.field-group textarea,.field-group select{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(0,200,255,0.12);
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:0.92rem;
+  padding:0.85rem 1rem;outline:none;
+  transition:border-color 0.2s;width:100%;
+}
+.field-group input:focus,.field-group textarea:focus,.field-group select:focus{
+  border-color:var(--cyan);background:rgba(0,200,255,0.03);
+}
+.field-group select option{background:var(--deep);}
+.field-group textarea{resize:vertical;min-height:130px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.contact-details{
+  display:flex;flex-direction:column;gap:1.5rem;margin-top:3rem;
+}
+.cd-item{
+  display:flex;align-items:center;gap:1rem;
+  font-size:0.9rem;color:var(--text);
+}
+.cd-icon{
+  width:42px;height:42px;
+  background:var(--cyan-glow);border:1px solid var(--border);
+  display:grid;place-items:center;font-size:1rem;flex-shrink:0;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:#020407;
+  border-top:1px solid var(--border);
+  padding:3rem;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:3rem;
+}
+.foot-brand .nav-logo{font-size:1.5rem;display:block;margin-bottom:1rem;}
+.foot-brand p{font-size:0.85rem;color:var(--muted);line-height:1.6;max-width:240px;}
+.foot-col h5{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text);margin-bottom:1.2rem;
+}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.foot-col ul a{
+  font-size:0.82rem;color:var(--muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.foot-col ul a:hover{color:var(--cyan);}
+.foot-bottom{
+  border-top:1px solid var(--border);
+  padding:1.5rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem;color:var(--muted);
+  letter-spacing:0.1em;
+  background:#020407;
+}
+.foot-bottom span{color:var(--cyan);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* glow pulse on cyan elements */
+@keyframes glowPulse{
+  0%,100%{text-shadow:0 0 20px rgba(0,200,255,0.3);}
+  50%{text-shadow:0 0 40px rgba(0,200,255,0.7),0 0 80px rgba(0,200,255,0.2);}
+}
+.hero h1 .accent{animation:glowPulse 3s ease-in-out infinite;}
+
+/* typeIn lines staggered */
+.t-line:nth-child(1){animation-delay:0.5s;}
+.t-line:nth-child(2){animation-delay:1.2s;}
+.t-line:nth-child(3){animation-delay:1.9s;}
+.t-line:nth-child(4){animation-delay:2.6s;}
+.t-line:nth-child(5){animation-delay:3.3s;}
+.t-line:nth-child(6){animation-delay:4s;}
+.t-line:nth-child(7){animation-delay:4.7s;}
+@keyframes typeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero{padding:7rem 1.5rem 3rem;}
+  .section{padding:4rem 1.5rem;}
+  .services-intro,.auto-grid,.contact-grid,.why-grid{grid-template-columns:1fr;gap:2rem;}
+  .services-grid,.pricing-grid{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+  .test-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr 1fr;gap:2rem;}
+  .foot-bottom{flex-direction:column;gap:0.5rem;padding:1.2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    Secret Systems<span class="dot">.</span><span class="io">io</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="automation.html">AI &amp; Automation</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="work.html">Past Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="vault.html">🔐 Vault</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Next-Gen Digital Infrastructure</p>
+  <h1>
+    The Systems<br>
+    <span class="line2">Behind Your</span><br>
+    <span class="accent">Growth.</span>
+  </h1>
+  <p class="hero-desc">
+    Web design, CRM automation, AI lead follow-up, call center flows, reputation management, text blasts, and every digital system your business needs — built and deployed under one roof.
+  </p>
+  <div class="hero-actions">
+    <a href="contact.html" class="btn-primary">Start Building →</a>
+    <a href="catalog.html" class="btn-ghost">View Service Catalog</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Web Design</span>
+    <span class="ticker-item">AI Lead Follow-Up</span>
+    <span class="ticker-item">CRM Setup</span>
+    <span class="ticker-item">Text Blast Campaigns</span>
+    <span class="ticker-item">5-Star Review Generator</span>
+    <span class="ticker-item">Call Center Automation</span>
+    <span class="ticker-item">Email Marketing</span>
+    <span class="ticker-item">Lead Funnels</span>
+    <span class="ticker-item">Auto-Dial Systems</span>
+    <span class="ticker-item">Digital Marketing</span>
+    <span class="ticker-item">Hosting & Maintenance</span>
+    <span class="ticker-item">GoHighLevel Experts</span>
+    <!-- dupe for seamless loop -->
+    <span class="ticker-item">Web Design</span>
+    <span class="ticker-item">AI Lead Follow-Up</span>
+    <span class="ticker-item">CRM Setup</span>
+    <span class="ticker-item">Text Blast Campaigns</span>
+    <span class="ticker-item">5-Star Review Generator</span>
+    <span class="ticker-item">Call Center Automation</span>
+    <span class="ticker-item">Email Marketing</span>
+    <span class="ticker-item">Lead Funnels</span>
+    <span class="ticker-item">Auto-Dial Systems</span>
+    <span class="ticker-item">Digital Marketing</span>
+    <span class="ticker-item">Hosting & Maintenance</span>
+    <span class="ticker-item">GoHighLevel Experts</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div id="services-section" style="background:linear-gradient(180deg,var(--void) 0%,var(--deep) 100%);border-bottom:1px solid var(--border);">
+<div class="section">
+  <div class="services-intro reveal">
+    <div>
+      <p class="eyebrow">What We Build</p>
+      <h2 class="big-title">Every System<br><span>Your Business Needs</span></h2>
+    </div>
+    <p class="sub-text" style="align-self:flex-end;">From a single landing page to a full AI-powered sales machine — Secret Systems engineers the infrastructure that converts strangers into customers, automatically.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-tile">
+      <div class="tile-num">01</div>
+      <span class="tile-icon">🌐</span>
+      <div class="tile-name">Web Design & Development</div>
+      <p class="tile-desc">Conversion-focused websites, landing pages, and funnels built for performance. Custom coded or CMS — your brand, built right.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">02</div>
+      <span class="tile-icon">🤖</span>
+      <div class="tile-name">AI Automation Systems</div>
+      <p class="tile-desc">Automate follow-ups, lead routing, appointment booking, and nurture sequences using AI-powered workflows.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">03</div>
+      <span class="tile-icon">📊</span>
+      <div class="tile-name">CRM Setup & Management</div>
+      <p class="tile-desc">Full GoHighLevel CRM configuration — pipelines, tags, automations, and dashboards that give you total visibility.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">04</div>
+      <span class="tile-icon">📱</span>
+      <div class="tile-name">SMS Text Blast Campaigns</div>
+      <p class="tile-desc">Reach your entire contact list instantly. Promotions, re-engagement campaigns, and drip sequences via text.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">05</div>
+      <span class="tile-icon">📞</span>
+      <div class="tile-name">Call Center Automation</div>
+      <p class="tile-desc">Auto-dial systems, call tracking, voicemail drops, and intelligent call routing — scale your outreach without hiring.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">06</div>
+      <span class="tile-icon">⭐</span>
+      <div class="tile-name">5-Star Review Generator</div>
+      <p class="tile-desc">Automated review request sequences via SMS and email. Build your Google reputation on autopilot, every day.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">07</div>
+      <span class="tile-icon">📧</span>
+      <div class="tile-name">Email Marketing</div>
+      <p class="tile-desc">Designed sequences, broadcast campaigns, and behavioral triggers that sell while you sleep.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">08</div>
+      <span class="tile-icon">🎯</span>
+      <div class="tile-name">Lead Funnels & Capture</div>
+      <p class="tile-desc">High-converting lead funnels connected to automated follow-up flows. Never let another lead go cold.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">09</div>
+      <span class="tile-icon">📈</span>
+      <div class="tile-name">Digital Marketing & Ads</div>
+      <p class="tile-desc">Meta ads, Google ads, retargeting, and SEO strategies that fill your pipeline with qualified leads.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how" style="padding:0;">
+<div class="section">
+  <p class="eyebrow reveal">The Process</p>
+  <h2 class="big-title reveal">From Zero to <span>Automated</span></h2>
+  <div class="steps-grid reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-desc">We learn your business, goals, and current gaps. No cookie-cutter solutions — we build a custom roadmap.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">System Blueprint</div>
+      <p class="step-desc">We map out your full digital infrastructure — website, CRM, automations, funnels, and campaigns.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Build & Launch</div>
+      <p class="step-desc">We build everything, test it thoroughly, and deploy. You get a live, working system — not a prototype.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Scale & Optimize</div>
+      <p class="step-desc">Ongoing monitoring, A/B testing, and optimization to make your systems grow stronger over time.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AUTOMATION SHOWCASE -->
+<div id="automation" style="background:var(--void);border-top:1px solid var(--border);padding:0;">
+<div class="section">
+  <div class="auto-grid">
+    <div>
+      <p class="eyebrow reveal">Powered by AI</p>
+      <h2 class="big-title reveal">Your Business<br><span>Runs Itself</span></h2>
+      <div class="auto-list reveal">
+        <div class="auto-item">
+          <div class="auto-icon">⚡</div>
+          <div>
+            <div class="auto-title">Instant Lead Response</div>
+            <p class="auto-desc">New lead comes in → AI texts them within 60 seconds, qualifies, and books the appointment. No human needed.</p>
+          </div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">🔄</div>
+          <div>
+            <div class="auto-title">Auto-Dial Follow-Up</div>
+            <p class="auto-desc">Cold leads re-engaged automatically via phone, text, and email on a smart multi-touch schedule.</p>
+          </div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">⭐</div>
+          <div>
+            <div class="auto-title">Review Requests on Autopilot</div>
+            <p class="auto-desc">Every completed job triggers a review request sequence. Watch your Google rating climb week over week.</p>
+          </div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">📋</div>
+          <div>
+            <div class="auto-title">Pipeline Management</div>
+            <p class="auto-desc">Leads move through your sales pipeline automatically based on behavior — zero manual pushing required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot" style="background:#ff5f57;"></div>
+          <div class="terminal-dot" style="background:#febc2e;"></div>
+          <div class="terminal-dot" style="background:#28c840;"></div>
+          <span style="margin-left:0.5rem;">secret-systems // automation.flow</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-muted">#</span> <span class="t-cyan">new_lead_received</span></div>
+          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">Lead captured: </span><span class="t-yellow">John D. — roofing inquiry</span></div>
+          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">SMS sent in </span><span class="t-cyan">0:47s</span></div>
+          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">AI qualified: </span><span class="t-yellow">HIGH intent</span></div>
+          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">Appointment booked: </span><span class="t-cyan">Tue 2pm</span></div>
+          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">CRM updated — pipeline: </span><span class="t-yellow">Booked</span></div>
+          <div class="t-line"><span class="t-muted">_</span><span class="cursor-blink">█</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PRICING -->
+<div id="pricing-section" style="padding:0;">
+<div class="section">
+  <div style="text-align:center;margin-bottom:1rem;" class="reveal">
+    <p class="eyebrow" style="justify-content:center;">Investment</p>
+    <h2 class="big-title">Simple, <span>Transparent</span> Pricing</h2>
+    <p class="sub-text" style="max-width:480px;margin:0 auto;">Custom quotes available for enterprise. All plans include onboarding and support.</p>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="price-card">
+      <div class="price-plan">Starter</div>
+      <div class="price-amount"><sup>$</sup>497<sup style="font-size:1rem;color:var(--muted);">/mo</sup></div>
+      <div class="price-period">Perfect for new businesses</div>
+      <ul class="price-features">
+        <li>Professional Website (5 pages)</li>
+        <li>Basic CRM Setup</li>
+        <li>Lead Capture Form + Automation</li>
+        <li>Review Request Sequence</li>
+        <li>Monthly Email Campaign</li>
+        <li class="off">Text Blast Campaigns</li>
+        <li class="off">Auto-Dial System</li>
+        <li class="off">AI Lead Follow-Up</li>
+      </ul>
+      <a href="contact.html" class="btn-price">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-plan">Growth</div>
+      <div class="price-amount"><sup>$</sup>997<sup style="font-size:1rem;color:var(--muted);">/mo</sup></div>
+      <div class="price-period">For businesses ready to scale</div>
+      <ul class="price-features">
+        <li>Custom Website + Funnel</li>
+        <li>Full CRM Configuration</li>
+        <li>AI Lead Follow-Up Sequences</li>
+        <li>SMS Text Blast System</li>
+        <li>5-Star Review Generator</li>
+        <li>Email Marketing Automation</li>
+        <li>Call Tracking & Routing</li>
+        <li class="off">Auto-Dial Campaign</li>
+      </ul>
+      <a href="contact.html" class="btn-price">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-plan">Machine</div>
+      <div class="price-amount" style="font-size:2.2rem;"><sup>$</sup>1,997<sup style="font-size:1rem;color:var(--muted);">/mo</sup></div>
+      <div class="price-period">Full digital infrastructure</div>
+      <ul class="price-features">
+        <li>Everything in Growth</li>
+        <li>Auto-Dial Lead System</li>
+        <li>Advanced AI Automation</li>
+        <li>Full Ad Management (Meta/Google)</li>
+        <li>Weekly Optimization Calls</li>
+        <li>Priority Support (24hr)</li>
+        <li>Custom Integrations</li>
+        <li>White-Glove Onboarding</li>
+      </ul>
+      <a href="contact.html" class="btn-price">Get Started</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CATALOG CTA -->
+<div id="catalog-cta" style="padding:0;">
+<div class="section">
+  <div class="catalog-inner reveal" style="text-align:center;">
+    <p class="eyebrow" style="justify-content:center;">A La Carte</p>
+    <h2 class="big-title">Need Something <span>Specific?</span></h2>
+    <p class="sub-text" style="margin:0 auto 2.5rem;text-align:center;">Browse our full service catalog — individual services priced and described. Pick exactly what you need.</p>
+    <a href="catalog.html" class="btn-primary" style="margin:0 auto;">Browse Full Catalog →</a>
+  </div>
+</div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="testimonials" style="padding:0;border-top:1px solid var(--border);">
+<div class="section">
+  <p class="eyebrow reveal">Client Results</p>
+  <h2 class="big-title reveal">What Happens When <span>Systems Work</span></h2>
+  <div class="test-grid reveal">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Secret Systems set up our entire CRM and automated follow-up in a week. We went from missing leads to booking 3x more appointments without any extra staff."</p>
+      <div class="test-author">Marcus T.</div>
+      <div class="test-role">HVAC Company Owner, Louisiana</div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"The review generator alone was worth every penny. We went from 14 Google reviews to 97 in 60 days. Our phone won't stop ringing now."</p>
+      <div class="test-author">Amanda R.</div>
+      <div class="test-role">Med Spa Owner</div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"We were running Facebook ads to nowhere. Secret Systems rebuilt our funnel, connected the CRM, and now every lead gets followed up with automatically. Game changer."</p>
+      <div class="test-author">David K.</div>
+      <div class="test-role">Roofing Contractor</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact-section" style="padding:0;">
+<div class="section">
+  <div class="contact-grid">
+    <div>
+      <p class="eyebrow reveal">Get Access</p>
+      <h2 class="big-title reveal">Let's Build Your<br><span>System</span></h2>
+      <p class="sub-text reveal">Tell us about your business. We'll put together a custom plan and show you exactly how Secret Systems can transform your operations.</p>
+      <div class="contact-details reveal">
+        <div class="cd-item"><div class="cd-icon">🌐</div> secretsystems.io</div>
+        <div class="cd-item"><div class="cd-icon">📘</div> South Louisiana & Nationwide Remote</div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="field-row">
+        <div class="field-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John"/>
+        </div>
+        <div class="field-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith"/>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Business Name</label>
+        <input type="text" placeholder="Your Company LLC"/>
+      </div>
+      <div class="field-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="(555) 000-0000"/>
+      </div>
+      <div class="field-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@company.com"/>
+      </div>
+      <div class="field-group">
+        <label>What do you need?</label>
+        <select>
+          <option value="">Select primary interest...</option>
+          <option>New Website</option>
+          <option>CRM Setup (GoHighLevel)</option>
+          <option>AI Automation</option>
+          <option>Text Blast / SMS</option>
+          <option>5-Star Review System</option>
+          <option>Call Center Automation</option>
+          <option>Full Growth Package</option>
+          <option>Everything — let's talk</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Tell Us About Your Business</label>
+        <textarea placeholder="What do you do, who are your customers, what's broken right now?"></textarea>
+      </div>
+      <button class="btn-primary" style="border:none;cursor:pointer;">Send Message →</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+    <p>The infrastructure behind businesses that grow without limits. Built in Louisiana. Deployed everywhere.</p>
+  </div>
+  <div class="foot-col">
+    <h5>Services</h5>
+    <ul>
+      <li><a href="services.html">Web Design</a></li>
+      <li><a href="services.html">CRM & Automation</a></li>
+      <li><a href="services.html">AI Systems</a></li>
+      <li><a href="services.html">Text & Email</a></li>
+      <li><a href="services.html">Call Center</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h5>Company</h5>
+    <ul>
+      <li><a href="catalog.html">Service Catalog</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="#testimonials">Case Studies</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h5>Connect</h5>
+    <ul>
+      <li><a href="contact.html">Get a Quote</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="foot-bottom">
+  <span>SECRET SYSTEMS .IO</span>
+  <span>© 2025 Secret Systems LLC · All Rights Reserved</span>
+  <span>Built on <span>Systems</span> · Powered by <span>AI</span></span>
+</div>
+
+<script>
+// ── CURSOR ──
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.service-tile,.auto-item,.price-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
+
+// ── PARTICLES ──
+const canvas=document.getElementById('particle-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+class Particle{
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.vx=(Math.random()-0.5)*0.3;this.vy=(Math.random()-0.5)*0.3;
+    this.r=Math.random()*1.5+0.5;
+    this.alpha=Math.random()*0.4+0.1;
+    this.color=Math.random()>0.7?'0,255,224':'0,200,255';
+  }
+  update(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();
+  }
+  draw(){
+    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${this.color},${this.alpha})`;ctx.fill();
+  }
+}
+for(let i=0;i<120;i++)particles.push(new Particle());
+// draw connections
+function drawLines(){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(0,200,255,${0.06*(1-dist/120)})`;
+        ctx.lineWidth=0.5;ctx.stroke();
+      }
+    }
+  }
+}
+function loop(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw();});
+  drawLines();
+  requestAnimationFrame(loop);
+}
+loop();
+
+// ── SCROLL REVEAL ──
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.12});
+reveals.forEach(r=>obs.observe(r));
+
+// ── NAV HIGHLIGHT ──
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  nav.style.boxShadow=window.scrollY>50?'0 4px 40px rgba(0,0,0,0.6)':'none';
+});
+</script>
+</body>
+</html>

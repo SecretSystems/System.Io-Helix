@@ -1,180 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Service Catalog | Web Design, CRM, AI Automation Pricing | Secret Systems .io</title>
-<meta name="description" content="Browse the full Secret Systems service catalog — 30+ digital services with transparent pricing. Web design, GoHighLevel CRM, AI automation, SMS text blasts, 5-star review generators, hosting, SEO, and more."/>
-<meta name="keywords" content="digital services catalog, web design pricing, CRM setup cost, AI automation services, SMS marketing pricing, 5 star review generator cost, GoHighLevel services, Secret Systems catalog, digital marketing services list"/>
-<meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://secretsystems.io/catalog.html"/>
-<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/catalog.html"/><meta property="og:title" content="Service Catalog | Secret Systems .io"/><meta property="og:description" content="Browse 30+ digital services with transparent pricing — web design, CRM, AI automation, SMS marketing, reputation management, hosting, and more."/><meta property="og:site_name" content="Secret Systems .io"/>
-<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Service Catalog | Secret Systems .io"/><meta name="twitter:description" content="30+ services. Transparent pricing. Filter by category and build your exact package."/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Secret Systems Service Catalog","description":"Complete list of digital marketing and automation services offered by Secret Systems LLC","url":"https://secretsystems.io/catalog.html","numberOfItems":30,"itemListElement":[{"@type":"ListItem","position":1,"name":"Custom Website Design","url":"https://secretsystems.io/catalog.html#web"},{"@type":"ListItem","position":2,"name":"GoHighLevel CRM Setup","url":"https://secretsystems.io/catalog.html#crm"},{"@type":"ListItem","position":3,"name":"AI Lead Response Bot","url":"https://secretsystems.io/catalog.html#ai"},{"@type":"ListItem","position":4,"name":"SMS Text Blast Campaign","url":"https://secretsystems.io/catalog.html#marketing"},{"@type":"ListItem","position":5,"name":"5-Star Google Review Generator","url":"https://secretsystems.io/catalog.html#reputation"}]}</script>
-<link rel="stylesheet" href="ss-shared.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Service Catalog | Secret Systems .io</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-.cat-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
-.cat-hero-inner{border:1px solid var(--border);background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));padding:4rem;position:relative;overflow:hidden;}
-.cat-hero-inner::before{content:'CATALOG';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-weight:800;font-size:10rem;color:rgba(0,200,255,.025);line-height:1;pointer-events:none;white-space:nowrap;}
-.filter-bar{position:sticky;top:67px;z-index:100;background:rgba(2,4,8,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1.2rem 0;}
-.filter-inner{display:flex;gap:.6rem;flex-wrap:wrap;}
-.filter-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;padding:.45rem 1rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;}
-.filter-btn:hover,.filter-btn.active{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow);}
-.cat-section{margin-bottom:5rem;}
-.cat-section-head{display:flex;align-items:center;gap:1rem;margin-bottom:.5rem;}
-.cat-section-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);}
-.cat-section-line{flex:1;height:1px;background:var(--border);}
-.cat-section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;margin-bottom:2.5rem;}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);}
-.cat-card{background:var(--card);padding:2rem;display:flex;flex-direction:column;gap:.7rem;position:relative;overflow:hidden;transition:background .3s;}
-.cat-card:hover{background:#12202f;}
-.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--cyan2));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.cat-card:hover::after{transform:scaleX(1);}
-.cc-icon{font-size:1.6rem;}
-.cc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;}
-.cc-desc{font-size:.83rem;color:var(--text);line-height:1.6;flex:1;}
-.cc-price{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--cyan);margin-top:.3rem;}
-.cc-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .55rem;background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.18);color:var(--cyan);align-self:flex-start;}
-.cc-cta{display:inline-flex;align-items:center;gap:.4rem;font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;margin-top:.3rem;transition:color .2s;}
-.cc-cta:hover{color:var(--cyan);}
-.cc-cta::after{content:'→';}
+:root{
+  --void:#020408;--deep:#070d14;--surface:#0d1520;--card:#0f1c2a;
+  --border:rgba(0,200,255,0.1);--cyan:#00c8ff;--cyan2:#00ffe0;
+  --cyan-glow:rgba(0,200,255,0.12);--white:#e8f4ff;
+  --muted:#4a6a82;--text:#a8c8e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+
+/* scanline */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9998;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(2,4,8,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--white);text-decoration:none;letter-spacing:0.05em;}
+.nav-logo .dot{color:var(--cyan);}
+.nav-logo .io{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--cyan);opacity:0.8;font-weight:300;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--cyan);}
+.nav-cta{border:1px solid var(--cyan)!important;color:var(--cyan)!important;padding:0.5rem 1.4rem;font-size:0.8rem!important;font-weight:600!important;letter-spacing:0.12em!important;transition:background 0.2s!important,color 0.2s!important;}
+.nav-cta:hover{background:var(--cyan)!important;color:var(--void)!important;}
+
+/* ── HERO ── */
+.cat-hero{
+  padding:8rem 3rem 4rem;
+  max-width:1400px;margin:0 auto;
+  position:relative;z-index:1;
+}
+.cat-hero-inner{
+  border:1px solid var(--border);
+  background:linear-gradient(135deg,var(--deep) 0%,rgba(0,200,255,0.03) 100%);
+  padding:4rem;position:relative;overflow:hidden;
+}
+.cat-hero-inner::before{
+  content:'CATALOG';
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  font-family:'Syne',sans-serif;font-weight:800;font-size:12rem;
+  color:rgba(0,200,255,0.025);line-height:1;pointer-events:none;
+  white-space:nowrap;
+}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;}
+.eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--cyan);}
+.cat-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,5rem);line-height:0.95;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+.cat-title span{color:var(--cyan);}
+.cat-sub{font-size:1rem;color:var(--text);max-width:600px;line-height:1.7;}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  padding:2rem 3rem;
+  max-width:1400px;margin:0 auto;
+  display:flex;gap:0.7rem;flex-wrap:wrap;
+  position:sticky;top:73px;z-index:100;
+  background:rgba(2,4,8,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.filter-btn{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.45rem 1rem;border:1px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;
+  transition:all 0.2s;
+}
+.filter-btn:hover,.filter-btn.active{
+  border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow);
+}
+
+/* ── CATALOG GRID ── */
+.catalog-body{
+  max-width:1400px;margin:0 auto;
+  padding:4rem 3rem;
+}
+.cat-category{margin-bottom:5rem;}
+.cat-cat-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:0.5rem;display:flex;align-items:center;gap:0.8rem;
+}
+.cat-cat-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.cat-cat-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.8rem;margin-bottom:2.5rem;
+}
+.cat-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1px;background:var(--border);
+}
+.cat-item{
+  background:var(--card);padding:2rem;
+  display:flex;flex-direction:column;gap:0.8rem;
+  transition:background 0.3s;position:relative;overflow:hidden;
+}
+.cat-item:hover{background:#12202f;}
+.cat-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.35s;
+}
+.cat-item:hover::after{transform:scaleX(1);}
+.cat-item-icon{font-size:1.6rem;}
+.cat-item-name{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+}
+.cat-item-desc{font-size:0.83rem;color:var(--text);line-height:1.6;flex:1;}
+.cat-item-price{
+  font-family:'JetBrains Mono',monospace;font-size:0.8rem;
+  color:var(--cyan);margin-top:0.5rem;
+}
+.cat-item-tag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;background:rgba(0,200,255,0.08);
+  border:1px solid rgba(0,200,255,0.2);color:var(--cyan);
+  align-self:flex-start;
+}
+.cat-item-cta{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.78rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--text);
+  text-decoration:none;margin-top:0.5rem;
+  transition:color 0.2s;
+}
+.cat-item-cta:hover{color:var(--cyan);}
+.cat-item-cta::after{content:'→';}
+
+/* ── CTA BAND ── */
+.cta-band{
+  background:linear-gradient(135deg,var(--deep),rgba(0,200,255,0.05));
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:5rem 3rem;text-align:center;
+}
+.cta-band h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1.5rem;}
+.cta-band h2 span{color:var(--cyan);}
+.cta-band p{font-size:1rem;color:var(--text);max-width:500px;margin:0 auto 2.5rem;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:var(--cyan);color:var(--void);font-family:'Outfit',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.9rem 2rem;text-decoration:none;transition:all 0.25s;}
+.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,200,255,0.3);}
+
+/* ── FOOTER ── */
+footer{background:#020407;border-top:1px solid var(--border);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-left{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);}
+.foot-left .dot{color:var(--cyan);}
+.foot-left .io{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--cyan);opacity:0.8;font-weight:300;}
+.foot-copy{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .cat-hero,.catalog-body,.filter-bar{padding-left:1.5rem;padding-right:1.5rem;}
+  .cat-hero-inner{padding:2.5rem 1.5rem;}
+  footer{flex-direction:column;text-align:center;padding:1.5rem;}
+}
 </style>
 </head>
 <body>
-<div id="cursor"></div><div id="cursor-ring"></div><canvas id="bg"></canvas>
+
 <nav>
   <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
     <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html" class="active">Catalog</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="work.html">Past Work</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="vault.html">🔐 Vault</a></li>
     <li><a href="contact.html" class="nav-cta">Get Access</a></li>
   </ul>
-  <button class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
 </nav>
-<div class="mob" id="mob"><button class="mob-close" onclick="closeMenu()">✕</button><a href="index.html" onclick="closeMenu()">Home</a><a href="services.html" onclick="closeMenu()">Services</a><a href="automation.html" onclick="closeMenu()">AI &amp; Automation</a><a href="catalog.html" onclick="closeMenu()">Catalog</a><a href="about.html" onclick="closeMenu()">About</a><a href="pricing.html" onclick="closeMenu()">Pricing</a><a href="contact.html" onclick="closeMenu()">Get Access</a></div>
 
-<main>
-<div class="cat-hero-bg">
-<div class="page-hero wrap" style="border-bottom:none;">
+<div class="cat-hero">
   <div class="cat-hero-inner">
     <p class="eyebrow">Secret Systems .io</p>
-    <h1 class="h1" style="font-size:clamp(2.5rem,5vw,5rem);">Full Service<br><span style="color:var(--cyan);">Catalog</span></h1>
-    <p class="lead" style="margin-top:1.5rem;max-width:580px;">Every service we offer — clearly described and priced. Filter by category, pick what you need, or get in touch and we'll build your custom package.</p>
+    <h1 class="cat-title">Full Service<br><span>Catalog</span></h1>
+    <p class="cat-sub">Every service we offer, clearly described and priced. This is the complete menu — browse by category and reach out to build your custom package.</p>
   </div>
 </div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all',this)">All Services</button>
+  <button class="filter-btn" onclick="filterCat('web',this)">Web & Design</button>
+  <button class="filter-btn" onclick="filterCat('crm',this)">CRM & Automation</button>
+  <button class="filter-btn" onclick="filterCat('ai',this)">AI Systems</button>
+  <button class="filter-btn" onclick="filterCat('marketing',this)">Marketing</button>
+  <button class="filter-btn" onclick="filterCat('reputation',this)">Reputation</button>
+  <button class="filter-btn" onclick="filterCat('hosting',this)">Hosting</button>
 </div>
 
-<div class="filter-bar" role="navigation" aria-label="Service categories">
-  <div class="wrap"><div class="filter-inner">
-    <button class="filter-btn active" onclick="filterCat('all',this)">All Services</button>
-    <button class="filter-btn" onclick="filterCat('web',this)">Web &amp; Design</button>
-    <button class="filter-btn" onclick="filterCat('crm',this)">CRM &amp; GHL</button>
-    <button class="filter-btn" onclick="filterCat('ai',this)">AI &amp; Automation</button>
-    <button class="filter-btn" onclick="filterCat('marketing',this)">Marketing</button>
-    <button class="filter-btn" onclick="filterCat('reputation',this)">Reputation</button>
-    <button class="filter-btn" onclick="filterCat('hosting',this)">Hosting &amp; SEO</button>
-  </div></div>
-</div>
+<div class="catalog-body">
 
-<div style="background:var(--void);border-bottom:1px solid var(--border);">
-<div class="section wrap" id="catalog-body">
-
-  <div class="cat-section reveal" data-cat="web" id="web">
-    <div class="cat-section-head"><span class="cat-section-label">Web &amp; Design</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">Websites &amp; Funnels</h2>
+  <!-- WEB DESIGN -->
+  <div class="cat-category reveal" data-cat="web">
+    <p class="cat-cat-label">Web & Design</p>
+    <h2 class="cat-cat-title">Websites & Funnels</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">🌐</span><h3 class="cc-name">Starter Website (5 Pages)</h3><p class="cc-desc">Professional mobile-optimized website — Home, About, Services, Gallery, Contact. SEO foundation, lead form, and fast load times included.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $997</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🚀</span><h3 class="cc-name">Custom Website (10+ Pages)</h3><p class="cc-desc">Fully custom designed and coded — animations, advanced UI, integrated lead capture, and CRM connection from day one. Built for conversion.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $2,497</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🎯</span><h3 class="cc-name">Lead Capture Landing Page</h3><p class="cc-desc">Single-focus landing page built to convert ad traffic. Includes lead form, thank you page, and CRM + automation connection.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $697</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📦</span><h3 class="cc-name">Multi-Step Sales Funnel</h3><p class="cc-desc">Opt-in → offer → upsell → thank you. Full funnel built and connected to your CRM, email, and SMS automation sequences.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $1,497</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📅</span><h3 class="cc-name">Booking Page + Calendar</h3><p class="cc-desc">Online appointment booking with automated confirmations, reminders, and no-show follow-up built inside GoHighLevel.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $397</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔧</span><h3 class="cc-name">Monthly Website Maintenance</h3><p class="cc-desc">Monthly content updates, security monitoring, performance checks, plugin updates, and priority support to keep your site sharp.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $197/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🌐</div>
+        <div class="cat-item-name">Starter Website (5 Pages)</div>
+        <p class="cat-item-desc">A clean, professional, mobile-optimized website. Home, About, Services, Gallery, Contact. Fast load times, SEO foundation included.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $997</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🚀</div>
+        <div class="cat-item-name">Custom Website (10+ Pages)</div>
+        <p class="cat-item-desc">Fully custom designed, conversion-optimized website with advanced UI, animations, and integrated lead capture — built from scratch for your brand.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $2,497</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🎯</div>
+        <div class="cat-item-name">Lead Capture Funnel</div>
+        <p class="cat-item-desc">Single-focus landing page with lead form, thank you page, and immediate CRM delivery. Designed to convert ad traffic into booked appointments.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $697</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📦</div>
+        <div class="cat-item-name">Sales Funnel (Multi-Step)</div>
+        <p class="cat-item-desc">Opt-in → VSL or offer page → upsell → thank you. Full multi-step sales funnel wired to your CRM and email/SMS automation.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $1,497</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📅</div>
+        <div class="cat-item-name">Booking Page + Calendar Integration</div>
+        <p class="cat-item-desc">Online appointment booking page with automated confirmations, reminders, and no-show follow-up sequences built in.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $397</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔧</div>
+        <div class="cat-item-name">Website Maintenance Plan</div>
+        <p class="cat-item-desc">Monthly updates, content changes, performance monitoring, plugin/security updates, and priority support. Keep your site sharp and secure.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $197/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
-  <div class="cat-section reveal" data-cat="crm" id="crm">
-    <div class="cat-section-head"><span class="cat-section-label">CRM &amp; GoHighLevel</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">GoHighLevel Systems</h2>
+  <!-- CRM & AUTOMATION -->
+  <div class="cat-category reveal" data-cat="crm">
+    <p class="cat-cat-label">CRM & Automation</p>
+    <h2 class="cat-cat-title">GoHighLevel Systems</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">📊</span><h3 class="cc-name">Full GHL CRM Setup</h3><p class="cc-desc">Complete GoHighLevel configuration — pipelines, stages, custom fields, tags, team permissions, and dashboard. Done right from day one.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $797</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔄</span><h3 class="cc-name">Lead Nurture Automation</h3><p class="cc-desc">Multi-step SMS + email follow-up workflows triggered by lead source or behavior. Zero leads fall through the cracks.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $597</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📋</span><h3 class="cc-name">Pipeline Stage Automation</h3><p class="cc-desc">Leads move automatically based on behavior. Notifications, tasks, and follow-ups fire at the right stage — every time.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $497</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔗</span><h3 class="cc-name">Third-Party Integration</h3><p class="cc-desc">Connect GHL to Facebook Lead Ads, Zapier, Google Sheets, QuickBooks, Stripe, or any other platform in your stack.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $297</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📆</span><h3 class="cc-name">Appointment Reminder Sequence</h3><p class="cc-desc">Auto confirmation + 24hr + 1hr reminders. Dramatically reduces no-shows and late cancellations on your calendar.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $297</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🛠️</span><h3 class="cc-name">Monthly CRM Management</h3><p class="cc-desc">Ongoing GHL maintenance — workflow updates, new automation builds, list hygiene, reporting, and optimization every month.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $397/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📊</div>
+        <div class="cat-item-name">GHL CRM Setup & Configuration</div>
+        <p class="cat-item-desc">Complete GoHighLevel account setup — pipelines, stages, tags, custom fields, team permissions, and dashboard configuration. Your CRM, done right from day one.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $797</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔄</div>
+        <div class="cat-item-name">Lead Nurture Automation</div>
+        <p class="cat-item-desc">Multi-step follow-up workflows triggered by lead source. Combines SMS, email, and internal notifications to ensure zero leads fall through the cracks.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $597</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📋</div>
+        <div class="cat-item-name">Pipeline + Stage Automation</div>
+        <p class="cat-item-desc">Leads automatically move through your pipeline based on behavior and triggers. Notifications, tasks, and follow-ups fire at the right stage every time.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $497</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔗</div>
+        <div class="cat-item-name">Third-Party Integration</div>
+        <p class="cat-item-desc">Connect GHL to your existing tools — Facebook Lead Ads, Zapier, Google Sheets, QuickBooks, Stripe, or any other platform you rely on.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $297</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📆</div>
+        <div class="cat-item-name">Appointment Reminder Sequence</div>
+        <p class="cat-item-desc">Automated confirmation + reminder SMS/email at booking, 24 hours before, 1 hour before. Dramatically reduces no-shows.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $297</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🛠️</div>
+        <div class="cat-item-name">Monthly CRM Management</div>
+        <p class="cat-item-desc">Ongoing CRM maintenance — workflow updates, new automation builds, contact list hygiene, reporting, and optimization. Your GHL expert on retainer.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $397/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
-  <div class="cat-section reveal" data-cat="ai" id="ai">
-    <div class="cat-section-head"><span class="cat-section-label">AI &amp; Automation</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">AI-Powered Systems</h2>
+  <!-- AI SYSTEMS -->
+  <div class="cat-category reveal" data-cat="ai">
+    <p class="cat-cat-label">AI Systems</p>
+    <h2 class="cat-cat-title">AI-Powered Automation</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">🤖</span><h3 class="cc-name">AI Lead Response Bot</h3><p class="cc-desc">AI that responds to new leads in 60 seconds via SMS, qualifies with conversation, and books the appointment — 24/7, no staff needed.</p><span class="cc-tag">Setup + Monthly</span><div class="cc-price">$497 setup + $197/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📞</span><h3 class="cc-name">Auto-Dial Lead Follow-Up</h3><p class="cc-desc">Automated outbound calling through your lead list on a scheduled cadence. Drops voicemails, logs outcomes, triggers CRM next steps.</p><span class="cc-tag">Setup + Monthly</span><div class="cc-price">$697 setup + $297/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🗣️</span><h3 class="cc-name">Voicemail Drop Campaigns</h3><p class="cc-desc">Pre-recorded voicemail drops sent to a list at scale. Zero ring, straight to voicemail. Perfect for promotions and re-engagement.</p><span class="cc-tag">Per Campaign</span><div class="cc-price">Starting at $197/campaign</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🧠</span><h3 class="cc-name">Missed Call Text-Back</h3><p class="cc-desc">Every missed call triggers an instant automated text. Never lose another lead to voicemail — the AI picks up where your phone left off.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $197</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">💬</span><h3 class="cc-name">AI Website Chat Widget</h3><p class="cc-desc">AI trained on your business — answers FAQs, captures leads, books appointments, and escalates to humans when needed. 24/7.</p><span class="cc-tag">Setup + Monthly</span><div class="cc-price">$397 setup + $147/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">⚙️</span><h3 class="cc-name">Custom AI Workflow Build</h3><p class="cc-desc">Have a unique process? We'll engineer a fully custom AI automation workflow built around your exact business operation. Scoped per project.</p><span class="cc-tag">Custom</span><div class="cc-price">Starting at $997</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🤖</div>
+        <div class="cat-item-name">AI Lead Response Bot</div>
+        <p class="cat-item-desc">AI agent that responds to new leads within 60 seconds via SMS, qualifies them with smart questions, and books the appointment — 24/7, no human needed.</p>
+        <div class="cat-item-tag">Setup + Monthly</div>
+        <div class="cat-item-price">$497 setup + $197/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📞</div>
+        <div class="cat-item-name">Auto-Dial Lead Follow-Up</div>
+        <p class="cat-item-desc">Automated outbound calling system that dials cold leads on a scheduled cadence. Drops voicemails, logs outcomes, and triggers next steps in your CRM automatically.</p>
+        <div class="cat-item-tag">Setup + Monthly</div>
+        <div class="cat-item-price">$697 setup + $297/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🗣️</div>
+        <div class="cat-item-name">Voicemail Drop Campaigns</div>
+        <p class="cat-item-desc">Pre-recorded voicemail drops sent to a list at scale. Zero ring, direct to voicemail. Perfect for re-engagement and promotional campaigns.</p>
+        <div class="cat-item-tag">Per Campaign</div>
+        <div class="cat-item-price">Starting at $197/campaign</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">💬</div>
+        <div class="cat-item-name">AI Website Chat Widget</div>
+        <p class="cat-item-desc">AI chatbot trained on your business — answers FAQs, captures leads, books appointments, and escalates to a human when needed. Works 24/7 on your site.</p>
+        <div class="cat-item-tag">Setup + Monthly</div>
+        <div class="cat-item-price">$397 setup + $147/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🧠</div>
+        <div class="cat-item-name">Missed Call Text-Back</div>
+        <p class="cat-item-desc">Every missed call on your business number triggers an immediate automated text: "Hey, we missed you — when's a good time to connect?" Never lose a lead to voicemail again.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $197</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">⚙️</div>
+        <div class="cat-item-name">Custom AI Workflow Build</div>
+        <p class="cat-item-desc">Have a unique process? We'll design and build a fully custom AI-powered workflow tailored to your exact business operations. Scoped per project.</p>
+        <div class="cat-item-tag">Custom</div>
+        <div class="cat-item-price">Starting at $997</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
-  <div class="cat-section reveal" data-cat="marketing" id="marketing">
-    <div class="cat-section-head"><span class="cat-section-label">Digital Marketing</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">Campaigns &amp; Advertising</h2>
+  <!-- MARKETING -->
+  <div class="cat-category reveal" data-cat="marketing">
+    <p class="cat-cat-label">Digital Marketing</p>
+    <h2 class="cat-cat-title">Campaigns & Outreach</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">📱</span><h3 class="cc-name">SMS Text Blast Campaign</h3><p class="cc-desc">Promotional or re-engagement blast to your entire contact list. Includes copywriting, send management, and click tracking report.</p><span class="cc-tag">Per Campaign</span><div class="cc-price">Starting at $197/campaign</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📧</span><h3 class="cc-name">Email Broadcast Campaign</h3><p class="cc-desc">Professionally designed email to your full list — strategy, design, copywriting, send, and open/click analytics included.</p><span class="cc-tag">Per Campaign</span><div class="cc-price">Starting at $147/campaign</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔢</span><h3 class="cc-name">Email Drip Sequence (5-Part)</h3><p class="cc-desc">5-email nurture sequence that builds trust and drives leads toward a sale. Triggered on opt-in and wired into your CRM.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $497</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📘</span><h3 class="cc-name">Meta Ads Management</h3><p class="cc-desc">Facebook and Instagram ad campaign management — targeting, creative, copy, and monthly optimization. Min $500 ad spend required.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $597/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔍</span><h3 class="cc-name">Google Ads Management</h3><p class="cc-desc">Search and display campaigns on Google. Intent-based targeting to capture buyers actively looking for your services. Min $500 ad spend.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $597/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔎</span><h3 class="cc-name">Local SEO Package</h3><p class="cc-desc">GBP optimization, local citations, on-page SEO, and schema markup. Get found when local customers search for your services.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $397</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📱</div>
+        <div class="cat-item-name">SMS Text Blast Campaign</div>
+        <p class="cat-item-desc">Send a promotional, re-engagement, or announcement message to your entire contact list at once. Includes copywriting, send, and click tracking.</p>
+        <div class="cat-item-tag">Per Campaign</div>
+        <div class="cat-item-price">Starting at $197/campaign</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📧</div>
+        <div class="cat-item-name">Email Broadcast Campaign</div>
+        <p class="cat-item-desc">Professionally designed email sent to your list. Includes strategy, design, copywriting, send, and open/click analytics report.</p>
+        <div class="cat-item-tag">Per Campaign</div>
+        <div class="cat-item-price">Starting at $147/campaign</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔢</div>
+        <div class="cat-item-name">Email Drip Sequence (5-Part)</div>
+        <p class="cat-item-desc">A 5-email nurture sequence that builds trust, educates leads, and drives them toward a sale. Wired into your CRM and triggered on contact opt-in.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $497</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📘</div>
+        <div class="cat-item-name">Meta Ads Management</div>
+        <p class="cat-item-desc">Facebook & Instagram ad campaign management. Includes audience targeting, creative strategy, copy, and monthly optimization. Min $500 ad spend required.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $597/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔍</div>
+        <div class="cat-item-name">Google Ads Management</div>
+        <p class="cat-item-desc">Search & display campaign management on Google. Intent-based targeting to capture customers already looking for what you offer. Min $500 ad spend required.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $597/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔎</div>
+        <div class="cat-item-name">Local SEO Setup</div>
+        <p class="cat-item-desc">Google Business Profile optimization, local citations, on-page SEO, and schema markup. Get found when customers search for you locally.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $397</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
-  <div class="cat-section reveal" data-cat="reputation" id="reputation">
-    <div class="cat-section-head"><span class="cat-section-label">Reputation Management</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">Reviews &amp; Reputation</h2>
+  <!-- REPUTATION -->
+  <div class="cat-category reveal" data-cat="reputation">
+    <p class="cat-cat-label">Reputation Management</p>
+    <h2 class="cat-cat-title">Reviews & Reputation</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">⭐</span><h3 class="cc-name">5-Star Google Review Generator</h3><p class="cc-desc">Every completed job triggers a review request via SMS and email. Smart filtering routes unhappy customers privately — protecting your public rating automatically.</p><span class="cc-tag">Setup + Monthly</span><div class="cc-price">$297 setup + $97/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🛡️</span><h3 class="cc-name">Review Monitoring &amp; Alerts</h3><p class="cc-desc">Instant alerts when new reviews hit Google, Facebook, or Yelp. Track rating trends and respond with AI-suggested replies.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $97/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📍</span><h3 class="cc-name">Google Business Profile Optimization</h3><p class="cc-desc">Full GBP overhaul — categories, services, photos, Q&amp;A, posts, and keyword-rich descriptions for maximum local map pack visibility.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $247</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">⭐</div>
+        <div class="cat-item-name">5-Star Google Review Generator</div>
+        <p class="cat-item-desc">Every completed job triggers an automated SMS + email asking for a Google review. Smart filtering routes unhappy customers to a private feedback form instead.</p>
+        <div class="cat-item-tag">Setup + Monthly</div>
+        <div class="cat-item-price">$297 setup + $97/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🛡️</div>
+        <div class="cat-item-name">Review Monitoring & Alerts</div>
+        <p class="cat-item-desc">Get notified the moment a new review hits Google, Facebook, or Yelp. Track your overall rating trends and respond promptly with AI-suggested replies.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $97/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">📍</div>
+        <div class="cat-item-name">Google Business Profile Optimization</div>
+        <p class="cat-item-desc">Full GBP overhaul — categories, services, photos, Q&A, posts, and description. Maximize visibility in local map pack searches.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $247</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
-  <div class="cat-section reveal" data-cat="hosting" id="hosting">
-    <div class="cat-section-head"><span class="cat-section-label">Hosting &amp; SEO</span><div class="cat-section-line"></div></div>
-    <h2 class="cat-section-title">Hosting &amp; Technical Services</h2>
+  <!-- HOSTING -->
+  <div class="cat-category reveal" data-cat="hosting">
+    <p class="cat-cat-label">Hosting & Infrastructure</p>
+    <h2 class="cat-cat-title">Hosting & Domains</h2>
     <div class="cat-grid">
-      <div class="cat-card"><span class="cc-icon">🖥️</span><h3 class="cc-name">Managed Website Hosting</h3><p class="cc-desc">Fast, secure managed hosting with SSL, CDN, daily backups, uptime monitoring, and support. We handle the server — you handle the business.</p><span class="cc-tag">Monthly</span><div class="cc-price">Starting at $47/mo</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🔒</span><h3 class="cc-name">SSL + Security Hardening</h3><p class="cc-desc">SSL installation, firewall configuration, malware scanning, and security hardening for new or existing websites.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $97</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">⚡</span><h3 class="cc-name">Page Speed Optimization</h3><p class="cc-desc">Full speed audit and optimization — image compression, caching, CDN, code minification. Target: 90+ Google PageSpeed score.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $297</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">🗺️</span><h3 class="cc-name">XML Sitemap + Robots.txt Setup</h3><p class="cc-desc">Proper sitemap generation, robots.txt configuration, and Google Search Console setup for maximum search engine crawlability.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $97</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">📊</span><h3 class="cc-name">Analytics &amp; Tracking Setup</h3><p class="cc-desc">Google Analytics 4, Meta Pixel, Google Tag Manager, and conversion tracking setup — know exactly where every lead comes from.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $197</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
-      <div class="cat-card"><span class="cc-icon">✍️</span><h3 class="cc-name">Technical SEO Audit</h3><p class="cc-desc">Full crawl of your site — broken links, duplicate content, thin pages, Core Web Vitals issues, and a prioritized fix list delivered to you.</p><span class="cc-tag">One-Time</span><div class="cc-price">Starting at $297</div><a href="contact.html" class="cc-cta">Request Quote</a></div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🖥️</div>
+        <div class="cat-item-name">Managed Website Hosting</div>
+        <p class="cat-item-desc">Fast, secure managed hosting with SSL, CDN, daily backups, uptime monitoring, and WordPress or static site support. We handle the tech, you focus on business.</p>
+        <div class="cat-item-tag">Monthly</div>
+        <div class="cat-item-price">Starting at $47/mo</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">🔒</div>
+        <div class="cat-item-name">SSL + Security Setup</div>
+        <p class="cat-item-desc">SSL certificate installation, firewall configuration, malware scanning, and security hardening for new or existing websites.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $97</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
+      <div class="cat-item">
+        <div class="cat-item-icon">⚡</div>
+        <div class="cat-item-name">Speed Optimization</div>
+        <p class="cat-item-desc">Page speed audit and full optimization — image compression, caching, CDN setup, code minification. Target: 90+ Google PageSpeed score.</p>
+        <div class="cat-item-tag">One-Time</div>
+        <div class="cat-item-price">Starting at $297</div>
+        <a href="contact.html" class="cat-item-cta">Request Quote</a>
+      </div>
     </div>
   </div>
 
 </div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Don't See Exactly<br>What You <span>Need?</span></h2>
+  <p>Every business is different. Reach out and we'll build a custom package around your exact needs and goals.</p>
+  <a href="contact.html" class="btn-primary">Build My Custom Package →</a>
 </div>
 
-<!-- CTA -->
-<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
-<div class="cta-band wrap">
-  <p class="eyebrow" style="justify-content:center;">Can't Find What You Need?</p>
-  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">We Build <span>Custom Packages</span><br>for Unique Businesses</h2>
-  <p style="color:var(--text);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;">Every business is different. Reach out and we'll scope a custom solution around your exact needs, budget, and goals — no generic packages.</p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-    <a href="contact.html" class="btn btn-cyan">Build My Custom Package →</a>
-    <a href="pricing.html" class="btn btn-outline">View Monthly Plans</a>
-  </div>
-</div>
-</section>
-</main>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-left">Secret Systems<span class="dot">.</span><span class="io">io</span></div>
+  <div class="foot-copy">© 2025 SECRET SYSTEMS LLC · ALL RIGHTS RESERVED</div>
+</footer>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>The infrastructure behind businesses that grow without limits. Built in Louisiana. Deployed nationwide.</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html">Web Design</a></li><li><a href="services.html#crm">CRM &amp; Automation</a></li><li><a href="automation.html">AI Systems</a></li><li><a href="services.html#sms">Text &amp; Email</a></li><li><a href="services.html#reviews">Reputation Mgmt</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="about.html#process">How It Works</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Get a Free Quote</a></li><li><a href="contact.html">Book a Strategy Call</a></li><li><a href="pricing.html">View Plans</a></li><li><a href="catalog.html">Browse All Services</a></li></ul></div></div></div></footer>
-<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2025 Secret Systems LLC · All Rights Reserved</span><span>Built on <span class="fc">Systems</span> · Powered by <span class="fc">AI</span></span></div></div></div>
-<script src="ss-shared.js"></script>
-<script>function filterCat(cat,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.cat-section').forEach(s=>{s.style.display=cat==='all'||s.dataset.cat===cat?'block':'none';});}</script>
-</body></html>
+<script>
+// filter
+function filterCat(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-category').forEach(c=>{
+    if(cat==='all'||c.dataset.cat===cat){c.style.display='block';}
+    else{c.style.display='none';}
+  });
+}
+// reveal
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

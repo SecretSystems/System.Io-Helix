@@ -144,8 +144,25 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 
 /* ── iframe preview ── */
 .pw{
-  position:relative;flex:1;background:#010406;overflow:hidden;
+  position:relative;
+  flex:1;
+  background:#010406;
+  overflow:hidden;
 }
+
+.pw iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:200%;
+  height:200%;
+  transform:scale(.5);
+  transform-origin:top left;
+  border:none;
+  pointer-events:none;
+  background:#010406;
+}
+
 @media (max-width: 768px){
   :root{
     --cw:150px;

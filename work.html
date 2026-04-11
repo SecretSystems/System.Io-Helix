@@ -165,6 +165,21 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 }
 
 @media (max-width: 768px){
+   .pw iframe{
+    width:220%;
+    height:220%;
+    transform:scale(.455);
+    transform-origin:top left;
+  }
+
+  #sc[data-layout="sphere"] .pw iframe,
+  #sc[data-layout="helix"] .pw iframe,
+  #sc[data-layout="grid"] .pw iframe{
+    width:240%;
+    height:240%;
+    transform:scale(.38);
+  }
+}
   #scene{
     perspective: 850px;
     perspective-origin: 50% 50%;
@@ -175,13 +190,12 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
     transform-style: preserve-3d;
   }
 
-  #sc[data-layout="sphere"] .pcard,
-  #sc[data-layout="helix"] .pcard,
-  #sc[data-layout="grid"] .pcard{
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
+#sc[data-layout="sphere"] .pcard,
+#sc[data-layout="helix"] .pcard,
+#sc[data-layout="grid"] .pcard{
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
 }
 /* shimmer while loading */
 .pw::after{
@@ -461,8 +475,8 @@ scene.addEventListener('touchmove',e=>{
   lastTouchX=x;
   lastTouchY=y;
 
-  targetRotY+=dx*0.32;
-  targetRotX-=dy*0.22;
+  targetRotY+=dx*0.22;
+targetRotX-=dy*0.16;
 
   targetRotX=clamp(targetRotX,-35,35);
 },{passive:false});
@@ -487,7 +501,7 @@ scene.addEventListener('touchcancel',()=>{
   }
 
 scene.style.transform = isMobile()
-  ? `translateZ(-420px) rotateX(${rotX}deg) rotateY(${rotY}deg)`
+  ? `translateZ(-520px) rotateX(${rotX}deg) rotateY(${rotY}deg)`
   : `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
@@ -603,25 +617,25 @@ function posFor(layout,i,isExp){
   const mobile=isMobile();
 
   if(layout==='sphere'){
-    const r=mobile ? 300 : 420;
+    const r=mobile ? 360 : 420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
     const sp=Math.sin(phi);
 
     const x=r*sp*Math.cos(theta);
-    const y=(mobile ? r*0.82 : r)*Math.cos(phi);
+    const y=(mobile ? r*0.88 : r)*Math.cos(phi);
     const z=r*sp*Math.sin(theta);
 
     const yaw=Math.atan2(x,z);
     const pitch=-Math.atan2(y,Math.hypot(x,z));
 
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.72 : 1}) translateZ(${z0}px)`;
+    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.56 : 1}) translateZ(${z0}px)`;
   }
 
   if(layout==='helix'){
-    const r=mobile ? 280 : 420;
+    const r=mobile ? 320 : 420;
     const step=mobile ? 0.22 : 0.22;
-    const vs=mobile ? 4.2 : 3.8;
+    const vs=mobile ? 4.6 : 3.8;
     const yOff=cards.length*vs/2;
 
     const theta=i*step+Math.PI;
@@ -632,15 +646,15 @@ function posFor(layout,i,isExp){
     const yaw=Math.atan2(x,z);
     const pitch=-Math.atan2(y,Math.hypot(x,z)*2);
 
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.72 : 1}) translateZ(${z0}px)`;
+    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.56 : 1}) translateZ(${z0}px)`;
   }
 
   if(layout==='grid'){
     const cols=3;
     const rows=4;
-    const cg=mobile ? 190 : 280;
-    const rg=mobile ? 155 : 220;
-    const dg=mobile ? 220 : 200;
+    const cg=mobile ? 210 : 280;
+    const rg=mobile ? 165 : 220;
+    const dg=mobile ? 260 : 200;
 
     const per=cols*rows;
     const layers=Math.ceil(cards.length/per);
@@ -652,12 +666,11 @@ function posFor(layout,i,isExp){
     const yz=((rows-1)/2-row)*rg;
     const z=z0+((layer-(layers-1)/2)*dg);
 
-    return `translate3d(${x}px,${yz}px,${z}px) scale(${mobile ? 0.72 : 1})`;
+    return `translate3d(${x}px,${yz}px,${z}px) scale(${mobile ? 0.56 : 1})`;
   }
 
   return '';
 }
-
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- ═══ MAIN PAGES ═══ -->
   <url><loc>https://secretsystems.io/</loc><lastmod>2025-04-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://secretsystems.io/services.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://secretsystems.io/automation.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -11,8 +9,6 @@
   <url><loc>https://secretsystems.io/pricing.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://secretsystems.io/contact.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://secretsystems.io/vault.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
-
-  <!-- ═══ PORTFOLIO SITES (/sites/ folder) ═══ -->
   <url><loc>https://secretsystems.io/sites/apex-plumbing.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://secretsystems.io/sites/ridge-roofing.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://secretsystems.io/sites/greenwave-lawn.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -24,5 +20,4 @@
   <url><loc>https://secretsystems.io/sites/elitepest.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://secretsystems.io/sites/sunstate-painting.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://secretsystems.io/sites/taylor-made.html</loc><lastmod>2025-04-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-
 </urlset>

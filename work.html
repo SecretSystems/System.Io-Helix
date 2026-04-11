@@ -632,13 +632,13 @@ function posFor(layout,i,isExp){
 
   if(layout==='sphere'){
     const mobile=isMobile();
-    const r=mobile ? 360 : 420;
+    const r=mobile ? 420 : 420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
     const sp=Math.sin(phi);
 
     const x=r*sp*Math.cos(theta);
-    const y=(mobile ? r*.9 : r)*Math.cos(phi);
+    const y=(mobile ? r : r)*Math.cos(phi);
     const z=r*sp*Math.sin(theta);
 
     const yaw=Math.atan2(x,z);
@@ -649,9 +649,9 @@ function posFor(layout,i,isExp){
 
   if(layout==='helix'){
     const mobile=isMobile();
-    const r=mobile ? 340 : 420;
-    const step=mobile ? 0.24 : 0.22;
-    const vs=mobile ? 5.2 : 3.8;
+    const r=mobile ? 380 : 420;
+    const step=mobile ? 0.22 : 0.22;
+    const vs=mobile ? 4.2 : 3.8;
     const yOff=cards.length*vs/2;
 
     const theta=i*step+Math.PI;
@@ -669,9 +669,9 @@ function posFor(layout,i,isExp){
     const mobile=isMobile();
     const cols=3;
     const rows=4;
-    const cg=mobile ? 220 : 280;
-    const rg=mobile ? 180 : 220;
-    const dg=mobile ? 220 : 200;
+    const cg=mobile ? 240 : 280;
+    const rg=mobile ? 190 : 220;
+    const dg=mobile ? 260 : 200;
 
     const per=cols*rows;
     const layers=Math.ceil(cards.length/per);
@@ -697,14 +697,14 @@ if(layout==='table'){
   tRotX=12;
   tRotY=16;
 }else if(layout==='sphere'){
-  tRotX=isMobile()?18:40;
-  tRotY=isMobile()?28:360;
+  tRotX=isMobile()?22:40;
+  tRotY=isMobile()?34:360;
 }else if(layout==='helix'){
-  tRotX=isMobile()?16:30;
-  tRotY=isMobile()?24:300;
+  tRotX=isMobile()?18:30;
+  tRotY=isMobile()?28:300;
 }else if(layout==='grid'){
-  tRotX=isMobile()?12:10;
-  tRotY=isMobile()?18:55;
+  tRotX=isMobile()?14:10;
+  tRotY=isMobile()?22:55;
 }
 
   if(layout==='table'){

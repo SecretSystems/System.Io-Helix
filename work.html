@@ -667,11 +667,11 @@ function posFor(layout,i,isExp){
 
   if(layout==='grid'){
     const mobile=isMobile();
-    const cols=mobile?3:3;
-    const rows=mobile?4:4;
-    const cg=mobile?220:280;
-    const rg=mobile?180:220;
-    const dg=mobile?220:200;
+    const cols=3;
+    const rows=4;
+    const cg=mobile ? 220 : 280;
+    const rg=mobile ? 180 : 220;
+    const dg=mobile ? 220 : 200;
 
     const per=cols*rows;
     const layers=Math.ceil(cards.length/per);
@@ -687,24 +687,7 @@ function posFor(layout,i,isExp){
   }
 
   return '';
-  }
-  if(layout==='helix'){
-    const r=420,step=0.22,vs=3.8,yOff=cards.length*vs/2;
-    const theta=i*step+Math.PI;
-    const y=-(i*vs)+yOff;
-    const x=r*Math.sin(theta),z=r*Math.cos(theta);
-    const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z)*2);
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
-  }
-  if(layout==='grid'){
-    const cols=3,rows=4,cg=280,rg=220,dg=200;
-    const per=cols*rows,layers=Math.ceil(cards.length/per);
-    const col=i%cols,row=Math.floor(i/cols)%rows,layer=Math.floor(i/per);
-    const x=(col-(cols-1)/2)*cg,yz=((rows-1)/2-row)*rg;
-    const z=z0+((layer-(layers-1)/2)*dg);
-    return `translate3d(${x}px,${yz}px,${z}px)`;
-  }
-  return '';
+}
 }
 
 function applyLayout(layout, animated=true){

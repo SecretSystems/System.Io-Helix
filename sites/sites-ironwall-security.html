@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IronWall Security | Home & Business Alarm Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* IRONWALL — Dark charcoal & vivid green — tactical/military */
+:root{--black:#030303;--char:#0a0a0a;--panel:#111;--green:#22c55e;--green2:#4ade80;--red:#ef4444;--white:#f1f5f9;--dim:#475569;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'Exo 2',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Live "armed/disarmed" system status with animated scanning line */
+nav{background:var(--char);border-bottom:1px solid rgba(34,197,94,.15);padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Exo 2',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);}
+.logo span{color:var(--green);}
+.status-badge{display:flex;align-items:center;gap:.5rem;border:1px solid var(--green);padding:.32rem .8rem;font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.15em;color:var(--green);}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink-g .8s infinite alternate;}
+@keyframes blink-g{from{opacity:1;}to{opacity:.2;}}
+.nav-cta{background:var(--green);color:var(--black);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:.42rem 1.2rem;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--green2);}
+/* SECURITY HUD HERO */
+.hero{position:relative;min-height:95vh;overflow:hidden;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.18) saturate(.4);}
+/* scanning line */
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:.6;animation:scan 4s linear infinite;z-index:2;}
+@keyframes scan{from{top:0;}to{top:100%;}}
+/* corner hud elements */
+.hud-corner{position:absolute;z-index:3;}
+.hud-tl{top:5rem;left:2rem;border-top:2px solid rgba(34,197,94,.5);border-left:2px solid rgba(34,197,94,.5);width:60px;height:60px;}
+.hud-tr{top:5rem;right:2rem;border-top:2px solid rgba(34,197,94,.5);border-right:2px solid rgba(34,197,94,.5);width:60px;height:60px;}
+.hud-bl{bottom:5rem;left:2rem;border-bottom:2px solid rgba(34,197,94,.5);border-left:2px solid rgba(34,197,94,.5);width:60px;height:60px;}
+.hud-br{bottom:5rem;right:2rem;border-bottom:2px solid rgba(34,197,94,.5);border-right:2px solid rgba(34,197,94,.5);width:60px;height:60px;}
+.hero-inner{position:relative;z-index:4;max-width:680px;padding:4rem 3rem;}
+.sys-status{font-family:'Courier Prime',monospace;font-size:.72rem;letter-spacing:.25em;color:var(--green);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
+.sys-status::before{content:'';display:block;width:20px;height:1px;background:var(--green);}
+.hero h1{font-weight:800;font-size:clamp(3rem,7vw,6rem);text-transform:uppercase;line-height:.9;letter-spacing:.04em;margin-bottom:1.5rem;}
+.hero h1 em{font-style:normal;color:var(--green);display:block;}
+.hero p{font-size:1rem;color:rgba(241,245,249,.65);line-height:1.75;max-width:480px;margin-bottom:2.5rem;}
+.btn-g{background:var(--green);color:var(--black);font-weight:800;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-g:hover{background:var(--green2);}
+/* services */
+.services{padding:5rem 2.5rem;background:var(--char);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(34,197,94,.1);margin-top:3rem;}
+.svc{background:var(--black);padding:2rem 1.5rem;border-top:2px solid transparent;transition:border-color .2s,background .2s;}
+.svc:hover{border-color:var(--green);background:#070707;}
+.svc-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.svc h3{font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;}
+.svc p{font-size:.83rem;color:var(--dim);line-height:1.65;}
+/* live feed section */
+.live{padding:5rem 2.5rem;background:var(--panel);}
+.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem;}
+.cam{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;border:1px solid rgba(34,197,94,.2);}
+.cam img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.6);}
+.cam-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:.6rem;}
+.cam-label{font-family:'Courier Prime',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--green);background:rgba(0,0,0,.6);padding:.15rem .4rem;align-self:flex-start;}
+.cam-time{font-family:'Courier Prime',monospace;font-size:.6rem;letter-spacing:.12em;color:var(--green);background:rgba(0,0,0,.6);padding:.15rem .4rem;align-self:flex-end;}
+.rec-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink-g .5s infinite alternate;margin-right:.3rem;}
+/* plans */
+.plans{padding:5rem 2.5rem;background:var(--char);}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;}
+.plan{background:var(--black);border:1px solid rgba(34,197,94,.12);padding:2.5rem 2rem;}
+.plan.best{border-color:var(--green);}
+.plan-n{font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:.8rem;}
+.plan-price{font-weight:800;font-size:2.5rem;margin-bottom:.3rem;}
+.plan-price sub{font-size:.9rem;font-weight:400;color:var(--dim);}
+.plan-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.5rem;}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;}
+.plan ul li{font-size:.82rem;color:var(--dim);display:flex;align-items:center;gap:.5rem;}
+.plan ul li::before{content:'✓';color:var(--green);font-weight:700;}
+.plan-btn{display:block;text-align:center;background:transparent;border:1px solid rgba(34,197,94,.3);color:var(--green);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.75rem;text-decoration:none;transition:all .2s;}
+.plan-btn:hover,.plan.best .plan-btn{background:var(--green);color:var(--black);}
+footer{background:var(--black);border-top:1px solid rgba(34,197,94,.1);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;color:var(--dim);font-size:.78rem;}
+footer span{color:var(--green);}
+@media(max-width:700px){.live-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">IRON<span>WALL</span></div>
+  <div class="status-badge"><div class="status-dot"></div>SYSTEM ARMED</div>
+  <a href="#" class="nav-cta">Free Quote</a>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1400&auto=format&fit=crop" alt="Security"/></div>
+  <div class="scan-line"></div>
+  <div class="hud-corner hud-tl"></div>
+  <div class="hud-corner hud-tr"></div>
+  <div class="hud-corner hud-bl"></div>
+  <div class="hud-corner hud-br"></div>
+  <div class="hero-inner">
+    <div class="sys-status">SYSTEM STATUS: FULLY PROTECTED</div>
+    <h1>Protect<br>What<br><em>Matters Most.</em></h1>
+    <p>Professional alarm systems, 24/7 monitoring, smart cameras, and access control for homes and businesses across South Louisiana. If something happens, we know before you do.</p>
+    <a href="#" class="btn-g">Get Protected Today</a>
+  </div>
+</div>
+<div class="services">
+  <h2 style="font-size:2.5rem;font-weight:800;text-transform:uppercase;text-align:center;">Security <span style="color:var(--green)">Solutions</span></h2>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">🔔</span><h3>Alarm Systems</h3><p>Wired and wireless alarm systems with 24/7 professional monitoring and mobile alerts.</p></div>
+    <div class="svc"><span class="svc-icon">📷</span><h3>Camera Systems</h3><p>4K IP cameras, NVR recording, and remote viewing from anywhere on your phone.</p></div>
+    <div class="svc"><span class="svc-icon">🔑</span><h3>Access Control</h3><p>Keypad, fob, and biometric entry systems for businesses, offices, and gated properties.</p></div>
+    <div class="svc"><span class="svc-icon">🚪</span><h3>Smart Door Locks</h3><p>Remote-locking deadbolts with smartphone control, access logs, and guest codes.</p></div>
+    <div class="svc"><span class="svc-icon">💡</span><h3>Smart Lighting</h3><p>Automated security lighting that deters intruders and integrates with your alarm system.</p></div>
+    <div class="svc"><span class="svc-icon">📱</span><h3>24/7 Monitoring</h3><p>Live monitoring center responds to every alert — police dispatch in under 90 seconds.</p></div>
+  </div>
+</div>
+<div class="live">
+  <h2 style="font-size:2.2rem;font-weight:800;text-transform:uppercase;text-align:center;">Live <span style="color:var(--green)">Camera Feed</span></h2>
+  <div class="live-grid">
+    <div class="cam"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop" alt="Camera 1"/><div class="cam-overlay"><div class="cam-label"><span class="rec-dot"></span>CAM-01 · FRONT DOOR</div><div class="cam-time" id="t1">--:--:--</div></div></div>
+    <div class="cam"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop" alt="Camera 2"/><div class="cam-overlay"><div class="cam-label"><span class="rec-dot"></span>CAM-02 · BACKYARD</div><div class="cam-time" id="t2">--:--:--</div></div></div>
+  </div>
+</div>
+<div class="plans">
+  <h2 style="font-size:2.2rem;font-weight:800;text-transform:uppercase;text-align:center;">Monitoring <span style="color:var(--green)">Plans</span></h2>
+  <div class="plan-grid">
+    <div class="plan"><div class="plan-n">// Basic Shield</div><div class="plan-price">$29<sub>/mo</sub></div><div class="plan-sub">Entry-level protection</div><ul><li>24/7 Alarm Monitoring</li><li>Mobile App Access</li><li>2 Door/Window Sensors</li><li>1 Motion Detector</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+    <div class="plan best"><div class="plan-n">// Full Fortress</div><div class="plan-price">$59<sub>/mo</sub></div><div class="plan-sub">Most popular package</div><ul><li>Everything in Basic</li><li>4K Camera System (4 cams)</li><li>Smart Door Lock</li><li>Video Doorbell</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+    <div class="plan"><div class="plan-n">// Total Control</div><div class="plan-price">$89<sub>/mo</sub></div><div class="plan-sub">Maximum protection</div><ul><li>Everything in Fortress</li><li>8-Camera System</li><li>Access Control System</li><li>Dedicated Response Agent</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+  </div>
+</div>
+<footer><span>IRONWALL SECURITY</span> · Licensed Alarm Contractor · © 2025 · (504) 555-0312</footer>
+<script>
+function updateTime(){
+  const now=new Date();
+  const t=now.toLocaleTimeString('en-US',{hour12:false});
+  document.getElementById('t1').textContent=t;
+  document.getElementById('t2').textContent=t;
+}
+updateTime();setInterval(updateTime,1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Volt Electric | Licensed Electricians — Residential & Commercial</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* VOLT ELECTRIC — Black & electric yellow — futuristic/tech */
+:root{--black:#050505;--dark:#0f0f0f;--gray:#1a1a1a;--yellow:#fbbf24;--yellow2:#fcd34d;--white:#f8fafc;--dim:#6b7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'Jost',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Live voltage meter / circuit animation */
+nav{background:var(--dark);border-bottom:1px solid rgba(251,191,36,.15);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.8rem;letter-spacing:.12em;text-transform:uppercase;}
+.logo span{color:var(--yellow);}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.nav-right a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-right a:hover{color:var(--yellow);}
+.nav-right .cta{border:1px solid var(--yellow);color:var(--yellow);padding:.42rem 1.2rem;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.nav-right .cta:hover{background:var(--yellow);color:var(--black);}
+/* VOLTAGE HERO */
+.hero{position:relative;min-height:95vh;overflow:hidden;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.25);}
+/* circuit lines — special twist */
+.circuit{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+svg.circuit-svg{position:absolute;inset:0;width:100%;height:100%;opacity:.18;}
+/* voltage meter */
+.volt-meter{position:absolute;right:5rem;top:50%;transform:translateY(-50%);background:rgba(5,5,5,.85);border:1px solid rgba(251,191,36,.25);padding:2rem 1.5rem;text-align:center;min-width:160px;}
+.volt-meter-label{font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:.8rem;}
+.volt-val{font-family:'Rajdhani',sans-serif;font-size:3.5rem;font-weight:700;color:var(--yellow);line-height:1;}
+.volt-unit{font-size:.8rem;color:var(--dim);margin-top:.2rem;}
+.volt-bar{height:4px;background:rgba(251,191,36,.2);border-radius:2px;margin-top:1rem;}
+.volt-fill{height:100%;border-radius:2px;background:var(--yellow);animation:volt-pulse .8s ease-in-out infinite alternate;}
+@keyframes volt-pulse{from{width:70%;}to{width:95%;}}
+.volt-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);margin:.8rem auto 0;animation:blink .5s infinite alternate;}
+@keyframes blink{from{opacity:1;}to{opacity:.2;}}
+.hero-inner{position:relative;z-index:2;max-width:640px;padding:4rem 2.5rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(251,191,36,.3);padding:.35rem .9rem;font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:1.8rem;}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.95;margin-bottom:1.5rem;}
+.hero h1 em{font-style:normal;color:var(--yellow);display:block;}
+.hero p{font-size:1rem;font-weight:300;color:rgba(248,250,252,.65);line-height:1.8;max-width:480px;margin-bottom:2.5rem;}
+.btn-yellow{background:var(--yellow);color:var(--black);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-yellow:hover{background:var(--yellow2);}
+/* services */
+.services{padding:5rem 2.5rem;background:var(--dark);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(251,191,36,.1);margin-top:3rem;}
+.svc{background:var(--black);padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .2s,background .2s;}
+.svc:hover{border-color:var(--yellow);background:#0d0d0d;}
+.svc-num{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;color:rgba(251,191,36,.4);margin-bottom:1rem;}
+.svc-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.svc h3{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;}
+.svc p{font-size:.86rem;color:var(--dim);line-height:1.65;}
+/* why us */
+.why{padding:5rem 2.5rem;background:var(--gray);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.why-img{overflow:hidden;}
+.why-img img{width:100%;display:block;height:480px;object-fit:cover;filter:brightness(.8);}
+.why-list{display:flex;flex-direction:column;gap:1.8rem;}
+.why-item{display:flex;gap:1.2rem;}
+.why-icon{width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);font-size:1.2rem;}
+.why-item h4{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase;margin-bottom:.3rem;}
+.why-item p{font-size:.85rem;color:var(--dim);line-height:1.6;}
+/* reviews */
+.reviews{padding:5rem 2.5rem;background:var(--dark);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.rcard{background:var(--gray);border:1px solid rgba(251,191,36,.1);padding:2rem;}
+.stars{color:var(--yellow);margin-bottom:.6rem;font-size:.9rem;}
+.rtext{font-size:.87rem;color:var(--dim);line-height:1.7;margin-bottom:.8rem;}
+.rname{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95rem;text-transform:uppercase;}
+footer{background:var(--black);border-top:1px solid rgba(251,191,36,.1);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;color:var(--dim);font-size:.78rem;}
+footer span{color:var(--yellow);}
+@media(max-width:800px){.why-grid{grid-template-columns:1fr;}.volt-meter{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">VOLT <span>ELECTRIC</span></div>
+  <div class="nav-right">
+    <a href="#">Residential</a><a href="#">Commercial</a><a href="#">Emergency</a>
+    <a href="#" class="cta">Call Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop&sat=-30" alt="Electrician working"/></div>
+  <div class="hero-inner">
+    <div class="hero-badge">⚡ Licensed Master Electricians</div>
+    <h1>Power.<br>Precision.<br><em>Peace of Mind.</em></h1>
+    <p>Residential wiring, panel upgrades, commercial buildouts, and 24/7 emergency electrical service. Licensed, insured, and on time — every time.</p>
+    <a href="#" class="btn-yellow">Schedule a Service Call</a>
+  </div>
+  <div class="volt-meter">
+    <div class="volt-meter-label">System Voltage</div>
+    <div class="volt-val" id="vlt">120</div>
+    <div class="volt-unit">VOLTS AC</div>
+    <div class="volt-bar"><div class="volt-fill"></div></div>
+    <div class="volt-dot"></div>
+  </div>
+</div>
+<div class="services">
+  <h2 style="font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;text-transform:uppercase;text-align:center;">Our <span style="color:var(--yellow)">Services</span></h2>
+  <div class="svc-grid">
+    <div class="svc"><div class="svc-num">01</div><span class="svc-icon">🔌</span><h3>Panel Upgrades</h3><p>200-amp service upgrades, panel replacement, and circuit breaker repair for modern homes.</p></div>
+    <div class="svc"><div class="svc-num">02</div><span class="svc-icon">💡</span><h3>Whole Home Wiring</h3><p>New construction and remodel wiring — rough-in, trim-out, and finish work done right.</p></div>
+    <div class="svc"><div class="svc-num">03</div><span class="svc-icon">🏢</span><h3>Commercial Electric</h3><p>Tenant buildouts, industrial panel work, and code compliance for businesses of all sizes.</p></div>
+    <div class="svc"><div class="svc-num">04</div><span class="svc-icon">☀️</span><h3>EV Chargers</h3><p>Level 2 home EV charger installation — Tesla, ChargePoint, and universal outlets.</p></div>
+    <div class="svc"><div class="svc-num">05</div><span class="svc-icon">🚨</span><h3>Emergency Service</h3><p>24/7 electrical emergency response — power outages, burning smell, sparking outlets.</p></div>
+    <div class="svc"><div class="svc-num">06</div><span class="svc-icon">🏠</span><h3>Smart Home</h3><p>Lutron, Nest, and full smart home electrical integration and automation wiring.</p></div>
+  </div>
+</div>
+<div class="why">
+  <div class="why-grid">
+    <div class="why-img"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop" alt="Electrician panel work"/></div>
+    <div>
+      <h2 style="font-family:'Rajdhani',sans-serif;font-size:2.5rem;font-weight:700;text-transform:uppercase;margin-bottom:2.5rem;">Why Choose <span style="color:var(--yellow)">Volt</span></h2>
+      <div class="why-list">
+        <div class="why-item"><div class="why-icon">⚡</div><div><h4>Master License</h4><p>All work performed by or supervised by licensed Master Electricians — not apprentices.</p></div></div>
+        <div class="why-item"><div class="why-icon">📋</div><div><h4>Full Permits</h4><p>We pull all required permits and handle inspections — your work is 100% code compliant.</p></div></div>
+        <div class="why-item"><div class="why-icon">🕐</div><div><h4>Same Day Available</h4><p>Most service calls scheduled same or next day. Emergency response in under 90 minutes.</p></div></div>
+        <div class="why-item"><div class="why-icon">💰</div><div><h4>Flat Rate Pricing</h4><p>No hourly surprises. We quote the full job upfront so you know exactly what you're paying.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="reviews">
+  <h2 style="font-family:'Rajdhani',sans-serif;font-size:2.5rem;font-weight:700;text-transform:uppercase;text-align:center;">Client <span style="color:var(--yellow)">Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Had outlets sparking at 10pm. Volt had someone here by midnight. Fixed everything, explained what went wrong, charged a fair price. Outstanding."</p><div class="rname">Michael D.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Panel upgrade on a 1970s house — they did it in one day, pulled permits, passed inspection first try. Highly recommend."</p><div class="rname">Karen B.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Wired our entire commercial buildout. On time, on budget, zero issues with inspections. We use them for all our properties now."</p><div class="rname">Tony M.</div></div>
+  </div>
+</div>
+<footer><span>VOLT ELECTRIC</span> · Master Electrician License #E-2025-LA · © 2025 · (504) 555-0198</footer>
+<script>
+// Fluctuate voltage display
+const v=document.getElementById('vlt');
+setInterval(()=>{
+  const val=118+Math.floor(Math.random()*5);
+  v.textContent=val;
+},1500);
+</script>
+</body>
+</html>

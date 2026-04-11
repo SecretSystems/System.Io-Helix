@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sundance Pools | Pool Maintenance & Repair</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* SUNDANCE POOLS — Aqua teal & warm sand — resort/luxury */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+:root{--teal:#0d9488;--teal2:#14b8a6;--sky:#67e8f9;--sand:#f5f0e8;--sand2:#ede8df;--dark:#0c3a35;--warm:#78716c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--sand);color:var(--dark);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Animated ripple water effect on hero */
+nav{background:var(--dark);padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--sand);letter-spacing:.02em;}
+.logo em{font-style:italic;color:var(--sky);}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-links a{font-size:.8rem;font-weight:500;color:rgba(245,240,232,.7);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--sky);}
+.nav-links .cta{background:var(--teal2);color:var(--sand);padding:.45rem 1.3rem;font-weight:600;font-size:.8rem;}
+/* HERO with water ripple */
+.hero{position:relative;min-height:95vh;overflow:hidden;display:flex;align-items:center;}
+.hero-img{position:absolute;inset:0;}
+.hero-img img{width:100%;height:100%;object-fit:cover;}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,58,53,.9) 45%,rgba(12,58,53,.3));}
+/* water ripple circles */
+.ripple-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.ripple{position:absolute;border-radius:50%;border:1px solid rgba(103,232,249,.25);animation:ripple-out 6s ease-out infinite;}
+.ripple:nth-child(1){width:200px;height:200px;bottom:20%;right:30%;animation-delay:0s;}
+.ripple:nth-child(2){width:400px;height:400px;bottom:15%;right:27%;animation-delay:1.5s;}
+.ripple:nth-child(3){width:650px;height:650px;bottom:8%;right:22%;animation-delay:3s;}
+@keyframes ripple-out{0%{transform:scale(.8);opacity:.8;}100%{transform:scale(1.3);opacity:0;}}
+.hero-inner{position:relative;z-index:2;padding:4rem 3rem;}
+.hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);margin-bottom:1.5rem;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,6.5vw,6rem);color:var(--sand);line-height:1.02;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--sky);}
+.hero p{font-size:1rem;color:rgba(245,240,232,.78);line-height:1.75;max-width:440px;margin-bottom:2.5rem;}
+.btn-teal{background:var(--teal2);color:var(--sand);font-weight:600;font-size:.9rem;padding:.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-teal:hover{background:var(--teal);}
+.btn-sand{border:2px solid rgba(245,240,232,.5);color:var(--sand);font-weight:500;font-size:.9rem;padding:.85rem 2rem;text-decoration:none;display:inline-block;margin-left:.8rem;transition:border-color .2s;}
+.btn-sand:hover{border-color:var(--sky);}
+/* services */
+.services{padding:5rem 3rem;background:var(--sand2);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem;}
+.svc{background:var(--sand);padding:2rem;border-bottom:3px solid transparent;transition:border-color .25s,transform .25s;}
+.svc:hover{border-color:var(--teal2);transform:translateY(-4px);}
+.svc-icon{font-size:2.2rem;margin-bottom:1rem;display:block;}
+.svc h3{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:.5rem;}
+.svc p{font-size:.84rem;color:var(--warm);line-height:1.65;}
+/* photo split */
+.split{display:grid;grid-template-columns:1fr 1fr;background:var(--dark);}
+.split-img{overflow:hidden;}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block;max-height:480px;filter:brightness(.85);transition:filter .4s;}
+.split-img:hover img{filter:brightness(1);}
+.split-text{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;}
+.split-text h2{font-family:'DM Serif Display',serif;font-size:2.5rem;color:var(--sand);line-height:1.1;margin-bottom:1.5rem;}
+.split-text h2 em{font-style:italic;color:var(--sky);}
+.split-list{list-style:none;display:flex;flex-direction:column;gap:1rem;}
+.split-list li{font-size:.9rem;color:rgba(245,240,232,.7);display:flex;gap:.8rem;align-items:flex-start;line-height:1.5;}
+.split-list li::before{content:'◆';color:var(--teal2);flex-shrink:0;font-size:.5rem;margin-top:.3rem;}
+/* reviews */
+.reviews{padding:5rem 3rem;background:var(--sand);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem;}
+.rcard{background:var(--sand2);padding:2rem;border-left:4px solid var(--teal2);}
+.stars{color:var(--teal);margin-bottom:.6rem;font-size:.9rem;}
+.rtext{font-size:.88rem;color:var(--warm);line-height:1.75;font-style:italic;margin-bottom:.8rem;}
+.rname{font-weight:600;font-size:.88rem;color:var(--dark);}
+/* gallery */
+.gallery{padding:4rem 3rem;background:var(--dark);}
+.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:2rem;}
+.g-img{overflow:hidden;aspect-ratio:4/3;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;}
+.g-img:hover img{transform:scale(1.06);filter:brightness(1.1);}
+footer{background:var(--dark);padding:2rem 3rem;text-align:center;color:rgba(245,240,232,.45);font-size:.8rem;}
+footer span{color:var(--sky);}
+@media(max-width:800px){.split{grid-template-columns:1fr;}.g-grid{grid-template-columns:repeat(2,1fr);}.hero{min-height:auto;}.hero-inner{padding-top:6rem;padding-bottom:4rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sun<em>dance</em> Pools</div>
+  <div class="nav-links">
+    <a href="#">Maintenance</a><a href="#">Repair</a><a href="#">Gallery</a>
+    <a href="#" class="cta">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=1400&auto=format&fit=crop" alt="Beautiful pool"/></div>
+  <div class="ripple-container"><div class="ripple"></div><div class="ripple"></div><div class="ripple"></div></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Pool Maintenance · Repair · Renovation</div>
+    <h1>Your Pool<br>Should Be<br><em>Perfect.</em></h1>
+    <p>Weekly cleaning, chemical balancing, equipment repair, and full pool renovations. We keep South Louisiana pools sparkling all year long.</p>
+    <a href="#" class="btn-teal">Get Weekly Service</a>
+    <a href="#" class="btn-sand">Free Estimate</a>
+  </div>
+</div>
+<div class="services">
+  <h2 style="font-family:'DM Serif Display',serif;font-size:2.8rem;text-align:center;margin-bottom:.5rem;">Everything Your <em style="font-style:italic;color:var(--teal)">Pool Needs</em></h2>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">🧹</span><h3>Weekly Cleaning</h3><p>Skimming, brushing, vacuuming, and filter backwash. Your pool pristine every week.</p></div>
+    <div class="svc"><span class="svc-icon">🧪</span><h3>Chemical Balancing</h3><p>Water testing and chemical treatment to keep your pool safe, clear, and algae-free.</p></div>
+    <div class="svc"><span class="svc-icon">🔧</span><h3>Equipment Repair</h3><p>Pump, filter, heater, and salt cell repair and replacement for all pool brands.</p></div>
+    <div class="svc"><span class="svc-icon">🏊</span><h3>Pool Renovation</h3><p>Resurfacing, tile replacement, deck refinishing, and full pool makeovers.</p></div>
+    <div class="svc"><span class="svc-icon">💡</span><h3>LED Lighting</h3><p>Color-changing LED pool light installation — transform your backyard at night.</p></div>
+    <div class="svc"><span class="svc-icon">🌡️</span><h3>Pool Heaters</h3><p>Gas and heat pump pool heater installation, repair, and seasonal startup/shutdown.</p></div>
+  </div>
+</div>
+<div class="split">
+  <div class="split-img"><img src="https://images.unsplash.com/photo-1570655652364-2e0a67455ac6?w=800&auto=format&fit=crop" alt="Pool service"/></div>
+  <div class="split-text">
+    <h2>Why Homeowners Choose<br><em>Sundance</em></h2>
+    <ul class="split-list">
+      <li>Same technician every visit — we learn your pool and spot issues early</li>
+      <li>Detailed digital service reports sent after every visit with photos</li>
+      <li>On-call equipment repair — most parts in stock on our trucks</li>
+      <li>No contracts, cancel anytime — we earn your business every week</li>
+      <li>Licensed, insured, and background-checked technicians only</li>
+    </ul>
+  </div>
+</div>
+<div class="reviews">
+  <h2 style="font-family:'DM Serif Display',serif;font-size:2.5rem;text-align:center;">Happy <em style="font-style:italic;color:var(--teal)">Pool Owners</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Been using Sundance for three years. Pool has never looked better. They catch things before they turn into expensive repairs."</p><div class="rname">Nancy H. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Pump died on the Friday before a pool party. Sundance had a tech here Saturday morning, new pump installed by noon. Saved the day."</p><div class="rname">Brian T. — Prairieville</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"The renovation they did on our 15-year-old pool turned it into a showpiece. New plaster, tiles, LED lights. Absolutely stunning."</p><div class="rname">Melissa G. — Zachary</div></div>
+  </div>
+</div>
+<div class="gallery">
+  <h2 style="font-family:'DM Serif Display',serif;font-size:2.5rem;color:var(--sand);text-align:center;margin-bottom:0;">Pool <em style="font-style:italic;color:var(--sky)">Gallery</em></h2>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&auto=format&fit=crop" alt="Pool 1"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=600&auto=format&fit=crop" alt="Pool 2"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1538965989090-b3db2d90a14b?w=600&auto=format&fit=crop" alt="Pool 3"/></div>
+  </div>
+</div>
+<footer>© 2025 <span>Sundance Pools LLC</span> · Licensed & Insured · South Louisiana · (225) 555-0427</footer>
+</body>
+</html>

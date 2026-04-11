@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GreenWave Lawn Care | Premium Lawn Maintenance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* GREENWAVE LAWN — Forest green & warm gold — organic/luxury editorial */
+:root{--forest:#1a3a2a;--forest2:#2d5a3d;--sage:#52784a;--gold:#c9a84c;--gold2:#f0c060;--cream:#fdf8f0;--brown:#6b4f3a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--forest);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Grass growing animation on scroll */
+nav{background:var(--forest);padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;color:var(--cream);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-links a{color:rgba(253,248,240,.7);font-size:.85rem;font-weight:500;text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links .cta{background:var(--gold);color:var(--forest);padding:.45rem 1.3rem;font-weight:600;font-size:.82rem;}
+/* hero */
+.hero{position:relative;min-height:95vh;overflow:hidden;}
+.hero-img{position:absolute;inset:0;}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,58,42,.85) 0%,rgba(26,58,42,.4) 60%,rgba(26,58,42,.8) 100%);}
+.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:95vh;text-align:center;padding:4rem 2rem;}
+/* grass strip — special twist */
+.grass-strip{position:absolute;bottom:0;left:0;right:0;height:80px;display:flex;align-items:flex-end;overflow:hidden;z-index:3;}
+.blade{width:6px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#4ade80,#166534);transform-origin:bottom center;animation:grow .8s ease-out forwards;}
+@keyframes grow{from{height:0;transform:rotate(var(--r,0deg));}to{height:var(--h,40px);transform:rotate(var(--r,0deg));}}
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(3rem,7vw,6rem);color:var(--cream);line-height:1.05;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{font-size:1.05rem;color:rgba(253,248,240,.85);max-width:520px;line-height:1.75;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.btn-gold{background:var(--gold);color:var(--forest);font-weight:700;font-size:.92rem;padding:.9rem 2.2rem;text-decoration:none;letter-spacing:.04em;transition:background .2s;}
+.btn-gold:hover{background:var(--gold2);}
+.btn-outline{border:2px solid rgba(253,248,240,.5);color:var(--cream);font-weight:500;font-size:.92rem;padding:.85rem 2rem;text-decoration:none;transition:border-color .2s;}
+.btn-outline:hover{border-color:var(--gold);}
+/* plans */
+.plans{padding:5rem 3rem;background:var(--cream);}
+.plans h2{font-family:'Playfair Display',serif;font-weight:800;font-size:2.8rem;text-align:center;margin-bottom:.5rem;}
+.plans p.sub{text-align:center;color:var(--sage);font-size:1rem;margin-bottom:3rem;}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.plan{background:#fff;border:1px solid rgba(26,58,42,.1);padding:2.5rem 2rem;text-align:center;position:relative;transition:box-shadow .3s,transform .3s;}
+.plan:hover{box-shadow:0 16px 40px rgba(26,58,42,.12);transform:translateY(-4px);}
+.plan.popular{border:2px solid var(--gold);}
+.plan.popular::before{content:'Most Popular';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--forest);font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .8rem;}
+.plan-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:.5rem;}
+.plan-price{font-size:2.8rem;font-weight:700;color:var(--forest);margin:.8rem 0;}
+.plan-price sup{font-size:1.2rem;vertical-align:top;margin-top:.6rem;}
+.plan-price sub{font-size:.85rem;color:var(--sage);}
+.plan ul{list-style:none;text-align:left;margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem;}
+.plan ul li{font-size:.86rem;color:var(--sage);display:flex;align-items:center;gap:.5rem;}
+.plan ul li::before{content:'✓';color:var(--forest2);font-weight:700;}
+.plan-btn{display:block;background:var(--forest);color:var(--cream);font-weight:600;font-size:.85rem;padding:.8rem;text-decoration:none;margin-top:1rem;transition:background .2s;}
+.plan-btn:hover{background:var(--forest2);}
+.plan.popular .plan-btn{background:var(--gold);color:var(--forest);}
+/* gallery */
+.gallery{padding:5rem 3rem;background:var(--forest);}
+.gallery h2{font-family:'Playfair Display',serif;font-weight:800;font-size:2.8rem;color:var(--cream);text-align:center;margin-bottom:2.5rem;}
+.gallery h2 em{color:var(--gold);font-style:italic;}
+.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
+.g-item{overflow:hidden;aspect-ratio:4/3;}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-item:hover img{transform:scale(1.06);}
+/* testimonials */
+.testimonials{padding:5rem 3rem;background:var(--cream);}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:3rem;}
+.tcard{background:#fff;padding:2rem;border-bottom:3px solid var(--gold);}
+.tq{font-size:.9rem;color:var(--sage);line-height:1.75;font-style:italic;margin-bottom:1rem;}
+.ta{font-weight:600;font-size:.88rem;color:var(--forest);}
+footer{background:var(--forest);padding:2rem 3rem;text-align:center;color:rgba(253,248,240,.5);font-size:.82rem;}
+@media(max-width:700px){.g-grid{grid-template-columns:repeat(2,1fr);}.hero-content{padding:6rem 1.5rem 3rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Green<span>Wave</span></div>
+  <div class="nav-links">
+    <a href="#">Services</a><a href="#">Plans</a><a href="#">Gallery</a>
+    <a href="#" class="cta">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop" alt="Beautiful lawn"/></div>
+  <div class="hero-content">
+    <div class="eyebrow">Premium Lawn Care · South Louisiana</div>
+    <h1>A Lawn Worth<br><em>Showing Off.</em></h1>
+    <p>Weekly maintenance, fertilization, aeration, and full landscape design. We treat your yard like it's our own — because your curb appeal is our reputation.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-gold">See Our Plans</a>
+      <a href="#" class="btn-outline">Free Estimate</a>
+    </div>
+  </div>
+  <div class="grass-strip" id="grassStrip"></div>
+</div>
+<div class="plans">
+  <h2>Simple, Clear Pricing</h2>
+  <p class="sub">No surprise fees. No contracts. Cancel anytime.</p>
+  <div class="plan-grid">
+    <div class="plan">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price"><sup>$</sup>89<sub>/visit</sub></div>
+      <ul><li>Mow & Edge</li><li>Blow & Clean</li><li>Bi-weekly available</li><li>Up to ½ acre</li></ul>
+      <a href="#" class="plan-btn">Get Started</a>
+    </div>
+    <div class="plan popular">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price"><sup>$</sup>149<sub>/visit</sub></div>
+      <ul><li>Everything in Basic</li><li>Fertilization</li><li>Weed Control</li><li>Shrub Trimming</li></ul>
+      <a href="#" class="plan-btn">Get Started</a>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price"><sup>$</sup>249<sub>/visit</sub></div>
+      <ul><li>Everything in Premium</li><li>Aeration & Overseeding</li><li>Pest Control</li><li>Full Landscape Design</li></ul>
+      <a href="#" class="plan-btn">Get Started</a>
+    </div>
+  </div>
+</div>
+<div class="gallery">
+  <h2>Before & <em>After</em></h2>
+  <div class="g-grid">
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&auto=format&fit=crop" alt="Lawn 1"/></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=600&auto=format&fit=crop" alt="Lawn 2"/></div>
+    <div class="g-item"><img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&auto=format&fit=crop" alt="Lawn 3"/></div>
+  </div>
+</div>
+<div class="testimonials">
+  <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;text-align:center;">What Our Clients Say</h2>
+  <div class="t-grid">
+    <div class="tcard"><p class="tq">"My yard hasn't looked this good since we built the house 15 years ago. GreenWave transformed it completely."</p><div class="ta">Patricia H. — Denham Springs</div></div>
+    <div class="tcard"><p class="tq">"Reliable, thorough, and they notice things before they become problems. Best lawn service I've ever used."</p><div class="ta">James W. — Baton Rouge</div></div>
+    <div class="tcard"><p class="tq">"The Elite package is worth every penny. My neighbors keep asking who does my lawn. Worth every penny."</p><div class="ta">Sandra L. — Zachary</div></div>
+  </div>
+</div>
+<footer>© 2025 GreenWave Lawn Care · Licensed & Insured · South Louisiana · (225) 555-0341</footer>
+<script>
+// Grow grass blades
+const strip=document.getElementById('grassStrip');
+for(let i=0;i<80;i++){
+  const b=document.createElement('div');
+  b.className='blade';
+  const h=Math.random()*50+20;
+  const r=(Math.random()-0.5)*25;
+  b.style.setProperty('--h',h+'px');
+  b.style.setProperty('--r',r+'deg');
+  b.style.animationDelay=(Math.random()*1.5)+'s';
+  b.style.marginRight='3px';
+  strip.appendChild(b);
+}
+</script>
+</body>
+</html>

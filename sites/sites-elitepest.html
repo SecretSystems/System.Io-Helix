@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Elite Pest Solutions | Termite & Pest Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ELITE PEST — Deep purple & lime — bold/modern/confident */
+:root{--purple:#4c1d95;--purple2:#6d28d9;--lime:#84cc16;--lime2:#a3e635;--white:#f8f9fa;--offwhite:#f1f5f9;--gray:#6b7280;--dark:#1a0533;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--white);color:var(--dark);font-family:'Nunito',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Animated bug that "runs away" when you hover near it */
+nav{background:var(--purple);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.1em;color:var(--white);}
+.logo span{color:var(--lime);}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.nav-right a{font-size:.8rem;font-weight:600;color:rgba(248,249,250,.7);text-decoration:none;transition:color .2s;}
+.nav-right a:hover{color:var(--lime);}
+.nav-cta{background:var(--lime);color:var(--dark);padding:.44rem 1.2rem;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--lime2);}
+/* HERO */
+.hero{position:relative;min-height:92vh;background:var(--dark);overflow:hidden;display:flex;align-items:center;}
+.hero-img{position:absolute;inset:0;}
+.hero-img img{width:100%;height:100%;object-fit:cover;opacity:.25;filter:saturate(.5);}
+/* BUG — special twist */
+#bug{position:absolute;font-size:2.5rem;z-index:10;pointer-events:none;transition:transform .15s,left .4s ease-out,top .4s ease-out;animation:walk 2s linear infinite;}
+@keyframes walk{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-5deg);}75%{transform:rotate(5deg);}}
+.hero-inner{position:relative;z-index:5;padding:4rem 3rem;max-width:660px;}
+.hero-ey{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.3em;color:var(--lime);margin-bottom:1.2rem;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,8rem);line-height:.9;color:var(--white);margin-bottom:1.5rem;}
+.hero h1 em{font-style:normal;color:var(--lime);display:block;}
+.hero p{font-size:1rem;color:rgba(248,249,250,.72);line-height:1.75;max-width:480px;margin-bottom:2.5rem;}
+.btn-lime{background:var(--lime);color:var(--dark);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.1em;padding:.85rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-lime:hover{background:var(--lime2);}
+/* pests we treat */
+.pests{padding:4rem 2.5rem;background:var(--offwhite);}
+.pest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem;margin-top:2.5rem;}
+.pest{background:var(--white);border:1px solid #e2e8f0;padding:1.5rem 1rem;text-align:center;border-radius:4px;transition:border-color .2s,transform .2s;}
+.pest:hover{border-color:var(--purple2);transform:scale(1.04);}
+.pest-icon{font-size:2.2rem;display:block;margin-bottom:.5rem;}
+.pest-name{font-size:.8rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.06em;}
+/* services */
+.services{padding:5rem 2.5rem;background:var(--purple);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(132,204,22,.15);margin-top:3rem;}
+.svc{background:var(--dark);padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .2s;}
+.svc:hover{border-color:var(--lime);}
+.svc h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;color:var(--white);margin-bottom:.5rem;}
+.svc p{font-size:.86rem;color:rgba(248,249,250,.6);line-height:1.65;}
+.svc-tag{display:inline-block;background:var(--lime);color:var(--dark);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.15rem .5rem;margin-top:.8rem;}
+/* guarantee */
+.guarantee{background:var(--lime);padding:3.5rem 2.5rem;text-align:center;}
+.guarantee h2{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.08em;color:var(--dark);margin-bottom:.8rem;}
+.guarantee p{font-size:1rem;color:rgba(26,5,51,.8);max-width:540px;margin:0 auto;}
+/* plans */
+.plans{padding:5rem 2.5rem;background:var(--offwhite);}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem;}
+.plan{background:var(--white);border:2px solid #e2e8f0;padding:2.5rem 2rem;text-align:center;}
+.plan.best{border-color:var(--purple2);}
+.plan-n{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.08em;color:var(--purple);}
+.plan-price{font-size:2.5rem;font-weight:800;margin:.5rem 0;color:var(--dark);}
+.plan-price sub{font-size:.9rem;font-weight:400;color:var(--gray);}
+.plan ul{list-style:none;text-align:left;margin:1.2rem 0;display:flex;flex-direction:column;gap:.5rem;}
+.plan ul li{font-size:.83rem;color:var(--gray);display:flex;align-items:center;gap:.5rem;}
+.plan ul li::before{content:'✓';color:var(--purple2);font-weight:800;}
+.plan-btn{display:block;background:var(--purple);color:var(--white);font-weight:700;font-size:.85rem;padding:.8rem;text-decoration:none;margin-top:1rem;transition:background .2s;}
+.plan-btn:hover{background:var(--purple2);}
+.plan.best .plan-btn{background:var(--lime);color:var(--dark);}
+/* reviews */
+.reviews{padding:4rem 2.5rem;background:var(--white);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.rcard{background:var(--offwhite);border-left:4px solid var(--purple2);padding:1.8rem;}
+.stars{color:var(--purple);font-size:.9rem;margin-bottom:.5rem;}
+.rtext{font-size:.86rem;color:var(--gray);line-height:1.7;margin-bottom:.7rem;}
+.rname{font-weight:700;font-size:.88rem;color:var(--dark);}
+footer{background:var(--dark);padding:2rem 2.5rem;text-align:center;color:rgba(248,249,250,.4);font-size:.78rem;}
+footer span{color:var(--lime);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">ELITE <span>PEST</span> SOLUTIONS</div>
+  <div class="nav-right">
+    <a href="#">Residential</a><a href="#">Commercial</a><a href="#">Termites</a>
+    <a href="#" class="nav-cta">Free Inspection</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop" alt="Home"/></div>
+  <div id="bug">🪲</div>
+  <div class="hero-inner">
+    <div class="hero-ey">LICENSED PEST CONTROL · SOUTH LOUISIANA</div>
+    <h1>No More<br><em>Bugs.</em></h1>
+    <p>Termites, roaches, rodents, mosquitoes, and more — we eliminate them all with targeted treatments that protect your family and your property for good.</p>
+    <a href="#" class="btn-lime">Get a Free Inspection</a>
+  </div>
+</div>
+<div class="pests">
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.06em;text-align:center;color:var(--purple);">Pests We Eliminate</h2>
+  <div class="pest-grid">
+    <div class="pest"><span class="pest-icon">🪲</span><div class="pest-name">Roaches</div></div>
+    <div class="pest"><span class="pest-icon">🐜</span><div class="pest-name">Termites</div></div>
+    <div class="pest"><span class="pest-icon">🐭</span><div class="pest-name">Rodents</div></div>
+    <div class="pest"><span class="pest-icon">🦟</span><div class="pest-name">Mosquitoes</div></div>
+    <div class="pest"><span class="pest-icon">🕷️</span><div class="pest-name">Spiders</div></div>
+    <div class="pest"><span class="pest-icon">🐝</span><div class="pest-name">Wasps</div></div>
+    <div class="pest"><span class="pest-icon">🐛</span><div class="pest-name">Bed Bugs</div></div>
+    <div class="pest"><span class="pest-icon">🦎</span><div class="pest-name">Lizards</div></div>
+  </div>
+</div>
+<div class="services">
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.06em;text-align:center;color:var(--white);">Our <span style="color:var(--lime)">Services</span></h2>
+  <div class="svc-grid">
+    <div class="svc"><h3>Termite Treatment</h3><p>Liquid barrier and baiting systems that eliminate termite colonies and protect your home long-term.</p><span class="svc-tag">Most Popular</span></div>
+    <div class="svc"><h3>General Pest Control</h3><p>Monthly or quarterly interior and exterior treatments targeting all common household pests.</p></div>
+    <div class="svc"><h3>Mosquito Control</h3><p>Yard spraying and misting systems that reduce mosquito populations by up to 90%.</p></div>
+    <div class="svc"><h3>Rodent Exclusion</h3><p>Trapping, removal, and sealing entry points so rodents can't get back in — ever.</p></div>
+  </div>
+</div>
+<div class="guarantee"><h2>100% SATISFACTION GUARANTEE</h2><p>If pests come back between scheduled treatments, we come back for free. No questions, no excuses — that's our promise.</p></div>
+<div class="reviews">
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.06em;text-align:center;color:var(--purple);">Happy <span style="color:var(--purple2)">Customers</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Had a serious roach problem that two other companies couldn't fix. Elite came in, treated once, and we haven't seen one in six months."</p><div class="rname">Denise W.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Found termite damage in our floor joists. Elite handled everything — treatment, damage assessment, and follow-up inspections. Outstanding."</p><div class="rname">Patrick M.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"The mosquito service made our backyard actually usable this summer. Down from swarms to almost zero. Worth every penny."</p><div class="rname">Carol T.</div></div>
+  </div>
+</div>
+<footer>© 2025 <span>Elite Pest Solutions</span> · Louisiana Certified Applicator · (225) 555-0491</footer>
+<script>
+// Bug runs away from cursor
+const bug=document.getElementById('bug');
+let bx=200,by=400;
+bug.style.left=bx+'px';bug.style.top=by+'px';
+document.addEventListener('mousemove',e=>{
+  const dx=e.clientX-bx,dy=e.clientY-by;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  if(dist<180){
+    const angle=Math.atan2(dy,dx);
+    bx=Math.max(20,Math.min(window.innerWidth-60,bx-Math.cos(angle)*80));
+    by=Math.max(70,Math.min(window.innerHeight-60,by-Math.sin(angle)*80));
+    bug.style.left=bx+'px';bug.style.top=by+'px';
+    const facing=Math.cos(angle)>0?'scaleX(-1)':'scaleX(1)';
+    bug.style.transform=facing;
+  }
+});
+</script>
+</body>
+</html>

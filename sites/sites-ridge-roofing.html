@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ridge Line Roofing | Storm Damage & Full Replacement</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* RIDGE LINE ROOFING — Deep red & slate — editorial magazine style */
+:root{--red:#dc2626;--red2:#ef4444;--slate:#1e293b;--slate2:#0f172a;--cream:#faf7f2;--warm:#78716c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--slate2);font-family:'Source Sans 3',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Animated storm radar overlay on hero */
+nav{background:var(--slate2);padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:.08em;color:var(--cream);text-transform:uppercase;}
+.logo span{color:var(--red);}
+.nav-cta{background:var(--red);color:var(--cream);font-family:'Oswald',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding:.55rem 1.4rem;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--red2);}
+.hero{position:relative;min-height:95vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+.hero-left{background:var(--slate2);display:flex;flex-direction:column;justify-content:center;padding:5rem 3rem 5rem 4rem;position:relative;z-index:2;}
+.hero-eyebrow{font-family:'Oswald',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;}
+.hero-left h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(2.8rem,5vw,5rem);line-height:1;text-transform:uppercase;color:var(--cream);margin-bottom:2rem;}
+.hero-left h1 em{font-style:normal;color:var(--red);display:block;}
+.hero-left p{font-size:1rem;color:rgba(250,247,242,.7);line-height:1.75;max-width:380px;margin-bottom:2.5rem;}
+.btn-red{background:var(--red);color:var(--cream);font-family:'Oswald',sans-serif;font-weight:600;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-red:hover{background:var(--red2);}
+.hero-right{position:relative;overflow:hidden;}
+.hero-right img{width:100%;height:100%;object-fit:cover;display:block;}
+/* RADAR overlay — special twist */
+.radar{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.radar-ring{position:absolute;border-radius:50%;border:1px solid rgba(220,38,38,.25);animation:pulse-r 3s ease-out infinite;}
+.radar-ring:nth-child(1){width:120px;height:120px;animation-delay:0s;}
+.radar-ring:nth-child(2){width:240px;height:240px;animation-delay:.5s;}
+.radar-ring:nth-child(3){width:380px;height:380px;animation-delay:1s;}
+.radar-ring:nth-child(4){width:520px;height:520px;animation-delay:1.5s;}
+@keyframes pulse-r{0%{transform:scale(.9);opacity:.8;}100%{transform:scale(1.1);opacity:0;}}
+/* storm alert banner */
+.alert{background:var(--red);padding:.7rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.alert p{font-family:'Oswald',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream);}
+.alert a{color:var(--cream);font-weight:700;text-decoration:underline;}
+/* services */
+.services{padding:5rem 3rem;background:var(--cream);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.svc-img{border-radius:2px;overflow:hidden;box-shadow:20px 20px 0 var(--red);}
+.svc-img img{width:100%;display:block;height:400px;object-fit:cover;}
+.svc-list{display:flex;flex-direction:column;gap:1.5rem;}
+.svc-item{border-left:3px solid var(--red);padding-left:1.2rem;}
+.svc-item h3{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:600;text-transform:uppercase;margin-bottom:.3rem;}
+.svc-item p{font-size:.88rem;color:var(--warm);line-height:1.6;}
+/* stats */
+.stats{background:var(--slate2);padding:3.5rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.stat{text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+.stat:last-child{border:none;}
+.stat-n{font-family:'Oswald',sans-serif;font-weight:700;font-size:3rem;color:var(--red);line-height:1;}
+.stat-l{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,247,242,.5);margin-top:.3rem;}
+/* reviews */
+.reviews{padding:4rem 3rem;background:var(--cream);}
+.r-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.rcard{background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.06);padding:1.8rem;}
+.stars{color:var(--red);font-size:.9rem;margin-bottom:.7rem;}
+.rtext{font-size:.88rem;color:var(--warm);line-height:1.7;margin-bottom:.8rem;}
+.rname{font-family:'Oswald',sans-serif;font-weight:600;font-size:.95rem;text-transform:uppercase;}
+footer{background:var(--slate2);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;color:rgba(250,247,242,.5);font-size:.8rem;}
+footer span{color:var(--red);}
+@media(max-width:800px){.hero{grid-template-columns:1fr;}.hero-right{height:300px;}.two-col{grid-template-columns:1fr;}.stats{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Ridge<span>Line</span> Roofing</div>
+  <a href="#" class="nav-cta">Free Inspection</a>
+</nav>
+<div class="alert"><p>⚠️ Storm in your area? <a href="#">Claim your FREE damage inspection today →</a></p><p>Most insurance claims covered at no cost to you.</p></div>
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Licensed · Insured · 5-Star Rated</div>
+    <h1>Storm<br>Damage<br><em>Experts</em></h1>
+    <p>When the storm hits, Ridge Line is the first call that matters. Full roof replacement, repair, and insurance claim assistance — all handled by us.</p>
+    <a href="#" class="btn-red">Get Your Free Inspection</a>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=900&auto=format&fit=crop" alt="Roofing crew working"/>
+    <div class="radar"><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div><div class="radar-ring"></div></div>
+  </div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">2,400+</div><div class="stat-l">Roofs Replaced</div></div>
+  <div class="stat"><div class="stat-n">98%</div><div class="stat-l">Insurance Approved</div></div>
+  <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">Google Rating</div></div>
+  <div class="stat"><div class="stat-n">15yr</div><div class="stat-l">In Business</div></div>
+</div>
+<div class="services">
+  <div class="two-col">
+    <div class="svc-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&auto=format&fit=crop" alt="Roof installation"/></div>
+    <div>
+      <h2 style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;text-transform:uppercase;margin-bottom:2rem;">What We <span style="color:var(--red);">Handle</span></h2>
+      <div class="svc-list">
+        <div class="svc-item"><h3>Full Roof Replacement</h3><p>Complete tear-off and new installation with premium shingles, underlayment, and flashing.</p></div>
+        <div class="svc-item"><h3>Storm Damage Repair</h3><p>Emergency tarping, hail damage repair, and wind damage restoration — fast response.</p></div>
+        <div class="svc-item"><h3>Insurance Claim Help</h3><p>We work directly with your adjuster and handle the paperwork so you don't have to.</p></div>
+        <div class="svc-item"><h3>Gutters & Fascia</h3><p>Seamless gutter installation and fascia board replacement — fully matched to your home.</p></div>
+        <div class="svc-item"><h3>Flat Roofing</h3><p>TPO, EPDM, and modified bitumen for commercial and flat residential roofs.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="reviews">
+  <h2 style="font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;text-transform:uppercase;text-align:center;margin-bottom:.5rem;">Client <span style="color:var(--red);">Reviews</span></h2>
+  <div class="r-row">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Hurricane damage took half my roof. Ridge Line had a crew out the next day, handled my insurance, and had it done in 4 days. Absolute professionals."</p><div class="rname">Robert M.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"They found hail damage I didn't even know I had. Got the insurance claim approved for the full replacement. Didn't cost me a dime out of pocket."</p><div class="rname">Tammy B.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Third roofer I called — first one who actually showed up and did what they said. Quality work, honest pricing, and they cleaned up everything."</p><div class="rname">Chris A.</div></div>
+  </div>
+</div>
+<footer><span>Ridge Line Roofing</span> · Licensed LA Contractor · © 2025 · (504) 555-0247</footer>
+</body>
+</html>

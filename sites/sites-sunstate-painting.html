@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sunstate Painting | Interior & Exterior House Painting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+/* SUNSTATE PAINTING — Warm terracotta & cream — artisan/editorial/luxury */
+:root{--terra:#c2410c;--terra2:#ea580c;--warm:#fef3c7;--cream:#fffbf7;--sand:#f5ede0;--brown:#78350f;--dark:#1c0a00;--gray:#92400e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--dark);font-family:'Lato',sans-serif;overflow-x:hidden;}
+/* SPECIAL TWIST: Color swatch picker that changes hero tint */
+nav{background:var(--dark);padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--terra);}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.7rem;color:var(--cream);letter-spacing:.04em;}
+.logo em{font-style:italic;color:var(--terra2);}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.nav-right a{font-size:.8rem;font-weight:400;color:rgba(255,251,247,.6);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.nav-right a:hover{color:var(--terra2);}
+.nav-right .cta{border:1px solid var(--terra);color:var(--terra2);padding:.42rem 1.2rem;font-size:.78rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.nav-right .cta:hover{background:var(--terra);color:var(--cream);}
+/* HERO */
+.hero{position:relative;min-height:95vh;overflow:hidden;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;transition:background-color .6s;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;display:block;}
+.hero-tint{position:absolute;inset:0;background:rgba(194,65,12,.75);transition:background .6s;mix-blend-mode:multiply;}
+.hero-content{position:relative;z-index:2;padding:5rem 4rem;}
+.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,7.5vw,7rem);font-weight:700;color:var(--cream);line-height:.95;margin-bottom:2rem;}
+.hero-content h1 em{font-style:italic;display:block;}
+.hero-content p{font-size:1.05rem;color:rgba(255,251,247,.8);line-height:1.8;max-width:460px;margin-bottom:2.5rem;font-weight:300;}
+.btn-cream{background:var(--cream);color:var(--dark);font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-cream:hover{background:var(--warm);}
+/* COLOR PICKER — special twist */
+.color-picker{position:absolute;right:4rem;top:50%;transform:translateY(-50%);z-index:3;background:rgba(28,10,0,.8);backdrop-filter:blur(8px);padding:1.5rem;border:1px solid rgba(194,65,12,.3);}
+.cp-label{font-size:.62rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,251,247,.5);margin-bottom:1rem;text-align:center;}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;}
+.swatch{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s,transform .2s;}
+.swatch:hover,.swatch.active{border-color:var(--cream);transform:scale(1.1);}
+.color-name{font-size:.6rem;color:rgba(255,251,247,.5);text-align:center;margin-top:.8rem;font-weight:300;letter-spacing:.1em;}
+/* services */
+.services{padding:5rem 3rem;background:var(--sand);}
+.services h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3rem;margin-bottom:.5rem;}
+.services h2 em{font-style:italic;color:var(--terra);}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
+.svc{display:flex;gap:1.5rem;align-items:flex-start;}
+.svc-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.5rem;color:var(--terra);opacity:.3;line-height:1;flex-shrink:0;}
+.svc-body h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;margin-bottom:.4rem;}
+.svc-body p{font-size:.88rem;color:var(--gray);line-height:1.7;font-weight:300;}
+/* gallery wall */
+.gallery{padding:5rem 3rem;background:var(--cream);}
+.gallery h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3rem;text-align:center;margin-bottom:2.5rem;}
+.gallery h2 em{font-style:italic;color:var(--terra);}
+.g-wall{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:.6rem;height:480px;}
+.g-wall .g0{grid-row:1/3;}
+.g-wall div{overflow:hidden;}
+.g-wall img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-wall div:hover img{transform:scale(1.05);}
+/* process */
+.process{padding:5rem 3rem;background:var(--dark);}
+.process h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3rem;color:var(--cream);text-align:center;margin-bottom:3rem;}
+.process h2 em{font-style:italic;color:var(--terra2);}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.step{text-align:center;}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:var(--terra);opacity:.4;line-height:1;margin-bottom:.5rem;}
+.step h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--cream);margin-bottom:.4rem;}
+.step p{font-size:.83rem;color:rgba(255,251,247,.5);line-height:1.65;font-weight:300;}
+/* reviews */
+.reviews{padding:4rem 3rem;background:var(--sand);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.rcard{background:var(--cream);padding:2rem;border-bottom:3px solid var(--terra2);}
+.stars{color:var(--terra);font-size:.88rem;margin-bottom:.6rem;}
+.rtext{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--brown);line-height:1.7;margin-bottom:.8rem;}
+.rname{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);}
+footer{background:var(--dark);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;color:rgba(255,251,247,.35);font-size:.78rem;}
+footer span{color:var(--terra2);}
+@media(max-width:800px){.hero-content{padding:6rem 2rem 3rem;}.color-picker{display:none;}.svc-grid{grid-template-columns:1fr;}.steps{grid-template-columns:1fr 1fr;}.g-wall{grid-template-columns:1fr 1fr;height:auto;}.g-wall .g0{grid-row:auto;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sun<em>state</em> Painting</div>
+  <div class="nav-right">
+    <a href="#">Interior</a><a href="#">Exterior</a><a href="#">Commercial</a>
+    <a href="#" class="cta">Free Quote</a>
+  </div>
+</nav>
+<div class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=1400&auto=format&fit=crop" alt="Painted home"/>
+    <div class="hero-tint" id="heroTint"></div>
+  </div>
+  <div class="hero-content">
+    <h1>Color<br>Changes<br><em>Everything.</em></h1>
+    <p>Expert interior and exterior painting that transforms your home. Meticulous prep, premium materials, and craftsmen who treat your home like their own.</p>
+    <a href="#" class="btn-cream">Get Your Free Estimate</a>
+  </div>
+  <div class="color-picker">
+    <div class="cp-label">Try a Color</div>
+    <div class="swatches" id="swatches">
+      <div class="swatch active" data-color="rgba(194,65,12,.75)" data-name="Terracotta" style="background:#c2410c;"></div>
+      <div class="swatch" data-color="rgba(29,78,216,.75)" data-name="Navy Blue" style="background:#1d4ed8;"></div>
+      <div class="swatch" data-color="rgba(21,128,61,.75)" data-name="Forest" style="background:#15803d;"></div>
+      <div class="swatch" data-color="rgba(107,33,168,.75)" data-name="Violet" style="background:#6b21a8;"></div>
+      <div class="swatch" data-color="rgba(15,118,110,.75)" data-name="Teal" style="background:#0f766e;"></div>
+      <div class="swatch" data-color="rgba(161,98,7,.75)" data-name="Gold" style="background:#a16207;"></div>
+    </div>
+    <div class="color-name" id="colorName">Terracotta</div>
+  </div>
+</div>
+<div class="services">
+  <h2>Our <em>Painting Services</em></h2>
+  <div class="svc-grid">
+    <div class="svc"><div class="svc-num">01</div><div class="svc-body"><h3>Interior Painting</h3><p>Full room painting with meticulous prep — patching, priming, caulking, and two-coat finish on every surface.</p></div></div>
+    <div class="svc"><div class="svc-num">02</div><div class="svc-body"><h3>Exterior Painting</h3><p>Complete exterior repaints that protect your home from South Louisiana weather — pressure washed and primed before we paint.</p></div></div>
+    <div class="svc"><div class="svc-num">03</div><div class="svc-body"><h3>Cabinet Refinishing</h3><p>Kitchen and bathroom cabinets refinished or painted in place — factory finish results at a fraction of replacement cost.</p></div></div>
+    <div class="svc"><div class="svc-num">04</div><div class="svc-body"><h3>Commercial Painting</h3><p>Office, retail, and industrial painting — nights and weekends available to minimize disruption to your business.</p></div></div>
+  </div>
+</div>
+<div class="gallery">
+  <h2>Our <em>Portfolio</em></h2>
+  <div class="g-wall">
+    <div class="g0"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop" alt="Interior room"/></div>
+    <div><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&auto=format&fit=crop" alt="Kitchen"/></div>
+    <div><img src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=600&auto=format&fit=crop" alt="Exterior"/></div>
+    <div><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&auto=format&fit=crop" alt="Living room"/></div>
+    <div><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&auto=format&fit=crop" alt="Home exterior"/></div>
+  </div>
+</div>
+<div class="process">
+  <h2>The <em>Process</em></h2>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><h3>Color Consult</h3><p>We bring samples and help you select colors that work with your home's lighting and existing finishes.</p></div>
+    <div class="step"><div class="step-n">2</div><h3>Thorough Prep</h3><p>Sanding, patching, caulking, and priming every surface — prep is 80% of a great paint job.</p></div>
+    <div class="step"><div class="step-n">3</div><h3>Expert Application</h3><p>Two full coats of premium paint, cut clean to every edge, trim, and detail.</p></div>
+    <div class="step"><div class="step-n">4</div><h3>Final Walk-Through</h3><p>We don't leave until you're satisfied with every line, corner, and surface in your home.</p></div>
+  </div>
+</div>
+<div class="reviews">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;text-align:center;">Client <em style="font-style:italic;color:var(--terra)">Testimonials</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"They transformed our entire first floor in three days. Prep was immaculate, lines were perfect, and the crew was incredibly respectful of our home."</p><div class="rname">Amanda R.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Our kitchen cabinets looked brand new for about a third of replacement cost. Color consult was so helpful. Absolutely thrilled with the result."</p><div class="rname">Stephen L.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Full exterior repaint on a two-story house. They took their time, did it right, and the house looks better than it did when it was built."</p><div class="rname">Claire D.</div></div>
+  </div>
+</div>
+<footer><span>Sunstate Painting</span> · Licensed & Insured · South Louisiana · © 2025 · (225) 555-0538</footer>
+<script>
+// Color swatch picker changes hero tint
+document.querySelectorAll('.swatch').forEach(s=>{
+  s.addEventListener('click',()=>{
+    document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));
+    s.classList.add('active');
+    document.getElementById('heroTint').style.background=s.dataset.color;
+    document.getElementById('colorName').textContent=s.dataset.name;
+  });
+});
+</script>
+</body>
+</html>

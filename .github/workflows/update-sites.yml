@@ -5,12 +5,17 @@ on:
     paths:
       - 'sites/*.html'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+        with:
+          fetch-depth: 0
+
       - name: Generate sites/index.json
         run: |
           echo '[' > sites/index.json
@@ -31,4 +36,5 @@ jobs:
           git config user.email "actions@github.com"
           git add sites/index.json
           git diff --staged --quiet || git commit -m "Auto-update sites/index.json"
-          git push
+          git pull --rebase origin main
+          git push origin main

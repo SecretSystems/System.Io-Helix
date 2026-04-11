@@ -616,21 +616,22 @@ function posFor(layout,i,isExp){
   const z0=isExp?20:0;
   const mobile=isMobile();
 
-  if(layout==='sphere'){
-    const r=mobile ? 360 : 420;
-    const phi=Math.acos(-1+(2*i)/cards.length);
-    const theta=Math.sqrt(cards.length*Math.PI)*phi;
-    const sp=Math.sin(phi);
+if(layout==='sphere'){
+  const mobile=isMobile();
+  const r=mobile ? 420 : 420;
+  const phi=Math.acos(-1+(2*i)/cards.length);
+  const theta=Math.sqrt(cards.length*Math.PI)*phi;
+  const sp=Math.sin(phi);
 
-    const x=r*sp*Math.cos(theta);
-    const y=(mobile ? r*0.88 : r)*Math.cos(phi);
-    const z=r*sp*Math.sin(theta);
+  const x=r*sp*Math.cos(theta);
+  const y=(mobile ? r*0.95 : r)*Math.cos(phi);
+  const z=r*sp*Math.sin(theta);
 
-    const yaw=Math.atan2(x,z);
-    const pitch=-Math.atan2(y,Math.hypot(x,z));
+  const yaw=Math.atan2(x,z);
+  const pitch=-Math.atan2(y,Math.hypot(x,z));
 
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.56 : 1}) translateZ(${z0}px)`;
-  }
+  return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.34 : 1}) translateZ(${z0}px)`;
+}
 
   if(layout==='helix'){
     const r=mobile ? 320 : 420;

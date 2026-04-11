@@ -1,17 +1,80 @@
 [
   {
+    "file": "apex-plumbing.html",
+    "title": "Apex Plumbing",
+    "tag": "Website",
+    "color": 0,
+    "desc": "24/7 emergency plumbing. Navy & orange industrial bold style with animated live leak counter."
+  },
+  {
+    "file": "ridge-roofing.html",
+    "title": "Ridge Line Roofing",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Storm damage roofing specialists. Deep red & slate editorial style with radar pulse animation."
+  },
+  {
+    "file": "greenwave-lawn.html",
+    "title": "GreenWave Lawn Care",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Premium lawn maintenance. Forest green & gold organic luxury with grass-grow hero animation."
+  },
+  {
+    "file": "volt-electric.html",
+    "title": "Volt Electric",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Licensed master electricians. Black & electric yellow futuristic style with live voltage meter."
+  },
+  {
+    "file": "arctic-hvac.html",
+    "title": "Arctic HVAC",
+    "tag": "Website",
+    "color": 0,
+    "desc": "AC repair & installation. Ice blue & charcoal clinical tech style with live temperature display."
+  },
+  {
+    "file": "ironwall-security.html",
+    "title": "IronWall Security",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Home & business alarm systems. Tactical dark green style with scanning line and live clock cameras."
+  },
+  {
+    "file": "sundance-pool.html",
+    "title": "Sundance Pools",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Pool maintenance & renovation. Aqua teal & sand resort style with animated water ripple effect."
+  },
+  {
+    "file": "kleen-pressure.html",
+    "title": "Kleen Force Pressure Washing",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Pressure washing & exterior cleaning. Deep blue & white impact style with animated wipe reveal."
+  },
+  {
+    "file": "elitepest.html",
+    "title": "Elite Pest Solutions",
+    "tag": "Website",
+    "color": 4,
+    "desc": "Termite & pest control. Purple & lime modern style with a bug that runs away from your cursor."
+  },
+  {
+    "file": "sunstate-painting.html",
+    "title": "Sunstate Painting",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Interior & exterior house painting. Terracotta & cream artisan style with live color swatch picker."
+  },
+  {
     "file": "taylor-made.html",
     "title": "Taylor Made Land Services",
     "tag": "Website",
     "color": 0,
-    "desc": "Black & orange industrial website for a South Louisiana land clearing company."
-  },
-  {
-    "file": "Ducharme-landscaping.html",
-    "title": "CRM Dashboard Demo",
-    "tag": "CRM",
-    "color": 1,
-    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
+    "desc": "South Louisiana land clearing and dirt work. Black & orange industrial aesthetic."
   },
   {
     "file": "demo-funnel.html",
@@ -25,20 +88,6 @@
     "title": "CRM Dashboard Demo",
     "tag": "CRM",
     "color": 1,
-    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
-  },
-  {
-    "file": "Tailor made land service/index.html",
-    "title": "CRM Dashboard Demo",
-    "tag": "CRM",
-    "color": 1,
-    "desc": "GoHighLevel pipeline overview — stages, automations, and reporting."
-  },
-  {
-    "file": "Cajun pressure/Cajun pressure.html",
-    "title": "Lead Gen Funnel Demo",
-    "tag": "Funnel",
-    "color": 3,
-    "desc": "High-converting lead capture funnel with CRM integration and AI follow-up."
+    "desc": "GoHighLevel pipeline overview with stages, automations, and reporting."
   }
 ]

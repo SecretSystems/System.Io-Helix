@@ -516,7 +516,7 @@ function posFor(layout,i,isExp){
   const z0=isExp?20:0;
   const cw=isExp?CWE:CW, ch=isExp?CHE:CH;
   if(layout==='sphere'){
-    const r=420;
+    const r=window.innerWidth<=768 ? 300 : 420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
     const sp=Math.sin(phi);

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Father & Son Mobile Mechanic | On-Site Auto Repair</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#dc2626;--red2:#ef4444;--dark:#111;--gray:#1f2937;--offwhite:#f9fafb;--dim:#6b7280;--white:#fff;--silver:#9ca3af;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--white);font-family:'Work Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Animated RPM gauge in hero */
+#rpm-wrap{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:3;}
+@media(max-width:700px){#rpm-wrap{position:relative;right:auto;top:auto;transform:none;margin:1.5rem auto 0;width:160px;}}
+#rpm-gauge{width:160px;height:80px;position:relative;}
+#rpm-gauge svg{width:100%;height:100%;}
+#rpm-needle{transform-origin:50% 100%;animation:rev 4s ease-in-out infinite;}
+@keyframes rev{0%{transform:rotate(-90deg);}40%{transform:rotate(60deg);}55%{transform:rotate(45deg);}70%{transform:rotate(80deg);}90%{transform:rotate(20deg);}100%{transform:rotate(-90deg);}}
+.rpm-label{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.2em;color:var(--silver);margin-top:.3rem;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(17,17,17,.97);border-bottom:2px solid rgba(220,38,38,.3);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;color:var(--white);white-space:nowrap;line-height:1.1;}
+.logo span{color:var(--red2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--red2);}
+.ncta{border:1px solid var(--red2)!important;color:var(--red2)!important;padding:.36rem .9rem;}
+.ncta:hover{background:var(--red2)!important;color:var(--white)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.2);}
+.hero-inner{position:relative;z-index:2;max-width:560px;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);color:var(--white);line-height:.88;margin-bottom:1.3rem;letter-spacing:.04em;}
+.hero h1 span{color:var(--red2);}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.62);line-height:1.75;max-width:420px;margin-bottom:2rem;}
+.btn{background:var(--red2);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.1em;padding:.8rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--red);}
+.sec{padding:3.5rem 1.5rem;}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,3rem);letter-spacing:.06em;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--red2);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1px;background:rgba(220,38,38,.15);}
+.svc{background:var(--gray);padding:1.8rem 1.4rem;border-top:2px solid transparent;transition:border-color .2s;}
+.svc:hover{border-color:var(--red2);}
+.svc-icon{font-size:1.8rem;display:block;margin-bottom:.6rem;}
+.svc h3{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.06em;color:var(--white);margin-bottom:.35rem;}
+.svc p{font-size:.82rem;color:var(--silver);line-height:1.6;}
+.promo{background:var(--red2);padding:2.5rem 1.5rem;text-align:center;}
+.promo h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.8rem);letter-spacing:.06em;color:var(--white);margin-bottom:.5rem;}
+.promo p{font-size:.9rem;color:rgba(255,255,255,.88);margin-bottom:1.3rem;}
+.promo a{background:var(--white);color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;padding:.75rem 1.8rem;text-decoration:none;display:inline-block;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);transition:filter .3s,transform .3s;}
+.g-img:hover img{filter:grayscale(0);transform:scale(1.04);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+.rcard{background:var(--gray);padding:1.6rem;border-top:3px solid var(--red2);}
+.stars{color:var(--red2);margin-bottom:.45rem;}
+.rtext{font-size:.83rem;color:var(--silver);line-height:1.68;margin-bottom:.55rem;}
+.rname{font-weight:700;font-size:.82rem;color:var(--white);}
+footer{background:var(--dark);border-top:1px solid rgba(220,38,38,.15);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.32);font-size:.74rem;}
+footer b{color:var(--red2);}
+#bottom-banner{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(15,23,42,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bb-text{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.bb-btn{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.28rem .75rem;transition:all .2s;white-space:nowrap;}
+.bb-btn.outline{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bb-btn.solid{background:#00c8ff;color:#020408;}
+.bb-btn.solid:hover{background:#00ffe0;}
+.bb-sep{color:rgba(255,255,255,.2);font-size:.7rem;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Father <span>&</span> Son<br>Mobile Mechanic</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">About</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Call Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=1200&auto=format&fit=crop&q=80" alt="Mobile mechanic working under hood of car at roadside location"/></div>
+  <div class="hero-inner">
+    <h1>Your Car.<br>Your<br><span>Driveway.</span></h1>
+    <p>We come to you — at home, at work, or on the side of the road. Oil changes, brakes, batteries, diagnostics, and more. No shop needed.</p>
+    <a href="#" class="btn">Book a Mobile Visit</a>
+  </div>
+  <div id="rpm-wrap">
+    <div id="rpm-gauge">
+      <svg viewBox="0 0 160 80">
+        <!-- gauge background -->
+        <path d="M10,80 A70,70 0 0,1 150,80" fill="none" stroke="#374151" stroke-width="12" stroke-linecap="round"/>
+        <!-- colored zones -->
+        <path d="M10,80 A70,70 0 0,1 40,22" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round"/>
+        <path d="M40,22 A70,70 0 0,1 120,22" fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round"/>
+        <path d="M120,22 A70,70 0 0,1 150,80" fill="none" stroke="#dc2626" stroke-width="12" stroke-linecap="round"/>
+        <!-- needle -->
+        <line x1="80" y1="80" x2="80" y2="18" stroke="white" stroke-width="2.5" stroke-linecap="round" id="rpm-needle"/>
+        <circle cx="80" cy="80" r="7" fill="#374151" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="rpm-label">ENGINE RPM</div>
+  </div>
+</div>
+<div class="sec" style="background:var(--gray);">
+  <div class="sh">Mobile <span>Services</span></div>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">🔧</span><h3>Oil Changes</h3><p>Conventional and synthetic oil changes done in your driveway — no appointment needed.</p></div>
+    <div class="svc"><span class="svc-icon">🛑</span><h3>Brake Service</h3><p>Pad replacement, rotor resurfacing, and brake fluid flush on-site at your location.</p></div>
+    <div class="svc"><span class="svc-icon">🔋</span><h3>Battery Replacement</h3><p>Dead battery? We test, replace, and dispose of the old one — all in under 30 minutes.</p></div>
+    <div class="svc"><span class="svc-icon">🔍</span><h3>Diagnostics</h3><p>Check engine light? We scan codes, diagnose the problem, and give you a clear explanation.</p></div>
+    <div class="svc"><span class="svc-icon">🌡️</span><h3>AC & Cooling</h3><p>AC recharge, coolant flush, thermostat replacement, and radiator repairs done on the spot.</p></div>
+    <div class="svc"><span class="svc-icon">🚗</span><h3>Pre-Purchase Inspection</h3><p>Buying a used car? We inspect it at the seller's location so you buy with confidence.</p></div>
+  </div>
+</div>
+<div class="promo">
+  <h2>🔧 BROKE DOWN? WE COME NOW.</h2>
+  <p>Roadside assistance available across South Louisiana — we diagnose and fix on the spot so you don't need a tow.</p>
+  <a href="tel:2255553241">(225) 555-3241 — Call for Roadside Help</a>
+</div>
+<div class="sec" style="background:var(--dark);">
+  <div class="sh">On The <span>Job</span></div>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600&auto=format&fit=crop&q=80" alt="Mechanic changing oil under car in residential driveway"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&auto=format&fit=crop&q=80" alt="Mobile mechanic replacing brake pads on vehicle wheel"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&auto=format&fit=crop&q=80" alt="Mechanic scanning OBD port with diagnostic tool for check engine light"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--gray);">
+  <div class="sh">Customer <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Oil change in my driveway during my lunch break. Done in 20 minutes, cheaper than the shop, and I didn't have to go anywhere. Perfect."</p><div class="rname">Greg T. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Broke down at work at 5pm on a Friday. Father & Son were there by 6:15pm, fixed the alternator, and I drove home. Literal lifesavers."</p><div class="rname">Marie C. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Used them for a pre-purchase inspection and they found an issue the seller was hiding. Saved me from a $4,000 mistake. These guys are honest."</p><div class="rname">Victor H. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Father & Son Mobile Mechanic</b> · ASE Certified · South Louisiana · (225) 555-3241</footer>
+<div id="bottom-banner">
+  <span class="bb-text">Built by Secret Systems</span>
+  <a href="../work.html" class="bb-btn outline">← View Portfolio</a>
+  <span class="bb-sep">|</span>
+  <a href="../contact.html" class="bb-btn solid">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

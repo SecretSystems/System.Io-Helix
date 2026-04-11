@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ProScape | Landscaping Design & Installation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#15803d;--green2:#16a34a;--lime:#84cc16;--dark:#052e16;--light:#f0fdf4;--dim:#6b7280;--sand:#fef9f0;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--light);color:var(--dark);font-family:'DM Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Parallax layered leaves scroll effect */
+#leaves-bg{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;overflow:hidden;}
+.leaf-layer{position:absolute;font-size:1.2rem;opacity:0.06;transition:transform .1s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,46,22,.97);backdrop-filter:blur(12px);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--white);white-space:nowrap;letter-spacing:.02em;}
+.logo em{font-style:italic;color:var(--lime);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--lime);}
+.ncta{border:1px solid var(--lime)!important;color:var(--lime)!important;padding:.36rem .9rem;}
+.ncta:hover{background:var(--lime)!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;z-index:1;min-height:90vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.32);}
+.hero-inner{position:relative;z-index:2;max-width:560px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,7.5vw,6rem);color:var(--white);line-height:1.0;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--lime);display:block;}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:400px;margin-bottom:2rem;}
+.btn{background:var(--lime);color:var(--dark);font-weight:700;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:#a3e635;}
+.sec{padding:3.5rem 1.5rem;position:relative;z-index:1;}
+.sh{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);text-align:center;margin-bottom:2rem;}
+.sh em{font-style:italic;color:var(--green2);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;}
+.svc{background:var(--white);border-bottom:4px solid var(--lime);padding:1.8rem 1.4rem;transition:transform .25s;}
+.svc:hover{transform:translateY(-4px);}
+.svc h3{font-family:'DM Serif Display',serif;font-size:1.05rem;margin-bottom:.4rem;}
+.svc p{font-size:.83rem;color:var(--dim);line-height:1.65;}
+.g-wall{display:grid;gap:.5rem;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;}
+@media(max-width:600px){.g-wall{grid-template-columns:1fr 1fr;grid-template-rows:auto;}}
+.g-wall .g0{grid-row:1/3;}
+.g-img{overflow:hidden;aspect-ratio:4/3;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+.rcard{background:var(--white);padding:1.6rem;border-left:5px solid var(--lime);}
+.stars{color:var(--green2);margin-bottom:.45rem;}
+.rtext{font-family:'DM Serif Display',serif;font-style:italic;font-size:.9rem;color:var(--dim);line-height:1.7;margin-bottom:.55rem;}
+.rname{font-weight:700;font-size:.82rem;}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:.74rem;}
+footer b{color:var(--lime);}
+#bottom-banner{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(15,23,42,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bb-text{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.bb-btn{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.28rem .75rem;transition:all .2s;white-space:nowrap;}
+.bb-btn.outline{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bb-btn.solid{background:#00c8ff;color:#020408;}
+.bb-btn.solid:hover{background:#00ffe0;}
+.bb-sep{color:rgba(255,255,255,.2);font-size:.7rem;}
+</style>
+</head>
+<body>
+<div id="leaves-bg"></div>
+<nav>
+  <div class="logo">Pro<em>Scape</em></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Design</a>
+    <a href="#" onclick="toggleNav()">Installation</a>
+    <a href="#" onclick="toggleNav()">Maintenance</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Consult</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&auto=format&fit=crop&q=80" alt="Professional landscape designer working in lush garden with plants and mulch beds"/></div>
+  <div class="hero-inner">
+    <h1>Landscapes<br><em>That Last.</em></h1>
+    <p>Custom landscape design, installation, and maintenance. From plant beds and hardscaping to irrigation and drainage — we build outdoor spaces that thrive.</p>
+    <a href="#" class="btn">Book a Free Consultation</a>
+  </div>
+</div>
+<div class="sec" style="background:var(--light);">
+  <h2 class="sh">Our <em>Services</em></h2>
+  <div class="svc-grid">
+    <div class="svc"><h3>Landscape Design</h3><p>Custom digital design plans developed around your property, soil, and sun exposure.</p></div>
+    <div class="svc"><h3>Plant Installation</h3><p>Trees, shrubs, ornamentals, and ground cover installed with proper spacing and soil prep.</p></div>
+    <div class="svc"><h3>Hardscaping</h3><p>Pavers, retaining walls, fire pits, and outdoor kitchen pads built to last decades.</p></div>
+    <div class="svc"><h3>Irrigation Systems</h3><p>Smart drip and spray irrigation systems designed for Louisiana soil and plant types.</p></div>
+    <div class="svc"><h3>Drainage Solutions</h3><p>French drains, catch basins, and regrading to eliminate standing water from your property.</p></div>
+    <div class="svc"><h3>Seasonal Maintenance</h3><p>Mulching, trimming, fertilization, and bed clean-ups to keep your landscape thriving all year.</p></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--white);">
+  <h2 class="sh">Our <em>Portfolio</em></h2>
+  <div class="g-wall">
+    <div class="g-img g0"><img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&auto=format&fit=crop&q=80" alt="Professionally landscaped backyard with planting beds and mulch"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=600&auto=format&fit=crop&q=80" alt="Stone paver patio with surrounding landscape beds"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1471194402529-8e0f5a675de6?w=600&auto=format&fit=crop&q=80" alt="Drip irrigation system installed in ornamental garden beds"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--sand);">
+  <h2 class="sh">Client <em>Reviews</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"ProScape transformed our bare backyard into something out of a magazine. The design was creative and the installation was flawless."</p><div class="rname">Jessica M. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Drainage problem we'd had for 10 years was solved in two days. French drain system works perfectly — no more standing water."</p><div class="rname">Mark T. — Denham Springs</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"The paver patio and fire pit they built is our favorite part of our home now. Beautifully done and built incredibly solid."</p><div class="rname">Allison B. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>ProScape Landscaping</b> · Licensed Contractor · South Louisiana · (225) 555-2789</footer>
+<div id="bottom-banner">
+  <span class="bb-text">Built by Secret Systems</span>
+  <a href="../work.html" class="bb-btn outline">← View Portfolio</a>
+  <span class="bb-sep">|</span>
+  <a href="../contact.html" class="bb-btn solid">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Parallax floating leaves
+const bg=document.getElementById('leaves-bg');
+const leafEmojis=['🍃','🌿','🍀'];
+const layers=[];
+for(let i=0;i<25;i++){
+  const el=document.createElement('div');
+  el.className='leaf-layer';
+  el.textContent=leafEmojis[i%3];
+  el.style.left=Math.random()*100+'vw';
+  el.style.top=Math.random()*100+'vh';
+  el.style.fontSize=(14+Math.random()*20)+'px';
+  el.dataset.speed=(0.02+Math.random()*0.05).toFixed(3);
+  bg.appendChild(el);
+  layers.push(el);
+}
+document.addEventListener('mousemove',e=>{
+  const cx=e.clientX/window.innerWidth-.5;
+  const cy=e.clientY/window.innerHeight-.5;
+  layers.forEach(l=>{
+    const s=parseFloat(l.dataset.speed);
+    l.style.transform=`translate(${cx*s*60}px,${cy*s*60}px)`;
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Elite Roofing Pros | Metal & Shingle Roofing</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#b91c1c;--red2:#dc2626;--steel:#1e293b;--silver:#cbd5e1;--light:#f8fafc;--dim:#64748b;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--light);color:var(--steel);font-family:'Source Sans 3',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Rain drops animate on hero image */
+#rain-canvas{position:absolute;inset:0;z-index:2;pointer-events:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(30,41,59,.97);backdrop-filter:blur(10px);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:.06em;color:var(--white);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--red2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--red2);}
+.ncta{border:1px solid var(--red2)!important;color:var(--red2)!important;padding:.36rem .9rem;}
+.ncta:hover{background:var(--red2)!important;color:var(--white)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--steel);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28);}
+.hero-inner{position:relative;z-index:3;max-width:580px;}
+.hero h1{font-family:'Oswald',sans-serif;font-size:clamp(3rem,9vw,7rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);line-height:.9;margin-bottom:1.3rem;}
+.hero h1 span{color:var(--red2);}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:440px;margin-bottom:2rem;}
+.btn{background:var(--red2);color:var(--white);font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.82rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--red);}
+.sec{padding:3.5rem 1.5rem;}
+.sh{font-family:'Oswald',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--red2);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+.svc{background:var(--white);border-top:4px solid var(--red2);padding:1.6rem 1.2rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.svc h3{font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:600;text-transform:uppercase;margin-bottom:.4rem;}
+.svc p{font-size:.83rem;color:var(--dim);line-height:1.6;}
+.stats{background:var(--steel);padding:2.5rem 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+@media(min-width:600px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat{text-align:center;color:var(--white);}
+.stat-n{font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:var(--red2);line-height:1;}
+.stat-l{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-top:.2rem;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+.rcard{background:var(--white);padding:1.6rem;border-left:4px solid var(--red2);box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.stars{color:var(--red2);margin-bottom:.45rem;}
+.rtext{font-size:.83rem;color:var(--dim);line-height:1.68;margin-bottom:.55rem;}
+.rname{font-weight:700;font-size:.82rem;}
+footer{background:var(--steel);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:.74rem;}
+footer b{color:var(--red2);}
+/* STICKY BOTTOM BANNER */
+#bottom-banner{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(15,23,42,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bb-text{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Source Sans 3',sans-serif;}
+.bb-btn{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.28rem .75rem;transition:all .2s;white-space:nowrap;}
+.bb-btn.outline{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bb-btn.outline:hover{background:rgba(0,200,255,.1);}
+.bb-btn.solid{background:#00c8ff;color:#020408;}
+.bb-btn.solid:hover{background:#00ffe0;}
+.bb-sep{color:rgba(255,255,255,.2);font-size:.7rem;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">ELITE <span>ROOFING</span> PROS</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Inspection</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=1200&auto=format&fit=crop&q=80" alt="Metal roof installation crew working on residential home"/></div>
+  <canvas id="rain-canvas"></canvas>
+  <div class="hero-inner">
+    <h1>Built For<br>The Storm.<br><span>Every Time.</span></h1>
+    <p>Metal roofing, shingle replacement, storm damage repair, and insurance claim assistance. Serving South Louisiana with top-rated craftsmanship since 2008.</p>
+    <a href="#" class="btn">Get a Free Inspection</a>
+  </div>
+</div>
+<div class="sec" style="background:var(--light);">
+  <div class="sh">Roofing <span>Services</span></div>
+  <div class="svc-grid">
+    <div class="svc"><h3>Metal Roofing</h3><p>Standing seam and exposed fastener metal roofing — lasts 40+ years and cuts energy bills.</p></div>
+    <div class="svc"><h3>Shingle Replacement</h3><p>Architectural and 3-tab shingle full replacement with premium materials and full warranty.</p></div>
+    <div class="svc"><h3>Storm Damage</h3><p>Emergency storm repair, tarping, and full insurance claim management — no cost to you.</p></div>
+    <div class="svc"><h3>Flat Roofing</h3><p>TPO, EPDM, and modified bitumen flat roof systems for commercial and residential.</p></div>
+    <div class="svc"><h3>Roof Coating</h3><p>Silicone and acrylic roof coatings that stop leaks and extend roof life by 10-15 years.</p></div>
+    <div class="svc"><h3>Gutters & Soffits</h3><p>Seamless gutter installation, fascia board replacement, and soffit venting.</p></div>
+  </div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">3,100+</div><div class="stat-l">Roofs Completed</div></div>
+  <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">Google Rating</div></div>
+  <div class="stat"><div class="stat-n">97%</div><div class="stat-l">Insurance Approved</div></div>
+  <div class="stat"><div class="stat-n">16yr</div><div class="stat-l">Experience</div></div>
+</div>
+<div class="sec" style="background:var(--white);">
+  <div class="sh">Recent <span>Installs</span></div>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&auto=format&fit=crop&q=80" alt="New metal roof installation on brick home"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&auto=format&fit=crop&q=80" alt="Roofing crew installing architectural shingles"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=80" alt="Standing seam metal roof completed on modern home"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--light);">
+  <div class="sh">Customer <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Metal roof completely changed our home. No more leaks during storms, energy bill dropped $60/mo, and it looks incredible."</p><div class="rname">Wayne T. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Hurricane damage, full insurance claim, new roof — Elite handled everything. We paid zero out of pocket. Outstanding service."</p><div class="rname">Brenda H. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Professional from first call to final inspection. Best roofing company in the parish, no question."</p><div class="rname">Derrick O. — Walker</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Elite Roofing Pros LLC</b> · Licensed Contractor · South Louisiana · (225) 555-2214</footer>
+<div id="bottom-banner">
+  <span class="bb-text">Built by</span>
+  <a href="../work.html" class="bb-btn outline">← View Portfolio</a>
+  <span class="bb-sep">|</span>
+  <a href="../contact.html" class="bb-btn solid">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Rain animation
+const canvas=document.getElementById('rain-canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const drops=Array.from({length:120},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,speed:4+Math.random()*6,len:8+Math.random()*14}));
+function rain(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle='rgba(147,197,253,0.22)';ctx.lineWidth=0.8;
+  drops.forEach(d=>{
+    ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-1,d.y+d.len);ctx.stroke();
+    d.y+=d.speed;d.x-=0.5;
+    if(d.y>canvas.height){d.y=-20;d.x=Math.random()*canvas.width;}
+  });
+  requestAnimationFrame(rain);
+}
+rain();
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sparkle Clean | Commercial Janitorial Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--teal:#0d9488;--teal2:#14b8a6;--cyan:#06b6d4;--dark:#042f2e;--light:#f0fdfa;--dim:#6b7280;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--light);color:var(--dark);font-family:'Poppins',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Checklist that animates down as you scroll — rooms get checked off */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,47,46,.97);backdrop-filter:blur(10px);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-weight:800;font-size:1.15rem;color:var(--white);white-space:nowrap;}
+.logo span{color:var(--teal2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--teal2);}
+.ncta{border:1px solid var(--teal2)!important;color:var(--teal2)!important;padding:.36rem .9rem;}
+.ncta:hover{background:var(--teal2)!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;}
+@media(max-width:700px){.hero{grid-template-columns:1fr;}}
+.hero-img{overflow:hidden;min-height:260px;}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-text{background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:5rem 2rem 3rem;}
+.ey{font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--teal2);margin-bottom:1.1rem;}
+.hero-text h1{font-size:clamp(2.2rem,4.5vw,4rem);font-weight:800;color:var(--white);line-height:.95;margin-bottom:1.2rem;}
+.hero-text h1 span{color:var(--teal2);}
+.hero-text p{font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.75;max-width:360px;margin-bottom:2rem;}
+.btn{background:var(--teal2);color:var(--dark);font-weight:700;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;padding:.82rem 1.9rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--teal);}
+/* SCROLL CHECKLIST */
+.checklist-sec{padding:3.5rem 1.5rem;background:var(--white);}
+.checklist-sec h2{font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:800;text-align:center;margin-bottom:.4rem;}
+.checklist-sec p{text-align:center;color:var(--dim);font-size:.88rem;margin-bottom:2rem;}
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem;}
+.cl-item{display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;border:2px solid #e2e8f0;background:var(--light);opacity:.4;transform:translateX(-20px);transition:all .5s;}
+.cl-item.done{opacity:1;transform:translateX(0);border-color:var(--teal2);background:#f0fdfa;}
+.cl-check{width:24px;height:24px;border-radius:50%;background:var(--teal2);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;opacity:0;transform:scale(0);transition:all .3s .2s;}
+.cl-item.done .cl-check{opacity:1;transform:scale(1);}
+.cl-text{font-size:.84rem;font-weight:600;color:var(--dark);}
+.sec{padding:3.5rem 1.5rem;}
+.sh{font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:800;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--teal);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;}
+.svc{background:var(--white);border-top:4px solid var(--teal2);padding:1.6rem 1.2rem;box-shadow:0 4px 16px rgba(13,148,136,.08);}
+.svc h3{font-size:.9rem;font-weight:700;margin-bottom:.35rem;}
+.svc p{font-size:.8rem;color:var(--dim);line-height:1.6;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+.rcard{background:var(--white);padding:1.6rem;border-left:5px solid var(--teal2);}
+.stars{color:var(--teal);margin-bottom:.45rem;}
+.rtext{font-size:.83rem;color:var(--dim);line-height:1.68;margin-bottom:.55rem;}
+.rname{font-weight:700;font-size:.82rem;}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:.74rem;}
+footer b{color:var(--teal2);}
+#bottom-banner{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(15,23,42,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bb-text{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.bb-btn{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.28rem .75rem;transition:all .2s;white-space:nowrap;}
+.bb-btn.outline{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bb-btn.solid{background:#00c8ff;color:#020408;}
+.bb-btn.solid:hover{background:#00ffe0;}
+.bb-sep{color:rgba(255,255,255,.2);font-size:.7rem;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sparkle <span>Clean</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Pricing</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1613946069412-38f7f1ff0b65?w=900&auto=format&fit=crop&q=80" alt="Professional janitorial crew cleaning modern commercial office space"/></div>
+  <div class="hero-text">
+    <div class="ey">Commercial · Office · Industrial</div>
+    <h1>Your Business,<br><span>Spotless Daily.</span></h1>
+    <p>Professional commercial cleaning and janitorial services for offices, retail, medical facilities, and industrial spaces across South Louisiana.</p>
+    <a href="#" class="btn">Get a Free Cleaning Quote</a>
+  </div>
+</div>
+<div class="checklist-sec">
+  <h2>Your <span style="color:var(--teal)">Daily Clean</span> Checklist</h2>
+  <p>Every service includes all of these — checked off before we leave.</p>
+  <div class="cl-grid" id="cl">
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Restrooms sanitized</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Trash removed</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Floors vacuumed</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Hard floors mopped</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Desks dusted & wiped</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Glass & mirrors cleaned</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Kitchen/break room</span></div>
+    <div class="cl-item"><div class="cl-check">✓</div><span class="cl-text">Entry & reception</span></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--light);">
+  <div class="sh">Cleaning <span>Services</span></div>
+  <div class="svc-grid">
+    <div class="svc"><h3>Office Cleaning</h3><p>Daily, weekly, and monthly office cleaning with bonded and background-checked teams.</p></div>
+    <div class="svc"><h3>Medical Facilities</h3><p>OSHA-compliant cleaning and disinfection for medical offices, clinics, and dental practices.</p></div>
+    <div class="svc"><h3>Retail Cleaning</h3><p>Before-open or after-close cleaning for retail stores, showrooms, and restaurants.</p></div>
+    <div class="svc"><h3>Industrial Cleaning</h3><p>Warehouse, manufacturing, and industrial facility cleaning with specialized equipment.</p></div>
+    <div class="svc"><h3>Floor Stripping</h3><p>Strip, wax, and buff commercial hard floors back to a mirror shine.</p></div>
+    <div class="svc"><h3>Post-Construction</h3><p>Full facility clean after renovation — dust, debris, and residue removed completely.</p></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--white);">
+  <div class="sh">Work We've <span>Done</span></div>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=80" alt="Janitorial worker mopping shiny commercial office hallway floor"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&auto=format&fit=crop&q=80" alt="Clean sparkling commercial restroom after professional janitorial service"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop&q=80" alt="Modern clean office space after commercial cleaning service"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--light);">
+  <div class="sh">Client <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Our 30-person office has never been cleaner. Sparkle Clean is thorough, professional, and always here on schedule. We couldn't be happier."</p><div class="rname">Lisa V. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Medical office cleaning is no joke and Sparkle Clean handles it perfectly. OSHA compliant, detail-oriented, and incredibly reliable."</p><div class="rname">Dr. James P. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Floor stripping and waxing turned our warehouse floors into a mirror. They showed up on the weekend and had it done before we opened Monday."</p><div class="rname">Tony R. — Walker</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Sparkle Clean LLC</b> · Bonded & Insured · South Louisiana · (225) 555-3014</footer>
+<div id="bottom-banner">
+  <span class="bb-text">Built by Secret Systems</span>
+  <a href="../work.html" class="bb-btn outline">← View Portfolio</a>
+  <span class="bb-sep">|</span>
+  <a href="../contact.html" class="bb-btn solid">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Animate checklist items with stagger
+const items=document.querySelectorAll('.cl-item');
+items.forEach((item,i)=>{setTimeout(()=>item.classList.add('done'),400+i*180);});
+</script>
+</body>
+</html>

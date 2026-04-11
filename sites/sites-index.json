@@ -1,31 +1,24 @@
 [
   {
+    "file": "Ducharme-landscaping.html",
+    "title": "Ducharme Landscaping",
+    "tag": "Website",
+    "color": 3,
+    "desc": ""
+  },
+  {
+    "file": "Father-and-son-mobile-mechanic.html",
+    "title": "Father and Son Mobile Mechanic",
+    "tag": "Website",
+    "color": 1,
+    "desc": ""
+  },
+  {
     "file": "apex-plumbing.html",
     "title": "Apex Plumbing",
     "tag": "Website",
     "color": 0,
     "desc": "24/7 emergency plumbing. Navy & orange industrial bold style with animated live leak counter."
-  },
-  {
-    "file": "ridge-roofing.html",
-    "title": "Ridge Line Roofing",
-    "tag": "Website",
-    "color": 2,
-    "desc": "Storm damage roofing specialists. Deep red & slate editorial style with radar pulse animation."
-  },
-  {
-    "file": "greenwave-lawn.html",
-    "title": "GreenWave Lawn Care",
-    "tag": "Website",
-    "color": 3,
-    "desc": "Premium lawn maintenance. Forest green & gold organic luxury with grass-grow hero animation."
-  },
-  {
-    "file": "volt-electric.html",
-    "title": "Volt Electric",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Licensed master electricians. Black & electric yellow futuristic style with live voltage meter."
   },
   {
     "file": "arctic-hvac.html",
@@ -35,25 +28,46 @@
     "desc": "AC repair & installation. Ice blue & charcoal clinical tech style with live temperature display."
   },
   {
-    "file": "ironwall-security.html",
-    "title": "IronWall Security",
+    "file": "coastal-painting.html",
+    "title": "Coastal Painting",
+    "tag": "Website",
+    "color": 1,
+    "desc": ""
+  },
+  {
+    "file": "delta-hauling.html",
+    "title": "Delta Hauling",
+    "tag": "Website",
+    "color": 2,
+    "desc": ""
+  },
+  {
+    "file": "demo-crm.html",
+    "title": "Demo CRM",
+    "tag": "Website",
+    "color": 4,
+    "desc": ""
+  },
+  {
+    "file": "demo-funnel.html",
+    "title": "Demo Funnel",
+    "tag": "Website",
+    "color": 4,
+    "desc": ""
+  },
+  {
+    "file": "ducharme-landscaping.html",
+    "title": "Ducharme Landscaping",
     "tag": "Website",
     "color": 3,
-    "desc": "Home & business alarm systems. Tactical dark green style with scanning line and live clock cameras."
+    "desc": ""
   },
   {
-    "file": "sundance-pool.html",
-    "title": "Sundance Pools",
+    "file": "elite-roofing.html",
+    "title": "Elite Roofing",
     "tag": "Website",
-    "color": 0,
-    "desc": "Pool maintenance & renovation. Aqua teal & sand resort style with animated water ripple effect."
-  },
-  {
-    "file": "kleen-pressure.html",
-    "title": "Kleen Force Pressure Washing",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Pressure washing & exterior cleaning. Deep blue & white impact style with animated wipe reveal."
+    "color": 2,
+    "desc": ""
   },
   {
     "file": "elitepest.html",
@@ -63,10 +77,101 @@
     "desc": "Termite & pest control. Purple & lime modern style with a bug that runs away from your cursor."
   },
   {
+    "file": "father-son-mechanic.html",
+    "title": "Father Son Mechanic",
+    "tag": "Website",
+    "color": 1,
+    "desc": ""
+  },
+  {
+    "file": "greenwave-lawn.html",
+    "title": "GreenWave Lawn Care",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Premium lawn maintenance. Forest green & gold organic luxury with grass-grow hero animation."
+  },
+  {
+    "file": "gulf-electric.html",
+    "title": "Gulf Electric",
+    "tag": "Website",
+    "color": 1,
+    "desc": ""
+  },
+  {
+    "file": "ironwall-security.html",
+    "title": "IronWall Security",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Home & business alarm systems. Tactical dark green style with scanning line and live clock cameras."
+  },
+  {
+    "file": "kleen-pressure.html",
+    "title": "Kleen Force Pressure Washing",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Pressure washing & exterior cleaning. Deep blue & white impact style with animated wipe reveal."
+  },
+  {
+    "file": "locksmith-pro.html",
+    "title": "Locksmith Pro",
+    "tag": "Website",
+    "color": 0,
+    "desc": ""
+  },
+  {
+    "file": "pro-landscaping.html",
+    "title": "Pro Landscaping",
+    "tag": "Website",
+    "color": 3,
+    "desc": ""
+  },
+  {
+    "file": "ridge-roofing.html",
+    "title": "Ridge Line Roofing",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Storm damage roofing specialists. Deep red & slate editorial style with radar pulse animation."
+  },
+  {
+    "file": "sparkle-cleaning.html",
+    "title": "Sparkle Cleaning",
+    "tag": "Website",
+    "color": 0,
+    "desc": ""
+  },
+  {
+    "file": "sundance-pool.html",
+    "title": "Sundance Pools",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Pool maintenance & renovation. Aqua teal & sand resort style with animated water ripple effect."
+  },
+  {
     "file": "sunstate-painting.html",
     "title": "Sunstate Painting",
     "tag": "Website",
     "color": 1,
     "desc": "Interior & exterior house painting. Terracotta & cream artisan style with live color swatch picker."
+  },
+  {
+    "file": "taylor-made.html",
+    "title": "Taylor Made",
+    "tag": "Website",
+    "color": 0,
+    "desc": ""
+  },
+  {
+    "file": "volt-electric.html",
+    "title": "Volt Electric",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Licensed master electricians. Black & electric yellow futuristic style with live voltage meter."
+  },
+  {
+    "file": "water-restoration.html",
+    "title": "Water Restoration",
+    "tag": "Website",
+    "color": 0,
+    "desc": ""
   }
 ]

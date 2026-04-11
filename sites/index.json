@@ -4,70 +4,70 @@
     "title": "Apex Plumbing",
     "tag": "Website",
     "color": 0,
-    "desc": "24/7 emergency plumbing. Navy & orange industrial bold style with animated live leak counter."
+    "desc": "24/7 emergency plumbing. Navy & orange industrial style with live leak counter."
   },
   {
     "file": "ridge-roofing.html",
     "title": "Ridge Line Roofing",
     "tag": "Website",
     "color": 2,
-    "desc": "Storm damage roofing specialists. Deep red & slate editorial style with radar pulse animation."
+    "desc": "Storm damage roofing. Deep red & slate editorial style with radar pulse animation."
   },
   {
     "file": "greenwave-lawn.html",
     "title": "GreenWave Lawn Care",
     "tag": "Website",
     "color": 3,
-    "desc": "Premium lawn maintenance. Forest green & gold organic luxury with grass-grow hero animation."
+    "desc": "Premium lawn maintenance. Forest green & gold with grass-grow hero animation."
   },
   {
     "file": "volt-electric.html",
     "title": "Volt Electric",
     "tag": "Website",
     "color": 1,
-    "desc": "Licensed master electricians. Black & electric yellow futuristic style with live voltage meter."
+    "desc": "Licensed electricians. Black & yellow futuristic style with live voltage meter."
   },
   {
     "file": "arctic-hvac.html",
     "title": "Arctic HVAC",
     "tag": "Website",
     "color": 0,
-    "desc": "AC repair & installation. Ice blue & charcoal clinical tech style with live temperature display."
+    "desc": "AC repair & installation. Ice blue & charcoal with live temperature display."
   },
   {
     "file": "ironwall-security.html",
     "title": "IronWall Security",
     "tag": "Website",
     "color": 3,
-    "desc": "Home & business alarm systems. Tactical dark green style with scanning line and live clock cameras."
+    "desc": "Home & business alarm systems. Tactical dark style with scanning line and live cameras."
   },
   {
     "file": "sundance-pool.html",
     "title": "Sundance Pools",
     "tag": "Website",
     "color": 0,
-    "desc": "Pool maintenance & renovation. Aqua teal & sand resort style with animated water ripple effect."
+    "desc": "Pool maintenance & renovation. Aqua teal & sand resort style with water ripple effect."
   },
   {
     "file": "kleen-pressure.html",
     "title": "Kleen Force Pressure Washing",
     "tag": "Website",
     "color": 0,
-    "desc": "Pressure washing & exterior cleaning. Deep blue & white impact style with animated wipe reveal."
+    "desc": "Pressure washing. Deep blue & white with animated before/after wipe reveal."
   },
   {
     "file": "elitepest.html",
     "title": "Elite Pest Solutions",
     "tag": "Website",
     "color": 4,
-    "desc": "Termite & pest control. Purple & lime modern style with a bug that runs away from your cursor."
+    "desc": "Pest control. Purple & lime style with a bug that runs away from your cursor."
   },
   {
     "file": "sunstate-painting.html",
     "title": "Sunstate Painting",
     "tag": "Website",
     "color": 1,
-    "desc": "Interior & exterior house painting. Terracotta & cream artisan style with live color swatch picker."
+    "desc": "House painting. Terracotta & cream artisan style with live color swatch picker."
   },
   {
     "file": "taylor-made.html",
@@ -89,5 +89,180 @@
     "tag": "CRM",
     "color": 1,
     "desc": "GoHighLevel pipeline overview with stages, automations, and reporting."
+  },
+  {
+    "file": "ironclad-fence.html",
+    "title": "Ironclad Fence Co.",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Custom fencing & gates. Rust & tan industrial style with interactive fence builder."
+  },
+  {
+    "file": "stone-slab.html",
+    "title": "Stone & Slab",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Custom countertops & marble. Gold & dark luxury style with magnifying glass cursor."
+  },
+  {
+    "file": "cajun-concrete.html",
+    "title": "Cajun Concrete",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Driveways, slabs & flatwork. Bold red & dark style with concrete pour animation."
+  },
+  {
+    "file": "bayou-moving.html",
+    "title": "Bayou Movers",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Local & long distance moving. Teal & dark style with animated moving truck."
+  },
+  {
+    "file": "southstar-appliance.html",
+    "title": "SouthStar Appliance Repair",
+    "tag": "Website",
+    "color": 0,
+    "desc": "All major appliance repair. Blue & dark style with interactive appliance selector."
+  },
+  {
+    "file": "delta-garage.html",
+    "title": "Delta Garage Doors",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Garage door repair & install. Green & dark style with animated CSS garage door."
+  },
+  {
+    "file": "clarity-windows.html",
+    "title": "Clarity Windows & Doors",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Replacement windows & doors. Sky blue & dark style with foggy hero wipe effect."
+  },
+  {
+    "file": "junk-kings.html",
+    "title": "Junk Kings LA",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Junk removal & hauling. Yellow & charcoal bold style with instant price calculator."
+  },
+  {
+    "file": "carpet-cloud.html",
+    "title": "Carpet Cloud",
+    "tag": "Website",
+    "color": 4,
+    "desc": "Professional carpet cleaning. Purple & lavender with animated carpet fiber wave."
+  },
+  {
+    "file": "solarpeak.html",
+    "title": "SolarPeak",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Solar panel installation. Amber & dark with live savings ticker and calculator."
+  },
+  {
+    "file": "septic-solutions.html",
+    "title": "Septic Solutions LA",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Septic pumping & repair. Earth tones with animated system health meter gauge."
+  },
+  {
+    "file": "handyman-henry.html",
+    "title": "Handyman Henry",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Home repairs & honey-do lists. Navy & cream playful style with interactive sticky note."
+  },
+  {
+    "file": "tree-guys.html",
+    "title": "The Tree Guys",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Tree removal & trimming. Deep green with animated falling leaves on screen."
+  },
+  {
+    "file": "first-class-painting.html",
+    "title": "First Class Painting",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Commercial & industrial coatings. Black & yellow bold style with paint roller wipe reveal."
+  },
+  {
+    "file": "deep-clean-pros.html",
+    "title": "Deep Clean Pros",
+    "tag": "Website",
+    "color": 3,
+    "desc": "House cleaning & maid service. Mint & teal with sparkle trail cursor effect."
+  },
+  {
+    "file": "elite-roofing.html",
+    "title": "Elite Roofing Pros",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Metal & shingle roofing. Red & steel editorial style with animated rain drops."
+  },
+  {
+    "file": "coastal-painting.html",
+    "title": "Coastal Painting Co.",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Interior & exterior painting. Navy & coral with palette dots that appear on logo hover."
+  },
+  {
+    "file": "delta-hauling.html",
+    "title": "Delta Hauling",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Dump truck & gravel delivery. Orange & dark industrial with odometer counter."
+  },
+  {
+    "file": "locksmith-pro.html",
+    "title": "KeyMaster Locksmith",
+    "tag": "Website",
+    "color": 1,
+    "desc": "24/7 emergency locksmith. Gold & dark tactical style with spinning combination dial."
+  },
+  {
+    "file": "water-restoration.html",
+    "title": "RapidDry Restoration",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Water & flood damage. Blue & dark emergency style with rising water animation."
+  },
+  {
+    "file": "pro-landscaping.html",
+    "title": "ProScape Landscaping",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Landscape design & installation. Deep green with parallax floating leaves on mouse."
+  },
+  {
+    "file": "gulf-electric.html",
+    "title": "Gulf Electric",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Generator installation & electrical. Yellow & dark with power flicker on load."
+  },
+  {
+    "file": "sparkle-cleaning.html",
+    "title": "Sparkle Clean",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Commercial janitorial. Teal & dark professional style with animated room checklist."
+  },
+  {
+    "file": "ducharme-landscaping.html",
+    "title": "Ducharme Landscaping",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Lawn care & irrigation. Green & dark with sprinkler water spray on button hover."
+  },
+  {
+    "file": "father-son-mechanic.html",
+    "title": "Father & Son Mobile Mechanic",
+    "tag": "Website",
+    "color": 2,
+    "desc": "On-site auto repair. Dark & red bold style with animated RPM gauge needle."
   }
 ]

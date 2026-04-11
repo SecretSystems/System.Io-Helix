@@ -306,6 +306,24 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 .msuc h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--cyan);margin-bottom:.7rem;}
 .msuc p{font-size:.82rem;color:var(--text);line-height:1.7;}
 .msuc a{color:var(--cyan);}
+  @media (max-width: 768px){
+  #scene{
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
+
+  #sc{
+    transform-style: preserve-3d;
+  }
+
+  #sc[data-layout="sphere"] .pcard,
+  #sc[data-layout="helix"] .pcard,
+  #sc[data-layout="grid"] .pcard{
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+}
 </style>
 </head>
 <body>
@@ -611,15 +629,64 @@ function buildCards(sites){
 ════════════════════════════════ */
 function posFor(layout,i,isExp){
   const z0=isExp?20:0;
-  const cw=isExp?CWE:CW, ch=isExp?CHE:CH;
+
   if(layout==='sphere'){
-    const r=window.innerWidth<=768 ? 300 : 420;
+    const mobile=isMobile();
+    const r=mobile ? 360 : 420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
     const sp=Math.sin(phi);
-    const x=r*sp*Math.cos(theta),y=(window.innerWidth<=768 ? r*.82 : r)*Math.cos(phi),z=r*sp*Math.sin(theta);
-    const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z));
+
+    const x=r*sp*Math.cos(theta);
+    const y=(mobile ? r*.9 : r)*Math.cos(phi);
+    const z=r*sp*Math.sin(theta);
+
+    const yaw=Math.atan2(x,z);
+    const pitch=-Math.atan2(y,Math.hypot(x,z));
+
     return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
+  }
+
+  if(layout==='helix'){
+    const mobile=isMobile();
+    const r=mobile ? 340 : 420;
+    const step=mobile ? 0.24 : 0.22;
+    const vs=mobile ? 5.2 : 3.8;
+    const yOff=cards.length*vs/2;
+
+    const theta=i*step+Math.PI;
+    const y=-(i*vs)+yOff;
+    const x=r*Math.sin(theta);
+    const z=r*Math.cos(theta);
+
+    const yaw=Math.atan2(x,z);
+    const pitch=-Math.atan2(y,Math.hypot(x,z)*2);
+
+    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
+  }
+
+  if(layout==='grid'){
+    const mobile=isMobile();
+    const cols=mobile?3:3;
+    const rows=mobile?4:4;
+    const cg=mobile?220:280;
+    const rg=mobile?180:220;
+    const dg=mobile?220:200;
+
+    const per=cols*rows;
+    const layers=Math.ceil(cards.length/per);
+    const col=i%cols;
+    const row=Math.floor(i/cols)%rows;
+    const layer=Math.floor(i/per);
+
+    const x=(col-(cols-1)/2)*cg;
+    const yz=((rows-1)/2-row)*rg;
+    const z=z0+((layer-(layers-1)/2)*dg);
+
+    return `translate3d(${x}px,${yz}px,${z}px)`;
+  }
+
+  return '';
   }
   if(layout==='helix'){
     const r=420,step=0.22,vs=3.8,yOff=cards.length*vs/2;
@@ -644,10 +711,19 @@ function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
   scene.classList.toggle('table-mobile', isMobile() && layout==='table');
- if(layout==='table'){tRotX=12;tRotY=16;}
-else if(layout==='sphere'){tRotX=isMobile()?10:40;tRotY=isMobile()?18:360;}
-else if(layout==='helix'){tRotX=isMobile()?10:30;tRotY=isMobile()?18:300;}
-else if(layout==='grid'){tRotX=isMobile()?8:10;tRotY=isMobile()?14:55;}
+if(layout==='table'){
+  tRotX=12;
+  tRotY=16;
+}else if(layout==='sphere'){
+  tRotX=isMobile()?18:40;
+  tRotY=isMobile()?28:360;
+}else if(layout==='helix'){
+  tRotX=isMobile()?16:30;
+  tRotY=isMobile()?24:300;
+}else if(layout==='grid'){
+  tRotX=isMobile()?12:10;
+  tRotY=isMobile()?18:55;
+}
 
   if(layout==='table'){
     cards.forEach(c=>{

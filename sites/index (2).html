@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Father and Son Mobile Mechanic LLC | Lafayette, LA</title>
+  <meta name="description" content="Father and Son Mobile Mechanic LLC serves Lafayette, Carencro, and nearby Acadiana communities with direct, clear, reliable mobile repair service.">
+  <style>
+    :root{
+      --bg:#071117;
+      --bg2:#0d1820;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.09);
+      --line:rgba(255,255,255,.12);
+      --text:#eef4f8;
+      --muted:rgba(238,244,248,.74);
+      --soft:rgba(238,244,248,.58);
+      --accent:#d6a15e;
+      --accent2:#73b8a3;
+      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --shadow2:0 12px 30px rgba(0,0,0,.22);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 80% -10%, rgba(214,161,94,.18), transparent 55%),
+        radial-gradient(900px 560px at 10% 15%, rgba(115,184,163,.12), transparent 48%),
+        linear-gradient(180deg, #050b10 0%, #071117 45%, #09131a 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(5,11,16,.88), rgba(5,11,16,.58));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .navin{
+      display:flex; align-items:center; justify-content:space-between;
+      min-height:82px; gap:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px; min-width:0;
+    }
+    .brand img{
+      width:52px; height:52px; object-fit:cover; border-radius:16px;
+      box-shadow: var(--shadow2);
+      border:1px solid rgba(255,255,255,.14);
+      background:#101820;
+      flex:0 0 auto;
+    }
+    .brandmark{
+      display:flex; flex-direction:column; line-height:1.1; min-width:0;
+    }
+    .brandmark strong{font-size:1.02rem; letter-spacing:.2px}
+    .brandmark span{color:var(--muted); font-size:.88rem}
+    .navlinks{
+      display:flex; align-items:center; gap:24px; color:var(--muted); font-size:.95rem;
+    }
+    .navlinks a{position:relative; padding:6px 0}
+    .navlinks a::after{
+      content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(214,161,94,.95), transparent);
+      transform:scaleX(0); transform-origin:center; transition:transform .25s ease;
+    }
+    .navlinks a:hover::after{transform:scaleX(1)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 20px; border-radius:999px; font-weight:650;
+      border:1px solid rgba(255,255,255,.12);
+      transition:transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+      will-change:transform;
+    }
+    .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow2)}
+    .btn.primary{
+      background:linear-gradient(135deg, var(--accent) 0%, #efc68d 100%);
+      color:#1d1308; border-color:transparent;
+    }
+    .btn.ghost{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+    }
+
+    .hero{
+      position:relative;
+      padding:28px 0 28px;
+    }
+    .heroShell{
+      position:relative;
+      min-height:720px;
+      border-radius:38px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      background:
+        linear-gradient(90deg, rgba(4,8,12,.88) 0%, rgba(4,8,12,.66) 44%, rgba(4,8,12,.20) 100%),
+        url('images/cover.jpg') center/cover no-repeat;
+    }
+    .heroInner{
+      position:relative;
+      min-height:720px;
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      align-items:end;
+      gap:20px;
+      padding:42px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:.84rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#f0d6b8;
+      margin-bottom:18px;
+    }
+    .eyebrow::before{
+      content:"";
+      width:42px; height:1px; background:linear-gradient(90deg, rgba(214,161,94,1), rgba(214,161,94,.15));
+    }
+    h1{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:clamp(3rem, 6vw, 5.6rem);
+      line-height:.95;
+      margin:0 0 18px;
+      font-weight:700;
+      letter-spacing:-.03em;
+      max-width:10ch;
+    }
+    .lead{
+      max-width:620px;
+      font-size:1.08rem;
+      line-height:1.8;
+      color:var(--muted);
+      margin:0 0 28px;
+    }
+    .heroActions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px}
+    .quickfacts{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      max-width:700px;
+    }
+    .fact{
+      padding:16px 16px 15px;
+      border-radius:18px;
+      background:rgba(8,14,19,.48);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+    .fact strong{display:block; font-size:1.02rem; margin-bottom:5px}
+    .fact span{color:var(--soft); font-size:.92rem; line-height:1.5}
+
+    .heroCard{
+      align-self:center;
+      justify-self:end;
+      width:min(100%, 380px);
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+        rgba(8,14,19,.42);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow2);
+      padding:18px;
+      backdrop-filter: blur(18px);
+    }
+    .heroCardTop{
+      display:flex; align-items:center; gap:14px;
+      padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .heroCardTop img{
+      width:64px; height:64px; border-radius:18px; object-fit:cover;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .heroCardTop .kicker{
+      color:var(--soft); font-size:.9rem; margin-top:4px;
+    }
+    .heroCard ul{list-style:none; padding:0; margin:0; display:grid; gap:12px}
+    .heroCard li{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:12px 0;
+    }
+    .dot{
+      width:11px; height:11px; border-radius:50%;
+      margin-top:6px;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      box-shadow:0 0 0 5px rgba(214,161,94,.12);
+      flex:0 0 auto;
+    }
+    .heroCard li div{color:var(--muted); font-size:.95rem; line-height:1.6}
+    .heroCard li b{display:block; color:var(--text); margin-bottom:3px}
+
+    section{padding:86px 0}
+    .sectionHead{
+      display:flex; align-items:end; justify-content:space-between; gap:20px;
+      margin-bottom:28px;
+    }
+    .sectionHead h2{
+      margin:0; font-size:clamp(2rem, 3vw, 3rem); line-height:1.08; letter-spacing:-.03em;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .sectionHead p{
+      margin:0; max-width:560px; color:var(--muted); line-height:1.75;
+    }
+
+    .services{
+      position:relative;
+    }
+    .serviceGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .95fr .95fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      position:relative;
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .serviceLarge{
+      padding:28px;
+      background:
+        linear-gradient(165deg, rgba(214,161,94,.18), rgba(255,255,255,.05) 45%, rgba(255,255,255,.03)),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+    }
+    .serviceLarge .tag{
+      display:inline-flex; padding:8px 12px; border-radius:999px;
+      background:rgba(0,0,0,.18); color:#f4dcc0; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .serviceLarge h3{margin:16px 0 12px; font-size:1.7rem; line-height:1.12}
+    .serviceLarge p{margin:0 0 22px; color:var(--muted); line-height:1.75}
+    .list{
+      display:grid; gap:12px; margin:0; padding:0; list-style:none;
+    }
+    .list li{
+      display:flex; gap:10px; color:var(--muted); line-height:1.5;
+    }
+    .mini{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+    }
+    .mini .icon{
+      width:54px; height:54px; border-radius:16px;
+      background:linear-gradient(135deg, rgba(214,161,94,.24), rgba(115,184,163,.18));
+      border:1px solid rgba(255,255,255,.11);
+      display:grid; place-items:center;
+      margin-bottom:18px;
+      font-size:1.15rem;
+    }
+    .mini h3{margin:0 0 10px; font-size:1.3rem}
+    .mini p{margin:0; color:var(--muted); line-height:1.75}
+    .mini .foot{margin-top:20px; color:#efc68d; font-weight:650}
+
+    .aboutBand{
+      padding-top:18px;
+    }
+    .aboutFrame{
+      display:grid;
+      grid-template-columns: .97fr 1.03fr;
+      gap:20px;
+      align-items:stretch;
+    }
+    .imagePanel{
+      position:relative;
+      min-height:520px;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+      background:linear-gradient(135deg, rgba(214,161,94,.16), rgba(115,184,163,.12));
+    }
+    .imagePanel img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      filter:saturate(1.03) contrast(1.02);
+    }
+    .imagePanel::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(4,8,12,.08), rgba(4,8,12,.60));
+    }
+    .imageBadge{
+      position:absolute; left:20px; bottom:20px; z-index:2;
+      max-width:280px;
+      padding:16px 18px;
+      border-radius:20px;
+      background:rgba(5,11,16,.68);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(16px);
+    }
+    .imageBadge strong{display:block; margin-bottom:6px}
+    .imageBadge span{color:var(--muted); line-height:1.55; font-size:.94rem}
+
+    .aboutCopy{
+      padding:30px;
+      border-radius:34px;
+      background:
+        radial-gradient(700px 300px at 90% 0%, rgba(214,161,94,.12), transparent 52%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:var(--shadow2);
+    }
+    .aboutCopy h3{margin:0 0 14px; font-size:2rem; line-height:1.1; font-family:Georgia, "Times New Roman", serif}
+    .aboutCopy p{margin:0 0 16px; color:var(--muted); line-height:1.85}
+    .aboutPoints{
+      display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px;
+    }
+    .point{
+      padding:16px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);
+    }
+    .point b{display:block; margin-bottom:6px}
+    .point span{color:var(--muted); line-height:1.55; font-size:.95rem}
+
+    .trust{
+      position:relative;
+    }
+    .trustStrip{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .trustLeft{
+      padding:30px;
+      border-radius:34px;
+      background:linear-gradient(135deg, rgba(115,184,163,.14), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:var(--shadow2);
+    }
+    .trustLeft h3{margin:0 0 12px; font-size:1.9rem; line-height:1.1; font-family:Georgia, "Times New Roman", serif}
+    .trustLeft p{margin:0 0 22px; color:var(--muted); line-height:1.8; max-width:640px}
+    .checkGrid{
+      display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    }
+    .check{
+      padding:16px 16px 16px 18px;
+      border-radius:20px;
+      background:rgba(10,16,22,.42);
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .check b{display:block; margin-bottom:6px}
+    .check span{color:var(--muted); line-height:1.55; font-size:.95rem}
+    .trustRight{
+      padding:22px;
+      border-radius:34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.11);
+      overflow:hidden;
+      position:relative;
+    }
+    .trustRight img{
+      width:100%; height:100%; min-height:320px; object-fit:cover;
+      border-radius:24px; display:block;
+      filter:saturate(1.05) contrast(1.02);
+    }
+
+    .cta{
+      padding-top:22px;
+    }
+    .ctaPanel{
+      position:relative;
+      border-radius:38px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      background:
+        linear-gradient(110deg, rgba(4,8,12,.94) 0%, rgba(4,8,12,.78) 60%, rgba(4,8,12,.56) 100%),
+        url('images/feature.jpg') right center/cover no-repeat;
+      box-shadow:var(--shadow);
+    }
+    .ctaInner{
+      padding:34px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:20px;
+      align-items:center;
+      min-height:320px;
+    }
+    .cta h2{margin:0 0 12px; font-size:clamp(2rem, 3vw, 3.2rem); line-height:1.05; font-family:Georgia, "Times New Roman", serif}
+    .cta p{margin:0; color:var(--muted); line-height:1.8; max-width:620px}
+    .ctaBox{
+      justify-self:end;
+      width:min(100%, 360px);
+      border-radius:28px;
+      padding:22px;
+      background:rgba(8,14,19,.62);
+      border:1px solid rgba(255,255,255,.11);
+      backdrop-filter: blur(16px);
+    }
+    .ctaBox .row{
+      display:flex; justify-content:space-between; gap:12px; padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .ctaBox .row:last-child{border-bottom:0}
+    .ctaBox strong{color:var(--text)}
+
+    .contact{
+      padding-bottom:94px;
+    }
+    .contactGrid{
+      display:grid; grid-template-columns: .9fr 1.1fr; gap:18px;
+    }
+    .contactInfo, .contactForm{
+      border-radius:34px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:var(--shadow2);
+      padding:28px;
+    }
+    .contactInfo h3, .contactForm h3{
+      margin:0 0 14px; font-size:1.8rem; font-family:Georgia, "Times New Roman", serif
+    }
+    .contactList{
+      display:grid; gap:14px; margin-top:18px;
+    }
+    .contactItem{
+      padding:16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .contactItem span{display:block; color:var(--soft); font-size:.9rem; margin-bottom:6px}
+    .contactItem a, .contactItem div{font-size:1.02rem; line-height:1.5}
+    .mailto{
+      color:#f0d6b8;
+    }
+
+    .formGrid{
+      display:grid; gap:12px;
+    }
+    .field{
+      display:grid; gap:8px;
+    }
+    .field label{color:var(--soft); font-size:.92rem}
+    .field input, .field textarea{
+      width:100%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(7,17,23,.55);
+      color:var(--text);
+      padding:15px 16px;
+      outline:none;
+      font:inherit;
+      transition:border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+    .field input:focus, .field textarea:focus{
+      border-color:rgba(214,161,94,.65);
+      background:rgba(7,17,23,.75);
+    }
+    .field textarea{min-height:132px; resize:vertical}
+    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:26px 0 34px;
+      background:rgba(0,0,0,.10);
+    }
+    .foot{
+      display:flex; align-items:center; justify-content:space-between; gap:18px; color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .footBrand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .footBrand img{width:42px;height:42px;border-radius:14px;object-fit:cover;border:1px solid rgba(255,255,255,.12)}
+    .fine{font-size:.94rem}
+
+    @media (max-width: 980px){
+      .navlinks{display:none}
+      .heroShell{min-height:auto}
+      .heroInner{grid-template-columns:1fr; min-height:auto; padding:28px}
+      .heroCard{justify-self:start; width:100%; max-width:480px}
+      .quickfacts{grid-template-columns:1fr}
+      .serviceGrid, .aboutFrame, .trustStrip, .ctaInner, .contactGrid{grid-template-columns:1fr}
+      .trustRight img{min-height:280px}
+      .ctaBox{justify-self:start; width:100%}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:0 16px}
+      .hero{padding-top:16px}
+      section{padding:68px 0}
+      .heroInner{padding:20px}
+      .heroShell{border-radius:28px}
+      .sectionHead{flex-direction:column; align-items:flex-start}
+      .aboutPoints, .checkGrid, .formRow{grid-template-columns:1fr}
+      .contactInfo, .contactForm, .trustLeft, .aboutCopy, .serviceLarge, .mini, .ctaInner{padding:22px}
+      .brandmark span{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <div class="navin">
+        <a class="brand" href="#top" aria-label="Father and Son Mobile Mechanic LLC home">
+          <img src="images/profile.jpg" alt="Father and Son Mobile Mechanic LLC logo" onerror="this.style.display='none'">
+          <div class="brandmark">
+            <strong>Father and Son Mobile Mechanic</strong>
+            <span>Mobile repairs in Lafayette & Acadiana</span>
+          </div>
+        </a>
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#why">Why Us</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn primary" href="tel:+13372588818">Book a service</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="heroShell">
+          <div class="heroInner">
+            <div>
+              <div class="eyebrow">Lafayette mobile mechanic</div>
+              <h1>Repairs that come to you, done with the care your vehicle deserves.</h1>
+              <p class="lead">Father and Son Mobile Mechanic LLC serves Lafayette, Carencro, and nearby Acadiana communities with direct service, clear communication, and dependable work for drivers who need honest repair help without the shop runaround.</p>
+              <div class="heroActions">
+                <a class="btn primary" href="tel:+13372588818">Book a service</a>
+                <a class="btn ghost" href="mailto:hello@secretsystems.com">Email us</a>
+              </div>
+              <div class="quickfacts">
+                <div class="fact">
+                  <strong>Mobile convenience</strong>
+                  <span>We bring the repair conversation to your driveway, jobsite, or roadside location.</span>
+                </div>
+                <div class="fact">
+                  <strong>Clear communication</strong>
+                  <span>You know what’s happening, what it costs, and what comes next.</span>
+                </div>
+                <div class="fact">
+                  <strong>Family-owned service</strong>
+                  <span>Work built on trust, pride, and the kind of accountability customers remember.</span>
+                </div>
+              </div>
+            </div>
+            <aside class="heroCard">
+              <div class="heroCardTop">
+                <img src="images/profile.jpg" alt="Father and Son Mobile Mechanic brand mark" onerror="this.style.display='none'">
+                <div>
+                  <strong>Father and Son Mobile Mechanic LLC</strong>
+                  <div class="kicker">Built for drivers who value straight answers</div>
+                </div>
+              </div>
+              <ul>
+                <li>
+                  <span class="dot"></span>
+                  <div><b>On-site diagnostics</b> We identify the issue where the vehicle is parked, saving you time and uncertainty.</div>
+                </li>
+                <li>
+                  <span class="dot"></span>
+                  <div><b>Practical repairs</b> From common breakdowns to routine mechanical service, the focus stays on getting you moving again.</div>
+                </li>
+                <li>
+                  <span class="dot"></span>
+                  <div><b>Local attention</b> Lafayette and Acadiana drivers get responsive service from people who understand the area and its pace.</div>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="sectionHead">
+          <h2>Mechanical help designed around the way people actually live and work.</h2>
+          <p>Whether you’re managing a tight schedule, dealing with an unexpected no-start, or trying to avoid towing, the service model stays simple: show up, diagnose clearly, and handle the repair with care.</p>
+        </div>
+        <div class="serviceGrid">
+          <article class="card serviceLarge">
+            <span class="tag">Core service</span>
+            <h3>Mobile diagnostics and repair planning</h3>
+            <p>When a vehicle starts acting up, fast guesses are expensive. We inspect the problem on-site, explain what matters, and outline a repair approach that makes sense for the vehicle and the situation.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Clear assessment before parts or labor move forward.</span></li>
+              <li><span class="dot"></span><span>Practical recommendations for safety, reliability, and value.</span></li>
+              <li><span class="dot"></span><span>Service choices shaped for real-world drivers in Lafayette and nearby communities.</span></li>
+            </ul>
+          </article>
+          <article class="card mini">
+            <div>
+              <div class="icon">⚙</div>
+              <h3>Brake, starter, and battery issues</h3>
+              <p>Common no-start and drivability problems are handled with a focused approach that gets to the source without unnecessary detours.</p>
+            </div>
+            <div class="foot">Dependable repair support</div>
+          </article>
+          <article class="card mini">
+            <div>
+              <div class="icon">⟲</div>
+              <h3>Routine maintenance and tune-up work</h3>
+              <p>Keep your vehicle working the way it should with straightforward maintenance that helps reduce surprise breakdowns.</p>
+            </div>
+            <div class="foot">Built for prevention</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="aboutBand" id="about">
+      <div class="wrap">
+        <div class="aboutFrame">
+          <div class="imagePanel">
+            <img src="images/supporting.jpg" alt="Supporting view of Father and Son Mobile Mechanic work" onerror="this.parentElement.style.background='linear-gradient(135deg, rgba(214,161,94,.18), rgba(115,184,163,.12))'; this.remove();">
+            <div class="imageBadge">
+              <strong>Family-owned. Locally focused.</strong>
+              <span>Serving Lafayette, Carencro, and nearby Acadiana communities with direct service and honest follow-through.</span>
+            </div>
+          </div>
+          <div class="aboutCopy">
+            <div class="eyebrow">About the business</div>
+            <h3>Direct service, clear communication, and work people feel confident recommending.</h3>
+            <p>Father and Son Mobile Mechanic is built on the idea that customers deserve more than a vague estimate and a long wait. Every visit is centered on practical help, calm communication, and a professional standard that respects both the vehicle and the person relying on it.</p>
+            <p>As a family-owned mobile mechanic business serving Lafayette and the surrounding Acadiana area, the goal is simple: make repairs easier to understand, easier to schedule, and easier to trust. That means showing up prepared, speaking plainly, and doing the work with pride.</p>
+            <div class="aboutPoints">
+              <div class="point">
+                <b>Personal accountability</b>
+                <span>Work is handled by people who understand the value of reputation in a close-knit community.</span>
+              </div>
+              <div class="point">
+                <b>Mobile-first convenience</b>
+                <span>Service is built around the customer’s location, helping reduce disruptions to the day.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust" id="why">
+      <div class="wrap">
+        <div class="sectionHead">
+          <h2>Why people call us back.</h2>
+          <p>Trust is won through the details: how the conversation starts, how the problem is explained, and whether the repair feels worth recommending after the job is complete.</p>
+        </div>
+        <div class="trustStrip">
+          <div class="trustLeft">
+            <h3>Professional habits that make mobile repair feel steady and reliable.</h3>
+            <p>Customers choose Father and Son Mobile Mechanic because the experience is grounded, respectful, and transparent. It’s the kind of service model that works well in Lafayette, where people value honest work and word-of-mouth matters.</p>
+            <div class="checkGrid">
+              <div class="check">
+                <b>Plainspoken communication</b>
+                <span>No confusion, no inflated language, just direct guidance about the vehicle’s condition.</span>
+              </div>
+              <div class="check">
+                <b>Family-owned standards</b>
+                <span>Every service is delivered with the care you expect from a business built on its name.</span>
+              </div>
+              <div class="check">
+                <b>Local response mindset</b>
+                <span>Service is shaped for the realities of Acadiana roads, schedules, and vehicle needs.</span>
+              </div>
+              <div class="check">
+                <b>Respect for your time</b>
+                <span>The goal is to reduce downtime and make the repair process feel manageable.</span>
+              </div>
+            </div>
+          </div>
+          <div class="trustRight">
+            <img src="images/feature.jpg" alt="Highlighted mobile mechanic image" onerror="this.parentElement.style.background='linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04))'; this.remove();">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <div class="ctaPanel">
+          <div class="ctaInner">
+            <div>
+              <div class="eyebrow">Ready when you are</div>
+              <h2>Schedule mobile mechanic service without the hassle of a tow or shop wait.</h2>
+              <p>Call Father and Son Mobile Mechanic LLC for straightforward help in Lafayette, Carencro, and nearby Acadiana communities. If you need service you can explain to a friend with confidence, this is the right place to start.</p>
+            </div>
+            <div class="ctaBox">
+              <div class="row"><strong>Primary CTA</strong><span>Book a service</span></div>
+              <div class="row"><strong>Phone</strong><span><a href="tel:+13372588818">(337) 258-8818</a></span></div>
+              <div class="row"><strong>Email</strong><span><a href="mailto:hello@secretsystems.com">hello@secretsystems.com</a></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="sectionHead">
+          <h2>Contact Father and Son Mobile Mechanic LLC</h2>
+          <p>Reach out for mobile repair help in Lafayette and nearby Acadiana communities. Clear communication starts here.</p>
+        </div>
+        <div class="contactGrid">
+          <div class="contactInfo">
+            <h3>Direct contact</h3>
+            <div class="contactList">
+              <div class="contactItem">
+                <span>Phone</span>
+                <a href="tel:+13372588818">(337) 258-8818</a>
+              </div>
+              <div class="contactItem">
+                <span>Email</span>
+                <a class="mailto" href="mailto:hello@secretsystems.com">hello@secretsystems.com</a>
+              </div>
+              <div class="contactItem">
+                <span>Service area</span>
+                <div>Lafayette, Carencro, and nearby Acadiana communities</div>
+              </div>
+            </div>
+          </div>
+          <div class="contactForm">
+            <h3>Request service</h3>
+            <div class="formGrid">
+              <div class="formRow">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" type="text" placeholder="Your name">
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" type="tel" placeholder="Your phone number">
+                </div>
+              </div>
+              <div class="field">
+                <label for="message">What’s going on with the vehicle?</label>
+                <textarea id="message" placeholder="Tell us the symptoms, location, and any timing concerns."></textarea>
+              </div>
+              <a class="btn primary" href="tel:+13372588818">Book a service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div class="footBrand">
+          <img src="images/profile.jpg" alt="Father and Son Mobile Mechanic logo" onerror="this.style.display='none'">
+          <div>
+            <strong>Father and Son Mobile Mechanic LLC</strong><br>
+            <span class="fine">Serving Lafayette, Carencro, and nearby Acadiana communities</span>
+          </div>
+        </div>
+        <div class="fine">© 2026 Father and Son Mobile Mechanic LLC. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

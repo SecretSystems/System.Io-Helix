@@ -1,407 +1,95 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Past Work | Web Design Portfolio | Secret Systems .io</title>
-<meta name="description" content="Browse Secret Systems' portfolio of web design, CRM builds, automation systems, and landing pages. Live previews in 3D interactive layouts."/>
-<meta name="keywords" content="Secret Systems portfolio, web design work, website examples, GoHighLevel builds, Louisiana web design portfolio"/>
-<meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://secretsystems.io/work.html"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://secretsystems.io/work.html"/>
-<meta property="og:title" content="Past Work | Secret Systems .io"/>
-<meta property="og:description" content="Live previews of every site we've built in interactive 3D layouts."/>
-<meta property="og:site_name" content="Secret Systems .io"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Secret Systems Portfolio","url":"https://secretsystems.io/work.html","isPartOf":{"@type":"WebSite","name":"Secret Systems .io","url":"https://secretsystems.io"}}</script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-/* ════════ ROOT ════════ */
-:root{
-  --void:#020408;--deep:#070d14;--card:#0f1c2a;
-  --border:rgba(0,200,255,0.12);--cyan:#00c8ff;--cyan2:#00ffe0;
-  --white:#e8f4ff;--muted:#4a6a82;--text:#a8c8e0;
-  --hh:4.2rem;
-  --cw:240px; --ch:200px; /* card dimensions */
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{height:100%;}
-body{
-  background:var(--void);color:var(--white);
-  font-family:'Outfit',sans-serif;
-  overflow:hidden;cursor:none;
-  min-height:100vh;
-  perspective:1100px;
-}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9997;}
-
-/* ════════ CURSOR ════════ */
-#cur{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;box-shadow:0 0 10px rgba(0,200,255,.5);transition:width .18s,height .18s;}
-#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(0,200,255,.32);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
-
-/* ════════ NAV ════════ */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem;height:var(--hh);background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nl{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--white);text-decoration:none;letter-spacing:.05em;}
-.nl .d{color:var(--cyan);}
-.nl .i{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);opacity:.8;font-weight:300;}
-nav ul{display:flex;gap:1.4rem;list-style:none;align-items:center;}
-nav ul a{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s;position:relative;}
-nav ul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
-nav ul a:hover,nav ul a.act{color:var(--cyan);}
-nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
-.nc{border:1px solid var(--cyan)!important;color:var(--cyan)!important;padding:.38rem 1rem;font-weight:600!important;transition:background .2s!important,color .2s!important;}
-.nc:hover{background:var(--cyan)!important;color:var(--void)!important;}
-.nc::after{display:none!important;}
-@media(max-width:768px){nav ul{display:none;}}
-
-/* ════════ CONTROLS BAR ════════ */
-#controls{
-  position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:500;
-  display:flex;align-items:center;gap:.4rem;
-  background:rgba(2,4,8,.9);backdrop-filter:blur(18px);
-  border:1px solid var(--border);padding:.42rem .55rem;
-  white-space:nowrap;
-}
-#controls button{
-  font-family:'JetBrains Mono',monospace;font-size:.6rem;
-  font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  background:transparent;border:1px solid rgba(0,200,255,.14);
-  color:var(--muted);padding:.38rem .85rem;cursor:pointer;transition:all .18s;
-}
-#controls button:hover{border-color:rgba(0,200,255,.38);color:var(--cyan);}
-#controls button.on{background:var(--cyan);color:var(--void);border-color:var(--cyan);font-weight:700;}
-.csep{width:1px;height:20px;background:var(--border);flex-shrink:0;}
-#req-btn{
-  font-family:'Syne',sans-serif!important;font-weight:700!important;
-  font-size:.66rem!important;letter-spacing:.08em!important;
-  background:rgba(0,200,255,.08)!important;
-  border:1px solid var(--cyan)!important;color:var(--cyan)!important;
-}
-#req-btn:hover{background:var(--cyan)!important;color:var(--void)!important;}
-
-/* ════════ 3D SCENE ════════ */
-#scene{
-  position:fixed;inset:0;
-  transform-style:preserve-3d;
-  display:flex;align-items:center;justify-content:center;
-}
-#sc{
-  position:absolute;width:100%;height:100%;
-  top:0;left:0;
-  transform-style:preserve-3d;
-  backface-visibility:hidden;
-  pointer-events:none;
-}
-/* TABLE layout: CSS grid */
-#sc[data-layout="table"]{
-  display:grid;
-  grid-template-columns:repeat(4,var(--cw));
-  grid-auto-rows:var(--ch);
-  gap:.6rem;
-  place-content:center;
-  padding-top:calc(var(--hh) + 20px);
-  padding-bottom:80px;
-}
-
-/* ════════ CARDS ════════ */
-.pcard{
-  pointer-events:auto;
-  position:relative;
-  display:flex;flex-direction:column;
-  width:var(--cw);height:var(--ch);
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:3px;
-  overflow:hidden;
-  cursor:pointer;
-  transform-style:preserve-3d;
-  transition:border-color .22s,box-shadow .22s;
-}
-.pcard::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--accent);z-index:3;
-  transform:scaleX(0);transform-origin:left;transition:transform .3s;
-}
-.pcard:hover{border-color:rgba(0,200,255,.45);box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 1px rgba(0,200,255,.06);}
-.pcard:hover::before{transform:scaleX(1);}
-
-.pcard[data-c="0"]{--accent:linear-gradient(90deg,#00c8ff,#00ffe0);}
-.pcard[data-c="1"]{--accent:linear-gradient(90deg,#c9a84c,#f0c060);}
-.pcard[data-c="2"]{--accent:linear-gradient(90deg,#ff2244,#ff6060);}
-.pcard[data-c="3"]{--accent:linear-gradient(90deg,#00ff88,#00c860);}
-.pcard[data-c="4"]{--accent:linear-gradient(90deg,#a855f7,#c084fc);}
-
-/* ── browser chrome ── */
-.bbar{
-  display:flex;align-items:center;gap:.35rem;
-  padding:.32rem .55rem;
-  background:#060d14;
-  border-bottom:1px solid rgba(0,200,255,.07);
-  flex-shrink:0;position:relative;z-index:2;
-}
-.bd{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.burl{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:.12rem .45rem;font-family:'JetBrains Mono',monospace;font-size:.45rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
-/* ── iframe preview ── */
-.pw{
-  position:relative;
-  flex:1;
-  background:#010406;
-  overflow:hidden;
-}
-
-.pw iframe{
-  position:absolute;
-  top:0;
-  left:0;
-  width:200%;
-  height:200%;
-  transform:scale(.5);
-  transform-origin:top left;
-  border:none;
-  pointer-events:none;
-  background:#010406;
-}
-
-@media (max-width: 768px){
-  :root{
-    --cw:150px;
-    --ch:125px;
-  }
-
-  #sc[data-layout="table"]{
-    grid-template-columns:repeat(2,var(--cw));
-    gap:.5rem;
-  }
-
-  .pw iframe{
-    width:260%;
-    height:260%;
-    transform:scale(.38);
-    transform-origin:top left;
-  }
-}
-/* shimmer while loading */
-.pw::after{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,transparent,rgba(0,200,255,.04),transparent);
-  background-size:200% 100%;
-  animation:shim 1.8s infinite;
-  transition:opacity .5s;
-}
-.pw.loaded::after{opacity:0;pointer-events:none;}
-@keyframes shim{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
-
-/* ── card footer label ── */
-.clabel{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.35rem .55rem;
-  background:rgba(2,4,8,.9);
-  border-top:1px solid rgba(0,200,255,.07);
-  flex-shrink:0;position:relative;z-index:2;
-}
-.ctag{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;}
-.pcard[data-c="0"] .ctag{color:#00c8ff;}
-.pcard[data-c="1"] .ctag{color:#c9a84c;}
-.pcard[data-c="2"] .ctag{color:#ff4060;}
-.pcard[data-c="3"] .ctag{color:#00ff88;}
-.pcard[data-c="4"] .ctag{color:#a855f7;}
-.ctitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;color:var(--white);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;}
-.cnum{font-family:'JetBrains Mono',monospace;font-size:.48rem;color:var(--muted);}
-
-/* ── EXPANDED card ── */
-.pcard.exp{
-  --cw:380px;--ch:320px;
-  z-index:50;
-  border-color:rgba(0,200,255,.5);
-  box-shadow:0 20px 60px rgba(0,0,0,.8),0 0 0 1px rgba(0,200,255,.15);
-}
-#sc[data-layout="table"] .pcard.exp{
-  position:relative;
-  margin-right:calc(var(--cw) * -.55);
-  margin-bottom:calc(var(--ch) * -.38);
-}
-
-/* 3D positioned modes */
-#sc[data-layout="sphere"] .pcard,
-#sc[data-layout="helix"] .pcard,
-#sc[data-layout="grid"] .pcard{
-  position:absolute;left:50%;top:50%;
-  margin-left:calc(var(--cw)*-.5);
-  margin-top:calc(var(--ch)*-.5);
-}
-
-/* ── LOADING / EMPTY ── */
-#loading{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;z-index:200;
-}
-.spin{width:32px;height:32px;border:2px solid rgba(0,200,255,.15);border-top:2px solid var(--cyan);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .8rem;}
-@keyframes sp{to{transform:rotate(360deg);}}
-#loading p{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--muted);}
-
-#empty{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;display:none;z-index:200;max-width:420px;padding:2rem;
-}
-#empty h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:.6rem;}
-#empty p{font-size:.82rem;color:var(--text);line-height:1.7;}
-#empty code{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.15);padding:.12rem .4rem;color:var(--cyan);}
-
-/* ════════ MODAL ════════ */
-#ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
-#ov.open{opacity:1;pointer-events:all;}
-#modal{background:linear-gradient(145deg,#080e18,#04090f);border:1px solid var(--border);width:min(520px,92vw);max-height:90vh;overflow-y:auto;padding:2.4rem;position:relative;transform:translateY(18px) scale(.97);transition:transform .3s cubic-bezier(.4,0,.2,1);}
-#ov.open #modal{transform:translateY(0) scale(1);}
-#modal::before{content:'';position:absolute;top:-1px;left:-1px;width:24px;height:24px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
-#modal::after{content:'';position:absolute;bottom:-1px;right:-1px;width:24px;height:24px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
-.mcl{position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .2s;}
-.mcl:hover{color:var(--white);}
-.mey{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem;}
-.mh{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:.32rem;}
-.ms{font-size:.78rem;color:var(--text);margin-bottom:1.6rem;line-height:1.6;}
-.fg{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.85rem;}
-.fg label{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
-.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.03);border:1px solid rgba(0,200,255,.12);color:var(--white);font-family:'Outfit',sans-serif;font-size:.84rem;padding:.68rem .9rem;outline:none;transition:border-color .2s;width:100%;}
-.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--cyan);}
-.fg select option{background:var(--deep);}
-.fg textarea{resize:vertical;min-height:85px;}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
-.msub{width:100%;background:var(--cyan);color:var(--void);font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.85rem;cursor:pointer;transition:background .2s,transform .12s;margin-top:.3rem;}
-.msub:hover{background:var(--cyan2);transform:translateY(-1px);}
-.msuc{display:none;text-align:center;padding:2.5rem 1rem;}
-.msuc h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--cyan);margin-bottom:.7rem;}
-.msuc p{font-size:.82rem;color:var(--text);line-height:1.7;}
-.msuc a{color:var(--cyan);}
-</style>
-</head>
-<body>
-<div id="cur"></div>
-<div id="cur-r"></div>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
-  <ul>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="work.html" class="act">Past Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li><a href="contact.html" class="nc">Get Access</a></li>
-  </ul>
-</nav>
-
-<!-- 3D SCENE -->
-<div id="scene">
-  <div id="sc" data-layout="table"></div>
-</div>
-
-<!-- LOADING -->
-<div id="loading"><div class="spin"></div><p>Loading portfolio...</p></div>
-
-<!-- EMPTY -->
-<div id="empty">
-  <div style="font-size:2.5rem;margin-bottom:1rem;opacity:.4;">📁</div>
-  <h3>No sites yet</h3>
-  <p>Drop any <code>.html</code> file into your <code>sites/</code> folder,<br/>then add an entry to <code>sites/index.json</code>.<br/>It'll appear here as a live preview card.</p>
-</div>
-
-<!-- CONTROLS -->
-<div id="controls">
-  <button class="on tog" data-layout="table">Table</button>
-  <button class="tog" data-layout="sphere">Sphere</button>
-  <button class="tog" data-layout="helix">Helix</button>
-  <button class="tog" data-layout="grid">Grid</button>
-  <div class="csep"></div>
-  <button id="req-btn">Request a Site →</button>
-</div>
-
-<!-- MODAL -->
-<div id="ov">
-  <div id="modal">
-    <button class="mcl" id="mcl">✕</button>
-    <div id="mfw">
-      <p class="mey">Secret Systems // New Project</p>
-      <h2 class="mh">Request Your Website</h2>
-      <p class="ms">Tell us what you need. Custom proposal within 24 hours.</p>
-      <form id="mform" novalidate>
-        <div class="fr">
-          <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required/></div>
-          <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required/></div>
-        </div>
-        <div class="fg"><label>Business Name *</label><input type="text" placeholder="Your Company LLC" required/></div>
-        <div class="fr">
-          <div class="fg"><label>Phone *</label><input type="tel" placeholder="(555) 000-0000" required/></div>
-          <div class="fg"><label>Email *</label><input type="email" placeholder="you@company.com" required/></div>
-        </div>
-        <div class="fg">
-          <label>Project Type *</label>
-          <select required>
-            <option value="">Select type...</option>
-            <option>Business Website</option>
-            <option>Landing Page / Funnel</option>
-            <option>GoHighLevel CRM Build</option>
-            <option>Complete Digital System</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Budget Range</label>
-          <select>
-            <option value="">Select range...</option>
-            <option>Under $1,000</option>
-            <option>$1,000 – $3,000</option>
-            <option>$3,000 – $7,500</option>
-            <option>$7,500+</option>
-            <option>Monthly retainer</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Project Details *</label>
-          <textarea placeholder="What do you need and what should it accomplish?" required></textarea>
-        </div>
-        <button type="submit" class="msub">Send My Request →</button>
-      </form>
-    </div>
-    <div class="msuc" id="msuc">
-      <div style="font-size:2.5rem;margin-bottom:1rem;">✅</div>
-      <h3>Request Received!</h3>
-      <p>We'll reach out within 24 hours.<br/><br/>
-      Browse our <a href="catalog.html">service catalog</a> or <a href="pricing.html">pricing plans</a>.</p>
-    </div>
-  </div>
-</div>
-
 <script>
 /* ════════════════════════════════
    CURSOR
 ════════════════════════════════ */
 const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function lr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(lr);})();
-const bigC=()=>{cur.style.width='16px';cur.style.height='16px';curR.style.width='44px';curR.style.height='44px';};
-const smC=()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='30px';curR.style.height='30px';};
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',bigC);el.addEventListener('mouseleave',smC);});
+document.addEventListener('mousemove',e=>{
+  if(window.innerWidth<=768) return;
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';
+  cur.style.top=my+'px';
+});
+(function lr(){
+  if(window.innerWidth>768){
+    rx+=(mx-rx)*.1;
+    ry+=(my-ry)*.1;
+    curR.style.left=rx+'px';
+    curR.style.top=ry+'px';
+  }
+  requestAnimationFrame(lr);
+})();
+const bigC=()=>{
+  if(window.innerWidth<=768) return;
+  cur.style.width='16px';
+  cur.style.height='16px';
+  curR.style.width='44px';
+  curR.style.height='44px';
+};
+const smC=()=>{
+  if(window.innerWidth<=768) return;
+  cur.style.width='10px';
+  cur.style.height='10px';
+  curR.style.width='30px';
+  curR.style.height='30px';
+};
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',bigC);
+  el.addEventListener('mouseleave',smC);
+});
 
 /* ════════════════════════════════
    SCENE / CAMERA PARALLAX
 ════════════════════════════════ */
 const scene=document.getElementById('scene');
 const sc=document.getElementById('sc');
+
 let rotX=0,rotY=0,tRotX=12,tRotY=16,pX=0,pY=0;
+let touchStartX=0,touchStartY=0;
+let mobilePX=0,mobilePY=0;
+
+function isMobile(){
+  return window.innerWidth <= 768;
+}
+
 document.addEventListener('pointermove',e=>{
+  if(isMobile()) return;
   const hw=innerWidth*.5,hh=innerHeight*.5;
   pX=(e.clientX-hw)/hw;
   pY=(e.clientY-hh)/hh;
 });
+
+document.addEventListener('touchstart',e=>{
+  if(!isMobile() || !e.touches.length) return;
+  touchStartX=e.touches[0].clientX;
+  touchStartY=e.touches[0].clientY;
+},{passive:true});
+
+document.addEventListener('touchmove',e=>{
+  if(!isMobile() || !e.touches.length) return;
+
+  const dx=e.touches[0].clientX-touchStartX;
+  const dy=e.touches[0].clientY-touchStartY;
+
+  mobilePX=Math.max(-1,Math.min(1,dx/(window.innerWidth*0.35)));
+  mobilePY=Math.max(-1,Math.min(1,dy/(window.innerHeight*0.35)));
+},{passive:true});
+
+document.addEventListener('touchend',()=>{
+  if(!isMobile()) return;
+  mobilePX*=0.8;
+  mobilePY*=0.8;
+},{passive:true});
+
 (function cam(){
-  rotX+=(pY*tRotX-rotX)*.012;
-  rotY+=(-pX*tRotY-rotY)*.012;
+  if(isMobile()){
+    rotX+=((-mobilePY*8)-rotX)*.08;
+    rotY+=((mobilePX*18)-rotY)*.08;
+  }else{
+    rotX+=(pY*tRotX-rotX)*.012;
+    rotY+=(-pX*tRotY-rotY)*.012;
+  }
+
   scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
@@ -469,12 +157,10 @@ function buildCards(sites){
         <div class="cnum">${String(i+1).padStart(2,'0')}</div>
       </div>`;
 
-    // mark iframe loaded
     el.querySelector('iframe').addEventListener('load',()=>{
       document.getElementById('pw'+i)?.classList.add('loaded');
     });
 
-    // click to open (not when expanding)
     el.addEventListener('click',e=>{
       if(e.target.closest('.bbar'))return;
       if(el.classList.contains('exp')){
@@ -486,14 +172,12 @@ function buildCards(sites){
     el.addEventListener('mouseenter',bigC);
     el.addEventListener('mouseleave',smC);
 
-    // start scattered for intro
     el.style.opacity='0';
     el.style.transition='none';
     sc.appendChild(el);
     cards.push(el);
   });
 
-  // intro: scatter then animate to table
   requestAnimationFrame(()=>{
     cards.forEach(c=>{
       const rx2=(Math.random()-.5)*1400;
@@ -515,17 +199,20 @@ function buildCards(sites){
 function posFor(layout,i,isExp){
   const z0=isExp?20:0;
   const cw=isExp?CWE:CW, ch=isExp?CHE:CH;
+
   if(layout==='sphere'){
-    const r=420;
+    const mobile=isMobile();
+    const r=mobile ? 300 : 420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
     const sp=Math.sin(phi);
-    const x=r*sp*Math.cos(theta),y=r*Math.cos(phi),z=r*sp*Math.sin(theta);
-    const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z));
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
+    const x=r*sp*Math.cos(theta),y=(mobile ? r*0.82 : r*Math.cos(phi)),z=r*sp*Math.sin(theta);
+    const yy=mobile ? r*Math.cos(phi)*0.82 : y;
+    const yaw=Math.atan2(x,z),pitch=-Math.atan2(yy,Math.hypot(x,z));
+    return `translate3d(${x}px,${yy}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
   }
   if(layout==='helix'){
-    const r=420,step=0.22,vs=3.8,yOff=cards.length*vs/2;
+    const r=isMobile()?300:420,step=0.22,vs=isMobile()?5.2:3.8,yOff=cards.length*vs/2;
     const theta=i*step+Math.PI;
     const y=-(i*vs)+yOff;
     const x=r*Math.sin(theta),z=r*Math.cos(theta);
@@ -533,7 +220,8 @@ function posFor(layout,i,isExp){
     return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
   }
   if(layout==='grid'){
-    const cols=3,rows=4,cg=280,rg=220,dg=200;
+    const mobile=isMobile();
+    const cols=mobile?2:3,rows=mobile?5:4,cg=mobile?210:280,rg=mobile?170:220,dg=mobile?170:200;
     const per=cols*rows,layers=Math.ceil(cards.length/per);
     const col=i%cols,row=Math.floor(i/cols)%rows,layer=Math.floor(i/per);
     const x=(col-(cols-1)/2)*cg,yz=((rows-1)/2-row)*rg;
@@ -546,10 +234,10 @@ function posFor(layout,i,isExp){
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
-  if(layout==='table'){tRotX=12;tRotY=16;}
-  else if(layout==='sphere'){tRotX=40;tRotY=360;}
-  else if(layout==='helix'){tRotX=30;tRotY=300;}
-  else if(layout==='grid'){tRotX=10;tRotY=55;}
+  if(layout==='table'){tRotX=isMobile()?8:12;tRotY=isMobile()?10:16;}
+  else if(layout==='sphere'){tRotX=isMobile()?14:40;tRotY=isMobile()?24:360;}
+  else if(layout==='helix'){tRotX=isMobile()?12:30;tRotY=isMobile()?20:300;}
+  else if(layout==='grid'){tRotX=isMobile()?8:10;tRotY=isMobile()?12:55;}
 
   if(layout==='table'){
     cards.forEach(c=>{
@@ -582,7 +270,6 @@ function toggleExpand(card){
   cards.forEach(c=>c.classList.remove('exp'));
   if(!wasExp){
     card.classList.add('exp');
-    // update size CSS vars on the element
     card.style.setProperty('--cw',CWE+'px');
     card.style.setProperty('--ch',CHE+'px');
   }
@@ -653,5 +340,3 @@ document.getElementById('mform').addEventListener('submit',e=>{
 ════════════════════════════════ */
 loadSites();
 </script>
-</body>
-</html>

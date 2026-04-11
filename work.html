@@ -171,8 +171,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   }
 
   body{
-    overflow-x:hidden;
-    overflow-y:auto;
+    overflow:hidden;
     cursor:auto;
   }
 
@@ -181,9 +180,31 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
     display:none;
   }
 
+  #scene{
+    overflow:hidden;
+    touch-action:none;
+  }
+
+  #scene.table-mobile{
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x pan-y;
+  }
+
   #sc[data-layout="table"]{
-    grid-template-columns:repeat(2,var(--cw));
+    position:relative;
+    width:max-content;
+    min-width:100%;
+    height:auto;
+    min-height:100%;
+    grid-template-columns:repeat(7,var(--cw));
+    grid-auto-rows:var(--ch);
     gap:.6rem;
+    place-content:start;
+    padding-top:calc(var(--hh) + 16px);
+    padding-left:1rem;
+    padding-right:1rem;
+    padding-bottom:6rem;
   }
 
   .pw iframe{
@@ -404,15 +425,80 @@ document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseent
 ════════════════════════════════ */
 const scene=document.getElementById('scene');
 const sc=document.getElementById('sc');
-let rotX=0,rotY=0,tRotX=12,tRotY=16,pX=0,pY=0;
+
+let rotX=0,rotY=0;
+let targetRotX=0,targetRotY=0;
+let tRotX=12,tRotY=16,pX=0,pY=0;
+
+let touchActive=false;
+let lastTouchX=0,lastTouchY=0;
+
+function clamp(v,min,max){
+  return Math.max(min,Math.min(max,v));
+}
+
+function isMobile(){
+  return window.innerWidth<=768;
+}
+
 document.addEventListener('pointermove',e=>{
+  if(isMobile()) return;
   const hw=innerWidth*.5,hh=innerHeight*.5;
   pX=(e.clientX-hw)/hw;
   pY=(e.clientY-hh)/hh;
 });
+
+scene.addEventListener('touchstart',e=>{
+  if(!isMobile()) return;
+  if(currentLayout==='table') return;
+  if(!e.touches.length) return;
+
+  touchActive=true;
+  lastTouchX=e.touches[0].clientX;
+  lastTouchY=e.touches[0].clientY;
+},{passive:false});
+
+scene.addEventListener('touchmove',e=>{
+  if(!isMobile()) return;
+  if(currentLayout==='table') return;
+  if(!touchActive || !e.touches.length) return;
+
+  e.preventDefault();
+
+  const x=e.touches[0].clientX;
+  const y=e.touches[0].clientY;
+
+  const dx=x-lastTouchX;
+  const dy=y-lastTouchY;
+
+  lastTouchX=x;
+  lastTouchY=y;
+
+  targetRotY+=dx*0.32;
+  targetRotX-=dy*0.22;
+
+  targetRotX=clamp(targetRotX,-35,35);
+},{passive:false});
+
+scene.addEventListener('touchend',()=>{
+  touchActive=false;
+},{passive:false});
+
+scene.addEventListener('touchcancel',()=>{
+  touchActive=false;
+},{passive:false});
+
 (function cam(){
-  rotX+=(pY*tRotX-rotX)*.012;
-  rotY+=(-pX*tRotY-rotY)*.012;
+  if(isMobile()){
+    rotX+=(targetRotX-rotX)*.18;
+    rotY+=(targetRotY-rotY)*.18;
+  }else{
+    targetRotX=pY*tRotX;
+    targetRotY=-pX*tRotY;
+    rotX+=(targetRotX-rotX)*.012;
+    rotY+=(targetRotY-rotY)*.012;
+  }
+
   scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
@@ -557,10 +643,11 @@ function posFor(layout,i,isExp){
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
-  if(layout==='table'){tRotX=12;tRotY=16;}
-  else if(layout==='sphere'){tRotX=40;tRotY=360;}
-  else if(layout==='helix'){tRotX=30;tRotY=300;}
-  else if(layout==='grid'){tRotX=10;tRotY=55;}
+  scene.classList.toggle('table-mobile', isMobile() && layout==='table');
+ if(layout==='table'){tRotX=12;tRotY=16;}
+else if(layout==='sphere'){tRotX=isMobile()?10:40;tRotY=isMobile()?18:360;}
+else if(layout==='helix'){tRotX=isMobile()?10:30;tRotY=isMobile()?18:300;}
+else if(layout==='grid'){tRotX=isMobile()?8:10;tRotY=isMobile()?14:55;}
 
   if(layout==='table'){
     cards.forEach(c=>{

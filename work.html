@@ -659,6 +659,15 @@ document.getElementById('mform').addEventListener('submit',e=>{
    INIT
 ════════════════════════════════ */
 loadSites();
+
+window.addEventListener('load',()=>{
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      applyLayout('sphere', false);
+      refreshPositions(false);
+    });
+  });
+});
 </script>
 </body>
 </html>

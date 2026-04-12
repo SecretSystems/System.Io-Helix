@@ -485,14 +485,16 @@ function buildCards(sites){
       document.getElementById('pw'+i)?.classList.add('loaded');
     });
 
-    el.addEventListener('click',e=>{
-      if(e.target.closest('.bbar'))return;
-      if(el.classList.contains('exp')){
-        window.open(url,'_blank');
-      } else {
-        toggleExpand(el);
-      }
-    });
+el.addEventListener('click',e=>{
+  if(el.classList.contains('exp')){
+    window.location.href = url;
+    return;
+  }
+
+  if(e.target.closest('.bbar')) return;
+
+  toggleExpand(el);
+});
     el.addEventListener('mouseenter',bigC);
     el.addEventListener('mouseleave',smC);
 

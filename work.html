@@ -617,21 +617,15 @@ function posFor(layout,i,isExp){
   const mobile=isMobile();
 
 if(layout==='sphere'){
-  const mobile=isMobile();
-  const r=mobile ? 420 : 420;
-  const phi=Math.acos(-1+(2*i)/cards.length);
-  const theta=Math.sqrt(cards.length*Math.PI)*phi;
-  const sp=Math.sin(phi);
+    const r=420;
+    const phi=Math.acos(-1+(2*i)/cards.length);
+    const theta=Math.sqrt(cards.length*Math.PI)*phi;
+    const sp=Math.sin(phi);
+    const x=r*sp*Math.cos(theta),y=r*Math.cos(phi),z=r*sp*Math.sin(theta);
+    const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z));
+    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
+  }
 
-  const x=r*sp*Math.cos(theta);
-  const y=(mobile ? r*0.95 : r)*Math.cos(phi);
-  const z=r*sp*Math.sin(theta);
-
-  const yaw=Math.atan2(x,z);
-  const pitch=-Math.atan2(y,Math.hypot(x,z));
-
-  return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.18 : 1}) translateZ(${z0}px)`;
-}
 
   if(layout==='helix'){
     const r=mobile ? 320 : 420;

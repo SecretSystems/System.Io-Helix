@@ -501,7 +501,7 @@ scene.addEventListener('touchcancel',()=>{
   }
 
 scene.style.transform = isMobile()
-  ? `translateZ(-520px) rotateX(${rotX}deg) rotateY(${rotY}deg)`
+  ? `translateZ(-1100px) rotateX(${rotX}deg) rotateY(${rotY}deg)`
   : `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
@@ -630,7 +630,7 @@ if(layout==='sphere'){
   const yaw=Math.atan2(x,z);
   const pitch=-Math.atan2(y,Math.hypot(x,z));
 
-  return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.34 : 1}) translateZ(${z0}px)`;
+  return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.18 : 1}) translateZ(${z0}px)`;
 }
 
   if(layout==='helix'){

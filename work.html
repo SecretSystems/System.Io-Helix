@@ -504,19 +504,18 @@ el.addEventListener('click',e=>{
     cards.push(el);
   });
 
-  requestAnimationFrame(()=>{
-    cards.forEach(c=>{
-      const rx2=(Math.random()-.5)*1400;
-      const ry2=(Math.random()-.5)*900;
-      const rz2=(Math.random()-.5)*1400;
-      c.style.position='absolute';c.style.left='50%';c.style.top='50%';
-      c.style.marginLeft=(-CW/2)+'px';c.style.marginTop=(-CH/2)+'px';
-      c.style.transform=`translate3d(${rx2}px,${ry2}px,${rz2}px)`;
-    });
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>applyLayout('sphere',true));
-    });
+ requestAnimationFrame(()=>{
+  cards.forEach(c=>{
+    c.style.position='absolute';
+    c.style.left='50%';
+    c.style.top='50%';
+    c.style.marginLeft=(-CW/2)+'px';
+    c.style.marginTop=(-CH/2)+'px';
+    c.style.opacity='1';
   });
+
+  applyLayout('sphere', false);
+});
 }
 
 /* ════════════════════════════════

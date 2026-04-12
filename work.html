@@ -165,37 +165,22 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 }
 
 @media (max-width: 768px){
-   .pw iframe{
-    width:220%;
-    height:220%;
-    transform:scale(.455);
+  :root{
+    --cw:150px;
+    --ch:125px;
+  }
+
+  #sc[data-layout="table"]{
+    grid-template-columns:repeat(2,var(--cw));
+    gap:.5rem;
+  }
+
+  .pw iframe{
+    width:260%;
+    height:260%;
+    transform:scale(.38);
     transform-origin:top left;
   }
-
-  #sc[data-layout="sphere"] .pw iframe,
-  #sc[data-layout="helix"] .pw iframe,
-  #sc[data-layout="grid"] .pw iframe{
-    width:240%;
-    height:240%;
-    transform:scale(.38);
-  }
-}
-  #scene{
-    perspective: 850px;
-    perspective-origin: 50% 50%;
-    transform-style: preserve-3d;
-  }
-
-  #sc{
-    transform-style: preserve-3d;
-  }
-
-#sc[data-layout="sphere"] .pcard,
-#sc[data-layout="helix"] .pcard,
-#sc[data-layout="grid"] .pcard{
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
 }
 /* shimmer while loading */
 .pw::after{
@@ -289,24 +274,6 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 .msuc h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--cyan);margin-bottom:.7rem;}
 .msuc p{font-size:.82rem;color:var(--text);line-height:1.7;}
 .msuc a{color:var(--cyan);}
-  @media (max-width: 768px){
-  #scene{
-    perspective: 1200px;
-    transform-style: preserve-3d;
-  }
-
-  #sc{
-    transform-style: preserve-3d;
-  }
-
-  #sc[data-layout="sphere"] .pcard,
-  #sc[data-layout="helix"] .pcard,
-  #sc[data-layout="grid"] .pcard{
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-}
 </style>
 </head>
 <body>
@@ -426,83 +393,16 @@ document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseent
 ════════════════════════════════ */
 const scene=document.getElementById('scene');
 const sc=document.getElementById('sc');
-
-let rotX=0,rotY=0;
-let targetRotX=0,targetRotY=0;
-let tRotX=12,tRotY=16,pX=0,pY=0;
-
-let touchActive=false;
-let lastTouchX=0,lastTouchY=0;
-
-function clamp(v,min,max){
-  return Math.max(min,Math.min(max,v));
-}
-
-function isMobile(){
-  return window.innerWidth<=768;
-}
-
+let rotX=0,rotY=0,tRotX=12,tRotY=16,pX=0,pY=0;
 document.addEventListener('pointermove',e=>{
-  if(isMobile()) return;
   const hw=innerWidth*.5,hh=innerHeight*.5;
   pX=(e.clientX-hw)/hw;
   pY=(e.clientY-hh)/hh;
 });
-
-scene.addEventListener('touchstart',e=>{
-  if(!isMobile()) return;
-  if(currentLayout==='table') return;
-  if(!e.touches.length) return;
-
-  touchActive=true;
-  lastTouchX=e.touches[0].clientX;
-  lastTouchY=e.touches[0].clientY;
-},{passive:false});
-
-scene.addEventListener('touchmove',e=>{
-  if(!isMobile()) return;
-  if(currentLayout==='table') return;
-  if(!touchActive || !e.touches.length) return;
-
-  e.preventDefault();
-
-  const x=e.touches[0].clientX;
-  const y=e.touches[0].clientY;
-
-  const dx=x-lastTouchX;
-  const dy=y-lastTouchY;
-
-  lastTouchX=x;
-  lastTouchY=y;
-
-  targetRotY+=dx*0.22;
-targetRotX-=dy*0.16;
-
-  targetRotX=clamp(targetRotX,-35,35);
-},{passive:false});
-
-scene.addEventListener('touchend',()=>{
-  touchActive=false;
-},{passive:false});
-
-scene.addEventListener('touchcancel',()=>{
-  touchActive=false;
-},{passive:false});
-
 (function cam(){
-  if(isMobile()){
-    rotX+=(targetRotX-rotX)*.18;
-    rotY+=(targetRotY-rotY)*.18;
-  }else{
-    targetRotX=pY*tRotX;
-    targetRotY=-pX*tRotY;
-    rotX+=(targetRotX-rotX)*.012;
-    rotY+=(targetRotY-rotY)*.012;
-  }
-
-scene.style.transform = isMobile()
-  ? `translateZ(-1100px) rotateX(${rotX}deg) rotateY(${rotY}deg)`
-  : `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  rotX+=(pY*tRotX-rotX)*.012;
+  rotY+=(-pX*tRotY-rotY)*.012;
+  scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
 
@@ -614,9 +514,8 @@ function buildCards(sites){
 ════════════════════════════════ */
 function posFor(layout,i,isExp){
   const z0=isExp?20:0;
-  const mobile=isMobile();
-
-if(layout==='sphere'){
+  const cw=isExp?CWE:CW, ch=isExp?CHE:CH;
+  if(layout==='sphere'){
     const r=420;
     const phi=Math.acos(-1+(2*i)/cards.length);
     const theta=Math.sqrt(cards.length*Math.PI)*phi;
@@ -625,64 +524,32 @@ if(layout==='sphere'){
     const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z));
     return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
   }
-
-
   if(layout==='helix'){
-    const r=mobile ? 320 : 420;
-    const step=mobile ? 0.22 : 0.22;
-    const vs=mobile ? 4.6 : 3.8;
-    const yOff=cards.length*vs/2;
-
+    const r=420,step=0.22,vs=3.8,yOff=cards.length*vs/2;
     const theta=i*step+Math.PI;
     const y=-(i*vs)+yOff;
-    const x=r*Math.sin(theta);
-    const z=r*Math.cos(theta);
-
-    const yaw=Math.atan2(x,z);
-    const pitch=-Math.atan2(y,Math.hypot(x,z)*2);
-
-    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) scale(${mobile ? 0.56 : 1}) translateZ(${z0}px)`;
+    const x=r*Math.sin(theta),z=r*Math.cos(theta);
+    const yaw=Math.atan2(x,z),pitch=-Math.atan2(y,Math.hypot(x,z)*2);
+    return `translate3d(${x}px,${y}px,${z}px) rotateY(${yaw}rad) rotateX(${pitch}rad) translateZ(${z0}px)`;
   }
-
   if(layout==='grid'){
-    const cols=3;
-    const rows=4;
-    const cg=mobile ? 210 : 280;
-    const rg=mobile ? 165 : 220;
-    const dg=mobile ? 260 : 200;
-
-    const per=cols*rows;
-    const layers=Math.ceil(cards.length/per);
-    const col=i%cols;
-    const row=Math.floor(i/cols)%rows;
-    const layer=Math.floor(i/per);
-
-    const x=(col-(cols-1)/2)*cg;
-    const yz=((rows-1)/2-row)*rg;
+    const cols=3,rows=4,cg=280,rg=220,dg=200;
+    const per=cols*rows,layers=Math.ceil(cards.length/per);
+    const col=i%cols,row=Math.floor(i/cols)%rows,layer=Math.floor(i/per);
+    const x=(col-(cols-1)/2)*cg,yz=((rows-1)/2-row)*rg;
     const z=z0+((layer-(layers-1)/2)*dg);
-
-    return `translate3d(${x}px,${yz}px,${z}px) scale(${mobile ? 0.56 : 1})`;
+    return `translate3d(${x}px,${yz}px,${z}px)`;
   }
-
   return '';
 }
+
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
-  scene.classList.toggle('table-mobile', isMobile() && layout==='table');
-if(layout==='table'){
-  tRotX=12;
-  tRotY=16;
-}else if(layout==='sphere'){
-  tRotX=isMobile()?22:40;
-  tRotY=isMobile()?34:360;
-}else if(layout==='helix'){
-  tRotX=isMobile()?18:30;
-  tRotY=isMobile()?28:300;
-}else if(layout==='grid'){
-  tRotX=isMobile()?14:10;
-  tRotY=isMobile()?22:55;
-}
+  if(layout==='table'){tRotX=12;tRotY=16;}
+  else if(layout==='sphere'){tRotX=40;tRotY=360;}
+  else if(layout==='helix'){tRotX=30;tRotY=300;}
+  else if(layout==='grid'){tRotX=10;tRotY=55;}
 
   if(layout==='table'){
     cards.forEach(c=>{

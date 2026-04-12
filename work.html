@@ -93,8 +93,10 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   pointer-events:none;
 }
 #sc[data-layout="table"]{
+  --cw:110px;
+  --ch:85px;
   display:grid;
-  grid-template-columns:repeat(8,var(--cw));
+  grid-template-columns:repeat(6,var(--cw));
   grid-auto-rows:var(--ch);
   gap:.35rem;
   place-content:center;
@@ -278,21 +280,22 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
     overflow-x:auto;
     justify-content:flex-start;
   }
-  
-#sc[data-layout="table"]{
-  grid-template-columns:repeat(4,var(--cw));
-  gap:.35rem;
-  padding-top:calc(var(--hh) + 10px);
-  padding-bottom:70px;
-  transform-origin:center top;
-}
+
+  #sc[data-layout="table"]{
+    --cw:95px;
+    --ch:75px;
+    grid-template-columns:repeat(4,var(--cw));
+    gap:.35rem;
+    padding-top:calc(var(--hh) + 10px);
+    padding-bottom:70px;
+  }
 
   .pw iframe{
-  width:260%;
-  height:260%;
-  transform:scale(.38);
-  transform-origin:top left;
-}
+    width:260%;
+    height:260%;
+    transform:scale(.38);
+    transform-origin:top left;
+  }
 
   .ctitle{
     max-width:95px;
@@ -319,7 +322,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 </nav>
 
 <div id="scene">
-  <div id="sc" data-layout="sphere"></div>
+  <div id="sc" data-layout="table"></div>
 </div>
 
 <div id="loading"><div class="spin"></div><p>Loading portfolio...</p></div>
@@ -331,8 +334,8 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 </div>
 
 <div id="controls">
-<button class="tog" data-layout="table">Table</button>
-<button class="on tog" data-layout="sphere">Sphere</button>
+  <button class="on tog" data-layout="table">Table</button>
+  <button class="tog" data-layout="sphere">Sphere</button>
   <button class="tog" data-layout="helix">Helix</button>
   <button class="tog" data-layout="grid">Grid</button>
   <div class="csep"></div>
@@ -485,16 +488,17 @@ function buildCards(sites){
       document.getElementById('pw'+i)?.classList.add('loaded');
     });
 
-el.addEventListener('click',e=>{
-  if(el.classList.contains('exp')){
-    window.location.href = url;
-    return;
-  }
+    el.addEventListener('click',e=>{
+      if(el.classList.contains('exp')){
+        window.location.href = url;
+        return;
+      }
 
-  if(e.target.closest('.bbar')) return;
+      if(e.target.closest('.bbar')) return;
 
-  toggleExpand(el);
-});
+      toggleExpand(el);
+    });
+
     el.addEventListener('mouseenter',bigC);
     el.addEventListener('mouseleave',smC);
 
@@ -504,18 +508,19 @@ el.addEventListener('click',e=>{
     cards.push(el);
   });
 
- requestAnimationFrame(()=>{
-  cards.forEach(c=>{
-    c.style.position='absolute';
-    c.style.left='50%';
-    c.style.top='50%';
-    c.style.marginLeft=(-CW/2)+'px';
-    c.style.marginTop=(-CH/2)+'px';
-    c.style.opacity='1';
+  requestAnimationFrame(()=>{
+    cards.forEach(c=>{
+      const rx2=(Math.random()-.5)*1400;
+      const ry2=(Math.random()-.5)*900;
+      const rz2=(Math.random()-.5)*1400;
+      c.style.position='absolute';c.style.left='50%';c.style.top='50%';
+      c.style.marginLeft=(-CW/2)+'px';c.style.marginTop=(-CH/2)+'px';
+      c.style.transform=`translate3d(${rx2}px,${ry2}px,${rz2}px)`;
+    });
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>applyLayout('table',true));
+    });
   });
-
-  applyLayout('sphere', false);
-});
 }
 
 /* ════════════════════════════════
@@ -659,15 +664,6 @@ document.getElementById('mform').addEventListener('submit',e=>{
    INIT
 ════════════════════════════════ */
 loadSites();
-
-window.addEventListener('load',()=>{
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      applyLayout('sphere', false);
-      refreshPositions(false);
-    });
-  });
-});
 </script>
 </body>
 </html>

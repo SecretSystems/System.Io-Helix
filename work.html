@@ -319,7 +319,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 </nav>
 
 <div id="scene">
-  <div id="sc" data-layout="table"></div>
+  <div id="sc" data-layout="sphere"></div>
 </div>
 
 <div id="loading"><div class="spin"></div><p>Loading portfolio...</p></div>
@@ -512,7 +512,7 @@ function buildCards(sites){
       c.style.transform=`translate3d(${rx2}px,${ry2}px,${rz2}px)`;
     });
     requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>applyLayout('table',true));
+      requestAnimationFrame(()=>applyLayout('sphere',true));
     });
   });
 }

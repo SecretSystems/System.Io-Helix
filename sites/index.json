@@ -88,4 +88,74 @@
   {"file":"volt-electric.html","title":"Volt Electric | Licensed Electricians — Residential & Commercial","tag":"Website","color":0,"desc":""}
 ,
   {"file":"water-restoration.html","title":"RapidDry Restoration | Water & Flood Damage","tag":"Website","color":0,"desc":""}
+    {
+    "file": "bayou-pest.html",
+    "title": "Bayou Pest Control",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Termite & pest elimination. Dark green with a bug cursor that follows your mouse."
+  },
+  {
+    "file": "gulf-coast-gutters.html",
+    "title": "Gulf Coast Gutters",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Seamless gutter installation. Navy & sky blue with animated raindrops falling through the hero."
+  },
+  {
+    "file": "south-la-drywall.html",
+    "title": "South LA Drywall",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Sheetrock installation & repair. Clay & cream with a draggable before/after wall repair slider."
+  },
+  {
+    "file": "pelican-plumbing.html",
+    "title": "Pelican Plumbing",
+    "tag": "Website",
+    "color": 0,
+    "desc": "24/7 emergency plumbing. Dark blue with a pipe that fills with water across the top on load."
+  },
+  {
+    "file": "la-pool-builder.html",
+    "title": "Louisiana Pool Builders",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Custom inground pools. Aqua & navy with water ripples that appear wherever you click."
+  },
+  {
+    "file": "crescent-city-flooring.html",
+    "title": "Crescent City Flooring",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Hardwood, tile & LVP. Warm brown editorial style with floor planks that animate in on load."
+  },
+  {
+    "file": "south-hvac.html",
+    "title": "South Louisiana HVAC",
+    "tag": "Website",
+    "color": 0,
+    "desc": "AC repair & installation. Dark blue & ice with a live temperature display that pulses in the nav."
+  },
+  {
+    "file": "delta-electric.html",
+    "title": "Delta Electric",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Residential & commercial electrical. Black & volt yellow with animated circuit board traces."
+  },
+  {
+    "file": "bayou-signs.html",
+    "title": "Bayou Signs & Graphics",
+    "tag": "Website",
+    "color": 4,
+    "desc": "Business signs & vehicle wraps. Dark with neon flicker effect on the logo like a real neon sign."
+  },
+  {
+    "file": "sportsplex-academy.html",
+    "title": "Sportsplex Academy",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Youth sports training. Dark green & yellow with a scoreboard that counts up to stats on load."
+  }
 ]

@@ -1,27 +1,71 @@
 [
-  {"file":"Ducharme-landscaping.html","title":"Ducharme Landscaping","tag":"Website","color":3,"desc":""},
-  {"file":"Father-and-son-mobile-mechanic.html","title":"Father and Son Mobile Mechanic","tag":"Website","color":1,"desc":""},
-  {"file":"apex-plumbing.html","title":"Apex Plumbing","tag":"Website","color":0,"desc":""},
-  {"file":"arctic-hvac.html","title":"Arctic HVAC","tag":"Website","color":0,"desc":""},
-  {"file":"coastal-painting.html","title":"Coastal Painting","tag":"Website","color":1,"desc":""},
-  {"file":"delta-hauling.html","title":"Delta Hauling","tag":"Website","color":2,"desc":""},
-  {"file":"demo-crm.html","title":"Demo CRM","tag":"Website","color":4,"desc":""},
-  {"file":"demo-funnel.html","title":"Demo Funnel","tag":"Website","color":4,"desc":""},
-  {"file":"ducharme-landscaping.html","title":"Ducharme Landscaping","tag":"Website","color":3,"desc":""},
-  {"file":"elite-roofing.html","title":"Elite Roofing","tag":"Website","color":2,"desc":""},
-  {"file":"elitepest.html","title":"Elite Pest Solutions","tag":"Website","color":4,"desc":""},
-  {"file":"father-son-mechanic.html","title":"Father Son Mechanic","tag":"Website","color":1,"desc":""},
-  {"file":"greenwave-lawn.html","title":"GreenWave Lawn Care","tag":"Website","color":3,"desc":""},
-  {"file":"gulf-electric.html","title":"Gulf Electric","tag":"Website","color":1,"desc":""},
-  {"file":"ironwall-security.html","title":"IronWall Security","tag":"Website","color":3,"desc":""},
-  {"file":"kleen-pressure.html","title":"Kleen Pressure","tag":"Website","color":0,"desc":""},
-  {"file":"locksmith-pro.html","title":"Locksmith Pro","tag":"Website","color":0,"desc":""},
-  {"file":"pro-landscaping.html","title":"Pro Landscaping","tag":"Website","color":3,"desc":""},
-  {"file":"ridge-roofing.html","title":"Ridge Roofing","tag":"Website","color":2,"desc":""},
-  {"file":"sparkle-cleaning.html","title":"Sparkle Cleaning","tag":"Website","color":0,"desc":""},
-  {"file":"sundance-pool.html","title":"Sundance Pool","tag":"Website","color":0,"desc":""},
-  {"file":"sunstate-painting.html","title":"Sunstate Painting","tag":"Website","color":1,"desc":""},
-  {"file":"taylor-made.html","title":"Taylor Made","tag":"Website","color":0,"desc":""},
-  {"file":"volt-electric.html","title":"Volt Electric","tag":"Website","color":1,"desc":""},
-  {"file":"water-restoration.html","title":"Water Restoration","tag":"Website","color":0,"desc":""}
+  {"file":"Ducharme-landscaping.html","title":"Ducharme-landscaping","tag":"Website","color":0,"desc":""}
+,
+  {"file":"Father-and-son-mobile-mechanic.html","title":"Father and Son Mobile Mechanic LLC | Lafayette, LA","tag":"Website","color":0,"desc":""}
+,
+  {"file":"apex-plumbing.html","title":"Apex Plumbing | Emergency Plumbers — 24/7 Service","tag":"Website","color":0,"desc":""}
+,
+  {"file":"arctic-hvac.html","title":"Arctic HVAC | AC Repair, Installation & Maintenance","tag":"Website","color":0,"desc":""}
+,
+  {"file":"cajun-catering.html","title":"Guidry's Cajun Catering | Authentic Louisiana Cuisine","tag":"Website","color":0,"desc":""}
+,
+  {"file":"coastal-painting.html","title":"Coastal Painting Co. | Interior & Exterior House Painting","tag":"Website","color":0,"desc":""}
+,
+  {"file":"delta-hauling.html","title":"Delta Hauling | Dump Truck & Gravel Delivery","tag":"Website","color":0,"desc":""}
+,
+  {"file":"demo-crm.html","title":"CRM Dashboard — GoHighLevel","tag":"Website","color":0,"desc":""}
+,
+  {"file":"demo-funnel.html","title":"Get Your Free Roofing Estimate","tag":"Website","color":0,"desc":""}
+,
+  {"file":"ducharme-landscaping.html","title":"Ducharme Landscaping | Lawn Care & Irrigation","tag":"Website","color":0,"desc":""}
+,
+  {"file":"elite-auto-detail.html","title":"Elite Auto Detail | Premium Car Detailing","tag":"Website","color":0,"desc":""}
+,
+  {"file":"elite-roofing.html","title":"Elite Roofing Pros | Metal & Shingle Roofing","tag":"Website","color":0,"desc":""}
+,
+  {"file":"elitepest.html","title":"Elite Pest Solutions | Termite & Pest Control","tag":"Website","color":0,"desc":""}
+,
+  {"file":"father-son-mechanic.html","title":"Father & Son Mobile Mechanic | On-Site Auto Repair","tag":"Website","color":0,"desc":""}
+,
+  {"file":"greenwave-lawn.html","title":"GreenWave Lawn Care | Premium Lawn Maintenance","tag":"Website","color":0,"desc":""}
+,
+  {"file":"gulf-electric.html","title":"Gulf Electric | Generator Installation & Electrical","tag":"Website","color":0,"desc":""}
+,
+  {"file":"ironforge-gym.html","title":"IronForge Gym | Personal Training & Fitness","tag":"Website","color":0,"desc":""}
+,
+  {"file":"ironwall-security.html","title":"IronWall Security | Home & Business Alarm Systems","tag":"Website","color":0,"desc":""}
+,
+  {"file":"kleen-pressure.html","title":"Kleen Force | Pressure Washing & Exterior Cleaning","tag":"Website","color":0,"desc":""}
+,
+  {"file":"law-firm.html","title":"Broussard Law Firm | Personal Injury & Family Law","tag":"Website","color":0,"desc":""}
+,
+  {"file":"locksmith-pro.html","title":"KeyMaster Locksmith | 24/7 Emergency Locksmith","tag":"Website","color":0,"desc":""}
+,
+  {"file":"luxe-spa.html","title":"Luxe Med Spa | Facials, Botox & Body Treatments","tag":"Website","color":0,"desc":""}
+,
+  {"file":"photo-studio.html","title":"Lumière Studio | Professional Photography","tag":"Website","color":0,"desc":""}
+,
+  {"file":"premier-dental.html","title":"Premier Dental | Family & Cosmetic Dentistry","tag":"Website","color":0,"desc":""}
+,
+  {"file":"premier-insurance.html","title":"Premier Insurance Group | Auto, Home & Life Insurance","tag":"Website","color":0,"desc":""}
+,
+  {"file":"pro-landscaping.html","title":"ProScape | Landscaping Design & Installation","tag":"Website","color":0,"desc":""}
+,
+  {"file":"real-estate-agent.html","title":"Tara Fontenot Realty | Buy, Sell & Invest in Louisiana","tag":"Website","color":0,"desc":""}
+,
+  {"file":"ridge-roofing.html","title":"Ridge Line Roofing | Storm Damage & Full Replacement","tag":"Website","color":0,"desc":""}
+,
+  {"file":"sparkle-cleaning.html","title":"Sparkle Clean | Commercial Janitorial Services","tag":"Website","color":0,"desc":""}
+,
+  {"file":"sundance-pool.html","title":"Sundance Pools | Pool Maintenance & Repair","tag":"Website","color":0,"desc":""}
+,
+  {"file":"sunstate-painting.html","title":"Sunstate Painting | Interior & Exterior House Painting","tag":"Website","color":0,"desc":""}
+,
+  {"file":"swift-towing.html","title":"Swift Towing | 24/7 Roadside Assistance & Towing","tag":"Website","color":0,"desc":""}
+,
+  {"file":"taylor-made.html","title":"Taylor Made Land Services LLC","tag":"Website","color":0,"desc":""}
+,
+  {"file":"volt-electric.html","title":"Volt Electric | Licensed Electricians — Residential & Commercial","tag":"Website","color":0,"desc":""}
+,
+  {"file":"water-restoration.html","title":"RapidDry Restoration | Water & Flood Damage","tag":"Website","color":0,"desc":""}
 ]

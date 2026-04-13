@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Crescent City Flooring | Hardwood, Tile & LVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--brown:#92400e;--brown2:#b45309;--tan:#fef3c7;--cream:#faf9f7;--dark:#1c1009;--dim:#78716c;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--dark);font-family:'DM Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Wood grain texture tiles animate in one by one like flooring being laid */
+#floor-hero{position:absolute;inset:0;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(5,1fr);gap:2px;overflow:hidden;}
+.plank{background:linear-gradient(90deg,#5c3d1e,#7a4f28,#6b4420,#8b6040);opacity:0;transform:translateY(-20px);transition:opacity .4s,transform .4s;}
+.plank:nth-child(odd){background:linear-gradient(90deg,#6b4420,#8b5e35,#7a4f28,#5c3d1e);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,16,9,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(180,83,9,.2);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:500;color:var(--white);white-space:nowrap;letter-spacing:.04em;}
+.logo em{font-style:italic;color:#fbbf24;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:#fbbf24;}
+.ncta{border:1px solid #fbbf24!important;color:#fbbf24!important;padding:.38rem 1rem;}
+.ncta:hover{background:#fbbf24!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;padding:5.5rem 1.5rem 3rem;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,16,9,.95) 40%,rgba(28,16,9,.4) 100%);z-index:1;}
+.hero-inner{position:relative;z-index:2;max-width:560px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:500;color:var(--white);line-height:1;margin-bottom:1.2rem;letter-spacing:.01em;}
+.hero h1 em{font-style:italic;color:#fbbf24;}
+.hero p{font-size:.96rem;font-weight:300;color:rgba(255,255,255,.62);line-height:1.8;max-width:440px;margin-bottom:2rem;}
+.btn{background:#fbbf24;color:var(--dark);font-weight:700;font-size:.88rem;letter-spacing:.1em;text-transform:uppercase;padding:.88rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:#f59e0b;}
+.sec{padding:4.5rem 1.5rem;}
+.sh{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:500;text-align:center;margin-bottom:.5rem;letter-spacing:.02em;}
+.sh em{font-style:italic;color:var(--brown2);}
+.sub{text-align:center;font-size:.85rem;color:var(--dim);margin-bottom:2.5rem;}
+.floor-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;}
+.ft{overflow:hidden;transition:transform .3s;}
+.ft:hover{transform:translateY(-4px);}
+.ft-img{height:180px;overflow:hidden;}
+.ft-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.ft:hover .ft-img img{transform:scale(1.06);}
+.ft-info{background:var(--white);padding:1.2rem;border-bottom:3px solid #fbbf24;}
+.ft-name{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.3rem;}
+.ft-desc{font-size:.8rem;color:var(--dim);line-height:1.6;}
+.services{background:var(--dark);padding:4.5rem 1.5rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1px;background:rgba(180,83,9,.15);margin-top:2rem;}
+.svc{background:var(--dark);padding:2rem 1.5rem;border-top:2px solid transparent;transition:border-color .2s;}
+.svc:hover{border-color:#fbbf24;}
+.svc h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:.4rem;}
+.svc p{font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.65;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(4,1fr);}}
+.g-img{aspect-ratio:3/4;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--white);padding:2rem;border-left:4px solid #fbbf24;box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.stars{color:#fbbf24;margin-bottom:.5rem;}
+.rtext{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--dim);line-height:1.75;margin-bottom:.6rem;}
+.rname{font-weight:700;font-size:.82rem;}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.3);font-size:.74rem;}
+footer b{color:#fbbf24;}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(28,16,9,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Crescent City <em>Flooring</em></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Flooring</a>
+    <a href="#" onclick="toggleNav()">Install</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Estimate</a>
+  </div>
+</nav>
+<div class="hero">
+  <div id="floor-hero"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <h1>Floors That<br>Define Your<br><em>Home.</em></h1>
+    <p>Hardwood, luxury vinyl plank, tile, and laminate installation with showroom-quality results. Supply, installation, and refinishing all under one roof.</p>
+    <a href="#" class="btn">Get a Free In-Home Estimate</a>
+  </div>
+</div>
+<div class="sec" style="background:var(--cream);">
+  <h2 class="sh">Flooring <em>Types</em></h2>
+  <p class="sub">Hundreds of samples available · Free in-home consultation</p>
+  <div class="floor-types">
+    <div class="ft"><div class="ft-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=85" alt="Wide plank white oak hardwood floor freshly installed in modern home"/></div><div class="ft-info"><div class="ft-name">Hardwood</div><p class="ft-desc">Solid and engineered hardwood in oak, hickory, pine, and exotic species. Installed or refinished.</p></div></div>
+    <div class="ft"><div class="ft-img"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=400&auto=format&fit=crop&q=85" alt="Gray luxury vinyl plank LVP flooring installed in living room"/></div><div class="ft-info"><div class="ft-name">Luxury Vinyl Plank</div><p class="ft-desc">100% waterproof LVP — perfect for Louisiana humidity. Looks like hardwood, performs better.</p></div></div>
+    <div class="ft"><div class="ft-img"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&auto=format&fit=crop&q=85" alt="Large format porcelain tile installed in modern bathroom with grout lines"/></div><div class="ft-info"><div class="ft-name">Tile & Stone</div><p class="ft-desc">Porcelain, ceramic, and natural stone in any format. Floors, walls, showers, and outdoor.</p></div></div>
+    <div class="ft"><div class="ft-img"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&auto=format&fit=crop&q=85" alt="Plush carpet installed in bedroom with warm lighting"/></div><div class="ft-info"><div class="ft-name">Carpet</div><p class="ft-desc">Bedroom carpet, commercial carpet tile, and stair runners in hundreds of colors and textures.</p></div></div>
+  </div>
+</div>
+<div class="services">
+  <h2 class="sh" style="color:var(--white);">Our <em style="color:#fbbf24">Services</em></h2>
+  <div class="svc-grid">
+    <div class="svc"><h3>New Installation</h3><p>Full flooring installation with precision subfloor prep, acclimation, and finishing.</p></div>
+    <div class="svc"><h3>Hardwood Refinishing</h3><p>Sand, stain, and refinish existing hardwood back to like-new condition in 2-3 days.</p></div>
+    <div class="svc"><h3>Tile Setting</h3><p>Large format, mosaic, herringbone, and custom tile layouts done with master-level skill.</p></div>
+    <div class="svc"><h3>Floor Repair</h3><p>Squeaky floors, water-damaged boards, chipped tile, and scratched hardwood repaired.</p></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--white);">
+  <h2 class="sh">Recent <em>Installs</em></h2>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=400&auto=format&fit=crop&q=85" alt="Freshly installed white oak hardwood in bright open concept living space"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&auto=format&fit=crop&q=85" alt="Herringbone tile pattern installed in modern kitchen floor"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&auto=format&fit=crop&q=85" alt="LVP flooring installed throughout open floor plan home"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1615529488469-e10c8b2e48ce?w=400&auto=format&fit=crop&q=85" alt="Hardwood staircase with matching railing after full refinish"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--cream);">
+  <h2 class="sh">Client <em>Reviews</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Hardwood refinishing on our 1960s floors — they look better than the day they were installed. The crew was meticulous and the result is stunning."</p><div class="rname">Rosemary H. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"LVP throughout our entire first floor — done in two days. Looks absolutely gorgeous and has held up perfectly through kids and dogs."</p><div class="rname">Jeff & Amy C. — Prairieville</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Master bath floor tile is a work of art. The large format tile is perfectly level, perfectly grouted, and the herringbone pattern is exact."</p><div class="rname">Paula B. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Crescent City Flooring</b> · Licensed Installer · South Louisiana · (225) 555-5151</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Lay floor planks animation
+const fh=document.getElementById('floor-hero');
+const planks=[];
+for(let i=0;i<40;i++){const p=document.createElement('div');p.className='plank';fh.appendChild(p);planks.push(p);}
+planks.forEach((p,i)=>setTimeout(()=>{p.style.opacity='1';p.style.transform='translateY(0)';},50+i*40));
+</script>
+</body>
+</html>

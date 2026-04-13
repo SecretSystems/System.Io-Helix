@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sportsplex Academy | Youth Sports Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#16a34a;--yellow:#fbbf24;--dark:#050d00;--char:#0a1500;--dim:#6b7280;--white:#f7fff0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'Nunito',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Scoreboard that counts up to show stats on load */
+#scoreboard{background:#111;border:3px solid #333;max-width:420px;margin:1.5rem auto 0;padding:1.2rem;font-family:'Russo One',sans-serif;}
+.sb-title{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#666;text-align:center;margin-bottom:.8rem;}
+.sb-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-top:1px solid #222;}
+.sb-label{font-size:.75rem;letter-spacing:.1em;color:#888;}
+.sb-val{font-size:1.8rem;color:var(--yellow);text-shadow:0 0 10px rgba(251,191,36,.4);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,13,0,.97);border-bottom:2px solid rgba(22,163,74,.25);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Russo One',sans-serif;font-size:1.2rem;letter-spacing:.04em;color:var(--white);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--yellow);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,255,240,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--yellow);}
+.ncta{background:var(--green)!important;color:var(--white)!important;padding:.4rem 1.1rem;}
+.ncta:hover{background:#15803d!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.22);}
+.hero-inner{position:relative;z-index:2;max-width:580px;}
+.hero h1{font-family:'Russo One',sans-serif;font-size:clamp(2.8rem,8vw,6.5rem);color:var(--white);line-height:.92;margin-bottom:1.2rem;letter-spacing:.02em;text-transform:uppercase;}
+.hero h1 span{color:var(--yellow);}
+.hero p{font-size:.96rem;font-weight:600;color:rgba(247,255,240,.62);line-height:1.8;max-width:460px;margin-bottom:2rem;}
+.btn{background:var(--yellow);color:var(--dark);font-family:'Russo One',sans-serif;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:#f59e0b;}
+.sec{padding:4rem 1.5rem;}
+.sh{font-family:'Russo One',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--yellow);}
+.sports{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(22,163,74,.15);}
+.sport{background:var(--dark);padding:2rem 1.2rem;text-align:center;border-top:2px solid transparent;transition:border-color .2s,background .2s;}
+.sport:hover{border-color:var(--yellow);background:var(--char);}
+.sport-icon{font-size:2.5rem;display:block;margin-bottom:.7rem;}
+.sport h3{font-family:'Russo One',sans-serif;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);}
+.programs{background:var(--char);padding:4rem 1.5rem;}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2rem;}
+.prog{background:var(--dark);border:1px solid rgba(22,163,74,.15);padding:2rem 1.5rem;transition:border-color .3s;}
+.prog:hover{border-color:var(--yellow);}
+.prog-age{font-size:.6rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;}
+.prog h3{font-family:'Russo One',sans-serif;font-size:1.1rem;letter-spacing:.04em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem;}
+.prog p{font-size:.83rem;color:rgba(247,255,240,.5);line-height:1.65;}
+.prog-price{font-size:.82rem;font-weight:800;color:var(--yellow);margin-top:.8rem;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:2rem;}
+.rcard{background:var(--char);border-top:3px solid var(--yellow);padding:1.8rem;}
+.stars{color:var(--yellow);margin-bottom:.5rem;}
+.rtext{font-size:.84rem;color:rgba(247,255,240,.5);line-height:1.68;margin-bottom:.6rem;}
+.rname{font-family:'Russo One',sans-serif;font-size:.8rem;color:var(--yellow);}
+footer{background:var(--dark);border-top:1px solid rgba(22,163,74,.12);padding:1.8rem 1.5rem;text-align:center;color:rgba(247,255,240,.3);font-size:.74rem;}
+footer b{color:var(--yellow);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(5,13,0,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sportsplex <span>Academy</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Sports</a>
+    <a href="#" onclick="toggleNav()">Programs</a>
+    <a href="#" onclick="toggleNav()">Coaches</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Enroll Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=1400&auto=format&fit=crop&q=85" alt="Youth athletes training on indoor sports court with professional coaches"/></div>
+  <div class="hero-inner">
+    <h1>Train.<br>Grow.<br><span>Win.</span></h1>
+    <p>South Louisiana's premier youth sports training academy. Multi-sport programs, elite coaching, and facilities built to develop champions from ages 5–18.</p>
+    <a href="#" class="btn">Enroll Your Athlete</a>
+    <div id="scoreboard">
+      <div class="sb-title">⚡ Academy Stats</div>
+      <div class="sb-row"><span class="sb-label">Athletes Trained</span><span class="sb-val" id="sb1">0</span></div>
+      <div class="sb-row"><span class="sb-label">College Commitments</span><span class="sb-val" id="sb2">0</span></div>
+      <div class="sb-row"><span class="sb-label">Championships Won</span><span class="sb-val" id="sb3">0</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec" style="background:var(--char);">
+  <div class="sh">Sports We <span>Train</span></div>
+  <div class="sports">
+    <div class="sport"><span class="sport-icon">⚽</span><h3>Soccer</h3></div>
+    <div class="sport"><span class="sport-icon">🏀</span><h3>Basketball</h3></div>
+    <div class="sport"><span class="sport-icon">🏈</span><h3>Football</h3></div>
+    <div class="sport"><span class="sport-icon">⚾</span><h3>Baseball</h3></div>
+    <div class="sport"><span class="sport-icon">🎾</span><h3>Tennis</h3></div>
+    <div class="sport"><span class="sport-icon">🏊</span><h3>Swimming</h3></div>
+    <div class="sport"><span class="sport-icon">🤸</span><h3>Gymnastics</h3></div>
+    <div class="sport"><span class="sport-icon">🥊</span><h3>Boxing</h3></div>
+  </div>
+</div>
+<div class="programs">
+  <div class="sh" style="color:var(--white)">Training <span>Programs</span></div>
+  <div class="prog-grid">
+    <div class="prog"><div class="prog-age">Ages 5–8</div><h3>Little Champs</h3><p>Fun fundamentals, coordination, and multi-sport exploration. Building the love of athletics.</p><div class="prog-price">$79/month</div></div>
+    <div class="prog"><div class="prog-age">Ages 9–13</div><h3>Elite Training</h3><p>Sport-specific skills, strength and conditioning, and team concepts with certified coaches.</p><div class="prog-price">$129/month</div></div>
+    <div class="prog"><div class="prog-age">Ages 14–18</div><h3>High Performance</h3><p>College prep training, recruiting guidance, film review, and elite-level coaching.</p><div class="prog-price">$179/month</div></div>
+    <div class="prog"><div class="prog-age">All Ages</div><h3>Private Sessions</h3><p>1-on-1 coaching sessions tailored to your athlete's exact position and development goals.</p><div class="prog-price">$85/session</div></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--dark);">
+  <div class="sh">In <span>Action</span></div>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=600&auto=format&fit=crop&q=85" alt="Youth basketball players practicing dribbling drills at indoor gym"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&auto=format&fit=crop&q=85" alt="Kids soccer training session on outdoor field with cones"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&auto=format&fit=crop&q=85" alt="Youth athlete receiving personal coaching on proper technique"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--char);">
+  <div class="sh">Parent <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"My son went from sitting the bench to starting quarterback in one season after training here. The coaches are exceptional and the program works."</p><div class="rname">JAMES T. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"My daughter got her first college recruiting interest after the High Performance program. Sportsplex Academy is the real deal."</p><div class="rname">LISA M. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Best investment we've made in our kids. Both children are more confident, more disciplined, and genuinely love sports now."</p><div class="rname">DEREK & AMY F.</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Sportsplex Academy</b> · Youth Athletic Training · South Louisiana · (225) 555-5603</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+function countUp(id,target,duration){
+  const el=document.getElementById(id);let n=0;
+  const step=Math.ceil(target/(duration/16));
+  const iv=setInterval(()=>{n=Math.min(n+step,target);el.textContent=n.toLocaleString();if(n>=target)clearInterval(iv);},16);
+}
+setTimeout(()=>{countUp('sb1',1847,1800);countUp('sb2',143,1800);countUp('sb3',38,1200);},600);
+</script>
+</body>
+</html>

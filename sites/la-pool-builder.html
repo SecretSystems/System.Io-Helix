@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Louisiana Pool Builders | Custom Inground Pools</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--aqua:#06b6d4;--aqua2:#22d3ee;--navy:#0c2340;--sand:#fef9f0;--dark:#041220;--dim:#64748b;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Ripple effect on hero image — click anywhere to create water ripples */
+#ripple-canvas{position:absolute;inset:0;z-index:2;pointer-events:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,18,32,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(6,182,212,.18);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--white);white-space:nowrap;letter-spacing:.02em;}
+.logo span{color:var(--aqua2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--aqua2);}
+.ncta{border:1px solid var(--aqua)!important;color:var(--aqua2)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--aqua)!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:96vh;display:flex;align-items:flex-end;overflow:hidden;cursor:crosshair;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.35);}
+.hero-inner{position:relative;z-index:3;padding:3rem 1.5rem 4rem;width:100%;}
+.hero-tag{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--aqua2);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--aqua2);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:800;color:var(--white);line-height:.9;margin-bottom:1.2rem;letter-spacing:-.02em;}
+.hero h1 span{color:var(--aqua2);}
+.hero p{font-size:.96rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.8;max-width:500px;margin-bottom:2rem;}
+.btn{background:var(--aqua);color:var(--dark);font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--aqua2);}
+.sec{padding:4.5rem 1.5rem;}
+.sh{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;text-align:center;margin-bottom:.5rem;letter-spacing:-.01em;}
+.sh span{color:var(--aqua);}
+.sub{text-align:center;color:var(--dim);font-size:.85rem;margin-bottom:2.5rem;}
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;}
+.type{overflow:hidden;position:relative;}
+.type-img{height:220px;overflow:hidden;}
+.type-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.type:hover .type-img img{transform:scale(1.06);}
+.type-info{background:var(--navy);padding:1.4rem;}
+.type-name{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.3rem;}
+.type-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;}
+.process{background:var(--navy);padding:4.5rem 1.5rem;}
+.step-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.step{text-align:center;padding:2rem 1rem;}
+.step-n{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:rgba(6,182,212,.15);line-height:1;margin-bottom:.6rem;}
+.step h3{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:.4rem;}
+.step p{font-size:.82rem;color:rgba(255,255,255,.48);line-height:1.65;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--white);padding:1.8rem;border-bottom:3px solid var(--aqua);box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.stars{color:var(--aqua);margin-bottom:.5rem;}
+.rtext{font-size:.85rem;color:var(--dim);line-height:1.7;margin-bottom:.6rem;}
+.rname{font-weight:700;font-size:.84rem;}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.32);font-size:.74rem;}
+footer b{color:var(--aqua2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(4,18,32,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Louisiana <span>Pool Builders</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Pool Types</a>
+    <a href="#" onclick="toggleNav()">Process</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Design</a>
+  </div>
+</nav>
+<div class="hero" onclick="makeRipple(event)">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1400&auto=format&fit=crop&q=85" alt="Stunning custom inground pool with waterfall feature and outdoor living area at dusk"/></div>
+  <canvas id="ripple-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-tag">Custom Inground Pools · South Louisiana</div>
+    <h1>Your Dream<br>Pool.<br><span>Built Right.</span></h1>
+    <p>Custom inground concrete, fiberglass, and vinyl liner pools designed and built by Louisiana's most trusted pool builders. Click the water to see what we mean.</p>
+    <a href="#" class="btn">Get a Free 3D Design</a>
+  </div>
+</div>
+<div class="sec" style="background:var(--sand);">
+  <div class="sh">Pool <span>Types</span></div>
+  <p class="sub">Every pool custom designed for your yard, budget, and lifestyle</p>
+  <div class="types">
+    <div class="type"><div class="type-img"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=600&auto=format&fit=crop&q=85" alt="Luxury concrete gunite pool with beach entry and spa"/></div><div class="type-info"><div class="type-name">Concrete / Gunite</div><p class="type-desc">Fully customizable shape, size, and depth. The most durable pool type — built to last 50+ years.</p></div></div>
+    <div class="type"><div class="type-img"><img src="https://images.unsplash.com/photo-1509233725247-49e657c54213?w=600&auto=format&fit=crop&q=85" alt="Blue fiberglass pool with water feature installed in backyard"/></div><div class="type-info"><div class="type-name">Fiberglass</div><p class="type-desc">Fastest installation, lowest maintenance, and the smoothest surface. In the ground in as little as 3 days.</p></div></div>
+    <div class="type"><div class="type-img"><img src="https://images.unsplash.com/photo-1619196875760-4b0aab79e4a2?w=600&auto=format&fit=crop&q=85" alt="Rectangular vinyl liner pool with travertine coping and deck"/></div><div class="type-info"><div class="type-name">Vinyl Liner</div><p class="type-desc">Budget-friendly custom shapes with beautiful liner patterns. Soft underfoot and easy to maintain.</p></div></div>
+  </div>
+</div>
+<div class="process">
+  <div class="sh" style="color:var(--white);">Our <span style="color:var(--aqua2);">Process</span></div>
+  <div class="step-grid">
+    <div class="step"><div class="step-n">01</div><h3>Free Design Consult</h3><p>We visit your yard and create a free 3D design showing exactly what your pool will look like.</p></div>
+    <div class="step"><div class="step-n">02</div><h3>Permits & Engineering</h3><p>We handle all permits, HOA approvals, and engineering drawings — you don't lift a finger.</p></div>
+    <div class="step"><div class="step-n">03</div><h3>Construction</h3><p>Expert crews build your pool on schedule with daily updates and a dedicated project manager.</p></div>
+    <div class="step"><div class="step-n">04</div><h3>Final Walkthrough</h3><p>We walk you through every system, show you how everything works, and hand you the keys.</p></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--white);">
+  <div class="sh">Completed <span>Pools</span></div>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&auto=format&fit=crop&q=85" alt="Custom pool with spa overflow and outdoor kitchen in Louisiana backyard"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=85" alt="Infinity edge pool with sunset view and LED lighting at dusk"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1572278170684-23ff2bf04e3d?w=600&auto=format&fit=crop&q=85" alt="Family enjoying newly built backyard pool with slide and diving board"/></div>
+  </div>
+</div>
+<div class="sec" style="background:var(--sand);">
+  <div class="sh">Client <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Our pool is the talk of the neighborhood. The 3D design preview was exactly what got built. On time, on budget, and absolutely stunning."</p><div class="rname">Keith & Diane B. — Prairieville</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Fiberglass pool was in the ground in 4 days. We were swimming within two weeks of signing. The quality is incredible and it's so easy to maintain."</p><div class="rname">Sandra N. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Best investment we've ever made in our home. The outdoor living area they designed around the pool is beyond what we imagined. Perfection."</p><div class="rname">Chris & Meg T. — Denham Springs</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Louisiana Pool Builders</b> · Licensed Contractor · South Louisiana · (225) 555-5038</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+const canvas=document.getElementById('ripple-canvas');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight;}
+resize();window.addEventListener('resize',resize);
+const ripples=[];
+function makeRipple(e){
+  const r=canvas.getBoundingClientRect();
+  ripples.push({x:e.clientX-r.left,y:e.clientY-r.top,r:0,max:180,alpha:0.6});
+}
+(function loop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=ripples.length-1;i>=0;i--){
+    const rp=ripples[i];rp.r+=3;rp.alpha-=0.008;
+    ctx.strokeStyle=`rgba(6,182,212,${rp.alpha})`;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.arc(rp.x,rp.y,rp.r,0,Math.PI*2);ctx.stroke();
+    if(rp.alpha<=0||rp.r>rp.max)ripples.splice(i,1);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

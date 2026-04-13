@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bayou Pest Control | Termite & Pest Elimination</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--green:#166534;--green2:#16a34a;--lime:#4ade80;--dark:#040e04;--char:#091209;--white:#f0fdf4;--dim:#6b7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Bug cursor — tiny bug icon follows your mouse around the page */
+#bug-cursor{position:fixed;pointer-events:none;z-index:9999;font-size:1.2rem;transform:translate(-50%,-50%);transition:left .05s,top .05s;display:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,14,4,.97);border-bottom:1px solid rgba(22,163,74,.2);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Exo',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:.04em;color:var(--white);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--lime);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,253,244,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--lime);}
+.ncta{background:var(--green2)!important;color:var(--white)!important;padding:.4rem 1.1rem;}
+.ncta:hover{background:var(--green)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.18);}
+.hero-inner{position:relative;z-index:2;max-width:580px;}
+.badge{display:inline-block;background:var(--green2);color:var(--white);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.22rem .7rem;margin-bottom:1.2rem;}
+.hero h1{font-family:'Exo',sans-serif;font-size:clamp(3rem,9vw,7rem);font-weight:900;text-transform:uppercase;letter-spacing:.03em;color:var(--white);line-height:.9;margin-bottom:1.2rem;}
+.hero h1 span{color:var(--lime);}
+.hero p{font-size:.96rem;font-weight:300;color:rgba(240,253,244,.6);line-height:1.8;max-width:460px;margin-bottom:2rem;}
+.btn{background:var(--green2);color:var(--white);font-family:'Exo',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--green);}
+.pests{padding:4rem 1.5rem;background:var(--char);}
+.sh{font-family:'Exo',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--lime);}
+.pest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;}
+.pest{background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15);padding:1.5rem 1rem;text-align:center;transition:border-color .2s,background .2s;}
+.pest:hover{border-color:var(--lime);background:rgba(74,222,128,.08);}
+.pest-icon{font-size:2rem;display:block;margin-bottom:.6rem;}
+.pest h3{font-family:'Exo',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--white);}
+.plans{padding:4rem 1.5rem;background:var(--dark);}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2rem;}
+.plan{background:var(--char);border:1px solid rgba(22,163,74,.15);padding:2.5rem 2rem;text-align:center;position:relative;transition:border-color .3s;}
+.plan:hover{border-color:var(--lime);}
+.plan.best{border-color:var(--green2);}
+.plan.best::before{content:'BEST VALUE';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--green2);color:var(--white);font-size:.58rem;font-weight:700;letter-spacing:.15em;padding:.2rem .7rem;}
+.plan-name{font-family:'Exo',sans-serif;font-size:1.2rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--white);margin-bottom:.5rem;}
+.plan-price{font-family:'Exo',sans-serif;font-size:2.5rem;font-weight:900;color:var(--lime);line-height:1;}
+.plan-per{font-size:.72rem;color:var(--dim);margin:.3rem 0 1.2rem;}
+.plan ul{list-style:none;text-align:left;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;}
+.plan li{font-size:.82rem;color:rgba(240,253,244,.55);display:flex;align-items:center;gap:.5rem;}
+.plan li::before{content:'✓';color:var(--lime);font-weight:700;}
+.plan-btn{display:block;background:var(--green2);color:var(--white);font-family:'Exo',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.75rem;text-decoration:none;transition:background .2s;}
+.plan-btn:hover{background:var(--green);}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:2rem;}
+.rcard{background:var(--char);border-top:3px solid var(--green2);padding:1.8rem;}
+.stars{color:var(--lime);margin-bottom:.5rem;}
+.rtext{font-size:.84rem;color:rgba(240,253,244,.5);line-height:1.68;margin-bottom:.6rem;}
+.rname{font-family:'Exo',sans-serif;font-weight:700;font-size:.85rem;color:var(--lime);}
+footer{background:var(--dark);border-top:1px solid rgba(22,163,74,.12);padding:1.8rem 1.5rem;text-align:center;color:rgba(240,253,244,.3);font-size:.74rem;}
+footer b{color:var(--lime);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(4,14,4,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="bug-cursor">🪲</div>
+<nav>
+  <div class="logo">Bayou <span>Pest</span> Control</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Plans</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Inspection</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop&q=85" alt="Pest control technician in protective gear spraying treatment inside home"/></div>
+  <div class="hero-inner">
+    <div class="badge">🪲 Free Inspection · Same Day Service</div>
+    <h1>Bug<br>Free.<br><span>Guaranteed.</span></h1>
+    <p>Louisiana's toughest bugs meet their match. Termites, roaches, mosquitoes, and more — eliminated with proven treatments and a 100% satisfaction guarantee.</p>
+    <a href="#" class="btn">Book Free Inspection</a>
+  </div>
+</div>
+<div class="pests">
+  <div class="sh">Pests We <span>Eliminate</span></div>
+  <div class="pest-grid">
+    <div class="pest"><span class="pest-icon">🪲</span><h3>Roaches</h3></div>
+    <div class="pest"><span class="pest-icon">🐜</span><h3>Ants</h3></div>
+    <div class="pest"><span class="pest-icon">🦟</span><h3>Mosquitoes</h3></div>
+    <div class="pest"><span class="pest-icon">🕷️</span><h3>Spiders</h3></div>
+    <div class="pest"><span class="pest-icon">🐭</span><h3>Rodents</h3></div>
+    <div class="pest"><span class="pest-icon">🪰</span><h3>Flies</h3></div>
+    <div class="pest"><span class="pest-icon">🦗</span><h3>Crickets</h3></div>
+    <div class="pest"><span class="pest-icon">🦟</span><h3>Termites</h3></div>
+  </div>
+</div>
+<div class="plans">
+  <div class="sh" style="color:var(--white)">Protection <span>Plans</span></div>
+  <div class="plan-grid">
+    <div class="plan"><div class="plan-name">Basic</div><div class="plan-price">$49</div><div class="plan-per">/month · Quarterly service</div><ul><li>Interior & exterior spray</li><li>Spider web removal</li><li>Free re-service guarantee</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+    <div class="plan best"><div class="plan-name">Complete</div><div class="plan-price">$89</div><div class="plan-per">/month · Bi-monthly service</div><ul><li>Everything in Basic</li><li>Mosquito yard treatment</li><li>Rodent monitoring</li><li>Termite inspection annual</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+    <div class="plan"><div class="plan-name">Premium</div><div class="plan-price">$129</div><div class="plan-per">/month · Monthly service</div><ul><li>Everything in Complete</li><li>Termite bond included</li><li>Mosquito misting system</li><li>Priority same-day response</li></ul><a href="#" class="plan-btn">Get Started</a></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--char);">
+  <div class="sh">Customer <span>Reviews</span></div>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"We had a massive cockroach problem. Bayou Pest came out, treated thoroughly, and we haven't seen one since. That was 8 months ago."</p><div class="rname">LINDA T. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Mosquito treatment for our backyard made summer actually enjoyable again. Kids play outside every evening now. Incredible difference."</p><div class="rname">MARCUS H. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Found termites during a home purchase. Bayou Pest treated and gave us the bond same week. Saved the closing. Professional and fast."</p><div class="rname">JANET W. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Bayou Pest Control</b> · Licensed & Insured · South Louisiana · (225) 555-4587</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+const bug=document.getElementById('bug-cursor');
+document.addEventListener('mousemove',e=>{
+  bug.style.display='block';
+  bug.style.left=e.clientX+'px';
+  bug.style.top=e.clientY+'px';
+});
+document.addEventListener('mouseleave',()=>{bug.style.display='none';});
+</script>
+</body>
+</html>

@@ -174,4 +174,74 @@
     "color": 0,
     "desc": ""
   }
+  {
+    "file": "luxe-spa.html",
+    "title": "Luxe Med Spa",
+    "tag": "Website",
+    "color": 4,
+    "desc": "Luxury med spa. Dark gold editorial style with floating gold smoke particle animation."
+  },
+  {
+    "file": "premier-dental.html",
+    "title": "Premier Dental",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Family & cosmetic dentistry. Clean blue & white with teeth that light up one by one on load."
+  },
+  {
+    "file": "ironforge-gym.html",
+    "title": "IronForge Gym",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Personal training & fitness. Dark black & red with a rep counter that ticks up as you scroll."
+  },
+  {
+    "file": "law-firm.html",
+    "title": "Broussard Law Firm",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Personal injury & family law. Navy & gold prestige style with animated scales of justice."
+  },
+  {
+    "file": "swift-towing.html",
+    "title": "Swift Towing",
+    "tag": "Website",
+    "color": 1,
+    "desc": "24/7 towing & roadside. Dark amber urgent style with sweeping emergency lights animation."
+  },
+  {
+    "file": "real-estate-agent.html",
+    "title": "Tara Fontenot Realty",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Real estate agent. Warm charcoal & gold with animated typing property search bar."
+  },
+  {
+    "file": "cajun-catering.html",
+    "title": "Guidry's Cajun Catering",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Authentic Louisiana catering. Dark red & cream with steam wisps rising from food on hover."
+  },
+  {
+    "file": "photo-studio.html",
+    "title": "Lumière Studio",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Professional photography. Black editorial masonry grid with camera shutter flash on click."
+  },
+  {
+    "file": "elite-auto-detail.html",
+    "title": "Elite Auto Detail",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Premium car detailing. Black & electric blue with paint shimmer sweep across the hero car."
+  },
+  {
+    "file": "premier-insurance.html",
+    "title": "Premier Insurance Group",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Auto, home & life insurance. Navy & sky blue with animated coverage gauge bars that fill on load."
+  }
 ]

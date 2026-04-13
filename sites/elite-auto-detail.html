@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Elite Auto Detail | Premium Car Detailing</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#050505;--dark:#0d0d0d;--char:#181818;--blue:#1d4ed8;--blue2:#2563eb;--ice:#bfdbfe;--white:#f8fafc;--dim:#6b7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Jost',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Car paint reflection — gradient shimmer sweeps across hero car image on loop */
+#shimmer{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.06) 50%,transparent 100%);animation:car-shine 4s ease-in-out infinite;pointer-events:none;z-index:3;}
+@keyframes car-shine{0%{left:-100%;}60%,100%{left:150%;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,5,5,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(37,99,235,.2);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:.1em;color:var(--white);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--blue2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--blue2);}
+.ncta{border:1px solid var(--blue2)!important;color:var(--blue2)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--blue2)!important;color:var(--white)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:96vh;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.38);}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,5,.98) 0%,rgba(5,5,5,.3) 40%,transparent 70%);}
+.hero-inner{position:relative;z-index:4;padding:3rem 1.5rem 4.5rem;max-width:680px;}
+.hero-tag{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--blue2);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+.hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--blue2);}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(3.5rem,10vw,8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);line-height:.88;margin-bottom:1.3rem;}
+.hero h1 span{color:var(--blue2);}
+.hero p{font-size:.98rem;font-weight:300;color:rgba(248,250,252,.6);line-height:1.8;max-width:500px;margin-bottom:2.2rem;}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn-blue{background:var(--blue2);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.82rem 2rem;text-decoration:none;transition:background .2s;}
+.btn-blue:hover{background:var(--blue);}
+.btn-ghost{border:1px solid rgba(37,99,235,.4);color:var(--blue2);font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.8rem;text-decoration:none;transition:all .2s;}
+.packages{padding:4.5rem 1.5rem;background:var(--char);}
+.sh{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:.5rem;}
+.sh span{color:var(--blue2);}
+.sub{text-align:center;font-size:.84rem;color:var(--dim);margin-bottom:2.5rem;}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+.pkg{background:var(--dark);border:1px solid rgba(37,99,235,.12);padding:2.5rem 2rem;text-align:center;position:relative;transition:border-color .3s,transform .3s;}
+.pkg:hover{border-color:rgba(37,99,235,.5);transform:translateY(-4px);}
+.pkg.best{border-color:var(--blue2);}
+.pkg.best::before{content:'MOST POPULAR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--blue2);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.15em;padding:.2rem .7rem;}
+.pkg-name{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.6rem;}
+.pkg-price{font-family:'Rajdhani',sans-serif;font-size:2.8rem;font-weight:700;color:var(--blue2);line-height:1;}
+.pkg-time{font-size:.72rem;color:var(--dim);margin:.3rem 0 1.2rem;letter-spacing:.08em;}
+.pkg ul{list-style:none;text-align:left;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;}
+.pkg li{font-size:.82rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:.5rem;}
+.pkg li::before{content:'✓';color:var(--blue2);font-weight:700;flex-shrink:0;}
+.pkg-btn{display:block;background:transparent;border:1px solid rgba(37,99,235,.3);color:var(--blue2);font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.75rem;text-decoration:none;transition:all .2s;}
+.pkg.best .pkg-btn,.pkg-btn:hover{background:var(--blue2);color:var(--white);border-color:var(--blue2);}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .5s;}
+.g-img:hover img{transform:scale(1.05);filter:brightness(1.1);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--char);border:1px solid rgba(37,99,235,.1);padding:1.8rem;}
+.stars{color:var(--blue2);margin-bottom:.5rem;letter-spacing:.1em;}
+.rtext{font-size:.85rem;color:var(--dim);line-height:1.7;margin-bottom:.6rem;}
+.rname{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;color:var(--ice);}
+footer{background:var(--black);border-top:1px solid rgba(37,99,235,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.28);font-size:.74rem;}
+footer b{color:var(--blue2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(5,5,5,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">ELITE <span>AUTO</span> DETAIL</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Packages</a>
+    <a href="#" onclick="toggleNav()">Ceramic</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Book Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1400&auto=format&fit=crop&q=85" alt="Luxury sports car being hand polished to mirror shine by professional detailer"/></div>
+  <div id="shimmer"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Premium Auto Detailing · South Louisiana</div>
+    <h1>Your Car<br>Deserves<br><span>Perfection.</span></h1>
+    <p>Professional auto detailing, paint correction, ceramic coating, and interior restoration. We treat every vehicle like it's our own — because our name goes on every single one.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-blue">Book a Detail</a>
+      <a href="#" class="btn-ghost">View Packages</a>
+    </div>
+  </div>
+</div>
+<div class="packages">
+  <h2 class="sh">Detail <span>Packages</span></h2>
+  <p class="sub">Every package includes hand wash · Clay bar · Interior vacuum · Tire dressing</p>
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-name">Essential</div>
+      <div class="pkg-price">$129</div>
+      <div class="pkg-time">~2 hours</div>
+      <ul><li>Exterior hand wash & dry</li><li>Wheel & tire cleaning</li><li>Interior vacuum & wipe</li><li>Window cleaning</li><li>Tire shine applied</li></ul>
+      <a href="#" class="pkg-btn">Book Essential</a>
+    </div>
+    <div class="pkg best">
+      <div class="pkg-name">Premium</div>
+      <div class="pkg-price">$249</div>
+      <div class="pkg-time">~4 hours</div>
+      <ul><li>Everything in Essential</li><li>Machine polish</li><li>Interior deep clean</li><li>Leather conditioning</li><li>Engine bay cleaning</li></ul>
+      <a href="#" class="pkg-btn">Book Premium</a>
+    </div>
+    <div class="pkg">
+      <div class="pkg-name">Showroom</div>
+      <div class="pkg-price">$449</div>
+      <div class="pkg-time">~8 hours</div>
+      <ul><li>Everything in Premium</li><li>Full paint correction</li><li>Ceramic sealant</li><li>Headlight restoration</li><li>Ozone odor treatment</li></ul>
+      <a href="#" class="pkg-btn">Book Showroom</a>
+    </div>
+  </div>
+</div>
+<div style="padding:4.5rem 1.5rem;background:var(--dark);">
+  <h2 class="sh">Our <span>Work</span></h2>
+  <div class="g-grid" style="margin-top:2rem;">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=85" alt="Detailer applying ceramic coating to black sports car hood"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&auto=format&fit=crop&q=85" alt="Luxury car interior being detailed with leather conditioner"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&auto=format&fit=crop&q=85" alt="White supercar with mirror-like paint finish after full detail"/></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--char);">
+  <h2 class="sh">Customer <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Paint correction on my Corvette turned back the clock 10 years. The before and after is unreal. These guys are true professionals."</p><div class="rname">Tony R.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Ceramic coating on my truck is incredible — water beads off like nothing I've ever seen. The showroom package was worth every penny."</p><div class="rname">Steve D. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"My truck had years of Louisiana mud and sun damage. One session with Elite and it looks factory new. Truly exceptional work."</p><div class="rname">Chad W. — Baton Rouge</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Elite Auto Detail</b> · Premium Detailing · South Louisiana · (225) 555-4258</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

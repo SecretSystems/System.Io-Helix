@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Luxe Med Spa | Facials, Botox & Body Treatments</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#c9a84c;--gold2:#e8c97a;--dark:#0d0b08;--cream:#faf7f2;--warm:#8c7b6b;--rose:#e8d5c4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--dark);font-family:'Jost',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Floating gold particles that drift upward like incense smoke */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.p{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0;}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.4;}90%{opacity:.15;}100%{transform:translateY(-10vh) scale(1.5);opacity:0;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(13,11,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.18);}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;letter-spacing:.12em;color:var(--cream);white-space:nowrap;}
+.logo em{font-style:italic;color:var(--gold2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1px;background:var(--cream);}
+.nmenu{display:flex;gap:1.8rem;align-items:center;}
+.nmenu a{font-size:.68rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.55);text-decoration:none;transition:color .3s;}
+.nmenu a:hover{color:var(--gold2);}
+.ncta{border:1px solid var(--gold)!important;color:var(--gold2)!important;padding:.38rem 1.1rem;}
+.ncta:hover{background:var(--gold)!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.4rem;color:var(--cream);}
+}
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(10deg,rgba(13,11,8,.92) 0%,rgba(13,11,8,.4) 55%,rgba(13,11,8,.1) 100%);}
+.hero-inner{position:relative;z-index:2;padding:4rem 2rem 5rem;max-width:640px;}
+.hero-tag{font-size:.65rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
+.hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;color:var(--cream);line-height:.95;margin-bottom:1.5rem;letter-spacing:.02em;}
+.hero h1 em{font-style:italic;color:var(--gold2);}
+.hero p{font-size:.98rem;font-weight:300;color:rgba(250,247,242,.72);line-height:1.85;max-width:480px;margin-bottom:2.5rem;}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--gold2);font-size:.72rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;padding:.95rem 2.5rem;text-decoration:none;transition:all .35s;}
+.btn:hover{background:var(--gold);color:var(--dark);}
+.services{padding:5rem 1.5rem;background:var(--cream);position:relative;z-index:1;}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;text-align:center;margin-bottom:.5rem;letter-spacing:.04em;}
+.sh em{font-style:italic;color:var(--gold);}
+.sub{text-align:center;font-size:.82rem;font-weight:300;color:var(--warm);letter-spacing:.1em;margin-bottom:3rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(201,168,76,.15);}
+.svc{background:var(--cream);padding:2.5rem 1.8rem;transition:background .3s;}
+.svc:hover{background:#f5f0e8;}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(201,168,76,.2);line-height:1;margin-bottom:.8rem;}
+.svc h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;margin-bottom:.6rem;letter-spacing:.06em;}
+.svc p{font-size:.82rem;font-weight:300;color:var(--warm);line-height:1.75;}
+.svc-tag{display:inline-block;font-size:.6rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:.8rem;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:.2rem;}
+.split{display:grid;grid-template-columns:1fr 1fr;background:var(--dark);}
+@media(max-width:700px){.split{grid-template-columns:1fr;}}
+.split-img{overflow:hidden;min-height:320px;}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s;}
+.split-img:hover img{transform:scale(1.04);}
+.split-text{display:flex;flex-direction:column;justify-content:center;padding:4rem 2.5rem;}
+.split-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:1.5rem;}
+.split-text h2 em{font-style:italic;color:var(--gold2);}
+.split-text ul{list-style:none;display:flex;flex-direction:column;gap:1rem;}
+.split-text li{font-size:.88rem;font-weight:300;color:rgba(250,247,242,.6);display:flex;gap:.8rem;line-height:1.6;}
+.split-text li::before{content:'—';color:var(--gold);flex-shrink:0;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(4,1fr);}}
+.g-img{aspect-ratio:3/4;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s,filter .6s;}
+.g-img:hover img{transform:scale(1.06);filter:brightness(1.05);}
+.r-section{padding:5rem 1.5rem;background:var(--dark);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.rcard{border:1px solid rgba(201,168,76,.12);padding:2rem;}
+.stars{color:var(--gold);letter-spacing:.1em;font-size:.85rem;margin-bottom:.8rem;}
+.rtext{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(250,247,242,.65);line-height:1.75;margin-bottom:.8rem;}
+.rname{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+footer{background:var(--dark);border-top:1px solid rgba(201,168,76,.1);padding:2rem 1.5rem;text-align:center;color:rgba(250,247,242,.3);font-size:.72rem;letter-spacing:.1em;}
+footer b{color:var(--gold);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(13,11,8,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.18);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;transition:all .2s;white-space:nowrap;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);font-size:.7rem;}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+<nav>
+  <div class="logo">Luxe <em>Med Spa</em></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Treatments</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Book Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1400&auto=format&fit=crop&q=85" alt="Luxury spa treatment room with soft lighting and facial bed"/></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Luxury Med Spa · South Louisiana</div>
+    <h1>Where<br>Beauty<br><em>Begins.</em></h1>
+    <p>Premium facials, Botox, body contouring, and skin rejuvenation treatments performed by licensed medical aestheticians in a serene, private setting.</p>
+    <a href="#" class="btn">Book Your Treatment</a>
+  </div>
+</div>
+<div class="services">
+  <h2 class="sh">Our <em>Treatments</em></h2>
+  <p class="sub">Every service customized to your skin · Results-driven care</p>
+  <div class="svc-grid">
+    <div class="svc"><div class="svc-num">01</div><h3>Signature Facial</h3><p>Deep cleanse, exfoliation, extractions, and custom mask treatment tailored to your skin type and concerns.</p><span class="svc-tag">60 min · $145</span></div>
+    <div class="svc"><div class="svc-num">02</div><h3>Botox & Fillers</h3><p>Precision Botox injections and dermal fillers administered by our licensed medical director for natural results.</p><span class="svc-tag">Starting at $12/unit</span></div>
+    <div class="svc"><div class="svc-num">03</div><h3>Body Contouring</h3><p>Non-invasive fat reduction and skin tightening using the latest radiofrequency and ultrasound technology.</p><span class="svc-tag">Series of 6 · $1,800</span></div>
+    <div class="svc"><div class="svc-num">04</div><h3>Chemical Peels</h3><p>Medical-grade peels that resurface skin, reduce hyperpigmentation, and reveal a dramatically smoother complexion.</p><span class="svc-tag">Starting at $185</span></div>
+    <div class="svc"><div class="svc-num">05</div><h3>Microneedling</h3><p>Collagen induction therapy that reduces fine lines, acne scars, and skin texture with visible results after one session.</p><span class="svc-tag">$285 per session</span></div>
+    <div class="svc"><div class="svc-num">06</div><h3>Laser Hair Removal</h3><p>Permanent hair reduction on all skin tones using our state-of-the-art Nd:YAG and diode laser systems.</p><span class="svc-tag">Starting at $99</span></div>
+  </div>
+</div>
+<div class="split">
+  <div class="split-img"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=85" alt="Aesthetician performing luxury facial treatment on client"/></div>
+  <div class="split-text">
+    <h2>The Luxe<br><em>Experience</em></h2>
+    <ul>
+      <li>Private treatment suites with premium linens and aromatherapy</li>
+      <li>Licensed medical aestheticians with 10+ years experience</li>
+      <li>Medical-grade products — SkinCeuticals, Obagi, and ZO Skin Health</li>
+      <li>Complimentary skin analysis and personalized treatment plan</li>
+      <li>Results-focused — we don't sell you what you don't need</li>
+    </ul>
+  </div>
+</div>
+<div style="background:var(--dark);padding:1px 0;">
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&auto=format&fit=crop&q=85" alt="Client relaxing during spa facial with cucumber eye pads"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&auto=format&fit=crop&q=85" alt="Medical aesthetician applying serum during treatment"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&auto=format&fit=crop&q=85" alt="Luxury spa room with candles soft towels and treatment table"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=500&auto=format&fit=crop&q=85" alt="Close up of glowing skin after professional facial treatment"/></div>
+  </div>
+</div>
+<div class="r-section">
+  <h2 class="sh" style="color:var(--cream);">Client <em>Reviews</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"I've been to spas all over Louisiana and nothing compares to Luxe. The microneedling results were visible after one session. I'm obsessed."</p><div class="rname">Catherine B.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Natural Botox results — exactly what I wanted. The medical director listened to every concern and delivered perfection. I tell everyone."</p><div class="rname">Michelle D.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"The signature facial alone is worth the drive. My skin has never felt this clean, glowing, or soft. Monthly client for life."</p><div class="rname">Stephanie R.</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Luxe Med Spa</b> · Licensed Medical Aestheticians · South Louisiana · (225) 555-3358</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Gold particle smoke effect
+const container=document.getElementById('particles');
+function createParticle(){
+  const p=document.createElement('div');
+  p.className='p';
+  const size=2+Math.random()*4;
+  p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;background:rgba(201,168,76,${0.1+Math.random()*.3});animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*5}s;`;
+  container.appendChild(p);
+  setTimeout(()=>p.remove(),(20+Math.random()*15)*1000);
+}
+for(let i=0;i<30;i++)createParticle();
+setInterval(createParticle,600);
+</script>
+</body>
+</html>

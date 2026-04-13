@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Premier Dental | Family & Cosmetic Dentistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--blue:#0369a1;--blue2:#0284c7;--sky:#f0f9ff;--dark:#0c1a2e;--dim:#64748b;--white:#fff;--mint:#ecfdf5;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--dark);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Animated smile rating that fills teeth one by one on load */
+#smile-bar{background:var(--dark);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:.6rem;position:relative;z-index:1;}
+.tooth{font-size:1.2rem;opacity:.15;transition:opacity .3s,transform .3s;}
+.tooth.lit{opacity:1;transform:scale(1.15);}
+.smile-label{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-weight:800;font-size:1.15rem;color:var(--dark);white-space:nowrap;letter-spacing:.02em;}
+.logo span{color:var(--blue2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--dark);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--blue2);}
+.ncta{background:var(--blue2)!important;color:var(--white)!important;padding:.42rem 1.1rem;border-radius:4px;}
+.ncta:hover{background:var(--blue)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--white);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--dark);}
+}
+.hero{padding:5.5rem 1.5rem 3rem;background:var(--sky);min-height:88vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding-top:6rem;}}
+.hero-tag{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
+.hero-tag::before{content:'';display:block;width:24px;height:2px;background:var(--blue2);}
+.hero h1{font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:800;color:var(--dark);line-height:.95;margin-bottom:1.2rem;letter-spacing:-.02em;}
+.hero h1 span{color:var(--blue2);}
+.hero p{font-size:.95rem;color:var(--dim);line-height:1.8;max-width:400px;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn-primary{background:var(--blue2);color:var(--white);font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;border-radius:4px;transition:background .2s;}
+.btn-primary:hover{background:var(--blue);}
+.btn-secondary{border:2px solid var(--blue2);color:var(--blue2);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;padding:.82rem 1.8rem;text-decoration:none;border-radius:4px;transition:all .2s;}
+.btn-secondary:hover{background:var(--sky);}
+.hero-img{border-radius:12px;overflow:hidden;box-shadow:0 24px 64px rgba(3,105,161,.15);}
+.hero-img img{width:100%;display:block;height:480px;object-fit:cover;}
+@media(max-width:700px){.hero-img{height:280px;}.hero-img img{height:280px;}}
+.services{padding:4.5rem 1.5rem;background:var(--white);}
+.sh{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;text-align:center;margin-bottom:.5rem;letter-spacing:-.02em;}
+.sh span{color:var(--blue2);}
+.sub{text-align:center;color:var(--dim);font-size:.88rem;margin-bottom:2.5rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;}
+.svc{background:var(--sky);border-radius:8px;padding:2rem 1.5rem;transition:transform .25s,box-shadow .25s;}
+.svc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(3,105,161,.1);}
+.svc-icon{font-size:2rem;display:block;margin-bottom:.9rem;}
+.svc h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.svc p{font-size:.82rem;color:var(--dim);line-height:1.65;}
+.svc-price{font-size:.75rem;font-weight:700;color:var(--blue2);margin-top:.8rem;}
+.why{padding:4.5rem 1.5rem;background:var(--dark);}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.why-card{border:1px solid rgba(255,255,255,.08);padding:2rem 1.5rem;text-align:center;}
+.why-icon{font-size:2.5rem;display:block;margin-bottom:1rem;}
+.why-card h3{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.4rem;}
+.why-card p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.65;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--sky);border-radius:8px;padding:1.8rem;}
+.stars{color:#f59e0b;margin-bottom:.6rem;font-size:.9rem;}
+.rtext{font-size:.86rem;color:var(--dim);line-height:1.7;margin-bottom:.7rem;}
+.rname{font-weight:700;font-size:.84rem;color:var(--dark);}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:.74rem;}
+footer b{color:#38bdf8;}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(12,26,46,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="smile-bar">
+  <span class="smile-label">Patient satisfaction</span>
+  <span class="tooth" id="t1">🦷</span>
+  <span class="tooth" id="t2">🦷</span>
+  <span class="tooth" id="t3">🦷</span>
+  <span class="tooth" id="t4">🦷</span>
+  <span class="tooth" id="t5">🦷</span>
+  <span class="smile-label">5 / 5</span>
+</div>
+<nav>
+  <div class="logo">Premier <span>Dental</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Cosmetic</a>
+    <a href="#" onclick="toggleNav()">About</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Book Appointment</a>
+  </div>
+</nav>
+<div class="hero">
+  <div>
+    <div class="hero-tag">Family & Cosmetic Dentistry</div>
+    <h1>Your Best<br><span>Smile</span><br>Starts Here.</h1>
+    <p>General, cosmetic, and restorative dentistry for the whole family. Modern technology, gentle care, and results that make you want to smile.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">Book an Appointment</a>
+      <a href="#" class="btn-secondary">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&auto=format&fit=crop&q=85" alt="Dentist examining patient with bright modern dental equipment"/></div>
+</div>
+<div class="services">
+  <h2 class="sh">Dental <span>Services</span></h2>
+  <p class="sub">Comprehensive care from your first cleaning to your dream smile</p>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">🪥</span><h3>Cleanings & Exams</h3><p>Comprehensive exams, digital X-rays, and professional cleanings every 6 months.</p><div class="svc-price">Starting at $89</div></div>
+    <div class="svc"><span class="svc-icon">✨</span><h3>Teeth Whitening</h3><p>In-office Zoom whitening achieves up to 8 shades lighter in a single 90-minute visit.</p><div class="svc-price">Starting at $299</div></div>
+    <div class="svc"><span class="svc-icon">💎</span><h3>Dental Veneers</h3><p>Porcelain veneers that transform the shape, size, and color of your smile permanently.</p><div class="svc-price">Starting at $895/tooth</div></div>
+    <div class="svc"><span class="svc-icon">🦷</span><h3>Dental Implants</h3><p>Permanent tooth replacement that looks, feels, and functions exactly like a natural tooth.</p><div class="svc-price">Starting at $2,400</div></div>
+    <div class="svc"><span class="svc-icon">😁</span><h3>Invisalign</h3><p>Clear aligner therapy that straightens teeth discreetly — no metal brackets or wires.</p><div class="svc-price">Starting at $3,200</div></div>
+    <div class="svc"><span class="svc-icon">🛡️</span><h3>Emergency Dental</h3><p>Same-day emergency appointments for pain, broken teeth, and urgent dental needs.</p><div class="svc-price">Same-Day Available</div></div>
+  </div>
+</div>
+<div class="why">
+  <h2 class="sh" style="color:var(--white);">Why <span style="color:#38bdf8;">Patients Choose Us</span></h2>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">💻</span><h3>Latest Technology</h3><p>Digital X-rays, 3D imaging, and same-day CEREC crowns in a single visit.</p></div>
+    <div class="why-card"><span class="why-icon">😌</span><h3>Anxiety-Free Care</h3><p>Nitrous oxide, oral sedation, and a gentle team dedicated to your comfort.</p></div>
+    <div class="why-card"><span class="why-icon">💳</span><h3>Flexible Financing</h3><p>CareCredit, in-house payment plans, and all major insurance accepted.</p></div>
+    <div class="why-card"><span class="why-icon">⏰</span><h3>Convenient Hours</h3><p>Early morning, evening, and Saturday appointments available for busy families.</p></div>
+  </div>
+</div>
+<div style="padding:3.5rem 1.5rem;background:var(--white);">
+  <h2 class="sh">Our <span>Office</span></h2>
+  <div class="g-grid" style="margin-top:2rem;">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&auto=format&fit=crop&q=85" alt="Modern bright dental operatory with patient chair and equipment"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1559757175-7cb2f15f9ede?w=600&auto=format&fit=crop&q=85" alt="Dentist showing patient dental X-ray on large screen"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1609840113376-7b0e8e0e4f89?w=600&auto=format&fit=crop&q=85" alt="Patient smiling with perfect teeth after cosmetic dental work"/></div>
+  </div>
+</div>
+<div style="padding:3.5rem 1.5rem;background:var(--sky);">
+  <h2 class="sh">Patient <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"I used to dread the dentist. Premier Dental completely changed that. The team is gentle, kind, and genuinely cares about your comfort."</p><div class="rname">Angela W. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Got veneers done and I cannot stop smiling. The results are absolutely stunning and natural-looking. Best investment I've ever made."</p><div class="rname">Tara M. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Dental implant process was smooth from start to finish. It looks and feels completely natural. Premier Dental is simply the best."</p><div class="rname">Robert A. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Premier Dental</b> · Family & Cosmetic Dentistry · South Louisiana · (225) 555-3471</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Animate teeth lighting up one by one
+const teeth=[1,2,3,4,5].map(i=>document.getElementById('t'+i));
+teeth.forEach((t,i)=>setTimeout(()=>t.classList.add('lit'),300+i*200));
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IronForge Gym | Personal Training & Fitness</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#dc2626;--red2:#ef4444;--dark:#0a0a0a;--char:#141414;--gray:#1f1f1f;--white:#f8fafc;--dim:#6b7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Workout rep counter — number ticks up as you scroll through page */
+#rep-counter{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:500;text-align:center;background:rgba(10,10,10,.85);border:1px solid rgba(220,38,38,.3);padding:.8rem .6rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;}
+#rep-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--red2);line-height:1;}
+#rep-label{font-size:.48rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+@media(max-width:700px){#rep-counter{display:none;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.96);border-bottom:1px solid rgba(220,38,38,.2);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.08em;color:var(--white);white-space:nowrap;}
+.logo span{color:var(--red2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--red2);}
+.ncta{background:var(--red2)!important;color:var(--white)!important;padding:.4rem 1.1rem;}
+.ncta:hover{background:var(--red)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.22);}
+/* Red slash overlay */
+.hero-slash{position:absolute;inset:0;background:linear-gradient(105deg,rgba(220,38,38,.18) 0%,transparent 50%);}
+.hero-inner{position:relative;z-index:2;padding:5.5rem 1.5rem 3rem;max-width:680px;}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red2);margin-bottom:1.2rem;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,10rem);color:var(--white);line-height:.85;margin-bottom:1.5rem;letter-spacing:.04em;}
+.hero h1 span{color:var(--red2);}
+.hero p{font-size:.98rem;font-weight:300;color:rgba(248,250,252,.62);line-height:1.8;max-width:460px;margin-bottom:2.2rem;}
+.btn{background:var(--red2);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.1em;padding:.8rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--red);}
+.stats-strip{background:var(--red2);padding:2.5rem 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(min-width:600px){.stats-strip{grid-template-columns:repeat(4,1fr);}}
+.stat{text-align:center;color:var(--white);}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.04em;line-height:1;}
+.stat-l{font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;opacity:.75;margin-top:.2rem;}
+.programs{padding:4.5rem 1.5rem;background:var(--char);}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:.06em;text-align:center;margin-bottom:.5rem;}
+.sh span{color:var(--red2);}
+.sub{text-align:center;font-size:.84rem;color:var(--dim);margin-bottom:2.5rem;}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(220,38,38,.15);}
+.prog{background:var(--dark);padding:2.5rem 1.8rem;position:relative;overflow:hidden;transition:background .3s;}
+.prog:hover{background:#0f0f0f;}
+.prog::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red2);transition:height .4s;}
+.prog:hover::before{height:100%;}
+.prog-tag{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(220,38,38,.6);margin-bottom:.8rem;}
+.prog h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:var(--white);margin-bottom:.6rem;}
+.prog p{font-size:.83rem;color:var(--dim);line-height:1.65;}
+.prog-price{font-size:.78rem;font-weight:700;color:var(--red2);margin-top:.8rem;}
+.trainers{padding:4.5rem 1.5rem;background:var(--dark);}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.trainer{overflow:hidden;}
+.trainer-img{aspect-ratio:3/4;overflow:hidden;}
+.trainer-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%);transition:filter .4s,transform .4s;}
+.trainer:hover .trainer-img img{filter:grayscale(0);transform:scale(1.04);}
+.trainer-info{background:var(--char);padding:1.2rem;}
+.trainer-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;color:var(--white);}
+.trainer-spec{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red2);margin-top:.2rem;}
+.trainer-bio{font-size:.8rem;color:var(--dim);line-height:1.6;margin-top:.5rem;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--gray);border-top:3px solid var(--red2);padding:1.8rem;}
+.stars{color:var(--red2);margin-bottom:.6rem;}
+.rtext{font-size:.85rem;color:var(--dim);line-height:1.7;margin-bottom:.7rem;}
+.rname{font-weight:700;font-size:.84rem;color:var(--white);}
+footer{background:var(--dark);border-top:1px solid rgba(220,38,38,.12);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.3);font-size:.74rem;}
+footer b{color:var(--red2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(10,10,10,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="rep-counter"><div id="rep-num">0</div><div id="rep-label">REPS</div></div>
+<nav>
+  <div class="logo">IRON<span>FORGE</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Programs</a>
+    <a href="#" onclick="toggleNav()">Trainers</a>
+    <a href="#" onclick="toggleNav()">Membership</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Trial</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&auto=format&fit=crop&q=85" alt="Dark dramatic gym floor with heavy barbells dumbbells and squat racks"/></div>
+  <div class="hero-slash"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Elite Training · South Louisiana</div>
+    <h1>BUILD<br>YOUR<br><span>LEGACY.</span></h1>
+    <p>Premier personal training, group classes, and strength programming. Where serious athletes and beginners alike transform their bodies — and their lives.</p>
+    <a href="#" class="btn">Start Your Free Trial</a>
+  </div>
+</div>
+<div class="stats-strip">
+  <div class="stat"><div class="stat-n">1,200+</div><div class="stat-l">Active Members</div></div>
+  <div class="stat"><div class="stat-n">18</div><div class="stat-l">Certified Trainers</div></div>
+  <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Classes Per Week</div></div>
+  <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">Google Rating</div></div>
+</div>
+<div class="programs">
+  <h2 class="sh">Training <span>Programs</span></h2>
+  <p class="sub">Every goal. Every level. Every body.</p>
+  <div class="prog-grid">
+    <div class="prog"><div class="prog-tag">Strength</div><h3>Powerlifting</h3><p>Structured programming for squat, bench, and deadlift with certified strength coaches.</p><div class="prog-price">$129/mo</div></div>
+    <div class="prog"><div class="prog-tag">Conditioning</div><h3>HIIT & MetCon</h3><p>High-intensity group classes that burn fat, build endurance, and leave you dripping.</p><div class="prog-price">$99/mo</div></div>
+    <div class="prog"><div class="prog-tag">1-on-1</div><h3>Personal Training</h3><p>Fully customized programming and coaching sessions with a dedicated personal trainer.</p><div class="prog-price">$75/session</div></div>
+    <div class="prog"><div class="prog-tag">Body Comp</div><h3>Transformation</h3><p>12-week body transformation program with nutrition coaching, workouts, and weekly check-ins.</p><div class="prog-price">$349 total</div></div>
+    <div class="prog"><div class="prog-tag">Movement</div><h3>Olympic Lifting</h3><p>Snatch, clean & jerk, and accessory work taught by nationally certified Olympic lifting coaches.</p><div class="prog-price">$149/mo</div></div>
+    <div class="prog"><div class="prog-tag">Recovery</div><h3>Mobility & Yoga</h3><p>Active recovery, flexibility training, and mindfulness sessions to keep you training hard.</p><div class="prog-price">$79/mo</div></div>
+  </div>
+</div>
+<div class="trainers">
+  <h2 class="sh">Our <span>Trainers</span></h2>
+  <div class="t-grid">
+    <div class="trainer"><div class="trainer-img"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&auto=format&fit=crop&q=85" alt="Male personal trainer posing in gym with weights behind him"/></div><div class="trainer-info"><div class="trainer-name">Marcus Cole</div><div class="trainer-spec">Powerlifting · CSCS</div><p class="trainer-bio">Former collegiate athlete. 12 years coaching experience. Specializes in strength and body composition.</p></div></div>
+    <div class="trainer"><div class="trainer-img"><img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=500&auto=format&fit=crop&q=85" alt="Female personal trainer smiling in athletic wear in gym"/></div><div class="trainer-info"><div class="trainer-name">Jade Rivers</div><div class="trainer-spec">HIIT · Nutrition Coach</div><p class="trainer-bio">CPT & precision nutrition certified. Known for transformations and high-energy group classes.</p></div></div>
+    <div class="trainer"><div class="trainer-img"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=500&auto=format&fit=crop&q=85" alt="Trainer demonstrating barbell deadlift with perfect form"/></div><div class="trainer-info"><div class="trainer-name">Damon Pierce</div><div class="trainer-spec">Olympic Lifting · Mobility</div><p class="trainer-bio">USA Weightlifting certified coach with a background in competitive Olympic lifting.</p></div></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--char);">
+  <h2 class="sh">Member <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Lost 40 pounds in 5 months with Marcus's program. IronForge isn't just a gym — it's a community that holds you accountable."</p><div class="rname">Derek W. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Best gym in Louisiana, no question. Equipment is top tier, trainers actually know what they're doing, and the energy is unmatched."</p><div class="rname">Priya S. — Denham Springs</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Jade's HIIT classes are brutal in the best way possible. I went from running out of breath to running 5Ks in 3 months."</p><div class="rname">Ashley T. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>IronForge Gym</b> · Premium Fitness · South Louisiana · (225) 555-3584</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Rep counter increases as you scroll
+let reps=0;const repEl=document.getElementById('rep-num');
+window.addEventListener('scroll',()=>{
+  const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  const target=Math.floor(pct*100);
+  if(target>reps){reps=target;repEl.textContent=reps;}
+});
+</script>
+</body>
+</html>

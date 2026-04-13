@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Broussard Law Firm | Personal Injury & Family Law</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f2044;--navy2:#1a3366;--gold:#b8960c;--gold2:#d4af37;--cream:#faf8f5;--dark:#09111f;--dim:#6b7280;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--dark);font-family:'Manrope',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Scales of justice balance animation that tips left/right */
+#scales-wrap{position:absolute;right:3rem;top:50%;transform:translateY(-50%);z-index:2;opacity:.18;pointer-events:none;}
+@media(max-width:900px){#scales-wrap{display:none;}}
+#scale-beam{animation:balance 4s ease-in-out infinite;transform-origin:center;}
+@keyframes balance{0%,100%{transform:rotate(0deg);}25%{transform:rotate(8deg);}75%{transform:rotate(-8deg);}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(9,17,31,.97);backdrop-filter:blur(12px);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,150,12,.2);}
+.logo{font-family:'EB Garamond',serif;font-size:1.2rem;color:var(--cream);white-space:nowrap;letter-spacing:.06em;}
+.logo span{color:var(--gold2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--cream);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,248,245,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--gold2);}
+.ncta{border:1px solid var(--gold)!important;color:var(--gold2)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--gold)!important;color:var(--dark)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.4rem;color:var(--cream);}
+}
+.hero{position:relative;background:var(--navy);min-height:95vh;display:flex;align-items:center;padding:5.5rem 1.5rem 4rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.12) saturate(.5);}
+.hero-inner{position:relative;z-index:2;max-width:640px;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(212,175,55,.3);padding:.32rem .85rem;margin-bottom:1.5rem;}
+.hero-badge span{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);}
+.hero h1{font-family:'EB Garamond',serif;font-size:clamp(2.8rem,6.5vw,5.5rem);font-weight:500;color:var(--cream);line-height:1.05;margin-bottom:1.3rem;}
+.hero h1 em{font-style:italic;color:var(--gold2);display:block;}
+.hero p{font-size:.98rem;font-weight:400;color:rgba(250,248,245,.62);line-height:1.85;max-width:500px;margin-bottom:2.2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-gold{background:var(--gold2);color:var(--dark);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.88rem 2rem;text-decoration:none;transition:background .2s;}
+.btn-gold:hover{background:var(--gold);}
+.btn-ghost{border:1px solid rgba(212,175,55,.4);color:var(--gold2);font-weight:500;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:var(--gold2);}
+.practice-areas{padding:4.5rem 1.5rem;background:var(--cream);}
+.sh{font-family:'EB Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:500;text-align:center;margin-bottom:.5rem;letter-spacing:.02em;}
+.sh em{font-style:italic;color:var(--gold);}
+.sub{text-align:center;font-size:.85rem;color:var(--dim);margin-bottom:2.5rem;}
+.pa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+.pa{background:var(--white);border-left:4px solid var(--gold2);padding:2rem 1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;}
+.pa:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+.pa-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.pa h3{font-family:'EB Garamond',serif;font-size:1.2rem;margin-bottom:.5rem;font-weight:500;}
+.pa p{font-size:.83rem;color:var(--dim);line-height:1.7;}
+.results{background:var(--navy);padding:4.5rem 1.5rem;}
+.r-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem;}
+@media(min-width:600px){.r-strip{grid-template-columns:repeat(4,1fr);}}
+.result{text-align:center;border:1px solid rgba(212,175,55,.15);padding:2rem 1rem;}
+.result-n{font-family:'EB Garamond',serif;font-size:2.8rem;font-weight:500;color:var(--gold2);line-height:1;}
+.result-l{font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,248,245,.45);margin-top:.4rem;}
+.attorneys{padding:4.5rem 1.5rem;background:var(--cream);}
+.atty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.atty{background:var(--white);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.atty-img{overflow:hidden;height:300px;}
+.atty-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.atty:hover .atty-img img{transform:scale(1.04);}
+.atty-info{padding:1.5rem;}
+.atty-name{font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:500;margin-bottom:.2rem;}
+.atty-title{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+.atty-bio{font-size:.82rem;color:var(--dim);line-height:1.65;}
+.r-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--white);padding:2rem;border-top:3px solid var(--gold2);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.stars{color:var(--gold2);margin-bottom:.6rem;}
+.rtext{font-family:'EB Garamond',serif;font-style:italic;font-size:.98rem;color:var(--dim);line-height:1.75;margin-bottom:.7rem;}
+.rname{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);}
+footer{background:var(--dark);padding:2rem 1.5rem;text-align:center;color:rgba(250,248,245,.3);font-size:.72rem;letter-spacing:.06em;}
+footer b{color:var(--gold2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(9,17,31,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.18);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><span>Broussard</span> Law Firm</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Practice Areas</a>
+    <a href="#" onclick="toggleNav()">Attorneys</a>
+    <a href="#" onclick="toggleNav()">Results</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Consultation</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&auto=format&fit=crop&q=85" alt="Attorney reviewing legal documents at desk with law books visible"/></div>
+  <div id="scales-wrap">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="100" y1="20" x2="100" y2="100" stroke="#d4af37" stroke-width="2"/>
+      <g id="scale-beam">
+        <line x1="30" y1="60" x2="170" y2="60" stroke="#d4af37" stroke-width="2"/>
+        <line x1="30" y1="60" x2="30" y2="90" stroke="#d4af37" stroke-width="1.5"/>
+        <line x1="170" y1="60" x2="170" y2="90" stroke="#d4af37" stroke-width="1.5"/>
+        <rect x="15" y="90" width="30" height="12" rx="2" fill="rgba(212,175,55,.3)" stroke="#d4af37" stroke-width="1"/>
+        <rect x="155" y="90" width="30" height="12" rx="2" fill="rgba(212,175,55,.3)" stroke="#d4af37" stroke-width="1"/>
+      </g>
+      <circle cx="100" cy="20" r="4" fill="#d4af37"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span>⚖️ Serving South Louisiana Since 1998</span></div>
+    <h1>Fighting For<br><em>Your Rights.</em></h1>
+    <p>Experienced personal injury, family law, and criminal defense attorneys who fight relentlessly for their clients. No fees unless we win your case.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-gold">Free Consultation</a>
+      <a href="#" class="btn-ghost">View Practice Areas</a>
+    </div>
+  </div>
+</div>
+<div class="practice-areas">
+  <h2 class="sh">Practice <em>Areas</em></h2>
+  <p class="sub">Experienced representation across the full spectrum of civil and family law</p>
+  <div class="pa-grid">
+    <div class="pa"><span class="pa-icon">🚗</span><h3>Personal Injury</h3><p>Auto accidents, slip and fall, workplace injuries, and wrongful death. No fee unless we recover for you.</p></div>
+    <div class="pa"><span class="pa-icon">👨‍👩‍👧</span><h3>Family Law</h3><p>Divorce, child custody, child support, adoption, and protective orders handled with compassion and strength.</p></div>
+    <div class="pa"><span class="pa-icon">⚖️</span><h3>Criminal Defense</h3><p>DWI, drug charges, felony defense, and expungements. Aggressive representation from day one.</p></div>
+    <div class="pa"><span class="pa-icon">🏢</span><h3>Business Law</h3><p>Business formation, contracts, employment disputes, and commercial litigation for Louisiana businesses.</p></div>
+    <div class="pa"><span class="pa-icon">🏠</span><h3>Real Estate Law</h3><p>Closings, title issues, property disputes, and landlord-tenant matters across South Louisiana.</p></div>
+    <div class="pa"><span class="pa-icon">📋</span><h3>Estate Planning</h3><p>Wills, trusts, powers of attorney, and succession planning to protect your family's future.</p></div>
+  </div>
+</div>
+<div class="results">
+  <h2 class="sh" style="color:var(--cream);">Our <em style="color:var(--gold2)">Results</em></h2>
+  <div class="r-strip">
+    <div class="result"><div class="result-n">$47M+</div><div class="result-l">Recovered for Clients</div></div>
+    <div class="result"><div class="result-n">98%</div><div class="result-l">Success Rate</div></div>
+    <div class="result"><div class="result-n">2,400+</div><div class="result-l">Cases Won</div></div>
+    <div class="result"><div class="result-n">25yr</div><div class="result-l">Combined Experience</div></div>
+  </div>
+</div>
+<div class="attorneys">
+  <h2 class="sh">Our <em>Attorneys</em></h2>
+  <div class="atty-grid">
+    <div class="atty"><div class="atty-img"><img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=500&auto=format&fit=crop&q=85" alt="Male attorney in suit standing in law office with bookcase"/></div><div class="atty-info"><div class="atty-name">James Broussard, Esq.</div><div class="atty-title">Founding Partner</div><p class="atty-bio">25 years representing Louisiana families. Specializes in personal injury and complex litigation. LSU Law, magna cum laude.</p></div></div>
+    <div class="atty"><div class="atty-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=85" alt="Female attorney in professional attire reviewing case documents"/></div><div class="atty-info"><div class="atty-name">Claire Thibodaux, Esq.</div><div class="atty-title">Partner · Family Law</div><p class="atty-bio">Board certified family law specialist. Known for achieving favorable outcomes in the most complex custody and divorce cases.</p></div></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--cream);">
+  <h2 class="sh">Client <em>Testimonials</em></h2>
+  <div class="r-cards">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"After my accident, I didn't know where to turn. Broussard Law handled everything. They recovered over $380,000 for me. Life-changing."</p><div class="rname">Michael D. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Claire guided me through the hardest custody battle of my life. She fought hard, communicated clearly, and won. I can't thank her enough."</p><div class="rname">Yvette F. — Gonzales</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"James Broussard is everything you want in an attorney — honest, aggressive when he needs to be, and genuinely cares about his clients."</p><div class="rname">Robert L. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Broussard Law Firm</b> · Licensed Louisiana Attorneys · (225) 555-3697</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

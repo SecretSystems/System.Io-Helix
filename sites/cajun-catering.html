@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Guidry's Cajun Catering | Authentic Louisiana Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#b91c1c;--orange:#ea580c;--cream:#fffbf0;--dark:#1c0a00;--warm:#78350f;--dim:#92400e;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--dark);font-family:'Nunito',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Steam wisps rise from food images on hover */
+.steam{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);pointer-events:none;display:flex;gap:8px;opacity:0;transition:opacity .3s;}
+.steam-wisp{width:6px;border-radius:3px;background:rgba(255,255,255,.6);animation:steam-rise 2s ease-out infinite;filter:blur(2px);}
+.steam-wisp:nth-child(1){height:20px;animation-delay:0s;}
+.steam-wisp:nth-child(2){height:28px;animation-delay:.3s;}
+.steam-wisp:nth-child(3){height:18px;animation-delay:.6s;}
+@keyframes steam-rise{0%{transform:translateY(0) scaleX(1);opacity:.6;}100%{transform:translateY(-40px) scaleX(.3);opacity:0;}}
+.food-card:hover .steam{opacity:1;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,10,0,.97);backdrop-filter:blur(10px);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid rgba(185,28,28,.3);}
+.logo{font-family:'Alfa Slab One',serif;font-size:1.2rem;letter-spacing:.04em;color:var(--cream);white-space:nowrap;}
+.logo span{color:#fbbf24;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--cream);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,251,240,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:#fbbf24;}
+.ncta{background:#fbbf24!important;color:var(--dark)!important;font-weight:800!important;padding:.4rem 1.1rem;}
+.ncta:hover{background:#f59e0b!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--cream);}
+}
+.hero{position:relative;min-height:96vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28);}
+.hero-inner{position:relative;z-index:2;max-width:640px;}
+.hero-badge{font-size:.65rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#fbbf24;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+.hero-badge::before{content:'🌶️';}
+.hero h1{font-family:'Alfa Slab One',serif;font-size:clamp(3rem,9vw,7.5rem);color:var(--cream);line-height:.9;margin-bottom:1.3rem;letter-spacing:.02em;}
+.hero h1 span{color:#fbbf24;}
+.hero p{font-size:1rem;color:rgba(255,251,240,.65);line-height:1.8;max-width:480px;margin-bottom:2.2rem;}
+.btn{background:var(--red);color:var(--cream);font-family:'Alfa Slab One',serif;font-size:1rem;letter-spacing:.06em;padding:.88rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:#991b1b;}
+.menu-section{padding:4.5rem 1.5rem;background:var(--dark);}
+.sh{font-family:'Alfa Slab One',serif;font-size:clamp(2rem,4.5vw,3.5rem);text-align:center;margin-bottom:.5rem;letter-spacing:.02em;}
+.sh span{color:#fbbf24;}
+.sub{text-align:center;font-size:.86rem;color:rgba(255,251,240,.5);margin-bottom:2.5rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
+.food-card{background:rgba(255,255,255,.04);overflow:hidden;position:relative;transition:transform .3s;}
+.food-card:hover{transform:translateY(-5px);}
+.food-img{height:200px;overflow:hidden;position:relative;}
+.food-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.food-card:hover .food-img img{transform:scale(1.06);}
+.food-info{padding:1.2rem;}
+.food-name{font-family:'Alfa Slab One',serif;font-size:1rem;color:var(--cream);margin-bottom:.3rem;}
+.food-desc{font-size:.8rem;color:rgba(255,251,240,.5);line-height:1.6;}
+.food-price{font-size:.82rem;font-weight:800;color:#fbbf24;margin-top:.6rem;}
+.why{padding:4.5rem 1.5rem;background:var(--cream);}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.why-card{background:var(--white);border-top:4px solid var(--red);padding:2rem 1.5rem;box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.why-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.why-card h3{font-size:.95rem;font-weight:800;margin-bottom:.4rem;}
+.why-card p{font-size:.82rem;color:var(--dim);line-height:1.65;}
+.gallery{padding:4.5rem 1.5rem;background:var(--dark);}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(4,1fr);}}
+.g-img{aspect-ratio:1;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.06);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--white);padding:1.8rem;border-left:5px solid var(--red);}
+.stars{color:var(--orange);margin-bottom:.5rem;}
+.rtext{font-size:.86rem;color:var(--dim);line-height:1.7;margin-bottom:.6rem;}
+.rname{font-weight:800;font-size:.83rem;color:var(--dark);}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,251,240,.3);font-size:.74rem;}
+footer b{color:#fbbf24;}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(28,10,0,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Guidry's <span>Catering</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Menu</a>
+    <a href="#" onclick="toggleNav()">Events</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Book Us</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1400&auto=format&fit=crop&q=85" alt="Large steaming pot of crawfish etouffee with authentic Louisiana spices"/></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Authentic Cajun Cuisine · South Louisiana</div>
+    <h1>Laissez<br>Les Bons<br><span>Temps Rouler.</span></h1>
+    <p>Let the good times roll. Authentic Cajun and Creole catering for weddings, corporate events, crawfish boils, and everything in between. Bringing Louisiana flavor to your table.</p>
+    <a href="#" class="btn">Request a Quote</a>
+  </div>
+</div>
+<div class="menu-section">
+  <h2 class="sh" style="color:var(--cream);">Our <span>Signature Dishes</span></h2>
+  <p class="sub">Every dish made from scratch with Louisiana ingredients</p>
+  <div class="food-grid">
+    <div class="food-card"><div class="food-img"><img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=500&auto=format&fit=crop&q=85" alt="Fresh boiled crawfish pile with corn and potatoes"/></div><div class="steam"><div class="steam-wisp"></div><div class="steam-wisp"></div><div class="steam-wisp"></div></div><div class="food-info"><div class="food-name">Crawfish Boil</div><p class="food-desc">Fresh Gulf crawfish boiled in our secret Guidry spice blend with corn, potatoes, and andouille.</p><div class="food-price">$18/lb · Minimum 20lbs</div></div></div>
+    <div class="food-card"><div class="food-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=85" alt="Classic Louisiana gumbo with rice in dark roux broth"/></div><div class="steam"><div class="steam-wisp"></div><div class="steam-wisp"></div><div class="steam-wisp"></div></div><div class="food-info"><div class="food-name">Chicken & Andouille Gumbo</div><p class="food-desc">Dark roux, the holy trinity, andouille sausage, and slow-cooked chicken. Served with white rice.</p><div class="food-price">$12/person</div></div></div>
+    <div class="food-card"><div class="food-img"><img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=500&auto=format&fit=crop&q=85" alt="Grilled boudin balls with dipping sauce plated elegantly"/></div><div class="steam"><div class="steam-wisp"></div><div class="steam-wisp"></div><div class="steam-wisp"></div></div><div class="food-info"><div class="food-name">Boudin Balls</div><p class="food-desc">House-made boudin rolled in crispy panko, fried golden, served with Creole mustard dipping sauce.</p><div class="food-price">$4 each · Minimum 50</div></div></div>
+    <div class="food-card"><div class="food-img"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&auto=format&fit=crop&q=85" alt="Cajun jambalaya with shrimp sausage and rice in cast iron"/></div><div class="steam"><div class="steam-wisp"></div><div class="steam-wisp"></div><div class="steam-wisp"></div></div><div class="food-info"><div class="food-name">Shrimp Jambalaya</div><p class="food-desc">Gulf shrimp, andouille, and tasso in a rich tomato-based Creole sauce over perfectly seasoned rice.</p><div class="food-price">$14/person</div></div></div>
+  </div>
+</div>
+<div class="why">
+  <h2 class="sh">Why <span style="color:var(--red)">Guidry's</span></h2>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">👨‍🍳</span><h3>Family Recipes</h3><p>Third-generation Cajun recipes passed down from Mamaw Guidry herself. No shortcuts, ever.</p></div>
+    <div class="why-card"><span class="why-icon">🦐</span><h3>Fresh Gulf Seafood</h3><p>We source seafood directly from Louisiana fishermen — harvested this week, cooked today.</p></div>
+    <div class="why-card"><span class="why-icon">🎉</span><h3>Any Size Event</h3><p>Intimate dinners for 20 to festivals for 2,000. Full setup, serving staff, and cleanup included.</p></div>
+    <div class="why-card"><span class="why-icon">📋</span><h3>Custom Menus</h3><p>Dietary restrictions? Budget goals? We create a custom menu around your exact event needs.</p></div>
+  </div>
+</div>
+<div class="gallery">
+  <h2 class="sh" style="color:var(--cream);">Event <span>Gallery</span></h2>
+  <div class="g-grid" style="margin-top:2rem;">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&auto=format&fit=crop&q=85" alt="Elegant wedding reception catering spread with Cajun dishes"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=500&auto=format&fit=crop&q=85" alt="Large outdoor crawfish boil event with people gathered around tables"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&auto=format&fit=crop&q=85" alt="Corporate catering buffet with Cajun food stations"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&auto=format&fit=crop&q=85" alt="Chef plating Creole dishes at a catering event kitchen"/></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--cream);">
+  <h2 class="sh">What <span style="color:var(--red)">They're Saying</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Guidry's catered our wedding of 250 guests. The gumbo had people going back for thirds. We've gotten more compliments about the food than anything else."</p><div class="rname">Emily & Travis B.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Corporate crawfish boil for 150 employees. Showed up early, set up everything, cooked perfect, and cleaned up without a trace. 10 out of 10."</p><div class="rname">Sandra K. — ExxonMobil</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"The boudin balls alone are worth booking them. The whole spread was authentic, hot, and absolutely delicious. Guidry's is the real deal."</p><div class="rname">Pete H. — Baton Rouge</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Guidry's Cajun Catering</b> · Licensed & Insured · South Louisiana · (225) 555-4034</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

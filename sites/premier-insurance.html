@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Premier Insurance Group | Auto, Home & Life Insurance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--blue:#1e4d8c;--blue2:#2563eb;--sky:#eff6ff;--dark:#0d1f3c;--dim:#64748b;--white:#fff;--green:#15803d;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--dark);font-family:'Libre Franklin',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Coverage gauge bars that animate fill on page load */
+#gauge-section{padding:4rem 1.5rem;background:var(--dark);}
+.gauge-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.4rem;display:flex;justify-content:space-between;}
+.gauge-bar{height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:1.4rem;}
+.gauge-fill{height:100%;border-radius:4px;width:0%;transition:width 1.8s cubic-bezier(.4,0,.2,1);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,31,60,.97);backdrop-filter:blur(12px);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(37,99,235,.18);}
+.logo{font-weight:800;font-size:1.1rem;color:var(--white);white-space:nowrap;letter-spacing:.02em;}
+.logo span{color:#60a5fa;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:#60a5fa;}
+.ncta{background:var(--blue2)!important;color:var(--white)!important;padding:.4rem 1.1rem;border-radius:3px;}
+.ncta:hover{background:var(--blue)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:92vh;}
+@media(max-width:700px){.hero{grid-template-columns:1fr;}}
+.hero-img{overflow:hidden;min-height:280px;}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-text{background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:5rem 2.5rem 3rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(96,165,250,.25);padding:.3rem .8rem;margin-bottom:1.3rem;}
+.hero-badge span{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#60a5fa;}
+.hero-text h1{font-size:clamp(2.2rem,4.5vw,4rem);font-weight:800;color:var(--white);line-height:.95;margin-bottom:1.2rem;letter-spacing:-.02em;}
+.hero-text h1 span{color:#60a5fa;}
+.hero-text p{font-size:.93rem;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8;max-width:380px;margin-bottom:2rem;}
+.btn{background:var(--blue2);color:var(--white);font-weight:700;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;padding:.88rem 2rem;text-decoration:none;display:inline-block;border-radius:3px;transition:background .2s;}
+.btn:hover{background:var(--blue);}
+.products{padding:4.5rem 1.5rem;background:var(--sky);}
+.sh{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;text-align:center;margin-bottom:.5rem;letter-spacing:-.02em;}
+.sh span{color:var(--blue2);}
+.sub{text-align:center;font-size:.85rem;color:var(--dim);margin-bottom:2.5rem;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;}
+.prod{background:var(--white);padding:2.5rem 1.8rem;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,.06);border-top:4px solid var(--blue2);transition:transform .25s,box-shadow .25s;}
+.prod:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
+.prod-icon{font-size:2.2rem;display:block;margin-bottom:.9rem;}
+.prod h3{font-size:.98rem;font-weight:700;margin-bottom:.5rem;}
+.prod p{font-size:.83rem;color:var(--dim);line-height:1.65;}
+.prod-cta{font-size:.72rem;font-weight:700;color:var(--blue2);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;margin-top:1rem;transition:gap .2s;}
+.prod-cta:hover{gap:.6rem;}
+.prod-cta::after{content:'→';}
+.why{padding:4.5rem 1.5rem;background:var(--white);}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.why-card{text-align:center;padding:2rem 1.5rem;}
+.why-icon{font-size:2.5rem;display:block;margin-bottom:1rem;}
+.why-card h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.why-card p{font-size:.83rem;color:var(--dim);line-height:1.65;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--sky);border-radius:6px;padding:1.8rem;border-left:4px solid var(--blue2);}
+.stars{color:#f59e0b;margin-bottom:.6rem;}
+.rtext{font-size:.86rem;color:var(--dim);line-height:1.7;margin-bottom:.7rem;}
+.rname{font-weight:700;font-size:.84rem;color:var(--dark);}
+footer{background:var(--dark);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.32);font-size:.74rem;}
+footer b{color:#60a5fa;}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(13,31,60,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Premier <span>Insurance</span> Group</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Auto</a>
+    <a href="#" onclick="toggleNav()">Home</a>
+    <a href="#" onclick="toggleNav()">Life</a>
+    <a href="#" onclick="toggleNav()">Business</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&auto=format&fit=crop&q=85" alt="Insurance agent shaking hands with family clients in bright modern office"/></div>
+  <div class="hero-text">
+    <div class="hero-badge"><span>🛡️ Independent · Trusted · Local</span></div>
+    <h1>Protection<br>You Can<br><span>Count On.</span></h1>
+    <p>Independent insurance agency representing 20+ top carriers. We shop the market so you get the best coverage at the best price — every time.</p>
+    <a href="#" class="btn">Get Your Free Quote</a>
+  </div>
+</div>
+<div id="gauge-section">
+  <h2 class="sh" style="color:var(--white);margin-bottom:2rem;">Your <span style="color:#60a5fa">Coverage Score</span></h2>
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="gauge-label"><span>Auto Insurance</span><span id="g1v">0%</span></div>
+    <div class="gauge-bar"><div class="gauge-fill" id="g1" style="background:#2563eb;"></div></div>
+    <div class="gauge-label"><span>Homeowners Insurance</span><span id="g2v">0%</span></div>
+    <div class="gauge-bar"><div class="gauge-fill" id="g2" style="background:#16a34a;"></div></div>
+    <div class="gauge-label"><span>Life Insurance</span><span id="g3v">0%</span></div>
+    <div class="gauge-bar"><div class="gauge-fill" id="g3" style="background:#c2410c;"></div></div>
+    <div class="gauge-label"><span>Business Coverage</span><span id="g4v">0%</span></div>
+    <div class="gauge-bar"><div class="gauge-fill" id="g4" style="background:#7c3aed;"></div></div>
+    <p style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:1rem;letter-spacing:.06em;">Call us to make sure all four are covered · Most clients save 20-30% by bundling</p>
+  </div>
+</div>
+<div class="products">
+  <h2 class="sh">Insurance <span>Products</span></h2>
+  <p class="sub">Independent agency · We represent 20+ carriers · No pressure, just savings</p>
+  <div class="prod-grid">
+    <div class="prod"><span class="prod-icon">🚗</span><h3>Auto Insurance</h3><p>Comprehensive auto coverage with the best rates from top carriers. Bundle for maximum savings.</p><a href="#" class="prod-cta">Get Auto Quote</a></div>
+    <div class="prod"><span class="prod-icon">🏠</span><h3>Home & Renters</h3><p>Homeowners and renters insurance that protects what matters most at rates that make sense.</p><a href="#" class="prod-cta">Get Home Quote</a></div>
+    <div class="prod"><span class="prod-icon">❤️</span><h3>Life Insurance</h3><p>Term and whole life insurance to protect your family's financial future — regardless of what happens.</p><a href="#" class="prod-cta">Get Life Quote</a></div>
+    <div class="prod"><span class="prod-icon">🏢</span><h3>Business Insurance</h3><p>General liability, commercial property, workers comp, and E&O coverage for Louisiana businesses.</p><a href="#" class="prod-cta">Get Business Quote</a></div>
+    <div class="prod"><span class="prod-icon">⛵</span><h3>Boat & Watercraft</h3><p>Louisiana has more waterways than anywhere. Protect your boat, jet ski, and marine equipment.</p><a href="#" class="prod-cta">Get Marine Quote</a></div>
+    <div class="prod"><span class="prod-icon">🌀</span><h3>Flood Insurance</h3><p>NFIP and private flood insurance for Louisiana homeowners — don't wait until the next storm.</p><a href="#" class="prod-cta">Get Flood Quote</a></div>
+  </div>
+</div>
+<div class="why">
+  <h2 class="sh">Why <span>Choose Us</span></h2>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">🔍</span><h3>We Shop For You</h3><p>Independent agency — we compare rates across 20+ carriers to find your best deal.</p></div>
+    <div class="why-card"><span class="why-icon">📞</span><h3>Real People</h3><p>Call us and speak to a local agent, not a call center. We know you by name.</p></div>
+    <div class="why-card"><span class="why-icon">💰</span><h3>Bundle & Save</h3><p>Most clients save 20-30% when they bundle auto and home with the same carrier.</p></div>
+    <div class="why-card"><span class="why-icon">⚡</span><h3>Claims Support</h3><p>When you have a claim, we advocate for you — not the insurance company.</p></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--sky);">
+  <h2 class="sh">Client <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Saved $840/year by bundling auto and home. The agent shopped 12 carriers and found us the best deal in 20 minutes. Why didn't I call sooner?"</p><div class="rname">Karen B. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Had a hail claim last year. Premier walked me through every step and fought to make sure I got what I deserved. Game-changing service."</p><div class="rname">Mike D. — Prairieville</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Finally got life insurance set up for my family. The agent made it simple, no pressure, and got us a great rate. Should've done this years ago."</p><div class="rname">James & Tanya H.</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Premier Insurance Group</b> · Licensed Louisiana Insurance Agent · (225) 555-4361</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Animate coverage gauges on load
+const gauges=[{id:'g1',v:'g1v',pct:92},{id:'g2',v:'g2v',pct:78},{id:'g3',v:'g3v',pct:55},{id:'g4',v:'g4v',pct:40}];
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    gauges.forEach((g,i)=>{
+      setTimeout(()=>{
+        document.getElementById(g.id).style.width=g.pct+'%';
+        let n=0;const target=g.pct;
+        const iv=setInterval(()=>{n=Math.min(n+2,target);document.getElementById(g.v).textContent=n+'%';if(n>=target)clearInterval(iv);},18);
+      },i*200);
+    });
+  },300);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tara Fontenot Realty | Buy, Sell & Invest in Louisiana</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--charcoal:#1a1a2e;--rose:#c0392b;--sand:#faf5ef;--warm:#8c6e63;--gold:#c9a84c;--dim:#6b7280;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--sand);color:var(--charcoal);font-family:'DM Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Property search bar with animated typing effect */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,26,46,.97);backdrop-filter:blur(12px);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,.15);}
+.logo{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:var(--white);white-space:nowrap;letter-spacing:.04em;}
+.logo em{font-style:italic;color:var(--gold);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--white);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--gold);}
+.ncta{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--gold)!important;color:var(--charcoal)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--charcoal);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.4rem;color:var(--white);}
+}
+.hero{position:relative;min-height:96vh;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,26,46,.96) 0%,rgba(26,26,46,.5) 45%,rgba(26,26,46,.1) 100%);}
+.hero-inner{position:relative;z-index:2;width:100%;padding:3rem 1.5rem 4rem;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:1rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.62);margin-bottom:2rem;max-width:500px;line-height:1.8;}
+/* Animated search bar */
+.search-bar{background:var(--white);display:flex;align-items:center;gap:0;max-width:580px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.search-input{flex:1;border:none;outline:none;padding:1.1rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--charcoal);background:transparent;}
+.search-type{background:var(--gold);color:var(--charcoal);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:1.1rem 1.5rem;border:none;cursor:pointer;white-space:nowrap;transition:background .2s;}
+.search-type:hover{background:var(--charcoal);color:var(--gold);}
+.listings{padding:4.5rem 1.5rem;background:var(--sand);}
+.sh{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;text-align:center;margin-bottom:.5rem;letter-spacing:.02em;}
+.sh em{font-style:italic;color:var(--gold);}
+.sub{text-align:center;font-size:.85rem;color:var(--dim);margin-bottom:2.5rem;}
+.listing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.listing{background:var(--white);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;}
+.listing:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.14);}
+.listing-img{height:220px;overflow:hidden;position:relative;}
+.listing-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.listing:hover .listing-img img{transform:scale(1.06);}
+.listing-tag{position:absolute;top:1rem;left:1rem;background:var(--gold);color:var(--charcoal);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .6rem;}
+.listing-info{padding:1.5rem;}
+.listing-price{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:400;color:var(--charcoal);margin-bottom:.3rem;}
+.listing-addr{font-size:.82rem;color:var(--dim);margin-bottom:.8rem;}
+.listing-specs{display:flex;gap:1.2rem;font-size:.78rem;font-weight:600;color:var(--warm);}
+.agent{padding:4.5rem 1.5rem;background:var(--charcoal);}
+.agent-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;max-width:960px;margin:0 auto;}
+@media(max-width:700px){.agent-inner{grid-template-columns:1fr;}}
+.agent-img{border-radius:4px;overflow:hidden;}
+.agent-img img{width:100%;display:block;height:420px;object-fit:cover;}
+.agent-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
+.agent h2{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--white);margin-bottom:1rem;}
+.agent h2 em{font-style:italic;color:var(--gold);}
+.agent p{font-size:.9rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:1.5rem;}
+.agent-stats{display:flex;gap:2rem;flex-wrap:wrap;}
+.ast-n{font-family:'Fraunces',serif;font-size:2rem;font-weight:400;color:var(--gold);line-height:1;}
+.ast-l{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.rcard{background:var(--white);padding:2rem;border-bottom:3px solid var(--gold);}
+.stars{color:var(--gold);margin-bottom:.6rem;}
+.rtext{font-family:'Fraunces',serif;font-style:italic;font-size:.98rem;color:var(--dim);line-height:1.75;margin-bottom:.7rem;}
+.rname{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);}
+footer{background:var(--charcoal);border-top:1px solid rgba(201,168,76,.12);padding:2rem 1.5rem;text-align:center;color:rgba(255,255,255,.3);font-size:.72rem;}
+footer b{color:var(--gold);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(26,26,46,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.18);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Tara Fontenot <em>Realty</em></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Buy</a>
+    <a href="#" onclick="toggleNav()">Sell</a>
+    <a href="#" onclick="toggleNav()">Listings</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Contact Tara</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1400&auto=format&fit=crop&q=85" alt="Beautiful modern Louisiana home exterior with landscaping at dusk"/></div>
+  <div class="hero-inner">
+    <h1>Find Your<br><em>Dream Home</em><br>in Louisiana.</h1>
+    <p>Trusted real estate guidance for buyers, sellers, and investors across South Louisiana. 12 years of experience, 400+ closings, and a reputation built on results.</p>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput" placeholder="" readonly/>
+      <button class="search-type">Search Homes</button>
+    </div>
+  </div>
+</div>
+<div class="listings">
+  <h2 class="sh">Featured <em>Listings</em></h2>
+  <p class="sub">Current properties available in South Louisiana</p>
+  <div class="listing-grid">
+    <div class="listing"><div class="listing-img"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&auto=format&fit=crop&q=85" alt="Beautiful craftsman home with covered porch and lush lawn"/><div class="listing-tag">For Sale</div></div><div class="listing-info"><div class="listing-price">$385,000</div><div class="listing-addr">142 Magnolia Lane, Prairieville, LA</div><div class="listing-specs"><span>4 bed</span><span>3 bath</span><span>2,640 sqft</span></div></div></div>
+    <div class="listing"><div class="listing-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&auto=format&fit=crop&q=85" alt="Modern white contemporary home with large windows and pool"/><div class="listing-tag">New Listing</div></div><div class="listing-info"><div class="listing-price">$524,900</div><div class="listing-addr">88 Plantation Dr, Denham Springs, LA</div><div class="listing-specs"><span>5 bed</span><span>4 bath</span><span>3,200 sqft</span></div></div></div>
+    <div class="listing"><div class="listing-img"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&auto=format&fit=crop&q=85" alt="Charming brick home on tree lined street with new landscaping"/><div class="listing-tag">Price Reduced</div></div><div class="listing-info"><div class="listing-price">$298,500</div><div class="listing-addr">517 Oak Hollow Ct, Gonzales, LA</div><div class="listing-specs"><span>3 bed</span><span>2 bath</span><span>1,980 sqft</span></div></div></div>
+  </div>
+</div>
+<div class="agent">
+  <div class="agent-inner">
+    <div class="agent-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&auto=format&fit=crop&q=85" alt="Professional female real estate agent smiling in business attire"/></div>
+    <div>
+      <div class="agent-eyebrow">Your Local Expert</div>
+      <h2>Meet <em>Tara Fontenot</em></h2>
+      <p>Born and raised in South Louisiana, Tara knows these neighborhoods better than anyone. 12 years in real estate, over 400 successful closings, and a reputation built entirely on referrals and trust.</p>
+      <div class="agent-stats">
+        <div><div class="ast-n">400+</div><div class="ast-l">Homes Closed</div></div>
+        <div><div class="ast-n">12yr</div><div class="ast-l">Experience</div></div>
+        <div><div class="ast-n">4.9★</div><div class="ast-l">Zillow Rating</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--sand);">
+  <h2 class="sh">Client <em>Reviews</em></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Tara found us our dream home in 3 weeks and negotiated $18,000 off the asking price. She's the only agent we'll ever use."</p><div class="rname">Chris & Sarah M.</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Listed our house on a Monday, had 6 offers by Thursday, sold for $22k over asking. Tara's marketing is in a league of its own."</p><div class="rname">Frank D. — Prairieville</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"First-time buyer, scared of the process. Tara held my hand through every step. Closed on the perfect house. Couldn't be happier."</p><div class="rname">Monica B. — Baton Rouge</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Tara Fontenot Realty</b> · Licensed Louisiana Realtor · (225) 555-3921</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+// Animated typing in search bar
+const phrases=['4 bed 3 bath in Gonzales...','Homes under $400k in Prairieville...','New construction in Denham Springs...','Investment properties in Baton Rouge...'];
+let pi=0,ci=0,deleting=false;
+const input=document.getElementById('searchInput');
+function type(){
+  const phrase=phrases[pi];
+  if(!deleting){
+    input.placeholder=phrase.slice(0,ci+1);
+    ci++;
+    if(ci===phrase.length){deleting=true;setTimeout(type,1800);return;}
+  } else {
+    input.placeholder=phrase.slice(0,ci-1);
+    ci--;
+    if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}
+  }
+  setTimeout(type,deleting?40:80);
+}
+type();
+</script>
+</body>
+</html>

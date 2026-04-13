@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Swift Towing | 24/7 Roadside Assistance & Towing</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--yellow:#fbbf24;--yellow2:#fcd34d;--dark:#0d0d0d;--gray:#1a1a1a;--offwhite:#f9fafb;--dim:#6b7280;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* SPECIAL TWIST: Flashing emergency lights (amber) sweep across header bar */
+#emergency-bar{position:fixed;top:0;left:0;right:0;height:4px;z-index:2000;overflow:hidden;}
+#light-l,#light-r{position:absolute;top:0;width:60px;height:4px;border-radius:2px;}
+#light-l{left:-60px;background:var(--yellow);animation:sweep-l 1.2s ease-in-out infinite;}
+#light-r{right:-60px;background:var(--yellow);animation:sweep-r 1.2s ease-in-out infinite;}
+@keyframes sweep-l{0%{left:-60px;opacity:1;}50%{left:50%;opacity:.8;}100%{left:110%;opacity:0;}}
+@keyframes sweep-r{0%{right:-60px;opacity:1;}50%{right:50%;opacity:.8;}100%{right:110%;opacity:0;}}
+nav{position:fixed;top:4px;left:0;right:0;z-index:1000;background:rgba(13,13,13,.97);border-bottom:2px solid rgba(251,191,36,.25);padding:.82rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:900;letter-spacing:.06em;color:var(--white);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--yellow);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--white);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--yellow);}
+.ncta{background:var(--yellow)!important;color:var(--dark)!important;font-weight:800!important;padding:.4rem 1.1rem;}
+.ncta:hover{background:var(--yellow2)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--white);}
+}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.22);}
+.hero-inner{position:relative;z-index:2;max-width:620px;}
+.response-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);padding:.35rem .85rem;margin-bottom:1.2rem;}
+.rb-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:blink .6s infinite alternate;}
+@keyframes blink{from{opacity:1;}to{opacity:.2;}}
+.rb-text{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(3.5rem,10vw,8.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.03em;color:var(--white);line-height:.88;margin-bottom:1.3rem;}
+.hero h1 span{color:var(--yellow);}
+.hero p{font-size:.98rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:460px;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn-yellow{background:var(--yellow);color:var(--dark);font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.8rem 2rem;text-decoration:none;transition:background .2s;}
+.btn-yellow:hover{background:var(--yellow2);}
+.btn-ghost{border:2px solid rgba(251,191,36,.4);color:var(--yellow);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.78rem 1.8rem;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:var(--yellow);}
+.stats{background:var(--yellow);padding:2.5rem 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(min-width:600px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat{text-align:center;color:var(--dark);}
+.stat-n{font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;font-weight:900;letter-spacing:.04em;line-height:1;}
+.stat-l{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.7;margin-top:.2rem;}
+.services{padding:4.5rem 1.5rem;background:var(--gray);}
+.sh{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:2.5rem;}
+.sh span{color:var(--yellow);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1px;background:rgba(251,191,36,.12);}
+.svc{background:var(--dark);padding:2rem 1.5rem;border-top:3px solid transparent;transition:border-color .2s,background .2s;}
+.svc:hover{border-color:var(--yellow);background:#111;}
+.svc-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.svc h3{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--white);margin-bottom:.4rem;}
+.svc p{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.65;}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;}
+@media(min-width:600px){.g-grid{grid-template-columns:repeat(3,1fr);}}
+.g-img{aspect-ratio:4/3;overflow:hidden;}
+.g-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.g-img:hover img{transform:scale(1.05);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rcard{background:var(--gray);border-top:3px solid var(--yellow);padding:1.8rem;}
+.stars{color:var(--yellow);margin-bottom:.5rem;}
+.rtext{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:.6rem;}
+.rname{font-weight:700;font-size:.83rem;color:var(--yellow);}
+footer{background:var(--dark);border-top:1px solid rgba(251,191,36,.12);padding:1.8rem 1.5rem;text-align:center;color:rgba(255,255,255,.32);font-size:.74rem;}
+footer b{color:var(--yellow);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(13,13,13,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="emergency-bar"><div id="light-l"></div><div id="light-r"></div></div>
+<nav>
+  <div class="logo">SWIFT <span>TOWING</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Coverage</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Call Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1400&auto=format&fit=crop&q=85" alt="Heavy duty tow truck with amber lights on highway at night"/></div>
+  <div class="hero-inner">
+    <div class="response-badge"><div class="rb-dot"></div><span class="rb-text">24/7 Live Dispatch</span></div>
+    <h1>Stuck?<br>We're<br><span>Coming.</span></h1>
+    <p>South Louisiana's fastest towing and roadside assistance. Average arrival in 25 minutes — day or night, rain or shine, 365 days a year.</p>
+    <div class="hero-btns">
+      <a href="tel:2255553814" class="btn-yellow">📞 (225) 555-3814</a>
+      <a href="#" class="btn-ghost">View Services</a>
+    </div>
+  </div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">25min</div><div class="stat-l">Avg Response</div></div>
+  <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Always Available</div></div>
+  <div class="stat"><div class="stat-n">15k+</div><div class="stat-l">Vehicles Towed</div></div>
+  <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">Google Rating</div></div>
+</div>
+<div class="services">
+  <h2 class="sh">Our <span>Services</span></h2>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">🚗</span><h3>Light Towing</h3><p>Passenger cars, SUVs, and light trucks towed safely to your destination of choice.</p></div>
+    <div class="svc"><span class="svc-icon">🚛</span><h3>Heavy Towing</h3><p>Semi trucks, RVs, buses, and heavy equipment moved with our heavy-duty rotator fleet.</p></div>
+    <div class="svc"><span class="svc-icon">🔋</span><h3>Jump Starts</h3><p>Dead battery? We'll jump-start your vehicle on-site — no tow needed in most cases.</p></div>
+    <div class="svc"><span class="svc-icon">🔓</span><h3>Lockouts</h3><p>Locked keys in your car? Our slim-jim team gets you in without a scratch, fast.</p></div>
+    <div class="svc"><span class="svc-icon">⛽</span><h3>Fuel Delivery</h3><p>Ran out of gas? We bring the fuel to you — enough to get you to the nearest station.</p></div>
+    <div class="svc"><span class="svc-icon">🛞</span><h3>Tire Changes</h3><p>Flat tire on the highway? We swap your spare and get you back on the road in minutes.</p></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--dark);">
+  <h2 class="sh">On The <span>Scene</span></h2>
+  <div class="g-grid">
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=85" alt="Tow truck driver attaching straps to disabled vehicle on roadside"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=600&auto=format&fit=crop&q=85" alt="Heavy duty tow truck lifting car from accident scene"/></div>
+    <div class="g-img"><img src="https://images.unsplash.com/photo-1597762117709-859f744b84c3?w=600&auto=format&fit=crop&q=85" alt="Roadside assistance technician changing flat tire for stranded driver"/></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--gray);">
+  <h2 class="sh">Customer <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Blew a tire on I-10 at 11pm. Swift was there in 22 minutes. Changed the tire, made sure I was safe, refused a tip. Outstanding people."</p><div class="rname">Donna P. — Baton Rouge</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Semi breakdown on a Friday afternoon. Swift had a heavy-duty truck there within 45 minutes and got us to the shop. Saved our weekend delivery."</p><div class="rname">Allen H. — Walker</div></div>
+    <div class="rcard"><div class="stars">★★★★★</div><p class="rtext">"Locked my keys in at a gas station with my baby in the car. Swift arrived in 15 minutes and got it open in 3. Professional and kind."</p><div class="rname">Kayla M. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Swift Towing LLC</b> · Licensed & Insured · South Louisiana · (225) 555-3814</footer>
+<div id="bb">
+  <span class="bbt">Built by Secret Systems</span>
+  <a href="../work.html" class="bbb o">← View Portfolio</a>
+  <span class="sep">|</span>
+  <a href="../contact.html" class="bbb s">Get a Site Like This →</a>
+</div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

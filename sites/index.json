@@ -5,7 +5,11 @@
 ,
   {"file":"apex-plumbing.html","title":"Apex Plumbing | Emergency Plumbers — 24/7 Service","tag":"Website","color":0,"desc":""}
 ,
+  {"file":"arcadian-landscaping.html","title":"Arcadian Landscaping | Landscape Design & Installation","tag":"Website","color":0,"desc":""}
+,
   {"file":"arctic-hvac.html","title":"Arctic HVAC | AC Repair, Installation & Maintenance","tag":"Website","color":0,"desc":""}
+,
+  {"file":"bayou-auto-glass.html","title":"Bayou Auto Glass | Windshield Repair & Replacement","tag":"Website","color":0,"desc":""}
 ,
   {"file":"bayou-pest.html","title":"Bayou Pest Control | Termite & Pest Elimination","tag":"Website","color":0,"desc":""}
 ,
@@ -16,6 +20,12 @@
   {"file":"coastal-painting.html","title":"Coastal Painting Co. | Interior & Exterior House Painting","tag":"Website","color":0,"desc":""}
 ,
   {"file":"crescent-city-flooring.html","title":"Crescent City Flooring | Hardwood, Tile & LVP","tag":"Website","color":0,"desc":""}
+,
+  {"file":"crescent-remodeling.html","title":"Crescent Remodeling | Kitchen, Bath & Home Renovation","tag":"Website","color":0,"desc":""}
+,
+  {"file":"crescent-storage.html","title":"Crescent Storage | Climate-Controlled Self Storage","tag":"Website","color":0,"desc":""}
+,
+  {"file":"delta-drone.html","title":"Delta Drone Services | Aerial Photography & Inspection","tag":"Website","color":0,"desc":""}
 ,
   {"file":"delta-electric.html","title":"Delta Electric | Residential & Commercial Electrical","tag":"Website","color":0,"desc":""}
 ,
@@ -41,11 +51,17 @@
 ,
   {"file":"gulf-electric.html","title":"Gulf Electric | Generator Installation & Electrical","tag":"Website","color":0,"desc":""}
 ,
+  {"file":"gutter-kings.html","title":"Gutter Kings | Seamless Gutters & Gutter Guards","tag":"Website","color":0,"desc":""}
+,
   {"file":"ironforge-gym.html","title":"IronForge Gym | Personal Training & Fitness","tag":"Website","color":0,"desc":""}
 ,
   {"file":"ironwall-security.html","title":"IronWall Security | Home & Business Alarm Systems","tag":"Website","color":0,"desc":""}
 ,
   {"file":"kleen-pressure.html","title":"Kleen Force | Pressure Washing & Exterior Cleaning","tag":"Website","color":0,"desc":""}
+,
+  {"file":"la-dog-grooming.html","title":"Bayou Paws Dog Grooming | Mobile & Salon Pet Grooming","tag":"Website","color":0,"desc":""}
+,
+  {"file":"la-foundation-repair.html","title":"Louisiana Foundation Repair | Slab & Pier Repair","tag":"Website","color":0,"desc":""}
 ,
   {"file":"la-pool-builder.html","title":"Louisiana Pool Builders | Custom Inground Pools","tag":"Website","color":0,"desc":""}
 ,
@@ -54,6 +70,8 @@
   {"file":"locksmith-pro.html","title":"KeyMaster Locksmith | 24/7 Emergency Locksmith","tag":"Website","color":0,"desc":""}
 ,
   {"file":"luxe-spa.html","title":"Luxe Med Spa | Facials, Botox & Body Treatments","tag":"Website","color":0,"desc":""}
+,
+  {"file":"magnolia-massage.html","title":"Magnolia Massage Therapy | Therapeutic & Relaxation Massage","tag":"Website","color":0,"desc":""}
 ,
   {"file":"pelican-plumbing.html","title":"Pelican Plumbing | 24/7 Emergency Plumbing","tag":"Website","color":0,"desc":""}
 ,
@@ -73,6 +91,8 @@
 ,
   {"file":"south-la-drywall.html","title":"South LA Drywall | Sheetrock Installation & Repair","tag":"Website","color":0,"desc":""}
 ,
+  {"file":"south-paving.html","title":"South Louisiana Paving | Asphalt Driveways & Parking Lots","tag":"Website","color":0,"desc":""}
+,
   {"file":"sparkle-cleaning.html","title":"Sparkle Clean | Commercial Janitorial Services","tag":"Website","color":0,"desc":""}
 ,
   {"file":"sportsplex-academy.html","title":"Sportsplex Academy | Youth Sports Training","tag":"Website","color":0,"desc":""}
@@ -88,145 +108,4 @@
   {"file":"volt-electric.html","title":"Volt Electric | Licensed Electricians — Residential & Commercial","tag":"Website","color":0,"desc":""}
 ,
   {"file":"water-restoration.html","title":"RapidDry Restoration | Water & Flood Damage","tag":"Website","color":0,"desc":""}
-,
-    {
-    "file": "bayou-pest.html",
-    "title": "Bayou Pest Control",
-    "tag": "Website",
-    "color": 3,
-    "desc": "Termite & pest elimination. Dark green with a bug cursor that follows your mouse."
-  },
-  {
-    "file": "gulf-coast-gutters.html",
-    "title": "Gulf Coast Gutters",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Seamless gutter installation. Navy & sky blue with animated raindrops falling through the hero."
-  },
-  {
-    "file": "south-la-drywall.html",
-    "title": "South LA Drywall",
-    "tag": "Website",
-    "color": 2,
-    "desc": "Sheetrock installation & repair. Clay & cream with a draggable before/after wall repair slider."
-  },
-  {
-    "file": "pelican-plumbing.html",
-    "title": "Pelican Plumbing",
-    "tag": "Website",
-    "color": 0,
-    "desc": "24/7 emergency plumbing. Dark blue with a pipe that fills with water across the top on load."
-  },
-  {
-    "file": "la-pool-builder.html",
-    "title": "Louisiana Pool Builders",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Custom inground pools. Aqua & navy with water ripples that appear wherever you click."
-  },
-  {
-    "file": "crescent-city-flooring.html",
-    "title": "Crescent City Flooring",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Hardwood, tile & LVP. Warm brown editorial style with floor planks that animate in on load."
-  },
-  {
-    "file": "south-hvac.html",
-    "title": "South Louisiana HVAC",
-    "tag": "Website",
-    "color": 0,
-    "desc": "AC repair & installation. Dark blue & ice with a live temperature display that pulses in the nav."
-  },
-  {
-    "file": "delta-electric.html",
-    "title": "Delta Electric",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Residential & commercial electrical. Black & volt yellow with animated circuit board traces."
-  },
-  {
-    "file": "bayou-signs.html",
-    "title": "Bayou Signs & Graphics",
-    "tag": "Website",
-    "color": 4,
-    "desc": "Business signs & vehicle wraps. Dark with neon flicker effect on the logo like a real neon sign."
-  },
-  {
-    "file": "sportsplex-academy.html",
-    "title": "Sportsplex Academy",
-    "tag": "Website",
-    "color": 3,
-    "desc": "Youth sports training. Dark green & yellow with a scoreboard that counts up to stats on load."
-  }
-  {
-    "file": "gutter-kings.html",
-    "title": "Gutter Kings",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Seamless gutters & gutter guards. Split hero layout with water drip animation running down the page edge."
-  },
-  {
-    "file": "crescent-remodeling.html",
-    "title": "Crescent Remodeling",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Kitchen, bath & home renovation. 6-panel photo grid hero with project progress bar on load."
-  },
-  {
-    "file": "magnolia-massage.html",
-    "title": "Magnolia Massage Therapy",
-    "tag": "Website",
-    "color": 3,
-    "desc": "Therapeutic & relaxation massage. Curved hero, sage green editorial with breathing circle animation."
-  },
-  {
-    "file": "bayou-auto-glass.html",
-    "title": "Bayou Auto Glass",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Windshield repair & replacement. Tabbed service layout with windshield crack healing animation on load."
-  },
-  {
-    "file": "south-paving.html",
-    "title": "South Louisiana Paving",
-    "tag": "Website",
-    "color": 2,
-    "desc": "Asphalt driveways & parking lots. Zigzag layout with paving machine rolling across the top on load."
-  },
-  {
-    "file": "la-dog-grooming.html",
-    "title": "Bayou Paws Dog Grooming",
-    "tag": "Website",
-    "color": 4,
-    "desc": "Mobile & salon pet grooming. Playful rounded card layout with paw prints walking across the screen."
-  },
-  {
-    "file": "la-foundation-repair.html",
-    "title": "Louisiana Foundation Repair",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Slab & pier foundation repair. Floating stat boxes layout with a crack that fills with gold on load."
-  },
-  {
-    "file": "arcadian-landscaping.html",
-    "title": "Arcadian Landscaping",
-    "tag": "Website",
-    "color": 3,
-    "desc": "Landscape design & installation. Horizontal scroll portfolio with a seed growing into a plant on hero."
-  },
-  {
-    "file": "crescent-storage.html",
-    "title": "Crescent Storage",
-    "tag": "Website",
-    "color": 1,
-    "desc": "Climate-controlled self storage. Interactive unit size selector with rolling door opening on load."
-  },
-  {
-    "file": "delta-drone.html",
-    "title": "Delta Drone Services",
-    "tag": "Website",
-    "color": 0,
-    "desc": "Aerial photography & inspection. Centered cinematic hero with a drone flying a search pattern animation."
-  }
 ]

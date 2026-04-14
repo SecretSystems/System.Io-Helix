@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Gutter Kings | Seamless Gutters & Gutter Guards</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--b:#1e40af;--b2:#3b82f6;--dk:#030712;--ch:#0a1628;--wh:#f0f9ff;--dm:#94a3b8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dk);color:var(--wh);font-family:'Mulish',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Water drip that runs down the left edge of the page continuously */
+#drip-rail{position:fixed;left:0;top:0;bottom:0;width:4px;background:rgba(59,130,246,.08);z-index:500;}
+.drip{position:absolute;left:0;width:4px;border-radius:2px;background:linear-gradient(180deg,var(--b2),transparent);animation:drip-fall linear infinite;}
+@keyframes drip-fall{0%{top:-60px;opacity:1;}100%{top:110%;opacity:0;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,7,18,.97);backdrop-filter:blur(16px);border-bottom:2px solid rgba(59,130,246,.2);padding:.88rem 1.5rem 0.88rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.08em;color:var(--wh);white-space:nowrap;}
+.logo span{color:var(--b2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:24px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.6rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,249,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--b2);}
+.ncta{background:var(--b2)!important;color:var(--dk)!important;font-weight:800!important;padding:.42rem 1.2rem;border-radius:0;}
+.ncta:hover{background:var(--b)!important;color:var(--wh)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.6rem;color:var(--wh);}
+}
+/* LAYOUT: Full-height split with text left, stacked photos right */
+.hero{display:grid;grid-template-columns:55% 45%;min-height:100vh;padding-top:60px;}
+@media(max-width:750px){.hero{grid-template-columns:1fr;}}
+.hero-left{background:var(--ch);display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 3rem;}
+.hero-tag{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--b2);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.hero-tag::before{content:'';display:block;width:24px;height:1px;background:var(--b2);}
+.hero h1{font-family:'Anton',sans-serif;font-size:clamp(3rem,6vw,5.5rem);color:var(--wh);line-height:.92;margin-bottom:1.4rem;letter-spacing:.04em;text-transform:uppercase;}
+.hero h1 em{font-style:normal;color:var(--b2);}
+.hero p{font-size:.96rem;color:rgba(240,249,255,.6);line-height:1.85;max-width:400px;margin-bottom:2.2rem;}
+.btn{display:inline-block;background:var(--b2);color:var(--dk);font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2.2rem;text-decoration:none;transition:background .2s;}
+.btn:hover{background:var(--b);color:var(--wh);}
+.hero-right{display:grid;grid-template-rows:1fr 1fr;}
+.hero-img{overflow:hidden;}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s;}
+.hero-img:hover img{transform:scale(1.04);}
+/* STATS ROW */
+.stats-row{background:var(--b2);display:grid;grid-template-columns:repeat(4,1fr);}
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr);}}
+.stat{padding:1.8rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+.stat:last-child{border:none;}
+.stat-n{font-family:'Anton',sans-serif;font-size:2.2rem;letter-spacing:.04em;color:var(--dk);line-height:1;}
+.stat-l{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(3,7,18,.65);margin-top:.2rem;}
+/* SERVICES — horizontal scrolling cards on mobile */
+.svc-wrap{padding:4rem 1.5rem;background:var(--ch);}
+.sh{font-family:'Anton',sans-serif;font-size:clamp(1.8rem,4vw,3rem);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:2rem;}
+.sh em{font-style:normal;color:var(--b2);}
+.svc-scroll{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(59,130,246,.12);}
+.svc{background:var(--dk);padding:2.2rem 1.5rem;border-top:3px solid transparent;transition:border-color .25s;}
+.svc:hover{border-color:var(--b2);}
+.svc-icon{font-size:2rem;margin-bottom:.8rem;display:block;}
+.svc h3{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;}
+.svc p{font-size:.83rem;color:var(--dm);line-height:1.65;}
+/* PHOTO MOSAIC */
+.mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:3px;}
+@media(max-width:600px){.mosaic{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px;}}
+.m0{grid-row:1/3;}
+.mos-img{overflow:hidden;}
+.mos-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.mos-img:hover img{transform:scale(1.05);}
+/* REVIEWS */
+.rev{padding:4rem 1.5rem;background:var(--ch);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--dk);border-left:4px solid var(--b2);padding:1.8rem;}
+.stars{color:var(--b2);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-weight:700;font-size:.84rem;color:var(--wh);}
+footer{background:var(--dk);border-top:1px solid rgba(59,130,246,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(240,249,255,.3);font-size:.74rem;}
+footer b{color:var(--b2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(3,7,18,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="drip-rail"></div>
+<nav>
+  <div class="logo">GUTTER <span>KINGS</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Gutters</a>
+    <a href="#" onclick="toggleNav()">Guards</a>
+    <a href="#" onclick="toggleNav()">Gallery</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Estimate</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">South Louisiana's #1 Gutter Company</div>
+    <h1>Stop The<br>Water.<br><em>Protect</em><br>Your Home.</h1>
+    <p>Custom seamless gutters formed on your roofline, gutter guards that last 30 years, and same-day repair service. One call handles it all.</p>
+    <a href="#" class="btn">Get Your Free Estimate</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=85" alt="New seamless aluminum gutter being installed by technician on home fascia board"/></div>
+    <div class="hero-img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&auto=format&fit=crop&q=85" alt="Micro mesh gutter guard installed keeping leaves out of clean gutter system"/></div>
+  </div>
+</div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">6,200+</div><div class="stat-l">Homes Done</div></div>
+  <div class="stat"><div class="stat-n">30yr</div><div class="stat-l">Guard Warranty</div></div>
+  <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">Google Rating</div></div>
+  <div class="stat"><div class="stat-n">1 Day</div><div class="stat-l">Most Installs</div></div>
+</div>
+<div class="svc-wrap">
+  <h2 class="sh">What We <em>Do</em></h2>
+  <div class="svc-scroll">
+    <div class="svc"><span class="svc-icon">🏠</span><h3>Seamless Gutters</h3><p>Custom K-style and half-round aluminum gutters formed on-site. Zero seams means zero leaks.</p></div>
+    <div class="svc"><span class="svc-icon">🛡️</span><h3>Gutter Guards</h3><p>Micro-mesh guards rated for 30 years. Never clean gutters again — guaranteed.</p></div>
+    <div class="svc"><span class="svc-icon">🔧</span><h3>Gutter Repair</h3><p>Sagging, leaking, or pulling away from the house — we fix it fast and permanently.</p></div>
+    <div class="svc"><span class="svc-icon">🧹</span><h3>Gutter Cleaning</h3><p>Full flush and inspection service. Downspouts cleared, gutters tested, report provided.</p></div>
+    <div class="svc"><span class="svc-icon">💧</span><h3>Downspout Work</h3><p>Extensions and underground drains to direct water far from your foundation.</p></div>
+    <div class="svc"><span class="svc-icon">🪵</span><h3>Fascia Repair</h3><p>Rotted wood replaced before new gutters go on — the right way every time.</p></div>
+  </div>
+</div>
+<div style="padding:3px 0;">
+  <div class="mosaic">
+    <div class="mos-img m0"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&auto=format&fit=crop&q=85" alt="White seamless gutters freshly installed on large brick home roofline"/></div>
+    <div class="mos-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&auto=format&fit=crop&q=85" alt="Downspout extension directing water away from home foundation"/></div>
+    <div class="mos-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&auto=format&fit=crop&q=85" alt="Gutter cleaning service removing leaves and debris from full gutters"/></div>
+    <div class="mos-img"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=500&auto=format&fit=crop&q=85" alt="New copper gutter half round style installed on historic home"/></div>
+  </div>
+</div>
+<div class="rev">
+  <h2 class="sh">What Homeowners <em>Say</em></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Gutter guards were the smartest thing we've put on this house. We used to have gutters full of pine needles every week. Not one leaf in two years."</p><div class="rn">Karen W. — Prairieville</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"New seamless gutters installed in one day. The crew was fast, professional, and the gutters look like they were built with the house."</p><div class="rn">Phil D. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Called about a sagging gutter on Monday, it was fixed by Tuesday morning. Honest price and the tech explained exactly what caused it."</p><div class="rn">Brenda T. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Gutter Kings LLC</b> · Licensed & Insured · South Louisiana · (225) 555-5716</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+const rail=document.getElementById('drip-rail');
+for(let i=0;i<6;i++){
+  const d=document.createElement('div');d.className='drip';
+  const h=40+Math.random()*60;
+  d.style.cssText=`height:${h}px;animation-duration:${1.8+Math.random()*2}s;animation-delay:${Math.random()*3}s;`;
+  rail.appendChild(d);
+}
+</script>
+</body>
+</html>

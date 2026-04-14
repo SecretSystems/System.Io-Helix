@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Louisiana Foundation Repair | Slab & Pier Repair</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--br:#92400e;--br2:#b45309;--am:#fbbf24;--dk:#1c0f00;--lt:#fef9f0;--dm:#78716c;--wh:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--lt);color:var(--dk);font-family:'DM Sans',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Crack fills with repair material on page load — SVG animation on hero */
+.crack-line{stroke-dasharray:400;stroke-dashoffset:400;animation:fill-crack 2.5s ease 1s forwards;}
+@keyframes fill-crack{to{stroke-dashoffset:0;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,15,0,.97);backdrop-filter:blur(16px);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid rgba(180,83,9,.25);}
+.logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--wh);white-space:nowrap;letter-spacing:.04em;}
+.logo em{font-style:italic;color:var(--am);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--wh);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--am);}
+.ncta{border:1px solid var(--am)!important;color:var(--am)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--am)!important;color:var(--dk)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Floating stat boxes overlapping hero, side-by-side warning section */
+.hero{position:relative;min-height:96vh;display:flex;align-items:flex-end;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28);}
+/* Animated crack on hero */
+.hero-crack{position:absolute;inset:0;z-index:2;pointer-events:none;}
+.hero-inner{position:relative;z-index:3;padding:3rem 1.5rem 5rem;max-width:680px;}
+.hero-ey{font-size:.65rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--am);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+.hero-ey::before{content:'';display:block;width:28px;height:1px;background:var(--am);}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,6rem);color:var(--wh);line-height:1;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--am);}
+.hero p{font-size:.96rem;color:rgba(255,255,255,.62);line-height:1.8;max-width:480px;margin-bottom:2rem;}
+.btn{background:var(--am);color:var(--dk);font-weight:700;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;padding:.88rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--br2);}
+/* FLOATING STATS — overlap from hero */
+.float-stats{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;}
+.fstat{background:rgba(255,255,255,.06);border:1px solid rgba(251,191,36,.2);backdrop-filter:blur(8px);padding:1rem 1.4rem;flex:1;min-width:120px;}
+.fstat-n{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--am);line-height:1;}
+.fstat-l{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.2rem;}
+/* WARNING SIGNS SECTION */
+.warning{background:var(--dk);padding:4.5rem 1.5rem;}
+.sh{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);text-align:center;margin-bottom:.5rem;}
+.sh em{font-style:italic;color:var(--am);}
+.sub{text-align:center;font-size:.85rem;color:rgba(255,255,255,.45);margin-bottom:2.5rem;}
+.warn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;}
+.warn{background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);padding:1.8rem;transition:border-color .2s;}
+.warn:hover{border-color:rgba(251,191,36,.5);}
+.warn-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.warn h3{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--wh);margin-bottom:.4rem;}
+.warn p{font-size:.83rem;color:rgba(255,255,255,.48);line-height:1.65;}
+/* SOLUTIONS */
+.solutions{padding:4.5rem 1.5rem;background:var(--lt);}
+.sol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2rem;}
+.sol{background:var(--wh);border-top:4px solid var(--am);padding:2rem 1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.sol h3{font-family:'DM Serif Display',serif;font-size:1.1rem;margin-bottom:.5rem;}
+.sol p{font-size:.84rem;color:var(--dm);line-height:1.7;}
+.sol-warranty{font-size:.72rem;font-weight:700;color:var(--br2);margin-top:.7rem;display:flex;align-items:center;gap:.3rem;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--wh);padding:2rem;border-left:4px solid var(--am);box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.stars{color:var(--am);margin-bottom:.5rem;}
+.rt{font-family:'DM Serif Display',serif;font-style:italic;font-size:.96rem;color:var(--dm);line-height:1.75;margin-bottom:.6rem;}
+.rn{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--br);}
+footer{background:var(--dk);padding:2rem 1.5rem;text-align:center;color:rgba(255,255,255,.3);font-size:.74rem;}
+footer b{color:var(--am);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(28,15,0,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.18);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Louisiana <em>Foundation</em> Repair</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Warning Signs</a>
+    <a href="#" onclick="toggleNav()">Reviews</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Inspection</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&auto=format&fit=crop&q=85" alt="Foundation repair crew installing helical piers under settling home"/></div>
+  <svg class="hero-crack" viewBox="0 0 1440 900" preserveAspectRatio="none">
+    <polyline points="500,0 480,150 520,250 490,380 530,480 500,600 520,780 490,900" fill="none" stroke="rgba(251,191,36,0)" stroke-width="3" class="crack-line"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="hero-ey">Foundation Specialists · South Louisiana Since 2001</div>
+    <h1>Your<br>Foundation.<br><em>Fixed.</em></h1>
+    <p>Slab lifting, pier underpinning, crack repair, and drainage correction for Louisiana homes. Lifetime transferable warranty on all structural work.</p>
+    <a href="#" class="btn">Schedule Free Inspection</a>
+    <div class="float-stats">
+      <div class="fstat"><div class="fstat-n">2,400+</div><div class="fstat-l">Homes Repaired</div></div>
+      <div class="fstat"><div class="fstat-n">Lifetime</div><div class="fstat-l">Warranty</div></div>
+      <div class="fstat"><div class="fstat-n">23yr</div><div class="fstat-l">Experience</div></div>
+    </div>
+  </div>
+</div>
+<div class="warning">
+  <h2 class="sh" style="color:var(--wh);">Warning <em>Signs</em></h2>
+  <p class="sub">These symptoms mean your foundation needs immediate attention</p>
+  <div class="warn-grid">
+    <div class="warn"><span class="warn-icon">↕️</span><h3>Cracks in Walls</h3><p>Diagonal cracks from door corners and stair-step cracks in brick are classic foundation settlement indicators.</p></div>
+    <div class="warn"><span class="warn-icon">🚪</span><h3>Sticking Doors</h3><p>Doors and windows that stick, won't close, or have gaps at the top indicate the home is shifting.</p></div>
+    <div class="warn"><span class="warn-icon">📐</span><h3>Sloping Floors</h3><p>Noticeable slope or bounce in your floors signals that the slab or supports beneath are settling unevenly.</p></div>
+    <div class="warn"><span class="warn-icon">💧</span><h3>Water in Crawl Space</h3><p>Standing water or moisture under your home accelerates wood rot and undermines the foundation.</p></div>
+  </div>
+</div>
+<div class="solutions">
+  <h2 class="sh">Our <em>Solutions</em></h2>
+  <div class="sol-grid">
+    <div class="sol"><h3>Slab Lifting</h3><p>Polyurethane foam injected under settled concrete lifts it back to level in hours — not days.</p><div class="sol-warranty">✓ 10-Year Warranty</div></div>
+    <div class="sol"><h3>Helical Piers</h3><p>Steel piers driven to bedrock provide permanent support for homes suffering from long-term settlement.</p><div class="sol-warranty">✓ Lifetime Warranty</div></div>
+    <div class="sol"><h3>Carbon Fiber Straps</h3><p>Bowing basement and crawl space walls stabilized with high-strength carbon fiber reinforcement.</p><div class="sol-warranty">✓ 25-Year Warranty</div></div>
+    <div class="sol"><h3>Drainage Systems</h3><p>French drains, sump pumps, and grading corrections to eliminate the water causing your problems.</p><div class="sol-warranty">✓ 5-Year Warranty</div></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--lt);">
+  <h2 class="sh">Client <em>Reviews</em></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Our home had settled 3 inches on one side. The pier system they installed lifted it back perfectly and the warranty transfers with the house."</p><div class="rn">Jerry F. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Slab lifting took half a day and cost a fraction of what we expected. The technician explained everything clearly and the results are perfect."</p><div class="rn">Carol S. — Prairieville</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Bowing wall in our crawl space was repaired with carbon fiber. The inspector said the work was excellent. Couldn't be happier."</p><div class="rn">Dan M. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Louisiana Foundation Repair</b> · Licensed Structural Contractor · (225) 555-6394</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

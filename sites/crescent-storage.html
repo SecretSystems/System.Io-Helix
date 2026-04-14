@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Crescent Storage | Climate-Controlled Self Storage</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--or:#f97316;--or2:#fb923c;--dk:#0a0a0a;--ch:#111;--wh:#f9fafb;--dm:#9ca3af;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dk);color:var(--wh);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Rolling door opens on load — a storage unit door slides up */
+#door-scene{position:fixed;inset:0;z-index:9000;background:var(--dk);display:flex;align-items:center;justify-content:center;transition:opacity .5s ease 3.2s;}
+#door-scene.gone{opacity:0;pointer-events:none;}
+.door-frame{width:260px;height:220px;background:#1a1a1a;border:3px solid #333;position:relative;overflow:hidden;}
+.door-slats{position:absolute;inset:0;background:repeating-linear-gradient(180deg,#2a2a2a 0px,#2a2a2a 18px,#222 18px,#222 20px);transition:transform 2.5s cubic-bezier(.4,0,.2,1);}
+.door-slats.open{transform:translateY(-110%);}
+.door-inside{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;}
+.door-logo{font-size:1.5rem;font-weight:700;color:var(--or);}
+.door-sub{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.door-handle{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:60px;height:8px;background:#444;border-radius:4px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.97);border-bottom:1px solid rgba(249,115,22,.2);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-weight:700;font-size:1.15rem;color:var(--wh);white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;}
+.logo span{color:var(--or);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(249,250,251,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--or);}
+.ncta{background:var(--or)!important;color:var(--dk)!important;font-weight:700!important;padding:.4rem 1.2rem;}
+.ncta:hover{background:var(--or2)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Full dark industrial grid — unit size selector tool */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;padding:5.5rem 1.5rem 3rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.18);}
+.hero-inner{position:relative;z-index:2;max-width:580px;}
+.hero h1{font-size:clamp(2.8rem,8vw,7rem);font-weight:700;color:var(--wh);line-height:.92;margin-bottom:1.2rem;letter-spacing:-.02em;}
+.hero h1 span{color:var(--or);}
+.hero p{font-size:.96rem;color:rgba(249,250,251,.6);line-height:1.8;max-width:460px;margin-bottom:2rem;}
+.btn{background:var(--or);color:var(--dk);font-weight:700;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--or2);}
+/* UNIT SIZE SELECTOR */
+.units{padding:4.5rem 1.5rem;background:var(--ch);}
+.sh{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;text-align:center;margin-bottom:.5rem;letter-spacing:-.01em;}
+.sh span{color:var(--or);}
+.sub{text-align:center;font-size:.85rem;color:var(--dm);margin-bottom:2.5rem;}
+.unit-tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
+.utab{background:none;border:1px solid rgba(249,115,22,.2);color:var(--dm);font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.2rem;cursor:pointer;transition:all .2s;}
+.utab.active{background:var(--or);color:var(--dk);border-color:var(--or);}
+.utab:hover{border-color:var(--or);color:var(--or);}
+.unit-panel{display:none;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:650px){.unit-panel{grid-template-columns:1fr;}}
+.unit-panel.show{display:grid;}
+.unit-viz{background:#1a1a1a;border:2px solid rgba(249,115,22,.2);display:flex;align-items:center;justify-content:center;padding:2rem;aspect-ratio:1;}
+.unit-box{background:rgba(249,115,22,.08);border:2px dashed rgba(249,115,22,.4);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or);}
+.unit-info h3{font-size:1.5rem;font-weight:700;color:var(--wh);margin-bottom:.5rem;}
+.unit-price{font-size:2rem;font-weight:700;color:var(--or);margin-bottom:.5rem;}
+.unit-per{font-size:.75rem;color:var(--dm);margin-bottom:1rem;}
+.unit-info ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;}
+.unit-info li{font-size:.84rem;color:rgba(249,250,251,.55);display:flex;align-items:center;gap:.5rem;}
+.unit-info li::before{content:'✓';color:var(--or);font-weight:700;}
+.unit-cta{display:inline-block;background:var(--or);color:var(--dk);font-weight:700;font-size:.84rem;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.8rem;text-decoration:none;transition:background .2s;}
+.unit-cta:hover{background:var(--or2);}
+/* FEATURES */
+.features{padding:4.5rem 1.5rem;background:var(--dk);}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:2rem;}
+.feat{background:var(--ch);border:1px solid rgba(249,115,22,.08);padding:2rem 1.5rem;text-align:center;transition:border-color .25s;}
+.feat:hover{border-color:rgba(249,115,22,.4);}
+.feat-icon{font-size:2.2rem;display:block;margin-bottom:.8rem;}
+.feat h3{font-size:.92rem;font-weight:700;color:var(--wh);margin-bottom:.3rem;}
+.feat p{font-size:.8rem;color:var(--dm);line-height:1.6;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--ch);border:1px solid rgba(249,115,22,.1);padding:1.8rem;transition:border-color .2s;}
+.rc:hover{border-color:rgba(249,115,22,.35);}
+.stars{color:var(--or);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-weight:700;font-size:.84rem;color:var(--or);}
+footer{background:var(--dk);border-top:1px solid rgba(249,115,22,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(249,250,251,.3);font-size:.74rem;}
+footer b{color:var(--or);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(10,10,10,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="door-scene">
+  <div class="door-frame">
+    <div class="door-inside"><div class="door-logo">CRESCENT STORAGE</div><div class="door-sub">Opening your unit...</div></div>
+    <div class="door-slats" id="door-slats"></div>
+    <div class="door-handle"></div>
+  </div>
+</div>
+<nav>
+  <div class="logo">Crescent <span>Storage</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Units</a>
+    <a href="#" onclick="toggleNav()">Features</a>
+    <a href="#" onclick="toggleNav()">Rates</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Reserve a Unit</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop&q=85" alt="Row of clean climate controlled storage units with orange rollup doors"/></div>
+  <div class="hero-inner">
+    <h1>Secure.<br>Climate<br><span>Controlled.</span></h1>
+    <p>Clean, secure, and climate-controlled self storage in South Louisiana. Month-to-month rentals, 24/7 access, and moving truck included free with first month.</p>
+    <a href="#" class="btn">Reserve Your Unit</a>
+  </div>
+</div>
+<div class="units">
+  <h2 class="sh">Choose Your <span>Unit Size</span></h2>
+  <p class="sub">Click a size to see what fits and current pricing</p>
+  <div class="unit-tabs">
+    <button class="utab active" onclick="showUnit('s5',this)">5×5</button>
+    <button class="utab" onclick="showUnit('s10',this)">5×10</button>
+    <button class="utab" onclick="showUnit('m10',this)">10×10</button>
+    <button class="utab" onclick="showUnit('l10',this)">10×20</button>
+    <button class="utab" onclick="showUnit('xl',this)">10×30</button>
+  </div>
+  <div id="s5" class="unit-panel show">
+    <div class="unit-viz"><div class="unit-box" style="width:60px;height:60px;">5×5</div></div>
+    <div class="unit-info"><h3>5×5 Unit</h3><div class="unit-price">$49</div><div class="unit-per">/month · Climate Controlled</div><ul><li>Small apartment items</li><li>Boxes and seasonal items</li><li>Closet overflow</li></ul><a href="#" class="unit-cta">Reserve This Unit</a></div>
+  </div>
+  <div id="s10" class="unit-panel">
+    <div class="unit-viz"><div class="unit-box" style="width:60px;height:120px;">5×10</div></div>
+    <div class="unit-info"><h3>5×10 Unit</h3><div class="unit-price">$79</div><div class="unit-per">/month · Climate Controlled</div><ul><li>Studio apartment contents</li><li>Furniture and appliances</li><li>Business inventory</li></ul><a href="#" class="unit-cta">Reserve This Unit</a></div>
+  </div>
+  <div id="m10" class="unit-panel">
+    <div class="unit-viz"><div class="unit-box" style="width:120px;height:120px;">10×10</div></div>
+    <div class="unit-info"><h3>10×10 Unit</h3><div class="unit-price">$119</div><div class="unit-per">/month · Climate Controlled</div><ul><li>1–2 bedroom apartment</li><li>Full furniture sets</li><li>Vehicle parts & tools</li></ul><a href="#" class="unit-cta">Reserve This Unit</a></div>
+  </div>
+  <div id="l10" class="unit-panel">
+    <div class="unit-viz"><div class="unit-box" style="width:200px;height:120px;">10×20</div></div>
+    <div class="unit-info"><h3>10×20 Unit</h3><div class="unit-price">$189</div><div class="unit-per">/month · Climate Controlled</div><ul><li>2–3 bedroom home</li><li>Full household contents</li><li>Vehicle + belongings</li></ul><a href="#" class="unit-cta">Reserve This Unit</a></div>
+  </div>
+  <div id="xl" class="unit-panel">
+    <div class="unit-viz"><div class="unit-box" style="width:200px;height:160px;">10×30</div></div>
+    <div class="unit-info"><h3>10×30 Unit</h3><div class="unit-price">$249</div><div class="unit-per">/month · Climate Controlled</div><ul><li>Large home or business</li><li>Multiple vehicles</li><li>Long-term storage</li></ul><a href="#" class="unit-cta">Reserve This Unit</a></div>
+  </div>
+</div>
+<div class="features">
+  <h2 class="sh">Facility <span>Features</span></h2>
+  <div class="feat-grid">
+    <div class="feat"><span class="feat-icon">🌡️</span><h3>Climate Controlled</h3><p>All units maintain 65–75°F year-round, protecting your valuables from Louisiana heat.</p></div>
+    <div class="feat"><span class="feat-icon">📹</span><h3>24/7 Security</h3><p>HD cameras, gated access, and on-site management keep your belongings safe around the clock.</p></div>
+    <div class="feat"><span class="feat-icon">🚚</span><h3>Free Moving Truck</h3><p>Reserve a unit and use our moving truck free for your first move-in day.</p></div>
+    <div class="feat"><span class="feat-icon">📱</span><h3>App Access</h3><p>Open the gate and manage your unit from your phone with our free mobile app.</p></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--ch);">
+  <h2 class="sh">Customer <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Cleanest storage facility I've ever used. Climate control actually works, everything was exactly as advertised, and the app gate access is genius."</p><div class="rn">BRENDA K. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Used the free moving truck, moved everything in one trip, and our unit was spotless. Month-to-month flexibility is perfect for our situation."</p><div class="rn">JOHN T. — Prairieville</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Stored my classic car here for 6 months. Perfect temperature, not a speck of dust. Crescent Storage is the only place I'll ever use."</p><div class="rn">GARY M. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Crescent Storage</b> · Climate Controlled · South Louisiana · (225) 555-6620</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+function showUnit(id,btn){
+  document.querySelectorAll('.unit-panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.utab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('show');btn.classList.add('active');
+}
+// Rolling door open animation
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('door-slats').classList.add('open'),400);
+  setTimeout(()=>document.getElementById('door-scene').classList.add('gone'),3800);
+});
+</script>
+</body>
+</html>

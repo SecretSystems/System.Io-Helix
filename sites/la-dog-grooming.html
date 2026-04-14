@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bayou Paws Dog Grooming | Mobile & Salon Pet Grooming</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--pu:#7c3aed;--pu2:#a78bfa;--pk:#ec4899;--wh:#fefcff;--dk:#1a0830;--lt:#f5f0ff;--dm:#6b7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--wh);color:var(--dk);font-family:'Nunito',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Paw prints walk across the screen on load */
+#paw-canvas{position:fixed;inset:0;pointer-events:none;z-index:9999;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,8,48,.97);backdrop-filter:blur(16px);padding:.88rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid rgba(124,58,237,.25);}
+.logo{font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:600;letter-spacing:.04em;color:var(--wh);white-space:nowrap;}
+.logo span{color:var(--pu2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(254,252,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--pu2);}
+.ncta{background:var(--pk)!important;color:var(--wh)!important;border-radius:30px;padding:.4rem 1.2rem;}
+.ncta:hover{background:#db2777!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Playful staggered card grid, round corners throughout */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;padding-top:60px;}
+@media(max-width:700px){.hero{grid-template-columns:1fr;}}
+.hero-text{background:var(--dk);display:flex;flex-direction:column;justify-content:center;padding:4rem 2.5rem;}
+.hero-badge{display:inline-block;background:var(--pu2);color:var(--dk);font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .8rem;border-radius:30px;margin-bottom:1.2rem;}
+.hero h1{font-family:'Fredoka',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;color:var(--wh);line-height:1;margin-bottom:1.1rem;letter-spacing:.02em;}
+.hero h1 span{color:var(--pu2);}
+.hero p{font-size:.95rem;color:rgba(254,252,255,.62);line-height:1.8;max-width:380px;margin-bottom:2rem;}
+.btn{display:inline-block;background:var(--pk);color:var(--wh);font-family:'Fredoka',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:.06em;padding:.82rem 2rem;text-decoration:none;border-radius:30px;transition:background .2s;}
+.btn:hover{background:#db2777;}
+.hero-img-wrap{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;}
+.himg{overflow:hidden;}
+.himg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.himg:hover img{transform:scale(1.06);}
+/* SERVICES — pill-style cards */
+.svcs{padding:4.5rem 1.5rem;background:var(--lt);}
+.sh{font-family:'Fredoka',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;text-align:center;margin-bottom:.4rem;}
+.sh span{color:var(--pu);}
+.sub{text-align:center;font-size:.86rem;color:var(--dm);margin-bottom:2.5rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;}
+.svc{background:var(--wh);border-radius:16px;padding:2rem 1.5rem;box-shadow:0 4px 20px rgba(124,58,237,.08);text-align:center;transition:transform .25s,box-shadow .25s;}
+.svc:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(124,58,237,.15);}
+.svc-icon{font-size:2.5rem;display:block;margin-bottom:.8rem;}
+.svc h3{font-family:'Fredoka',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:.4rem;}
+.svc p{font-size:.82rem;color:var(--dm);line-height:1.65;}
+.svc-price{display:inline-block;background:var(--lt);color:var(--pu);font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-top:.7rem;}
+/* MOBILE GROOMING FEATURE */
+.mobile-feat{background:var(--pu);padding:4rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;}
+@media(max-width:700px){.mobile-feat{grid-template-columns:1fr;}}
+.mobile-feat-img{border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.3);}
+.mobile-feat-img img{width:100%;display:block;height:380px;object-fit:cover;}
+.mobile-text h2{font-family:'Fredoka',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;color:var(--wh);margin-bottom:1rem;}
+.mobile-text p{font-size:.92rem;color:rgba(254,252,255,.72);line-height:1.8;margin-bottom:1rem;}
+.mobile-text ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
+.mobile-text li{font-size:.88rem;color:rgba(254,252,255,.72);display:flex;align-items:center;gap:.6rem;}
+.mobile-text li::before{content:'🐾';font-size:.75rem;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--wh);border-radius:12px;padding:1.8rem;box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.stars{color:var(--pk);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem;color:var(--pu);}
+footer{background:var(--dk);padding:2rem 1.5rem;text-align:center;color:rgba(254,252,255,.3);font-size:.74rem;}
+footer b{color:var(--pu2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(26,8,48,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<canvas id="paw-canvas"></canvas>
+<nav>
+  <div class="logo">Bayou <span>Paws</span> 🐾</div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Services</a>
+    <a href="#" onclick="toggleNav()">Mobile</a>
+    <a href="#" onclick="toggleNav()">Pricing</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Book Now</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">🐾 Mobile & Salon Grooming</div>
+    <h1>Your Pup<br>Deserves<br><span>The Best.</span></h1>
+    <p>Professional dog grooming at our salon or right in your driveway. Full grooms, baths, nail trims, and spa treatments by certified groomers.</p>
+    <a href="#" class="btn">Book a Groom 🐶</a>
+  </div>
+  <div class="hero-img-wrap">
+    <div class="himg"><img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&auto=format&fit=crop&q=85" alt="Happy golden retriever being groomed by professional pet groomer"/></div>
+    <div class="himg"><img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&auto=format&fit=crop&q=85" alt="Small fluffy dog getting a bath at dog grooming salon"/></div>
+    <div class="himg"><img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?w=500&auto=format&fit=crop&q=85" alt="Dog groomer trimming fur with scissors on poodle mix"/></div>
+    <div class="himg"><img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=500&auto=format&fit=crop&q=85" alt="Cute dog with bow tie after professional grooming session"/></div>
+  </div>
+</div>
+<div class="svcs">
+  <h2 class="sh">Grooming <span>Services</span></h2>
+  <p class="sub">All breeds · All sizes · Certified groomers only</p>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">✂️</span><h3>Full Groom</h3><p>Bath, blow dry, breed-specific haircut, nail trim, ear cleaning, and bandana or bow.</p><div class="svc-price">Starting at $55</div></div>
+    <div class="svc"><span class="svc-icon">🛁</span><h3>Bath & Brush</h3><p>Shampoo, condition, blow dry, brush out, nail trim, and fresh spritz. Looking great!</p><div class="svc-price">Starting at $35</div></div>
+    <div class="svc"><span class="svc-icon">💅</span><h3>Nail Trim</h3><p>Nail trim and file only — in and out in 10 minutes. Walk-in welcome.</p><div class="svc-price">$15</div></div>
+    <div class="svc"><span class="svc-icon">🌿</span><h3>De-Shed Treatment</h3><p>Professional de-shedding treatment reduces shedding up to 80% for 4–6 weeks.</p><div class="svc-price">Add-on: $20–$35</div></div>
+    <div class="svc"><span class="svc-icon">✨</span><h3>Teeth Brushing</h3><p>Dog-safe toothpaste brushing to freshen breath and maintain dental health.</p><div class="svc-price">Add-on: $10</div></div>
+    <div class="svc"><span class="svc-icon">🐾</span><h3>Puppy First Groom</h3><p>Gentle introduction to grooming for puppies 8 weeks+. Patience and treats included.</p><div class="svc-price">Starting at $40</div></div>
+  </div>
+</div>
+<div class="mobile-feat">
+  <div class="mobile-feat-img"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&auto=format&fit=crop&q=85" alt="Mobile dog grooming van parked in residential driveway groomer working inside"/></div>
+  <div class="mobile-text">
+    <h2>🚐 Mobile Grooming — We Come To You</h2>
+    <p>Our fully equipped mobile grooming van brings the salon experience right to your driveway. Your dog never has to deal with the stress of other animals.</p>
+    <ul>
+      <li>One-on-one attention — no other pets present</li>
+      <li>You watch if you want — full transparency</li>
+      <li>Less stressful for anxious dogs</li>
+      <li>Available 6 days a week</li>
+    </ul>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--lt);">
+  <h2 class="sh">Pet Parent <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"My golden retriever looks like a show dog after every appointment. The mobile grooming is so convenient and Biscuit is so much calmer than at a regular salon."</p><div class="rn">Sarah M. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Best groomers in the area. My doodle has never been so well-groomed and he's no longer nervous about going. The team is so patient and kind."</p><div class="rn">James T. — Prairieville</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"De-shed treatment changed our lives. Our lab barely sheds anymore. Our furniture and car seats thank you every single day."</p><div class="rn">Nicole F. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Bayou Paws Dog Grooming</b> · Certified Groomers · South Louisiana · (225) 555-6281</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+const canvas=document.getElementById('paw-canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const paws=[];let t=0;
+function drawPaw(x,y,s,a){
+  ctx.save();ctx.globalAlpha=a;ctx.translate(x,y);ctx.scale(s,s);
+  ctx.fillStyle='rgba(124,58,237,0.6)';
+  ctx.beginPath();ctx.ellipse(0,0,8,10,0,0,Math.PI*2);ctx.fill();
+  [[−12,−10,4],[12,−10,4],[−18,0,4],[18,0,4]].forEach(([px,py,r])=>{ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);ctx.fill();});
+  ctx.restore();
+}
+function step(){
+  if(t<40){
+    const x=60+t*38;const y=80+Math.sin(t*.8)*30;
+    paws.push({x,y,age:0,side:t%2});
+    t++;
+  }
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=paws.length-1;i>=0;i--){
+    const p=paws[i];p.age+=0.01;
+    const a=Math.max(0,0.5-p.age);
+    drawPaw(p.x+(p.side?8:-8),p.y,1,a);
+    if(a<=0)paws.splice(i,1);
+  }
+  requestAnimationFrame(step);
+}
+step();
+</script>
+</body>
+</html>

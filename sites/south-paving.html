@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>South Louisiana Paving | Asphalt Driveways & Parking Lots</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--or:#f97316;--or2:#fb923c;--dk:#09090b;--ch:#111113;--wh:#fafafa;--dm:#71717a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dk);color:var(--wh);font-family:'Source Sans 3',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Asphalt paving machine rolls across the top of page on load */
+#paver-track{position:fixed;top:0;left:0;right:0;height:52px;background:#111;z-index:1001;overflow:hidden;border-bottom:3px solid var(--or);}
+#paver{position:absolute;top:50%;transform:translateY(-50%);font-size:1.5rem;left:-60px;animation:pave 3s ease-in-out .3s forwards;}
+@keyframes pave{0%{left:-60px;}100%{left:calc(100% + 60px);}}
+#fresh-asphalt{position:absolute;top:0;left:0;height:100%;width:0;background:linear-gradient(90deg,#1a1a1a,#222);transition:width 3s ease-in-out .3s;}
+nav{position:fixed;top:52px;left:0;right:0;z-index:1000;background:rgba(9,9,11,.97);border-bottom:2px solid rgba(249,115,22,.2);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:.06em;color:var(--wh);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--or);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,250,250,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--or);}
+.ncta{background:var(--or)!important;color:var(--dk)!important;font-weight:700!important;padding:.4rem 1.2rem;}
+.ncta:hover{background:var(--or2)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Full-width sticky video-style hero, zigzag alternating sections */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;padding:7.5rem 1.5rem 4rem;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.2);}
+.hero-inner{position:relative;z-index:2;max-width:680px;}
+.hero h1{font-family:'Oswald',sans-serif;font-size:clamp(3rem,10vw,8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--wh);line-height:.88;margin-bottom:1.3rem;}
+.hero h1 span{color:var(--or);}
+.hero p{font-size:.98rem;color:rgba(250,250,250,.6);line-height:1.8;max-width:500px;margin-bottom:2.2rem;}
+.btn{background:var(--or);color:var(--dk);font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.82rem 2.2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--or2);}
+/* ZIGZAG SECTIONS */
+.zz{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;}
+@media(max-width:700px){.zz{grid-template-columns:1fr;}}
+.zz.flip .zz-img{order:2;}
+.zz.flip .zz-text{order:1;}
+.zz-img{overflow:hidden;min-height:320px;}
+.zz-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s;}
+.zz-img:hover img{transform:scale(1.04);}
+.zz-text{background:var(--ch);display:flex;flex-direction:column;justify-content:center;padding:3.5rem 2.5rem;}
+.zz-num{font-family:'Oswald',sans-serif;font-size:4rem;font-weight:700;color:rgba(249,115,22,.12);line-height:1;margin-bottom:.5rem;}
+.zz-text h2{font-family:'Oswald',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--wh);margin-bottom:.8rem;}
+.zz-text h2 span{color:var(--or);}
+.zz-text p{font-size:.9rem;color:rgba(250,250,250,.52);line-height:1.8;}
+.stats{background:var(--or);padding:2.5rem 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(min-width:600px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat{text-align:center;color:var(--dk);}
+.stat-n{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;line-height:1;}
+.stat-l{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.7;margin-top:.2rem;}
+.r-section{padding:4.5rem 1.5rem;background:var(--ch);}
+.sh{font-family:'Oswald',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:2rem;}
+.sh span{color:var(--or);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;}
+.rc{background:var(--dk);border-top:3px solid var(--or);padding:1.8rem;}
+.stars{color:var(--or);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-family:'Oswald',sans-serif;font-weight:600;font-size:.9rem;color:var(--or);}
+footer{background:var(--dk);border-top:1px solid rgba(249,115,22,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(250,250,250,.3);font-size:.74rem;}
+footer b{color:var(--or);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(9,9,11,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="paver-track"><div id="fresh-asphalt"></div><div id="paver">🚧</div></div>
+<nav>
+  <div class="logo">SOUTH LA <span>PAVING</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Driveways</a>
+    <a href="#" onclick="toggleNav()">Parking Lots</a>
+    <a href="#" onclick="toggleNav()">Sealcoating</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&auto=format&fit=crop&q=85" alt="Asphalt paving machine laying fresh hot mix asphalt on commercial parking lot"/></div>
+  <div class="hero-inner">
+    <h1>New<br>Asphalt.<br><span>Flawless.</span></h1>
+    <p>Residential driveways, commercial parking lots, and roadway paving across South Louisiana. Hot mix asphalt installed right with equipment and experience that shows.</p>
+    <a href="#" class="btn">Get a Free Quote</a>
+  </div>
+</div>
+<div class="zz">
+  <div class="zz-img"><img src="https://images.unsplash.com/photo-1597059640506-41cb2fc5ad05?w=800&auto=format&fit=crop&q=85" alt="Freshly paved smooth black asphalt residential driveway in front of brick home"/></div>
+  <div class="zz-text"><div class="zz-num">01</div><h2>Residential <span>Driveways</span></h2><p>New driveway installs, full replacements, and resurfacing. 3-inch compacted base with proper drainage grading — built to handle Louisiana weather for decades.</p></div>
+</div>
+<div class="zz flip">
+  <div class="zz-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=85" alt="Commercial asphalt parking lot being paved with striping machine visible"/></div>
+  <div class="zz-text"><div class="zz-num">02</div><h2>Commercial <span>Parking Lots</span></h2><p>Full parking lot construction, expansion, and resurfacing with drainage engineering, ADA compliance, and striping all handled in-house.</p></div>
+</div>
+<div class="zz">
+  <div class="zz-img"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&auto=format&fit=crop&q=85" alt="Sealcoating being applied with squeegee to restore faded cracked asphalt driveway"/></div>
+  <div class="zz-text"><div class="zz-num">03</div><h2>Sealcoating & <span>Repairs</span></h2><p>Protect your investment with professional sealcoating, crack filling, and pothole repair. Extends asphalt life by 10+ years at a fraction of replacement cost.</p></div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">3,800+</div><div class="stat-l">Jobs Completed</div></div>
+  <div class="stat"><div class="stat-n">22yr</div><div class="stat-l">Experience</div></div>
+  <div class="stat"><div class="stat-n">4.8★</div><div class="stat-l">Google Rating</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Licensed</div></div>
+</div>
+<div class="r-section">
+  <h2 class="sh">Customer <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"New driveway is absolutely beautiful. Thick, smooth, and properly graded. The crew worked fast and cleaned up everything before they left."</p><div class="rn">RANDY T. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Parking lot for our shopping strip — 38,000 sq ft done on time and on budget. The quality is exceptional and the striping is perfect."</p><div class="rn">CARL E. — Gonzales</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Sealcoating on my driveway transformed it from faded and cracked to like brand new. Amazing what a difference it makes. Worth every penny."</p><div class="rn">LINDA B. — Prairieville</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>South Louisiana Paving</b> · Licensed Contractor · South Louisiana · (225) 555-6168</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+window.addEventListener('load',()=>setTimeout(()=>{document.getElementById('fresh-asphalt').style.width='100%';},300));
+</script>
+</body>
+</html>

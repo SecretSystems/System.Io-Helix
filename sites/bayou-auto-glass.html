@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bayou Auto Glass | Windshield Repair & Replacement</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--teal:#0891b2;--teal2:#06b6d4;--dk:#020d12;--ch:#041820;--wh:#f0fdff;--dm:#64748b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dk);color:var(--wh);font-family:'Sora',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Glass crack SVG that slowly "repairs" — crack fades out on hero load */
+#crack-overlay{position:absolute;inset:0;z-index:3;pointer-events:none;}
+#crack-path{stroke-dasharray:800;stroke-dashoffset:0;transition:stroke-dashoffset 2.5s ease 1s;}
+#crack-path.healed{stroke-dashoffset:800;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,13,18,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(6,182,212,.18);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-weight:800;font-size:1.15rem;color:var(--wh);white-space:nowrap;letter-spacing:.04em;}
+.logo span{color:var(--teal2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.5rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,253,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--teal2);}
+.ncta{background:var(--teal2)!important;color:var(--dk)!important;font-weight:700!important;padding:.4rem 1.2rem;}
+.ncta:hover{background:var(--teal)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Angled 3-column info strip below hero, horizontal service tabs */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;padding:5.5rem 1.5rem 3rem;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.22);}
+.hero-inner{position:relative;z-index:4;max-width:600px;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);padding:.32rem .85rem;margin-bottom:1.2rem;}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal2);animation:blink .7s infinite alternate;}
+@keyframes blink{from{opacity:1;}to{opacity:.2;}}
+.badge-text{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal2);}
+.hero h1{font-size:clamp(2.8rem,8vw,7rem);font-weight:800;color:var(--wh);line-height:.9;margin-bottom:1.2rem;letter-spacing:-.02em;}
+.hero h1 span{color:var(--teal2);}
+.hero p{font-size:.96rem;color:rgba(240,253,255,.62);line-height:1.8;max-width:460px;margin-bottom:2rem;}
+.btn{background:var(--teal2);color:var(--dk);font-weight:800;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn:hover{background:var(--teal);}
+/* ANGLED INFO STRIP */
+.info-strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--teal);clip-path:polygon(0 0,100% 0,100% 80%,0 100%);}
+@media(max-width:600px){.info-strip{grid-template-columns:1fr;clip-path:none;}}
+.info-item{padding:2.5rem 1.5rem 3.5rem;border-right:1px solid rgba(255,255,255,.15);text-align:center;}
+.info-item:last-child{border:none;}
+.info-icon{font-size:2rem;display:block;margin-bottom:.7rem;}
+.info-item h3{font-size:.9rem;font-weight:700;color:var(--dk);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;}
+.info-item p{font-size:.82rem;color:rgba(2,13,18,.7);line-height:1.6;}
+/* SERVICE TABS */
+.svc-section{padding:5rem 1.5rem;background:var(--ch);}
+.sh{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;text-align:center;margin-bottom:2rem;letter-spacing:-.01em;}
+.sh span{color:var(--teal2);}
+.tab-btns{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid rgba(6,182,212,.15);margin-bottom:2rem;scrollbar-width:none;}
+.tab-btn{flex-shrink:0;padding:.8rem 1.4rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;color:rgba(240,253,255,.45);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+.tab-btn.active,.tab-btn:hover{color:var(--teal2);border-bottom-color:var(--teal2);}
+.tab-panel{display:none;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:650px){.tab-panel{grid-template-columns:1fr;}}
+.tab-panel.active{display:grid;}
+.tab-img{border-radius:4px;overflow:hidden;}
+.tab-img img{width:100%;display:block;height:300px;object-fit:cover;}
+.tab-body h3{font-size:1.5rem;font-weight:800;color:var(--wh);margin-bottom:.8rem;}
+.tab-body p{font-size:.88rem;color:rgba(240,253,255,.58);line-height:1.8;margin-bottom:1.2rem;}
+.tab-price{font-size:1.1rem;font-weight:800;color:var(--teal2);margin-bottom:1rem;}
+.tab-body a{display:inline-block;background:var(--teal2);color:var(--dk);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.8rem;text-decoration:none;transition:background .2s;}
+.tab-body a:hover{background:var(--teal);}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--dk);border:1px solid rgba(6,182,212,.12);padding:1.8rem;transition:border-color .2s;}
+.rc:hover{border-color:rgba(6,182,212,.4);}
+.stars{color:var(--teal2);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-weight:700;font-size:.84rem;color:var(--teal2);}
+footer{background:var(--dk);border-top:1px solid rgba(6,182,212,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(240,253,255,.3);font-size:.74rem;}
+footer b{color:var(--teal2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(2,13,18,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Bayou <span>Auto Glass</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Windshields</a>
+    <a href="#" onclick="toggleNav()">Side Glass</a>
+    <a href="#" onclick="toggleNav()">ADAS</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&fit=crop&q=85" alt="Auto glass technician installing new windshield on vehicle with suction cups"/></div>
+  <svg id="crack-overlay" viewBox="0 0 1440 800" preserveAspectRatio="none">
+    <path id="crack-path" d="M720,0 L680,120 L640,200 L700,280 L650,350 L720,420 L680,500 L740,580 L700,660 L760,800" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+    <path d="M680,120 L580,180 L520,220" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <path d="M640,200 L740,240 L800,260" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="badge-dot"></div><span class="badge-text">Mobile Service · We Come To You</span></div>
+    <h1>Cracked?<br>Fixed<br><span>Today.</span></h1>
+    <p>Windshield repair and replacement with mobile service anywhere in South Louisiana. Most repairs done in 30 minutes. Insurance accepted with zero out-of-pocket in most cases.</p>
+    <a href="#" class="btn">Get an Instant Quote</a>
+  </div>
+</div>
+<div class="info-strip">
+  <div class="info-item"><span class="info-icon">🚗</span><h3>Mobile Service</h3><p>We come to your home, office, or anywhere convenient. You don't have to go anywhere.</p></div>
+  <div class="info-item"><span class="info-icon">💳</span><h3>Insurance Direct Bill</h3><p>We bill your insurance directly. Most customers pay $0 out of pocket for windshield replacement.</p></div>
+  <div class="info-item"><span class="info-icon">⚡</span><h3>Same Day Available</h3><p>Most windshield replacements completed same day or next morning after your call.</p></div>
+</div>
+<div class="svc-section">
+  <h2 class="sh">Our <span>Services</span></h2>
+  <div class="tab-btns">
+    <button class="tab-btn active" onclick="showTab('repair',this)">Chip Repair</button>
+    <button class="tab-btn" onclick="showTab('replace',this)">Full Replacement</button>
+    <button class="tab-btn" onclick="showTab('side',this)">Side & Rear Glass</button>
+    <button class="tab-btn" onclick="showTab('adas',this)">ADAS Calibration</button>
+  </div>
+  <div id="repair" class="tab-panel active">
+    <div class="tab-img"><img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=700&auto=format&fit=crop&q=85" alt="Rock chip in windshield being repaired with resin injection tool"/></div>
+    <div class="tab-body"><h3>Rock Chip & Crack Repair</h3><p>Chips up to 1 inch and cracks up to 6 inches can be repaired without replacing the windshield. Takes 30 minutes and is invisible when done correctly.</p><div class="tab-price">Starting at $39 · Often FREE with insurance</div><a href="#">Book Chip Repair</a></div>
+  </div>
+  <div id="replace" class="tab-panel">
+    <div class="tab-img"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=700&auto=format&fit=crop&q=85" alt="New OEM windshield being placed on vehicle by two technicians"/></div>
+    <div class="tab-body"><h3>Full Windshield Replacement</h3><p>OEM and OEM-equivalent glass installed with premium urethane adhesive. Safe to drive in 1 hour. All makes and models in stock or ordered same day.</p><div class="tab-price">Starting at $249 · Most insurance: $0 deductible</div><a href="#">Book Replacement</a></div>
+  </div>
+  <div id="side" class="tab-panel">
+    <div class="tab-img"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=700&auto=format&fit=crop&q=85" alt="Side door window glass replacement on sedan vehicle"/></div>
+    <div class="tab-body"><h3>Side & Rear Window Glass</h3><p>Tempered glass for all door windows, quarter glass, and rear windshields. Broken from accidents, theft, or vandalism replaced same day.</p><div class="tab-price">Starting at $149</div><a href="#">Book Side Glass</a></div>
+  </div>
+  <div id="adas" class="tab-panel">
+    <div class="tab-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=85" alt="Technician performing ADAS camera calibration after windshield replacement"/></div>
+    <div class="tab-body"><h3>ADAS Camera Calibration</h3><p>Modern vehicles with lane keep assist, automatic emergency braking, and collision detection require camera recalibration after windshield replacement. We're fully equipped.</p><div class="tab-price">Starting at $199</div><a href="#">Book Calibration</a></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--dk);">
+  <h2 class="sh">Customer <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Called at 8am, tech was at my office by noon. New windshield in 45 minutes, insurance handled everything, I paid zero. Unbelievable service."</p><div class="rn">Frank A. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Rock chip repaired in my driveway in 20 minutes. Completely invisible. Would have been a $400 replacement if I waited. Thank you Bayou Auto Glass."</p><div class="rn">Maria L. — Gonzales</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Side window smashed during a break-in. They came to my house the same day, replaced it, and vacuumed all the broken glass from inside my car."</p><div class="rn">Kevin S. — Walker</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Bayou Auto Glass</b> · Mobile Service · All Insurance Accepted · (225) 555-6055</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+setTimeout(()=>document.getElementById('crack-path').classList.add('healed'),800);
+</script>
+</body>
+</html>

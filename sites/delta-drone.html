@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Delta Drone Services | Aerial Photography & Inspection</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--cy:#06b6d4;--cy2:#22d3ee;--dk:#020810;--ch:#050f1c;--wh:#f0fdff;--dm:#94a3b8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dk);color:var(--wh);font-family:'Inter',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Drone flies a search pattern across the hero */
+#drone{position:absolute;z-index:5;font-size:1.4rem;pointer-events:none;filter:drop-shadow(0 0 8px rgba(6,182,212,.6));animation:drone-fly 8s linear infinite;}
+@keyframes drone-fly{
+  0%{top:18%;left:-5%;}
+  20%{top:18%;left:95%;}
+  25%{top:35%;left:95%;}
+  45%{top:35%;left:-5%;}
+  50%{top:52%;left:-5%;}
+  70%{top:52%;left:95%;}
+  75%{top:68%;left:95%;}
+  95%{top:68%;left:-5%;}
+  100%{top:18%;left:-5%;}
+}
+/* Drone scan line follows drone */
+#scan-line{position:absolute;z-index:4;width:2px;height:60%;background:linear-gradient(180deg,transparent,rgba(6,182,212,.3),transparent);pointer-events:none;animation:scan 8s linear infinite;}
+@keyframes scan{
+  0%{left:-5%;top:10%;}20%{left:95%;top:10%;}25%{left:95%;top:28%;}
+  45%{left:-5%;top:28%;}50%{left:-5%;top:45%;}70%{left:95%;top:45%;}
+  75%{left:95%;top:62%;}95%{left:-5%;top:62%;}100%{left:-5%;top:10%;}
+}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,8,16,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(6,182,212,.18);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.1em;color:var(--wh);white-space:nowrap;text-transform:uppercase;}
+.logo span{color:var(--cy2);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:2px;background:var(--wh);}
+.nmenu{display:flex;gap:1.4rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,253,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--cy2);}
+.ncta{border:1px solid var(--cy2)!important;color:var(--cy2)!important;padding:.38rem 1rem;}
+.ncta:hover{background:var(--cy2)!important;color:var(--dk)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Centered cinematic text, 2×3 service icon grid, masonry gallery */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:5.5rem 1.5rem 3rem;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.25);}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(2,8,16,.8) 100%);}
+.hero-inner{position:relative;z-index:6;max-width:680px;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.25);padding:.32rem .85rem;margin-bottom:1.5rem;}
+.hb-dot{width:6px;height:6px;border-radius:50%;background:var(--cy2);animation:pulse .8s infinite alternate;}
+@keyframes pulse{from{opacity:1;}to{opacity:.2;}}
+.hb-text{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--cy2);}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(3rem,9vw,8rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--wh);line-height:.88;margin-bottom:1.2rem;}
+.hero h1 span{color:var(--cy2);}
+.hero p{font-size:.96rem;font-weight:300;color:rgba(240,253,255,.62);line-height:1.82;max-width:520px;margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+.btn-cy{background:var(--cy);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:.82rem 2rem;text-decoration:none;transition:background .2s;}
+.btn-cy:hover{background:var(--cy2);}
+.btn-gh{border:1px solid rgba(6,182,212,.35);color:var(--cy2);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.8rem;text-decoration:none;transition:all .2s;}
+.btn-gh:hover{border-color:var(--cy2);}
+/* SERVICES ICON GRID */
+.svcs{padding:5rem 1.5rem;background:var(--ch);}
+.sh{font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:.5rem;}
+.sh span{color:var(--cy2);}
+.sub{text-align:center;font-size:.84rem;color:var(--dm);margin-bottom:2.5rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+@media(min-width:600px){.svc-grid{grid-template-columns:repeat(3,1fr);}}
+.svc{background:var(--dk);border:1px solid rgba(6,182,212,.08);padding:2.2rem 1.5rem;text-align:center;transition:border-color .25s,transform .25s;}
+.svc:hover{border-color:rgba(6,182,212,.4);transform:translateY(-4px);}
+.svc-icon{font-size:2.5rem;display:block;margin-bottom:.9rem;}
+.svc h3{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--wh);margin-bottom:.4rem;}
+.svc p{font-size:.82rem;color:var(--dm);line-height:1.65;}
+/* MASONRY PORTFOLIO */
+.port{padding:5rem 1.5rem;background:var(--dk);}
+.port-cols{columns:2;gap:.4rem;}
+@media(min-width:600px){.port-cols{columns:3;}}
+.port-item{break-inside:avoid;margin-bottom:.4rem;overflow:hidden;display:block;position:relative;}
+.port-item img{width:100%;display:block;transition:transform .5s,filter .5s;}
+.port-item:hover img{transform:scale(1.04);filter:brightness(1.1);}
+.port-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(2,8,16,.9),transparent);padding:.7rem;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cy2);}
+.certs{background:var(--cy);padding:2rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;}
+.cert{text-align:center;color:var(--dk);}
+.cert-val{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;line-height:1;}
+.cert-l{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.7;margin-top:.2rem;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem;}
+.rc{background:var(--ch);border:1px solid rgba(6,182,212,.1);padding:1.8rem;transition:border-color .2s;}
+.rc:hover{border-color:rgba(6,182,212,.4);}
+.stars{color:var(--cy2);margin-bottom:.5rem;}
+.rt{font-size:.85rem;color:var(--dm);line-height:1.7;margin-bottom:.6rem;}
+.rn{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;color:var(--cy2);}
+footer{background:var(--dk);border-top:1px solid rgba(6,182,212,.1);padding:1.8rem 1.5rem;text-align:center;color:rgba(240,253,255,.3);font-size:.74rem;}
+footer b{color:var(--cy2);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(2,8,16,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">DELTA <span>DRONE</span></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Aerial Photo</a>
+    <a href="#" onclick="toggleNav()">Inspections</a>
+    <a href="#" onclick="toggleNav()">Mapping</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Get a Quote</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1400&auto=format&fit=crop&q=85" alt="Professional drone flying over Louisiana bayou landscape for aerial photography"/></div>
+  <div id="drone">🛸</div>
+  <div id="scan-line"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="hb-dot"></div><span class="hb-text">FAA Part 107 Certified Pilots</span></div>
+    <h1>See It<br>From<br><span>Above.</span></h1>
+    <p>Professional aerial photography, video, roof and infrastructure inspections, survey mapping, and real estate imagery for South Louisiana clients.</p>
+    <div class="hero-btns"><a href="#" class="btn-cy">Get a Quote</a><a href="#" class="btn-gh">View Our Work</a></div>
+  </div>
+</div>
+<div class="svcs">
+  <h2 class="sh">Drone <span>Services</span></h2>
+  <p class="sub">FAA certified · Fully insured · Same-day turnaround available</p>
+  <div class="svc-grid">
+    <div class="svc"><span class="svc-icon">📸</span><h3>Aerial Photography</h3><p>4K stills and video of properties, events, and landscapes from stunning angles impossible from the ground.</p></div>
+    <div class="svc"><span class="svc-icon">🏠</span><h3>Real Estate</h3><p>Property listing photos and video that sell homes 30% faster than ground-only listings.</p></div>
+    <div class="svc"><span class="svc-icon">🏗️</span><h3>Roof Inspections</h3><p>Safe, detailed roof inspections without ladders. Insurance documentation and damage assessment.</p></div>
+    <div class="svc"><span class="svc-icon">🗺️</span><h3>Survey Mapping</h3><p>Photogrammetry and 2D/3D mapping for construction, agriculture, and land management.</p></div>
+    <div class="svc"><span class="svc-icon">🎬</span><h3>Film & Events</h3><p>Cinematic aerial video for weddings, corporate events, film productions, and social media content.</p></div>
+    <div class="svc"><span class="svc-icon">⚡</span><h3>Infrastructure</h3><p>Cell tower, power line, pipeline, and bridge inspections done safely without expensive equipment.</p></div>
+  </div>
+</div>
+<div class="port">
+  <h2 class="sh">Aerial <span>Portfolio</span></h2>
+  <div class="port-cols" style="margin-top:2rem;">
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=600&auto=format&fit=crop&q=85" alt="Aerial drone shot of Louisiana bayou winding through cypress trees"/><div class="port-label">Bayou Aerial</div></div>
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?w=600&auto=format&fit=crop&q=85" alt="Aerial view of large home and property for real estate listing"/><div class="port-label">Real Estate</div></div>
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&auto=format&fit=crop&q=85" alt="Construction site overhead mapping view from drone"/><div class="port-label">Construction Mapping</div></div>
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=85" alt="Roof inspection drone view showing shingle condition"/><div class="port-label">Roof Inspection</div></div>
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&auto=format&fit=crop&q=85" alt="Aerial sunset photo over Louisiana farmland and fields"/><div class="port-label">Agricultural Survey</div></div>
+    <div class="port-item"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&auto=format&fit=crop&q=85" alt="Cinematic aerial wedding venue shot from drone"/><div class="port-label">Event Coverage</div></div>
+  </div>
+</div>
+<div class="certs">
+  <div class="cert"><div class="cert-val">FAA</div><div class="cert-l">Part 107 Certified</div></div>
+  <div class="cert"><div class="cert-val">$2M</div><div class="cert-l">Liability Insurance</div></div>
+  <div class="cert"><div class="cert-val">4K</div><div class="cert-l">Ultra HD Video</div></div>
+  <div class="cert"><div class="cert-val">24hr</div><div class="cert-l">Delivery Turnaround</div></div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--ch);">
+  <h2 class="sh">Client <span>Reviews</span></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Aerial photos sold our listing in 4 days at full ask. The drone video of the property was better than any other listing in the area."</p><div class="rn">SUSAN B. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Roof inspection saved us thousands. The drone found damage we couldn't see from the ground and the photos documented everything for insurance."</p><div class="rn">PAUL D. — Gonzales</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"The wedding aerial video is absolutely cinematic. Our guests couldn't believe it. Worth every dollar and then some."</p><div class="rn">JESSICA & MARK T.</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Delta Drone Services</b> · FAA Part 107 · Licensed & Insured · South Louisiana · (225) 555-6733</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+</script>
+</body>
+</html>

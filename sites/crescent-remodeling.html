@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Crescent Remodeling | Kitchen, Bath & Home Renovation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#c9a84c;--dk:#0e0c0a;--ch:#1a1510;--cr:#fdf8f0;--wm:#8c7355;--dm:#78716c;--wh:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cr);color:var(--dk);font-family:'Karla',sans-serif;overflow-x:hidden;padding-bottom:52px;}
+/* ANIMATION: Progress bar that sweeps across below nav like a "loading project" */
+#progress-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:2000;background:rgba(201,168,76,.12);}
+#pb-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#e8c97a);transition:width 3s cubic-bezier(.4,0,.2,1);}
+nav{position:fixed;top:3px;left:0;right:0;z-index:1000;background:rgba(14,12,10,.97);backdrop-filter:blur(16px);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,.15);}
+.logo{font-family:'Cormorant',serif;font-size:1.3rem;font-weight:600;letter-spacing:.06em;color:var(--wh);white-space:nowrap;}
+.logo em{font-style:italic;color:var(--gold);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1002;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--wh);}
+.nmenu{display:flex;gap:1.6rem;align-items:center;}
+.nmenu a{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nmenu a:hover{color:var(--gold);}
+.ncta{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:.38rem 1.1rem;}
+.ncta:hover{background:var(--gold)!important;color:var(--dk)!important;}
+@media(max-width:700px){
+  .hbg{display:flex;}
+  .nmenu{display:none;position:fixed;inset:0;background:var(--dk);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1001;}
+  .nmenu.open{display:flex;}
+  .nmenu a{font-size:1.5rem;color:var(--wh);}
+}
+/* LAYOUT: Full-bleed photo grid hero — 3 cols, 2 rows, overlaid text bottom left */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:3px;padding-top:63px;}
+@media(max-width:650px){.hero{grid-template-columns:1fr 1fr;min-height:70vh;}}
+.h-img{overflow:hidden;}
+.h-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s;}
+.h-img:hover img{transform:scale(1.05);}
+.hero-text{position:absolute;bottom:0;left:0;right:0;z-index:3;background:linear-gradient(0deg,rgba(14,12,10,.97) 0%,rgba(14,12,10,.6) 60%,transparent 100%);padding:3rem 2rem 2.5rem;}
+.hero-inner{max-width:600px;}
+.hero-ey{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+.hero-ey::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.hero h1{font-family:'Cormorant',serif;font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:600;color:var(--wh);line-height:1;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{font-size:.94rem;color:rgba(255,255,255,.62);line-height:1.8;max-width:460px;margin-bottom:1.8rem;}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;transition:all .3s;}
+.btn:hover{background:var(--gold);color:var(--dk);}
+/* SERVICES — asymmetric grid */
+.svc-section{padding:5rem 1.5rem;background:var(--cr);}
+.sh{font-family:'Cormorant',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:600;text-align:center;margin-bottom:.5rem;}
+.sh em{font-style:italic;color:var(--gold);}
+.sub{text-align:center;font-size:.84rem;color:var(--dm);margin-bottom:3rem;}
+.svc-asym{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(201,168,76,.1);}
+@media(max-width:600px){.svc-asym{grid-template-columns:1fr;}}
+.svc{background:var(--wh);padding:2.5rem 2rem;}
+.svc.wide{grid-column:1/3;}
+@media(max-width:600px){.svc.wide{grid-column:auto;}}
+.svc-num{font-family:'Cormorant',serif;font-size:3rem;font-weight:400;color:rgba(201,168,76,.18);line-height:1;margin-bottom:.6rem;}
+.svc h3{font-family:'Cormorant',serif;font-size:1.35rem;font-weight:600;margin-bottom:.5rem;}
+.svc p{font-size:.84rem;color:var(--dm);line-height:1.72;}
+/* PROCESS TIMELINE */
+.process{padding:5rem 1.5rem;background:var(--ch);}
+.timeline{display:flex;flex-direction:column;gap:0;max-width:700px;margin:2.5rem auto 0;position:relative;}
+.timeline::before{content:'';position:absolute;left:32px;top:0;bottom:0;width:1px;background:rgba(201,168,76,.2);}
+.tl-item{display:flex;gap:2rem;padding-bottom:2.5rem;}
+.tl-num{flex-shrink:0;width:64px;height:64px;border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant',serif;font-size:1.6rem;font-weight:600;color:var(--gold);background:var(--ch);position:relative;z-index:1;}
+.tl-body h3{font-family:'Cormorant',serif;font-size:1.2rem;font-weight:600;color:var(--wh);margin-bottom:.4rem;padding-top:.8rem;}
+.tl-body p{font-size:.84rem;color:rgba(255,255,255,.48);line-height:1.7;}
+.r-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.rc{background:var(--wh);padding:2rem;border-bottom:3px solid var(--gold);}
+.stars{color:var(--gold);margin-bottom:.7rem;}
+.rt{font-family:'Cormorant',serif;font-style:italic;font-size:1rem;color:var(--dm);line-height:1.75;margin-bottom:.7rem;}
+.rn{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--wm);}
+footer{background:var(--dk);padding:2rem 1.5rem;text-align:center;color:rgba(255,255,255,.3);font-size:.74rem;}
+footer b{color:var(--gold);}
+#bb{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(14,12,10,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(0,200,255,.18);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;flex-wrap:wrap;}
+.bbt{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bbb{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.28rem .8rem;white-space:nowrap;transition:all .2s;}
+.bbb.o{border:1px solid rgba(0,200,255,.4);color:#00c8ff;}
+.bbb.s{background:#00c8ff;color:#020408;}
+.bbb.s:hover{background:#00ffe0;}
+.sep{color:rgba(255,255,255,.2);}
+</style>
+</head>
+<body>
+<div id="progress-bar"><div id="pb-fill"></div></div>
+<nav>
+  <div class="logo">Crescent <em>Remodeling</em></div>
+  <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nmenu" id="nm">
+    <a href="#" onclick="toggleNav()">Kitchen</a>
+    <a href="#" onclick="toggleNav()">Bath</a>
+    <a href="#" onclick="toggleNav()">Additions</a>
+    <a href="#" class="ncta" onclick="toggleNav()">Free Consult</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&auto=format&fit=crop&q=85" alt="Luxurious newly remodeled kitchen with white quartz countertops and custom cabinets"/></div>
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&auto=format&fit=crop&q=85" alt="Spa-like master bathroom renovation with marble tile walk-in shower"/></div>
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=600&auto=format&fit=crop&q=85" alt="Modern open concept living room addition with vaulted ceilings and hardwood floors"/></div>
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?w=600&auto=format&fit=crop&q=85" alt="Custom built-in shelving and fireplace surround in remodeled living room"/></div>
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1575725977293-f5b89c4d2e4a?w=600&auto=format&fit=crop&q=85" alt="Elegant master suite with custom closet built-ins and natural light"/></div>
+  <div class="h-img"><img src="https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format&fit=crop&q=85" alt="Outdoor covered patio addition with ceiling fan and outdoor kitchen"/></div>
+  <div class="hero-text">
+    <div class="hero-inner">
+      <div class="hero-ey">Full-Service Home Renovation · South Louisiana</div>
+      <h1>Your Home,<br><em>Transformed.</em></h1>
+      <p>Kitchen and bath remodels, room additions, whole-home renovations, and outdoor living. Design, permits, and construction all under one contract.</p>
+      <a href="#" class="btn">Schedule a Free Consultation</a>
+    </div>
+  </div>
+</div>
+<div class="svc-section">
+  <h2 class="sh">What We <em>Renovate</em></h2>
+  <p class="sub">Turn-key renovation from design to final walkthrough · Licensed general contractor</p>
+  <div class="svc-asym">
+    <div class="svc"><div class="svc-num">01</div><h3>Kitchen Remodels</h3><p>Custom cabinets, quartz countertops, tile backsplashes, and full appliance packages. Average project: 3–4 weeks.</p></div>
+    <div class="svc"><div class="svc-num">02</div><h3>Bathroom Renovations</h3><p>Walk-in showers, soaking tubs, double vanities, and radiant floor heat. Master suite transformations our specialty.</p></div>
+    <div class="svc wide"><div class="svc-num">03</div><h3>Room Additions & Expansions</h3><p>Permitted room additions that blend seamlessly with your existing structure. Primary suites, sunrooms, in-law suites, and full second-story additions designed and built by our team.</p></div>
+    <div class="svc"><div class="svc-num">04</div><h3>Outdoor Living</h3><p>Covered patios, outdoor kitchens, pergolas, and screened porches built to extend your living space outdoors.</p></div>
+    <div class="svc"><div class="svc-num">05</div><h3>Whole-Home Renovations</h3><p>Complete interior overhauls — new floors, paint, trim, fixtures, and layout changes throughout the entire home.</p></div>
+  </div>
+</div>
+<div class="process">
+  <h2 class="sh" style="color:var(--wh);">Our <em style="color:var(--gold)">Process</em></h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-num">I</div><div class="tl-body"><h3>Design Consultation</h3><p>We visit your home, discuss your vision, and create a detailed design with 3D renderings before anything is built.</p></div></div>
+    <div class="tl-item"><div class="tl-num">II</div><div class="tl-body"><h3>Proposal & Permitting</h3><p>Transparent line-item proposal. We pull all required permits so your project is legal and inspected.</p></div></div>
+    <div class="tl-item"><div class="tl-num">III</div><div class="tl-body"><h3>Construction</h3><p>Dedicated crew with a project manager who gives you daily progress updates from day one to completion.</p></div></div>
+    <div class="tl-item"><div class="tl-num">IV</div><div class="tl-body"><h3>Final Walkthrough</h3><p>We don't call it done until you're completely satisfied. Punch-list items resolved before final payment.</p></div></div>
+  </div>
+</div>
+<div style="padding:4rem 1.5rem;background:var(--cr);">
+  <h2 class="sh">Client <em>Stories</em></h2>
+  <div class="r-grid">
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Our kitchen is unrecognizable — in the absolute best way. The 3D rendering they showed us before construction was exactly what got built."</p><div class="rn">Helen B. — Baton Rouge</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"Master bath renovation exceeded every expectation. Every detail was perfect, the timeline was honored, and our home is worth so much more."</p><div class="rn">Todd & Pam R. — Prairieville</div></div>
+    <div class="rc"><div class="stars">★★★★★</div><p class="rt">"The room addition they built looks like it was always part of the house. You genuinely cannot tell where the original ends and the new begins."</p><div class="rn">Stuart M. — Gonzales</div></div>
+  </div>
+</div>
+<footer>© 2025 <b>Crescent Remodeling</b> · Licensed General Contractor · South Louisiana · (225) 555-5829</footer>
+<div id="bb"><span class="bbt">Built by Secret Systems</span><a href="../work.html" class="bbb o">← View Portfolio</a><span class="sep">|</span><a href="../contact.html" class="bbb s">Get a Site Like This →</a></div>
+<script>
+function toggleNav(){document.getElementById('nm').classList.toggle('open');}
+window.addEventListener('load',()=>setTimeout(()=>{document.getElementById('pb-fill').style.width='100%';},200));
+</script>
+</body>
+</html>

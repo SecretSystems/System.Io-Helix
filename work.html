@@ -430,7 +430,22 @@ document.addEventListener('pointermove',e=>{
 /* ════════════════════════════════
    CARD DIMENSIONS
 ════════════════════════════════ */
-const CW=240,CH=200,CWE=380,CHE=320;
+function getCardSize(){
+  const styles = getComputedStyle(document.documentElement);
+  return {
+    cw: parseFloat(styles.getPropertyValue('--cw')) || 140,
+    ch: parseFloat(styles.getPropertyValue('--ch')) || 110
+  };
+}
+
+let CW = 140, CH = 110;
+let CWE = 380, CHE = 320;
+
+function updateCardSize(){
+  const s = getCardSize();
+  CW = s.cw;
+  CH = s.ch;
+}
 
 /* ════════════════════════════════
    BUILD CARDS from sites/index.json

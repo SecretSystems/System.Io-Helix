@@ -159,4 +159,74 @@
     "color": 3,
     "desc": "Youth sports training. Dark green & yellow with a scoreboard that counts up to stats on load."
   }
+  {
+    "file": "gutter-kings.html",
+    "title": "Gutter Kings",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Seamless gutters & gutter guards. Split hero layout with water drip animation running down the page edge."
+  },
+  {
+    "file": "crescent-remodeling.html",
+    "title": "Crescent Remodeling",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Kitchen, bath & home renovation. 6-panel photo grid hero with project progress bar on load."
+  },
+  {
+    "file": "magnolia-massage.html",
+    "title": "Magnolia Massage Therapy",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Therapeutic & relaxation massage. Curved hero, sage green editorial with breathing circle animation."
+  },
+  {
+    "file": "bayou-auto-glass.html",
+    "title": "Bayou Auto Glass",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Windshield repair & replacement. Tabbed service layout with windshield crack healing animation on load."
+  },
+  {
+    "file": "south-paving.html",
+    "title": "South Louisiana Paving",
+    "tag": "Website",
+    "color": 2,
+    "desc": "Asphalt driveways & parking lots. Zigzag layout with paving machine rolling across the top on load."
+  },
+  {
+    "file": "la-dog-grooming.html",
+    "title": "Bayou Paws Dog Grooming",
+    "tag": "Website",
+    "color": 4,
+    "desc": "Mobile & salon pet grooming. Playful rounded card layout with paw prints walking across the screen."
+  },
+  {
+    "file": "la-foundation-repair.html",
+    "title": "Louisiana Foundation Repair",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Slab & pier foundation repair. Floating stat boxes layout with a crack that fills with gold on load."
+  },
+  {
+    "file": "arcadian-landscaping.html",
+    "title": "Arcadian Landscaping",
+    "tag": "Website",
+    "color": 3,
+    "desc": "Landscape design & installation. Horizontal scroll portfolio with a seed growing into a plant on hero."
+  },
+  {
+    "file": "crescent-storage.html",
+    "title": "Crescent Storage",
+    "tag": "Website",
+    "color": 1,
+    "desc": "Climate-controlled self storage. Interactive unit size selector with rolling door opening on load."
+  },
+  {
+    "file": "delta-drone.html",
+    "title": "Delta Drone Services",
+    "tag": "Website",
+    "color": 0,
+    "desc": "Aerial photography & inspection. Centered cinematic hero with a drone flying a search pattern animation."
+  }
 ]

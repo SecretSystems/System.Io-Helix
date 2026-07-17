@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Secret Systems .io | The Infrastructure Behind Your Growth</title>
+<title>Secret Systems | Websites, Software, Automation &amp; Security — Louisiana</title>
+<meta name="description" content="Secret Systems is a Louisiana software and systems studio. We build websites, custom software, apps, dashboards, workflow automation, and security reviews for small and mid-size businesses. Built in Lafayette, serving clients nationwide."/>
+<meta name="keywords" content="Louisiana web design, custom software development, app development, business dashboards, workflow automation, GoHighLevel CRM, small business cybersecurity, Lafayette Louisiana"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://secretsystems.io/"/>
+<meta property="og:title" content="Secret Systems | Websites, Software, Automation &amp; Security"/>
+<meta property="og:description" content="A Louisiana software and systems studio: websites, custom software, apps, dashboards, automation, and security reviews for growing businesses."/>
+<meta property="og:site_name" content="Secret Systems .io"/>
+<meta property="og:image" content="https://secretsystems.io/favicon.svg"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Secret Systems | Websites, Software, Automation &amp; Security"/>
+<meta name="twitter:description" content="Websites, custom software, dashboards, automation, and security for growing Louisiana businesses."/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Secret Systems LLC","alternateName":"Secret Systems .io","url":"https://secretsystems.io/","email":"info@secretsystems.io","telephone":"+1-337-258-8818","image":"https://secretsystems.io/favicon.svg","description":"Louisiana software and systems studio: websites, custom software, apps, dashboards, workflow automation, and security reviews for small and mid-size businesses.","areaServed":{"@type":"Country","name":"United States"},"address":{"@type":"PostalAddress","addressRegion":"LA","addressCountry":"US"},"knowsAbout":["Web design","Custom software development","App development","Business dashboards","Workflow automation","CRM automation","Cybersecurity review"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -28,8 +43,8 @@ body{
   color:var(--white);
   font-family:'Outfit',sans-serif;
   overflow-x:hidden;
-  cursor:none;
 }
+html.has-custom-cursor body{cursor:none;}
 
 /* ── CUSTOM CURSOR ── */
 #cursor{
@@ -950,6 +965,32 @@ footer{
   footer{grid-template-columns:1fr 1fr;gap:2rem;}
   .foot-bottom{flex-direction:column;gap:0.5rem;padding:1.2rem 1.5rem;}
 }
+/* ── ACCESSIBILITY: visible keyboard focus ── */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:2px;}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0;}
+/* ── ACCESSIBILITY: honor reduced-motion ── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+  #particle-canvas,#vault-canvas{display:none!important;}
+  #cursor,#cursor-ring{display:none!important;}
+  body,html.has-custom-cursor body{cursor:auto!important;}
+  .hero .hero-label,.hero h1,.hero-desc,.hero-actions{opacity:1!important;transform:none!important;}
+}
+/* ── Touch / coarse pointers: native cursor ── */
+@media (hover:none),(pointer:coarse){
+  #cursor,#cursor-ring{display:none!important;}
+  body,html.has-custom-cursor body{cursor:auto!important;}
+}
+/* ── Contact-form status messages ── */
+.ss-form-status{margin-top:1rem;font-size:.85rem;line-height:1.55;min-height:1.2em;}
+.ss-form-status.ok{color:#4eff9f;}
+.ss-form-status.err{color:var(--danger);}
+.ss-form-status.warn{color:#ffe066;}
+.ss-form-status a{color:var(--cyan);}
+input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="true"]{border-color:var(--danger)!important;}
+.foot-contact{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-top:1rem;}
+.foot-contact a{color:var(--text);text-decoration:none;}
+.foot-contact a:hover{color:var(--cyan);}
 </style>
 </head>
 <body>
@@ -994,13 +1035,12 @@ footer{
   </a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="work.html">Past Work</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
     <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li><a href="contact.html" class="nav-cta">Get Access</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -1013,13 +1053,12 @@ footer{
   <ul class="mobile-nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="work.html">Past Work</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
     <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li class="mobile-cta"><a href="contact.html">Get Access</a></li>
+    <li><a href="about.html">About</a></li>
+    <li class="mobile-cta"><a href="contact.html">Contact</a></li>
   </ul>
 </div>
 
@@ -1068,18 +1107,18 @@ footer{
 
     <!-- HERO CONTENT -->
     <div class="hero" id="hero-content">
-      <p class="hero-label">Next-Gen Digital Infrastructure</p>
+      <p class="hero-label">Louisiana Software &amp; Systems Studio</p>
       <h1>
         The Systems<br>
         <span class="line2">Behind Your</span><br>
         <span class="accent">Growth.</span>
       </h1>
       <p class="hero-desc">
-        Web design, CRM automation, AI lead follow-up, call center flows, reputation management, text blasts, and every digital system your business needs — built and deployed under one roof.
+        We build the websites, custom software, dashboards, automation, and security that small and mid-size businesses actually run on — designed, built, and maintained by one Louisiana team you can reach.
       </p>
       <div class="hero-actions">
-        <a href="contact.html" class="btn-primary">Start Building →</a>
-        <a href="catalog.html" class="btn-ghost">View Service Catalog</a>
+        <a href="contact.html" class="btn-primary">Book a Consult →</a>
+        <a href="services.html" class="btn-ghost">See What We Build</a>
       </div>
     </div>
 
@@ -1092,9 +1131,9 @@ footer{
   <div class="services-intro reveal">
     <div>
       <p class="eyebrow">What We Build</p>
-      <h2 class="big-title">Every System<br><span>Your Business Needs</span></h2>
+      <h2 class="big-title">Websites, Software<br><span>&amp; Systems That Work</span></h2>
     </div>
-    <p class="sub-text" style="align-self:flex-end;">From a single landing page to a full AI-powered sales machine — Secret Systems engineers the infrastructure that converts strangers into customers, automatically.</p>
+    <p class="sub-text" style="align-self:flex-end;">From a marketing website to custom software, dashboards, and internal tools — we design, build, and maintain the systems your business runs on, and we're straight about what each one will and won't do.</p>
   </div>
   <div class="services-grid reveal">
     <div class="service-tile">
@@ -1137,7 +1176,7 @@ footer{
       <div class="tile-num">07</div>
       <span class="tile-icon">📧</span>
       <div class="tile-name">Email Marketing</div>
-      <p class="tile-desc">Designed sequences, broadcast campaigns, and behavioral triggers that sell while you sleep.</p>
+      <p class="tile-desc">Designed sequences, broadcast campaigns, and behavioral triggers that keep your list warm and bring past customers back.</p>
     </div>
     <div class="service-tile">
       <div class="tile-num">08</div>
@@ -1150,6 +1189,36 @@ footer{
       <span class="tile-icon">📈</span>
       <div class="tile-name">Digital Marketing & Ads</div>
       <p class="tile-desc">Meta ads, Google ads, retargeting, and SEO strategies that fill your pipeline with qualified leads.</p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">10</div>
+      <span class="tile-icon" aria-hidden="true">💻</span>
+      <div class="tile-name">Custom Software Development</div>
+      <p class="tile-desc">Bespoke web applications and internal business tools built around your workflow — for when off-the-shelf software doesn't fit. <a href="services.html#software" style="color:var(--cyan);">Learn more →</a></p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">11</div>
+      <span class="tile-icon" aria-hidden="true">📱</span>
+      <div class="tile-name">App Development</div>
+      <p class="tile-desc">Mobile and web apps for your customers or your team — installed, deployed, and supported, with the source in your hands. <a href="services.html#software" style="color:var(--cyan);">Learn more →</a></p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">12</div>
+      <span class="tile-icon" aria-hidden="true">📊</span>
+      <div class="tile-name">Dashboard Development</div>
+      <p class="tile-desc">Business and admin dashboards that pull your numbers into one clear place — so you can see what's happening without digging. <a href="services.html#dashboards" style="color:var(--cyan);">Learn more →</a></p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">13</div>
+      <span class="tile-icon" aria-hidden="true">🔗</span>
+      <div class="tile-name">Workflow Automation</div>
+      <p class="tile-desc">Connect your tools and remove the manual, repetitive steps — data entry, hand-offs, and follow-ups that eat your team's time. <a href="services.html#automation" style="color:var(--cyan);">Learn more →</a></p>
+    </div>
+    <div class="service-tile">
+      <div class="tile-num">14</div>
+      <span class="tile-icon" aria-hidden="true">🔒</span>
+      <div class="tile-name">Cybersecurity Reviews</div>
+      <p class="tile-desc">Practical security reviews and hardening for your website, apps, and setup — clear reports, prioritized fixes. Review and advisory, not penetration testing. <a href="security.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
   </div>
 </div>
@@ -1190,14 +1259,14 @@ footer{
 <div class="section">
   <div class="auto-grid">
     <div>
-      <p class="eyebrow reveal">Powered by AI</p>
-      <h2 class="big-title reveal">Your Business<br><span>Runs Itself</span></h2>
+      <p class="eyebrow reveal">How the Automation Works</p>
+      <h2 class="big-title reveal">Fast, Consistent<br><span>Follow-Up</span></h2>
       <div class="auto-list reveal">
         <div class="auto-item">
           <div class="auto-icon">⚡</div>
           <div>
             <div class="auto-title">Instant Lead Response</div>
-            <p class="auto-desc">New lead comes in → AI texts them within 60 seconds, qualifies, and books the appointment. No human needed.</p>
+            <p class="auto-desc">A new lead comes in and gets an automatic text within about a minute — with a booking link — so they hear back fast even when you're on a job.</p>
           </div>
         </div>
         <div class="auto-item">
@@ -1319,30 +1388,15 @@ footer{
 </div>
 </div>
 
-<!-- TESTIMONIALS -->
-<div id="testimonials" style="padding:0;border-top:1px solid var(--border);">
+<!-- PROOF -->
+<div id="proof" style="padding:0;border-top:1px solid var(--border);">
 <div class="section">
-  <p class="eyebrow reveal">Client Results</p>
-  <h2 class="big-title reveal">What Happens When <span>Systems Work</span></h2>
-  <div class="test-grid reveal">
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Secret Systems set up our entire CRM and automated follow-up in a week. We went from missing leads to booking 3x more appointments without any extra staff."</p>
-      <div class="test-author">Marcus T.</div>
-      <div class="test-role">HVAC Company Owner, Louisiana</div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"The review generator alone was worth every penny. We went from 14 Google reviews to 97 in 60 days. Our phone won't stop ringing now."</p>
-      <div class="test-author">Amanda R.</div>
-      <div class="test-role">Med Spa Owner</div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"We were running Facebook ads to nowhere. Secret Systems rebuilt our funnel, connected the CRM, and now every lead gets followed up with automatically. Game changer."</p>
-      <div class="test-author">David K.</div>
-      <div class="test-role">Roofing Contractor</div>
-    </div>
+  <p class="eyebrow reveal">Proof</p>
+  <h2 class="big-title reveal">See the Work, <span>Not Just Claims</span></h2>
+  <p class="sub-text reveal" style="max-width:640px;">We'd rather show you real work than post invented reviews. Browse example builds in our portfolio, and ask us for client references and a live walkthrough on your call.</p>
+  <div class="reveal" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="work.html" class="btn-primary">View Our Work →</a>
+    <a href="contact.html" class="btn-ghost">Ask for References</a>
   </div>
 </div>
 </div>
@@ -1352,56 +1406,60 @@ footer{
 <div class="section">
   <div class="contact-grid">
     <div>
-      <p class="eyebrow reveal">Get Access</p>
+      <p class="eyebrow reveal">Contact</p>
       <h2 class="big-title reveal">Let's Build Your<br><span>System</span></h2>
-      <p class="sub-text reveal">Tell us about your business. We'll put together a custom plan and show you exactly how Secret Systems can transform your operations.</p>
+      <p class="sub-text reveal">Tell us what your business does and what's slowing you down. We'll reply within one business day with a straight assessment — not a sales pitch.</p>
       <div class="contact-details reveal">
-        <div class="cd-item"><div class="cd-icon">🌐</div> secretsystems.io</div>
-        <div class="cd-item"><div class="cd-icon">📘</div> South Louisiana & Nationwide Remote</div>
+        <div class="cd-item"><div class="cd-icon" aria-hidden="true">✉️</div> <a href="mailto:info@secretsystems.io" style="color:var(--text);text-decoration:none;">info@secretsystems.io</a></div>
+        <div class="cd-item"><div class="cd-icon" aria-hidden="true">📞</div> <a href="tel:+13372588818" style="color:var(--text);text-decoration:none;">(337) 258-8818</a></div>
+        <div class="cd-item"><div class="cd-icon" aria-hidden="true">📍</div> South Louisiana · Serving nationwide</div>
       </div>
     </div>
-    <div class="contact-form reveal">
-      <div class="field-row">
-        <div class="field-group">
-          <label>First Name</label>
-          <input type="text" placeholder="John"/>
+    <div data-ss-formwrap>
+      <form class="contact-form reveal" id="ssContactForm" data-ss-form novalidate>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="hp-fname">First Name *</label>
+            <input type="text" id="hp-fname" name="firstName" placeholder="John" required/>
+          </div>
+          <div class="field-group">
+            <label for="hp-lname">Last Name *</label>
+            <input type="text" id="hp-lname" name="lastName" placeholder="Smith" required/>
+          </div>
         </div>
         <div class="field-group">
-          <label>Last Name</label>
-          <input type="text" placeholder="Smith"/>
+          <label for="hp-biz">Business Name</label>
+          <input type="text" id="hp-biz" name="business" placeholder="Your Company LLC"/>
         </div>
-      </div>
-      <div class="field-group">
-        <label>Business Name</label>
-        <input type="text" placeholder="Your Company LLC"/>
-      </div>
-      <div class="field-group">
-        <label>Phone</label>
-        <input type="tel" placeholder="(555) 000-0000"/>
-      </div>
-      <div class="field-group">
-        <label>Email</label>
-        <input type="email" placeholder="you@company.com"/>
-      </div>
-      <div class="field-group">
-        <label>What do you need?</label>
-        <select>
-          <option value="">Select primary interest...</option>
-          <option>New Website</option>
-          <option>CRM Setup (GoHighLevel)</option>
-          <option>AI Automation</option>
-          <option>Text Blast / SMS</option>
-          <option>5-Star Review System</option>
-          <option>Call Center Automation</option>
-          <option>Full Growth Package</option>
-          <option>Everything — let's talk</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <label>Tell Us About Your Business</label>
-        <textarea placeholder="What do you do, who are your customers, what's broken right now?"></textarea>
-      </div>
-      <button class="btn-primary" style="border:none;cursor:pointer;">Send Message →</button>
+        <div class="field-group">
+          <label for="hp-phone">Phone</label>
+          <input type="tel" id="hp-phone" name="phone" placeholder="(337) 000-0000"/>
+        </div>
+        <div class="field-group">
+          <label for="hp-email">Email *</label>
+          <input type="email" id="hp-email" name="email" placeholder="you@company.com" required/>
+        </div>
+        <div class="field-group">
+          <label for="hp-interest">What do you need?</label>
+          <select id="hp-interest" name="interest">
+            <option value="">Select primary interest...</option>
+            <option>New Website</option>
+            <option>Custom Software / Web App</option>
+            <option>App Development</option>
+            <option>Business Dashboard</option>
+            <option>Workflow Automation</option>
+            <option>CRM Setup (GoHighLevel)</option>
+            <option>Cybersecurity Review</option>
+            <option>Something else — let's talk</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="hp-message">Tell Us About Your Business *</label>
+          <textarea id="hp-message" name="message" placeholder="What do you do, who are your customers, and what's slowing you down right now?" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">Send Message →</button>
+        <p class="ss-form-status" data-ss-status role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </div>
@@ -1411,45 +1469,49 @@ footer{
 <footer>
   <div class="foot-brand">
     <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
-    <p>The infrastructure behind businesses that grow without limits. Built in Louisiana. Deployed everywhere.</p>
+    <p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p>
+    <p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p>
   </div>
   <div class="foot-col">
     <h5>Services</h5>
     <ul>
-      <li><a href="services.html">Web Design</a></li>
-      <li><a href="services.html">CRM & Automation</a></li>
-      <li><a href="services.html">AI Systems</a></li>
-      <li><a href="services.html">Text & Email</a></li>
-      <li><a href="services.html">Call Center</a></li>
+      <li><a href="services.html#web">Websites</a></li>
+      <li><a href="services.html#software">Software &amp; Apps</a></li>
+      <li><a href="services.html#dashboards">Dashboards</a></li>
+      <li><a href="automation.html">Automation</a></li>
+      <li><a href="security.html">Security</a></li>
     </ul>
   </div>
   <div class="foot-col">
     <h5>Company</h5>
     <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
       <li><a href="catalog.html">Service Catalog</a></li>
-      <li><a href="#how">How It Works</a></li>
       <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="#testimonials">Case Studies</a></li>
     </ul>
   </div>
   <div class="foot-col">
-    <h5>Connect</h5>
+    <h5>Get Started</h5>
     <ul>
-      <li><a href="contact.html">Get a Quote</a></li>
-      <li><a href="#">Facebook</a></li>
-      <li><a href="#">Instagram</a></li>
-      <li><a href="#">LinkedIn</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li>
+      <li><a href="tel:+13372588818">(337) 258-8818</a></li>
     </ul>
   </div>
 </footer>
 <div class="foot-bottom">
   <span>SECRET SYSTEMS .IO</span>
-  <span>© 2025 Secret Systems LLC · All Rights Reserved</span>
-  <span>Built on <span>Systems</span> · Powered by <span>AI</span></span>
+  <span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span>
+  <span>Built in Louisiana</span>
 </div>
 
+<script src="ss-config.js"></script>
 <script>
 (function(){
+
+  var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ssFine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
   /* ── MOBILE MENU ── */
   var hamburger=document.getElementById('nav-hamburger');
@@ -1461,17 +1523,22 @@ footer{
   menuClose.addEventListener('click',closeMenu);
   mobileMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
 
-  /* ── CURSOR ── */
+  /* ── CURSOR (desktop fine-pointer, motion-OK only; native cursor otherwise) ── */
   const cursor=document.getElementById('cursor');
   const ring=document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-  function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
-  animRing();
-  document.querySelectorAll('a,button,.service-tile,.auto-item,.price-card').forEach(function(el){
-    el.addEventListener('mouseenter',function(){cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
-    el.addEventListener('mouseleave',function(){cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
-  });
+  if(ssFine && !ssReduce){
+    document.documentElement.classList.add('has-custom-cursor');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    (function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+    document.querySelectorAll('a,button,.service-tile,.auto-item,.price-card').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
+      el.addEventListener('mouseleave',function(){cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+    });
+  } else {
+    if(cursor) cursor.style.display='none';
+    if(ring) ring.style.display='none';
+  }
 
   /* ── PARTICLES ── */
   const pCanvas=document.getElementById('particle-canvas');
@@ -1519,7 +1586,7 @@ footer{
     drawLines();
     requestAnimationFrame(pLoop);
   }
-  pLoop();
+  if(!ssReduce){ pLoop(); } else { pCanvas.style.display='none'; }
 
   /* ── SCROLL REVEAL ── */
   var reveals=document.querySelectorAll('.reveal');
@@ -1673,7 +1740,7 @@ footer{
   var loaderBar        = document.getElementById('loader-bar');
   var loaderPct        = document.getElementById('loader-pct');
   var loaderFill       = document.getElementById('loader-progress-fill');
-  var MIN_SHOW_MS      = 5000;
+  var MIN_SHOW_MS      = ssReduce ? 0 : 700;
   var loaderStartTime  = Date.now();
   var readyToReveal    = false;  /* frame 0 loaded */
   var showTimerDone    = false;  /* 5s elapsed */
@@ -1737,6 +1804,33 @@ footer{
       frames[idx] = img;
     })(f);
   }
+
+  /* ── CONTACT FORM (provider-agnostic; sends only when an endpoint is configured) ── */
+  (function(){
+    var cfg=window.SS_CONFIG||{};
+    var email=cfg.EMAIL||'info@secretsystems.io', telD=cfg.PHONE_DISPLAY||'', tel=cfg.PHONE_TEL||'';
+    var line='email <a href="mailto:'+email+'">'+email+'</a>'+(tel?' or call <a href="tel:'+tel+'">'+telD+'</a>':'')+'.';
+    document.querySelectorAll('form[data-ss-form]').forEach(function(form){
+      var status=form.querySelector('[data-ss-status]');
+      function set(m,c){if(status){status.innerHTML=m;status.className='ss-form-status'+(c?' '+c:'');}}
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        var ok=true,first=null;
+        form.querySelectorAll('[required]').forEach(function(f){if(!f.value.trim()){f.setAttribute('aria-invalid','true');ok=false;if(!first)first=f;}else{f.removeAttribute('aria-invalid');}});
+        if(!ok){set('Please complete the required fields.','err');if(first)first.focus();return;}
+        if(!cfg.FORM_ENDPOINT){set('Online form delivery isn’t active yet. Please '+line,'warn');return;}
+        var btn=form.querySelector('[type="submit"]');var payload={};new FormData(form).forEach(function(v,k){payload[k]=v;});payload._page=location.pathname;
+        set('Sending…','');if(btn)btn.disabled=true;
+        fetch(cfg.FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+          .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r;})
+          .then(function(){form.reset();set('Thanks — your message was sent. We’ll reply within one business day.','ok');})
+          .catch(function(){set('Something went wrong sending your message. Please '+line,'err');})
+          .finally(function(){if(btn)btn.disabled=false;});
+      });
+    });
+  })();
+  /* ── GA4 (loads only when a Measurement ID is configured) ── */
+  (function(){var id=(window.SS_CONFIG||{}).GA4_ID;if(!id)return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',id);})();
 
 })();
 </script>

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow:
+# Client demo/template pages are not part of the Secret Systems site content.
+Disallow: /sites/
 
 Sitemap: https://secretsystems.io/sitemap.xml

@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Past Work | Web Design Portfolio | Secret Systems .io</title>
-<meta name="description" content="Browse Secret Systems' portfolio of web design, CRM builds, automation systems, and landing pages. Live previews in 3D interactive layouts."/>
+<title>Design Demos &amp; Example Builds | Secret Systems .io</title>
+<meta name="description" content="Browse example website builds and design concepts from Secret Systems, shown as live previews in interactive 3D layouts. Ask us for client references on a call."/>
 <meta name="keywords" content="Secret Systems portfolio, web design work, website examples, GoHighLevel builds, Louisiana web design portfolio"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://secretsystems.io/work.html"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://secretsystems.io/work.html"/>
-<meta property="og:title" content="Past Work | Secret Systems .io"/>
-<meta property="og:description" content="Live previews of every site we've built in interactive 3D layouts."/>
+<meta property="og:title" content="Design Demos & Example Builds | Secret Systems .io"/>
+<meta property="og:description" content="Example website builds and design concepts, shown as live interactive previews."/>
 <meta property="og:site_name" content="Secret Systems .io"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Secret Systems Portfolio","url":"https://secretsystems.io/work.html","isPartOf":{"@type":"WebSite","name":"Secret Systems .io","url":"https://secretsystems.io"}}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -311,13 +312,12 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   <a href="index.html" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
   <ul>
     <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="work.html" class="act">Past Work</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html" class="act">Work</a></li>
     <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li><a href="contact.html" class="nc">Get Access</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nc">Contact</a></li>
   </ul>
 </nav>
 
@@ -325,7 +325,9 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   <div id="sc" data-layout="table"></div>
 </div>
 
-<div id="loading"><div class="spin"></div><p>Loading portfolio...</p></div>
+<div style="position:fixed;top:74px;left:0;right:0;text-align:center;z-index:50;pointer-events:none;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:0 1rem;">Design demos &amp; concept builds · ask us for client references</div>
+
+<div id="loading"><div class="spin"></div><p>Loading demos...</p></div>
 
 <div id="empty">
   <div style="font-size:2.5rem;margin-bottom:1rem;opacity:.4;">📁</div>
@@ -347,32 +349,34 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
     <button class="mcl" id="mcl">✕</button>
     <div id="mfw">
       <p class="mey">Secret Systems // New Project</p>
-      <h2 class="mh">Request Your Website</h2>
-      <p class="ms">Tell us what you need. Custom proposal within 24 hours.</p>
+      <h2 class="mh">Start a Project</h2>
+      <p class="ms">Tell us what you need. We reply within one business day.</p>
       <form id="mform" novalidate>
         <div class="fr">
-          <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required/></div>
-          <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required/></div>
+          <div class="fg"><label for="w-fn">First Name *</label><input id="w-fn" name="firstName" type="text" placeholder="John" required/></div>
+          <div class="fg"><label for="w-ln">Last Name *</label><input id="w-ln" name="lastName" type="text" placeholder="Smith" required/></div>
         </div>
-        <div class="fg"><label>Business Name *</label><input type="text" placeholder="Your Company LLC" required/></div>
+        <div class="fg"><label for="w-biz">Business Name *</label><input id="w-biz" name="business" type="text" placeholder="Your Company LLC" required/></div>
         <div class="fr">
-          <div class="fg"><label>Phone *</label><input type="tel" placeholder="(555) 000-0000" required/></div>
-          <div class="fg"><label>Email *</label><input type="email" placeholder="you@company.com" required/></div>
+          <div class="fg"><label for="w-ph">Phone *</label><input id="w-ph" name="phone" type="tel" placeholder="(337) 000-0000" required/></div>
+          <div class="fg"><label for="w-em">Email *</label><input id="w-em" name="email" type="email" placeholder="you@company.com" required/></div>
         </div>
         <div class="fg">
-          <label>Project Type *</label>
-          <select required>
+          <label for="w-pt">Project Type *</label>
+          <select id="w-pt" name="projectType" required>
             <option value="">Select type...</option>
             <option>Business Website</option>
             <option>Landing Page / Funnel</option>
+            <option>Custom Software / Web App</option>
+            <option>Business Dashboard</option>
+            <option>Workflow Automation</option>
             <option>GoHighLevel CRM Build</option>
-            <option>Complete Digital System</option>
             <option>Other</option>
           </select>
         </div>
         <div class="fg">
-          <label>Budget Range</label>
-          <select>
+          <label for="w-bud">Budget Range</label>
+          <select id="w-bud" name="budget">
             <option value="">Select range...</option>
             <option>Under $1,000</option>
             <option>$1,000 – $3,000</option>
@@ -382,21 +386,24 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
           </select>
         </div>
         <div class="fg">
-          <label>Project Details *</label>
-          <textarea placeholder="What do you need and what should it accomplish?" required></textarea>
+          <label for="w-det">Project Details *</label>
+          <textarea id="w-det" name="message" placeholder="What do you need and what should it accomplish?" required></textarea>
         </div>
         <button type="submit" class="msub">Send My Request →</button>
+        <p class="ss-form-status" data-ss-status role="status" aria-live="polite" style="margin-top:1rem;font-size:.8rem;line-height:1.5;"></p>
       </form>
     </div>
     <div class="msuc" id="msuc">
       <div style="font-size:2.5rem;margin-bottom:1rem;">✅</div>
       <h3>Request Received!</h3>
-      <p>We'll reach out within 24 hours.<br/><br/>
+      <p>Thanks — we'll reply within one business day.<br/><br/>
       Browse our <a href="catalog.html">service catalog</a> or <a href="pricing.html">pricing plans</a>.</p>
     </div>
   </div>
 </div>
 
+<script src="ss-config.js"></script>
+<script>(function(){var id=(window.SS_CONFIG||{}).GA4_ID;if(!id)return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',id);})();</script>
 <script>
 /* ════════════════════════════════
    CURSOR
@@ -663,17 +670,31 @@ document.getElementById('req-btn').addEventListener('click',()=>ov.classList.add
 document.getElementById('mcl').addEventListener('click',()=>ov.classList.remove('open'));
 ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')ov.classList.remove('open');});
-document.getElementById('mform').addEventListener('submit',e=>{
-  e.preventDefault();
-  let ok=true;
-  e.target.querySelectorAll('[required]').forEach(f=>{
-    if(!f.value.trim()){f.style.borderColor='#ff2244';ok=false;}
-    else f.style.borderColor='rgba(0,200,255,.12)';
+(function(){
+  var cfg=window.SS_CONFIG||{};
+  var email=cfg.EMAIL||'info@secretsystems.io', telD=cfg.PHONE_DISPLAY||'', tel=cfg.PHONE_TEL||'';
+  var line='email <a href="mailto:'+email+'" style="color:var(--cyan);">'+email+'</a>'+(tel?' or call <a href="tel:'+tel+'" style="color:var(--cyan);">'+telD+'</a>':'')+'.';
+  var form=document.getElementById('mform');
+  var status=form.querySelector('[data-ss-status]');
+  function set(m,c){if(!status)return;status.innerHTML=m;status.style.color=(c==='err')?'#ff2244':(c==='ok')?'#4eff9f':(c==='warn')?'#ffe066':'#a8c8e0';}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=true,first=null;
+    form.querySelectorAll('[required]').forEach(function(f){
+      if(!f.value.trim()){f.setAttribute('aria-invalid','true');f.style.borderColor='#ff2244';ok=false;if(!first)first=f;}
+      else{f.removeAttribute('aria-invalid');f.style.borderColor='rgba(0,200,255,.12)';}
+    });
+    if(!ok){set('Please complete the required fields.','err');if(first)first.focus();return;}
+    if(!cfg.FORM_ENDPOINT){set('Online form delivery isn’t active yet. Please '+line,'warn');return;}
+    var btn=form.querySelector('[type="submit"]');var payload={};new FormData(form).forEach(function(v,k){payload[k]=v;});payload._page=location.pathname;
+    set('Sending…','');if(btn)btn.disabled=true;
+    fetch(cfg.FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r;})
+      .then(function(){document.getElementById('mfw').style.display='none';document.getElementById('msuc').style.display='block';})
+      .catch(function(){set('Something went wrong sending your message. Please '+line,'err');})
+      .finally(function(){if(btn)btn.disabled=false;});
   });
-  if(!ok)return;
-  document.getElementById('mfw').style.display='none';
-  document.getElementById('msuc').style.display='block';
-});
+})();
 
 /* ════════════════════════════════
    INIT

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cybersecurity Reviews &amp; Hardening for Small Business | Secret Systems .io</title>
+<meta name="description" content="Practical security reviews and hardening for small and mid-size businesses: website and web-app review, dependency and configuration checks, security policies, backup and incident-readiness planning. Review and advisory — not penetration testing, and no security guarantees."/>
+<meta name="keywords" content="small business security review, website security review, web application security review, security hardening, dependency review, incident readiness, Louisiana cybersecurity consulting"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/security.html"/>
+<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/security.html"/><meta property="og:title" content="Cybersecurity Reviews & Hardening | Secret Systems .io"/><meta property="og:description" content="Security reviews and hardening for small business — website, web app, configuration, dependencies, policies, and incident readiness. Clear reports, prioritized fixes."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Cybersecurity Reviews & Hardening | Secret Systems .io"/><meta name="twitter:description" content="Security reviews and hardening for small business. Review and advisory — not penetration testing."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Security review and advisory","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"description":"Security reviews and hardening for small and mid-size businesses: website and web application review, dependency and configuration review, security policy development, and incident-readiness planning. Review and advisory services only."}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.svc-block{border-bottom:1px solid var(--border);padding:5rem 0;}
+.svc-block:last-child{border-bottom:none;}
+.svc-block-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;}
+.svc-block-label{position:sticky;top:100px;}
+.svc-block-label h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:1rem;}
+.svc-block-label h2 span{color:var(--cyan);}
+.svc-block-label p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:2rem;}
+.svc-items{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+.svc-item{background:var(--card);padding:2rem 2.5rem;}
+.si-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.si-icon{font-size:1.6rem;}
+.si-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
+.si-desc{font-size:.88rem;color:var(--text);line-height:1.7;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;}
+.faq-q::after{content:'+';color:var(--cyan);font-size:1.4rem;flex-shrink:0;}
+.faq-q[aria-expanded="true"]::after{content:'–';}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-q[aria-expanded="true"]+.faq-a{max-height:400px;}
+.faq-a p{font-size:.9rem;color:var(--text);line-height:1.7;padding:0 0 1.5rem;}
+@media(max-width:900px){.svc-block-grid{grid-template-columns:1fr;gap:2rem;}.svc-block-label{position:static;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div><canvas id="bg"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html" class="active">Security</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="automation.html" onclick="closeMenu()">Automation</a>
+  <a href="security.html" onclick="closeMenu()">Security</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
+  <a href="pricing.html" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <p class="eyebrow">Cybersecurity</p>
+  <h1 class="h1">Find the Gaps<br><span>Before Someone Else Does.</span></h1>
+  <p class="lead" style="margin-top:2rem;max-width:600px;">Most small businesses don't know where their real security risks are — the outdated plugin, the weak login, the public file, the missing backup. We review your website, applications, and configuration, then hand you a clear, prioritized plan to fix what matters.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="contact.html" class="btn btn-cyan">Request a Security Review →</a>
+    <a href="#scope" class="btn btn-outline">What This Is (and Isn't)</a>
+  </div>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+
+  <!-- SCOPE HONESTY -->
+  <div id="scope" class="scope-box" style="margin-bottom:1rem;">
+    <h4>What we do — and what we don't</h4>
+    <p><strong>We do:</strong> security reviews, advisory, hardening recommendations, policy and documentation, and incident-readiness planning. You get a written report with findings, severity, and a prioritized fix plan.</p>
+    <p style="margin-top:.8rem;"><strong>We don't:</strong> claim to be certified penetration testers, run offensive/exploit engagements, perform compliance certifications (HIPAA, PCI DSS, SOC 2, ISO 27001), or guarantee that a system is secure. Work requiring those credentials is referred to a qualified partner. A review reduces risk and finds common problems; it cannot find or fix everything, and no one can promise a system is "unhackable."</p>
+  </div>
+
+  <!-- REVIEW & ADVISORY -->
+  <div class="svc-block" id="review">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">01</p>
+        <h2>Review &amp; <span>Hardening</span></h2>
+        <p>A practical look at where your website, app, and setup are exposed — and exactly what to do about it.</p>
+        <a href="contact.html" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Request a Review →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🌐</span><h3 class="si-name">Website &amp; Web-App Security Review</h3></div><p class="si-desc">We review your public site and web application against common web risks (the OWASP Top 10): login and session handling, input handling, HTTPS/TLS, security headers, and publicly exposed files. You get findings, severity, and a fix plan.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🔑</span><h3 class="si-name">Authentication &amp; Access Review</h3></div><p class="si-desc">A review of how users sign in and what they can reach: password and MFA policy, session expiry, and whether roles and permissions match what each person actually needs.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📦</span><h3 class="si-name">Dependency &amp; Configuration Review</h3></div><p class="si-desc">We check for outdated or vulnerable software components, and review hosting, DNS, and email settings (SPF/DKIM/DMARC) that are commonly misconfigured and abused.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🛡️</span><h3 class="si-name">Hardening Recommendations</h3></div><p class="si-desc">A prioritized, plain-language list of changes to reduce your attack surface — what to fix first, what can wait, and what it takes to do each one.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- READINESS & POLICY -->
+  <div class="svc-block" id="readiness">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">02</p>
+        <h2>Readiness &amp; <span>Documentation</span></h2>
+        <p>The paperwork and plans that turn "we think we're fine" into something you can actually rely on.</p>
+        <a href="contact.html" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Talk to Us →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">💾</span><h3 class="si-name">Backup &amp; Recovery Review</h3></div><p class="si-desc">We review whether your critical data is actually backed up, how quickly you could restore it, and where the gaps are — because most "we have backups" turn out to be untested.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📋</span><h3 class="si-name">Security Policies &amp; Documentation</h3></div><p class="si-desc">Written policies your team can follow: passwords, acceptable use, data handling, and access. Practical documents sized for a small business, not a 50-page binder no one reads.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🚨</span><h3 class="si-name">Incident-Readiness Planning</h3></div><p class="si-desc">A simple plan for "what do we do if something goes wrong" — who to call, what to check, and how to contain and recover — written before you need it.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🤝</span><h3 class="si-name">Vendor-Risk &amp; Awareness Guidance</h3></div><p class="si-desc">A review of the third-party tools your business depends on, plus straightforward guidance to help your team recognize phishing and other common attacks.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHOD -->
+  <div class="svc-block" id="method">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">03</p>
+        <h2>How We <span>Work</span></h2>
+        <p>Straightforward, scoped, and documented from the first conversation.</p>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📝</span><h3 class="si-name">Scope in writing, with authorization</h3></div><p class="si-desc">We agree on exactly what's in scope before we start, and we only review systems you own or are authorized to let us review.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🔍</span><h3 class="si-name">Review against a known methodology</h3></div><p class="si-desc">We work from established references such as the OWASP Top 10 so the review is consistent and explainable — not a black box.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📄</span><h3 class="si-name">A clear written report</h3></div><p class="si-desc">Findings, severity, evidence, and a prioritized remediation plan you can act on yourself or with us — plus a re-check after fixes.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="svc-block" id="faq">
+    <p class="eyebrow reveal">FAQ</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Common <span>Questions</span></h2>
+    <div class="reveal">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Is this a penetration test?</button><div class="faq-a"><p>No. This is a security review and advisory service. We identify common and known weaknesses and give you a plan to fix them. A penetration test is an offensive engagement that actively tries to exploit systems, usually performed by specifically certified testers under a separate agreement. If you need that, we'll refer you to a qualified partner.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Do you guarantee my systems are secure?</button><div class="faq-a"><p>No one honestly can. A review reduces risk and finds many common problems, but it cannot find or fix every issue, and security changes over time. We'll be clear about what we checked and what we didn't.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Can you handle HIPAA, PCI DSS, SOC 2, or ISO 27001?</button><div class="faq-a"><p>Formal compliance audits and certifications require specific credentials and independent auditors. We can help you prepare and improve your practices, and we'll connect you with a qualified partner for the certification itself.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What do I actually receive?</button><div class="faq-a"><p>A written report: findings with severity, supporting evidence, and a prioritized remediation plan you can act on. For readiness work, you receive the relevant policies or plans as documents you own.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Do you need access to my systems?</button><div class="faq-a"><p>Some reviews need read access to configuration or code; others work from the outside. We scope this with you in writing and only touch what we're authorized to review.</p></div></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Get Started</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Not Sure Where You Stand? <span>Let's Find Out.</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;">Tell us about your website, apps, and setup. We'll scope a security review and show you where your real risks are — no scare tactics, just a straight assessment.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="contact.html" class="btn btn-cyan">Request a Security Review →</a>
+    <a href="services.html" class="btn btn-outline">See All Services</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html#web">Websites</a></li><li><a href="services.html#software">Software &amp; Apps</a></li><li><a href="services.html#dashboards">Dashboards</a></li><li><a href="automation.html">Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="ss-config.js"></script>
+<script src="ss-shared.js"></script>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+</script>
+</body></html>

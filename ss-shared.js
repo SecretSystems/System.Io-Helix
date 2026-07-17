@@ -1,16 +1,24 @@
-// ── CURSOR ──
-const cursor=document.getElementById('cursor');
-const ring=document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
-document.querySelectorAll('a,button,.card,.auto-item,.price-card,.test-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
-  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
-});
-// ── PARTICLES ──
+// ── MOTION / POINTER PREFERENCES ──
+var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var ssFinePointer = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+// ── CURSOR (desktop fine-pointer, motion-OK only; native cursor stays otherwise) ──
+(function(){
+  const cursor=document.getElementById('cursor');
+  const ring=document.getElementById('cursor-ring');
+  if(!cursor||!ring) return;
+  if(!ssFinePointer || ssReduce){ cursor.style.display='none'; ring.style.display='none'; return; }
+  document.documentElement.classList.add('has-custom-cursor');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+  document.querySelectorAll('a,button,.card,.auto-item,.price-card,.test-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
+    el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+  });
+})();
+// ── PARTICLES (skipped when the visitor prefers reduced motion) ──
 const canvas=document.getElementById('bg');
-if(canvas){
+if(canvas && !ssReduce){
   const ctx=canvas.getContext('2d');
   let W,H,particles=[];
   const resize=()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;};
@@ -23,5 +31,57 @@ if(canvas){
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 // ── MOBILE MENU ──
-function openMenu(){document.getElementById('mob').classList.add('open');}
-function closeMenu(){document.getElementById('mob').classList.remove('open');}
+function openMenu(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden';}
+function closeMenu(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+// ── CONTACT FORM (provider-agnostic; sends only when an endpoint is configured) ──
+function ssInitForms(){
+  var cfg = window.SS_CONFIG || {};
+  var email = cfg.EMAIL || 'info@secretsystems.io';
+  var telDisp = cfg.PHONE_DISPLAY || '';
+  var tel = cfg.PHONE_TEL || '';
+  var contactLine = 'email <a href="mailto:'+email+'">'+email+'</a>'+(tel?' or call <a href="tel:'+tel+'">'+telDisp+'</a>':'')+'.';
+  document.querySelectorAll('form[data-ss-form]').forEach(function(form){
+    var status = form.querySelector('[data-ss-status]');
+    function setStatus(msg,cls){ if(status){ status.innerHTML=msg; status.className='ss-form-status'+(cls?' '+cls:''); } }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var ok=true, first=null;
+      form.querySelectorAll('[required]').forEach(function(f){
+        if(!f.value.trim()){ f.setAttribute('aria-invalid','true'); ok=false; if(!first) first=f; }
+        else { f.removeAttribute('aria-invalid'); }
+      });
+      if(!ok){ setStatus('Please complete the required fields.','err'); if(first) first.focus(); return; }
+      if(!cfg.FORM_ENDPOINT){
+        setStatus('Online form delivery isn’t active yet. Please '+contactLine,'warn');
+        return;
+      }
+      var btn = form.querySelector('[type="submit"]');
+      var payload = {};
+      new FormData(form).forEach(function(v,k){ payload[k]=v; });
+      payload._page = location.pathname;
+      setStatus('Sending…','');
+      if(btn) btn.disabled=true;
+      fetch(cfg.FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r; })
+        .then(function(){
+          form.reset();
+          var successId = form.getAttribute('data-ss-success');
+          var wrap = form.closest('[data-ss-formwrap]');
+          var successEl = successId ? document.getElementById(successId) : null;
+          if(successEl && wrap){ wrap.style.display='none'; successEl.style.display='block'; }
+          else { setStatus('Thanks — your message was sent. We’ll reply within one business day.','ok'); }
+        })
+        .catch(function(){ setStatus('Something went wrong sending your message. Please '+contactLine,'err'); })
+        .finally(function(){ if(btn) btn.disabled=false; });
+    });
+  });
+}
+// ── GA4 (loads only when a Measurement ID is configured) ──
+(function(){
+  var id=(window.SS_CONFIG||{}).GA4_ID;
+  if(!id) return;
+  var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+id; document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=gtag;
+  gtag('js', new Date()); gtag('config', id);
+})();
+if(document.readyState!=='loading'){ ssInitForms(); } else { document.addEventListener('DOMContentLoaded', ssInitForms); }

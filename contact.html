@@ -10,6 +10,7 @@
 <meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/contact.html"/><meta property="og:title" content="Contact Secret Systems .io | Free Strategy Call"/><meta property="og:description" content="Book a free strategy call with Secret Systems. We'll build a custom plan for web design, CRM automation, AI lead follow-up, or your full digital infrastructure."/><meta property="og:site_name" content="Secret Systems .io"/>
 <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Contact Secret Systems .io"/><meta name="twitter:description" content="Book a free strategy call. Tell us about your business and we'll engineer the exact system you need to grow."/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"Contact Secret Systems","url":"https://secretsystems.io/contact.html","mainEntity":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io","contactPoint":{"@type":"ContactPoint","contactType":"Sales","areaServed":"US","availableLanguage":"English"}}}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="ss-shared.css"/>
 <style>
 .contact-hero-bg{background:radial-gradient(ellipse at 80% 20%,rgba(0,200,255,.06) 0%,var(--void) 65%);}
@@ -41,33 +42,31 @@
   <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
     <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="work.html">Past Work</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li><a href="contact.html" class="nav-cta active">Get Access</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta active">Contact</a></li>
   </ul>
   <button class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob" id="mob">
-  <button class="mob-close" onclick="closeMenu()" aria-label="Close">✕</button>
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
-  <a href="automation.html" onclick="closeMenu()">AI &amp; Automation</a>
-  <a href="catalog.html" onclick="closeMenu()">Catalog</a>
-  <a href="work.html" onclick="closeMenu()">Past Work</a>
-  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="automation.html" onclick="closeMenu()">Automation</a>
+  <a href="security.html" onclick="closeMenu()">Security</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
   <a href="pricing.html" onclick="closeMenu()">Pricing</a>
-  <a href="vault.html" onclick="closeMenu()">🔐 Vault</a>
-  <a href="contact.html" onclick="closeMenu()">Get Access</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
 </div>
 
 <main>
 <div class="contact-hero-bg">
 <div class="page-hero wrap" style="border-bottom:none;padding-bottom:2rem;">
-  <p class="eyebrow">Get Access</p>
+  <p class="eyebrow">Contact</p>
   <h1 class="h1">Let's Build Your<br><span style="color:var(--cyan);">System.</span></h1>
   <p class="lead" style="margin-top:1.5rem;max-width:520px;">Tell us about your business. We'll put together a custom plan and show you exactly what Secret Systems can build — no pressure, no generic pitch, just a real conversation about your growth.</p>
 </div>
@@ -82,7 +81,8 @@
       <h2 class="h2" style="font-size:2rem;margin-bottom:2rem;">We're Here.<br><span>Let's Talk.</span></h2>
       <div class="ci-item"><div class="ci-icon">🌐</div><div><div class="ci-label">Website</div><div class="ci-value"><a href="https://secretsystems.io">secretsystems.io</a></div></div></div>
       <div class="ci-item"><div class="ci-icon">📍</div><div><div class="ci-label">Headquarters</div><div class="ci-value">South Louisiana &amp; Serving Nationwide</div></div></div>
-      <div class="ci-item"><div class="ci-icon">📘</div><div><div class="ci-label">Facebook</div><div class="ci-value"><a href="https://facebook.com/secretsystemsio" target="_blank" rel="noopener">facebook.com/secretsystemsio</a></div></div></div>
+      <div class="ci-item"><div class="ci-icon" aria-hidden="true">✉️</div><div><div class="ci-label">Email</div><div class="ci-value"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></div></div></div>
+      <div class="ci-item"><div class="ci-icon" aria-hidden="true">📞</div><div><div class="ci-label">Phone</div><div class="ci-value"><a href="tel:+13372588818">(337) 258-8818</a></div></div></div>
       <div class="ci-item"><div class="ci-icon">⏱️</div><div><div class="ci-label">Response Time</div><div class="ci-value">Within 24 hours on business days</div></div></div>
       <div class="what-to-expect">
         <div class="wte-title">What Happens After You Submit</div>
@@ -98,10 +98,10 @@
     <!-- RIGHT FORM -->
     <div>
       <div class="contact-form-block">
-        <div id="formWrap">
+        <div id="formWrap" data-ss-formwrap>
           <h2 class="form-title">Request Your Free Strategy Call</h2>
           <p class="form-subtitle">Fill out the form below and we'll be in touch within 24 hours to schedule your call.</p>
-          <form id="contactForm" onsubmit="submitForm(event)" novalidate>
+          <form id="contactForm" data-ss-form data-ss-success="formSuccess" novalidate>
             <div class="field-row" style="margin-bottom:0;">
               <div class="field-group"><label for="fname">First Name *</label><input type="text" id="fname" name="firstName" placeholder="John" required/></div>
               <div class="field-group"><label for="lname">Last Name *</label><input type="text" id="lname" name="lastName" placeholder="Smith" required/></div>
@@ -120,14 +120,14 @@
               <select id="interest" name="interest" required>
                 <option value="">Select your biggest need...</option>
                 <option>New Website</option>
+                <option>Custom Software</option>
+                <option>Web App</option>
+                <option>App Development</option>
+                <option>Business Dashboard</option>
+                <option>Workflow Automation</option>
                 <option>GoHighLevel CRM Setup</option>
-                <option>AI Lead Follow-Up Automation</option>
-                <option>SMS Text Blast Campaigns</option>
-                <option>5-Star Google Review System</option>
-                <option>Auto-Dial / Call Center Automation</option>
-                <option>Digital Marketing &amp; Ads</option>
-                <option>Full Growth Package</option>
-                <option>Everything — let's build it all</option>
+                <option>Cybersecurity Review</option>
+                <option>Something else — let's talk</option>
               </select>
             </div>
             <div class="field-group">
@@ -145,6 +145,7 @@
               <textarea id="message" name="message" rows="5" placeholder="What does your business do, who are your customers, what's your biggest challenge right now, and what does success look like in 6 months?" required></textarea>
             </div>
             <button type="submit" class="btn btn-cyan" style="width:100%;justify-content:center;border:none;cursor:pointer;font-size:.95rem;padding:1.1rem 2rem;margin-top:.5rem;">Send My Request →</button>
+            <p class="ss-form-status" data-ss-status role="status" aria-live="polite"></p>
           </form>
         </div>
         <div class="form-success" id="formSuccess">
@@ -160,19 +161,8 @@
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>The infrastructure behind businesses that grow without limits. Built in Louisiana. Deployed nationwide.</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html">Web Design</a></li><li><a href="services.html#crm">CRM &amp; Automation</a></li><li><a href="automation.html">AI Systems</a></li><li><a href="services.html#sms">Text &amp; Email</a></li><li><a href="services.html#reviews">Reputation Mgmt</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="about.html#process">How It Works</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Get a Free Quote</a></li><li><a href="contact.html">Book a Strategy Call</a></li><li><a href="pricing.html">View Plans</a></li><li><a href="catalog.html">Browse All Services</a></li></ul></div></div></div></footer>
-<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2025 Secret Systems LLC · All Rights Reserved</span><span>Built on <span class="fc">Systems</span> · Powered by <span class="fc">AI</span></span></div></div></div>
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html#web">Websites</a></li><li><a href="services.html#software">Software &amp; Apps</a></li><li><a href="services.html#dashboards">Dashboards</a></li><li><a href="automation.html">Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="ss-config.js"></script>
 <script src="ss-shared.js"></script>
-<script>
-function submitForm(e){
-  e.preventDefault();
-  const form=document.getElementById('contactForm');
-  const required=form.querySelectorAll('[required]');
-  let valid=true;
-  required.forEach(f=>{if(!f.value.trim()){f.style.borderColor='#ff3c6e';valid=false;}else{f.style.borderColor='rgba(0,200,255,0.12)';}});
-  if(!valid)return;
-  document.getElementById('formWrap').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
-}
-</script>
 </body></html>

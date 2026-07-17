@@ -2,7 +2,8 @@
 :root{--void:#020408;--deep:#070d14;--card:#0f1c2a;--border:rgba(0,200,255,0.1);--cyan:#00c8ff;--cyan2:#00ffe0;--cyan-glow:rgba(0,200,255,0.12);--white:#e8f4ff;--muted:#4a6a82;--text:#a8c8e0;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;}
+body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+html.has-custom-cursor body{cursor:none;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9998;}
 #cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:screen;}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,200,255,0.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
@@ -126,3 +127,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .auto-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:.35rem;}
 .auto-desc{font-size:.83rem;color:var(--text);line-height:1.6;}
 @media(max-width:900px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}.hamburger{display:flex;}.wrap{padding-left:1.5rem;padding-right:1.5rem;}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;gap:2rem;}.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}.foot-bottom-inner{flex-direction:column;gap:.5rem;text-align:center;}.field-row{grid-template-columns:1fr;}}
+/* ── ACCESSIBILITY: visible keyboard focus ── */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:2px;}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0;}
+/* ── ACCESSIBILITY: honor reduced-motion ── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+  canvas#bg,#particle-canvas{display:none!important;}
+  #cursor,#cursor-ring{display:none!important;}
+  body,html.has-custom-cursor body{cursor:auto!important;}
+}
+/* ── Touch / coarse pointers: native cursor, no custom cursor ── */
+@media (hover:none),(pointer:coarse){
+  #cursor,#cursor-ring{display:none!important;}
+  body,html.has-custom-cursor body{cursor:auto!important;}
+}
+/* ── Contact-form status messages ── */
+.ss-form-status{margin-top:1rem;font-size:.85rem;line-height:1.55;min-height:1.2em;}
+.ss-form-status.ok{color:#4eff9f;}
+.ss-form-status.err{color:#ff3c6e;}
+.ss-form-status.warn{color:#ffe066;}
+.ss-form-status a{color:var(--cyan);}
+input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="true"]{border-color:#ff3c6e!important;}
+/* ── Footer contact block ── */
+.foot-contact{font-size:.82rem;color:var(--muted);line-height:1.7;margin-top:1rem;}
+.foot-contact a{color:var(--text);text-decoration:none;}
+.foot-contact a:hover{color:var(--cyan);}
+/* ── Cybersecurity scope box ── */
+.scope-box{border:1px solid var(--border);background:rgba(0,200,255,.03);padding:1.5rem 1.75rem;margin:1.5rem 0;}
+.scope-box h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--cyan);margin-bottom:.6rem;}
+.scope-box p{font-size:.86rem;color:var(--text);line-height:1.65;}

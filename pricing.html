@@ -9,7 +9,8 @@
 <link rel="canonical" href="https://secretsystems.io/pricing.html"/>
 <meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/pricing.html"/><meta property="og:title" content="Pricing | Secret Systems .io"/><meta property="og:description" content="Simple, transparent pricing for web design, CRM automation, AI lead follow-up, and full digital marketing. Plans start at $497/month."/><meta property="og:site_name" content="Secret Systems .io"/>
 <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Pricing | Secret Systems .io"/><meta name="twitter:description" content="Web design, CRM, AI automation pricing starting at $497/month. Transparent plans with no hidden fees."/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"PriceSpecification","name":"Secret Systems Service Pricing","description":"Monthly subscription plans for digital marketing, CRM automation, web design, and AI lead follow-up services","priceCurrency":"USD","eligibleRegion":{"@type":"Country","name":"United States"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Secret Systems Service Plans","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"offers":[{"@type":"Offer","name":"Starter","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"497","priceCurrency":"USD","unitCode":"MON"}},{"@type":"Offer","name":"Growth","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"997","priceCurrency":"USD","unitCode":"MON"}},{"@type":"Offer","name":"Machine","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"1997","priceCurrency":"USD","unitCode":"MON"}}]}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="ss-shared.css"/>
 <style>
 .pricing-hero-bg{background:radial-gradient(ellipse at 50% 30%,rgba(0,200,255,.05) 0%,var(--void) 65%);}
@@ -39,6 +40,7 @@
 .addon-price{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--cyan);}
 .faq-list{display:flex;flex-direction:column;gap:0;margin-top:3rem;}
 .faq-item{border-bottom:1px solid var(--border);padding:1.8rem 0;cursor:pointer;}
+button.faq-q{width:100%;text-align:left;background:none;border:none;color:inherit;font:inherit;appearance:none;-webkit-appearance:none;cursor:pointer;padding:0;}
 .faq-q{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .faq-q .arrow{color:var(--cyan);font-size:1.2rem;transition:transform .3s;flex-shrink:0;}
 .faq-a{font-size:.9rem;color:var(--text);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
@@ -53,27 +55,25 @@
   <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
   <ul class="nav-links">
     <li><a href="services.html">Services</a></li>
-    <li><a href="automation.html">AI &amp; Automation</a></li>
-    <li><a href="catalog.html">Catalog</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
     <li><a href="pricing.html" class="active">Pricing</a></li>
-    <li><a href="work.html">Past Work</a></li>
-    <li><a href="vault.html">🔐 Vault</a></li>
-    <li><a href="contact.html" class="nav-cta">Get Access</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
   </ul>
   <button class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob" id="mob">
-  <button class="mob-close" onclick="closeMenu()" aria-label="Close">✕</button>
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
-  <a href="automation.html" onclick="closeMenu()">AI &amp; Automation</a>
-  <a href="catalog.html" onclick="closeMenu()">Catalog</a>
-  <a href="work.html" onclick="closeMenu()">Past Work</a>
-  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="automation.html" onclick="closeMenu()">Automation</a>
+  <a href="security.html" onclick="closeMenu()">Security</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
   <a href="pricing.html" onclick="closeMenu()">Pricing</a>
-  <a href="vault.html" onclick="closeMenu()">🔐 Vault</a>
-  <a href="contact.html" onclick="closeMenu()">Get Access</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
 </div>
 
 <main>
@@ -223,6 +223,11 @@
     <div class="addon"><div class="addon-name">Local SEO Package</div><div class="addon-desc">GBP optimization, citations, on-page SEO, schema markup.</div><div class="addon-price">From $397 one-time</div></div>
     <div class="addon"><div class="addon-name">AI Chat Widget</div><div class="addon-desc">Custom-trained AI chatbot for your website — 24/7 lead capture.</div><div class="addon-price">$397 setup + $147/mo</div></div>
     <div class="addon"><div class="addon-name">Custom Automation Build</div><div class="addon-desc">Fully bespoke AI workflow engineered around your process.</div><div class="addon-price">From $997 (scoped)</div></div>
+    <div class="addon"><div class="addon-name">Custom Software / Web App</div><div class="addon-desc">Bespoke software or web application built around your exact workflow.</div><div class="addon-price">Quote</div></div>
+    <div class="addon"><div class="addon-name">App Development</div><div class="addon-desc">Native or cross-platform mobile app design and development.</div><div class="addon-price">Quote</div></div>
+    <div class="addon"><div class="addon-name">Business Dashboard</div><div class="addon-desc">Live dashboard bringing your key metrics and data into one view.</div><div class="addon-price">Quote</div></div>
+    <div class="addon"><div class="addon-name">Workflow Automation</div><div class="addon-desc">Custom automations that connect your tools and remove manual steps.</div><div class="addon-price">Quote</div></div>
+    <div class="addon"><div class="addon-name">Website Security Review</div><div class="addon-desc">Audit of your site's security posture with prioritized fixes.</div><div class="addon-price">Quote</div></div>
   </div>
   <div style="text-align:center;margin-top:3rem;" class="reveal"><a href="catalog.html" class="btn btn-outline">Browse Full Service Catalog →</a></div>
 </div>
@@ -234,12 +239,12 @@
   <p class="eyebrow reveal">Common Questions</p>
   <h2 class="h2 reveal">Pricing <span>FAQ</span></h2>
   <div class="faq-list reveal">
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Are there any setup fees or contracts?<span class="arrow">↓</span></div><div class="faq-a">There are no long-term contracts. We work month-to-month and believe results should earn your continued business — not a contract. Some one-time setup fees apply to specific builds, which are always disclosed upfront before any work begins.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens if I want to cancel?<span class="arrow">↓</span></div><div class="faq-a">You can cancel anytime with 30 days' notice. You keep everything we've built for you — your website files, your CRM contacts, your automations. We don't hold your business data hostage.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do I need to already have GoHighLevel?<span class="arrow">↓</span></div><div class="faq-a">No. We can set up and manage your GoHighLevel account for you, or work within your existing account if you already have one. We'll recommend the right GHL plan for your needs during onboarding.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How long does it take to get set up?<span class="arrow">↓</span></div><div class="faq-a">Most Starter plans are live within 7–10 business days. Growth and Machine plans typically take 2–3 weeks depending on the scope. Custom builds are scoped individually with a clear timeline before we start.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I start with one service and add more later?<span class="arrow">↓</span></div><div class="faq-a">Absolutely. Many clients start with a website or a single automation and expand as they see results. We're built for flexibility — start where you are and scale as your business grows.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer custom enterprise pricing?<span class="arrow">↓</span></div><div class="faq-a">Yes. For agencies, franchises, or businesses with more complex needs, we offer custom-scoped packages. Get in touch and we'll build a proposal around your exact requirements and scale.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are there any setup fees or contracts?<span class="arrow">↓</span></button><div class="faq-a">There are no long-term contracts. We work month-to-month and believe results should earn your continued business — not a contract. Some one-time setup fees apply to specific builds, which are always disclosed upfront before any work begins.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What happens if I want to cancel?<span class="arrow">↓</span></button><div class="faq-a">You can cancel anytime with 30 days' notice. You keep everything we've built for you — your website files, your CRM contacts, your automations. We don't hold your business data hostage.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Do I need to already have GoHighLevel?<span class="arrow">↓</span></button><div class="faq-a">No. We can set up and manage your GoHighLevel account for you, or work within your existing account if you already have one. We'll recommend the right GHL plan for your needs during onboarding.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">How long does it take to get set up?<span class="arrow">↓</span></button><div class="faq-a">Most Starter plans are live within 7–10 business days. Growth and Machine plans typically take 2–3 weeks depending on the scope. Custom builds are scoped individually with a clear timeline before we start.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Can I start with one service and add more later?<span class="arrow">↓</span></button><div class="faq-a">Absolutely. Many clients start with a website or a single automation and expand as they see results. We're built for flexibility — start where you are and scale as your business grows.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Do you offer custom enterprise pricing?<span class="arrow">↓</span></button><div class="faq-a">Yes. For agencies, franchises, or businesses with more complex needs, we offer custom-scoped packages. Get in touch and we'll build a proposal around your exact requirements and scale.</div></div>
   </div>
 </div>
 </section>
@@ -258,8 +263,9 @@
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>The infrastructure behind businesses that grow without limits. Built in Louisiana. Deployed nationwide.</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html">Web Design</a></li><li><a href="services.html#crm">CRM &amp; Automation</a></li><li><a href="automation.html">AI Systems</a></li><li><a href="services.html#sms">Text &amp; Email</a></li><li><a href="services.html#reviews">Reputation Mgmt</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="about.html#process">How It Works</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Get a Free Quote</a></li><li><a href="contact.html">Book a Strategy Call</a></li><li><a href="pricing.html">View Plans</a></li><li><a href="catalog.html">Browse All Services</a></li></ul></div></div></div></footer>
-<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2025 Secret Systems LLC · All Rights Reserved</span><span>Built on <span class="fc">Systems</span> · Powered by <span class="fc">AI</span></span></div></div></div>
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h5>Services</h5><ul><li><a href="services.html#web">Websites</a></li><li><a href="services.html#software">Software &amp; Apps</a></li><li><a href="services.html#dashboards">Dashboards</a></li><li><a href="automation.html">Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li></ul></div><div class="foot-col"><h5>Get Started</h5><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="ss-config.js"></script>
 <script src="ss-shared.js"></script>
-<script>function toggleFaq(el){el.classList.toggle('open');}</script>
+<script>function toggleFaq(el){var open=el.parentElement.classList.toggle('open');el.setAttribute('aria-expanded',open?'true':'false');}</script>
 </body></html>

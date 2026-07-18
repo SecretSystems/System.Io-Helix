@@ -10,6 +10,8 @@
 <meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/security.html"/><meta property="og:title" content="Cybersecurity Reviews & Hardening | Secret Systems .io"/><meta property="og:description" content="Security reviews and hardening for small business — website, web app, configuration, dependencies, policies, and incident readiness. Clear reports, prioritized fixes."/><meta property="og:site_name" content="Secret Systems .io"/>
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Cybersecurity Reviews & Hardening | Secret Systems .io"/><meta name="twitter:description" content="Security reviews and hardening for small business. Review and advisory — not penetration testing."/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Security review and advisory","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"description":"Security reviews and hardening for small and mid-size businesses: website and web application review, dependency and configuration review, security policy development, and incident-readiness planning. Review and advisory services only."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://secretsystems.io/services.html"},{"@type":"ListItem","position":3,"name":"Cybersecurity Reviews","item":"https://secretsystems.io/security.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a penetration test?","acceptedAnswer":{"@type":"Answer","text":"No. This is a security review and advisory service. We identify common and known weaknesses and give you a plan to fix them. A penetration test is an offensive engagement that actively tries to exploit systems, usually performed by specifically certified testers under a separate agreement. If you need that, we'll refer you to a qualified partner."}},{"@type":"Question","name":"Do you guarantee my systems are secure?","acceptedAnswer":{"@type":"Answer","text":"No one honestly can. A review reduces risk and finds many common problems, but it cannot find or fix every issue, and security changes over time. We'll be clear about what we checked and what we didn't."}},{"@type":"Question","name":"Can you handle HIPAA, PCI DSS, SOC 2, or ISO 27001?","acceptedAnswer":{"@type":"Answer","text":"Formal compliance audits and certifications require specific credentials and independent auditors. We can help you prepare and improve your practices, and we'll connect you with a qualified partner for the certification itself."}},{"@type":"Question","name":"What do I actually receive?","acceptedAnswer":{"@type":"Answer","text":"A written report: findings with severity, supporting evidence, and a prioritized remediation plan you can act on. For readiness work, you receive the relevant policies or plans as documents you own."}},{"@type":"Question","name":"Do you need access to my systems?","acceptedAnswer":{"@type":"Answer","text":"Some reviews need read access to configuration or code; others work from the outside. We scope this with you in writing and only touch what we're authorized to review."}}]}</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="ss-shared.css"/>
 <style>
@@ -42,7 +44,7 @@
 <nav>
   <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="services.html">All Services</a></li><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software Development</a></li><li><a href="app-development.html">App Development</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="automation.html">CRM Automation</a></li><li><a href="security.html">Cybersecurity Reviews</a></li></ul></li>
     <li><a href="automation.html">Automation</a></li>
     <li><a href="security.html" class="active">Security</a></li>
     <li><a href="work.html">Work</a></li>
@@ -56,6 +58,11 @@
   <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="web-design.html" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="software-development.html" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="app-development.html" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="dashboard-development.html" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="workflow-automation.html" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
   <a href="automation.html" onclick="closeMenu()">Automation</a>
   <a href="security.html" onclick="closeMenu()">Security</a>
   <a href="work.html" onclick="closeMenu()">Work</a>
@@ -67,6 +74,7 @@
 <main>
 <div class="page-hero-bg">
 <div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="index.html" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="services.html" style="color:var(--muted);text-decoration:none;">Services</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Cybersecurity Reviews</span></nav>
   <p class="eyebrow">Cybersecurity</p>
   <h1 class="h1">Find the Gaps<br><span>Before Someone Else Does.</span></h1>
   <p class="lead" style="margin-top:2rem;max-width:600px;">Most small businesses don't know where their real security risks are — the outdated plugin, the weak login, the public file, the missing backup. We review your website, applications, and configuration, then hand you a clear, prioritized plan to fix what matters.</p>
@@ -101,6 +109,8 @@
         <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🔑</span><h3 class="si-name">Authentication &amp; Access Review</h3></div><p class="si-desc">A review of how users sign in and what they can reach: password and MFA policy, session expiry, and whether roles and permissions match what each person actually needs.</p></div>
         <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📦</span><h3 class="si-name">Dependency &amp; Configuration Review</h3></div><p class="si-desc">We check for outdated or vulnerable software components, and review hosting, DNS, and email settings (SPF/DKIM/DMARC) that are commonly misconfigured and abused.</p></div>
         <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🛡️</span><h3 class="si-name">Hardening Recommendations</h3></div><p class="si-desc">A prioritized, plain-language list of changes to reduce your attack surface — what to fix first, what can wait, and what it takes to do each one.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">📜</span><h3 class="si-name">Logging &amp; Monitoring Recommendations</h3></div><p class="si-desc">A review of what your systems record and what they'd tell you after an incident — with practical recommendations for logging, alerting, and knowing when something is wrong before a customer tells you.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🧱</span><h3 class="si-name">Secure-Development Guidance</h3></div><p class="si-desc">For software we build or you already run: input validation, session handling, least-privilege access, and dependency hygiene applied as working practices — not a checkbox at the end.</p></div>
       </div>
     </div>
   </div>
@@ -155,6 +165,18 @@
 </div>
 </div>
 
+<!-- RELATED -->
+<div style="background:var(--void);border-top:1px solid var(--border);">
+<div class="section wrap" style="padding-top:3rem;padding-bottom:3rem;">
+  <p class="eyebrow">Related Services</p>
+  <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;">
+    <a href="software-development.html" class="card-link">Custom software development →</a>
+    <a href="web-design.html" class="card-link">Website design &amp; development →</a>
+    <a href="workflow-automation.html" class="card-link">Workflow automation →</a>
+  </div>
+</div>
+</div>
+
 <!-- CTA -->
 <section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
 <div class="cta-band wrap">
@@ -169,7 +191,7 @@
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="services.html#web">Websites</a></li><li><a href="services.html#software">Software &amp; Apps</a></li><li><a href="services.html#dashboards">Dashboards</a></li><li><a href="automation.html">Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software &amp; Apps</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="resources.html">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
 <div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
 <script src="ss-config.js"></script>
 <script src="ss-shared.js"></script>

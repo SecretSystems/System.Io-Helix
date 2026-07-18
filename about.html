@@ -38,7 +38,7 @@
 <nav>
   <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="services.html">All Services</a></li><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software Development</a></li><li><a href="app-development.html">App Development</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="automation.html">CRM Automation</a></li><li><a href="security.html">Cybersecurity Reviews</a></li></ul></li>
     <li><a href="automation.html">Automation</a></li>
     <li><a href="security.html">Security</a></li>
     <li><a href="work.html">Work</a></li>
@@ -52,6 +52,11 @@
   <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="web-design.html" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="software-development.html" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="app-development.html" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="dashboard-development.html" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="workflow-automation.html" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
   <a href="automation.html" onclick="closeMenu()">Automation</a>
   <a href="security.html" onclick="closeMenu()">Security</a>
   <a href="work.html" onclick="closeMenu()">Work</a>
@@ -123,6 +128,31 @@
 </div>
 </section>
 
+<!-- PLAIN TALK -->
+<section style="background:var(--deep);border-bottom:1px solid var(--border);">
+<div class="section wrap">
+  <p class="eyebrow reveal">Plain Talk</p>
+  <h2 class="h2 reveal">What We Are — <span>and What We Aren't</span></h2>
+  <div class="grid-2 reveal" style="align-items:start;gap:3rem;">
+    <div>
+      <p style="color:var(--text);font-size:.95rem;line-height:1.8;margin-bottom:1.2rem;">Secret Systems exists because most small businesses are stuck between two bad options: enterprise software firms that won't return a call for less than six figures, and template shops that hand over something generic and disappear. We build practical systems — websites, software, dashboards, automation — for real businesses, at a scale a business owner can actually buy.</p>
+      <p style="color:var(--text);font-size:.95rem;line-height:1.8;margin-bottom:1.2rem;">We're based in South Louisiana and work with clients nationwide. When you call, you talk to the people doing the work — not an account layer. You get plain explanations, written scopes, and you own what we build: the code, the data, the accounts.</p>
+      <p style="color:var(--text);font-size:.95rem;line-height:1.8;">We're a small studio, and we're honest about it. We don't claim a floor of engineers, we don't take on work we can't do well, and when an off-the-shelf product is the better answer for you, we'll say so — even when it costs us the project.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);padding:2.5rem;">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--cyan);margin-bottom:1.2rem;">What working with us looks like</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.8rem;">
+        <li style="font-size:.88rem;color:var(--text);display:flex;gap:.7rem;"><span style="color:var(--cyan);" aria-hidden="true">→</span>Direct access to the people building your system</li>
+        <li style="font-size:.88rem;color:var(--text);display:flex;gap:.7rem;"><span style="color:var(--cyan);" aria-hidden="true">→</span>Written scope and quote before work begins</li>
+        <li style="font-size:.88rem;color:var(--text);display:flex;gap:.7rem;"><span style="color:var(--cyan);" aria-hidden="true">→</span>You own the source code, data, and accounts</li>
+        <li style="font-size:.88rem;color:var(--text);display:flex;gap:.7rem;"><span style="color:var(--cyan);" aria-hidden="true">→</span>Honest recommendations, including &quot;don't build this&quot;</li>
+        <li style="font-size:.88rem;color:var(--text);display:flex;gap:.7rem;"><span style="color:var(--cyan);" aria-hidden="true">→</span>Louisiana-based, serving clients nationwide</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- CTA -->
 <section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
 <div class="cta-band wrap">
@@ -137,7 +167,7 @@
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="services.html#web">Websites</a></li><li><a href="services.html#software">Software &amp; Apps</a></li><li><a href="services.html#dashboards">Dashboards</a></li><li><a href="automation.html">Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software &amp; Apps</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="resources.html">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
 <div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
 <script src="ss-config.js"></script>
 <script src="ss-shared.js"></script>

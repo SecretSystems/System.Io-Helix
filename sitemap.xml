@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://secretsystems.io/</loc><lastmod>2026-07-17</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://secretsystems.io/services.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://secretsystems.io/security.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://secretsystems.io/automation.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://secretsystems.io/work.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://secretsystems.io/catalog.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://secretsystems.io/pricing.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://secretsystems.io/about.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://secretsystems.io/contact.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://secretsystems.io/</loc><lastmod>2026-07-18</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://secretsystems.io/services.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://secretsystems.io/software-development.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://secretsystems.io/web-design.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://secretsystems.io/app-development.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://secretsystems.io/dashboard-development.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://secretsystems.io/workflow-automation.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://secretsystems.io/security.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://secretsystems.io/automation.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://secretsystems.io/work.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://secretsystems.io/catalog.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://secretsystems.io/pricing.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://secretsystems.io/about.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://secretsystems.io/contact.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://secretsystems.io/resources.html</loc><lastmod>2026-07-18</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://secretsystems.io/custom-software-vs-off-the-shelf.html</loc><lastmod>2026-07-18</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://secretsystems.io/what-business-processes-should-you-automate.html</loc><lastmod>2026-07-18</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://secretsystems.io/business-dashboard-guide.html</loc><lastmod>2026-07-18</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://secretsystems.io/privacy.html</loc><lastmod>2026-07-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://secretsystems.io/terms.html</loc><lastmod>2026-07-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://secretsystems.io/accessibility.html</loc><lastmod>2026-07-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>

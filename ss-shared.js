@@ -33,6 +33,15 @@ document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 // ── MOBILE MENU ──
 function openMenu(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden';}
 function closeMenu(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+// ── SERVICES DROPDOWN ──
+(function(){
+  var dd=document.querySelector('.nav-dd');if(!dd)return;
+  var btn=dd.querySelector('.nav-dd-btn');if(!btn)return;
+  function ddClose(){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();var open=dd.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
+  document.addEventListener('click',function(e){if(!dd.contains(e.target))ddClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose();});
+})();
 // ── CONTACT FORM (provider-agnostic; sends only when an endpoint is configured) ──
 function ssInitForms(){
   var cfg = window.SS_CONFIG || {};

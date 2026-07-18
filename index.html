@@ -981,6 +981,20 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0
   #cursor,#cursor-ring{display:none!important;}
   body,html.has-custom-cursor body{cursor:auto!important;}
 }
+/* ── Services dropdown ── */
+.nav-dd{position:relative;}
+.nav-dd-btn{background:none;border:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:0.35rem;padding:0;transition:color 0.2s;}
+.nav-dd-btn:hover,.nav-dd.open .nav-dd-btn{color:var(--cyan);}
+.dd-caret{font-size:0.55rem;transition:transform 0.2s;}
+.nav-dd.open .dd-caret{transform:rotate(180deg);}
+.nav-dd-menu{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);min-width:235px;background:rgba(2,4,8,0.97);backdrop-filter:blur(20px);border:1px solid var(--border);padding:0.5rem 0;list-style:none;display:none;z-index:1200;}
+.nav-dd.open .nav-dd-menu{display:block;}
+@media(hover:hover) and (pointer:fine){.nav-dd:hover .nav-dd-menu{display:block;}}
+.nav-dd-menu a{display:block;padding:0.55rem 1.2rem;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color 0.2s,background 0.2s;}
+.nav-dd-menu a:hover{color:var(--cyan);background:rgba(0,200,255,0.05);}
+.nav-dd-menu a::after{display:none;}
+.mobile-nav-links a.mob-sub{font-family:'Outfit',sans-serif;font-weight:500;font-size:1rem;padding:0.55rem 2rem;color:var(--text);}
+#mobile-menu{overflow-y:auto;}
 /* ── Contact-form status messages ── */
 .ss-form-status{margin-top:1rem;font-size:.85rem;line-height:1.55;min-height:1.2em;}
 .ss-form-status.ok{color:#4eff9f;}
@@ -1036,7 +1050,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     Secret Systems<span class="dot">.</span><span class="io">io</span>
   </a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="services.html">All Services</a></li><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software Development</a></li><li><a href="app-development.html">App Development</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="automation.html">CRM Automation</a></li><li><a href="security.html">Cybersecurity Reviews</a></li></ul></li>
     <li><a href="automation.html">Automation</a></li>
     <li><a href="security.html">Security</a></li>
     <li><a href="work.html">Work</a></li>
@@ -1055,6 +1069,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   <ul class="mobile-nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
+    <li><a href="web-design.html" class="mob-sub">Web Design</a></li>
+    <li><a href="software-development.html" class="mob-sub">Software Development</a></li>
+    <li><a href="app-development.html" class="mob-sub">App Development</a></li>
+    <li><a href="dashboard-development.html" class="mob-sub">Dashboards</a></li>
+    <li><a href="workflow-automation.html" class="mob-sub">Workflow Automation</a></li>
     <li><a href="automation.html">Automation</a></li>
     <li><a href="security.html">Security</a></li>
     <li><a href="work.html">Work</a></li>
@@ -1142,7 +1161,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       <div class="tile-num">01</div>
       <span class="tile-icon">🌐</span>
       <div class="tile-name">Web Design & Development</div>
-      <p class="tile-desc">Conversion-focused websites, landing pages, and funnels built for performance. Custom coded or CMS — your brand, built right.</p>
+      <p class="tile-desc">Conversion-focused websites, landing pages, and funnels built for performance. Custom coded or CMS — your brand, built right. <a href="web-design.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
     <div class="service-tile">
       <div class="tile-num">02</div>
@@ -1196,25 +1215,25 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       <div class="tile-num">10</div>
       <span class="tile-icon" aria-hidden="true">💻</span>
       <div class="tile-name">Custom Software Development</div>
-      <p class="tile-desc">Bespoke web applications and internal business tools built around your workflow — for when off-the-shelf software doesn't fit. <a href="services.html#software" style="color:var(--cyan);">Learn more →</a></p>
+      <p class="tile-desc">Bespoke web applications and internal business tools built around your workflow — for when off-the-shelf software doesn't fit. <a href="software-development.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
     <div class="service-tile">
       <div class="tile-num">11</div>
       <span class="tile-icon" aria-hidden="true">📱</span>
       <div class="tile-name">App Development</div>
-      <p class="tile-desc">Mobile and web apps for your customers or your team — installed, deployed, and supported, with the source in your hands. <a href="services.html#software" style="color:var(--cyan);">Learn more →</a></p>
+      <p class="tile-desc">Mobile and web apps for your customers or your team — installed, deployed, and supported, with the source in your hands. <a href="app-development.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
     <div class="service-tile">
       <div class="tile-num">12</div>
       <span class="tile-icon" aria-hidden="true">📊</span>
       <div class="tile-name">Dashboard Development</div>
-      <p class="tile-desc">Business and admin dashboards that pull your numbers into one clear place — so you can see what's happening without digging. <a href="services.html#dashboards" style="color:var(--cyan);">Learn more →</a></p>
+      <p class="tile-desc">Business and admin dashboards that pull your numbers into one clear place — so you can see what's happening without digging. <a href="dashboard-development.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
     <div class="service-tile">
       <div class="tile-num">13</div>
       <span class="tile-icon" aria-hidden="true">🔗</span>
       <div class="tile-name">Workflow Automation</div>
-      <p class="tile-desc">Connect your tools and remove the manual, repetitive steps — data entry, hand-offs, and follow-ups that eat your team's time. <a href="services.html#automation" style="color:var(--cyan);">Learn more →</a></p>
+      <p class="tile-desc">Connect your tools and remove the manual, repetitive steps — data entry, hand-offs, and follow-ups that eat your team's time. <a href="workflow-automation.html" style="color:var(--cyan);">Learn more →</a></p>
     </div>
     <div class="service-tile">
       <div class="tile-num">14</div>
@@ -1477,10 +1496,10 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   <div class="foot-col">
     <h3>Services</h3>
     <ul>
-      <li><a href="services.html#web">Websites</a></li>
-      <li><a href="services.html#software">Software &amp; Apps</a></li>
-      <li><a href="services.html#dashboards">Dashboards</a></li>
-      <li><a href="automation.html">Automation</a></li>
+      <li><a href="web-design.html">Web Design</a></li>
+      <li><a href="software-development.html">Software &amp; Apps</a></li>
+      <li><a href="dashboard-development.html">Dashboards</a></li>
+      <li><a href="workflow-automation.html">Workflow Automation</a></li>
       <li><a href="security.html">Security</a></li>
     </ul>
   </div>
@@ -1491,6 +1510,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       <li><a href="work.html">Work</a></li>
       <li><a href="catalog.html">Service Catalog</a></li>
       <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="resources.html">Resources</a></li>
     </ul>
   </div>
   <div class="foot-col">
@@ -1514,6 +1534,16 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
   var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var ssFine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ── SERVICES DROPDOWN ── */
+  (function(){
+    var dd=document.querySelector('.nav-dd');if(!dd)return;
+    var btn=dd.querySelector('.nav-dd-btn');if(!btn)return;
+    function ddClose(){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    btn.addEventListener('click',function(e){e.stopPropagation();var open=dd.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target))ddClose();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose();});
+  })();
 
   /* ── MOBILE MENU ── */
   var hamburger=document.getElementById('nav-hamburger');

@@ -153,6 +153,21 @@ input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="tr
 .foot-contact{font-size:.82rem;color:var(--muted);line-height:1.7;margin-top:1rem;}
 .foot-contact a{color:var(--text);text-decoration:none;}
 .foot-contact a:hover{color:var(--cyan);}
+/* ── Services dropdown ── */
+.nav-dd{position:relative;}
+.nav-dd-btn{background:none;border:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;padding:0;transition:color .2s;}
+.nav-dd-btn:hover,.nav-dd.open .nav-dd-btn{color:var(--cyan);}
+.dd-caret{font-size:.55rem;transition:transform .2s;}
+.nav-dd.open .dd-caret{transform:rotate(180deg);}
+.nav-dd-menu{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);min-width:235px;background:rgba(2,4,8,.97);backdrop-filter:blur(20px);border:1px solid var(--border);padding:.5rem 0;list-style:none;display:none;z-index:1200;}
+.nav-dd.open .nav-dd-menu{display:block;}
+@media(hover:hover) and (pointer:fine){.nav-dd:hover .nav-dd-menu{display:block;}}
+.nav-dd-menu a{display:block;padding:.55rem 1.2rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s,background .2s;}
+.nav-dd-menu a:hover{color:var(--cyan);background:rgba(0,200,255,.05);}
+.nav-dd-menu a::after{display:none;}
+/* mobile menu sub-links */
+.mob{overflow-y:auto;}
+.mob a.mob-sub{font-family:'Outfit',sans-serif;font-weight:500;font-size:.95rem;color:var(--text);letter-spacing:.06em;margin-top:-1.2rem;}
 /* ── Cybersecurity scope box ── */
 .scope-box{border:1px solid var(--border);background:rgba(0,200,255,.03);padding:1.5rem 1.75rem;margin:1.5rem 0;}
 .scope-box h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--cyan);margin-bottom:.6rem;}
@@ -160,3 +175,5 @@ input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="tr
 
 /* footer contrast AA */
 .site-footer .foot-brand p,.site-footer .foot-contact,.site-footer .foot-col ul a{color:#85a0b8;}
+
+.foot-bottom-inner,.foot-bottom-inner a{color:#8ea7bf;}

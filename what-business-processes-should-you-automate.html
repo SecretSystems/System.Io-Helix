@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>What Business Processes Should You Automate First? | Secret Systems .io</title>
+<meta name="description" content="Not every process is worth automating. Which business processes make the best first automation candidates, what to leave alone, and how to start small safely."/>
+<meta name="keywords" content="what business processes to automate, business process automation, workflow automation for small business, automation readiness checklist, first automation project"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/what-business-processes-should-you-automate.html"/>
+<meta property="og:type" content="article"/><meta property="og:url" content="https://secretsystems.io/what-business-processes-should-you-automate.html"/><meta property="og:title" content="What Business Processes Should You Automate First?"/><meta property="og:description" content="Which processes make the best first automation candidates, what to leave alone, and how to start small without breaking things."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="What Business Processes Should You Automate First?"/><meta name="twitter:description" content="The best first automation candidates, what to leave alone, and how to start small safely."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What Business Processes Should You Automate First?","description":"How to identify the business processes that make the best first automation candidates, which processes to leave with humans, security and failure-recovery considerations, and an automation-readiness checklist.","author":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"publisher":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"datePublished":"2026-07-18","dateModified":"2026-07-18","mainEntityOfPage":"https://secretsystems.io/what-business-processes-should-you-automate.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Resources","item":"https://secretsystems.io/resources.html"},{"@type":"ListItem","position":3,"name":"What to Automate","item":"https://secretsystems.io/what-business-processes-should-you-automate.html"}]}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.byline{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem;}
+.article{max-width:860px;}
+.article h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;margin:3rem 0 1rem;color:var(--white);scroll-margin-top:110px;}
+.article h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin:1.8rem 0 .5rem;color:var(--white);}
+.article p,.article li{font-size:.96rem;color:var(--text);line-height:1.8;}
+.article p{margin-bottom:1.1rem;}
+.article ul,.article ol{margin:.4rem 0 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;}
+.article a{color:var(--cyan);}
+.toc{border:1px solid var(--border);background:rgba(0,200,255,.03);padding:1.4rem 1.6rem;margin:2.2rem 0 1rem;}
+.toc-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem;}
+.toc ul{list-style:none;margin:0;display:flex;flex-direction:column;gap:.45rem;}
+.toc a{color:var(--text);text-decoration:none;font-size:.88rem;}
+.toc a:hover{color:var(--cyan);}
+.checklist{list-style:none;margin-left:0 !important;}
+.checklist li{padding-left:1.7rem;position:relative;}
+.checklist li::before{content:'☐';position:absolute;left:0;top:0;color:var(--cyan);}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div><canvas id="bg"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="services.html">All Services</a></li><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software Development</a></li><li><a href="app-development.html">App Development</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="automation.html">CRM Automation</a></li><li><a href="security.html">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="web-design.html" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="software-development.html" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="app-development.html" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="dashboard-development.html" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="workflow-automation.html" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="automation.html" onclick="closeMenu()">Automation</a>
+  <a href="security.html" onclick="closeMenu()">Security</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
+  <a href="pricing.html" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="index.html" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="resources.html" style="color:var(--muted);text-decoration:none;">Resources</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">What to Automate</span></nav>
+  <p class="eyebrow">Guide</p>
+  <h1 class="h1" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">What Business Processes Should You <span>Automate First?</span></h1>
+  <p class="byline">By Secret Systems · Published July 18, 2026</p>
+  <p class="lead" style="margin-top:1.6rem;max-width:640px;">Automating the wrong process wastes money. Automating the right one gives you hours back every week. The difference is knowing what to look for — and what to leave alone.</p>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+<div class="article">
+
+  <p>The most common automation mistake we see isn't technical. It's picking the wrong process: the messy one, the political one, the one nobody can quite describe. This guide covers what makes a process a good first candidate, what should stay with humans, the security and failure questions to settle before anything runs on its own, and a checklist to score your own candidates.</p>
+
+  <div class="toc">
+    <p class="toc-label">In this guide</p>
+    <ul>
+      <li><a href="#best-candidates">The best candidates</a></li>
+      <li><a href="#examples">Concrete examples by pattern</a></li>
+      <li><a href="#what-not">What NOT to automate</a></li>
+      <li><a href="#privacy-security">Privacy &amp; security considerations</a></li>
+      <li><a href="#failure-recovery">Failure recovery</a></li>
+      <li><a href="#checklist">An automation-readiness checklist</a></li>
+      <li><a href="#start-small">Start small</a></li>
+    </ul>
+  </div>
+
+  <h2 id="best-candidates">The best candidates</h2>
+  <p>Good automation candidates share a handful of traits. You don't need all of them, but the more boxes a process ticks, the better your first project will go:</p>
+  <ul>
+    <li><strong>Repetitive.</strong> The same steps, in the same order, over and over. If an employee could write the steps on an index card and hand it to a new hire, software can follow the card too.</li>
+    <li><strong>Rules-based.</strong> Decisions inside the process follow "if this, then that" logic — not judgment, taste, or negotiation.</li>
+    <li><strong>High-volume.</strong> It happens daily or weekly, not quarterly. Automating something that occurs four times a year rarely pays back the effort.</li>
+    <li><strong>Frequent handoffs.</strong> Work passes between people, systems, or departments — and stalls at every pass. Handoffs are where things get dropped.</li>
+    <li><strong>Error-prone re-keying.</strong> Someone types the same information into a second (or third) system. Every re-key is a chance for a typo that surfaces weeks later as a wrong invoice or a missed job.</li>
+    <li><strong>Work that waits in queues.</strong> The task itself takes two minutes, but it sits in an inbox for two days. Automation's biggest wins are often about latency, not labor — the quote that goes out in five minutes instead of Friday.</li>
+  </ul>
+
+  <h2 id="examples">Concrete examples by pattern</h2>
+  <p>These are hypothetical, but each pattern is one we see constantly.</p>
+  <h3>Lead intake and routing</h3>
+  <p>Say a plumbing company gets leads from its website form, phone calls, and a couple of listing sites. Someone checks each source when they think of it, and fast-moving customers book a competitor first. Automated intake pulls every lead into one list the moment it arrives, tags it by service and area, and notifies the right person — the two-day "did anyone call them back?" gap just stops existing.</p>
+  <h3>Quote and invoice generation</h3>
+  <p>Imagine an equipment rental outfit where quotes are built by copying an old spreadsheet and swapping numbers — usually most of them, occasionally not, which is how last month's price reaches this month's customer. Generating quotes and invoices from a current price list and job record removes the copy-paste step where those errors are born, and gets the document out the same day.</p>
+  <h3>Appointment reminders</h3>
+  <p>A clinic or a detail shop that reminds customers by hand calls when the day is slow and skips it when the day is busy — which means reminders vanish exactly when the schedule is fullest. Automated text or email reminders at 48 and 2 hours are boring, solved, and reliably reduce the no-shows that cost real money.</p>
+  <h3>Status updates</h3>
+  <p>Picture a cabinet shop fielding "is my order ready?" calls all day. Every call interrupts someone who has to walk to the floor and check. If order status lives in a system, an automated "your order moved to finishing" message answers the question before it's asked — and the phone quiets down.</p>
+
+  <h2 id="what-not">What NOT to automate</h2>
+  <p>Some work should stay human, and being clear about it up front saves grief later:</p>
+  <ul>
+    <li><strong>Judgment calls.</strong> Pricing a strange job, deciding whether to take on a difficult client, resolving a dispute. If two experienced employees might reasonably decide differently, it's judgment — don't hand it to rules.</li>
+    <li><strong>Exception-heavy work.</strong> If a process runs the "standard way" only half the time, automation handles half your cases and mangles the rest. Standardize first; automate second.</li>
+    <li><strong>Costly-if-wrong actions.</strong> Anything where a single bad execution is expensive or irreversible — large payments, contract commitments, deleting records — should keep a human approval step even when the rest of the flow is automated.</li>
+    <li><strong>Sensitive communications.</strong> Delivering bad news, handling a complaint, anything involving grief or conflict. An automated message in a moment that calls for a person doesn't just fail — it insults.</li>
+  </ul>
+
+  <h2 id="privacy-security">Privacy &amp; security considerations</h2>
+  <p>An automation is software with standing permission to act on your behalf, so treat its access the way you'd treat a new employee's. Three questions to settle before anything goes live:</p>
+  <p><strong>What data does it touch?</strong> If the process moves customer names, phone numbers, or payment details between systems, every system in the chain now holds that data. Know the chain before you build it.</p>
+  <p><strong>Where do the credentials live?</strong> Automations log into things. Those logins should be dedicated service accounts with strong credentials stored properly — not the owner's personal password pasted into a workflow tool.</p>
+  <p><strong>Does it have more access than it needs?</strong> Least privilege applies to software: a tool that sends appointment reminders needs the schedule, not your accounting system. If a workflow platform asks for broad access to everything, that's a real cost of using it — weigh it. This is the same review thinking we apply in our <a href="security.html">security work</a>, and it's worth applying even if you build everything yourself.</p>
+
+  <h2 id="failure-recovery">Failure recovery</h2>
+  <p>Every automation eventually fails — an API changes, a service has an outage, an input arrives in a shape nobody predicted. The difference between a minor hiccup and a quiet disaster is whether you designed for failure on day one:</p>
+  <ul>
+    <li><strong>Alerts.</strong> When a run fails, a human gets told — by a channel someone actually reads. Silent failure is the worst failure: the leads that stopped routing three weeks ago and nobody noticed.</li>
+    <li><strong>A human fallback.</strong> Someone knows how to do the process by hand, and there's a written note saying how. If the reminder system goes down Friday afternoon, Monday's appointments still get reminded.</li>
+    <li><strong>An audit trail.</strong> The automation records what it did — what came in, what went out, when. When a customer says "I never got the invoice," you can check in thirty seconds instead of shrugging.</li>
+  </ul>
+  <p>Ask whoever builds your automation how each of these is handled. "It hasn't failed yet" is not an answer; it's a countdown.</p>
+
+  <h2 id="checklist">An automation-readiness checklist</h2>
+  <p>Score a candidate process against this list. Seven or more checked and it's a strong first project; four or fewer and it needs standardizing before it needs software.</p>
+  <ul class="checklist">
+    <li>The process runs the same way at least 8 out of 10 times.</li>
+    <li>You can write the rules down, and two employees reading them would do the same thing.</li>
+    <li>It happens at least weekly — ideally daily.</li>
+    <li>Someone owns the process and can answer questions about it while it's being automated.</li>
+    <li>The data it needs already lives in a system (or one form), not in someone's head.</li>
+    <li>A single wrong execution is cheap to catch and fix — not a disaster.</li>
+    <li>You can describe what "working correctly" looks like well enough to test it.</li>
+    <li>The systems involved are ones you plan to keep for a while.</li>
+    <li>A person could still do the process by hand if the automation went down for a week.</li>
+    <li>You know roughly what the manual version costs in hours per week, so you can tell whether the automation paid off.</li>
+  </ul>
+
+  <h2 id="start-small">Start small</h2>
+  <p>Pick one process. Not the biggest or most impressive — the one that scores best on the checklist and annoys people weekly. Automate it end to end, run it alongside the manual version until you trust it, and measure: hours saved, errors caught, response time improved, against the rough baseline you wrote down first.</p>
+  <p>Then — and only then — expand. The second project inherits everything the first one taught you about your data, your team, and your edge cases, and each one after gets cheaper and faster. Businesses that try to automate everything at once tend to end up with a tangle nobody trusts; businesses that stack up small wins end up genuinely different a year later.</p>
+  <p>If you want a sense of what this looks like in practice, our <a href="workflow-automation.html">workflow automation</a> page covers the process-level work described here, and our <a href="automation.html">automation overview</a> covers the broader toolkit. And if you just want a second opinion on whether a process is worth automating at all, ask — that conversation is free.</p>
+
+</div>
+</div>
+</div>
+
+<!-- RELATED -->
+<div style="background:var(--void);border-top:1px solid var(--border);">
+<div class="section wrap" style="padding-top:3rem;padding-bottom:3rem;">
+  <p class="eyebrow">Related Services</p>
+  <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;">
+    <a href="workflow-automation.html" class="card-link">Workflow automation →</a>
+    <a href="automation.html" class="card-link">Automation overview →</a>
+    <a href="resources.html" class="card-link">All guides →</a>
+  </div>
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Weighing a Candidate?</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Not Sure It's <span>Worth Automating?</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:520px;margin:0 auto 2.5rem;">Describe the process and we'll tell you honestly whether it's a good first candidate — or whether it needs tightening up before software gets involved.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="contact.html" class="btn btn-cyan">Talk it through with us — no pitch. →</a>
+  </div>
+  <p style="color:var(--muted);font-size:.85rem;margin-top:1.5rem;"><a href="mailto:info@secretsystems.io" style="color:var(--muted);">info@secretsystems.io</a> · <a href="tel:+13372588818" style="color:var(--muted);">(337) 258-8818</a></p>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software &amp; Apps</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="resources.html">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="ss-config.js"></script>
+<script src="ss-shared.js"></script>
+</body></html>

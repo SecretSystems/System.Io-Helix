@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>How Much Does Custom Software Cost? An Honest Breakdown | Secret Systems .io</title>
+<meta name="description" content="Why nobody quotes custom software sight-unseen, what actually drives the cost, cheap patterns vs. expensive ones, and how to budget before you have a quote."/>
+<meta name="keywords" content="custom software cost, how much does custom software cost, software development pricing, custom software budget, software quote questions, small business software cost"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/how-much-does-custom-software-cost.html"/>
+<meta property="og:type" content="article"/><meta property="og:url" content="https://secretsystems.io/how-much-does-custom-software-cost.html"/><meta property="og:title" content="How Much Does Custom Software Cost? An Honest Breakdown"/><meta property="og:description" content="What actually drives the cost of custom software, cheap patterns vs. expensive ones, and how to budget before you have a quote."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="How Much Does Custom Software Cost? An Honest Breakdown"/><meta name="twitter:description" content="What actually drives the cost of custom software, and how to budget before you have a quote."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How Much Does Custom Software Cost? An Honest Breakdown","description":"Why nobody quotes custom software sight-unseen, the factors that actually drive cost — roles, integrations, data migration, reporting, polish — the build-vs-maintain cost shape, how we price projects, and the questions and red flags to bring to any developer.","author":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"publisher":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"datePublished":"2026-07-18","dateModified":"2026-07-18","mainEntityOfPage":"https://secretsystems.io/how-much-does-custom-software-cost.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Resources","item":"https://secretsystems.io/resources.html"},{"@type":"ListItem","position":3,"name":"Software Cost","item":"https://secretsystems.io/how-much-does-custom-software-cost.html"}]}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.byline{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem;}
+.article{max-width:860px;}
+.article h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;margin:3rem 0 1rem;color:var(--white);scroll-margin-top:110px;}
+.article h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin:1.8rem 0 .5rem;color:var(--white);}
+.article p,.article li{font-size:.96rem;color:var(--text);line-height:1.8;}
+.article p{margin-bottom:1.1rem;}
+.article ul,.article ol{margin:.4rem 0 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;}
+.article a{color:var(--cyan);}
+.toc{border:1px solid var(--border);background:rgba(0,200,255,.03);padding:1.4rem 1.6rem;margin:2.2rem 0 1rem;}
+.toc-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem;}
+.toc ul{list-style:none;margin:0;display:flex;flex-direction:column;gap:.45rem;}
+.toc a{color:var(--text);text-decoration:none;font-size:.88rem;}
+.toc a:hover{color:var(--cyan);}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div><canvas id="bg"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="services.html">All Services</a></li><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software Development</a></li><li><a href="app-development.html">App Development</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="automation.html">CRM Automation</a></li><li><a href="security.html">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="automation.html">Automation</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="web-design.html" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="software-development.html" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="app-development.html" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="dashboard-development.html" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="workflow-automation.html" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="automation.html" onclick="closeMenu()">Automation</a>
+  <a href="security.html" onclick="closeMenu()">Security</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
+  <a href="pricing.html" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="index.html" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="resources.html" style="color:var(--muted);text-decoration:none;">Resources</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Software Cost</span></nav>
+  <p class="eyebrow">Guide</p>
+  <h1 class="h1" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">How Much Does <span>Custom Software Cost?</span></h1>
+  <p class="byline">By Secret Systems · Published July 18, 2026</p>
+  <p class="lead" style="margin-top:1.6rem;max-width:640px;">It's the most-asked question in this business, and most answers are either evasive or made up. Here's the honest version: what drives the number, what makes it bigger or smaller, and how to budget before anyone quotes you anything.</p>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+<div class="article">
+
+  <p>Ask three developers what custom software costs and you'll get a shrug, a suspiciously precise figure, and a request for a call. The shrug is closer to honest than the precise figure — but neither helps you plan. What actually helps is understanding <em>why</em> the price moves, so you can read any quote you receive and tell whether it was built on your project or pulled from the air. That's what this guide covers. It contains no dollar figures, on purpose: any number we printed here would be a guess about a project we haven't seen, and guesses dressed up as answers are exactly the problem.</p>
+
+  <div class="toc">
+    <p class="toc-label">In this guide</p>
+    <ul>
+      <li><a href="#straight-number">Why nobody gives you a straight number</a></li>
+      <li><a href="#cost-drivers">What actually drives cost</a></li>
+      <li><a href="#build-vs-maintain">The cost shape: build vs. maintain</a></li>
+      <li><a href="#cheap-vs-expensive">Cheap patterns vs. expensive patterns</a></li>
+      <li><a href="#how-we-price">How we price it</a></li>
+      <li><a href="#budget-without-quote">How to budget without a quote</a></li>
+      <li><a href="#questions-to-ask">Questions to ask any developer about price</a></li>
+      <li><a href="#red-flags">Red flags</a></li>
+    </ul>
+  </div>
+
+  <h2 id="straight-number">Why nobody gives you a straight number</h2>
+  <p>"Custom software" covers an enormous range of work. A tool that replaces one spreadsheet for one person is custom software. So is a portal where customers log in, technicians update jobs from their phones, invoices sync to your accounting system, and the owner gets a nightly report. Both are real projects; they are not remotely the same size. Asking what custom software costs is like asking what a building costs — the answer for a carport and the answer for a clinic differ so much that a single number would be meaningless.</p>
+  <p>So when a developer won't name a figure before understanding your project, that's not evasion — it's the same reason a good contractor walks the site before bidding. The number depends on scope, and scope lives inside your business: how many people use the tool, what it connects to, what data comes with it. The honest sequence is understand first, price second. Be more suspicious of the developer who skips straight to the number.</p>
+
+  <h2 id="cost-drivers">What actually drives cost</h2>
+  <p>Nearly every quote we've ever written comes down to six factors. If you understand these, you can predict which way a price will move before anyone tells you:</p>
+  <ul>
+    <li><strong>User roles and permissions.</strong> One person using a tool is simple. The moment you add roles — owner sees everything, office staff see jobs and invoices, field crew see only their schedule — the software needs logins, permission checks on every screen, and testing for each combination. Every role multiplies the surface area.</li>
+    <li><strong>Integrations.</strong> Each outside system the software talks to — accounting, CRM, payment processor, scheduling tool — is its own mini-project: authentication, mapping your data to theirs, and handling the days that service is down or changes something. Two integrations aren't twice one; they can also interact with each other.</li>
+    <li><strong>Data migration.</strong> If years of history live in spreadsheets or an old system, moving it in takes real work: cleaning duplicates, reconciling formats, deciding what "customer" meant in 2019 versus now. Starting fresh is cheaper; keeping your history is often worth it — but it's a line item, not a freebie.</li>
+    <li><strong>Reporting.</strong> "Show me a list" is easy. "Show me margin by crew by month, filterable, exportable, emailed every Monday" is a feature set of its own. Reporting requirements often add as much work as the core tool.</li>
+    <li><strong>Custom logic vs. standard patterns.</strong> Login screens, forms, lists, and search follow patterns developers have built a hundred times. Your commission formula with seventeen exceptions has been built exactly zero times. The more your rules deviate from standard patterns, the more of the budget goes to logic that exists nowhere else.</li>
+    <li><strong>Polish level.</strong> An internal tool your own staff uses can be plain and still be excellent. A customer-facing product carries your brand, so it needs design attention, friendlier error handling, and behavior that holds up in the hands of strangers. Same function, different finish, different price.</li>
+  </ul>
+
+  <h2 id="build-vs-maintain">The cost shape: build vs. maintain</h2>
+  <p>Custom software has a distinctive cost shape: most of the money is up front, in the build, followed by a much smaller ongoing amount for support — hosting, backups, security updates, and small fixes as your business shifts. It's the shape of buying equipment: a real purchase, then upkeep.</p>
+  <p>Subscription software is the opposite shape: little or nothing up front, then a per-seat fee every month, forever, that typically grows as you add people. Neither shape is automatically better. But when you compare a custom quote to a subscription, compare shapes, not sticker prices — the honest comparison is the build cost plus a few years of support against the same years of subscription fees at your team's size, including the seats you'll add as you grow. Sometimes the subscription still wins; sometimes the compounding quietly reverses the answer. We walk through that whole decision in <a href="custom-software-vs-off-the-shelf.html">custom software vs. off-the-shelf</a>.</p>
+  <p>One more thing an honest quote should show: ongoing support priced separately and stated up front. Software isn't a roof; it lives in a moving world of browser updates and security patches. A build price with no mention of what happens after launch is an incomplete price.</p>
+
+  <h2 id="cheap-vs-expensive">Cheap patterns vs. expensive patterns</h2>
+  <p>Put the drivers together and you can see why two projects that sound similar in a sentence can sit at opposite ends of the range.</p>
+  <p><strong>The inexpensive end</strong> looks like this: a single-user internal tool, no integrations, starting from a blank slate, standard screens — forms, lists, search — with plain-but-clean styling. Every cost driver is at its minimum. There's one role to build and test, no outside systems to negotiate with, no history to migrate, and the whole thing is assembled from patterns that already exist. This is also, not coincidentally, the kind of project we recommend most often as a first step.</p>
+  <p><strong>The expensive end</strong> looks like this: a multi-role portal — customers, staff, admins — that syncs with three outside systems, imports a decade of records, and produces custom reports for each audience. Nothing on that list is exotic, but every driver is turned up at once: three-plus roles to secure and test, three integrations that each need building and babysitting, a migration project inside the project, and reporting as a second product. The two projects might get described in conversation with the same words — "we need a system to manage jobs" — which is exactly why nobody can price the sentence. The cost lives in the details underneath it.</p>
+
+  <h2 id="how-we-price">How we price it</h2>
+  <p>Since we can't print a universal number, here's the thing we can print: our actual process, the same one every Secret Systems software project goes through.</p>
+  <ol>
+    <li><strong>Discovery call.</strong> A conversation about the process that hurts — who does it today, what it touches, what "fixed" would look like. No charge, no obligation, and if off-the-shelf software would serve you better, this is where we say so.</li>
+    <li><strong>Written scope.</strong> We put the project in writing: what the software will do, who uses it, what it connects to, and — just as important — what's explicitly out of scope. You can take this document to another developer for a competing bid. We'd rather you compare bids on the same scope than guess.</li>
+    <li><strong>Written quote before any work.</strong> A fixed figure tied to that written scope, before anything is built. If the scope changes mid-project, the price conversation happens in the open, in writing, before the work — not on the final invoice.</li>
+  </ol>
+  <p>Third-party costs — hosting, domain names, paid services the software depends on — are disclosed separately and billed at cost, so you always know which part of the money is ours and which passes through. That's the whole system. It isn't clever; it's just the order of operations that keeps surprises out.</p>
+
+  <h2 id="budget-without-quote">How to budget without a quote</h2>
+  <p>You can do useful budgeting before you ever talk to a developer — not by guessing a number, but by shrinking the problem until the number, whatever it is, gets small too:</p>
+  <ul>
+    <li><strong>Name the one process that hurts most.</strong> Not the five things you'd like — the one that costs hours every week or loses you money when it goes wrong. That's the project. Everything else is a later phase.</li>
+    <li><strong>Define the smallest version that removes the pain.</strong> Fewer roles, fewer integrations, standard screens. If the pain is "quotes take two hours and live in Susan's head," the smallest version is a quote builder — not a quote builder plus scheduling plus invoicing plus a customer portal.</li>
+    <li><strong>Expand after it proves itself.</strong> Software built this way earns its next phase with results from the last one. Phase two gets scoped against a tool your team already uses, which makes it better-aimed and easier to price than a grand plan drawn up on day one.</li>
+  </ul>
+  <p>This approach doesn't just keep the first check small. It keeps every check honest, because each one buys a working thing rather than a fraction of a promise.</p>
+
+  <h2 id="questions-to-ask">Questions to ask any developer about price</h2>
+  <p>Whoever you hire — us included — these questions belong in the first money conversation. Good developers answer them readily; the answers tell you what the number actually buys:</p>
+  <ul>
+    <li><strong>What exactly is included in this price?</strong> Design, build, testing, deployment, training? Get it in writing.</li>
+    <li><strong>What is explicitly excluded?</strong> The scariest costs live in the gap between what you assumed and what they scoped. A developer who volunteers the exclusions is protecting you both.</li>
+    <li><strong>Who owns the code when it's done?</strong> You want to own what you paid for — or at minimum have the unconditional right to take it to another developer. "You'd have to keep paying us to use it" changes the entire economics.</li>
+    <li><strong>What does support cost after launch, and what does it cover?</strong> Bug fixes vs. new features vs. emergencies — where are the lines?</li>
+    <li><strong>What happens if the scope changes mid-project?</strong> The answer should involve a written change, priced before the work happens.</li>
+    <li><strong>Which third-party costs will I carry, and at what rates?</strong> Hosting and services should be disclosed, not discovered.</li>
+  </ul>
+
+  <h2 id="red-flags">Red flags</h2>
+  <p>A few pricing behaviors that should make you slow down, whoever you're talking to:</p>
+  <ul>
+    <li><strong>A precise quote before anyone understood your process.</strong> If the number arrived before the questions did, it wasn't priced on your project — it was priced on getting your signature. That number changes later, and never downward.</li>
+    <li><strong>A price too good to include support.</strong> If a quote undercuts everything else you've heard, find out what happens after launch. Software with nobody on the hook for it doesn't stay cheap; it becomes a rescue project — often re-scoped from scratch by whoever inherits it.</li>
+    <li><strong>Hourly billing with no cap and no scope.</strong> Hourly isn't inherently wrong, but hourly with no written scope and no ceiling means you've agreed to a total nobody has said out loud. You deserve to know the worst case before work starts.</li>
+    <li><strong>Vagueness about ownership.</strong> If the answer to "who owns the code?" takes more than a sentence, assume the answer is "not you" until proven otherwise.</li>
+  </ul>
+  <p>None of these automatically mean bad faith — sometimes they're just inexperience. But price problems announced this early rarely improve with time, and the fix costs nothing: keep asking until the answers are in writing. If you want to see how these questions play out on a real project — yours — our <a href="software-development.html">software development</a> page covers what we build, and the discovery call is where the honest number finally gets to exist.</p>
+
+</div>
+</div>
+</div>
+
+<!-- RELATED -->
+<div style="background:var(--void);border-top:1px solid var(--border);">
+<div class="section wrap" style="padding-top:3rem;padding-bottom:3rem;">
+  <p class="eyebrow">Related Services</p>
+  <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;">
+    <a href="software-development.html" class="card-link">Custom software development →</a>
+    <a href="workflow-automation.html" class="card-link">Workflow automation →</a>
+    <a href="custom-software-vs-off-the-shelf.html" class="card-link">Custom vs. off-the-shelf →</a>
+    <a href="resources.html" class="card-link">All guides →</a>
+  </div>
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Want a Real Number?</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Scope It. <span>Then Price It.</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:520px;margin:0 auto 2.5rem;">Bring the process that hurts and we'll turn it into a written scope and a written quote — before any work, with no obligation to use us for the build.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="contact.html" class="btn btn-cyan">Book a discovery call — no pitch. →</a>
+  </div>
+  <p style="color:var(--muted);font-size:.85rem;margin-top:1.5rem;"><a href="mailto:info@secretsystems.io" style="color:var(--muted);">info@secretsystems.io</a> · <a href="tel:+13372588818" style="color:var(--muted);">(337) 258-8818</a></p>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="index.html" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="web-design.html">Web Design</a></li><li><a href="software-development.html">Software &amp; Apps</a></li><li><a href="dashboard-development.html">Dashboards</a></li><li><a href="workflow-automation.html">Workflow Automation</a></li><li><a href="security.html">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="catalog.html">Service Catalog</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="resources.html">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="contact.html">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="privacy.html" style="color:inherit;">Privacy</a> · <a href="terms.html" style="color:inherit;">Terms</a> · <a href="accessibility.html" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="ss-config.js"></script>
+<script src="ss-shared.js"></script>
+</body></html>

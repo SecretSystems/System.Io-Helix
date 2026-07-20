@@ -3,10 +3,10 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden;}
-html.has-custom-cursor body{cursor:none;}
+
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9998;}
-#cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:screen;}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,200,255,0.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
+
+
 canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--white);text-decoration:none;letter-spacing:.05em;}
@@ -134,13 +134,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
   canvas#bg,#particle-canvas{display:none!important;}
-  #cursor,#cursor-ring{display:none!important;}
-  body,html.has-custom-cursor body{cursor:auto!important;}
 }
 /* ── Touch / coarse pointers: native cursor, no custom cursor ── */
 @media (hover:none),(pointer:coarse){
-  #cursor,#cursor-ring{display:none!important;}
-  body,html.has-custom-cursor body{cursor:auto!important;}
 }
 /* ── Contact-form status messages ── */
 .ss-form-status{margin-top:1rem;font-size:.85rem;line-height:1.55;min-height:1.2em;}

@@ -30,15 +30,15 @@ html{height:100%;}
 body{
   background:var(--void);color:var(--white);
   font-family:'Outfit',sans-serif;
-  overflow:hidden;cursor:none;
+  overflow:hidden;
   min-height:100vh;
   perspective:1100px;
 }
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9997;}
 
 /* ════════ CURSOR ════════ */
-#cur{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:screen;box-shadow:0 0 10px rgba(0,200,255,.5);transition:width .18s,height .18s;}
-#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(0,200,255,.32);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
+
+
 
 /* ════════ NAV ════════ */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem;height:var(--hh);background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
@@ -271,9 +271,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   }
 
   #cur,
-  #cur-r{
-    display:none;
-  }
+  
 
   #controls{
     bottom:.8rem;
@@ -305,9 +303,6 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 </style>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur-r"></div>
-
 <nav>
   <a href="index.html" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
   <ul>
@@ -408,13 +403,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 /* ════════════════════════════════
    CURSOR
 ════════════════════════════════ */
-const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function lr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(lr);})();
-const bigC=()=>{cur.style.width='16px';cur.style.height='16px';curR.style.width='44px';curR.style.height='44px';};
-const smC=()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='30px';curR.style.height='30px';};
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',bigC);el.addEventListener('mouseleave',smC);});
+const bigC=()=>{},smC=()=>{};
 
 /* ════════════════════════════════
    SCENE / CAMERA PARALLAX

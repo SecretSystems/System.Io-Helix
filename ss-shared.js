@@ -1,21 +1,6 @@
 // ── MOTION / POINTER PREFERENCES ──
 var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 var ssFinePointer = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-// ── CURSOR (desktop fine-pointer, motion-OK only; native cursor stays otherwise) ──
-(function(){
-  const cursor=document.getElementById('cursor');
-  const ring=document.getElementById('cursor-ring');
-  if(!cursor||!ring) return;
-  if(!ssFinePointer || ssReduce){ cursor.style.display='none'; ring.style.display='none'; return; }
-  document.documentElement.classList.add('has-custom-cursor');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-  (function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
-  document.querySelectorAll('a,button,.card,.auto-item,.price-card,.test-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px';});
-    el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
-  });
-})();
 // ── PARTICLES (skipped when the visitor prefers reduced motion) ──
 const canvas=document.getElementById('bg');
 if(canvas && !ssReduce){

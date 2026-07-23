@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Custom Business Dashboards &amp; Reporting | Secret Systems .io</title>
+<meta name="description" content="Custom business dashboards that pull your numbers from the tools you already use — CRM, spreadsheets, accounting, databases — into one clear, permissioned view. Executive, operations, KPI, sales, and financial reporting dashboards built in Louisiana."/>
+<meta name="keywords" content="custom business dashboard, KPI dashboard development, executive dashboard, operations dashboard, business reporting dashboard, data integration, Louisiana dashboard development"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/dashboard-development/"/>
+<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/dashboard-development/"/><meta property="og:title" content="Custom Business Dashboards &amp; Reporting | Secret Systems .io"/><meta property="og:description" content="See your whole business on one screen. Custom dashboards that pull sales, jobs, and money from the tools you already use into one clear, permissioned view."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Custom Business Dashboards &amp; Reporting | Secret Systems .io"/><meta name="twitter:description" content="Custom dashboards that pull your numbers from the tools you already use into one clear, permissioned view."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Business dashboard development","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"description":"Custom business dashboard development: executive, operations, KPI, sales and CRM, financial reporting, and back-office dashboards that pull data from CRMs, spreadsheets, accounting tools, and databases into one clear, permissioned view."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://secretsystems.io/services/"},{"@type":"ListItem","position":3,"name":"Dashboard Development","item":"https://secretsystems.io/dashboard-development/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does a custom dashboard cost?","acceptedAnswer":{"@type":"Answer","text":"Scope determines cost and timing — the number of data sources, how much cleanup the underlying data needs, and how fresh the numbers have to be all matter. We scope it in a discovery conversation and a written quote follows. Third-party service costs, like hosting or connector fees, are separate when applicable."}},{"@type":"Question","name":"What data sources can you connect?","acceptedAnswer":{"@type":"Answer","text":"CRMs, spreadsheets, accounting tools in the QuickBooks class, databases, and most modern software with an export or an API. If a tool has no clean way to get data out, we will tell you what the workaround involves before you commit to anything."}},{"@type":"Question","name":"Do we need real-time data, or is a daily refresh enough?","acceptedAnswer":{"@type":"Answer","text":"For most business decisions, a nightly or hourly refresh is plenty — and it costs less to build and run. Near-real-time updates make sense for things like inbound leads or job status, and we will tell you honestly which parts of your dashboard need them and which do not."}},{"@type":"Question","name":"Do we need a database before we can have a dashboard?","acceptedAnswer":{"@type":"Answer","text":"No. We work with what exists — spreadsheets, exports, and the tools you already run. If the data is not ready to support the dashboard you want, we will say so plainly and show you what it takes to get there."}},{"@type":"Question","name":"Who maintains the dashboard after launch?","acceptedAnswer":{"@type":"Answer","text":"You own the code, the configuration, and the data created for the work — subject to third-party software terms and the written agreement — so you can maintain it in-house or hand it to any developer. If you would rather not think about it, an optional maintenance plan covers updates, monitoring, and changes as your tools evolve."}},{"@type":"Question","name":"Can it run on a TV or an office screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. We can build a wall-display view — large numbers, readable across the room, refreshing automatically — alongside the standard desktop and mobile views your team uses at their desks."}}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.svc-block{border-bottom:1px solid var(--border);padding:5rem 0;}
+.svc-block:last-child{border-bottom:none;}
+.svc-block-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;}
+.svc-block-label{position:sticky;top:100px;}
+.svc-block-label h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:1rem;}
+.svc-block-label h2 span{color:var(--cyan);}
+.svc-block-label p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:2rem;}
+.svc-items{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+.svc-item{background:var(--card);padding:2rem 2.5rem;}
+.si-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.si-icon{font-size:1.6rem;}
+.si-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
+.si-desc{font-size:.88rem;color:var(--text);line-height:1.7;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;}
+.faq-q::after{content:'+';color:var(--cyan);font-size:1.4rem;flex-shrink:0;}
+.faq-q[aria-expanded="true"]::after{content:'–';}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-q[aria-expanded="true"]+.faq-a{max-height:400px;}
+.faq-a p{font-size:.9rem;color:var(--text);line-height:1.7;padding:0 0 1.5rem;}
+@media(max-width:900px){.svc-block-grid{grid-template-columns:1fr;gap:2rem;}.svc-block-label{position:static;}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <a href="/" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="/automation/">Automation</a></li>
+    <li><a href="/security/">Security</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="/" onclick="closeMenu()">Home</a>
+  <a href="/services/" onclick="closeMenu()">Services</a>
+  <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="/automation/" onclick="closeMenu()">Automation</a>
+  <a href="/security/" onclick="closeMenu()">Security</a>
+  <a href="/work/" onclick="closeMenu()">Work</a>
+  <a href="/pricing/" onclick="closeMenu()">Pricing</a>
+  <a href="/about/" onclick="closeMenu()">About</a>
+  <a href="/contact/" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="/" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="/services/" style="color:var(--muted);text-decoration:none;">Services</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Dashboard Development</span></nav>
+  <p class="eyebrow">Dashboards</p>
+  <h1 class="h1">See Your Whole Business<br><span>on One Screen.</span></h1>
+  <p class="lead" style="margin-top:2rem;max-width:600px;">Your numbers live in five tools that don't talk to each other. We build custom dashboards that pull sales, jobs, money, and operations from the software you already use into one clear, permissioned view — so the answer to "how are we doing" is a glance, not an afternoon of compiling.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/work/" class="btn btn-outline">See a Demo Concept</a>
+  </div>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+
+  <!-- DASHBOARDS WE BUILD -->
+  <div class="svc-block" id="build">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">01</p>
+        <h2>Dashboards We <span>Build</span></h2>
+        <p>Every dashboard is built around the questions you actually ask — not a wall of charts nobody opens after week two.</p>
+        <a href="/contact/" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Book a Consultation →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3 20h18"/><path d="M6 20v-6M11 20V8M16 20v-9"/></svg></span><h3 class="si-name">Executive Dashboards</h3></div><p class="si-desc">One screen for the owner: revenue, cash position, pipeline, and workload, side by side. Answers "how is the business doing right now" without waiting for someone to compile it.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M4 5l2.1 2.1M17.9 16.9L20 19M2.5 12h3M18.5 12h3M4 19l2.1-2.1M17.9 7.1L20 5"/></svg></span><h3 class="si-name">Operations Dashboards</h3></div><p class="si-desc">Jobs, orders, or tickets by stage, with age and owner visible. Answers "which jobs are stuck, and who's waiting on what" before the customer calls to ask.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.3"/><circle cx="12" cy="12" r="0.9"/></svg></span><h3 class="si-name">KPI Dashboards</h3></div><p class="si-desc">The handful of numbers you've agreed actually matter, tracked against targets over time. Answers "are we on pace this month, or falling behind" — early enough to do something about it.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg></span><h3 class="si-name">Sales &amp; CRM Dashboards</h3></div><p class="si-desc">Leads by source, conversion by stage, and follow-up activity pulled straight from your CRM. Answers "where do our customers actually come from — and where do we lose them."</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg></span><h3 class="si-name">Financial Reporting Dashboards</h3></div><p class="si-desc">Revenue, expenses, and margin by job, crew, or service line, built from your accounting data. Answers "are we making money this month — and on which work."</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span><h3 class="si-name">Administrative &amp; Back-Office Dashboards</h3></div><p class="si-desc">Outstanding invoices, upcoming deadlines, renewals, and paperwork status in one place. Answers "what's overdue, what's due this week, and what fell through the cracks."</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="svc-block" id="details">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">02</p>
+        <h2>The Details That Make It <span>Useful</span></h2>
+        <p>The difference between a dashboard people use daily and one they abandon is in the plumbing — the parts you don't see on the screen.</p>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9 2.5v6M15 2.5v6M7 8.5h10v2.5a5 5 0 0 1-10 0zM12 16v5.5"/></svg></span><h3 class="si-name">Data-Source Integration</h3></div><p class="si-desc">We connect your CRM, spreadsheets, accounting tools in the QuickBooks class, and databases. If a tool has an export or an API, we can usually pull from it — and we'll confirm each source during discovery, not after the contract.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2 2M15.7 15.7l2 2M17.7 6.3l-2 2M8.3 15.7l-2 2"/></svg></span><h3 class="si-name">Data Quality First</h3></div><p class="si-desc">A dashboard is only as good as its inputs. Before we build a single chart, we clean up definitions — what counts as a sale, an active job, a closed lead — so the numbers on screen are ones everyone trusts.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 2.5h5"/></svg></span><h3 class="si-name">Scheduled vs. Near-Real-Time Refresh</h3></div><p class="si-desc">An honest trade-off: nightly or hourly refreshes are cheaper to build and run, and they're enough for most decisions. Near-real-time costs more and earns it only for things like inbound leads or live job status. We'll tell you which parts need which.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/></svg></span><h3 class="si-name">Permissions &amp; User Roles</h3></div><p class="si-desc">The owner sees financials; crew leads see their jobs; the front desk sees schedules. Each person gets the view their role needs — nothing more, nothing hidden that they should have.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><h3 class="si-name">Exports &amp; Scheduled Reports</h3></div><p class="si-desc">Download any view as a spreadsheet or PDF, or have a summary land in the right inboxes every Monday morning — automatically, without anyone remembering to send it.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 9.5a6 6 0 0 1 12 0c0 4.5 2 5.5 2 5.5H4s2-1 2-5.5z"/><path d="M10 19.5a2 2 0 0 0 4 0"/></svg></span><h3 class="si-name">Alerts &amp; Thresholds</h3></div><p class="si-desc">Set a line, and get an email or text when a number crosses it — a job past its due date, cash below a floor, a lead untouched for 48 hours. The dashboard watches so you don't have to.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span><h3 class="si-name">Mobile Access</h3></div><p class="si-desc">Readable on a phone in a truck, not just on a desktop in the office. The views that matter in the field are designed for the field.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS & OWNERSHIP -->
+  <div class="svc-block" id="process">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">03</p>
+        <h2>Process &amp; <span>Ownership</span></h2>
+        <p>Built in the open, documented as we go, and yours when it's done.</p>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.2-4.2"/></svg></span><h3 class="si-name">Discovery First</h3></div><p class="si-desc">We start by asking which decisions the dashboard serves, who looks at it, and how often. A dashboard nobody checks is a decoration — so we design around real habits, not hypothetical ones.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 20l4-1 10.5-10.5-3-3L5 16z"/><path d="M14 6.5l3 3"/></svg></span><h3 class="si-name">Metric Definitions in Writing</h3></div><p class="si-desc">Before the build starts, we agree in writing on what each number means and where it comes from. When the dashboard says revenue, everyone knows exactly what's being counted.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M4 5l2.1 2.1M17.9 16.9L20 19M2.5 12h3M18.5 12h3M4 19l2.1-2.1M17.9 7.1L20 5"/></svg></span><h3 class="si-name">Build, Then Training</h3></div><p class="si-desc">We build against the agreed definitions, then walk your team through it — what each view shows, how to filter, and how to trust-check a number against the source system.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 12.5h5M9.5 16h5"/></svg></span><h3 class="si-name">You Own It</h3></div><p class="si-desc">The code, the configuration, and the data are yours. Maintain it in-house, hand it to another developer, or add an optional maintenance plan — your call, and never a requirement.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="svc-block" id="faq">
+    <p class="eyebrow reveal">FAQ</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Common <span>Questions</span></h2>
+    <div class="reveal">
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What does a custom dashboard cost?</button><div class="faq-a"><p>Scope determines cost and timing — the number of data sources, how much cleanup the underlying data needs, and how fresh the numbers have to be all matter. We scope it in a discovery conversation and a written quote follows. Third-party service costs, like hosting or connector fees, are separate when applicable.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What data sources can you connect?</button><div class="faq-a"><p>CRMs, spreadsheets, accounting tools in the QuickBooks class, databases, and most modern software with an export or an API. If a tool has no clean way to get data out, we will tell you what the workaround involves before you commit to anything.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Do we need real-time data, or is a daily refresh enough?</button><div class="faq-a"><p>For most business decisions, a nightly or hourly refresh is plenty — and it costs less to build and run. Near-real-time updates make sense for things like inbound leads or job status, and we will tell you honestly which parts of your dashboard need them and which do not.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Do we need a database before we can have a dashboard?</button><div class="faq-a"><p>No. We work with what exists — spreadsheets, exports, and the tools you already run. If the data is not ready to support the dashboard you want, we will say so plainly and show you what it takes to get there.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Who maintains the dashboard after launch?</button><div class="faq-a"><p>You own the code, the configuration, and the data created for the work — subject to third-party software terms and the written agreement — so you can maintain it in-house or hand it to any developer. If you would rather not think about it, an optional maintenance plan covers updates, monitoring, and changes as your tools evolve.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Can it run on a TV or an office screen?</button><div class="faq-a"><p>Yes. We can build a wall-display view — large numbers, readable across the room, refreshing automatically — alongside the standard desktop and mobile views your team uses at their desks.</p></div></div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="svc-block" id="related">
+    <p class="eyebrow reveal">Related</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Where This <span>Connects</span></h2>
+    <div class="svc-items reveal">
+      <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/></svg></span><h3 class="si-name"><a href="/software-development/" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--cyan);">Custom Software Development</a></h3></div><p class="si-desc">When a dashboard reveals a broken process, custom software is often the fix — internal tools, portals, and systems built around how you actually work.</p></div>
+      <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5v4h-4"/></svg></span><h3 class="si-name"><a href="/workflow-automation/" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--cyan);">Workflow Automation</a></h3></div><p class="si-desc">Dashboards show you where work gets stuck; automation unsticks it — approvals, handoffs, and data movement between the same tools your dashboard reads from.</p></div>
+      <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><h3 class="si-name"><a href="/automation/" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--cyan);">CRM &amp; Lead Automation</a></h3></div><p class="si-desc">If your sales dashboard shows leads going cold, automated follow-up, CRM setup, and lead routing keep the pipeline your dashboard measures actually moving.</p></div>
+    </div>
+    <p class="si-desc reveal" style="margin-top:1.5rem;">Planning a dashboard project? Start with <a href="/business-dashboard-guide/" style="color:var(--cyan);">our business dashboard guide</a> — what to measure, what to skip, and how to tell if your data is ready.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Get Started</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Tired of Compiling Reports by Hand? <span>Put It on One Screen.</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;">Tell us which numbers you check, where they live, and who needs to see them. We'll scope a dashboard around the decisions you actually make — ask for a live walkthrough, and a written quote follows discovery.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/services/" class="btn btn-outline">See All Services</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="/" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software &amp; Apps</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/security/">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/catalog/">Service Catalog</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/resources/">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="/contact/">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="/privacy/" style="color:inherit;">Privacy</a> · <a href="/terms/" style="color:inherit;">Terms</a> · <a href="/accessibility/" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+</script>
+</body></html>

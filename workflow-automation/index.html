@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Business Workflow Automation &amp; Integrations | Secret Systems .io</title>
+<meta name="description" content="Automation for internal operations: approvals, handoffs, data movement, documents, and scheduling — connecting the tools you already use. Built in Louisiana, serving nationwide."/>
+<meta name="keywords" content="business workflow automation, business process automation, approval workflow automation, document generation automation, API integration, webhook integration, data entry automation, Louisiana automation company"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/workflow-automation/"/>
+<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/workflow-automation/"/><meta property="og:title" content="Business Workflow Automation &amp; Integrations | Secret Systems .io"/><meta property="og:description" content="Approvals, handoffs, data movement, documents, and scheduling — automated across the tools you already use, with human review where judgment matters."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Business Workflow Automation &amp; Integrations | Secret Systems .io"/><meta name="twitter:description" content="Internal operations automation: approvals, handoffs, data movement, documents, scheduling. Built to not break — with alerts when something does."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Workflow automation","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"description":"Workflow automation for internal business operations: lead routing, approval workflows, notifications and escalations, scheduling, document generation, data movement between systems, CRM handoffs, and API/webhook integrations. Built with failure handling, audit trails, and human review steps; clients own the workflows, accounts, and documentation created for the work, subject to third-party software terms and the written agreement."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://secretsystems.io/services/"},{"@type":"ListItem","position":3,"name":"Workflow Automation","item":"https://secretsystems.io/workflow-automation/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What tools can you connect?","acceptedAnswer":{"@type":"Answer","text":"Most modern business tools expose an API or webhooks — CRMs, accounting software, spreadsheets, email, forms, scheduling, e-signature, phone systems. If two tools can talk at all, we can usually route data between them. Older or closed software takes more creativity, but there is almost always a workable path. We confirm exactly what your tools support during discovery, before you commit to anything."}},{"@type":"Question","name":"What happens if an automation breaks?","acceptedAnswer":{"@type":"Answer","text":"It gets caught, not discovered three weeks later. Every workflow we build includes failure handling: if a step errors, the automation stops safely, the failed item is preserved, and someone on your team gets an alert saying exactly what failed and where. Silent failure is the real danger with automation, so we design against it from the start."}},{"@type":"Question","name":"How do we know it's actually working?","acceptedAnswer":{"@type":"Answer","text":"Every run leaves a record — what triggered it, what it did, and when. You can see how many items moved through each workflow and spot-check any of them. During the first weeks after launch we monitor runs alongside you, and you can ask for a live walkthrough of the audit trail before you buy anything."}},{"@type":"Question","name":"What does workflow automation cost?","acceptedAnswer":{"@type":"Answer","text":"Scope determines cost and timing. Connecting two tools with a simple trigger is a small job; a multi-step approval workflow with document generation and escalations is a bigger one. After discovery you get a written quote, so you know the number before we build. Third-party service costs — automation platforms, API fees — are separate when applicable and billed by those providers."}},{"@type":"Question","name":"Will automation replace my staff?","acceptedAnswer":{"@type":"Answer","text":"Honestly, no — and that's not what it's for. Automation removes the repetitive steps: re-typing the same data into three systems, chasing signatures, sending the same reminder email. Your people keep doing the work that takes judgment — talking to customers, handling exceptions, making calls on the gray areas. Most clients find their staff gets more done, not that they need less staff."}},{"@type":"Question","name":"Can you work around our old software?","acceptedAnswer":{"@type":"Answer","text":"Usually, yes. Plenty of businesses run on software that predates APIs. Depending on what it can do, we can work with exports and imports, scheduled file drops, email parsing, or a database connection. It's rarely elegant, but it works, and it beats replacing a system your team knows. We assess what your software can actually support during discovery."}}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.svc-block{border-bottom:1px solid var(--border);padding:5rem 0;}
+.svc-block:last-child{border-bottom:none;}
+.svc-block-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;}
+.svc-block-label{position:sticky;top:100px;}
+.svc-block-label h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:1rem;}
+.svc-block-label h2 span{color:var(--cyan);}
+.svc-block-label p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:2rem;}
+.svc-items{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+.svc-item{background:var(--card);padding:2rem 2.5rem;}
+.si-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.si-icon{font-size:1.6rem;}
+.si-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
+.si-desc{font-size:.88rem;color:var(--text);line-height:1.7;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;}
+.faq-q::after{content:'+';color:var(--cyan);font-size:1.4rem;flex-shrink:0;}
+.faq-q[aria-expanded="true"]::after{content:'–';}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-q[aria-expanded="true"]+.faq-a{max-height:400px;}
+.faq-a p{font-size:.9rem;color:var(--text);line-height:1.7;padding:0 0 1.5rem;}
+@media(max-width:900px){.svc-block-grid{grid-template-columns:1fr;gap:2rem;}.svc-block-label{position:static;}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <a href="/" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="/automation/">Automation</a></li>
+    <li><a href="/security/">Security</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="/" onclick="closeMenu()">Home</a>
+  <a href="/services/" onclick="closeMenu()">Services</a>
+  <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="/automation/" onclick="closeMenu()">Automation</a>
+  <a href="/security/" onclick="closeMenu()">Security</a>
+  <a href="/work/" onclick="closeMenu()">Work</a>
+  <a href="/pricing/" onclick="closeMenu()">Pricing</a>
+  <a href="/about/" onclick="closeMenu()">About</a>
+  <a href="/contact/" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="/" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="/services/" style="color:var(--muted);text-decoration:none;">Services</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Workflow Automation</span></nav>
+  <p class="eyebrow">Workflow Automation</p>
+  <h1 class="h1">Stop Re-Typing.<br><span>Start Routing.</span></h1>
+  <p class="lead" style="margin-top:2rem;max-width:600px;">Automation for your internal operations — approvals, handoffs, data movement, documents, and scheduling — connecting the tools you already use so work moves without someone pushing it. Looking for lead follow-up, CRM, and marketing automation? That's our <a href="/automation/" style="color:var(--cyan);">CRM &amp; lead automation</a> page — this page covers internal operations.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/work/" class="btn btn-outline">See Our Work</a>
+  </div>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+
+  <!-- WHAT WE AUTOMATE -->
+  <div class="svc-block" id="automate">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">01</p>
+        <h2>What We <span>Automate</span></h2>
+        <p>The repetitive, rule-following work that eats hours and invites typos. Not sure which of your processes qualify? Read our guide: <a href="/what-business-processes-should-you-automate/" style="color:var(--cyan);">what should you automate?</a></p>
+        <a href="/contact/" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Talk Through a Process →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><h3 class="si-name">Lead routing &amp; assignment</h3></div><p class="si-desc">For the lead that sat in a shared inbox all weekend. New inquiries get routed to the right person by territory, service, or availability — the moment they arrive, not when someone checks.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l2.8 2.8L16 9"/></svg></span><h3 class="si-name">Approval workflows</h3></div><p class="si-desc">For the purchase order stuck under a stack on someone's desk. Requests route to the right approver, remind them if they stall, and escalate if they sit — with a record of who approved what and when.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 4l8.5 15H3.5z"/><path d="M12 10v4.5M12 17.5h.01"/></svg></span><h3 class="si-name">Notifications &amp; escalations</h3></div><p class="si-desc">For the problem nobody heard about until it was expensive. When a job stalls, a payment fails, or a deadline nears, the right person gets told — and if they don't act, the next person up does.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9.5h16M8 3v4M16 3v4"/></svg></span><h3 class="si-name">Scheduling &amp; reminders</h3></div><p class="si-desc">For the no-shows and the calendar built by phone tag. Bookings, confirmations, and reminder texts run on their own, and reschedules update everyone who needs to know.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 12.5h5M9.5 16h5"/></svg></span><h3 class="si-name">Document generation</h3></div><p class="si-desc">For the quote that takes forty-five minutes of copy-paste. Quotes, invoices, and contracts fill from templates using data you already have — consistent, correct, and out the door in minutes.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">⌨️</span><h3 class="si-name">Data entry &amp; re-keying</h3></div><p class="si-desc">For the same customer typed into three systems by three people. Data entered once flows to everywhere it belongs — no re-keying, no transposed digits, no "which one is right?"</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg></span><h3 class="si-name">CRM handoffs</h3></div><p class="si-desc">For the deal that closed in sales and vanished on the way to operations. When a stage changes in your CRM, the next team gets the job, the details, and the paperwork — automatically.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><h3 class="si-name">Operational email &amp; text sequences</h3></div><p class="si-desc">For the updates your team means to send but doesn't. Job started, job done, invoice sent, payment overdue — messages triggered by what actually happened in your operations, not by someone remembering.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M9 2.5v6M15 2.5v6M7 8.5h10v2.5a5 5 0 0 1-10 0zM12 16v5.5"/></svg></span><h3 class="si-name">Integrations (APIs &amp; webhooks)</h3></div><p class="si-desc">For the two systems that both matter and don't talk. We connect your tools directly through their APIs and webhooks, so the connection is yours — not rented from a middleman forever, subject to third-party platform terms and the written agreement.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILT TO NOT BREAK -->
+  <div class="svc-block" id="reliability">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">02</p>
+        <h2>Built to <span>Not Break</span></h2>
+        <p>The difference between automation that helps and automation that quietly wrecks your data is what happens on the bad days. We design for the bad days.</p>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg>‍<svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 4v16M7.5 20h9M4.5 8h15"/><path d="M4.5 8l-2.3 5.5a2.8 2.8 0 0 0 4.6 0zM19.5 8l-2.3 5.5a2.8 2.8 0 0 0 4.6 0z"/></svg></span><h3 class="si-name">Human review where judgment matters</h3></div><p class="si-desc">Not every step should run on its own. Where a call requires judgment — an unusual discount, a borderline approval, a sensitive customer — the workflow pauses and asks a person. Automation moves the paper; people make the calls.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🛟</span><h3 class="si-name">Failure handling &amp; alerts</h3></div><p class="si-desc">When an automation errs — an API is down, a record is malformed — it stops safely, keeps the failed item, and alerts someone with enough detail to fix it. The worst automations fail silently for weeks. Ours don't.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🧾</span><h3 class="si-name">Audit trails</h3></div><p class="si-desc">Every run is logged: who or what triggered it, what it changed, and when. When someone asks "why did this invoice go out?", there's an answer you can look up instead of a shrug.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 4l8.5 15H3.5z"/><path d="M12 10v4.5M12 17.5h.01"/></svg></span><h3 class="si-name">What should NOT be automated</h3></div><p class="si-desc">Plainly: judgment calls, exception-heavy processes, and anything that's expensive when it's wrong. If half your cases are special cases, automation will make the mess faster, not better. We'll tell you when a process isn't ready — fixing the process comes first.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS & OWNERSHIP -->
+  <div class="svc-block" id="process">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">03</p>
+        <h2>Process &amp; <span>Ownership</span></h2>
+        <p>Automating a process you haven't mapped just automates the confusion. We do it in order — and what we build belongs to you.</p>
+        <a href="/contact/" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Start With Discovery →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true">🗺️</span><h3 class="si-name">Map the current process first</h3></div><p class="si-desc">We sit with the people who do the work and chart how it actually flows — including the workarounds nobody wrote down. This is where the real requirements surface, and where broken steps get fixed before they get automated.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span><h3 class="si-name">Automate the stable parts</h3></div><p class="si-desc">We start with the steps that are consistent and rule-following — the ones automation is good at — and leave the volatile parts with people until they settle. Better a smaller automation that's trusted than a big one that's babysat.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span><h3 class="si-name">Monitor and adjust</h3></div><p class="si-desc">After launch we watch the runs with you: what's flowing, what's erroring, what the team actually uses. Workflows get tuned based on real behavior, not the plan on paper.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l2-2M18.5 18.5l1.8-1.8"/></svg></span><h3 class="si-name">You own it all</h3></div><p class="si-desc">The workflows, the accounts they run on, and the documentation explaining how each one works — all in your name. If we disappeared tomorrow, your automations would keep running and the next developer could read exactly how.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg></span><h3 class="si-name">Support plan optional</h3></div><p class="si-desc">Keep us on a monthly plan to monitor, fix, and extend your workflows — or take the documented hand-off and run them in-house. Both are real options; neither is a trap.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="svc-block" id="faq">
+    <p class="eyebrow reveal">FAQ</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Common <span>Questions</span></h2>
+    <div class="reveal">
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What tools can you connect?</button><div class="faq-a"><p>Most modern business tools expose an API or webhooks — CRMs, accounting software, spreadsheets, email, forms, scheduling, e-signature, phone systems. If two tools can talk at all, we can usually route data between them. Older or closed software takes more creativity, but there is almost always a workable path. We confirm exactly what your tools support during discovery, before you commit to anything.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What happens if an automation breaks?</button><div class="faq-a"><p>It gets caught, not discovered three weeks later. Every workflow we build includes failure handling: if a step errors, the automation stops safely, the failed item is preserved, and someone on your team gets an alert saying exactly what failed and where. Silent failure is the real danger with automation, so we design against it from the start.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">How do we know it's actually working?</button><div class="faq-a"><p>Every run leaves a record — what triggered it, what it did, and when. You can see how many items moved through each workflow and spot-check any of them. During the first weeks after launch we monitor runs alongside you, and you can ask for a live walkthrough of the audit trail before you buy anything.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What does workflow automation cost?</button><div class="faq-a"><p>Scope determines cost and timing. Connecting two tools with a simple trigger is a small job; a multi-step approval workflow with document generation and escalations is a bigger one. After discovery you get a written quote, so you know the number before we build. Third-party service costs — automation platforms, API fees — are separate when applicable and billed by those providers.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Will automation replace my staff?</button><div class="faq-a"><p>Honestly, no — and that's not what it's for. Automation removes the repetitive steps: re-typing the same data into three systems, chasing signatures, sending the same reminder email. Your people keep doing the work that takes judgment — talking to customers, handling exceptions, making calls on the gray areas. Most clients find their staff gets more done, not that they need less staff.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Can you work around our old software?</button><div class="faq-a"><p>Usually, yes. Plenty of businesses run on software that predates APIs. Depending on what it can do, we can work with exports and imports, scheduled file drops, email parsing, or a database connection. It's rarely elegant, but it works, and it beats replacing a system your team knows. We assess what your software can actually support during discovery.</p></div></div>
+    </div>
+  </div>
+
+  <!-- RELATED SERVICES -->
+  <div class="svc-block" id="related">
+    <p class="eyebrow reveal">Related</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Related <span>Services</span></h2>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);">
+      <a href="/software-development/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">Software Development →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">When connecting tools isn't enough — custom systems built around your actual process.</p></a>
+      <a href="/dashboard-development/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">Dashboard Development →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">Your business numbers pulled into one live view instead of five logins and a spreadsheet.</p></a>
+      <a href="/automation/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">CRM &amp; Lead Automation →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">Lead follow-up, CRM, and marketing automation — the customer-facing side of automation.</p></a>
+    </div>
+    <p class="reveal" style="font-size:.88rem;color:var(--text);line-height:1.7;margin-top:1.5rem;">Not sure where to start? Read our guide: <a href="/what-business-processes-should-you-automate/" style="color:var(--cyan);">what should you automate?</a></p>
+  </div>
+
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Get Started</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">What's the Task Your Team <span>Does Twice a Day, Every Day?</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;">Tell us about the re-typing, the chasing, and the handoffs that fall through. We'll map the process with you and tell you straight what's worth automating — a written quote follows discovery, before anything gets built.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/services/" class="btn btn-outline">See All Services</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="/" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software &amp; Apps</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/security/">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/catalog/">Service Catalog</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/resources/">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="/contact/">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="/privacy/" style="color:inherit;">Privacy</a> · <a href="/terms/" style="color:inherit;">Terms</a> · <a href="/accessibility/" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+</script>
+</body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Business Web &amp; Mobile App Development | Secret Systems .io</title>
+<meta name="description" content="Web applications, progressive web apps, and mobile-friendly tools for customers and field crews. Honest advice on web vs. native. Built in Louisiana, serving nationwide."/>
+<meta name="keywords" content="business app development, web application development, progressive web app development, PWA development, mobile app development, customer app, field service app, Louisiana app developer"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/app-development/"/>
+<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/app-development/"/><meta property="og:title" content="Business Web &amp; Mobile App Development | Secret Systems .io"/><meta property="og:description" content="Web applications, progressive web apps, and mobile-friendly tools for your customers and your crew — with honest advice on when native is actually worth it."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Business Web &amp; Mobile App Development | Secret Systems .io"/><meta name="twitter:description" content="Web apps, PWAs, and mobile-friendly tools for customers and field crews. Honest advice on web vs. native. You own the app — the source code, content, data, and project accounts created for the work — subject to third-party platform terms (including Apple’s and Google’s) and the written agreement."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Web and mobile application development","provider":{"@type":"Organization","name":"Secret Systems LLC","url":"https://secretsystems.io"},"areaServed":{"@type":"Country","name":"United States"},"description":"Business application development: web applications, progressive web apps, customer-facing apps, employee and field tools, and cross-platform apps when native is warranted. Written quotes after discovery; clients own the source code, data, and accounts."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://secretsystems.io/services/"},{"@type":"ListItem","position":3,"name":"App Development","item":"https://secretsystems.io/app-development/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a native app, or is a web app enough?","acceptedAnswer":{"@type":"Answer","text":"For most businesses, a web app or progressive web app is the right answer. It works on every device, updates instantly, skips app-store review, and costs less to build and maintain. Native makes sense when you genuinely need it: heavy offline use, deep hardware access, or a presence in the app stores that your customers expect. We tell you which one fits during discovery, and we have no incentive to steer you toward the more expensive option."}},{"@type":"Question","name":"What does a business app cost?","acceptedAnswer":{"@type":"Answer","text":"Scope determines cost and timing. A focused web app with a few screens and one user role costs far less than a customer-facing app with accounts, notifications, and offline support. After discovery you get a written quote, so you know the number before we build. Third-party service costs — app-store developer fees, hosting, notification services — are separate when applicable, and they are billed by those providers, not marked up by us."}},{"@type":"Question","name":"How long does app-store approval take?","acceptedAnswer":{"@type":"Answer","text":"Typically days, sometimes weeks — and the timeline is controlled by Apple and Google, not by us or you. Reviews can also come back with change requests that add a round trip. This is one of the practical reasons we often recommend web apps and PWAs: updates go live the moment we ship them, with no review queue in between."}},{"@type":"Question","name":"Who owns the app?","acceptedAnswer":{"@type":"Answer","text":"You do. The source code lives in a repository under your account, your data is stored in standard formats you can export, and the hosting, domain, and developer accounts are registered in your name. If you ever change developers, you take all of it with you."}},{"@type":"Question","name":"Can the app work offline?","acceptedAnswer":{"@type":"Answer","text":"To a degree, yes — and we are honest about the limits. Progressive web apps can cache screens and queue work while a crew is out of signal, then sync when the connection returns. Full offline operation with large data sets and conflict handling is harder and pushes toward native. If offline is critical to your work, say so early; it shapes the whole design."}},{"@type":"Question","name":"Who handles updates after launch?","acceptedAnswer":{"@type":"Answer","text":"Your choice. Some clients keep us on a monthly maintenance plan covering updates, fixes, and small improvements. Others take a documented hand-off and run it with their own people or another developer. For web apps we ship updates directly; for app-store apps, each update also passes through Apple or Google review."}}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
+.svc-block{border-bottom:1px solid var(--border);padding:5rem 0;}
+.svc-block:last-child{border-bottom:none;}
+.svc-block-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;}
+.svc-block-label{position:sticky;top:100px;}
+.svc-block-label h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:1rem;}
+.svc-block-label h2 span{color:var(--cyan);}
+.svc-block-label p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:2rem;}
+.svc-items{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+.svc-item{background:var(--card);padding:2rem 2.5rem;}
+.si-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.si-icon{font-size:1.6rem;}
+.si-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
+.si-desc{font-size:.88rem;color:var(--text);line-height:1.7;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;}
+.faq-q::after{content:'+';color:var(--cyan);font-size:1.4rem;flex-shrink:0;}
+.faq-q[aria-expanded="true"]::after{content:'–';}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-q[aria-expanded="true"]+.faq-a{max-height:400px;}
+.faq-a p{font-size:.9rem;color:var(--text);line-height:1.7;padding:0 0 1.5rem;}
+@media(max-width:900px){.svc-block-grid{grid-template-columns:1fr;gap:2rem;}.svc-block-label{position:static;}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <a href="/" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="/automation/">Automation</a></li>
+    <li><a href="/security/">Security</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="/" onclick="closeMenu()">Home</a>
+  <a href="/services/" onclick="closeMenu()">Services</a>
+  <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="/automation/" onclick="closeMenu()">Automation</a>
+  <a href="/security/" onclick="closeMenu()">Security</a>
+  <a href="/work/" onclick="closeMenu()">Work</a>
+  <a href="/pricing/" onclick="closeMenu()">Pricing</a>
+  <a href="/about/" onclick="closeMenu()">About</a>
+  <a href="/contact/" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+<div class="page-hero-bg">
+<div class="page-hero wrap">
+  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="/" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><a href="/services/" style="color:var(--muted);text-decoration:none;">Services</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">App Development</span></nav>
+  <p class="eyebrow">App Development</p>
+  <h1 class="h1">Web &amp; Mobile Apps<br><span>for Your Customers and Your Crew.</span></h1>
+  <p class="lead" style="margin-top:2rem;max-width:600px;">Web applications, progressive web apps, and mobile-friendly internal tools. Here's the plain truth up front: most business apps are best built as web apps or PWAs — they cost less, update instantly, and run on every device. We build native only when the project genuinely needs it, and we'll tell you which one yours is.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/work/" class="btn btn-outline">See Our Work</a>
+  </div>
+</div>
+</div>
+
+<div style="background:var(--void);">
+<div class="section wrap">
+
+  <!-- WHAT WE BUILD -->
+  <div class="svc-block" id="build">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">01</p>
+        <h2>What We <span>Build</span></h2>
+        <p>Apps that solve a specific problem for specific people — your customers, your office, or your crew in the field. Examples are in our <a href="/work/" style="color:var(--cyan);">work section</a>, and you can ask for a live walkthrough of anything we've built.</p>
+        <a href="/contact/" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Talk Through an App Idea →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20"/></svg></span><h3 class="si-name">Web Applications</h3></div><p class="si-desc">For work that happens in a browser: quoting, ordering, tracking, managing. A web app runs on any device with no install, updates the moment we ship, and never waits in an app-store queue. This is the right shape for most business software.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span><h3 class="si-name">Progressive Web Apps</h3></div><p class="si-desc">For when you want the app feel without the app store. A PWA installs to the home screen, opens full-screen like a native app, and can work with a weak connection — no app store, no review delays, no developer-account fees. One build covers iPhone, Android, and desktop.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg>‍<svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12.5h18"/></svg></span><h3 class="si-name">Customer-Facing Apps</h3></div><p class="si-desc">For the customers who call to ask where things stand. An app where they book, pay, check status, and see documents — so the phone rings less and the experience feels like a company that has its act together.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M4 5l2.1 2.1M17.9 16.9L20 19M2.5 12h3M18.5 12h3M4 19l2.1-2.1M17.9 7.1L20 5"/></svg></span><h3 class="si-name">Employee &amp; Field Tools</h3></div><p class="si-desc">For crews working off paper tickets and text messages. A mobile-friendly tool for job details, photos, checklists, signatures, and time — built for gloves, sunlight, and spotty rural signal, not for a desk.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span><h3 class="si-name">Cross-Platform Apps</h3></div><p class="si-desc">For the cases where native is genuinely warranted — deep hardware access, heavy offline use, or an app-store presence your market expects. One codebase ships to both iOS and Android, so you're not paying for two separate builds.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE DECISIONS THAT MATTER -->
+  <div class="svc-block" id="decisions">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">02</p>
+        <h2>The Decisions <span>That Matter</span></h2>
+        <p>A handful of early choices drive most of an app's cost, timeline, and day-to-day usefulness. We walk through each one with you in plain terms before anything gets built.</p>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/></svg></span><h3 class="si-name">Authentication &amp; user roles</h3></div><p class="si-desc">Who logs in, and what can they see? Customers, office staff, and field crews usually need different views of the same data. Getting roles right early is cheap; bolting them on later is not.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 4v16M7.5 20h9M4.5 8h15"/><path d="M4.5 8l-2.3 5.5a2.8 2.8 0 0 0 4.6 0zM19.5 8l-2.3 5.5a2.8 2.8 0 0 0 4.6 0z"/></svg></span><h3 class="si-name">Web vs. PWA vs. native</h3></div><p class="si-desc">The trade-offs are real: native costs more to build and maintain, every update waits on app-store review, and you pay Apple and Google's developer fees. Web and PWA update instantly and run everywhere. Native earns its cost only when you need what only native can do.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 9.5a6 6 0 0 1 12 0c0 4.5 2 5.5 2 5.5H4s2-1 2-5.5z"/><path d="M10 19.5a2 2 0 0 0 4 0"/></svg></span><h3 class="si-name">Notifications</h3></div><p class="si-desc">Web push now works on Android, desktop, and — with limits — on iPhone, where the PWA must be installed to the home screen first. Native notifications are the most reliable. If notifications are central to your app, this alone can decide the platform, so we settle it early.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M6 3h3l1.8 4.5L8.8 9a11 11 0 0 0 5.2 5.2l1.5-2 4.5 1.8V17a2 2 0 0 1-2.2 2A15 15 0 0 1 4 5.2 2 2 0 0 1 6 3z"/></svg></span><h3 class="si-name">Offline needs and limits</h3></div><p class="si-desc">PWAs can cache screens and queue submissions until signal returns — enough for most field work. Full offline with large data sets and sync-conflict handling is a genuinely harder problem that pushes toward native. We'll tell you which side of that line your app is on.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span><h3 class="si-name">Deployment</h3></div><p class="si-desc">Web apps deploy to hosting you own and update in minutes. App-store apps go through Apple and Google review — typically days, sometimes weeks — and both companies charge developer-account fees. Those timelines and fees are theirs, not ours, and we plan around them from the start.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OWNERSHIP, DEPLOYMENT & MAINTENANCE -->
+  <div class="svc-block" id="ownership">
+    <div class="svc-block-grid reveal">
+      <div class="svc-block-label">
+        <p class="eyebrow">03</p>
+        <h2>Ownership, Deployment <span>&amp; Maintenance</span></h2>
+        <p>The app is yours — not licensed to you, not held on our platform. That's in the agreement, and the accounts are in your name from day one.</p>
+        <a href="/contact/" class="btn btn-cyan" style="font-size:.8rem;padding:.7rem 1.5rem;">Start With Discovery →</a>
+      </div>
+      <div class="svc-items">
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-6h8v6"/></svg></span><h3 class="si-name">You own the source</h3></div><p class="si-desc">The full codebase lives in a repository under your account. Any competent developer can pick it up after us — no license fees, no lock-in.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span><h3 class="si-name">You own the data and accounts</h3></div><p class="si-desc">Your data sits in standard formats you can export any time, and the hosting, domain, database, and app-store developer accounts are registered to you — not to us. If we disappeared tomorrow, you'd lose nothing.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5v4h-4"/></svg></span><h3 class="si-name">How updates ship</h3></div><p class="si-desc">For web apps and PWAs, updates go live the moment we deploy them — every user gets the new version on their next visit. For app-store apps, each update passes through Apple or Google review first, so we batch changes and plan releases around that queue.</p></div>
+        <div class="svc-item"><div class="si-head"><span class="si-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3 3 0 0 1 0 5.6M16.5 20a5 5 0 0 0-2-4"/></svg></span><h3 class="si-name">Maintenance plans are optional</h3></div><p class="si-desc">Keep us on a monthly plan for updates, fixes, and small improvements — or take a documented hand-off and run it yourself. Apps need upkeep either way; we just make sure it's your choice who does it.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="svc-block" id="faq">
+    <p class="eyebrow reveal">FAQ</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Common <span>Questions</span></h2>
+    <div class="reveal">
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Do I need a native app, or is a web app enough?</button><div class="faq-a"><p>For most businesses, a web app or progressive web app is the right answer. It works on every device, updates instantly, skips app-store review, and costs less to build and maintain. Native makes sense when you genuinely need it: heavy offline use, deep hardware access, or a presence in the app stores that your customers expect. We tell you which one fits during discovery, and we have no incentive to steer you toward the more expensive option.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">What does a business app cost?</button><div class="faq-a"><p>Scope determines cost and timing. A focused web app with a few screens and one user role costs far less than a customer-facing app with accounts, notifications, and offline support. After discovery you get a written quote, so you know the number before we build. Third-party service costs — app-store developer fees, hosting, notification services — are separate when applicable, and they are billed by those providers, not marked up by us.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">How long does app-store approval take?</button><div class="faq-a"><p>Typically days, sometimes weeks — and the timeline is controlled by Apple and Google, not by us or you. Reviews can also come back with change requests that add a round trip. This is one of the practical reasons we often recommend web apps and PWAs: updates go live the moment we ship them, with no review queue in between.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Who owns the app?</button><div class="faq-a"><p>You do. The source code lives in a repository under your account, your data is stored in standard formats you can export, and the hosting, domain, and developer accounts are registered in your name. If you ever change developers, you take all of it with you.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Can the app work offline?</button><div class="faq-a"><p>To a degree, yes — and we are honest about the limits. Progressive web apps can cache screens and queue work while a crew is out of signal, then sync when the connection returns. Full offline operation with large data sets and conflict handling is harder and pushes toward native. If offline is critical to your work, say so early; it shapes the whole design.</p></div></div>
+      <div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">Who handles updates after launch?</button><div class="faq-a"><p>Your choice. Some clients keep us on a monthly maintenance plan covering updates, fixes, and small improvements. Others take a documented hand-off and run it with their own people or another developer. For web apps we ship updates directly; for app-store apps, each update also passes through Apple or Google review.</p></div></div>
+    </div>
+  </div>
+
+  <!-- RELATED SERVICES -->
+  <div class="svc-block" id="related">
+    <p class="eyebrow reveal">Related</p>
+    <h2 class="h2 reveal" style="margin-bottom:2rem;">Related <span>Services</span></h2>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);">
+      <a href="/software-development/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">Software Development →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">Internal tools, process software, portals, and database-backed systems you own (per the ownership terms above).</p></a>
+      <a href="/dashboard-development/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">Dashboard Development →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">Your business numbers pulled into one live view instead of five logins and a spreadsheet.</p></a>
+      <a href="/web-design/" style="background:var(--card);padding:2rem 2.5rem;text-decoration:none;display:block;"><h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.6rem;">Web Design →</h3><p style="font-size:.85rem;color:var(--text);line-height:1.6;">Marketing sites and landing pages built to win local customers, with SEO and speed underneath.</p></a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.04));border-top:1px solid var(--border);">
+<div class="cta-band wrap">
+  <p class="eyebrow" style="justify-content:center;">Get Started</p>
+  <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Got an App Idea? <span>Let's Pressure-Test It First.</span></h2>
+  <p style="color:var(--text);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;">Tell us who would use it and what problem it solves. We'll tell you straight whether it should be a web app, a PWA, or native — and a written quote follows discovery, before anything gets built.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/contact/" class="btn btn-cyan">Book a Consultation →</a>
+    <a href="/services/" class="btn btn-outline">See All Services</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="/" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software &amp; Apps</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/security/">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/catalog/">Service Catalog</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/resources/">Resources</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="/contact/">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="/privacy/" style="color:inherit;">Privacy</a> · <a href="/terms/" style="color:inherit;">Terms</a> · <a href="/accessibility/" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+</script>
+</body></html>

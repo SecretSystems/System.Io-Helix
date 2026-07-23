@@ -3,7 +3,7 @@ var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:r
 var ssFinePointer = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 // ── PARTICLES (skipped when the visitor prefers reduced motion) ──
 const canvas=document.getElementById('bg');
-if(canvas && !ssReduce){
+if(false){ /* background particle field retired for a calmer, faster surface */
   const ctx=canvas.getContext('2d');
   let W,H,particles=[];
   const resize=()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;};

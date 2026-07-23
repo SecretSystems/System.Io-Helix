@@ -1,0 +1,24 @@
+{
+  "name": "secret-systems-motion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline Remotion workspace for Secret Systems. Renders premium animation assets (e.g. the lead-response pipeline) that are exported as video/stills and embedded into the static site. This is NOT part of the production website — the site itself ships no JS framework and stays dependency-light.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "studio": "remotion studio",
+    "render:leadflow": "remotion render LeadFlow out/lead-flow.mp4",
+    "render:leadflow-webm": "remotion render LeadFlow out/lead-flow.webm --codec=vp8",
+    "still:leadflow": "remotion still LeadFlow out/lead-flow-poster.png --frame=170",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "typescript": "^5.4.5"
+  }
+}

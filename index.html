@@ -46,12 +46,7 @@ body{
 }
 
 
-/* ── SCANLINE OVERLAY ── */
-body::after{
-  content:'';position:fixed;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
-  pointer-events:none;z-index:9998;
-}
+/* scanline overlay removed — calmer, cleaner surface */
 
 /* ── PARTICLE CANVAS ── */
 #particle-canvas{
@@ -168,7 +163,7 @@ nav{
 /* ── HERO WRAPPER (scroll container) ── */
 .hero-scroll-container{
   position:relative;
-  height:250vh;
+  height:300vh;
   z-index:1;
 }
 
@@ -540,7 +535,7 @@ nav{
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
   transition:left 0.4s;
 }
-.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,200,255,0.3);}
+.btn-primary:hover{background:var(--cyan2);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,0.4);}
 .btn-primary:hover::before{left:100%;}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:0.6rem;
@@ -552,20 +547,7 @@ nav{
 }
 .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
 
-/* scrolling ticker (used in vault bottom banner) */
-.ticker{
-  display:flex;gap:3rem;
-  animation:ticker 30s linear infinite;
-  white-space:nowrap;
-}
-.ticker-item{
-  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
-  font-weight:400;letter-spacing:0.15em;color:#8ea7bf;
-  text-transform:uppercase;display:flex;align-items:center;gap:1rem;
-  flex-shrink:0;
-}
-.ticker-item::before{content:'◆';color:var(--cyan);font-size:0.5rem;}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+/* scrolling ticker removed */
 
 /* ── SECTION WRAPPER ── */
 .section{
@@ -701,31 +683,21 @@ nav{
 }
 .auto-desc{font-size:0.83rem;color:var(--text);line-height:1.6;}
 
-/* terminal window */
-.terminal{
-  background:#030a0f;
-  border:1px solid rgba(0,200,255,0.2);
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.8rem;
-  overflow:hidden;
+/* lead-response pipeline diagram (replaces the terminal mockup) */
+.lead-flow{margin:0;}
+.lead-flow svg{width:100%;height:auto;display:block;}
+.lead-flow figcaption{
+  font-size:0.82rem;color:var(--muted);line-height:1.65;
+  margin-top:1.4rem;max-width:42ch;
 }
-.terminal-bar{
-  background:rgba(0,200,255,0.06);
-  padding:0.7rem 1rem;
-  border-bottom:1px solid rgba(0,200,255,0.1);
-  display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;
-  color:var(--muted);
+@keyframes lfFlow{
+  0%{transform:translateY(0);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{transform:translateY(416px);opacity:0;}
 }
-.terminal-dot{width:10px;height:10px;border-radius:50%;}
-.terminal-body{padding:1.5rem;line-height:2;}
-.t-line{opacity:0;animation:typeIn 0.1s forwards;}
-.t-green{color:#4eff9f;}
-.t-cyan{color:var(--cyan);}
-.t-muted{color:var(--muted);}
-.t-white{color:var(--white);}
-.t-yellow{color:#ffe066;}
-.cursor-blink{animation:blink 1s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.lf-pulse{animation:lfFlow 5.5s cubic-bezier(.45,0,.15,1) infinite;}
+@media (prefers-reduced-motion:reduce){.lf-pulse{display:none;}}
 
 /* ── PRICING ── */
 #pricing-section{
@@ -899,41 +871,11 @@ footer{
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* glow pulse on cyan elements */
-@keyframes glowPulse{
-  0%,100%{text-shadow:0 0 20px rgba(0,200,255,0.3);}
-  50%{text-shadow:0 0 40px rgba(0,200,255,0.7),0 0 80px rgba(0,200,255,0.2);}
-}
-.hero h1 .accent{animation:glowPulse 3s ease-in-out infinite;}
+/* hero accent glow-pulse removed — the accent stays a solid, confident cyan */
 
-/* typeIn lines staggered */
-.t-line:nth-child(1){animation-delay:0.5s;}
-.t-line:nth-child(2){animation-delay:1.2s;}
-.t-line:nth-child(3){animation-delay:1.9s;}
-.t-line:nth-child(4){animation-delay:2.6s;}
-.t-line:nth-child(5){animation-delay:3.3s;}
-.t-line:nth-child(6){animation-delay:4s;}
-.t-line:nth-child(7){animation-delay:4.7s;}
-@keyframes typeIn{from{opacity:0;}to{opacity:1;}}
+/* terminal type-in animation removed with the terminal mockup */
 
-/* ── WATERMARK COVER BANNER ── */
-#vault-bottom-banner{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  height:44px;
-  z-index:9500;
-  background:var(--void);
-  border-top:1px solid var(--border);
-  overflow:hidden;
-  pointer-events:none;
-  display:flex;align-items:center;
-}
-#vault-bottom-banner .ticker{
-  animation:ticker 90s linear infinite;
-}
-#vault-bottom-banner .ticker-item{
-  flex-shrink:0;
-}
+/* bottom ticker banner removed — hero watermark is now cropped at draw time (see drawFrame) */
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .nav-links{display:none;}
@@ -1060,35 +1002,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   </ul>
 </div>
 
-<!-- FIXED BOTTOM BANNER (always covers watermark) -->
-<div id="vault-bottom-banner">
-  <div class="ticker">
-    <span class="ticker-item">Web Design</span>
-    <span class="ticker-item">AI Lead Follow-Up</span>
-    <span class="ticker-item">CRM Setup</span>
-    <span class="ticker-item">Text Blast Campaigns</span>
-    <span class="ticker-item">5-Star Review Generator</span>
-    <span class="ticker-item">Call Center Automation</span>
-    <span class="ticker-item">Email Marketing</span>
-    <span class="ticker-item">Lead Funnels</span>
-    <span class="ticker-item">Auto-Dial Systems</span>
-    <span class="ticker-item">Digital Marketing</span>
-    <span class="ticker-item">Hosting &amp; Maintenance</span>
-    <span class="ticker-item">GoHighLevel Experts</span>
-    <span class="ticker-item">Web Design</span>
-    <span class="ticker-item">AI Lead Follow-Up</span>
-    <span class="ticker-item">CRM Setup</span>
-    <span class="ticker-item">Text Blast Campaigns</span>
-    <span class="ticker-item">5-Star Review Generator</span>
-    <span class="ticker-item">Call Center Automation</span>
-    <span class="ticker-item">Email Marketing</span>
-    <span class="ticker-item">Lead Funnels</span>
-    <span class="ticker-item">Auto-Dial Systems</span>
-    <span class="ticker-item">Digital Marketing</span>
-    <span class="ticker-item">Hosting &amp; Maintenance</span>
-    <span class="ticker-item">GoHighLevel Experts</span>
-  </div>
-</div>
+<!-- bottom ticker banner removed; hero watermark cropped at draw time -->
 
 <!-- HERO SCROLL CONTAINER -->
 <div class="hero-scroll-container" id="hero-scroll-container">
@@ -1290,25 +1204,60 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         </div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="terminal">
-        <div class="terminal-bar">
-          <div class="terminal-dot" style="background:#ff5f57;"></div>
-          <div class="terminal-dot" style="background:#febc2e;"></div>
-          <div class="terminal-dot" style="background:#28c840;"></div>
-          <span style="margin-left:0.5rem;">secret-systems // automation.flow</span>
-        </div>
-        <div class="terminal-body">
-          <div class="t-line"><span class="t-muted">#</span> <span class="t-cyan">new_lead_received</span></div>
-          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">Lead captured: </span><span class="t-yellow">John D. — roofing inquiry</span></div>
-          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">SMS sent in </span><span class="t-cyan">0:47s</span></div>
-          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">AI qualified: </span><span class="t-yellow">HIGH intent</span></div>
-          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">Appointment booked: </span><span class="t-cyan">Tue 2pm</span></div>
-          <div class="t-line"><span class="t-green">✓</span> <span class="t-white">CRM updated — pipeline: </span><span class="t-yellow">Booked</span></div>
-          <div class="t-line"><span class="t-muted">_</span><span class="cursor-blink">█</span></div>
-        </div>
-      </div>
-    </div>
+    <figure class="lead-flow reveal" role="img" aria-label="Automated lead-response pipeline. Step 1: a new lead is captured the moment an inquiry arrives. Step 2: an automatic text with a booking link is sent in under a minute. Step 3: AI qualifies the lead's intent and routes it. Step 4: an appointment is booked and synced to your calendar. Step 5: your CRM pipeline advances to Booked.">
+      <svg viewBox="0 0 440 520" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" focusable="false">
+        <!-- connectors -->
+        <g stroke="#21405a" stroke-width="1.6">
+          <line x1="76" y1="67"  x2="76" y2="141"/>
+          <line x1="76" y1="171" x2="76" y2="245"/>
+          <line x1="76" y1="275" x2="76" y2="349"/>
+          <line x1="76" y1="379" x2="76" y2="453"/>
+        </g>
+        <!-- traveling lead pulse (hidden under reduced motion) -->
+        <g class="lf-pulse">
+          <circle cx="76" cy="52" r="9" fill="rgba(0,200,255,0.18)"/>
+          <circle cx="76" cy="52" r="4.5" fill="#00c8ff"/>
+        </g>
+        <!-- stages -->
+        <g>
+          <rect x="40" y="20" width="360" height="64" rx="12" fill="#0a1826" stroke="#1c3a52"/>
+          <circle cx="76" cy="52" r="15" fill="#06121e" stroke="#00c8ff" stroke-width="1.4"/>
+          <text x="76" y="52" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00c8ff">1</text>
+          <text x="104" y="48" font-family="'Outfit',sans-serif" font-size="13.5" font-weight="600" fill="#e8f4ff">Lead captured</text>
+          <text x="104" y="66" font-family="'Outfit',sans-serif" font-size="11" fill="#6f8ba0">New inquiry hits the system</text>
+          <text x="384" y="52" text-anchor="end" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#8ea7bf">0:00</text>
+
+          <rect x="40" y="124" width="360" height="64" rx="12" fill="#0a1826" stroke="#1c3a52"/>
+          <circle cx="76" cy="156" r="15" fill="#06121e" stroke="#00c8ff" stroke-width="1.4"/>
+          <text x="76" y="156" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00c8ff">2</text>
+          <text x="104" y="152" font-family="'Outfit',sans-serif" font-size="13.5" font-weight="600" fill="#e8f4ff">Auto-text sent</text>
+          <text x="104" y="170" font-family="'Outfit',sans-serif" font-size="11" fill="#6f8ba0">Reply + booking link</text>
+          <text x="384" y="156" text-anchor="end" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#8ea7bf">&lt; 1 min</text>
+
+          <rect x="40" y="228" width="360" height="64" rx="12" fill="#0a1826" stroke="#1c3a52"/>
+          <circle cx="76" cy="260" r="15" fill="#06121e" stroke="#00c8ff" stroke-width="1.4"/>
+          <text x="76" y="260" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00c8ff">3</text>
+          <text x="104" y="256" font-family="'Outfit',sans-serif" font-size="13.5" font-weight="600" fill="#e8f4ff">AI qualifies intent</text>
+          <text x="104" y="274" font-family="'Outfit',sans-serif" font-size="11" fill="#6f8ba0">Scores and routes the lead</text>
+          <text x="384" y="260" text-anchor="end" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#8ea7bf">HIGH</text>
+
+          <rect x="40" y="332" width="360" height="64" rx="12" fill="#0a1826" stroke="#1c3a52"/>
+          <circle cx="76" cy="364" r="15" fill="#06121e" stroke="#00c8ff" stroke-width="1.4"/>
+          <text x="76" y="364" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00c8ff">4</text>
+          <text x="104" y="360" font-family="'Outfit',sans-serif" font-size="13.5" font-weight="600" fill="#e8f4ff">Appointment booked</text>
+          <text x="104" y="378" font-family="'Outfit',sans-serif" font-size="11" fill="#6f8ba0">Synced to your calendar</text>
+          <text x="384" y="364" text-anchor="end" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#8ea7bf">Tue 2:00</text>
+
+          <rect x="40" y="436" width="360" height="64" rx="12" fill="#0a1826" stroke="#1c3a52"/>
+          <circle cx="76" cy="468" r="15" fill="#06121e" stroke="#00c8ff" stroke-width="1.4"/>
+          <text x="76" y="468" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00c8ff">5</text>
+          <text x="104" y="464" font-family="'Outfit',sans-serif" font-size="13.5" font-weight="600" fill="#e8f4ff">CRM updated</text>
+          <text x="104" y="482" font-family="'Outfit',sans-serif" font-size="11" fill="#6f8ba0">Pipeline stage advances</text>
+          <text x="384" y="468" text-anchor="end" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#00c8ff">Booked</text>
+        </g>
+      </svg>
+      <figcaption>One lead, start to finish — captured, answered, qualified, and booked automatically, usually in under a minute.</figcaption>
+    </figure>
   </div>
 </div>
 </div>
@@ -1578,7 +1527,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     drawLines();
     requestAnimationFrame(pLoop);
   }
-  if(!ssReduce){ pLoop(); } else { pCanvas.style.display='none'; }
+  pCanvas.style.display='none'; /* particle field retired for a calmer hero */
 
   /* ── SCROLL REVEAL ── */
   var reveals=document.querySelectorAll('.reveal');
@@ -1599,8 +1548,9 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
   var TOTAL_FRAMES  = 145;
   var FRAME_PREFIX  = 'frames/ezgif-frame-';
-  var REVEAL_START  = 0.80;
+  var HERO_HOLD_PX  = 230;    /* after frames hit the final frame, hold + scroll this far before the hero text reveals */
   var SPEED_FACTOR  = 0.75;
+  var WATERMARK_CROP= 0.08;   /* crop the bottom strip of each source frame so the generator watermark never draws */
 
   var vaultCanvas        = document.getElementById('vault-canvas');
   var vCtx               = vaultCanvas.getContext('2d');
@@ -1666,12 +1616,14 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     if(!img || !img.naturalWidth) return;
     var cw = lockedW, ch = lockedH;
     var iw = img.naturalWidth, ih = img.naturalHeight;
-    var scale = Math.max(cw/iw, ch/ih);
-    var dw = iw*scale, dh = ih*scale;
+    /* crop the bottom strip of the source frame so the generator watermark never draws */
+    var srcH = ih * (1 - WATERMARK_CROP);
+    var scale = Math.max(cw/iw, ch/srcH);
+    var dw = iw*scale, dh = srcH*scale;
     var dx = (cw-dw)*0.5;
     var dy = (ch-dh)*0.5;
     vCtx.clearRect(0,0,cw,ch);
-    vCtx.drawImage(img, dx, dy, dw, dh);
+    vCtx.drawImage(img, 0, 0, iw, srcH, dx, dy, dw, dh);
     currentFrameIdx = index;
   }
 
@@ -1710,9 +1662,13 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       if(frameReady) lastShow = show;
     }
 
-    /* text / overlay reveal */
-    var tp = Math.max(0, Math.min(1, (progress - REVEAL_START) / (1 - REVEAL_START)));
-    if(tp > 0.05){
+    /* text / overlay reveal — cinematic: reveal only AFTER the frames reach the final
+       frame, the frame is held, and the visitor has scrolled HERO_HOLD_PX further */
+    var containerTop = heroScrollContainer.offsetTop;
+    var scrollable   = heroScrollContainer.offsetHeight - window.innerHeight;
+    var frameDoneY   = containerTop + SPEED_FACTOR * scrollable; /* scroll position where the last frame lands */
+    var revealAt     = frameDoneY + HERO_HOLD_PX;
+    if(window.scrollY >= revealAt){
       heroContent.classList.add('text-visible');
       textOverlay.classList.add('active');
     } else {

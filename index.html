@@ -218,32 +218,32 @@ nav{
 }
 .hero h1{
   font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(3.5rem,8vw,8rem);line-height:0.92;
+  font-size:clamp(2.5rem,4.8vw,4.5rem);line-height:1.06;
   letter-spacing:-0.02em;
   opacity:0;
   transform:translateY(32px);
   transition:opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
 }
-.hero h1 .line2{
-  display:block;
-  -webkit-text-stroke:1.5px rgba(0,200,255,0.5);
-  color:transparent;
-}
 .hero h1 .accent{color:var(--cyan);}
 .hero-desc{
-  font-size:1.1rem;font-weight:300;color:var(--text);
-  max-width:550px;line-height:1.7;margin-top:2rem;margin-bottom:3rem;
+  font-size:1.05rem;font-weight:300;color:var(--text);
+  max-width:440px;line-height:1.75;margin-top:1.75rem;margin-bottom:3.25rem;
   opacity:0;
   transform:translateY(28px);
   transition:opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
 }
 .hero-actions{
-  display:flex;gap:1rem;flex-wrap:wrap;
+  display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;
   opacity:0;
   transform:translateY(24px);
   transition:opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
   pointer-events:all;
 }
+/* editorial left column — copy ~42%, artwork breathes on the right ~58% */
+.hero-copy{max-width:600px;width:100%;}
+/* secondary CTA sits quieter so the primary clearly dominates */
+.hero-actions .btn-ghost{border-color:rgba(255,255,255,0.16);color:#8ea7bf;font-weight:400;}
+.hero-actions .btn-ghost:hover{border-color:rgba(255,255,255,0.42);color:var(--white);}
 
 /* hero text revealed state */
 .hero.text-visible .hero-label,
@@ -270,10 +270,27 @@ nav{
   z-index:1;
   pointer-events:none;
   background:rgba(2,4,8,0);
-  transition:background 0.6s ease;
+  transition:background 0.6s ease, backdrop-filter 0.6s ease;
 }
+/* revealed state: a left-weighted wash + a soft blur/desaturate that lets the
+   server room recede behind the typography instead of competing with it */
 #vault-text-overlay.active{
-  background:rgba(2,4,8,0.55);
+  background:linear-gradient(90deg,
+    rgba(2,4,8,0.95) 0%,
+    rgba(2,4,8,0.9) 34%,
+    rgba(2,4,8,0.64) 56%,
+    rgba(2,4,8,0.5) 100%);
+  backdrop-filter:blur(3px) saturate(0.6) brightness(0.72);
+  -webkit-backdrop-filter:blur(3px) saturate(0.6) brightness(0.72);
+}
+/* on narrow screens the copy stacks full-width, so the wash is even */
+@media(max-width:900px){
+  .hero-copy{max-width:100%;}
+  #vault-text-overlay.active{
+    background:rgba(2,4,8,0.7);
+    backdrop-filter:blur(2px) saturate(0.7) brightness(0.8);
+    -webkit-backdrop-filter:blur(2px) saturate(0.7) brightness(0.8);
+  }
 }
 
 /* ── CINEMATIC LOADER ── */
@@ -1019,18 +1036,20 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
     <!-- HERO CONTENT -->
     <div class="hero" id="hero-content">
-      <p class="hero-label">Louisiana Software &amp; Systems Studio</p>
-      <h1>
-        The Systems<br>
-        <span class="line2">Behind Your</span><br>
-        <span class="accent">Growth.</span>
-      </h1>
-      <p class="hero-desc">
-        We build the websites, custom software, dashboards, automation, and security that small and mid-size businesses actually run on — designed, built, and maintained by one Louisiana team you can reach.
-      </p>
-      <div class="hero-actions">
-        <a href="contact.html" class="btn-primary">Book a Consult →</a>
-        <a href="services.html" class="btn-ghost">See What We Build</a>
+      <div class="hero-copy">
+        <p class="hero-label">Louisiana Software &amp; Systems Studio</p>
+        <h1>
+          The Systems<br>
+          Behind Your<br>
+          <span class="accent">Growth.</span>
+        </h1>
+        <p class="hero-desc">
+          The websites, custom software, dashboards, automation, and security that small and mid-size businesses actually run on — built and maintained by one Louisiana team you can reach.
+        </p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn-primary">Book a Consult →</a>
+          <a href="services.html" class="btn-ghost">See What We Build</a>
+        </div>
       </div>
     </div>
 

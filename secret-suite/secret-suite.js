@@ -30,6 +30,44 @@
     "Personal Tools": "Personal"
   };
 
+  var DEPLOY_BADGE_SHORT = {
+    no_hosting: "Free Forever",
+    free_cloud: "Free Cloud Eligible",
+    own_server: "Own Server Required",
+    external_services: "External Services"
+  };
+  var REQUIREMENT_BADGE_SHORT = {
+    none: "No Hosting",
+    database: "Database",
+    file_storage: "File Storage",
+    email_delivery: "Email Delivery",
+    docker: "Docker",
+    ai_model: "AI/GPU",
+    gpu: "AI/GPU",
+    third_party_api: "Third-Party API",
+    licensed_data: "Licensed Data",
+    video_bandwidth: "Video Bandwidth",
+    always_on_server: "Always-On Server"
+  };
+
+  function primaryRequirement(app){
+    if(!app.requirements || !app.requirements.length || app.requirements[0] === "none") return "none";
+    // Prefer the most visually informative single requirement.
+    var priority = ["gpu","ai_model","docker","database","always_on_server","file_storage","email_delivery","third_party_api","licensed_data","video_bandwidth"];
+    for(var i=0;i<priority.length;i++){
+      if(app.requirements.indexOf(priority[i]) !== -1) return priority[i];
+    }
+    return app.requirements[0];
+  }
+
+  function deployBadgesHtml(app){
+    var pathBadge = '<span class="deploy-badge is-path-' + app.deploymentPath + '">' + escapeHtml(DEPLOY_BADGE_SHORT[app.deploymentPath] || app.deploymentPath) + '</span>';
+    var setupBadge = '<span class="deploy-badge">' + escapeHtml(app.setupLabel) + '</span>';
+    var reqKey = primaryRequirement(app);
+    var reqBadge = '<span class="deploy-badge">' + escapeHtml(REQUIREMENT_BADGE_SHORT[reqKey] || reqKey) + '</span>';
+    return '<span class="deploy-badges">' + pathBadge + setupBadge + reqBadge + '</span>';
+  }
+
   function fmtMoney(n){
     return "$" + n.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
@@ -76,13 +114,43 @@
     return app.representativeMonthlyPrice;
   }
 
+  /* ── Multi-group filter state ──
+     Each group is an array of selected values, OR'd within the group.
+     Groups are AND'd together. Category/Status remain single-select
+     dropdowns (existing pattern) but participate in the same AND chain. */
+  var filterState = {
+    deploymentPath: [],
+    setupLevel: [],
+    costTier: [],
+    requirements: [],
+    managed: [],
+    excludeDatabase: false
+  };
+
   function getState(){
     return {
       q: document.getElementById("searchInput").value.trim().toLowerCase(),
-      cat: document.getElementById("categoryFilter").value,
-      status: document.getElementById("statusFilter").value,
+      cat: document.getElementById("panelCategoryFilter").value,
+      status: document.getElementById("panelStatusFilter").value,
       sort: document.getElementById("sortSelect").value
     };
+  }
+
+  function deploymentPriority(app){
+    var d = SS_SUITE_DEPLOYMENT_PATHS.filter(function(p){ return p.value === app.deploymentPath; })[0];
+    return d ? d.priority : 99;
+  }
+
+  var COST_ORDER = SS_SUITE_COST_TIERS.map(function(c){ return c.value; });
+
+  function easiestFreeFirstCompare(a, b){
+    var dp = deploymentPriority(a) - deploymentPriority(b);
+    if(dp !== 0) return dp;
+    var sl = a.setupLevel - b.setupLevel;
+    if(sl !== 0) return sl;
+    var cp = COST_ORDER.indexOf(a.diyCostTier) - COST_ORDER.indexOf(b.diyCostTier);
+    if(cp !== 0) return cp;
+    return b.popularity - a.popularity;
   }
 
   function getFilteredApps(){
@@ -94,6 +162,15 @@
         var hay = (app.secretName + " " + app.description + " " + app.paidAlternative + " " + app.category).toLowerCase();
         if(hay.indexOf(s.q) === -1) return false;
       }
+      if(filterState.deploymentPath.length && filterState.deploymentPath.indexOf(app.deploymentPath) === -1) return false;
+      if(filterState.setupLevel.length && filterState.setupLevel.indexOf(app.setupLevel) === -1) return false;
+      if(filterState.costTier.length && filterState.costTier.indexOf(app.diyCostTier) === -1) return false;
+      if(filterState.managed.length && filterState.managed.indexOf(app.managedHosting) === -1) return false;
+      if(filterState.requirements.length){
+        var matchesAny = filterState.requirements.some(function(r){ return app.requirements.indexOf(r) !== -1; });
+        if(!matchesAny) return false;
+      }
+      if(filterState.excludeDatabase && app.requirements.indexOf("database") !== -1) return false;
       return true;
     });
 
@@ -101,6 +178,9 @@
       if(s.sort === "popularity") return b.popularity - a.popularity;
       if(s.sort === "value") return effectiveMonthlyValue(b,5) - effectiveMonthlyValue(a,5);
       if(s.sort === "name") return a.secretName.localeCompare(b.secretName);
+      if(s.sort === "setup") return a.setupLevel - b.setupLevel || b.popularity - a.popularity;
+      if(s.sort === "diycost") return COST_ORDER.indexOf(a.diyCostTier) - COST_ORDER.indexOf(b.diyCostTier) || b.popularity - a.popularity;
+      if(s.sort === "easiest_free") return easiestFreeFirstCompare(a, b);
       return a.rank - b.rank;
     });
 
@@ -157,6 +237,7 @@
           '<a class="row-app-name" href="' + escapeHtml(href) + '"' + (live ? ' target="_blank" rel="noopener"' : '') + '>' + escapeHtml(app.secretName) + '</a>' +
           '<span class="row-app-desc">' + escapeHtml(app.description) + '</span>' +
           '<span class="row-app-meta"><span class="row-app-cat">' + escapeHtml(app.category) + '</span><span class="row-dot">·</span><span class="' + statusClass + '">' + escapeHtml(statusText(app)) + '</span></span>' +
+          deployBadgesHtml(app) +
         '</span>' +
       '</span>' +
       '<span class="row-replaces-col" role="cell" aria-hidden="true">' + SWAP_ARROW_SVG + '</span>' +
@@ -188,7 +269,8 @@
         '</div>' +
         '<div class="suite-card-center">' + SWAP_ARROW_SVG + '</div>' +
         '<div class="suite-card-competitor">' + competitorBlockHtml(app, 20) + '</div>' +
-      '</div>';
+      '</div>' +
+      deployBadgesHtml(app);
 
     var link = div.querySelector(".suite-card-name");
     link.addEventListener("click", function(e){ handleAppClick(e, app, ".suite-card"); });
@@ -337,40 +419,335 @@
 
   function clearFilters(){
     document.getElementById("searchInput").value = "";
-    document.getElementById("categoryFilter").value = "";
-    document.getElementById("statusFilter").value = "";
-    document.getElementById("sortSelect").value = "rank";
-    syncMobileControlsFromDesktop();
+    var mobileSearch = document.getElementById("mobileSearchInput");
+    if(mobileSearch) mobileSearch.value = "";
+    document.getElementById("panelCategoryFilter").value = "";
+    document.getElementById("panelStatusFilter").value = "";
+    document.getElementById("sortSelect").value = "easiest_free";
+    var panelSort = document.getElementById("panelSortSelect");
+    if(panelSort) panelSort.value = "easiest_free";
+    filterState.deploymentPath = [];
+    filterState.setupLevel = [];
+    filterState.costTier = [];
+    filterState.requirements = [];
+    filterState.managed = [];
+    syncCheckboxesFromState();
+    syncQuickChipStates();
     updateFilterCount();
+    renderActiveChips();
     renderCatalog();
+    announcePolite("Filters cleared. Showing all " + SS_SUITE_APPS.length + " apps.");
   }
 
   function initFilterOptions(){
-    [document.getElementById("categoryFilter"), document.getElementById("panelCategoryFilter")].forEach(function(catSel){
-      if(!catSel) return;
+    var catSel = document.getElementById("panelCategoryFilter");
+    if(catSel){
       SS_SUITE_CATEGORIES.forEach(function(cat){
         var opt = document.createElement("option");
         opt.value = cat; opt.textContent = cat;
         catSel.appendChild(opt);
       });
-    });
-    [document.getElementById("statusFilter"), document.getElementById("panelStatusFilter")].forEach(function(statSel){
-      if(!statSel) return;
+    }
+    var statSel = document.getElementById("panelStatusFilter");
+    if(statSel){
       SS_SUITE_STATUSES.forEach(function(st){
         var opt = document.createElement("option");
         opt.value = st; opt.textContent = STATUS_LABELS[st] || st;
         statSel.appendChild(opt);
       });
+    }
+
+    renderCheckboxGroup("filterDeploymentPath", "deploymentPath", SS_SUITE_DEPLOYMENT_PATHS.map(function(d){ return {value: d.value, label: d.label}; }));
+    renderCheckboxGroup("filterSetupLevel", "setupLevel", SS_SUITE_SETUP_LEVELS.map(function(s){ return {value: s.value, label: s.label}; }));
+    renderCheckboxGroup("filterCostTier", "costTier", SS_SUITE_COST_TIERS.map(function(c){ return {value: c.value, label: c.label}; }));
+    renderCheckboxGroup("filterRequirements", "requirements", SS_SUITE_REQUIREMENTS.map(function(r){ return {value: r.value, label: r.label}; }));
+    renderCheckboxGroup("filterManaged", "managed", SS_SUITE_MANAGED_STATUSES.map(function(m){ return {value: m.value, label: m.label}; }));
+  }
+
+  function renderCheckboxGroup(containerId, groupKey, options){
+    var container = document.getElementById(containerId);
+    if(!container) return;
+    var frag = document.createDocumentFragment();
+    options.forEach(function(opt, idx){
+      var id = containerId + "-" + idx;
+      var label = document.createElement("label");
+      label.className = "filter-checkbox-item";
+      label.setAttribute("for", id);
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = id;
+      cb.value = String(opt.value);
+      cb.setAttribute("data-group", groupKey);
+      var span = document.createElement("span");
+      span.textContent = opt.label;
+      label.appendChild(cb);
+      label.appendChild(span);
+      frag.appendChild(label);
+    });
+    container.appendChild(frag);
+  }
+
+  function syncCheckboxesFromState(){
+    ["filterDeploymentPath","filterSetupLevel","filterCostTier","filterRequirements","filterManaged"].forEach(function(containerId){
+      var container = document.getElementById(containerId);
+      if(!container) return;
+      container.querySelectorAll("input[type=checkbox]").forEach(function(cb){
+        var groupKey = cb.getAttribute("data-group");
+        var groupValues = filterState[groupKey] || [];
+        var val = (groupKey === "setupLevel") ? parseInt(cb.value, 10) : cb.value;
+        cb.checked = groupValues.indexOf(val) !== -1;
+      });
     });
   }
 
-  /* ── Mobile filter panel (bottom sheet) ── */
+  function onCheckboxGroupChange(e){
+    var cb = e.target;
+    if(!cb || cb.type !== "checkbox" || !cb.hasAttribute("data-group")) return;
+    var groupKey = cb.getAttribute("data-group");
+    var val = (groupKey === "setupLevel") ? parseInt(cb.value, 10) : cb.value;
+    var arr = filterState[groupKey];
+    var idx = arr.indexOf(val);
+    if(cb.checked && idx === -1) arr.push(val);
+    else if(!cb.checked && idx !== -1) arr.splice(idx, 1);
+    syncQuickChipStates();
+    updateFilterCount();
+    renderActiveChips();
+    renderCatalog();
+  }
+
+  /* ── Quick-filter chips ──
+     Each quick filter is a named preset that sets one or more filter
+     groups at once. Chips are pressed (aria-pressed) when the current
+     filterState exactly satisfies the preset's condition. */
+  var QUICK_FILTERS = [
+    {
+      key: "free_no_setup", label: "Free & No Setup",
+      apply: function(){
+        filterState.deploymentPath = ["no_hosting"];
+        filterState.setupLevel = [1];
+        filterState.costTier = ["zero"];
+        filterState.requirements = ["none"];
+      },
+      isActive: function(){
+        return arraysEqual(filterState.deploymentPath, ["no_hosting"]) &&
+          arraysEqual(filterState.setupLevel, [1]) &&
+          arraysEqual(filterState.costTier, ["zero"]) &&
+          arraysEqual(filterState.requirements, ["none"]);
+      },
+      mobile: true
+    },
+    {
+      key: "free_cloud", label: "Free Cloud",
+      apply: function(){
+        filterState.deploymentPath = ["free_cloud"];
+        filterState.costTier = ["free_tier"];
+      },
+      isActive: function(){
+        return arraysEqual(filterState.deploymentPath, ["free_cloud"]) && arraysEqual(filterState.costTier, ["free_tier"]);
+      },
+      mobile: true
+    },
+    {
+      key: "one_click", label: "One-Click",
+      apply: function(){ filterState.setupLevel = [2]; },
+      isActive: function(){ return arraysEqual(filterState.setupLevel, [2]); },
+      mobile: false
+    },
+    {
+      key: "no_database", label: "No Database",
+      apply: function(){ filterState.excludeDatabase = true; },
+      isActive: function(){ return !!filterState.excludeDatabase; },
+      mobile: false
+    },
+    {
+      key: "managed_available", label: "Managed Available",
+      apply: function(){ filterState.managed = ["available"]; },
+      isActive: function(){ return arraysEqual(filterState.managed, ["available"]); },
+      mobile: false
+    }
+  ];
+
+  function arraysEqual(a, b){
+    if(a.length !== b.length) return false;
+    for(var i=0;i<a.length;i++){ if(a[i] !== b[i]) return false; }
+    return true;
+  }
+
+  function resetGroupsForQuickFilters(){
+    filterState.deploymentPath = [];
+    filterState.setupLevel = [];
+    filterState.costTier = [];
+    filterState.requirements = [];
+    filterState.managed = [];
+    filterState.excludeDatabase = false;
+  }
+
+  function toggleQuickFilter(key){
+    var qf = QUICK_FILTERS.filter(function(q){ return q.key === key; })[0];
+    if(!qf) return;
+    if(qf.isActive()){
+      resetGroupsForQuickFilters();
+    } else {
+      resetGroupsForQuickFilters();
+      qf.apply();
+    }
+    syncCheckboxesFromState();
+    syncQuickChipStates();
+    updateFilterCount();
+    renderActiveChips();
+    renderCatalog();
+    announcePolite(qf.isActive() ? qf.label + " filter applied." : "Filter cleared.");
+  }
+
+  function renderQuickChips(){
+    var containers = [
+      { id: "desktopQuickChips", showAll: true },
+      { id: "mobileQuickChips", showAll: false },
+      { id: "panelQuickChips", showAll: true }
+    ];
+    containers.forEach(function(c){
+      var el = document.getElementById(c.id);
+      if(!el) return;
+      el.innerHTML = "";
+      QUICK_FILTERS.forEach(function(qf){
+        if(!c.showAll && !qf.mobile) return;
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "quick-chip";
+        btn.setAttribute("data-quick-key", qf.key);
+        btn.setAttribute("aria-pressed", "false");
+        btn.textContent = qf.label;
+        btn.addEventListener("click", function(){ toggleQuickFilter(qf.key); });
+        el.appendChild(btn);
+      });
+    });
+  }
+
+  function syncQuickChipStates(){
+    QUICK_FILTERS.forEach(function(qf){
+      var pressed = qf.isActive();
+      document.querySelectorAll('[data-quick-key="' + qf.key + '"]').forEach(function(btn){
+        btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+      });
+    });
+  }
+
+  /* ── Active-filter chips (removable), reflecting every applied filter ── */
+  function activeFilterEntries(){
+    var entries = [];
+    var s = getState();
+    if(s.q) entries.push({ label: 'Search: "' + s.q + '"', clear: function(){ document.getElementById("searchInput").value = ""; var m = document.getElementById("mobileSearchInput"); if(m) m.value = ""; } });
+    if(s.cat) entries.push({ label: s.cat, clear: function(){ document.getElementById("panelCategoryFilter").value = ""; } });
+    if(s.status) entries.push({ label: STATUS_LABELS[s.status] || s.status, clear: function(){ document.getElementById("panelStatusFilter").value = ""; } });
+    filterState.deploymentPath.forEach(function(v){
+      var d = SS_SUITE_DEPLOYMENT_PATHS.filter(function(p){ return p.value === v; })[0];
+      entries.push({ label: d ? d.label : v, clear: function(){ removeFromGroup("deploymentPath", v); } });
+    });
+    filterState.setupLevel.forEach(function(v){
+      var lvl = SS_SUITE_SETUP_LEVELS.filter(function(s2){ return s2.value === v; })[0];
+      entries.push({ label: lvl ? lvl.label : ("Level " + v), clear: function(){ removeFromGroup("setupLevel", v); } });
+    });
+    filterState.costTier.forEach(function(v){
+      var c = SS_SUITE_COST_TIERS.filter(function(c2){ return c2.value === v; })[0];
+      entries.push({ label: c ? c.label : v, clear: function(){ removeFromGroup("costTier", v); } });
+    });
+    filterState.requirements.forEach(function(v){
+      var r = SS_SUITE_REQUIREMENTS.filter(function(r2){ return r2.value === v; })[0];
+      entries.push({ label: r ? r.label : v, clear: function(){ removeFromGroup("requirements", v); } });
+    });
+    filterState.managed.forEach(function(v){
+      var m = SS_SUITE_MANAGED_STATUSES.filter(function(m2){ return m2.value === v; })[0];
+      entries.push({ label: m ? m.label : v, clear: function(){ removeFromGroup("managed", v); } });
+    });
+    if(filterState.excludeDatabase) entries.push({ label: "No Database", clear: function(){ filterState.excludeDatabase = false; } });
+    return entries;
+  }
+
+  function removeFromGroup(groupKey, val){
+    var arr = filterState[groupKey];
+    var idx = arr.indexOf(val);
+    if(idx !== -1) arr.splice(idx, 1);
+  }
+
+  function renderActiveChips(){
+    var wrap = document.getElementById("activeChips");
+    if(!wrap) return;
+    var entries = activeFilterEntries();
+    wrap.innerHTML = "";
+    wrap.classList.toggle("has-chips", entries.length > 0);
+    entries.forEach(function(entry){
+      var chip = document.createElement("span");
+      chip.className = "active-chip";
+      var label = document.createElement("span");
+      label.textContent = entry.label;
+      var removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.setAttribute("aria-label", "Remove filter: " + entry.label);
+      removeBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+      removeBtn.addEventListener("click", function(){
+        entry.clear();
+        syncCheckboxesFromState();
+        syncQuickChipStates();
+        updateFilterCount();
+        renderActiveChips();
+        renderCatalog();
+      });
+      chip.appendChild(label);
+      chip.appendChild(removeBtn);
+      wrap.appendChild(chip);
+    });
+  }
+
+  /* ── Deployment summary strip — counts computed from data, clickable ── */
+  function renderDeploySummary(){
+    var wrap = document.getElementById("deploySummaryRow");
+    if(!wrap) return;
+    var noHosting = SS_SUITE_APPS.filter(function(a){ return a.deploymentPath === "no_hosting"; }).length;
+    var freeCloud = SS_SUITE_APPS.filter(function(a){ return a.deploymentPath === "free_cloud"; }).length;
+    var oneClick = SS_SUITE_APPS.filter(function(a){ return a.setupLevel === 2; }).length;
+    var ownServer = SS_SUITE_APPS.filter(function(a){ return a.deploymentPath === "own_server"; }).length;
+    var managedAvail = SS_SUITE_APPS.filter(function(a){ return a.managedHosting === "available"; }).length;
+
+    var items = [
+      { num: noHosting, label: "Free with no hosting", primary: true, action: function(){ resetGroupsForQuickFilters(); filterState.deploymentPath = ["no_hosting"]; } },
+      { num: freeCloud, label: "Free-cloud eligible", primary: false, action: function(){ resetGroupsForQuickFilters(); filterState.deploymentPath = ["free_cloud"]; } },
+      { num: oneClick, label: "One-click", primary: false, action: function(){ resetGroupsForQuickFilters(); filterState.setupLevel = [2]; } },
+      { num: ownServer, label: "Server required", primary: false, action: function(){ resetGroupsForQuickFilters(); filterState.deploymentPath = ["own_server"]; } },
+      { num: managedAvail, label: "Managed options", primary: false, action: function(){ resetGroupsForQuickFilters(); filterState.managed = ["available"]; } }
+    ];
+
+    wrap.innerHTML = "";
+    items.forEach(function(item){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "deploy-summary-item" + (item.primary ? " is-primary" : "");
+      btn.innerHTML = '<span class="deploy-summary-num">' + item.num + '</span><span class="deploy-summary-label">' + escapeHtml(item.label) + '</span>';
+      btn.addEventListener("click", function(){
+        item.action();
+        syncCheckboxesFromState();
+        syncQuickChipStates();
+        updateFilterCount();
+        renderActiveChips();
+        renderCatalog();
+        var filtersSection = document.getElementById("catalog");
+        if(filtersSection) filtersSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  /* ── Filter panel (bottom sheet on mobile, anchored panel on desktop) ── */
   var lastFocusedBeforePanel = null;
 
-  function openFilterPanel(){
+  function announcePolite(msg){
+    var live = document.getElementById("filterLiveRegion");
+    if(live) live.textContent = msg;
+  }
+
+  function openFilterPanel(triggerEl){
     var backdrop = document.getElementById("filterPanelBackdrop");
     var panel = document.getElementById("filterPanel");
-    lastFocusedBeforePanel = document.activeElement;
+    lastFocusedBeforePanel = triggerEl || document.activeElement;
     backdrop.classList.add("open");
     panel.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -386,8 +763,8 @@
     panel.classList.remove("open");
     document.body.style.overflow = "";
     document.removeEventListener("keydown", onPanelKeydown);
-    var filtersBtn = document.getElementById("mobileFiltersBtn");
-    if(filtersBtn) filtersBtn.focus();
+    var returnTo = lastFocusedBeforePanel || document.getElementById("mobileFiltersBtn");
+    if(returnTo && typeof returnTo.focus === "function") returnTo.focus();
   }
 
   function onPanelKeydown(e){
@@ -408,26 +785,17 @@
     }
   }
 
-  function syncMobileControlsFromDesktop(){
-    var panelCat = document.getElementById("panelCategoryFilter");
-    var panelStatus = document.getElementById("panelStatusFilter");
-    var panelSort = document.getElementById("panelSortSelect");
-    var mobileSearch = document.getElementById("mobileSearchInput");
-    if(panelCat) panelCat.value = document.getElementById("categoryFilter").value;
-    if(panelStatus) panelStatus.value = document.getElementById("statusFilter").value;
-    if(panelSort) panelSort.value = document.getElementById("sortSelect").value;
-    if(mobileSearch) mobileSearch.value = document.getElementById("searchInput").value;
-  }
-
   function updateFilterCount(){
     var s = getState();
-    var count = (s.cat ? 1 : 0) + (s.status ? 1 : 0) + (s.sort !== "rank" ? 1 : 0);
-    var badge = document.getElementById("mobileFiltersCount");
-    var clearLink = document.getElementById("mobileClearLink");
-    if(badge){
+    var count = (s.cat ? 1 : 0) + (s.status ? 1 : 0) +
+      filterState.deploymentPath.length + filterState.setupLevel.length +
+      filterState.costTier.length + filterState.requirements.length + filterState.managed.length;
+    [document.getElementById("mobileFiltersCount"), document.getElementById("desktopFiltersCount")].forEach(function(badge){
+      if(!badge) return;
       if(count > 0){ badge.textContent = String(count); badge.style.display = "flex"; }
       else { badge.style.display = "none"; }
-    }
+    });
+    var clearLink = document.getElementById("mobileClearLink");
     if(clearLink){
       clearLink.style.display = (count > 0 || s.q) ? "inline" : "none";
     }
@@ -437,6 +805,7 @@
     var mobileSearch = document.getElementById("mobileSearchInput");
     var desktopSearch = document.getElementById("searchInput");
     var filtersBtn = document.getElementById("mobileFiltersBtn");
+    var desktopFiltersBtn = document.getElementById("desktopFiltersBtn");
     var closeBtn = document.getElementById("filterPanelClose");
     var backdrop = document.getElementById("filterPanelBackdrop");
     var applyBtn = document.getElementById("filterPanelApply");
@@ -450,16 +819,27 @@
         updateFilterCount();
       });
     }
-    if(filtersBtn) filtersBtn.addEventListener("click", openFilterPanel);
+    if(desktopSearch){
+      desktopSearch.addEventListener("input", function(){
+        if(mobileSearch) mobileSearch.value = desktopSearch.value;
+      });
+    }
+    if(filtersBtn) filtersBtn.addEventListener("click", function(){ openFilterPanel(filtersBtn); });
+    if(desktopFiltersBtn) desktopFiltersBtn.addEventListener("click", function(){ openFilterPanel(desktopFiltersBtn); });
     if(closeBtn) closeBtn.addEventListener("click", closeFilterPanel);
     if(backdrop) backdrop.addEventListener("click", function(e){ if(e.target === backdrop) closeFilterPanel(); });
 
     var panelCat = document.getElementById("panelCategoryFilter");
     var panelStatus = document.getElementById("panelStatusFilter");
     var panelSort = document.getElementById("panelSortSelect");
-    if(panelCat) panelCat.addEventListener("change", function(){ document.getElementById("categoryFilter").value = panelCat.value; renderCatalog(); updateFilterCount(); });
-    if(panelStatus) panelStatus.addEventListener("change", function(){ document.getElementById("statusFilter").value = panelStatus.value; renderCatalog(); updateFilterCount(); });
-    if(panelSort) panelSort.addEventListener("change", function(){ document.getElementById("sortSelect").value = panelSort.value; renderCatalog(); updateFilterCount(); });
+    if(panelCat) panelCat.addEventListener("change", function(){ renderCatalog(); updateFilterCount(); renderActiveChips(); });
+    if(panelStatus) panelStatus.addEventListener("change", function(){ renderCatalog(); updateFilterCount(); renderActiveChips(); });
+    if(panelSort) panelSort.addEventListener("change", function(){ document.getElementById("sortSelect").value = panelSort.value; renderCatalog(); });
+
+    ["filterDeploymentPath","filterSetupLevel","filterCostTier","filterRequirements","filterManaged"].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener("change", onCheckboxGroupChange);
+    });
 
     if(applyBtn) applyBtn.addEventListener("click", closeFilterPanel);
     if(clearBtnPanel) clearBtnPanel.addEventListener("click", function(){ clearFilters(); closeFilterPanel(); });
@@ -467,10 +847,12 @@
   }
 
   function initControls(){
-    document.getElementById("searchInput").addEventListener("input", function(){ renderCatalog(); syncMobileControlsFromDesktop(); updateFilterCount(); });
-    document.getElementById("categoryFilter").addEventListener("change", function(){ renderCatalog(); syncMobileControlsFromDesktop(); updateFilterCount(); });
-    document.getElementById("statusFilter").addEventListener("change", function(){ renderCatalog(); syncMobileControlsFromDesktop(); updateFilterCount(); });
-    document.getElementById("sortSelect").addEventListener("change", function(){ renderCatalog(); syncMobileControlsFromDesktop(); updateFilterCount(); });
+    document.getElementById("searchInput").addEventListener("input", function(){ renderCatalog(); updateFilterCount(); });
+    document.getElementById("sortSelect").addEventListener("change", function(){
+      var panelSort = document.getElementById("panelSortSelect");
+      if(panelSort) panelSort.value = document.getElementById("sortSelect").value;
+      renderCatalog();
+    });
     document.getElementById("clearFilters").addEventListener("click", clearFilters);
 
     document.querySelectorAll(".view-toggle-btn").forEach(function(btn){
@@ -696,11 +1078,14 @@
 
   document.addEventListener("DOMContentLoaded", function(){
     initFilterOptions();
+    renderQuickChips();
+    renderDeploySummary();
     initControls();
     initMobileControls();
     applyViewToggleButtons();
     renderCatalog();
     updateFilterCount();
+    renderActiveChips();
     initCalculator();
     initReviewedDates();
     initVerifiedTotals();

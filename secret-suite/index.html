@@ -160,6 +160,56 @@
 .filter-panel-actions{display:flex;gap:.7rem;margin-top:1.4rem;}
 .filter-panel-actions .btn{flex:1;justify-content:center;min-height:46px;}
 
+/* Fieldsets inside the filter panel */
+.filter-group{border:none;padding:0;margin:0 0 1.3rem;}
+.filter-group legend{font-family:'Syne',sans-serif;font-weight:700;font-size:.84rem;color:var(--white);margin-bottom:.6rem;padding:0;}
+.filter-checkbox-list{display:flex;flex-direction:column;gap:.15rem;}
+.filter-checkbox-item{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:.3rem .2rem;cursor:pointer;border-radius:6px;}
+.filter-checkbox-item:hover{background:rgba(0,200,255,.05);}
+.filter-checkbox-item input{width:17px;height:17px;accent-color:var(--cyan);flex-shrink:0;}
+.filter-checkbox-item span{font-size:.86rem;color:var(--text);}
+.filter-checkbox-item input:checked ~ span{color:var(--white);}
+
+/* Desktop Filters button (opens the same panel) */
+.ctrl-filters-btn{position:relative;display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.82rem;padding:.5rem .9rem;cursor:pointer;transition:border-color .2s,color .2s;}
+.ctrl-filters-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.ctrl-filters-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.ctrl-filters-btn .mobile-filters-count{position:static;margin-left:.2rem;}
+
+/* Quick-filter chips */
+.quick-chips{display:flex;gap:.5rem;flex-wrap:wrap;}
+.quick-chip{display:inline-flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:999px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.76rem;padding:.4rem .85rem;cursor:pointer;transition:all .2s;white-space:nowrap;min-height:44px;}
+.quick-chip:hover{border-color:var(--cyan);color:var(--cyan);}
+.quick-chip[aria-pressed="true"]{background:rgba(0,200,255,.12);border-color:var(--cyan);color:var(--cyan);}
+.desktop-quick-chips{flex-shrink:0;}
+.mobile-quick-chips{padding-top:.6rem;}
+
+/* Active-filter chips (removable) */
+.active-chips{display:none;flex-wrap:wrap;gap:.5rem;padding-top:.7rem;}
+.active-chips.has-chips{display:flex;}
+.active-chip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.3);border-radius:999px;color:var(--cyan);font-family:'Outfit',sans-serif;font-size:.74rem;padding:.3rem .5rem .3rem .8rem;}
+.active-chip button{display:flex;align-items:center;justify-content:center;width:18px;height:18px;background:none;border:none;color:inherit;cursor:pointer;border-radius:50%;flex-shrink:0;}
+.active-chip button:hover{background:rgba(0,200,255,.2);}
+.active-chip button svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;}
+
+/* ── Deployment summary strip ── */
+.deploy-summary-section{border-bottom:1px solid var(--border);padding:1.6rem 0;}
+.deploy-summary-row{display:flex;flex-wrap:wrap;gap:.6rem;}
+.deploy-summary-item{display:flex;flex-direction:column;gap:.2rem;background:none;border:1px solid var(--border);border-radius:10px;padding:.8rem 1.1rem;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .2s,background .2s;min-height:44px;}
+.deploy-summary-item:hover{border-color:var(--cyan);background:rgba(0,200,255,.04);}
+.deploy-summary-item.is-primary{border-color:rgba(0,200,255,.4);background:rgba(0,200,255,.06);}
+.deploy-summary-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--white);}
+.deploy-summary-item.is-primary .deploy-summary-num{color:var(--cyan);}
+.deploy-summary-label{font-family:'Outfit',sans-serif;font-size:.72rem;color:var(--muted);}
+
+/* ── Deployment badges on catalog rows/cards ── */
+.deploy-badges{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem;}
+.deploy-badge{display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-size:.66rem;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:.15rem .45rem;white-space:nowrap;}
+.deploy-badge.is-path-no_hosting{color:#4eff9f;border-color:rgba(78,255,159,.35);}
+.deploy-badge.is-path-free_cloud{color:var(--cyan);border-color:rgba(0,200,255,.35);}
+.deploy-badge.is-path-own_server{color:#ffe066;border-color:rgba(255,224,102,.3);}
+.deploy-badge.is-path-external_services{color:#ff9b6a;border-color:rgba(255,155,106,.3);}
+
 /* ── CATALOG — editorial index, not a bordered table ── */
 .catalog-section{padding:1.6rem 0 6rem;}
 .catalog-head-row{display:grid;grid-template-columns:2.4rem 1.6fr auto 1fr;gap:1.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);}
@@ -286,6 +336,10 @@
 @media(min-width:768px){
   .catalog-cards.active{display:none;}
   .catalog-list.active{display:flex;}
+  .mobile-quick-chips,.panel-quick-chips .quick-chip[data-desktop-hidden]{display:none;}
+  /* Desktop filter panel: anchored top-right, not a full bottom sheet */
+  .filter-panel{left:auto;right:2rem;bottom:auto;top:80px;width:380px;border-radius:14px;max-height:calc(100vh - 120px);transform:translateY(-12px) scale(.98);opacity:0;pointer-events:none;transition:transform .2s,opacity .2s;}
+  .filter-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto;}
 }
 
 @media(max-width:900px){
@@ -305,6 +359,10 @@
   .mobile-controls{display:block;}
   .controls-section{padding:.7rem 0;top:65px;}
   .catalog-section{padding-top:1rem;}
+  .deploy-summary-section{padding:1.1rem 0;}
+  .deploy-summary-row{gap:.45rem;}
+  .deploy-summary-item{padding:.6rem .8rem;}
+  .mobile-quick-chips .quick-chip[data-mobile-hidden]{display:none;}
 }
 </style>
 </head>
@@ -418,6 +476,13 @@
   </div>
 </section>
 
+<!-- ── DEPLOYMENT SUMMARY STRIP ── -->
+<section class="deploy-summary-section">
+  <div class="wrap">
+    <div class="deploy-summary-row" id="deploySummaryRow" role="group" aria-label="Catalog composition — click a figure to filter"></div>
+  </div>
+</section>
+
 <!-- ── CATALOG CONTROLS ── -->
 <section class="controls-section">
   <div class="wrap">
@@ -428,20 +493,20 @@
         <label for="searchInput" class="sr-only">Search apps</label>
         <input type="text" id="searchInput" placeholder="Search apps or paid alternatives…"/>
       </div>
-      <label for="categoryFilter" class="sr-only">Filter by category</label>
-      <select id="categoryFilter" class="ctrl-select">
-        <option value="">All categories</option>
-      </select>
-      <label for="statusFilter" class="sr-only">Filter by status</label>
-      <select id="statusFilter" class="ctrl-select">
-        <option value="">All statuses</option>
-      </select>
+      <div class="quick-chips desktop-quick-chips" id="desktopQuickChips" role="group" aria-label="Quick filters"></div>
+      <button type="button" class="ctrl-filters-btn" id="desktopFiltersBtn" aria-haspopup="dialog" aria-controls="filterPanel">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filters
+        <span class="mobile-filters-count" id="desktopFiltersCount" style="display:none;">0</span>
+      </button>
       <label for="sortSelect" class="sr-only">Sort apps</label>
       <select id="sortSelect" class="ctrl-select">
-        <option value="rank">Sort: Rank</option>
+        <option value="easiest_free">Sort: Easiest &amp; Free First</option>
         <option value="popularity">Sort: Popularity</option>
-        <option value="value">Sort: Replacement value</option>
-        <option value="name">Sort: App name</option>
+        <option value="setup">Sort: Setup — Easiest First</option>
+        <option value="diycost">Sort: DIY Cost — Lowest First</option>
+        <option value="value">Sort: Monthly Subscription Replaced — Highest First</option>
+        <option value="name">Sort: App Name</option>
       </select>
       <button type="button" class="ctrl-clear" id="clearFilters">Clear filters</button>
       <span class="ctrl-count" id="resultsCount" role="status" aria-live="polite">56 of 56 apps</span>
@@ -450,6 +515,9 @@
         <button type="button" class="view-toggle-btn" data-view="grid" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Grid</button>
       </div>
     </div>
+
+    <!-- Active-filter chips (both breakpoints) -->
+    <div class="active-chips" id="activeChips" role="group" aria-label="Active filters" aria-live="polite"></div>
 
     <!-- Mobile compact controls (below 768px) -->
     <div class="mobile-controls">
@@ -474,37 +542,63 @@
           </div>
         </div>
       </div>
+      <div class="quick-chips mobile-quick-chips" id="mobileQuickChips" role="group" aria-label="Quick filters"></div>
     </div>
 
   </div>
 </section>
 
-<!-- ── MOBILE FILTER PANEL (bottom sheet) ── -->
+<!-- ── FILTER PANEL (bottom sheet on mobile, panel on desktop) ── -->
+<div class="sr-only" id="filterLiveRegion" role="status" aria-live="polite"></div>
 <div class="filter-panel-backdrop" id="filterPanelBackdrop"></div>
 <div class="filter-panel" id="filterPanel" role="dialog" aria-modal="true" aria-labelledby="filterPanelTitle">
   <div class="filter-panel-head">
     <h2 class="filter-panel-title" id="filterPanelTitle">Filters</h2>
     <button type="button" class="filter-panel-close" id="filterPanelClose" aria-label="Close filters">✕</button>
   </div>
+
+  <fieldset class="filter-group">
+    <legend>Quick filters</legend>
+    <div class="quick-chips panel-quick-chips" id="panelQuickChips" role="group" aria-label="Quick filters"></div>
+  </fieldset>
+
+  <fieldset class="filter-group">
+    <legend>Free deployment path</legend>
+    <div class="filter-checkbox-list" id="filterDeploymentPath" data-group="deploymentPath"></div>
+  </fieldset>
+
+  <fieldset class="filter-group">
+    <legend>Setup complexity</legend>
+    <div class="filter-checkbox-list" id="filterSetupLevel" data-group="setupLevel"></div>
+  </fieldset>
+
+  <fieldset class="filter-group">
+    <legend>Estimated DIY cost</legend>
+    <div class="filter-checkbox-list" id="filterCostTier" data-group="costTier"></div>
+  </fieldset>
+
   <div class="filter-field">
     <label for="panelCategoryFilter">Category</label>
     <select id="panelCategoryFilter"><option value="">All categories</option></select>
   </div>
+
+  <fieldset class="filter-group">
+    <legend>Requirements</legend>
+    <div class="filter-checkbox-list" id="filterRequirements" data-group="requirements"></div>
+  </fieldset>
+
   <div class="filter-field">
     <label for="panelStatusFilter">Status</label>
     <select id="panelStatusFilter"><option value="">All statuses</option></select>
   </div>
-  <div class="filter-field">
-    <label for="panelSortSelect">Sort</label>
-    <select id="panelSortSelect">
-      <option value="rank">Rank</option>
-      <option value="popularity">Popularity</option>
-      <option value="value">Replacement value</option>
-      <option value="name">App name</option>
-    </select>
-  </div>
+
+  <fieldset class="filter-group">
+    <legend>Managed hosting</legend>
+    <div class="filter-checkbox-list" id="filterManaged" data-group="managed"></div>
+  </fieldset>
+
   <div class="filter-panel-actions">
-    <button type="button" class="btn btn-outline" id="filterPanelClear">Clear filters</button>
+    <button type="button" class="btn btn-outline" id="filterPanelClear">Clear all</button>
     <button type="button" class="btn btn-cyan" id="filterPanelApply">Apply</button>
   </div>
 </div>

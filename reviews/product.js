@@ -39,12 +39,22 @@
     custom:    { slug:"custom",    name:"Custom Design",   price:40, img:"/reviews/assets/nfc-review-cards.png", paymentLink:"" }
   };
 
-  /* Gallery shows real photos of the Signature Black sign — the only fixed
-     design that exists as a physical product right now. Custom Design has
-     no preset photo since the design comes from the customer's own upload. */
+  /* Gallery shows the two real Signature Black product photos first, then
+     example designs to illustrate what's possible with the Custom Design
+     tier (these are inspiration only — Custom Design ships from the
+     customer's own uploaded file, not a preset picker). */
   var GALLERY_IMAGES = [
     { img:"/reviews/assets/nfc-review-cards.png", name:"Signature Black sign, black and white finish" },
-    { img:"/reviews/assets/styles/style-standard-blackwhite.jpg", name:"Signature Black sign with dimensions" }
+    { img:"/reviews/assets/styles/style-standard-blackwhite.jpg", name:"Signature Black sign with dimensions" },
+    { img:"/reviews/assets/styles/style-salon-gold.png", name:"Custom Design example: Gold Salon" },
+    { img:"/reviews/assets/styles/style-retail-neon.png", name:"Custom Design example: Stay Connected retail" },
+    { img:"/reviews/assets/styles/style-dental-teal.png", name:"Custom Design example: Feedback Matters medical office" },
+    { img:"/reviews/assets/styles/style-dental-white.png", name:"Custom Design example: Tooth Outline medical office" },
+    { img:"/reviews/assets/styles/style-cafe-yelp.png", name:"Custom Design example: Love Your Visit restaurant, Yelp" },
+    { img:"/reviews/assets/styles/style-barber-navy.png", name:"Custom Design example: Like Your Cut barbershop, Facebook" },
+    { img:"/reviews/assets/styles/style-dining-emerald.png", name:"Custom Design example: Fine Dining, TripAdvisor" },
+    { img:"/reviews/assets/styles/style-auto-blue.png", name:"Custom Design example: Auto Shop / tire shop" },
+    { img:"/reviews/assets/styles/style-beauty-pink.png", name:"Custom Design example: Share The Love salon, Instagram" }
   ];
   var SIGN_SIZE = "120mm × 140mm × 50mm base"; // the only size currently available
   var FALLBACK_LINK = "/contact/";
@@ -143,13 +153,14 @@
     var dotsWrap = document.getElementById("pdpGalleryDots");
     var thumbRow = document.getElementById("pdpThumbRow");
     var counter = document.getElementById("pdpGalleryCounter");
+    var caption = document.getElementById("pdpGalleryCaption");
     var videoFab = document.getElementById("pdpVideoFab");
 
     var slides = GALLERY_IMAGES;
 
     track_.innerHTML = slides.map(function(s, i){
       return '<div class="pdp-gallery-slide" data-index="' + i + '" role="group" aria-roledescription="slide" aria-label="' + (i+1) + ' of ' + slides.length + '">' +
-        '<img src="' + s.img + '" alt="' + s.name + ' review sign shown in a real business setting" loading="' + (i === 0 ? "eager" : "lazy") + '"/>' +
+        '<img src="' + s.img + '" alt="' + s.name + '" loading="' + (i === 0 ? "eager" : "lazy") + '"/>' +
         '</div>';
     }).join("");
 
@@ -178,6 +189,8 @@
       dotEls.forEach(function(d, di){ d.classList.toggle("is-active", di === i); });
       thumbEls.forEach(function(t, ti){ t.classList.toggle("is-active", ti === i); });
       counter.textContent = (i + 1) + " / " + slides.length;
+      var isExample = slides[i].name.indexOf("Custom Design example") === 0;
+      caption.innerHTML = isExample ? '<b>Example</b> — Custom Design' : 'Signature Black';
     }
 
     function goTo(i, behavior){

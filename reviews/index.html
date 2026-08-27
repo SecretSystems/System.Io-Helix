@@ -63,6 +63,8 @@ main{display:block;padding-top:58px;}
 .pdp-gallery-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);border:none;padding:0;cursor:pointer;transition:all .2s;}
 .pdp-gallery-dot.is-active{background:var(--cyan);transform:scale(1.4);}
 .pdp-gallery-counter{position:absolute;top:.8rem;right:.8rem;background:rgba(2,4,8,.65);backdrop-filter:blur(4px);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.3rem .6rem;border-radius:999px;z-index:2;}
+.pdp-gallery-caption{position:absolute;left:.8rem;bottom:.8rem;background:rgba(2,4,8,.65);backdrop-filter:blur(4px);color:var(--white);font-family:'Outfit',sans-serif;font-size:.72rem;padding:.4rem .8rem;border-radius:999px;z-index:2;max-width:calc(100% - 1.6rem);}
+.pdp-gallery-caption b{color:var(--cyan);font-weight:600;}
 .pdp-video-fab{position:absolute;left:.8rem;bottom:.9rem;z-index:2;display:none;align-items:center;gap:.4rem;background:rgba(2,4,8,.75);backdrop-filter:blur(4px);border:1px solid rgba(0,200,255,.3);color:var(--white);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;padding:.45rem .8rem;border-radius:999px;cursor:pointer;}
 .pdp-video-fab svg{width:13px;height:13px;stroke:var(--cyan);fill:none;stroke-width:2;}
 .pdp-thumb-row{display:none;gap:.6rem;padding:1rem;overflow-x:auto;}
@@ -337,6 +339,7 @@ main{display:block;padding-top:58px;}
   <div class="pdp-gallery-col">
     <div class="pdp-gallery">
       <span class="pdp-gallery-counter" id="pdpGalleryCounter">1 / 11</span>
+      <span class="pdp-gallery-caption" id="pdpGalleryCaption"></span>
       <div class="pdp-gallery-track" id="pdpGalleryTrack" role="region" aria-label="Product photos" aria-roledescription="carousel"></div>
       <div class="pdp-gallery-dots" id="pdpGalleryDots" role="tablist" aria-label="Choose photo"></div>
       <!-- Floating "see it in action" button — only shown if PRODUCT_VIDEO_URL is set below -->

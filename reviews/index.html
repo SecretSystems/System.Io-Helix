@@ -47,6 +47,34 @@
   .rv-price-grid{grid-template-columns:1fr;}
   .rv-badge{left:1rem;}
 }
+
+/* ── MOBILE FULL-BLEED VISUAL HERO ──
+   Product photo fills the top of the screen, compact text pinned to
+   the bottom over a gradient scrim, next section peeks in below —
+   same pattern as a Nike/Apple mobile hero. Desktop keeps the
+   original .page-hero-bg two-column layout above; this only shows <768px. */
+.rv-hero-visual{display:none;}
+@media(max-width:767px){
+  .page-hero-bg{display:none;}
+  .rv-hero-visual{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    position:relative;height:92svh;min-height:560px;max-height:820px;
+    overflow:hidden;background:var(--void);border-bottom:1px solid var(--border);
+  }
+  .rv-hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  .rv-hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,4,8,.05) 0%,rgba(2,4,8,.2) 32%,rgba(2,4,8,.75) 55%,rgba(2,4,8,.97) 78%,var(--void) 100%);}
+  .rv-hero-visual-content{position:relative;z-index:1;padding:0 1.3rem 1.6rem;}
+  .rv-hero-visual-content .eyebrow{font-size:.62rem;margin-bottom:.6rem;}
+  .rv-hero-visual-content h1{font-size:2rem;line-height:1.05;margin-bottom:.8rem;}
+  .rv-hero-visual-content .lead{font-size:.82rem;margin-bottom:1.1rem;max-width:100%;margin-top:0!important;}
+  .rv-hero-visual-content .rv-stat-row{display:none;}
+  .rv-hero-visual-content div[style*="display:flex"]{margin-top:0!important;gap:.7rem!important;}
+  .rv-hero-visual-content .btn{padding:.7rem 1.4rem;font-size:.78rem;}
+  .rv-scroll-cue{position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--muted);animation:rvBounce 1.8s ease-in-out infinite;}
+  .rv-scroll-cue svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  @keyframes rvBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+  @media(prefers-reduced-motion:reduce){.rv-scroll-cue{animation:none;}}
+}
 </style>
 </head>
 <body>
@@ -82,6 +110,22 @@
 </div>
 
 <main>
+
+<!-- ── MOBILE FULL-BLEED VISUAL HERO (Nike-style: photo first, compact text pinned low, next section peeks in) ── -->
+<section class="rv-hero-visual">
+  <img src="/reviews/assets/nfc-review-cards.png" alt="Two black countertop NFC and QR review cards branded Secret Systems.io, reading 'Review Us On Google' with tap-to-review icons, five gold stars, and a printed QR code" width="1522" height="1033"/>
+  <div class="rv-hero-scrim"></div>
+  <div class="rv-hero-visual-content">
+    <p class="eyebrow">Tap. Scan. Review.</p>
+    <p class="h1" role="heading" aria-level="1" style="font-size:2rem;">Turn Happy Customers Into 5-Star Reviews.</p>
+    <p class="lead">A custom-branded countertop card that sends customers straight to your Google review page — no app, no searching.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="/contact/" class="btn btn-cyan">Get Your Review Card →</a>
+    </div>
+  </div>
+  <div class="rv-scroll-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
+</section>
+
 <div class="page-hero-bg">
 <div class="page-hero wrap">
   <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="/" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Review Cards</span></nav>

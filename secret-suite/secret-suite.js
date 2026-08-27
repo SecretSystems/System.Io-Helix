@@ -1077,7 +1077,55 @@
     if(methodTotal) methodTotal.textContent = monthlyStr + "/month";
   }
 
+  /* ── Mobile full-bleed hero: ambient marquee of competitor logos ── */
+  function renderHeroMarquee(){
+    var stage = document.getElementById("suiteMarqueeStage");
+    if(!stage) return;
+    var logoApps = SS_SUITE_APPS.filter(function(a){ return a.logoSlug; });
+    if(!logoApps.length) return;
+
+    var ROWS = 4;
+    var perRow = Math.ceil(logoApps.length / ROWS);
+    var speeds = [42, 55, 38, 60];
+    stage.innerHTML = "";
+
+    for(var r = 0; r < ROWS; r++){
+      var rowApps = logoApps.slice(r * perRow, r * perRow + perRow);
+      if(!rowApps.length) continue;
+      var row = document.createElement("div");
+      row.className = "suite-marquee-row" + (r % 2 === 1 ? " dir-r" : "");
+      row.style.animationDuration = speeds[r % speeds.length] + "s";
+
+      var tilesHtml = rowApps.map(function(app){
+        var ext = app.logoExt || "svg";
+        return '<span class="suite-marquee-tile" data-slug="' + app.slug + '"><img src="/secret-suite/assets/competitor-logos/' +
+          encodeURIComponent(app.logoSlug) + '.' + ext + '" alt="" loading="lazy"/></span>';
+      }).join("");
+      // duplicate the row content once so the translateX(-50%) loop is seamless
+      row.innerHTML = tilesHtml + tilesHtml;
+      stage.appendChild(row);
+    }
+
+    function randomizeCrossouts(){
+      var tiles = stage.querySelectorAll(".suite-marquee-tile");
+      tiles.forEach(function(t){ t.classList.remove("is-crossed"); });
+      var count = Math.round(tiles.length * 0.12);
+      var used = {};
+      for(var i = 0; i < count; i++){
+        var idx = Math.floor(Math.random() * tiles.length);
+        if(used[idx]) continue;
+        used[idx] = true;
+        tiles[idx].classList.add("is-crossed");
+      }
+    }
+    randomizeCrossouts();
+    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      setInterval(randomizeCrossouts, 2600);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function(){
+    renderHeroMarquee();
     initFilterOptions();
     renderQuickChips();
     renderDeploySummary();

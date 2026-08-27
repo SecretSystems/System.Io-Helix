@@ -21,8 +21,47 @@
    card grids, no glow effects, no repeated decorative chrome.
    ============================================================ */
 
-/* ── HERO ── */
+/* ── HERO (desktop: classic text block, no marquee) ── */
 .suite-hero{padding:8rem 0 4rem;border-bottom:1px solid var(--border);}
+
+/* ── MOBILE FULL-BLEED VISUAL HERO ──
+   Full-viewport-height logo marquee behind a compact text block
+   pinned to the bottom, with the next section peeking in below —
+   same pattern as a Nike/Apple mobile hero. Desktop keeps the
+   original text-first .suite-hero above; this only shows <768px. */
+.suite-hero-visual{display:none;}
+@media(max-width:767px){
+  .suite-hero{display:none;}
+  .suite-hero-visual{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    position:relative;height:92svh;min-height:560px;max-height:820px;
+    overflow:hidden;background:var(--void);border-bottom:1px solid var(--border);
+  }
+  .suite-marquee-stage{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:.6rem;transform:rotate(-4deg) scale(1.15);opacity:.55;}
+  .suite-marquee-row{display:flex;gap:.6rem;width:max-content;animation:suiteMarquee linear infinite;}
+  .suite-marquee-row.dir-r{animation-direction:reverse;}
+  .suite-marquee-tile{position:relative;flex-shrink:0;width:64px;height:64px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:.7rem;}
+  .suite-marquee-tile img{max-width:100%;max-height:100%;object-fit:contain;}
+  .suite-marquee-tile.is-crossed::after{content:'';position:absolute;left:6%;right:6%;top:50%;height:2px;background:#ff5470;transform:translateY(-50%) rotate(-8deg);border-radius:2px;}
+  .suite-marquee-tile.is-crossed{opacity:.4;}
+  @keyframes suiteMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .suite-hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,4,8,.35) 0%,rgba(2,4,8,.55) 45%,rgba(2,4,8,.96) 82%,var(--void) 100%);}
+  .suite-hero-visual-content{position:relative;z-index:1;padding:0 1.3rem 1.6rem;}
+  .suite-hero-visual-content .eyebrow{font-size:.62rem;margin-bottom:.6rem;}
+  .suite-hero-visual-content .suite-title{font-size:2.2rem;margin-bottom:.3rem;}
+  .suite-hero-visual-content .suite-campaign{font-size:.58rem;margin-bottom:.6rem;}
+  .suite-hero-visual-content .suite-headline{display:none;}
+  .suite-hero-visual-content .suite-sub{font-size:.82rem;margin-bottom:1.1rem;max-width:100%;}
+  .suite-hero-visual-content .suite-figure{margin-bottom:.2rem;}
+  .suite-hero-visual-content .suite-figure-amount{font-size:2rem;}
+  .suite-hero-visual-content .suite-qualify{display:none;}
+  .suite-hero-visual-content .suite-ctas{margin-top:1.2rem;gap:.7rem;}
+  .suite-hero-visual-content .btn{padding:.7rem 1.4rem;font-size:.78rem;}
+  .suite-scroll-cue{position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--muted);animation:suiteBounce 1.8s ease-in-out infinite;}
+  .suite-scroll-cue svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  @keyframes suiteBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+  @media(prefers-reduced-motion:reduce){.suite-marquee-row{animation:none;}.suite-scroll-cue{animation:none;}}
+}
 .suite-eyebrow-row{display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem;}
 .suite-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;letter-spacing:-.02em;margin-bottom:.9rem;}
 .suite-title span{color:var(--cyan);}
@@ -408,7 +447,27 @@
 
 <main>
 
-<!-- ── HERO ── -->
+<!-- ── MOBILE FULL-BLEED VISUAL HERO (Nike-style: image first, compact text pinned low, next section peeks in) ── -->
+<section class="suite-hero-visual">
+  <div class="suite-marquee-stage" id="suiteMarqueeStage" aria-hidden="true"></div>
+  <div class="suite-hero-scrim"></div>
+  <div class="suite-hero-visual-content">
+    <p class="eyebrow">Secret Systems Presents</p>
+    <p class="suite-title" role="heading" aria-level="1">SECRET <span>SUITE</span></p>
+    <p class="suite-campaign">The Subscription Killer</p>
+    <p class="suite-sub">Cancel the subscriptions. Keep the software.</p>
+    <div class="suite-figure">
+      <span class="suite-figure-amount">$2,910.36</span>
+      <span class="suite-figure-period">/month replacement value</span>
+    </div>
+    <div class="suite-ctas">
+      <a href="#catalog" class="btn btn-cyan">Explore all 56 apps →</a>
+    </div>
+  </div>
+  <div class="suite-scroll-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
+</section>
+
+<!-- ── HERO (desktop) ── -->
 <section class="suite-hero">
   <div class="wrap">
     <p class="eyebrow">Secret Systems Presents</p>

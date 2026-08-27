@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://secretsystems.io/reviews/"/>
 <meta property="og:type" content="product"/><meta property="og:url" content="https://secretsystems.io/reviews/"/><meta property="og:title" content="NFC & QR Review Signs | Secret Systems .io"/><meta property="og:description" content="Custom NFC + QR review signs for local businesses. One tap or scan sends customers straight to your review page."/><meta property="og:image" content="https://secretsystems.io/reviews/assets/nfc-review-cards.png"/><meta property="og:site_name" content="Secret Systems .io"/>
 <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="NFC & QR Review Signs | Secret Systems .io"/><meta name="twitter:description" content="Custom NFC + QR review signs for local businesses. One tap or scan, no app required."/><meta name="twitter:image" content="https://secretsystems.io/reviews/assets/nfc-review-cards.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Custom NFC + QR Review Sign","description":"A custom-branded countertop sign with NFC tap and QR scan that sends customers directly to your Google, Instagram, TripAdvisor or Facebook page.","image":"https://secretsystems.io/reviews/assets/nfc-review-cards.png","brand":{"@type":"Organization","name":"Secret Systems LLC"},"offers":[{"@type":"Offer","name":"Standard Card","priceCurrency":"USD","price":"25","availability":"https://schema.org/InStock","url":"https://secretsystems.io/reviews/"},{"@type":"Offer","name":"Branded Card","priceCurrency":"USD","price":"40","availability":"https://schema.org/InStock","url":"https://secretsystems.io/reviews/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Custom NFC + QR Review Sign","description":"A countertop sign with NFC tap and QR scan that sends customers directly to your Google, Instagram, TripAdvisor or Facebook page. Available in a fixed Signature Black design or fully custom with your own uploaded design.","image":"https://secretsystems.io/reviews/assets/nfc-review-cards.png","brand":{"@type":"Organization","name":"Secret Systems LLC"},"offers":[{"@type":"Offer","name":"Signature Black","priceCurrency":"USD","price":"25","availability":"https://schema.org/InStock","url":"https://secretsystems.io/reviews/"},{"@type":"Offer","name":"Custom Design","priceCurrency":"USD","price":"40","availability":"https://schema.org/InStock","url":"https://secretsystems.io/reviews/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Review Cards","item":"https://secretsystems.io/reviews/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the customer need an app to leave a review?","acceptedAnswer":{"@type":"Answer","text":"No. Tapping the sign with a modern smartphone (NFC) or scanning the printed QR code opens their phone's browser straight to your review page. No app download, no login beyond their existing account on that platform."}},{"@type":"Question","name":"Does this work on iPhone and Android?","acceptedAnswer":{"@type":"Answer","text":"NFC tap works on iPhone XS and newer (iOS 14+) and on most Android phones from the last several years with NFC enabled. The printed QR code works as a backup on any smartphone, including older devices with no NFC chip."}},{"@type":"Question","name":"Can the sign link somewhere other than Google?","acceptedAnswer":{"@type":"Answer","text":"Yes. We can program the sign to point to Google, Instagram, Facebook, TripAdvisor, your website, or any link you choose, and reprogram it later if that link changes."}},{"@type":"Question","name":"Is this against Google's review policies?","acceptedAnswer":{"@type":"Answer","text":"No. Directing customers to your own public review page is allowed. What's not allowed is offering incentives in exchange for a review, or filtering customers by star rating before they land on the review page — we don't set signs up to do either."}},{"@type":"Question","name":"What happens after I order?","acceptedAnswer":{"@type":"Answer","text":"We review your business name, chosen style, and destination link, program the NFC tag and generate the matching QR code, then confirm with you before production. If anything about your order looks incomplete or unclear, we'll reach out before proceeding."}}]}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
@@ -104,6 +104,7 @@ main{display:block;padding-top:58px;}
 /* Option groups */
 .pdp-opt-group{margin-bottom:1.6rem;}
 .pdp-opt-label{display:flex;justify-content:space-between;align-items:baseline;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;}
+.pdp-size-note{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;font-size:.8rem;color:var(--text);line-height:1.55;}
 .pdp-opt-label b{color:var(--white);font-family:'Outfit',sans-serif;font-size:.82rem;letter-spacing:0;text-transform:none;}
 .pdp-required-mark{color:#ff5470;}
 
@@ -367,8 +368,8 @@ main{display:block;padding-top:58px;}
 
     <!-- Live summary — always visible, updates with every choice -->
     <div class="pdp-summary-card">
-      <div class="pdp-summary-row"><span>Tier</span><span id="sumTier">Standard Card</span></div>
-      <div class="pdp-summary-row"><span>Style</span><span id="sumStyle">Classic Google</span></div>
+      <div class="pdp-summary-row"><span>Tier</span><span id="sumTier">Signature Black</span></div>
+      <div class="pdp-summary-row" id="sumDesignRow" style="display:none;"><span>Design</span><span id="sumStyle">Custom upload</span></div>
       <div class="pdp-summary-row"><span>Destination</span><span id="sumPlatform">Google</span></div>
       <div class="pdp-summary-row"><span>Quantity</span><span id="sumQty">1</span></div>
       <div class="pdp-summary-total"><span style="font-size:.8rem;color:var(--muted);">Total</span><b>$<span id="sumTotal">25</span></b></div>
@@ -378,16 +379,16 @@ main{display:block;padding-top:58px;}
     <div class="pdp-opt-group">
       <div class="pdp-opt-label"><b>1. Card tier</b> <span class="pdp-required-mark">Required</span></div>
       <div class="pdp-tier-grid" role="radiogroup" aria-label="Card tier">
-        <button type="button" class="pdp-tier-card is-selected" data-tier="standard" data-price="25" role="radio" aria-checked="true">
-          <div class="pdp-tier-name">Standard</div>
+        <button type="button" class="pdp-tier-card is-selected" data-tier="signature" data-price="25" role="radio" aria-checked="true">
+          <div class="pdp-tier-name">Signature Black</div>
           <div class="pdp-tier-price">$25</div>
-          <div class="pdp-tier-desc">Plain "Review Us On" design, black or white finish — no custom branding</div>
+          <div class="pdp-tier-desc">Plain "Review Us On" black sign, NFC + QR — no custom design</div>
         </button>
-        <button type="button" class="pdp-tier-card" data-tier="branded" data-price="40" role="radio" aria-checked="false">
-          <span class="pdp-tier-badge">Most Popular</span>
-          <div class="pdp-tier-name">Branded</div>
-          <div class="pdp-tier-price">$40</div>
-          <div class="pdp-tier-desc">Industry-styled design, customized with your business name</div>
+        <button type="button" class="pdp-tier-card" data-tier="custom" data-price="40" role="radio" aria-checked="false">
+          <span class="pdp-tier-badge">Fully Custom</span>
+          <div class="pdp-tier-name">Custom Design</div>
+          <div class="pdp-tier-price">$40+</div>
+          <div class="pdp-tier-desc">Upload your own design — we print it to size and program the NFC + QR to match</div>
         </button>
       </div>
     </div>
@@ -398,10 +399,10 @@ main{display:block;padding-top:58px;}
       <div class="pdp-platform-grid" id="pdpPlatformGrid" role="radiogroup" aria-label="Review destination"></div>
     </div>
 
-    <!-- 3. Style (branded only) -->
-    <div class="pdp-opt-group" id="pdpStyleSection" style="display:none;">
-      <div class="pdp-opt-label"><b>3. Design style</b> <span class="pdp-required-mark">Required</span></div>
-      <div class="pdp-style-grid" id="pdpStyleGrid" role="radiogroup" aria-label="Design style"></div>
+    <!-- 3. Size (custom tier only — fixed size for now) -->
+    <div class="pdp-opt-group" id="pdpSizeSection" style="display:none;">
+      <div class="pdp-opt-label"><b>3. Sign size</b></div>
+      <div class="pdp-size-note">120mm × 140mm × 50mm base — the only size currently available. We'll reach out if your design needs a different size.</div>
     </div>
 
     <!-- 4. Quantity -->
@@ -437,18 +438,18 @@ main{display:block;padding-top:58px;}
       </div>
     </div>
 
-    <!-- 6. Business name (branded only) -->
+    <!-- 6. Business name (custom tier only) -->
     <div class="pdp-field" id="pdpNameField" style="display:none;">
       <label for="pdpBizName"><span>Business name (for the sign)</span><span class="pdp-required-mark">Required</span></label>
       <input type="text" id="pdpBizName" placeholder="Your Business Name" autocomplete="organization"/>
     </div>
 
-    <!-- 7. Logo upload (branded only, optional) -->
+    <!-- 7. Design upload (custom tier only, required) -->
     <div class="pdp-field" id="pdpUploadField" style="display:none;">
-      <label for="pdpLogoUpload"><span>Custom logo (optional)</span></label>
+      <label for="pdpLogoUpload"><span>Your design file</span><span class="pdp-required-mark">Required</span></label>
       <div class="pdp-upload-zone" id="pdpUploadZone">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
-        <p>Tap to upload your logo (PNG, JPG, or SVG)</p>
+        <p>Tap to upload your design (PNG, JPG, or SVG)</p>
         <input type="file" id="pdpLogoUpload" accept="image/png,image/jpeg,image/svg+xml"/>
       </div>
       <div class="pdp-upload-preview" id="pdpUploadPreview">
@@ -456,7 +457,7 @@ main{display:block;padding-top:58px;}
         <span class="pdp-upload-preview-name" id="pdpUploadPreviewName"></span>
         <button type="button" class="pdp-upload-remove" id="pdpUploadRemove" aria-label="Remove uploaded file">✕</button>
       </div>
-      <p class="pdp-field-hint">We review every upload before production — a team member confirms it prints clearly before your sign ships.</p>
+      <p class="pdp-field-hint">Design it for a 120mm × 140mm sign. This upload is attached to your order for reference — for now, please also email the file to <a href="mailto:info@secretsystems.io" style="color:var(--cyan);">info@secretsystems.io</a> after checkout so we have the actual print-ready file. We review every design before production.</p>
     </div>
 
     <!-- 8. Order notes -->

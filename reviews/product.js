@@ -32,26 +32,26 @@
     { slug:"custom", name:"Website / Custom", icon:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/>' }
   ];
 
-  var STYLES = [
-    { slug:"standard",       name:"Classic Google",   business:"Any business", platform:"google",  img:"/reviews/assets/styles/style-standard-blackwhite.jpg", standardOnly:true, paymentLink:"" },
-    { slug:"branded-black",  name:"Signature Black",  business:"Any business", platform:"google",  img:"/reviews/assets/nfc-review-cards.png", paymentLink:"" },
-    { slug:"salon-gold",     name:"Gold Salon",       business:"Salon",        platform:"google",  img:"/reviews/assets/styles/style-salon-gold.png", paymentLink:"" },
-    { slug:"retail-neon",    name:"Stay Connected",   business:"Retail store", platform:"google",  img:"/reviews/assets/styles/style-retail-neon.png", paymentLink:"" },
-    { slug:"dental-teal",    name:"Feedback Matters", business:"Medical office", platform:"google", img:"/reviews/assets/styles/style-dental-teal.png", paymentLink:"" },
-    { slug:"dental-white",   name:"Tooth Outline",    business:"Medical office", platform:"google", img:"/reviews/assets/styles/style-dental-white.png", paymentLink:"" },
-    { slug:"cafe-yelp",      name:"Love Your Visit",  business:"Restaurant",   platform:"yelp",    img:"/reviews/assets/styles/style-cafe-yelp.png", paymentLink:"" },
-    { slug:"barber-navy",    name:"Like Your Cut",    business:"Barbershop",   platform:"facebook", img:"/reviews/assets/styles/style-barber-navy.png", paymentLink:"" },
-    { slug:"dining-emerald", name:"Fine Dining",      business:"Restaurant",   platform:"tripadvisor", img:"/reviews/assets/styles/style-dining-emerald.png", paymentLink:"" },
-    { slug:"auto-blue",      name:"Auto Shop",        business:"Tire shop",    platform:"google",  img:"/reviews/assets/styles/style-auto-blue.png", paymentLink:"" },
-    { slug:"beauty-pink",    name:"Share The Love",   business:"Salon",        platform:"instagram", img:"/reviews/assets/styles/style-beauty-pink.png", paymentLink:"" }
+  /* Two tiers only: Signature Black (fixed design, cheapest) and Custom Design
+     (customer uploads their own design, priced higher). No preset style gallery. */
+  var TIERS = {
+    signature: { slug:"signature", name:"Signature Black", price:25, img:"/reviews/assets/nfc-review-cards.png", paymentLink:"" },
+    custom:    { slug:"custom",    name:"Custom Design",   price:40, img:"/reviews/assets/nfc-review-cards.png", paymentLink:"" }
+  };
+
+  /* Gallery shows real photos of the Signature Black sign — the only fixed
+     design that exists as a physical product right now. Custom Design has
+     no preset photo since the design comes from the customer's own upload. */
+  var GALLERY_IMAGES = [
+    { img:"/reviews/assets/nfc-review-cards.png", name:"Signature Black sign, black and white finish" },
+    { img:"/reviews/assets/styles/style-standard-blackwhite.jpg", name:"Signature Black sign with dimensions" }
   ];
+  var SIGN_SIZE = "120mm × 140mm × 50mm base"; // the only size currently available
   var FALLBACK_LINK = "/contact/";
   var CART_KEY = "ss_reviews_cart_v1";
   var SAVE_KEY = "ss_reviews_saved_v1";
 
-  function brandedStyles(){ return STYLES.filter(function(s){ return !s.standardOnly; }); }
   function platformBySlug(slug){ return PLATFORMS.filter(function(p){ return p.slug === slug; })[0] || PLATFORMS[0]; }
-  function styleBySlug(slug){ return STYLES.filter(function(s){ return s.slug === slug; })[0]; }
 
   /* ── Analytics — fires through window.gtag only if GA4 is actually configured; otherwise a safe no-op ── */
   function track(eventName, params){
@@ -64,9 +64,8 @@
 
   /* ── State ── */
   var state = {
-    tier: "standard",
+    tier: "signature",
     price: 25,
-    styleSlug: "standard",
     platform: "google",
     qty: 1,
     destUrl: "",
@@ -82,7 +81,6 @@
     initSaveButton();
     initPlatformGrid();
     initTierGrid();
-    initStyleGrid();
     initQty();
     initFields();
     initUpload();
@@ -147,7 +145,7 @@
     var counter = document.getElementById("pdpGalleryCounter");
     var videoFab = document.getElementById("pdpVideoFab");
 
-    var slides = STYLES.map(function(s){ return { img: s.img, name: s.name }; });
+    var slides = GALLERY_IMAGES;
 
     track_.innerHTML = slides.map(function(s, i){
       return '<div class="pdp-gallery-slide" data-index="' + i + '" role="group" aria-roledescription="slide" aria-label="' + (i+1) + ' of ' + slides.length + '">' +
@@ -187,6 +185,8 @@
       slideEls[i].scrollIntoView({ behavior: behavior || "smooth", block: "nearest", inline: "start" });
       setActive(i);
     }
+
+    setActive(0);
 
     dotEls.forEach(function(d){ d.addEventListener("click", function(){ goTo(parseInt(d.dataset.index, 10)); notifyInteract(); }); });
     thumbEls.forEach(function(t){ t.addEventListener("click", function(){ goTo(parseInt(t.dataset.index, 10)); notifyInteract(); }); });
@@ -282,42 +282,15 @@
         card.setAttribute("aria-checked", "true");
         state.tier = card.dataset.tier;
         state.price = parseInt(card.dataset.price, 10);
-        var isBranded = state.tier === "branded";
-        document.getElementById("pdpStyleSection").style.display = isBranded ? "block" : "none";
-        document.getElementById("pdpNameField").style.display = isBranded ? "block" : "none";
-        document.getElementById("pdpUploadField").style.display = isBranded ? "block" : "none";
-        if(isBranded && state.styleSlug === "standard"){ state.styleSlug = brandedStyles()[0].slug; }
-        if(!isBranded){ state.styleSlug = "standard"; }
+        var isCustom = state.tier === "custom";
+        document.getElementById("pdpSizeSection").style.display = isCustom ? "block" : "none";
+        document.getElementById("pdpNameField").style.display = isCustom ? "block" : "none";
+        document.getElementById("pdpUploadField").style.display = isCustom ? "block" : "none";
         track("product_option_selected", { option: "tier", value: state.tier });
-        renderStyleGrid();
         updateAll();
       });
     });
   }
-
-  /* ── Style grid ── */
-  function renderStyleGrid(){
-    var grid = document.getElementById("pdpStyleGrid");
-    grid.innerHTML = brandedStyles().map(function(s){
-      var selected = state.styleSlug === s.slug;
-      return '<button type="button" class="pdp-style-card' + (selected ? " is-selected" : "") + '" data-slug="' + s.slug + '" role="radio" aria-checked="' + selected + '">' +
-        '<img src="' + s.img + '" alt="' + s.name + ' design" loading="lazy"/>' +
-        '<span class="pdp-style-check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>' +
-        '<span class="pdp-style-name">' + s.name + '</span></button>';
-    }).join("");
-    grid.querySelectorAll(".pdp-style-card").forEach(function(card){
-      card.addEventListener("click", function(){
-        state.styleSlug = card.dataset.slug;
-        var style = styleBySlug(state.styleSlug);
-        if(style && style.platform) state.platform = style.platform;
-        track("product_option_selected", { option: "style", value: state.styleSlug });
-        renderStyleGrid();
-        initPlatformGrid();
-        updateAll();
-      });
-    });
-  }
-  function initStyleGrid(){ renderStyleGrid(); }
 
   /* ── Quantity ── */
   function initQty(){
@@ -382,6 +355,8 @@
         previewName.textContent = file.name;
         preview.classList.add("is-visible");
         zone.style.display = "none";
+        track("customization_started", { field: "design_upload" });
+        updateAll();
       };
       reader.readAsDataURL(file);
     });
@@ -391,6 +366,7 @@
       input.value = "";
       preview.classList.remove("is-visible");
       zone.style.display = "block";
+      updateAll();
     });
   }
 
@@ -417,27 +393,27 @@
   /* ── Validation ── */
   function requiredFieldsComplete(){
     if(!isLikelyUrl(state.destUrl)) return false;
-    if(state.tier === "branded" && !state.bizName.trim()) return false;
+    if(state.tier === "custom"){
+      if(!state.bizName.trim()) return false;
+      if(!state.logoFile) return false;
+    }
     return true;
-  }
-
-  function currentStyle(){
-    if(state.tier === "standard") return STYLES[0];
-    return styleBySlug(state.styleSlug) || brandedStyles()[0];
   }
 
   function lineTotal(){ return state.price * state.qty; }
 
   /* ── Update everything derived from state (single source of truth) ── */
   function updateAll(){
-    var style = currentStyle();
+    var tierInfo = TIERS[state.tier];
     var platform = platformBySlug(state.platform);
     var total = lineTotal();
     var ready = requiredFieldsComplete();
+    var isCustom = state.tier === "custom";
 
     document.getElementById("pdpPrice").textContent = state.price;
-    document.getElementById("sumTier").textContent = state.tier === "standard" ? "Standard Card" : "Branded Card";
-    document.getElementById("sumStyle").textContent = style ? style.name : "—";
+    document.getElementById("sumTier").textContent = tierInfo.name;
+    document.getElementById("sumDesignRow").style.display = isCustom ? "flex" : "none";
+    document.getElementById("sumStyle").textContent = state.logoFile ? state.logoFile.name : "Awaiting upload";
     document.getElementById("sumPlatform").textContent = platform.name;
     document.getElementById("sumQty").textContent = state.qty;
     document.getElementById("sumTotal").textContent = total;
@@ -452,14 +428,13 @@
 
   /* ── Buy / cart button wiring ── */
   function buildCartItem(){
-    var style = currentStyle();
+    var tierInfo = TIERS[state.tier];
     var platform = platformBySlug(state.platform);
     return {
       id: Date.now() + "-" + Math.random().toString(36).slice(2, 8),
       tier: state.tier,
-      styleSlug: state.styleSlug,
-      styleName: style ? style.name : "",
-      img: style ? style.img : "/reviews/assets/nfc-review-cards.png",
+      tierName: tierInfo.name,
+      img: tierInfo.img,
       platform: platform.name,
       qty: state.qty,
       price: state.price,
@@ -467,7 +442,8 @@
       bizName: state.bizName,
       orderNote: state.orderNote,
       hasLogo: !!state.logoFile,
-      logoName: state.logoFile ? state.logoFile.name : ""
+      logoName: state.logoFile ? state.logoFile.name : "",
+      size: state.tier === "custom" ? SIGN_SIZE : ""
     };
   }
 
@@ -484,7 +460,7 @@
         setLoading(btn, true);
         var item = buildCartItem();
         addToCart(item);
-        track("add_to_cart", { tier: item.tier, style: item.styleSlug, quantity: item.qty, value: item.price * item.qty });
+        track("add_to_cart", { tier: item.tier, quantity: item.qty, value: item.price * item.qty });
         setTimeout(function(){
           setLoading(btn, false);
           announce("Added to cart");
@@ -501,7 +477,7 @@
         }
         setLoading(btn, true);
         var item = buildCartItem();
-        track("buy_now", { tier: item.tier, style: item.styleSlug, quantity: item.qty, value: item.price * item.qty });
+        track("buy_now", { tier: item.tier, quantity: item.qty, value: item.price * item.qty });
         goToCheckout([item]);
       });
     });
@@ -511,6 +487,7 @@
     var destUrl = document.getElementById("pdpDestUrl");
     var destField = document.getElementById("pdpLinkField");
     var bizName = document.getElementById("pdpBizName");
+    var uploadZone = document.getElementById("pdpUploadZone");
     if(!isLikelyUrl(state.destUrl)){
       destField.classList.add("has-error");
       destUrl.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -518,10 +495,15 @@
       announce("Please enter your destination link before continuing");
       return;
     }
-    if(state.tier === "branded" && !state.bizName.trim()){
+    if(state.tier === "custom" && !state.bizName.trim()){
       bizName.scrollIntoView({ behavior: "smooth", block: "center" });
       bizName.focus();
       announce("Please enter your business name before continuing");
+      return;
+    }
+    if(state.tier === "custom" && !state.logoFile){
+      uploadZone.scrollIntoView({ behavior: "smooth", block: "center" });
+      announce("Please upload your design file before continuing");
     }
   }
 
@@ -609,9 +591,9 @@
 
     body.innerHTML = undoHtml + items.map(function(it){
       return '<div class="pdp-cart-item" data-id="' + it.id + '">' +
-        '<img src="' + it.img + '" alt="' + it.styleName + '"/>' +
+        '<img src="' + it.img + '" alt="' + it.tierName + '"/>' +
         '<div class="pdp-cart-item-info">' +
-          '<b>' + (it.tier === "standard" ? "Standard" : "Branded — " + it.styleName) + '</b>' +
+          '<b>' + it.tierName + (it.hasLogo ? " — " + it.logoName : "") + '</b>' +
           '<span>Destination: ' + it.platform + (it.bizName ? " · " + it.bizName : "") + '</span>' +
           '<div class="pdp-cart-item-actions">' +
             '<span class="pdp-cart-item-price">$' + (it.price * it.qty) + '</span>' +
@@ -676,8 +658,8 @@
   function goToCheckout(items){
     track("checkout_started", { value: cartTotal(items), items: items.length });
     var first = items[0];
-    var style = styleBySlug(first.styleSlug) || STYLES[0];
-    var link = style.paymentLink && style.paymentLink.length ? style.paymentLink : FALLBACK_LINK;
+    var tierInfo = TIERS[first.tier] || TIERS.signature;
+    var link = tierInfo.paymentLink && tierInfo.paymentLink.length ? tierInfo.paymentLink : FALLBACK_LINK;
     if(link !== FALLBACK_LINK){
       track("payment_attempted", { provider: "stripe" });
     }

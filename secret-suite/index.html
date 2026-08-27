@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Secret Suite | Cancel Your Software Subscriptions</title>
+<meta name="description" content="Explore 56 Secret Systems alternatives to expensive subscription software. Replace tools for design, communication, scheduling, analytics, automation, business operations and more."/>
+<meta name="keywords" content="subscription alternatives, self-hosted software, open source SaaS alternatives, cancel subscriptions, Secret Systems apps"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/secret-suite/"/>
+<meta property="og:type" content="website"/><meta property="og:url" content="https://secretsystems.io/secret-suite/"/><meta property="og:title" content="Secret Suite: The Subscription Killer"/><meta property="og:description" content="Replace up to $2,910.36 per month in recurring software subscriptions with the Secret Systems app collection."/><meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Secret Suite: The Subscription Killer"/><meta name="twitter:description" content="Replace up to $2,910.36 per month in recurring software subscriptions with the Secret Systems app collection."/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Secret Suite","url":"https://secretsystems.io/secret-suite/","description":"56 Secret Systems alternatives to expensive subscription software.","isPartOf":{"@type":"WebSite","name":"Secret Systems .io","url":"https://secretsystems.io"}}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+/* ============================================================
+   SECRET SUITE — editorial redesign
+   Principles: one accent color (cyan) for Secret Systems' own
+   identity, one restrained red for the cancellation mark, minimal
+   borders, generous whitespace, strong type hierarchy. No boxed
+   card grids, no glow effects, no repeated decorative chrome.
+   ============================================================ */
+
+/* ── HERO ── */
+.suite-hero{padding:8rem 0 4rem;border-bottom:1px solid var(--border);}
+.suite-eyebrow-row{display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem;}
+.suite-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;letter-spacing:-.02em;margin-bottom:.9rem;}
+.suite-title span{color:var(--cyan);}
+.suite-campaign{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#ff5470;margin-bottom:1.8rem;}
+.suite-headline{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.3;max-width:640px;color:var(--white);margin-bottom:1.1rem;}
+.suite-sub{font-size:.98rem;color:var(--text);max-width:560px;line-height:1.7;margin-bottom:3rem;}
+
+.suite-figure{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.suite-figure-amount{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.9rem,9.5vw,3.6rem);line-height:1;color:var(--white);}
+.suite-figure-period{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--muted);}
+.suite-figure-annual{font-size:.92rem;color:var(--text);margin-bottom:1.1rem;}
+.suite-figure-annual b{color:var(--white);font-weight:600;}
+.suite-qualify{font-size:.78rem;color:var(--muted);line-height:1.6;max-width:540px;margin-bottom:2.4rem;}
+
+.suite-ctas{display:flex;gap:.9rem;flex-wrap:wrap;}
+
+/* ── VERIFIED STRIP — quiet fact bar, not a decorative box ── */
+.verify-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--deep);}
+.verify-row{display:flex;flex-wrap:wrap;gap:2.5rem;padding:1.6rem 0;}
+.verify-item{display:flex;flex-direction:column;gap:.25rem;}
+.verify-num{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:var(--white);}
+.verify-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+
+/* ── ONE-LINE PREVIEW — three product examples, restrained ── */
+.preview-section{padding:3.6rem 0;border-bottom:1px solid var(--border);}
+.preview-row{display:flex;flex-direction:column;}
+.preview-item{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.6rem;padding:1.3rem 0;border-top:1px solid var(--border);}
+.preview-item:last-child{border-bottom:1px solid var(--border);}
+.preview-secret{display:flex;flex-direction:column;gap:.15rem;}
+.preview-secret-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);}
+.preview-secret-desc{font-size:.8rem;color:var(--muted);}
+.preview-arrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);text-align:center;white-space:nowrap;}
+.competitor-block{position:relative;display:inline-flex;align-items:center;gap:.6rem;justify-self:end;}
+.competitor-block::after{content:'';position:absolute;left:-6%;right:-6%;top:50%;height:2px;background:#ff5470;transform:translateY(-50%) rotate(-4deg);pointer-events:none;}
+.competitor-logo{height:22px;max-width:80px;flex-shrink:0;display:flex;align-items:center;}
+.competitor-logo svg,.competitor-logo img{height:100%;width:auto;max-width:80px;object-fit:contain;display:block;}
+.competitor-logo-word{font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;color:var(--text);white-space:nowrap;}
+.competitor-text{display:flex;flex-direction:column;gap:.1rem;}
+.competitor-name{font-size:.85rem;color:var(--text);}
+.competitor-price{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
+
+/* ── CALCULATOR ── */
+.calc-section{background:var(--deep);border-bottom:1px solid var(--border);}
+.calc-intro{max-width:600px;margin-bottom:2.2rem;}
+.calc-shell{border-top:1px solid var(--border);}
+.calc-top{display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;padding:1.8rem 0;border-bottom:1px solid var(--border);}
+.calc-team-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;}
+.calc-team-input{display:flex;align-items:center;gap:1rem;}
+.calc-team-input input[type=range]{width:200px;accent-color:var(--cyan);}
+.calc-team-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--white);min-width:2ch;}
+.calc-totals{display:flex;gap:2.5rem;flex-wrap:wrap;}
+.calc-total-block{text-align:right;}
+.calc-total-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem;}
+.calc-total-amount{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;color:var(--white);}
+
+.calc-actions{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:1.2rem 0;}
+.calc-selected-count{font-size:.82rem;color:var(--text);}
+.calc-action-buttons{display:flex;gap:.6rem;flex-wrap:wrap;}
+.calc-action-btn{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;color:var(--text);background:none;border:none;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);cursor:pointer;padding:.3rem 0;transition:color .2s,text-decoration-color .2s;}
+.calc-action-btn:hover{color:var(--cyan);text-decoration-color:var(--cyan);}
+
+.calc-categories{display:flex;flex-direction:column;}
+.calc-category{border-top:1px solid var(--border);}
+.calc-category:last-child{border-bottom:1px solid var(--border);}
+.calc-cat-header{display:flex;align-items:center;justify-content:space-between;width:100%;padding:1rem 0;background:none;border:none;cursor:pointer;text-align:left;color:inherit;font:inherit;min-height:44px;}
+.calc-cat-header-left{display:flex;align-items:center;gap:.8rem;}
+.calc-cat-checkbox{width:17px;height:17px;accent-color:var(--cyan);flex-shrink:0;}
+.calc-cat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;color:var(--white);}
+.calc-cat-count{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
+.calc-cat-caret{color:var(--muted);font-size:.75rem;transition:transform .2s;flex-shrink:0;}
+.calc-category.open .calc-cat-caret{transform:rotate(180deg);}
+.calc-cat-body{display:none;padding:0 0 1.2rem 2.1rem;flex-direction:column;gap:.65rem;}
+.calc-category.open .calc-cat-body{display:flex;}
+.calc-app-row{display:flex;align-items:flex-start;gap:.65rem;min-height:44px;}
+.calc-app-row input[type=checkbox]{margin-top:.25rem;width:16px;height:16px;accent-color:var(--cyan);flex-shrink:0;}
+.calc-app-row label{font-size:.85rem;color:var(--text);line-height:1.4;cursor:pointer;padding:.1rem 0;}
+.calc-app-row .can{font-family:'Syne',sans-serif;font-weight:600;color:var(--white);}
+.calc-app-row .cap{color:var(--muted);}
+
+/* ── CATALOG CONTROLS ── */
+.controls-section{position:sticky;top:73px;z-index:100;background:rgba(2,4,8,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.9rem 0;}
+.controls-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+.ctrl-search{flex:1;min-width:200px;}
+.ctrl-search input{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--white);font-family:'Outfit',sans-serif;font-size:.88rem;padding:.5rem .1rem;outline:none;width:100%;transition:border-color .2s;}
+.ctrl-search input:focus{border-color:var(--cyan);}
+.ctrl-search input::placeholder{color:var(--muted);}
+.ctrl-select{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:'Outfit',sans-serif;font-size:.82rem;padding:.5rem 1.4rem .5rem .1rem;outline:none;cursor:pointer;}
+.ctrl-select:focus{border-color:var(--cyan);}
+.ctrl-clear{font-family:'Outfit',sans-serif;font-size:.78rem;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:transparent;transition:color .2s,text-decoration-color .2s;padding:.5rem 0;}
+.ctrl-clear:hover{color:var(--cyan);text-decoration-color:var(--cyan);}
+.ctrl-count{font-family:'Outfit',sans-serif;font-size:.78rem;color:var(--muted);white-space:nowrap;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ── CATALOG — editorial index, not a bordered table ── */
+.catalog-section{padding:3.5rem 0 6rem;}
+.catalog-head-row{display:none;}
+.catalog-list{display:flex;flex-direction:column;}
+.cat-row{display:grid;grid-template-columns:2.4rem 1.6fr auto 1fr;align-items:center;gap:1.6rem;padding:1.35rem 0;border-bottom:1px solid var(--border);transition:background .2s;}
+.cat-row:hover{background:rgba(0,200,255,.025);}
+.cat-row:focus-within{background:rgba(0,200,255,.025);}
+.row-rank{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
+.row-app{display:flex;flex-direction:column;gap:.3rem;min-width:0;}
+.row-app-top{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.row-app-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.08rem;color:var(--white);text-decoration:none;transition:color .2s;}
+.row-app-name:hover,.row-app-name:focus-visible{color:var(--cyan);}
+.row-app-desc{font-size:.83rem;color:var(--text);line-height:1.55;max-width:420px;}
+.row-app-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.1rem;}
+.row-app-cat{font-size:.72rem;color:var(--muted);}
+.row-dot{color:var(--border);font-size:.6rem;}
+.status-tag{font-size:.72rem;color:var(--muted);}
+.status-tag.is-available{color:#4eff9f;}
+.status-tag.is-beta{color:#ffe066;}
+.status-tag.is-in_development{color:var(--cyan);}
+.row-replaces-col{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;text-align:center;}
+.row-competitor{justify-self:end;}
+.row-action{color:var(--muted);font-size:1rem;transition:color .2s,transform .2s;justify-self:end;}
+.cat-row:hover .row-action{color:var(--cyan);transform:translateX(2px);}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);font-size:.9rem;}
+.planned-note{font-size:.72rem;color:var(--muted);margin-top:.4rem;}
+
+/* Mobile stacked cards */
+.catalog-cards{display:none;flex-direction:column;}
+.suite-card{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+.suite-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.5rem;}
+.suite-card-rank{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
+.suite-card-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.08rem;color:var(--white);text-decoration:none;min-height:44px;display:flex;align-items:center;}
+.suite-card-desc{font-size:.85rem;color:var(--text);line-height:1.6;margin-bottom:.5rem;}
+.suite-card-meta{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--muted);margin-bottom:1rem;}
+.suite-card-competitor-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.9rem;border-top:1px solid var(--border);}
+.suite-card-replaces{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+
+/* Methodology */
+.method-section{border-bottom:1px solid var(--border);}
+.method-intro{max-width:640px;margin-bottom:2.4rem;}
+.method-list{border-top:1px solid var(--border);}
+.method-item{display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 0;border-bottom:1px solid var(--border);}
+.method-item h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;color:var(--white);}
+.method-item p{font-size:.85rem;color:var(--text);line-height:1.65;}
+.method-note{margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--border);}
+.method-note h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;color:var(--white);margin-bottom:.6rem;}
+.method-note p{font-size:.85rem;color:var(--text);line-height:1.7;max-width:720px;}
+.method-reviewed{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:1.5rem;}
+.duplicate-list{margin-top:1.2rem;display:flex;flex-direction:column;gap:.5rem;}
+.duplicate-item{font-size:.82rem;color:var(--text);line-height:1.6;}
+.duplicate-item b{color:var(--white);}
+
+/* Open source disclosure */
+.disclosure-section{border-bottom:1px solid var(--border);}
+.disclosure-text{max-width:680px;display:flex;flex-direction:column;gap:1.1rem;}
+.disclosure-text p{font-size:.88rem;color:var(--text);line-height:1.75;}
+
+@media(max-width:900px){
+  .suite-hero{padding:7rem 0 3rem;}
+  .verify-row{gap:1.6rem;padding:1.2rem 0;}
+  .preview-item{grid-template-columns:1fr;gap:.7rem;text-align:left;}
+  .preview-arrow{text-align:left;}
+  .competitor-block{justify-self:start;}
+  .calc-top{flex-direction:column;align-items:flex-start;gap:1.4rem;}
+  .calc-totals{width:100%;justify-content:space-between;gap:1rem;}
+  .calc-total-block{text-align:left;}
+  .method-item{grid-template-columns:1fr;gap:.5rem;}
+  .catalog-list{display:none;}
+  .catalog-cards{display:flex;}
+  .controls-row{flex-direction:column;align-items:stretch;gap:.7rem;}
+  .ctrl-search{min-width:0;}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <a href="/" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="/secret-suite/" class="active">Secret Suite</a></li>
+    <li><a href="/automation/">Automation</a></li>
+    <li><a href="/security/">Security</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="/" onclick="closeMenu()">Home</a>
+  <a href="/services/" onclick="closeMenu()">Services</a>
+  <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+  <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+  <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+  <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+  <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <a href="/secret-suite/" onclick="closeMenu()">Secret Suite</a>
+  <a href="/automation/" onclick="closeMenu()">Automation</a>
+  <a href="/security/" onclick="closeMenu()">Security</a>
+  <a href="/work/" onclick="closeMenu()">Work</a>
+  <a href="/pricing/" onclick="closeMenu()">Pricing</a>
+  <a href="/about/" onclick="closeMenu()">About</a>
+  <a href="/contact/" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="suite-hero">
+  <div class="wrap">
+    <p class="eyebrow">Secret Systems Presents</p>
+    <h1 class="suite-title">SECRET <span>SUITE</span></h1>
+    <p class="suite-campaign">The Subscription Killer</p>
+    <h2 class="suite-headline">Cancel the subscriptions. Keep the software.</h2>
+    <p class="suite-sub">A growing collection of customizable, self-hostable applications designed to replace expensive recurring software subscriptions.</p>
+
+    <div class="suite-figure">
+      <span class="suite-figure-amount" id="heroMonthly">$2,910.36</span>
+      <span class="suite-figure-period">/month replacement value</span>
+    </div>
+    <p class="suite-figure-annual">Up to <b id="heroAnnual">$34,924.32</b> per year</p>
+    <p class="suite-qualify">Verified itemized estimate for a five-person business, built from each vendor's own published pricing (sources and review date below). Not every Secret Suite application is available yet — most are planned. Self-hosting still carries real infrastructure cost.</p>
+
+    <div class="suite-ctas">
+      <a href="#catalog" class="btn btn-cyan">Explore all 56 apps →</a>
+      <a href="#calculator" class="btn btn-outline">Calculate your savings</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── VERIFIED FACTS STRIP ── -->
+<section class="verify-strip">
+  <div class="wrap verify-row">
+    <div class="verify-item"><span class="verify-num">56</span><span class="verify-label">Applications planned</span></div>
+    <div class="verify-item"><span class="verify-num">0</span><span class="verify-label">Live today</span></div>
+    <div class="verify-item"><span class="verify-num">47</span><span class="verify-label">Verified vendor logos</span></div>
+    <div class="verify-item"><span class="verify-num" id="stripReviewed">—</span><span class="verify-label">Pricing last reviewed</span></div>
+  </div>
+</section>
+
+<!-- ── PREVIEW — three examples before the full catalog ── -->
+<section class="preview-section">
+  <div class="wrap">
+    <div class="preview-row">
+      <div class="preview-item">
+        <div class="preview-secret">
+          <span class="preview-secret-name">SecretDesign</span>
+          <span class="preview-secret-desc">Design graphics and interfaces</span>
+        </div>
+        <span class="preview-arrow">Replaces</span>
+        <div class="competitor-block">
+          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/canva.svg" alt="" width="22" height="22"/></div>
+          <div class="competitor-text"><span class="competitor-name">Canva</span><span class="competitor-price">$18/month</span></div>
+        </div>
+      </div>
+      <div class="preview-item">
+        <div class="preview-secret">
+          <span class="preview-secret-name">SecretChat</span>
+          <span class="preview-secret-desc">Team messaging and channels</span>
+        </div>
+        <span class="preview-arrow">Replaces</span>
+        <div class="competitor-block">
+          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/slack.svg" alt="" width="22" height="22"/></div>
+          <div class="competitor-text"><span class="competitor-name">Slack</span><span class="competitor-price">$8.75/user/month</span></div>
+        </div>
+      </div>
+      <div class="preview-item">
+        <div class="preview-secret">
+          <span class="preview-secret-name">SecretSupport</span>
+          <span class="preview-secret-desc">Customer conversations and tickets</span>
+        </div>
+        <span class="preview-arrow">Replaces</span>
+        <div class="competitor-block">
+          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/zendesk.svg" alt="" width="22" height="22"/></div>
+          <div class="competitor-text"><span class="competitor-name">Zendesk</span><span class="competitor-price">$55/user/month</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CALCULATOR ── -->
+<section class="calc-section" id="calculator">
+  <div class="section wrap">
+    <p class="eyebrow reveal">Interactive Estimate</p>
+    <h2 class="h2 reveal">Savings <span>Calculator</span></h2>
+    <p class="calc-intro reveal" style="color:var(--text);font-size:.92rem;">Set your team size and choose which applications apply to your business. Every number here is computed live from the same sourced data as the catalog below.</p>
+
+    <div class="calc-shell reveal">
+      <div class="calc-top">
+        <div class="calc-team-field">
+          <label for="teamSize">Team size</label>
+          <div class="calc-team-input">
+            <input type="range" id="teamSize" min="1" max="100" value="5" aria-describedby="teamSizeNum"/>
+            <span class="calc-team-num" id="teamSizeNum">5</span>
+          </div>
+        </div>
+        <div class="calc-totals">
+          <div class="calc-total-block">
+            <div class="calc-total-label">Monthly</div>
+            <div class="calc-total-amount" id="calcMonthly">$0.00</div>
+          </div>
+          <div class="calc-total-block">
+            <div class="calc-total-label">Annual</div>
+            <div class="calc-total-amount" id="calcAnnual">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-actions">
+        <span class="calc-selected-count" id="calcSelectedCount" role="status" aria-live="polite">56 of 56 apps selected</span>
+        <div class="calc-action-buttons">
+          <button type="button" class="calc-action-btn" id="calcSelectAll">Select all</button>
+          <button type="button" class="calc-action-btn" id="calcReset">Reset</button>
+        </div>
+      </div>
+
+      <div class="calc-categories" id="calcCategories" role="group" aria-label="Select apps by category to include in your estimate"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATALOG CONTROLS ── -->
+<section class="controls-section">
+  <div class="wrap">
+    <div class="controls-row">
+      <div class="ctrl-search">
+        <label for="searchInput" class="sr-only">Search apps</label>
+        <input type="text" id="searchInput" placeholder="Search apps or paid alternatives…"/>
+      </div>
+      <label for="categoryFilter" class="sr-only">Filter by category</label>
+      <select id="categoryFilter" class="ctrl-select">
+        <option value="">All categories</option>
+      </select>
+      <label for="statusFilter" class="sr-only">Filter by status</label>
+      <select id="statusFilter" class="ctrl-select">
+        <option value="">All statuses</option>
+      </select>
+      <label for="sortSelect" class="sr-only">Sort apps</label>
+      <select id="sortSelect" class="ctrl-select">
+        <option value="rank">Sort: Rank</option>
+        <option value="popularity">Sort: Popularity</option>
+        <option value="value">Sort: Replacement value</option>
+        <option value="name">Sort: App name</option>
+      </select>
+      <button type="button" class="ctrl-clear" id="clearFilters">Clear filters</button>
+      <span class="ctrl-count" id="resultsCount" role="status" aria-live="polite">56 of 56 apps</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATALOG ── -->
+<section class="catalog-section" id="catalog">
+  <div class="wrap">
+    <div class="catalog-list" id="catalogList" role="table" aria-label="Secret Suite catalog of 56 applications and the paid subscriptions they replace">
+      <div class="catalog-head-row" role="row">
+        <span role="columnheader">#</span>
+        <span role="columnheader">Secret Systems App</span>
+        <span role="columnheader">Replaces</span>
+        <span role="columnheader">Paid Alternative</span>
+      </div>
+      <div id="catalogRows"></div>
+    </div>
+    <div class="catalog-cards" id="catalogCards"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">No apps match your search or filters.</div>
+  </div>
+</section>
+
+<!-- ── METHODOLOGY ── -->
+<section class="method-section" id="methodology">
+  <div class="section wrap">
+    <p class="eyebrow reveal">Transparent Methodology</p>
+    <h2 class="h2 reveal">How the Total Is <span>Calculated</span></h2>
+    <p class="method-intro reveal" style="color:var(--text);font-size:.92rem;">The <b id="methodTotal" style="color:var(--white);">$2,910.36/month</b> figure is not a rounded marketing number — it is the sum of the itemized catalog below, using each vendor's own published pricing for a five-person business. The calculator and the hero use this exact same total by default.</p>
+
+    <div class="method-list reveal">
+      <div class="method-item">
+        <h3>Per-user plans</h3>
+        <p>Tools priced per seat (Zoom, Slack, Notion, DocuSign, Zendesk, and similar) are modeled at 5 users, matching the five-person business assumption.</p>
+      </div>
+      <div class="method-item">
+        <h3>Flat and per-channel plans</h3>
+        <p>Tools priced as a flat workspace, account, or per-channel subscription (Canva, Dropbox, Shopify, QuickBooks, Buffer, and similar) are counted once, regardless of team size.</p>
+      </div>
+      <div class="method-item">
+        <h3>Pricing sources</h3>
+        <p>Every counted price links to the vendor's own current pricing page in the catalog data. Where a vendor only publishes an annual-billed rate, the monthly-equivalent figure is used and noted.</p>
+      </div>
+      <div class="method-item">
+        <h3>What's excluded</h3>
+        <p>Taxes, promotional discounts, and invented enterprise pricing are excluded from every figure on this page. No price was selected to hit a predetermined total.</p>
+      </div>
+      <div class="method-item">
+        <h3>Open source still costs something</h3>
+        <p>Self-hosting is not free. Hosting, storage, backups, email delivery, payment processing, third-party APIs, AI compute, and maintenance can still carry real operating costs.</p>
+      </div>
+    </div>
+
+    <div class="method-note reveal">
+      <h3>Duplicate value reviewed and excluded</h3>
+      <p>SecretHelp runs on the same infrastructure as SecretSupport (both are Chatwoot-based) and is excluded from every total to avoid double-counting the same subscription twice.</p>
+      <div class="duplicate-list">
+        <p class="duplicate-item"><b>Kept separate — SecretSchedule vs. SecretBookings:</b> general meeting scheduling (Calendly) versus service-business appointment booking with staff and payment handling (Square Appointments) are different paid products.</p>
+        <p class="duplicate-item"><b>Kept separate — SecretMoney vs. SecretInvoice:</b> general-ledger accounting (QuickBooks) versus dedicated invoicing and payment tracking (FreshBooks) are different paid products many teams run side by side.</p>
+        <p class="duplicate-item"><b>Kept separate — SecretWiki vs. SecretKnowledge:</b> internal team documentation versus customer-facing published help content (GitBook) are different use cases and different products.</p>
+        <p class="duplicate-item"><b>Kept separate — SecretDrive vs. SecretVault:</b> general file sync (Dropbox Plus) versus access-controlled, audit-logged sharing (Dropbox Business Advanced) is a materially different, separately priced feature tier.</p>
+      </div>
+    </div>
+
+    <p class="method-reviewed">Pricing last reviewed <span id="pricingReviewedDate">—</span> · Team-size assumption: 5 people · Full sourced data in the catalog below</p>
+  </div>
+</section>
+
+<!-- ── OPEN SOURCE DISCLOSURE ── -->
+<section class="disclosure-section">
+  <div class="section wrap">
+    <p class="eyebrow reveal">Built on Open Foundations</p>
+    <h2 class="h2 reveal">Built on Open <span>Foundations</span></h2>
+    <div class="disclosure-text reveal">
+      <p>Secret Suite products are redesigned and maintained by Secret Systems using established open-source foundations. Each application preserves the licensing notices, attribution and source-code obligations required by its underlying project.</p>
+      <p>Secret Systems is not affiliated with, endorsed by or sponsored by the paid products displayed on this page. Product names and logos are used only to identify the services being compared.</p>
+      <p>Free software does not mean zero operating cost. Hosting, storage, backups, email delivery, payment processing, third-party APIs, AI compute, data services, maintenance and support may still have costs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section style="background:var(--deep);border-top:1px solid var(--border);">
+  <div class="cta-band wrap">
+    <p class="eyebrow" style="justify-content:center;">Ready When You Are</p>
+    <h2 class="h2" style="max-width:620px;margin:0 auto 1.5rem;">Start Cutting Your <span>Software Bill.</span></h2>
+    <p style="color:var(--text);font-size:1rem;max-width:520px;margin:0 auto 2.5rem;">Follow the Secret Suite rollout or request the applications your business needs first.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact/?service=Secret+Suite" class="btn btn-cyan">Request an app →</a>
+      <a href="/contact/?service=Secret+Suite" class="btn btn-outline">Talk to Secret Systems</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="/" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software &amp; Apps</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/security/">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/secret-suite/">Secret Suite</a></li><li><a href="/catalog/">Service Catalog</a></li><li><a href="/pricing/">Pricing</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="/contact/">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="/privacy/" style="color:inherit;">Privacy</a> · <a href="/terms/" style="color:inherit;">Terms</a> · <a href="/accessibility/" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script src="/secret-suite/secret-suite-data.js"></script>
+<script src="/secret-suite/secret-suite.js"></script>
+</body>
+</html>

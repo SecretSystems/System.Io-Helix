@@ -1,0 +1,273 @@
+{
+  "1password": {
+    "title": "1Password",
+    "hex": "145FE4",
+    "fillUsed": "#145FE4",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "asana": {
+    "title": "Asana",
+    "hex": "F06A6A",
+    "fillUsed": "#F06A6A",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "bitly": {
+    "title": "Bitly",
+    "hex": "EE6123",
+    "fillUsed": "#EE6123",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "buffer": {
+    "title": "Buffer",
+    "hex": "231F20",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "calendly": {
+    "title": "Calendly",
+    "hex": "006BFF",
+    "fillUsed": "#006BFF",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "confluence": {
+    "title": "Confluence",
+    "hex": "172B4D",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "dropbox": {
+    "title": "Dropbox",
+    "hex": "0061FF",
+    "fillUsed": "#0061FF",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "elevenlabs": {
+    "title": "ElevenLabs",
+    "hex": "000000",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "evernote": {
+    "title": "Evernote",
+    "hex": "00A82D",
+    "fillUsed": "#00A82D",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "ghost": {
+    "title": "Ghost",
+    "hex": "15171A",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "github": {
+    "title": "GitHub",
+    "hex": "181717",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "google": {
+    "title": "Google",
+    "hex": "4285F4",
+    "fillUsed": "#4285F4",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "grammarly": {
+    "title": "Grammarly",
+    "hex": "027E6F",
+    "fillUsed": "#027E6F",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "hubspot": {
+    "title": "HubSpot",
+    "hex": "FF7A59",
+    "fillUsed": "#FF7A59",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "instapaper": {
+    "title": "Instapaper",
+    "hex": "1F1F1F",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "loom": {
+    "title": "Loom",
+    "hex": "625DF5",
+    "fillUsed": "#625DF5",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "mailchimp": {
+    "title": "MailChimp",
+    "hex": "FFE01B",
+    "fillUsed": "#FFE01B",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "miro": {
+    "title": "Miro",
+    "hex": "050038",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "mixpanel": {
+    "title": "Mixpanel",
+    "hex": "7856FF",
+    "fillUsed": "#7856FF",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "notion": {
+    "title": "Notion",
+    "hex": "000000",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "perplexity": {
+    "title": "Perplexity",
+    "hex": "1FB8CD",
+    "fillUsed": "#1FB8CD",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "plex": {
+    "title": "Plex",
+    "hex": "EBAF00",
+    "fillUsed": "#EBAF00",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "postman": {
+    "title": "Postman",
+    "hex": "FF6C37",
+    "fillUsed": "#FF6C37",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "quickbooks": {
+    "title": "QuickBooks",
+    "hex": "2CA01C",
+    "fillUsed": "#2CA01C",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "retool": {
+    "title": "Retool",
+    "hex": "3D3D3D",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "sentry": {
+    "title": "Sentry",
+    "hex": "362D59",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "shopify": {
+    "title": "Shopify",
+    "hex": "7AB55C",
+    "fillUsed": "#7AB55C",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "spotify": {
+    "title": "Spotify",
+    "hex": "1ED760",
+    "fillUsed": "#1ED760",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "square": {
+    "title": "Square",
+    "hex": "3E4348",
+    "fillUsed": "#3E4348",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "surveymonkey": {
+    "title": "SurveyMonkey",
+    "hex": "00BF6F",
+    "fillUsed": "#00BF6F",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "teamviewer": {
+    "title": "TeamViewer",
+    "hex": "050A52",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "toggl": {
+    "title": "Toggl",
+    "hex": "FFDE91",
+    "fillUsed": "#FFDE91",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "typeform": {
+    "title": "Typeform",
+    "hex": "262627",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "zapier": {
+    "title": "Zapier",
+    "hex": "FF4F00",
+    "fillUsed": "#FF4F00",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "zendesk": {
+    "title": "Zendesk",
+    "hex": "03363D",
+    "fillUsed": "#e8f4ff",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "zoom": {
+    "title": "Zoom",
+    "hex": "0B5CFF",
+    "fillUsed": "#0B5CFF",
+    "source": "Simple Icons (CC0) via npm simple-icons 16.28.0"
+  },
+  "adobe-acrobat": {
+    "title": "Adobe Acrobat",
+    "source": "Wikimedia Commons (File:Adobe Acrobat DC logo 2020.svg)",
+    "fillUsed": "#FA0F00 / #FFF (original)"
+  },
+  "adobe-premiere-pro": {
+    "title": "Adobe Premiere Pro",
+    "source": "Wikimedia Commons (File:Adobe Premiere Pro Logo.svg)",
+    "fillUsed": "#C9A6FF (recolored from #2A0034 for dark-background visibility; shape unaltered)"
+  },
+  "canva": {
+    "title": "Canva",
+    "source": "Wikimedia Commons (File:Canva logo.svg)",
+    "fillUsed": "#7D2AE7 (original)"
+  },
+  "slack": {
+    "title": "Slack",
+    "source": "Wikimedia Commons (File:Slack icon 2019.svg)",
+    "fillUsed": "original 4-color brand palette"
+  },
+  "docusign": {
+    "title": "DocuSign",
+    "source": "Wikimedia Commons (File:Docusign Full Color.svg)",
+    "fillUsed": "original"
+  },
+  "otter": {
+    "title": "Otter.ai",
+    "source": "Official press/media kit (public.otter.ai/img/blue-horizontal.svg)",
+    "fillUsed": "#144FFF original + #e8f4ff recolored from #22282F for dark-background visibility"
+  },
+  "ynab": {
+    "title": "YNAB",
+    "source": "Wikimedia Commons (File:YNAB blurple logo.svg)",
+    "fillUsed": "#545BFE original + #e8f4ff recolored from #1C1F58 for dark-background visibility"
+  },
+  "freshbooks": {
+    "title": "FreshBooks",
+    "source": "Wikimedia Commons (File:FreshBooks logo (2020).svg)",
+    "fillUsed": "original"
+  },
+  "lucidchart": {
+    "title": "Lucidchart",
+    "source": "Wikimedia Commons (File:Lucidchart 2020 logo.svg)",
+    "fillUsed": "#F96B13 original + #e8f4ff recolored from #282C33 for dark-background visibility"
+  },
+  "runway": {
+    "title": "Runway",
+    "source": "Wikimedia Commons (File:Runway Black Logo SVG.svg) — self-published upload, moderate confidence this is runwayml.com and not an unrelated brand of the same name",
+    "fillUsed": "#e8f4ff recolored from black for dark-background visibility"
+  },
+  "openai": {
+    "title": "OpenAI",
+    "source": "Wikimedia Commons (File:OpenAI logo 2025 (wordmark).svg), sourced from openai.com/brand — used to represent ChatGPT Plus",
+    "fillUsed": "#e8f4ff (explicit fill added; source had none, would default to black/invisible)"
+  }
+}

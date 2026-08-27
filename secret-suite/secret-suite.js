@@ -670,31 +670,32 @@
   }
 
   function renderActiveChips(){
-    var wrap = document.getElementById("activeChips");
-    if(!wrap) return;
     var entries = activeFilterEntries();
-    wrap.innerHTML = "";
-    wrap.classList.toggle("has-chips", entries.length > 0);
-    entries.forEach(function(entry){
-      var chip = document.createElement("span");
-      chip.className = "active-chip";
-      var label = document.createElement("span");
-      label.textContent = entry.label;
-      var removeBtn = document.createElement("button");
-      removeBtn.type = "button";
-      removeBtn.setAttribute("aria-label", "Remove filter: " + entry.label);
-      removeBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-      removeBtn.addEventListener("click", function(){
-        entry.clear();
-        syncCheckboxesFromState();
-        syncQuickChipStates();
-        updateFilterCount();
-        renderActiveChips();
-        renderCatalog();
+    [document.getElementById("activeChips"), document.getElementById("activeChipsPanel")].forEach(function(wrap){
+      if(!wrap) return;
+      wrap.innerHTML = "";
+      wrap.classList.toggle("has-chips", entries.length > 0);
+      entries.forEach(function(entry){
+        var chip = document.createElement("span");
+        chip.className = "active-chip";
+        var label = document.createElement("span");
+        label.textContent = entry.label;
+        var removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.setAttribute("aria-label", "Remove filter: " + entry.label);
+        removeBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+        removeBtn.addEventListener("click", function(){
+          entry.clear();
+          syncCheckboxesFromState();
+          syncQuickChipStates();
+          updateFilterCount();
+          renderActiveChips();
+          renderCatalog();
+        });
+        chip.appendChild(label);
+        chip.appendChild(removeBtn);
+        wrap.appendChild(chip);
       });
-      chip.appendChild(label);
-      chip.appendChild(removeBtn);
-      wrap.appendChild(chip);
     });
   }
 

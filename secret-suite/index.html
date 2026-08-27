@@ -140,7 +140,7 @@
 .mobile-filters-btn{position:relative;flex-shrink:0;width:96px;height:46px;display:flex;align-items:center;justify-content:center;gap:.4rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Outfit',sans-serif;font-size:.82rem;cursor:pointer;}
 .mobile-filters-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 .mobile-filters-count{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--cyan);color:var(--void);font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.mobile-controls-row2{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding-top:.6rem;}
+.mobile-controls-row2{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding-top:.5rem;}
 .mobile-results-count{font-size:.76rem;color:var(--muted);}
 .mobile-row2-right{display:flex;align-items:center;gap:.7rem;}
 .mobile-clear-link{font-family:'Outfit',sans-serif;font-size:.76rem;color:var(--cyan);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px;}
@@ -182,11 +182,14 @@
 .quick-chip:hover{border-color:var(--cyan);color:var(--cyan);}
 .quick-chip[aria-pressed="true"]{background:rgba(0,200,255,.12);border-color:var(--cyan);color:var(--cyan);}
 .desktop-quick-chips{flex-shrink:0;}
-.mobile-quick-chips{padding-top:.6rem;}
+.mobile-quick-chips{padding-top:.45rem;}
+.mobile-quick-chips .quick-chip{padding:.4rem .75rem;font-size:.74rem;}
 
 /* Active-filter chips (removable) */
 .active-chips{display:none;flex-wrap:wrap;gap:.5rem;padding-top:.7rem;}
 .active-chips.has-chips{display:flex;}
+.panel-active-chips{padding-top:0;margin-bottom:1.3rem;}
+.panel-active-chips:empty{margin-bottom:0;}
 .active-chip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.3);border-radius:999px;color:var(--cyan);font-family:'Outfit',sans-serif;font-size:.74rem;padding:.3rem .5rem .3rem .8rem;}
 .active-chip button{display:flex;align-items:center;justify-content:center;width:18px;height:18px;background:none;border:none;color:inherit;cursor:pointer;border-radius:50%;flex-shrink:0;}
 .active-chip button:hover{background:rgba(0,200,255,.2);}
@@ -363,6 +366,9 @@
   .deploy-summary-row{gap:.45rem;}
   .deploy-summary-item{padding:.6rem .8rem;}
   .mobile-quick-chips .quick-chip[data-mobile-hidden]{display:none;}
+  /* Active-filter chips live inside the Filters panel only on mobile — keep the compact controls slim */
+  .active-chips{display:none!important;}
+  .panel-active-chips.has-chips{display:flex!important;}
 }
 </style>
 </head>
@@ -556,6 +562,8 @@
     <h2 class="filter-panel-title" id="filterPanelTitle">Filters</h2>
     <button type="button" class="filter-panel-close" id="filterPanelClose" aria-label="Close filters">✕</button>
   </div>
+
+  <div class="active-chips panel-active-chips" id="activeChipsPanel" role="group" aria-label="Active filters" aria-live="polite"></div>
 
   <fieldset class="filter-group">
     <legend>Quick filters</legend>

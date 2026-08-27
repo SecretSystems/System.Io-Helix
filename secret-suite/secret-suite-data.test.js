@@ -73,10 +73,24 @@ SS_SUITE_APPS.forEach(a => {
 });
 check("every app has a logo or a documented fallback reason", undocumented === 0, undocumented + " undocumented");
 
-/* ── Every referenced logo file actually exists on disk ── */
-const referencedSlugs = SS_SUITE_APPS.filter(a => a.logoSlug).map(a => a.logoSlug);
-const missingFiles = referencedSlugs.filter(slug => !fs.existsSync(path.join(LOGO_DIR, slug + ".svg")));
+/* ── Every referenced logo file actually exists on disk (correct extension) ── */
+const referencedLogos = SS_SUITE_APPS.filter(a => a.logoSlug).map(a => ({slug: a.logoSlug, ext: a.logoExt || "svg"}));
+const missingFiles = referencedLogos.filter(l => !fs.existsSync(path.join(LOGO_DIR, l.slug + "." + l.ext))).map(l => l.slug + "." + l.ext);
 check("every referenced logo file exists in assets/competitor-logos/", missingFiles.length === 0, missingFiles.join(", "));
+
+/* ── 100% logo coverage: no app should still need a text-only fallback ── */
+const stillFallback = SS_SUITE_APPS.filter(a => a.priceBasis !== "merged" && !a.logoSlug);
+check("every counted app has a real vendor logo (no text-only fallbacks remain)", stillFallback.length === 0, stillFallback.map(a => a.paidAlternative).join(", "));
+
+/* ── Displayed "Verified vendor logos" stat matches the real logo count ── */
+const realLogoCount = SS_SUITE_APPS.filter(a => a.logoSlug).length;
+const htmlPathForStat = path.join(__dirname, "index.html");
+const htmlForStat = fs.readFileSync(htmlPathForStat, "utf8");
+check("hero stat displays the correct verified-logo count (" + realLogoCount + ")", htmlForStat.includes('<span class="verify-num">' + realLogoCount + '</span><span class="verify-label">Verified vendor logos</span>'));
+
+/* ── logoIncludesName is only set on rows with an actual logo ── */
+const badLogoIncludesName = SS_SUITE_APPS.filter(a => a.logoIncludesName && !a.logoSlug);
+check("logoIncludesName is never set without a logoSlug", badLogoIncludesName.length === 0, badLogoIncludesName.map(a => a.paidAlternative).join(", "));
 
 /* ── Pricing totals: hero, calculator default, and methodology must all agree ── */
 function effectiveMonthlyValue(app, teamSize){

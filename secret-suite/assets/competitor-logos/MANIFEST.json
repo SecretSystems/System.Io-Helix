@@ -269,5 +269,45 @@
     "title": "OpenAI",
     "source": "Wikimedia Commons (File:OpenAI logo 2025 (wordmark).svg), sourced from openai.com/brand — used to represent ChatGPT Plus",
     "fillUsed": "#e8f4ff (explicit fill added; source had none, would default to black/invisible)"
+  },
+  "chatgpt": {
+    "title": "ChatGPT",
+    "source": "Wikimedia Commons (File:ChatGPT logo.svg) — ChatGPT-specific icon, not the generic OpenAI corporate mark",
+    "fillUsed": "original teal #74aa9c + white"
+  },
+  "uptimerobot": {
+    "title": "UptimeRobot",
+    "source": "Official marketing site (uptimerobot.com build asset)",
+    "fillUsed": "original green #3BD771"
+  },
+  "canny": {
+    "title": "Canny",
+    "source": "Official marketing site (assets.canny.io CDN)",
+    "fillUsed": "original blue, PNG format"
+  },
+  "sortly": {
+    "title": "Sortly",
+    "source": "Wikimedia Commons (File:Sortly Logo.png), sourced from sortly.com",
+    "fillUsed": "original red wordmark, PNG format"
+  },
+  "resumeio": {
+    "title": "Resume.io",
+    "source": "Official marketing site (s3.resume.io asset)",
+    "fillUsed": "#e8f4ff recolored from #0F141E/#828BA2 for dark-background visibility; blue accent #2F8DEB original"
+  },
+  "gitbook": {
+    "title": "GitBook",
+    "source": "Official marketing site (framerusercontent.com touch-icon asset referenced by gitbook.com)",
+    "fillUsed": "original dark-square icon, already dark-background-safe, PNG format"
+  },
+  "opusclip": {
+    "title": "OpusClip",
+    "source": "Official marketing site (opus.pro Webflow CDN favicon asset)",
+    "fillUsed": "original, PNG format, small native size (32x32) — lower visual fidelity than other logos but confirmed genuine"
+  },
+  "apollo": {
+    "title": "Apollo.io",
+    "source": "Official marketing site (apollo.io Next.js build asset) — confirmed the sales-intelligence Apollo, not the unrelated Apollo GraphQL brand",
+    "fillUsed": "#e8f4ff recolored from #1F1F1E for dark-background visibility"
   }
 }

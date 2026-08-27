@@ -73,7 +73,7 @@ Gold Salon: https://buy.stripe.com/xxxx3
 ```
 
 I'll paste each URL into the matching `paymentLink:""` entry in
-`reviews/index.html` (search for `var STYLES = [`), test that every
+`reviews/product.js` (search for `var STYLES = [`), test that every
 Buy button opens the right Stripe page, and deploy.
 
 ## What happens until then

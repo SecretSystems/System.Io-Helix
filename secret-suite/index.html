@@ -46,16 +46,6 @@
 .verify-num{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:var(--white);}
 .verify-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
 
-/* ── ONE-LINE PREVIEW — three product examples, restrained ── */
-.preview-section{padding:2.4rem 0;border-bottom:1px solid var(--border);}
-.preview-row{display:flex;flex-direction:column;}
-.preview-item{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.6rem;padding:1.3rem 0;border-top:1px solid var(--border);}
-.preview-item:last-child{border-bottom:1px solid var(--border);}
-.preview-secret{display:flex;flex-direction:column;gap:.15rem;}
-.preview-secret-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);}
-.preview-secret-desc{font-size:.8rem;color:var(--muted);}
-.preview-arrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);text-align:center;white-space:nowrap;}
-
 /* Competitor block — exactly one cancellation line across the whole group */
 .competitor-block{position:relative;display:inline-flex;align-items:center;gap:.6rem;justify-self:end;}
 .competitor-block::after{content:'';position:absolute;left:-8%;right:-8%;top:50%;height:2px;background:#ff5470;transform:translateY(-50%) rotate(-3.5deg);pointer-events:none;box-shadow:0 0 0 1px rgba(2,4,8,.35);}
@@ -301,8 +291,6 @@
 @media(max-width:900px){
   .suite-hero{padding:7rem 0 3rem;}
   .verify-row{gap:1.6rem;padding:1.2rem 0;}
-  .preview-item{grid-template-columns:1fr;gap:.7rem;text-align:left;}
-  .preview-arrow{text-align:left;}
   .competitor-block{justify-self:start;}
   .calc-top{flex-direction:column;align-items:flex-start;gap:1.4rem;}
   .calc-totals{width:100%;justify-content:space-between;gap:1rem;}
@@ -386,47 +374,6 @@
     <div class="verify-item"><span class="verify-num">0</span><span class="verify-label">Live today</span></div>
     <div class="verify-item"><span class="verify-num">55</span><span class="verify-label">Verified vendor logos</span></div>
     <div class="verify-item"><span class="verify-num" id="stripReviewed">—</span><span class="verify-label">Pricing last reviewed</span></div>
-  </div>
-</section>
-
-<!-- ── PREVIEW — three examples before the full catalog ── -->
-<section class="preview-section">
-  <div class="wrap">
-    <div class="preview-row">
-      <div class="preview-item">
-        <div class="preview-secret">
-          <span class="preview-secret-name">SecretDesign</span>
-          <span class="preview-secret-desc">Design graphics and interfaces</span>
-        </div>
-        <span class="preview-arrow">Replaces</span>
-        <div class="competitor-block">
-          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/canva.svg" alt="" width="22" height="22"/></div>
-          <div class="competitor-text"><span class="competitor-name">Canva</span><span class="competitor-price">$18/month</span></div>
-        </div>
-      </div>
-      <div class="preview-item">
-        <div class="preview-secret">
-          <span class="preview-secret-name">SecretChat</span>
-          <span class="preview-secret-desc">Team messaging and channels</span>
-        </div>
-        <span class="preview-arrow">Replaces</span>
-        <div class="competitor-block">
-          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/slack.svg" alt="" width="22" height="22"/></div>
-          <div class="competitor-text"><span class="competitor-name">Slack</span><span class="competitor-price">$8.75/user/month</span></div>
-        </div>
-      </div>
-      <div class="preview-item">
-        <div class="preview-secret">
-          <span class="preview-secret-name">SecretSupport</span>
-          <span class="preview-secret-desc">Customer conversations and tickets</span>
-        </div>
-        <span class="preview-arrow">Replaces</span>
-        <div class="competitor-block">
-          <div class="competitor-logo" aria-hidden="true"><img src="/secret-suite/assets/competitor-logos/zendesk.svg" alt="" width="22" height="22"/></div>
-          <div class="competitor-text"><span class="competitor-name">Zendesk</span><span class="competitor-price">$55/user/month</span></div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 

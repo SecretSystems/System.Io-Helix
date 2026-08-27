@@ -75,6 +75,56 @@
   @keyframes rvBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
   @media(prefers-reduced-motion:reduce){.rv-scroll-cue{animation:none;}}
 }
+
+/* ── PRODUCT PICKER / CHECKOUT ── */
+.rv-style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:2.5rem;}
+.rv-style-card{background:var(--card);border:2px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:border-color .2s,transform .2s;position:relative;}
+.rv-style-card:hover{border-color:rgba(0,200,255,.4);transform:translateY(-2px);}
+.rv-style-card.is-selected{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,200,255,.15);}
+.rv-style-card img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#0a1420;}
+.rv-style-check{position:absolute;top:.6rem;right:.6rem;width:26px;height:26px;border-radius:50%;background:var(--void);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.rv-style-card.is-selected .rv-style-check{background:var(--cyan);border-color:var(--cyan);}
+.rv-style-check svg{width:14px;height:14px;stroke:var(--void);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s;}
+.rv-style-card.is-selected .rv-style-check svg{opacity:1;}
+.rv-style-meta{padding:.8rem .9rem 1rem;}
+.rv-style-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:.2rem;}
+.rv-style-platform{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+
+.rv-checkout-panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;}
+.rv-checkout-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-bottom:1.8rem;}
+.rv-tier-option{background:var(--card);color:inherit;text-align:left;font:inherit;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.3rem;cursor:pointer;transition:border-color .2s,background .2s;position:relative;width:100%;}
+.rv-tier-option:hover{border-color:rgba(0,200,255,.4);}
+.rv-tier-option.is-selected{border-color:var(--cyan);background:rgba(0,200,255,.04);}
+.rv-tier-option .plan-label{margin-bottom:.4rem;}
+.rv-tier-option .amount{font-size:2rem;margin-bottom:.2rem;}
+.rv-tier-option .period{font-size:.78rem;margin-bottom:0;}
+.rv-field-row{margin-bottom:1.4rem;}
+.rv-field-row label{display:block;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+.rv-field-row input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(0,200,255,.15);color:var(--white);font-family:'Outfit',sans-serif;font-size:.92rem;padding:.85rem 1rem;outline:none;border-radius:8px;transition:border-color .2s;}
+.rv-field-row input:focus{border-color:var(--cyan);}
+.rv-field-hint{font-size:.76rem;color:var(--muted);margin-top:.5rem;line-height:1.5;}
+.rv-field-error{font-size:.76rem;color:#ff6b6b;margin-top:.5rem;display:none;}
+.rv-field-row.has-error input{border-color:#ff6b6b;}
+.rv-field-row.has-error .rv-field-error{display:block;}
+
+.rv-guide-toggle{display:inline-flex;align-items:center;gap:.4rem;background:none;border:none;color:var(--cyan);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;padding:0;margin-top:.6rem;}
+.rv-guide-toggle svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s;}
+.rv-guide-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+.rv-guide-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.rv-guide-body.is-open{max-height:900px;}
+.rv-guide-steps{list-style:none;counter-reset:rvstep;margin-top:1rem;padding:1.2rem;background:rgba(0,200,255,.03);border:1px solid var(--border);border-radius:10px;}
+.rv-guide-steps li{counter-increment:rvstep;position:relative;padding:.5rem 0 .5rem 2.4rem;font-size:.85rem;color:var(--text);line-height:1.6;}
+.rv-guide-steps li::before{content:counter(rvstep);position:absolute;left:0;top:.5rem;width:1.7rem;height:1.7rem;border-radius:50%;background:rgba(0,200,255,.12);border:1px solid rgba(0,200,255,.3);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.rv-guide-steps li b{color:var(--white);}
+
+.rv-checkout-summary{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.4rem;border-top:1px solid var(--border);}
+.rv-checkout-summary .rv-total{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--white);}
+.rv-checkout-summary .rv-total #rvSelectedLabel{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);font-weight:400;display:block;}
+@media(max-width:700px){
+  .rv-style-grid{grid-template-columns:repeat(2,1fr);}
+  .rv-checkout-grid{grid-template-columns:1fr;}
+  .rv-checkout-panel{padding:1.4rem;}
+}
 </style>
 </head>
 <body>
@@ -197,49 +247,76 @@
     </div>
   </div>
 
-  <!-- PRICING -->
+  <!-- PICKER + CHECKOUT -->
   <div id="pricing" style="margin-bottom:5rem;">
-    <p class="eyebrow reveal">Pricing</p>
-    <h2 class="h2 reveal" style="margin-bottom:2.5rem;">Pick Your <span>Card</span></h2>
-    <div class="rv-price-grid reveal">
-      <div class="price-card">
-        <p class="plan-label">Standard Card</p>
-        <div class="amount">$25<sup>one-time</sup></div>
-        <p class="period">Small NFC + QR card, standard black finish</p>
-        <ul class="pf">
-          <li>NFC tap + QR code, programmed &amp; tested</li>
-          <li>"Review Us On Google" printed design</li>
-          <li>Freestanding countertop card</li>
-          <li class="off">Custom logo/branding</li>
-        </ul>
-        <a href="/contact/" class="btn-price">Order Standard →</a>
+    <p class="eyebrow reveal">Build Your Card</p>
+    <h2 class="h2 reveal" style="margin-bottom:1rem;">Pick a Style.<br><span>Get It Programmed.</span></h2>
+    <p class="lead reveal" style="max-width:640px;margin-bottom:2.5rem;">Choose a design, tell us your review link, and check out — we program the NFC tag and QR code to match before it ships.</p>
+
+    <div class="rv-checkout-panel reveal" id="rvCheckout">
+
+      <!-- Tier -->
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;">1. Choose your tier</p>
+      <div class="rv-checkout-grid" role="radiogroup" aria-label="Card tier">
+        <button type="button" class="rv-tier-option is-selected" data-tier="standard" data-price="25" role="radio" aria-checked="true">
+          <p class="plan-label">Standard Card</p>
+          <div class="amount">$25<sup>one-time</sup></div>
+          <p class="period">Plain "Review Us On Google" design, black or white finish — no custom branding</p>
+        </button>
+        <button type="button" class="rv-tier-option" data-tier="branded" data-price="40" role="radio" aria-checked="false">
+          <p class="plan-label">Branded Card</p>
+          <div class="amount">$40<sup>one-time</sup></div>
+          <p class="period">Pick an industry-styled design below, customized with your business name</p>
+        </button>
       </div>
-      <div class="price-card feat">
-        <p class="plan-label">Branded Card</p>
-        <div class="amount">$40<sup>one-time</sup></div>
-        <p class="period">Large tap-here card, your logo &amp; colors</p>
-        <ul class="pf">
-          <li>NFC tap + QR code, programmed &amp; tested</li>
-          <li>Custom logo, business name &amp; colors</li>
-          <li>Larger freestanding countertop stand</li>
-          <li>Link destination updates included</li>
-        </ul>
-        <a href="/contact/" class="btn-price">Order Branded →</a>
+
+      <!-- Style picker (branded only) -->
+      <div id="rvStyleSection" style="display:none;margin-top:1.8rem;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;">2. Choose a style</p>
+        <div class="rv-style-grid" id="rvStyleGrid" role="radiogroup" aria-label="Card style"></div>
       </div>
-      <div class="price-card">
-        <p class="plan-label">Multi-Location</p>
-        <div class="amount">Custom</div>
-        <p class="period">Multiple cards across locations or counters</p>
-        <ul class="pf">
-          <li>Everything in Branded</li>
-          <li>Per-location review links</li>
-          <li>Volume pricing</li>
-          <li>Central reordering as you grow</li>
-        </ul>
-        <a href="/contact/" class="btn-price">Talk to Us →</a>
+
+      <!-- Google review link -->
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:1.8rem 0 .8rem;" id="rvLinkStepLabel">3. Your Google review link</p>
+      <div class="rv-field-row" id="rvLinkFieldRow">
+        <label for="rvReviewLink">Google review link</label>
+        <input type="url" id="rvReviewLink" placeholder="https://g.page/r/your-business/review" inputmode="url" autocomplete="off"/>
+        <p class="rv-field-error" id="rvLinkError">That doesn't look like a link. Paste the full URL, starting with https://</p>
+        <p class="rv-field-hint">This is the link your card will send customers to. Don't have it handy?</p>
+        <button type="button" class="rv-guide-toggle" id="rvGuideToggle" aria-expanded="false" aria-controls="rvGuideBody">
+          Can't find my Google review link?
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="rv-guide-body" id="rvGuideBody">
+          <ol class="rv-guide-steps">
+            <li>Open <b>Google Maps</b> or <b>google.com/business</b> and sign in with the account that manages your business.</li>
+            <li>Search for your business name and open its listing (or click <b>Manage now</b> from Google Business Profile).</li>
+            <li>Tap the <b>Share</b> or <b>Ask for reviews</b> button on your business listing.</li>
+            <li>Google will show a link that starts with <b>g.page/r/…</b> — tap <b>Copy link</b>.</li>
+            <li>Paste that link into the box above. That's it — that link is what your card will send customers to.</li>
+            <li>Still stuck? Leave the field blank and click <b>Buy</b> — write "need help finding my link" in the note, and we'll track it down for you before we program the card.</li>
+          </ol>
+        </div>
       </div>
+
+      <!-- Business name (branded only) -->
+      <div class="rv-field-row" id="rvNameFieldRow" style="display:none;">
+        <label for="rvBusinessName">Business name (for the card)</label>
+        <input type="text" id="rvBusinessName" placeholder="Your Business Name" autocomplete="organization"/>
+      </div>
+
+      <div class="rv-field-row">
+        <label for="rvOrderNote">Order notes (optional)</label>
+        <input type="text" id="rvOrderNote" placeholder="e.g. need help finding my review link, or color preference"/>
+        <p class="rv-field-hint">We read every note before we program your card. On the Stripe checkout page, this same field appears again as "Order notes" — either works.</p>
+      </div>
+
+      <div class="rv-checkout-summary">
+        <div class="rv-total"><span id="rvSelectedLabel">Standard Card</span>$<span id="rvTotalAmount">25</span></div>
+        <a href="#" id="rvBuyBtn" class="btn btn-cyan" target="_blank" rel="noopener">Buy Now →</a>
+      </div>
+      <p style="font-size:.76rem;color:var(--muted);margin-top:1rem;">Checkout is handled securely by Stripe. Shipping is calculated at checkout. Multiple locations or a bigger order? <a href="/contact/" style="color:var(--cyan);">Talk to us</a> for volume pricing.</p>
     </div>
-    <p style="font-size:.78rem;color:var(--muted);margin-top:1.5rem;">Prices are per card, one-time cost — no subscription. Shipping calculated at checkout when you contact us to order.</p>
   </div>
 
   <!-- FAQ -->
@@ -278,5 +355,121 @@
 <script src="/ss-shared.js"></script>
 <script>
 document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+
+/* ── Product picker + checkout ──
+   Each style below needs a real Stripe Payment Link — see the
+   REVIEWS_PAYMENT_LINKS_SETUP note at the bottom of this file for the
+   exact click-by-click steps to create one per row. Until a real URL
+   is filled in, the Buy button falls back to /contact/ so nothing is
+   ever a dead link in production. */
+(function(){
+  "use strict";
+
+  var STYLES = [
+    { slug:"standard",      name:"Classic Google",   platform:"Google · Black/White", img:"/reviews/assets/styles/style-standard-blackwhite.jpg", standardOnly:true, paymentLink:"" },
+    { slug:"branded-black",  name:"Signature Black",  platform:"Google",     img:"/reviews/assets/nfc-review-cards.png",             paymentLink:"" },
+    { slug:"salon-gold",     name:"Gold Salon",       platform:"Google",     img:"/reviews/assets/styles/style-salon-gold.png",       paymentLink:"" },
+    { slug:"retail-neon",    name:"Stay Connected",   platform:"Google · Instagram · Facebook", img:"/reviews/assets/styles/style-retail-neon.png", paymentLink:"" },
+    { slug:"dental-teal",    name:"Feedback Matters", platform:"Google",     img:"/reviews/assets/styles/style-dental-teal.png",      paymentLink:"" },
+    { slug:"dental-white",   name:"Tooth Outline",    platform:"Google",     img:"/reviews/assets/styles/style-dental-white.png",     paymentLink:"" },
+    { slug:"cafe-yelp",      name:"Love Your Visit",  platform:"Yelp",       img:"/reviews/assets/styles/style-cafe-yelp.png",        paymentLink:"" },
+    { slug:"barber-navy",    name:"Like Your Cut",    platform:"Facebook",   img:"/reviews/assets/styles/style-barber-navy.png",      paymentLink:"" },
+    { slug:"dining-emerald", name:"Fine Dining",      platform:"TripAdvisor", img:"/reviews/assets/styles/style-dining-emerald.png",  paymentLink:"" },
+    { slug:"auto-blue",      name:"Auto Shop",        platform:"Google",     img:"/reviews/assets/styles/style-auto-blue.png",        paymentLink:"" },
+    { slug:"beauty-pink",    name:"Share The Love",   platform:"Instagram",  img:"/reviews/assets/styles/style-beauty-pink.png",      paymentLink:"" }
+  ];
+  var FALLBACK_LINK = "/contact/";
+
+  var state = { tier:"standard", styleSlug:"standard" };
+
+  var grid = document.getElementById("rvStyleGrid");
+  var styleSection = document.getElementById("rvStyleSection");
+  var nameFieldRow = document.getElementById("rvNameFieldRow");
+  var tierBtns = document.querySelectorAll(".rv-tier-option");
+  var selectedLabel = document.getElementById("rvSelectedLabel");
+  var totalAmount = document.getElementById("rvTotalAmount");
+  var buyBtn = document.getElementById("rvBuyBtn");
+  var linkInput = document.getElementById("rvReviewLink");
+  var linkFieldRow = document.getElementById("rvLinkFieldRow");
+  var guideToggle = document.getElementById("rvGuideToggle");
+  var guideBody = document.getElementById("rvGuideBody");
+
+  function brandedStyles(){ return STYLES.filter(function(s){ return !s.standardOnly; }); }
+
+  function renderStyleGrid(){
+    grid.innerHTML = "";
+    brandedStyles().forEach(function(s){
+      var card = document.createElement("button");
+      card.type = "button";
+      card.className = "rv-style-card" + (state.styleSlug === s.slug ? " is-selected" : "");
+      card.setAttribute("role", "radio");
+      card.setAttribute("aria-checked", state.styleSlug === s.slug ? "true" : "false");
+      card.dataset.slug = s.slug;
+      card.innerHTML =
+        '<img src="' + s.img + '" alt="' + s.name + ' review card design" loading="lazy"/>' +
+        '<span class="rv-style-check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>' +
+        '<span class="rv-style-meta"><span class="rv-style-name">' + s.name + '</span><span class="rv-style-platform">' + s.platform + '</span></span>';
+      card.addEventListener("click", function(){
+        state.styleSlug = s.slug;
+        renderStyleGrid();
+        updateSummary();
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  function currentStyle(){
+    if(state.tier === "standard") return STYLES[0];
+    return STYLES.find(function(s){ return s.slug === state.styleSlug; }) || brandedStyles()[0];
+  }
+
+  function updateSummary(){
+    var tierBtn = document.querySelector('.rv-tier-option[data-tier="' + state.tier + '"]');
+    var price = tierBtn ? tierBtn.dataset.price : "25";
+    var style = currentStyle();
+    totalAmount.textContent = price;
+    selectedLabel.textContent = (state.tier === "standard" ? "Standard Card" : "Branded — " + style.name);
+    var link = style.paymentLink && style.paymentLink.length ? style.paymentLink : FALLBACK_LINK;
+    buyBtn.href = link;
+    buyBtn.target = link === FALLBACK_LINK ? "_self" : "_blank";
+  }
+
+  tierBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      tierBtns.forEach(function(b){ b.classList.remove("is-selected"); b.setAttribute("aria-checked","false"); });
+      btn.classList.add("is-selected");
+      btn.setAttribute("aria-checked","true");
+      state.tier = btn.dataset.tier;
+      var isBranded = state.tier === "branded";
+      styleSection.style.display = isBranded ? "block" : "none";
+      nameFieldRow.style.display = isBranded ? "block" : "none";
+      if(isBranded && state.styleSlug === "standard"){
+        state.styleSlug = brandedStyles()[0].slug;
+        renderStyleGrid();
+      }
+      updateSummary();
+    });
+  });
+
+  guideToggle.addEventListener("click", function(){
+    var open = guideToggle.getAttribute("aria-expanded") === "true";
+    guideToggle.setAttribute("aria-expanded", String(!open));
+    guideBody.classList.toggle("is-open", !open);
+  });
+
+  function isLikelyUrl(v){
+    if(!v) return true; // empty is allowed — they can ask us to find it
+    return /^https?:\/\/.+\..+/i.test(v.trim());
+  }
+  linkInput.addEventListener("blur", function(){
+    linkFieldRow.classList.toggle("has-error", !isLikelyUrl(linkInput.value));
+  });
+  linkInput.addEventListener("input", function(){
+    if(linkFieldRow.classList.contains("has-error")) linkFieldRow.classList.toggle("has-error", !isLikelyUrl(linkInput.value));
+  });
+
+  renderStyleGrid();
+  updateSummary();
+})();
 </script>
 </body></html>

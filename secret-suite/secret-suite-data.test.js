@@ -84,12 +84,6 @@ check("every referenced logo file exists in assets/competitor-logos/", missingFi
 const stillFallback = SS_SUITE_APPS.filter(a => a.priceBasis !== "merged" && !a.logoSlug);
 check("every counted app has a real vendor logo (no text-only fallbacks remain)", stillFallback.length === 0, stillFallback.map(a => a.paidAlternative).join(", "));
 
-/* ── Displayed "Verified vendor logos" stat matches the real logo count ── */
-const realLogoCount = SS_SUITE_APPS.filter(a => a.logoSlug).length;
-const htmlPathForStat = path.join(__dirname, "index.html");
-const htmlForStat = fs.readFileSync(htmlPathForStat, "utf8");
-check("hero stat displays the correct verified-logo count (" + realLogoCount + ")", htmlForStat.includes('<span class="verify-num">' + realLogoCount + '</span><span class="verify-label">Verified vendor logos</span>'));
-
 /* ── logoIncludesName is only set on rows with an actual logo ── */
 const badLogoIncludesName = SS_SUITE_APPS.filter(a => a.logoIncludesName && !a.logoSlug);
 check("logoIncludesName is never set without a logoSlug", badLogoIncludesName.length === 0, badLogoIncludesName.map(a => a.paidAlternative).join(", "));

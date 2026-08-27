@@ -15,16 +15,6 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="/ss-shared.css"/>
 <style>
-.page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
-.rv-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;}
-.rv-hero-grid>div{min-width:0;}
-.rv-hero-img{position:relative;}
-.rv-hero-img img{width:100%;height:auto;display:block;border:1px solid var(--border);background:var(--card);}
-.rv-badge{position:absolute;bottom:-1rem;left:-1rem;background:var(--void);border:1px solid var(--cyan);border-radius:999px;padding:.6rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:.5rem;}
-.rv-badge::before{content:'●';color:#4eff9f;font-size:.6rem;}
-.rv-stat-row{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.2rem;}
-.rv-stat b{display:block;font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--white);}
-.rv-stat span{font-size:.76rem;color:var(--muted);letter-spacing:.05em;}
 .how-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
 .how-step{background:var(--card);padding:2.5rem 2rem;}
 .how-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--cyan);margin-bottom:1rem;}
@@ -42,38 +32,8 @@
 .faq-a p{font-size:.9rem;color:var(--text);line-height:1.7;padding:0 0 1.5rem;}
 .rv-price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
 @media(max-width:900px){
-  .rv-hero-grid{grid-template-columns:1fr;gap:2.5rem;}
   .how-row{grid-template-columns:1fr;}
   .rv-price-grid{grid-template-columns:1fr;}
-  .rv-badge{left:1rem;}
-}
-
-/* ── MOBILE FULL-BLEED VISUAL HERO ──
-   Product photo fills the top of the screen, compact text pinned to
-   the bottom over a gradient scrim, next section peeks in below —
-   same pattern as a Nike/Apple mobile hero. Desktop keeps the
-   original .page-hero-bg two-column layout above; this only shows <768px. */
-.rv-hero-visual{display:none;}
-@media(max-width:767px){
-  .page-hero-bg{display:none;}
-  .rv-hero-visual{
-    display:flex;flex-direction:column;justify-content:flex-end;
-    position:relative;height:92svh;min-height:560px;max-height:820px;
-    overflow:hidden;background:var(--void);border-bottom:1px solid var(--border);
-  }
-  .rv-hero-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;}
-  .rv-hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,4,8,.05) 0%,rgba(2,4,8,.2) 32%,rgba(2,4,8,.75) 55%,rgba(2,4,8,.97) 78%,var(--void) 100%);}
-  .rv-hero-visual-content{position:relative;z-index:1;padding:0 1.3rem 1.6rem;}
-  .rv-hero-visual-content .eyebrow{font-size:.62rem;margin-bottom:.6rem;}
-  .rv-hero-visual-content h1{font-size:2rem;line-height:1.05;margin-bottom:.8rem;}
-  .rv-hero-visual-content .lead{font-size:.82rem;margin-bottom:1.1rem;max-width:100%;margin-top:0!important;}
-  .rv-hero-visual-content .rv-stat-row{display:none;}
-  .rv-hero-visual-content div[style*="display:flex"]{margin-top:0!important;gap:.7rem!important;}
-  .rv-hero-visual-content .btn{padding:.7rem 1.4rem;font-size:.78rem;}
-  .rv-scroll-cue{position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--muted);animation:rvBounce 1.8s ease-in-out infinite;}
-  .rv-scroll-cue svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
-  @keyframes rvBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
-  @media(prefers-reduced-motion:reduce){.rv-scroll-cue{animation:none;}}
 }
 
 /* ── PRODUCT PICKER / CHECKOUT ── */
@@ -125,6 +85,33 @@
   .rv-checkout-grid{grid-template-columns:1fr;}
   .rv-checkout-panel{padding:1.4rem;}
 }
+
+/* ── TOP CAROUSEL ──
+   Full-width, auto-playing, swipeable image strip — pure visual
+   showcase, not tied to the picker below. Pauses on hover/touch and
+   respects prefers-reduced-motion. */
+.rv-carousel{position:relative;background:var(--void);border-bottom:1px solid var(--border);overflow:hidden;}
+.rv-carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:0;-webkit-overflow-scrolling:touch;}
+.rv-carousel-track::-webkit-scrollbar{display:none;}
+.rv-carousel-track{scrollbar-width:none;}
+.rv-carousel-slide{flex:0 0 100%;scroll-snap-align:center;position:relative;height:78svh;min-height:420px;max-height:760px;}
+.rv-carousel-slide img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
+.rv-carousel-caption{position:absolute;left:0;right:0;bottom:0;padding:2.6rem 1.6rem 1.4rem;background:linear-gradient(180deg,transparent,rgba(2,4,8,.9) 55%,rgba(2,4,8,.9));display:flex;flex-direction:column;gap:.2rem;text-align:center;}
+.rv-carousel-caption b{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--white);}
+.rv-carousel-caption span{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);}
+.rv-carousel-dots{position:absolute;left:50%;bottom:.7rem;transform:translateX(-50%);display:flex;gap:.5rem;z-index:2;}
+.rv-carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);border:none;padding:0;cursor:pointer;transition:background .2s,transform .2s;}
+.rv-carousel-dot.is-active{background:var(--cyan);transform:scale(1.3);}
+.rv-carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(2,4,8,.55);border:1px solid rgba(255,255,255,.15);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;backdrop-filter:blur(4px);}
+.rv-carousel-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.rv-carousel-arrow.prev{left:1rem;}
+.rv-carousel-arrow.next{right:1rem;}
+@media(max-width:700px){
+  .rv-carousel-slide{height:62svh;min-height:340px;}
+  .rv-carousel-arrow{display:none;}
+  .rv-carousel-caption{padding:1rem 1.1rem;}
+  .rv-carousel-caption b{font-size:.88rem;}
+}
 </style>
 </head>
 <body>
@@ -161,93 +148,19 @@
 
 <main>
 
-<!-- ── MOBILE FULL-BLEED VISUAL HERO (Nike-style: photo first, compact text pinned low, next section peeks in) ── -->
-<section class="rv-hero-visual">
-  <img src="/reviews/assets/nfc-review-cards.png" alt="Two black countertop NFC and QR review cards branded Secret Systems.io, reading 'Review Us On Google' with tap-to-review icons, five gold stars, and a printed QR code" width="1522" height="1033"/>
-  <div class="rv-hero-scrim"></div>
-  <div class="rv-hero-visual-content">
-    <p class="eyebrow">Tap. Scan. Review.</p>
-    <p class="h1" role="heading" aria-level="1" style="font-size:2rem;">Turn Happy Customers Into 5-Star Reviews.</p>
-    <p class="lead">A custom-branded countertop card that sends customers straight to your Google review page — no app, no searching.</p>
-    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-      <a href="/contact/" class="btn btn-cyan">Get Your Review Card →</a>
-    </div>
-  </div>
-  <div class="rv-scroll-cue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
+<!-- ── TOP CAROUSEL — pure visual showcase of every card style, autoplay + swipe ── -->
+<section class="rv-carousel">
+  <nav aria-label="Breadcrumb" style="position:absolute;top:1rem;left:1.6rem;z-index:2;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;"><a href="/" style="color:rgba(255,255,255,.7);text-decoration:none;">Home</a><span style="color:rgba(255,255,255,.5);"> › </span><span style="color:var(--cyan);">Review Cards</span></nav>
+  <div class="rv-carousel-track" id="rvCarouselTrack" role="region" aria-label="Review card style gallery" aria-roledescription="carousel"></div>
+  <button type="button" class="rv-carousel-arrow prev" id="rvCarouselPrev" aria-label="Previous style"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button type="button" class="rv-carousel-arrow next" id="rvCarouselNext" aria-label="Next style"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div class="rv-carousel-dots" id="rvCarouselDots" role="tablist" aria-label="Choose slide"></div>
 </section>
 
-<div class="page-hero-bg">
-<div class="page-hero wrap">
-  <nav aria-label="Breadcrumb" style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem;"><a href="/" style="color:var(--muted);text-decoration:none;">Home</a><span style="color:var(--muted);"> › </span><span style="color:var(--cyan);">Review Cards</span></nav>
-  <div class="rv-hero-grid">
-    <div>
-      <p class="eyebrow">Tap. Scan. Review.</p>
-      <h1 class="h1" style="font-size:clamp(2.6rem,5.5vw,5.2rem);">Turn Happy Customers<br><span>Into 5-Star Reviews.</span></h1>
-      <p class="lead" style="margin-top:2rem;max-width:560px;">A custom-branded countertop card that sends any customer straight to your Google review page — no app, no typing your business name, no searching. Just a tap or a scan, and they're already on the review screen.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
-        <a href="/contact/" class="btn btn-cyan">Get Your Review Card →</a>
-        <a href="#how" class="btn btn-outline">How It Works</a>
-      </div>
-      <div class="rv-stat-row">
-        <div class="rv-stat"><b>&lt;5 sec</b><span>Tap to review screen</span></div>
-        <div class="rv-stat"><b>NFC + QR</b><span>Works on every phone</span></div>
-        <div class="rv-stat"><b>0</b><span>Apps to download</span></div>
-      </div>
-    </div>
-    <div class="rv-hero-img">
-      <img src="/reviews/assets/nfc-review-cards.png" alt="Two black countertop NFC and QR review cards branded Secret Systems.io, reading 'Review Us On Google' with tap-to-review icons, five gold stars, and a printed QR code" width="1522" height="1033"/>
-      <span class="rv-badge">NFC Tap-to-Review</span>
-    </div>
-  </div>
-</div>
-</div>
-
 <div style="background:var(--void);">
-<div class="section wrap">
+<div class="section wrap" style="padding-top:3.5rem;">
 
-  <!-- HOW IT WORKS -->
-  <div id="how" style="margin-bottom:5rem;">
-    <p class="eyebrow reveal">How It Works</p>
-    <h2 class="h2 reveal" style="margin-bottom:2.5rem;">Three Steps.<br><span>Zero Friction.</span></h2>
-    <div class="how-row reveal">
-      <div class="how-step">
-        <div class="how-num">01</div>
-        <div class="how-title">Set it on the counter</div>
-        <div class="how-desc">The card stands on its own — checkout counter, table, front desk, wherever customers naturally look when they're happy with the service.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">02</div>
-        <div class="how-title">Customer taps or scans</div>
-        <div class="how-desc">Any modern phone taps the card (NFC) or scans the printed QR code. No app required — it just opens their browser.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-num">03</div>
-        <div class="how-title">They land on your review page</div>
-        <div class="how-desc">Their phone opens straight to your Google Business review screen, star rating ready to tap. Fewer steps means more reviews actually get left.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WHY IT WORKS -->
-  <div class="grid-2 reveal" style="margin-bottom:5rem;">
-    <div>
-      <p class="eyebrow">Why It Works</p>
-      <h2 class="h2">Every Extra Step<br><span>Loses a Review.</span></h2>
-      <p class="lead">Most happy customers mean to leave a review and never do — because they'd have to open Google, search your business name, find the right listing, and then find the review button. That's four steps too many. A tap-to-review card removes all of them.</p>
-    </div>
-    <div>
-      <ul class="feat-list">
-        <li>Custom-branded with your business name and colors</li>
-        <li>Durable countertop stand — no batteries, no charging, no app</li>
-        <li>NFC tap works on iPhone (iOS 14+) and nearly all modern Android phones</li>
-        <li>Printed QR code as a fallback for any phone, any age</li>
-        <li>Links directly to your Google Business review page — we set it up for you</li>
-        <li>Can be reprogrammed if your review link or business info changes</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- PICKER + CHECKOUT -->
+  <!-- PICKER + CHECKOUT (moved to the very top of the page content) -->
   <div id="pricing" style="margin-bottom:5rem;">
     <p class="eyebrow reveal">Build Your Card</p>
     <h2 class="h2 reveal" style="margin-bottom:1rem;">Pick a Style.<br><span>Get It Programmed.</span></h2>
@@ -319,6 +232,48 @@
     </div>
   </div>
 
+  <!-- HOW IT WORKS -->
+  <div id="how" style="margin-bottom:5rem;">
+    <p class="eyebrow reveal">How It Works</p>
+    <h2 class="h2 reveal" style="margin-bottom:2.5rem;">Three Steps.<br><span>Zero Friction.</span></h2>
+    <div class="how-row reveal">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-title">Set it on the counter</div>
+        <div class="how-desc">The card stands on its own — checkout counter, table, front desk, wherever customers naturally look when they're happy with the service.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-title">Customer taps or scans</div>
+        <div class="how-desc">Any modern phone taps the card (NFC) or scans the printed QR code. No app required — it just opens their browser.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-title">They land on your review page</div>
+        <div class="how-desc">Their phone opens straight to your Google Business review screen, star rating ready to tap. Fewer steps means more reviews actually get left.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY IT WORKS -->
+  <div class="grid-2 reveal" style="margin-bottom:5rem;">
+    <div>
+      <p class="eyebrow">Why It Works</p>
+      <h2 class="h2">Every Extra Step<br><span>Loses a Review.</span></h2>
+      <p class="lead">Most happy customers mean to leave a review and never do — because they'd have to open Google, search your business name, find the right listing, and then find the review button. That's four steps too many. A tap-to-review card removes all of them.</p>
+    </div>
+    <div>
+      <ul class="feat-list">
+        <li>Custom-branded with your business name and colors</li>
+        <li>Durable countertop stand — no batteries, no charging, no app</li>
+        <li>NFC tap works on iPhone (iOS 14+) and nearly all modern Android phones</li>
+        <li>Printed QR code as a fallback for any phone, any age</li>
+        <li>Links directly to your Google Business review page — we set it up for you</li>
+        <li>Can be reprogrammed if your review link or business info changes</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- FAQ -->
   <div id="faq">
     <p class="eyebrow reveal">FAQ</p>
@@ -355,6 +310,84 @@
 <script src="/ss-shared.js"></script>
 <script>
 document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!e));});});
+
+/* ── Top carousel — pure visual showcase, independent of the picker below ── */
+(function(){
+  "use strict";
+  var SLIDES = [
+    { name:"Signature Black",  platform:"Google",       img:"/reviews/assets/nfc-review-cards.png" },
+    { name:"Classic Google",   platform:"Google",       img:"/reviews/assets/styles/style-standard-blackwhite.jpg" },
+    { name:"Gold Salon",       platform:"Google",       img:"/reviews/assets/styles/style-salon-gold.png" },
+    { name:"Stay Connected",   platform:"Google · Instagram · Facebook", img:"/reviews/assets/styles/style-retail-neon.png" },
+    { name:"Feedback Matters", platform:"Google",       img:"/reviews/assets/styles/style-dental-teal.png" },
+    { name:"Tooth Outline",    platform:"Google",       img:"/reviews/assets/styles/style-dental-white.png" },
+    { name:"Love Your Visit",  platform:"Yelp",         img:"/reviews/assets/styles/style-cafe-yelp.png" },
+    { name:"Like Your Cut",    platform:"Facebook",     img:"/reviews/assets/styles/style-barber-navy.png" },
+    { name:"Fine Dining",      platform:"TripAdvisor",  img:"/reviews/assets/styles/style-dining-emerald.png" },
+    { name:"Auto Shop",        platform:"Google",       img:"/reviews/assets/styles/style-auto-blue.png" },
+    { name:"Share The Love",   platform:"Instagram",    img:"/reviews/assets/styles/style-beauty-pink.png" }
+  ];
+
+  var track = document.getElementById("rvCarouselTrack");
+  var dotsWrap = document.getElementById("rvCarouselDots");
+  var prevBtn = document.getElementById("rvCarouselPrev");
+  var nextBtn = document.getElementById("rvCarouselNext");
+  if(!track) return;
+
+  track.innerHTML = SLIDES.map(function(s, i){
+    return '<div class="rv-carousel-slide" role="group" aria-roledescription="slide" aria-label="' + (i+1) + ' of ' + SLIDES.length + '">' +
+      '<img src="' + s.img + '" alt="' + s.name + ' review card design in use" loading="' + (i === 0 ? "eager" : "lazy") + '"/>' +
+      '<div class="rv-carousel-caption"><b>' + s.name + '</b><span>' + s.platform + '</span></div>' +
+      '</div>';
+  }).join("");
+
+  dotsWrap.innerHTML = SLIDES.map(function(s, i){
+    return '<button type="button" class="rv-carousel-dot' + (i === 0 ? " is-active" : "") + '" role="tab" aria-label="Go to slide ' + (i+1) + '" data-index="' + i + '"></button>';
+  }).join("");
+
+  var slides = track.querySelectorAll(".rv-carousel-slide");
+  var dots = dotsWrap.querySelectorAll(".rv-carousel-dot");
+  var current = 0;
+  var timer = null;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function goTo(i){
+    current = (i + slides.length) % slides.length;
+    slides[current].scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest", inline: "start" });
+    dots.forEach(function(d, di){ d.classList.toggle("is-active", di === current); });
+  }
+
+  prevBtn.addEventListener("click", function(){ goTo(current - 1); restart(); });
+  nextBtn.addEventListener("click", function(){ goTo(current + 1); restart(); });
+  dots.forEach(function(d){ d.addEventListener("click", function(){ goTo(parseInt(d.dataset.index, 10)); restart(); }); });
+
+  // keep dots in sync when the user swipes manually
+  var scrollTimeout;
+  track.addEventListener("scroll", function(){
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function(){
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      if(idx !== current && idx >= 0 && idx < slides.length){
+        current = idx;
+        dots.forEach(function(d, di){ d.classList.toggle("is-active", di === current); });
+      }
+    }, 100);
+  }, { passive: true });
+
+  function start(){
+    if(reduced) return;
+    timer = setInterval(function(){ goTo(current + 1); }, 4200);
+  }
+  function stop(){ if(timer) clearInterval(timer); }
+  function restart(){ stop(); start(); }
+
+  track.addEventListener("mouseenter", stop);
+  track.addEventListener("mouseleave", start);
+  track.addEventListener("touchstart", stop, { passive: true });
+  track.addEventListener("touchend", function(){ setTimeout(start, 2500); }, { passive: true });
+
+  start();
+})();
 
 /* ── Product picker + checkout ──
    Each style below needs a real Stripe Payment Link — see the

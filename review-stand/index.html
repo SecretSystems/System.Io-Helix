@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Google Review Stand | Secret Systems</title>
+<meta name="description" content="Make leaving a Google review as simple as one tap with the Secret Systems Google Review Stand."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://secretsystems.io/review-stand/"/>
+<meta property="og:type" content="product"/>
+<meta property="og:url" content="https://secretsystems.io/review-stand/"/>
+<meta property="og:title" content="Google Review Stand | Secret Systems"/>
+<meta property="og:description" content="Make leaving a Google review as simple as one tap with the Secret Systems Google Review Stand."/>
+<meta property="og:image" content="https://secretsystems.io/reviews/assets/nfc-review-cards.png"/>
+<meta property="og:site_name" content="Secret Systems .io"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Google Review Stand | Secret Systems"/>
+<meta name="twitter:description" content="Make leaving a Google review as simple as one tap with the Secret Systems Google Review Stand."/>
+<meta name="twitter:image" content="https://secretsystems.io/reviews/assets/nfc-review-cards.png"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Google Review Stand","description":"Make leaving a Google review as simple as one tap with the Secret Systems Google Review Stand.","image":"https://secretsystems.io/reviews/assets/nfc-review-cards.png","brand":{"@type":"Brand","name":"Secret Systems"},"offers":{"@type":"Offer","url":"https://secretsystems.io/review-stand/","priceCurrency":"USD","price":"25","availability":"https://schema.org/InStock"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://secretsystems.io/"},{"@type":"ListItem","position":2,"name":"Google Review Stand","item":"https://secretsystems.io/review-stand/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the stand require an app?","acceptedAnswer":{"@type":"Answer","text":"No. Customers use their phone's built-in NFC reader."}},{"@type":"Question","name":"Where should I place it?","acceptedAnswer":{"@type":"Answer","text":"Place it near checkout, reception or anywhere customers complete their visit."}},{"@type":"Question","name":"Is my logo printed on the stand?","acceptedAnswer":{"@type":"Answer","text":"No. This product comes in one standardized Secret Systems design."}}]}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+/* ── Review Stand product page ── */
+.rs-hero{padding:9.5rem 0 4rem;position:relative;z-index:1;border-bottom:1px solid var(--border);}
+.rs-hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.rs-info .eyebrow{justify-content:flex-start;}
+.rs-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.1rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem;}
+.rs-tagline{font-size:1.05rem;font-weight:300;color:var(--text);line-height:1.6;max-width:32rem;margin-bottom:1.75rem;}
+.rs-price-row{display:flex;align-items:baseline;gap:.6rem;margin-bottom:1.75rem;}
+.rs-price{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:2rem;color:var(--cyan);}
+.rs-price-note{font-size:.8rem;color:var(--muted);}
+.rs-qty-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem;}
+.rs-qty-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.rs-qty{display:inline-flex;align-items:center;border:1px solid var(--border);}
+.rs-qty button{width:2.6rem;height:2.6rem;background:transparent;border:none;color:var(--white);font-size:1.1rem;cursor:pointer;transition:background .2s,color .2s;}
+.rs-qty button:hover{background:var(--cyan-glow);color:var(--cyan);}
+.rs-qty button:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px;}
+.rs-qty span{width:2.8rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:1rem;}
+.rs-cta-row{display:flex;flex-direction:column;gap:.85rem;align-items:flex-start;margin-bottom:0;}
+.rs-cta{width:100%;justify-content:center;font-size:.95rem;padding:1.05rem 2rem;}
+.rs-cta:disabled{opacity:.6;cursor:not-allowed;}
+.rs-support-text{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;color:var(--muted);}
+.rs-img-col{position:relative;}
+.rs-img-frame{border:1px solid var(--border);background:var(--card);padding:2rem;display:flex;align-items:center;justify-content:center;}
+.rs-img-frame img{width:100%;height:auto;max-width:460px;display:block;}
+
+/* benefits */
+.rs-benefits{padding:5rem 0;border-bottom:1px solid var(--border);}
+.rs-benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.rs-benefit{background:var(--card);padding:2.25rem 2rem;text-align:center;}
+.rs-benefit svg{width:1.8rem;height:1.8rem;stroke:var(--cyan);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:1rem;}
+.rs-benefit p{font-size:.92rem;color:var(--text);line-height:1.55;}
+
+/* how it works */
+.section-head{text-align:center;max-width:36rem;margin:0 auto 3.5rem;}
+.section-head .eyebrow{justify-content:center;}
+.rs-steps{padding:6rem 0;border-bottom:1px solid var(--border);}
+.rs-step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;}
+.rs-step{text-align:center;}
+.rs-step-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.2em;color:var(--cyan);margin-bottom:.75rem;}
+.rs-step p{font-size:.95rem;color:var(--text);line-height:1.6;}
+
+/* branding/qr explainer */
+.rs-explainer{padding:5rem 0;border-bottom:1px solid var(--border);}
+.rs-explainer .wrap{max-width:760px;text-align:center;}
+.rs-explainer p{font-size:.95rem;color:var(--text);line-height:1.7;}
+.rs-explainer .brand-line{margin-top:1.25rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:var(--muted);}
+
+/* faq */
+.rs-faq{padding:6rem 0;}
+.rs-faq .section-head{text-align:center;margin-bottom:3rem;}
+.rs-faq-list{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.4rem 0;background:transparent;border:none;color:var(--white);font-family:'Outfit',sans-serif;font-size:1rem;font-weight:500;text-align:left;cursor:pointer;}
+.faq-q:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+.faq-q .faq-caret{transition:transform .25s;color:var(--cyan);flex-shrink:0;}
+.faq-q[aria-expanded="true"] .faq-caret{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-q[aria-expanded="true"]+.faq-a{max-height:12rem;}
+.faq-a p{padding:0 0 1.4rem;font-size:.9rem;color:var(--text);line-height:1.65;max-width:34rem;}
+
+.rs-sticky-bar{display:none;}
+
+@media(max-width:900px){
+  .rs-hero .wrap{grid-template-columns:1fr;gap:2.5rem;}
+  .rs-img-col{order:-1;}
+  .rs-img-frame{padding:1.25rem;}
+  .rs-img-frame img{max-width:320px;}
+  .rs-benefit-grid,.rs-step-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a>
+  <ul class="nav-links">
+    <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
+    <li><a href="/secret-suite/">Secret Suite</a></li>
+    <li><a href="/review-stand/" class="active">Review Stand</a></li>
+    <li><a href="/secret-agent-campaign/">Secret Agent</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/pricing/">Pricing</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="/" onclick="closeMenu()">Home</a>
+  <div class="mob-services-group">
+    <button type="button" class="mob-services-toggle" aria-expanded="false" aria-controls="mobServicesSubmenu">
+      Services
+      <svg class="mob-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="mob-services-submenu" id="mobServicesSubmenu">
+      <a href="/services/" class="mob-sub" onclick="closeMenu()">All Services</a>
+      <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+      <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+      <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+      <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+      <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+    </div>
+  </div>
+  <a href="/secret-suite/" onclick="closeMenu()">Secret Suite</a>
+  <a href="/review-stand/" onclick="closeMenu()">Review Stand</a>
+  <a href="/secret-agent-campaign/" onclick="closeMenu()">Secret Agent Campaign</a>
+  <a href="/work/" onclick="closeMenu()">Work</a>
+  <a href="/pricing/" onclick="closeMenu()">Pricing</a>
+  <a href="/about/" onclick="closeMenu()">About</a>
+  <a href="/contact/" onclick="closeMenu()">Contact</a>
+</div>
+
+<main>
+
+<!-- ── PRODUCT HERO ── -->
+<section class="rs-hero">
+  <div class="wrap">
+    <div class="rs-info">
+      <p class="eyebrow">Secret Systems .io</p>
+      <h1 class="rs-name">Google Review Stand</h1>
+      <p class="rs-tagline">Make leaving a Google review as simple as one tap. Place it at your checkout counter, front desk or reception area. Customers tap their phone to open your Google Review page.</p>
+      <div class="rs-price-row">
+        <span class="rs-price">$<span id="rsPrice">25</span></span>
+        <span class="rs-price-note">per stand</span>
+      </div>
+      <div class="rs-qty-row">
+        <span class="rs-qty-label">Quantity</span>
+        <div class="rs-qty">
+          <button type="button" id="rsQtyMinus" aria-label="Decrease quantity">−</button>
+          <span id="rsQtyValue">1</span>
+          <button type="button" id="rsQtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <div class="rs-cta-row">
+        <button type="button" class="btn btn-cyan rs-cta" id="rsOrderBtn">Order Your Review Stand</button>
+        <span class="rs-support-text">Secure checkout • Ships from Secret Systems</span>
+      </div>
+    </div>
+    <div class="rs-img-col">
+      <div class="rs-img-frame">
+        <img src="/reviews/assets/nfc-review-cards.png" alt="Secret Systems Google Review Stand, a black countertop NFC stand for one-tap Google reviews" width="900" height="900" loading="eager" fetchpriority="high"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THREE BENEFITS ── -->
+<section class="rs-benefits">
+  <div class="wrap">
+    <div class="rs-benefit-grid">
+      <div class="rs-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <p>One-tap access to your Google Review page</p>
+      </div>
+      <div class="rs-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg>
+        <p>Clean black countertop design</p>
+      </div>
+      <div class="rs-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg>
+        <p>Simple setup with no custom printing required</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="rs-steps">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="h2">Three Steps to More Reviews</h2>
+    </div>
+    <div class="rs-step-grid">
+      <div class="rs-step">
+        <p class="rs-step-num">STEP 01</p>
+        <p>Place your order</p>
+      </div>
+      <div class="rs-step">
+        <p class="rs-step-num">STEP 02</p>
+        <p>Connect your Google Review destination</p>
+      </div>
+      <div class="rs-step">
+        <p class="rs-step-num">STEP 03</p>
+        <p>Place the stand where customers can easily tap it</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BRANDING / QR EXPLAINER ── -->
+<section class="rs-explainer">
+  <div class="wrap">
+    <p>Each stand uses NFC to open your Google Review page the moment a customer taps their phone. A small QR code labeled "Get yours" is also included, so other business owners can find this page and order their own stand.</p>
+    <p class="brand-line">Secret Systems .io</p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="rs-faq">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h2">Common Questions</h2>
+    </div>
+    <div class="rs-faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Does the stand require an app?<svg class="faq-caret" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>No. Customers use their phone's built-in NFC reader.</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Where should I place it?<svg class="faq-caret" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Place it near checkout, reception or anywhere customers complete their visit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Is my logo printed on the stand?<svg class="faq-caret" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>No. This product comes in one standardized Secret Systems design.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="foot-brand"><a href="/" class="foot-logo">Secret Systems<span class="dot">.</span><span class="io">io</span></a><p>Websites, software, dashboards, automation, and security for growing Louisiana businesses. Built in Lafayette, serving clients nationwide.</p><p class="foot-contact"><a href="mailto:info@secretsystems.io">info@secretsystems.io</a><br><a href="tel:+13372588818">(337) 258-8818</a><br>South Louisiana · Serving nationwide</p></div><div class="foot-col"><h3>Services</h3><ul><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software &amp; Apps</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/security/">Security</a></li></ul></div><div class="foot-col"><h3>Company</h3><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/secret-suite/">Secret Suite</a></li><li><a href="/review-stand/">Review Stand</a></li><li><a href="/pricing/">Pricing</a></li></ul></div><div class="foot-col"><h3>Get Started</h3><ul><li><a href="/contact/">Contact Us</a></li><li><a href="mailto:info@secretsystems.io">info@secretsystems.io</a></li><li><a href="tel:+13372588818">(337) 258-8818</a></li></ul></div></div></div></footer>
+<div class="foot-bottom"><div class="wrap"><div class="foot-bottom-inner"><span class="fc">SECRET SYSTEMS .IO</span><span>© 2026 Secret Systems LLC · <a href="/privacy/" style="color:inherit;">Privacy</a> · <a href="/terms/" style="color:inherit;">Terms</a> · <a href="/accessibility/" style="color:inherit;">Accessibility</a></span><span>Built in Louisiana</span></div></div></div>
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script src="/review-stand/product.js"></script>
+</body></html>

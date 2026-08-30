@@ -18,7 +18,9 @@
 .page-hero-bg{background:linear-gradient(135deg,var(--deep),rgba(0,200,255,.03));}
 .svc-block{border-bottom:1px solid var(--border);padding:5rem 0;}
 .svc-block:last-child{border-bottom:none;}
-.svc-block-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;}
+&
+.svc-block-grid>div{min-width:0;}
+.svc-block-label h2{overflow-wrap:break-word;}
 .svc-block-label{position:sticky;top:100px;}
 .svc-block-label h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1.1;margin-bottom:1rem;}
 .svc-block-label h2 span{color:var(--cyan);}
@@ -47,6 +49,7 @@
     <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
     <li><a href="/secret-suite/">Secret Suite</a></li>
     <li><a href="/reviews/">Review Cards</a></li>
+    <li><a href="/secret-agent-campaign/">Secret Agent</a></li>
     <li><a href="/automation/">Automation</a></li>
     <li><a href="/security/">Security</a></li>
     <li><a href="/work/">Work</a></li>
@@ -59,14 +62,23 @@
 <div class="mob" id="mob">
   <button class="mob-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
   <a href="/" onclick="closeMenu()">Home</a>
-  <a href="/services/" onclick="closeMenu()">Services</a>
-  <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
-  <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
-  <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
-  <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
-  <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+  <div class="mob-services-group">
+    <button type="button" class="mob-services-toggle" aria-expanded="false" aria-controls="mobServicesSubmenu">
+      Services
+      <svg class="mob-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="mob-services-submenu" id="mobServicesSubmenu">
+      <a href="/services/" class="mob-sub" onclick="closeMenu()">All Services</a>
+      <a href="/web-design/" class="mob-sub" onclick="closeMenu()">Web Design</a>
+      <a href="/software-development/" class="mob-sub" onclick="closeMenu()">Software Development</a>
+      <a href="/app-development/" class="mob-sub" onclick="closeMenu()">App Development</a>
+      <a href="/dashboard-development/" class="mob-sub" onclick="closeMenu()">Dashboards</a>
+      <a href="/workflow-automation/" class="mob-sub" onclick="closeMenu()">Workflow Automation</a>
+    </div>
+  </div>
   <a href="/secret-suite/" onclick="closeMenu()">Secret Suite</a>
   <a href="/reviews/" onclick="closeMenu()">Review Cards</a>
+  <a href="/secret-agent-campaign/" onclick="closeMenu()">Secret Agent Campaign</a>
   <a href="/automation/" onclick="closeMenu()">Automation</a>
   <a href="/security/" onclick="closeMenu()">Security</a>
   <a href="/work/" onclick="closeMenu()">Work</a>

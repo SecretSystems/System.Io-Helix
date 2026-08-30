@@ -17,7 +17,24 @@ const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersec
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 // ── MOBILE MENU ──
 function openMenu(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden';}
-function closeMenu(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+function closeMenu(){
+  document.getElementById('mob').classList.remove('open');
+  document.body.style.overflow='';
+  // collapse the mobile Services submenu so it always starts closed next time
+  var subToggle=document.querySelector('.mob-services-toggle');
+  var submenu=document.querySelector('.mob-services-submenu');
+  if(subToggle&&submenu){subToggle.setAttribute('aria-expanded','false');submenu.classList.remove('is-open');}
+}
+// ── MOBILE SERVICES SUBMENU (collapsed by default; toggled via button, not auto-expanded) ──
+(function(){
+  var toggle=document.querySelector('.mob-services-toggle');
+  var submenu=document.querySelector('.mob-services-submenu');
+  if(!toggle||!submenu)return;
+  toggle.addEventListener('click',function(){
+    var open=submenu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+})();
 // ── SERVICES DROPDOWN ──
 (function(){
   var dd=document.querySelector('.nav-dd');if(!dd)return;

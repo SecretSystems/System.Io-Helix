@@ -152,6 +152,16 @@ nav{
   transition:color 0.2s,background 0.2s;
 }
 .mobile-nav-links a:hover{color:var(--cyan);background:rgba(0,200,255,0.04);}
+.mob-services-group{width:100%;border-bottom:1px solid rgba(0,200,255,0.07);}
+.mob-services-toggle{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;background:none;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.4rem,5vw,2rem);letter-spacing:0.04em;color:var(--white);padding:1.1rem 2rem;min-height:44px;transition:color .2s;}
+.mob-services-toggle:hover{color:var(--cyan);}
+.mob-chevron{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .3s ease;}
+.mob-services-toggle[aria-expanded="true"] .mob-chevron{transform:rotate(180deg);}
+.mob-services-submenu{list-style:none;display:flex;flex-direction:column;align-items:center;gap:0;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .25s ease;width:100%;}
+.mob-services-submenu.is-open{max-height:26rem;opacity:1;}
+.mob-services-submenu li{border-bottom:none;}
+.mob-services-submenu a.mob-sub{min-height:44px;display:flex;align-items:center;justify-content:center;}
+@media(prefers-reduced-motion:reduce){.mob-chevron,.mob-services-submenu{transition:none;}}
 .mobile-nav-links .mobile-cta a{
   color:var(--cyan);
   font-size:clamp(1rem,4vw,1.3rem);
@@ -194,8 +204,9 @@ nav{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:flex-start;
-  padding:8rem 3rem 4rem;
+  align-items:center;
+  text-align:center;
+  padding:9rem 3rem 4rem;
   z-index:2;
   max-width:1400px;
   margin:0 auto;
@@ -208,7 +219,7 @@ nav{
   font-family:'JetBrains Mono',monospace;font-size:0.78rem;
   font-weight:400;letter-spacing:0.25em;color:var(--cyan);
   text-transform:uppercase;margin-bottom:2rem;
-  display:flex;align-items:center;gap:0.8rem;
+  display:flex;align-items:center;justify-content:center;gap:0.8rem;
   opacity:0;
   transform:translateY(24px);
   transition:opacity 0.7s ease, transform 0.7s ease;
@@ -218,7 +229,7 @@ nav{
 }
 .hero h1{
   font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2.5rem,4.8vw,4.5rem);line-height:1.06;
+  font-size:clamp(2.3rem,4.4vw,4.1rem);line-height:1.08;
   letter-spacing:-0.02em;
   opacity:0;
   transform:translateY(32px);
@@ -228,19 +239,20 @@ nav{
 .hero-desc{
   font-size:1.05rem;font-weight:300;color:var(--text);
   max-width:440px;line-height:1.75;margin-top:1.75rem;margin-bottom:3.25rem;
+  margin-left:auto;margin-right:auto;
   opacity:0;
   transform:translateY(28px);
   transition:opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
 }
 .hero-actions{
-  display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;
+  display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;justify-content:center;
   opacity:0;
   transform:translateY(24px);
   transition:opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
   pointer-events:all;
 }
-/* editorial left column — copy ~42%, artwork breathes on the right ~58% */
-.hero-copy{max-width:600px;width:100%;}
+/* centered editorial column over the full-bleed canvas backdrop */
+.hero-copy{max-width:680px;width:100%;margin:0 auto;}
 /* secondary CTA sits quieter so the primary clearly dominates */
 .hero-actions .btn-ghost{border-color:rgba(255,255,255,0.16);color:#8ea7bf;font-weight:400;}
 .hero-actions .btn-ghost:hover{border-color:rgba(255,255,255,0.42);color:var(--white);}
@@ -990,6 +1002,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <li class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true">Services <span class="dd-caret" aria-hidden="true">▾</span></button><ul class="nav-dd-menu"><li><a href="/services/">All Services</a></li><li><a href="/web-design/">Web Design</a></li><li><a href="/software-development/">Software Development</a></li><li><a href="/app-development/">App Development</a></li><li><a href="/dashboard-development/">Dashboards</a></li><li><a href="/workflow-automation/">Workflow Automation</a></li><li><a href="/automation/">CRM Automation</a></li><li><a href="/security/">Cybersecurity Reviews</a></li></ul></li>
     <li><a href="/secret-suite/">Secret Suite</a></li>
     <li><a href="/reviews/">Review Cards</a></li>
+    <li><a href="/secret-agent-campaign/">Secret Agent</a></li>
     <li><a href="/automation/">Automation</a></li>
     <li><a href="/security/">Security</a></li>
     <li><a href="/work/">Work</a></li>
@@ -1007,14 +1020,23 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   <button class="mobile-menu-close" id="mobile-menu-close">Close</button>
   <ul class="mobile-nav-links">
     <li><a href="/">Home</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/web-design/" class="mob-sub">Web Design</a></li>
-    <li><a href="/software-development/" class="mob-sub">Software Development</a></li>
-    <li><a href="/app-development/" class="mob-sub">App Development</a></li>
-    <li><a href="/dashboard-development/" class="mob-sub">Dashboards</a></li>
-    <li><a href="/workflow-automation/" class="mob-sub">Workflow Automation</a></li>
+    <li class="mob-services-group">
+      <button type="button" class="mob-services-toggle" aria-expanded="false" aria-controls="mobServicesSubmenu">
+        Services
+        <svg class="mob-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul class="mob-services-submenu" id="mobServicesSubmenu">
+        <li><a href="/services/" class="mob-sub">All Services</a></li>
+        <li><a href="/web-design/" class="mob-sub">Web Design</a></li>
+        <li><a href="/software-development/" class="mob-sub">Software Development</a></li>
+        <li><a href="/app-development/" class="mob-sub">App Development</a></li>
+        <li><a href="/dashboard-development/" class="mob-sub">Dashboards</a></li>
+        <li><a href="/workflow-automation/" class="mob-sub">Workflow Automation</a></li>
+      </ul>
+    </li>
     <li><a href="/secret-suite/">Secret Suite</a></li>
     <li><a href="/reviews/">Review Cards</a></li>
+    <li><a href="/secret-agent-campaign/">Secret Agent</a></li>
     <li><a href="/automation/">Automation</a></li>
     <li><a href="/security/">Security</a></li>
     <li><a href="/work/">Work</a></li>
@@ -1499,11 +1521,22 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   var hamburger=document.getElementById('nav-hamburger');
   var mobileMenu=document.getElementById('mobile-menu');
   var menuClose=document.getElementById('mobile-menu-close');
+  var mobServicesToggle=document.querySelector('.mob-services-toggle');
+  var mobServicesSubmenu=document.getElementById('mobServicesSubmenu');
   function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden';}
-  function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow='';}
+  function closeMenu(){
+    mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow='';
+    if(mobServicesToggle&&mobServicesSubmenu){mobServicesToggle.setAttribute('aria-expanded','false');mobServicesSubmenu.classList.remove('is-open');}
+  }
   hamburger.addEventListener('click',openMenu);
   menuClose.addEventListener('click',closeMenu);
   mobileMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  if(mobServicesToggle&&mobServicesSubmenu){
+    mobServicesToggle.addEventListener('click',function(){
+      var open=mobServicesSubmenu.classList.toggle('is-open');
+      mobServicesToggle.setAttribute('aria-expanded',open?'true':'false');
+    });
+  }
 
   /* ── PARTICLES ── */
   const pCanvas=document.getElementById('particle-canvas');

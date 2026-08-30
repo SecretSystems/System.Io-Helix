@@ -30,12 +30,10 @@ html{height:100%;}
 body{
   background:var(--void);color:var(--white);
   font-family:'Outfit',sans-serif;
-  overflow-x:hidden;
-  overflow-y:auto;
+  overflow:hidden;
   min-height:100vh;
   perspective:1100px;
 }
-body.scene-locked{overflow:hidden;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9997;}
 
 /* ════════ CURSOR ════════ */
@@ -82,47 +80,47 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 }
 #req-btn:hover{background:var(--cyan)!important;color:var(--void)!important;}
 
-/* ════════ SCENE ════════
-   "table" is a normal responsive document-flow grid (page scrolls).
-   sphere / helix / grid are the fixed-viewport 3D modes. */
+/* ════════ 3D SCENE ════════ */
 #scene{
-  position:static;
-  transform-style:preserve-3d;
-}
-body.scene-locked #scene{
   position:fixed;inset:0;
+  transform-style:preserve-3d;
   display:flex;align-items:center;justify-content:center;
 }
 #sc{
+  position:absolute;width:100%;height:100%;
+  top:0;left:0;
   transform-style:preserve-3d;
   backface-visibility:hidden;
   pointer-events:none;
 }
-body.scene-locked #sc{
-  position:absolute;width:100%;height:100%;
-  top:0;left:0;
-}
-
 #sc[data-layout="table"]{
+  --cw:150px;
+  --ch:130px;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1.4rem;
-  max-width:1400px;
-  margin:0 auto;
-  padding:calc(var(--hh) + 2.5rem) 2rem 6rem;
-  pointer-events:auto;
+  grid-template-columns:repeat(6,var(--cw));
+  grid-auto-rows:var(--ch);
+  gap:.5rem;
+  place-content:center;
+  padding-top:calc(var(--hh) + 12px);
+  padding-bottom:40px;
 }
-@media(min-width:1440px){#sc[data-layout="table"]{grid-template-columns:repeat(4,1fr);}}
-@media(max-width:1439px) and (min-width:1025px){#sc[data-layout="table"]{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:1024px) and (min-width:641px){#sc[data-layout="table"]{grid-template-columns:repeat(2,1fr);gap:1.1rem;padding:calc(var(--hh) + 2rem) 1.5rem 5rem;}}
-@media(max-width:640px){#sc[data-layout="table"]{grid-template-columns:1fr;gap:1rem;padding:calc(var(--hh) + 1.5rem) 1rem 4rem;}}
+@media(max-width:768px){
+  #sc[data-layout="table"]{
+    --cw:130px;
+    --ch:112px;
+    grid-template-columns:repeat(4,var(--cw));
+    gap:.35rem;
+    padding-top:calc(var(--hh) + 10px);
+    padding-bottom:70px;
+  }
+}
 
 /* ════════ CARDS ════════ */
 .pcard{
   pointer-events:auto;
   position:relative;
   display:flex;flex-direction:column;
-  width:100%;height:auto;
+  width:var(--cw);height:var(--ch);
   background:var(--card);
   border:1px solid var(--border);
   border-radius:6px;
@@ -131,8 +129,6 @@ body.scene-locked #sc{
   transform-style:preserve-3d;
   transition:border-color .22s,box-shadow .22s;
 }
-/* fixed-size cards are only needed for the 3D perspective modes */
-body.scene-locked .pcard{width:var(--cw);height:var(--ch);}
 .pcard::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:var(--accent);z-index:3;
@@ -147,12 +143,14 @@ body.scene-locked .pcard{width:var(--cw);height:var(--ch);}
 .pcard[data-c="3"]{--accent:linear-gradient(90deg,#00ff88,#00c860);}
 .pcard[data-c="4"]{--accent:linear-gradient(90deg,#a855f7,#c084fc);}
 
-/* ── website preview: fills its container, unobstructed, consistent 16:9 ── */
+/* ── website preview: fills its container, unobstructed ──
+   The iframe is rendered oversized then scaled down (zoomed out),
+   so more of the real page is visible and any fixed-position
+   elements the site itself adds (e.g. a bottom promo bar) shrink
+   proportionally instead of covering the whole preview. */
 .pw{
   position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  flex-shrink:0;
+  flex:1;
   background:#010406;
   overflow:hidden;
   border-radius:6px 6px 0 0;
@@ -161,14 +159,14 @@ body.scene-locked .pcard{width:var(--cw);height:var(--ch);}
   position:absolute;
   top:0;
   left:0;
-  width:100%;
-  height:100%;
+  width:340%;
+  height:340%;
+  transform:scale(.294);
+  transform-origin:top left;
   border:none;
   pointer-events:none;
   background:#010406;
-  transition:transform .35s ease;
 }
-.pcard:hover .pw iframe{transform:scale(1.04);}
 
 /* shimmer while loading */
 .pw::after{
@@ -268,9 +266,12 @@ body.scene-locked .pcard{width:var(--cw);height:var(--ch);}
 
 /* MOBILE OVERRIDES */
 @media (max-width: 768px){
-  body.scene-locked{
+  :root{
     --cw:180px;
     --ch:150px;
+  }
+
+  body{
     cursor:auto;
   }
 
@@ -404,13 +405,9 @@ document.addEventListener('pointermove',e=>{
   pY=(e.clientY-hh)/hh;
 });
 (function cam(){
-  if(document.body.classList.contains('scene-locked')){
-    rotX+=(pY*tRotX-rotX)*.012;
-    rotY+=(-pX*tRotY-rotY)*.012;
-    scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-  } else {
-    scene.style.transform='';
-  }
+  rotX+=(pY*tRotX-rotX)*.012;
+  rotY+=(-pX*tRotY-rotY)*.012;
+  scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(cam);
 })();
 
@@ -485,10 +482,6 @@ function buildCards(sites){
     });
 
     el.addEventListener('click',()=>{
-      if(currentLayout==='table'){
-        window.location.href = url;
-        return;
-      }
       if(el.classList.contains('exp')){
         window.location.href = url;
         return;
@@ -500,13 +493,23 @@ function buildCards(sites){
     el.addEventListener('mouseleave',smC);
 
     el.style.opacity='0';
-    el.style.transition='opacity .5s';
+    el.style.transition='none';
     sc.appendChild(el);
     cards.push(el);
   });
 
   requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>applyLayout(currentLayout||'table',true));
+    cards.forEach(c=>{
+      const rx2=(Math.random()-.5)*1400;
+      const ry2=(Math.random()-.5)*900;
+      const rz2=(Math.random()-.5)*1400;
+      c.style.position='absolute';c.style.left='50%';c.style.top='50%';
+      c.style.marginLeft=(-CW/2)+'px';c.style.marginTop=(-CH/2)+'px';
+      c.style.transform=`translate3d(${rx2}px,${ry2}px,${rz2}px)`;
+    });
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>applyLayout('table',true));
+    });
   });
 }
 
@@ -546,8 +549,7 @@ function posFor(layout,i,isExp){
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
-  document.body.classList.toggle('scene-locked', layout!=='table');
-  if(layout==='table'){tRotX=0;tRotY=0;}
+  if(layout==='table'){tRotX=12;tRotY=16;}
   else if(layout==='sphere'){tRotX=40;tRotY=360;}
   else if(layout==='helix'){tRotX=30;tRotY=300;}
   else if(layout==='grid'){tRotX=10;tRotY=55;}
@@ -556,9 +558,11 @@ function applyLayout(layout, animated=true){
     cards.forEach(c=>{
       c.style.position='';c.style.left='';c.style.top='';
       c.style.marginLeft='';c.style.marginTop='';
-      c.style.transition='opacity .4s';
+      const dur=animated?1500:0;
+      const delay=animated?Math.random()*700:0;
+      c.style.transition=`transform ${dur}ms ${delay}ms cubic-bezier(.77,0,.175,1), opacity ${dur}ms ${delay}ms`;
       c.style.opacity='1';
-      c.style.transform='';
+      c.style.transform=`translateZ(${c.classList.contains('exp')?50:6}px)`;
     });
   } else {
     cards.forEach((c,i)=>{

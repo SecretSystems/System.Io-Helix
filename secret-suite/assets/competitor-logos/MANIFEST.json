@@ -309,5 +309,10 @@
     "title": "Apollo.io",
     "source": "Official marketing site (apollo.io Next.js build asset) — confirmed the sales-intelligence Apollo, not the unrelated Apollo GraphQL brand",
     "fillUsed": "#e8f4ff recolored from #1F1F1E for dark-background visibility"
+  },
+  "capcut": {
+    "title": "CapCut",
+    "source": "Wikimedia Commons (File:Capcut-icon.svg), public domain — icon-only app mark (white rounded-square tile + black ribbon glyph), true vector paths, unaltered. The full wordmark variant (File:CapCut logo.svg) was evaluated but rejected: it wraps a raster PNG in SVG syntax and its black-on-transparent wordmark was unreadable against this site's dark theme.",
+    "fillUsed": "original — white tile background, black glyph, gray border"
   }
 }

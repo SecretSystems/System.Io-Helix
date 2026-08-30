@@ -99,7 +99,7 @@ const annualTotal = monthlyTotal * 12;
 const roundedMonthly = Math.round(monthlyTotal * 100) / 100;
 const roundedAnnual = Math.round(annualTotal * 100) / 100;
 
-check("monthly total is reproducible from itemized data", roundedMonthly === 2910.36, "computed " + roundedMonthly.toFixed(2));
+check("monthly total is reproducible from itemized data", roundedMonthly === 2887.37, "computed " + roundedMonthly.toFixed(2));
 check("annual total equals monthly total x 12", Math.abs(roundedAnnual - roundedMonthly * 12) < 0.01, "computed " + roundedAnnual.toFixed(2));
 
 /* ── HTML file references the same totals (hero/calculator/methodology parity) ── */

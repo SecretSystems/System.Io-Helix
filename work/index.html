@@ -23,17 +23,19 @@
   --border:rgba(0,200,255,0.12);--cyan:#00c8ff;--cyan2:#00ffe0;
   --white:#e8f4ff;--muted:#4a6a82;--text:#a8c8e0;
   --hh:4.2rem;
-  --cw:140px; --ch:110px;
+  --cw:170px; --ch:135px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{height:100%;}
 body{
   background:var(--void);color:var(--white);
   font-family:'Outfit',sans-serif;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   min-height:100vh;
   perspective:1100px;
 }
+body.scene-locked{overflow:hidden;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9997;}
 
 /* ════════ CURSOR ════════ */
@@ -80,45 +82,57 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 }
 #req-btn:hover{background:var(--cyan)!important;color:var(--void)!important;}
 
-/* ════════ 3D SCENE ════════ */
+/* ════════ SCENE ════════
+   "table" is a normal responsive document-flow grid (page scrolls).
+   sphere / helix / grid are the fixed-viewport 3D modes. */
 #scene{
-  position:fixed;inset:0;
+  position:static;
   transform-style:preserve-3d;
+}
+body.scene-locked #scene{
+  position:fixed;inset:0;
   display:flex;align-items:center;justify-content:center;
 }
 #sc{
-  position:absolute;width:100%;height:100%;
-  top:0;left:0;
   transform-style:preserve-3d;
   backface-visibility:hidden;
   pointer-events:none;
 }
-#sc[data-layout="table"]{
-  --cw:110px;
-  --ch:85px;
-  display:grid;
-  grid-template-columns:repeat(6,var(--cw));
-  grid-auto-rows:var(--ch);
-  gap:.35rem;
-  place-content:center;
-  padding-top:calc(var(--hh) + 12px);
-  padding-bottom:40px;
+body.scene-locked #sc{
+  position:absolute;width:100%;height:100%;
+  top:0;left:0;
 }
+
+#sc[data-layout="table"]{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.4rem;
+  max-width:1400px;
+  margin:0 auto;
+  padding:calc(var(--hh) + 2.5rem) 2rem 6rem;
+  pointer-events:auto;
+}
+@media(min-width:1440px){#sc[data-layout="table"]{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:1439px) and (min-width:1025px){#sc[data-layout="table"]{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:1024px) and (min-width:641px){#sc[data-layout="table"]{grid-template-columns:repeat(2,1fr);gap:1.1rem;padding:calc(var(--hh) + 2rem) 1.5rem 5rem;}}
+@media(max-width:640px){#sc[data-layout="table"]{grid-template-columns:1fr;gap:1rem;padding:calc(var(--hh) + 1.5rem) 1rem 4rem;}}
 
 /* ════════ CARDS ════════ */
 .pcard{
   pointer-events:auto;
   position:relative;
   display:flex;flex-direction:column;
-  width:var(--cw);height:var(--ch);
+  width:100%;height:auto;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:3px;
+  border-radius:6px;
   overflow:hidden;
   cursor:pointer;
   transform-style:preserve-3d;
   transition:border-color .22s,box-shadow .22s;
 }
+/* fixed-size cards are only needed for the 3D perspective modes */
+body.scene-locked .pcard{width:var(--cw);height:var(--ch);}
 .pcard::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:var(--accent);z-index:3;
@@ -133,36 +147,28 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 .pcard[data-c="3"]{--accent:linear-gradient(90deg,#00ff88,#00c860);}
 .pcard[data-c="4"]{--accent:linear-gradient(90deg,#a855f7,#c084fc);}
 
-/* ── browser chrome ── */
-.bbar{
-  display:flex;align-items:center;gap:.35rem;
-  padding:.32rem .55rem;
-  background:#060d14;
-  border-bottom:1px solid rgba(0,200,255,.07);
-  flex-shrink:0;position:relative;z-index:2;
-}
-.bd{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.burl{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:.12rem .45rem;font-family:'JetBrains Mono',monospace;font-size:.45rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
-/* ── iframe preview ── */
+/* ── website preview: fills its container, unobstructed, consistent 16:9 ── */
 .pw{
   position:relative;
-  flex:1;
+  width:100%;
+  aspect-ratio:16/9;
+  flex-shrink:0;
   background:#010406;
   overflow:hidden;
+  border-radius:6px 6px 0 0;
 }
 .pw iframe{
   position:absolute;
   top:0;
   left:0;
-  width:240%;
-  height:240%;
-  transform:scale(.42);
-  transform-origin:top left;
+  width:100%;
+  height:100%;
   border:none;
   pointer-events:none;
   background:#010406;
+  transition:transform .35s ease;
 }
+.pcard:hover .pw iframe{transform:scale(1.04);}
 
 /* shimmer while loading */
 .pw::after{
@@ -171,38 +177,41 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   background-size:200% 100%;
   animation:shim 1.8s infinite;
   transition:opacity .5s;
+  pointer-events:none;
 }
 .pw.loaded::after{opacity:0;pointer-events:none;}
 @keyframes shim{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
 
-/* ── card footer label ── */
-.clabel{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.35rem .55rem;
-  background:rgba(2,4,8,.9);
-  border-top:1px solid rgba(0,200,255,.07);
-  flex-shrink:0;position:relative;z-index:2;
+/* ── project info: below the preview, never overlapping it ── */
+.cinfo{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:.4rem;
+  padding:.5rem .6rem .6rem;
+  flex:1;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
 }
+.cinfo-main{display:flex;flex-direction:column;gap:.2rem;min-width:0;}
 .ctag{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;}
 .pcard[data-c="0"] .ctag{color:#00c8ff;}
 .pcard[data-c="1"] .ctag{color:#c9a84c;}
 .pcard[data-c="2"] .ctag{color:#ff4060;}
 .pcard[data-c="3"] .ctag{color:#00ff88;}
 .pcard[data-c="4"] .ctag{color:#a855f7;}
-.ctitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;color:var(--white);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;}
-.cnum{font-family:'JetBrains Mono',monospace;font-size:.48rem;color:var(--muted);}
+.ctitle{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;color:var(--white);
+  line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.cnum{font-family:'JetBrains Mono',monospace;font-size:.48rem;color:var(--muted);flex-shrink:0;}
 
-/* ── EXPANDED card ── */
+/* ── EXPANDED card (3D modes only — table mode navigates directly) ── */
 .pcard.exp{
   --cw:380px;--ch:320px;
   z-index:50;
   border-color:rgba(0,200,255,.5);
   box-shadow:0 20px 60px rgba(0,0,0,.8),0 0 0 1px rgba(0,200,255,.15);
-}
-#sc[data-layout="table"] .pcard.exp{
-  position:relative;
-  margin-right:calc(var(--cw) * -.55);
-  margin-bottom:calc(var(--ch) * -.38);
 }
 
 /* 3D positioned modes */
@@ -259,45 +268,17 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 
 /* MOBILE OVERRIDES */
 @media (max-width: 768px){
-  :root{
+  body.scene-locked{
     --cw:180px;
     --ch:150px;
-  }
-
-  body{
-    overflow-x:hidden;
-    overflow-y:auto;
     cursor:auto;
   }
-
-  #cur,
-  
 
   #controls{
     bottom:.8rem;
     width:calc(100% - 1rem);
     overflow-x:auto;
     justify-content:flex-start;
-  }
-
-  #sc[data-layout="table"]{
-    --cw:95px;
-    --ch:75px;
-    grid-template-columns:repeat(4,var(--cw));
-    gap:.35rem;
-    padding-top:calc(var(--hh) + 10px);
-    padding-bottom:70px;
-  }
-
-  .pw iframe{
-    width:260%;
-    height:260%;
-    transform:scale(.38);
-    transform-origin:top left;
-  }
-
-  .ctitle{
-    max-width:95px;
   }
 }
 
@@ -423,9 +404,13 @@ document.addEventListener('pointermove',e=>{
   pY=(e.clientY-hh)/hh;
 });
 (function cam(){
-  rotX+=(pY*tRotX-rotX)*.012;
-  rotY+=(-pX*tRotY-rotY)*.012;
-  scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  if(document.body.classList.contains('scene-locked')){
+    rotX+=(pY*tRotX-rotX)*.012;
+    rotY+=(-pX*tRotY-rotY)*.012;
+    scene.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  } else {
+    scene.style.transform='';
+  }
   requestAnimationFrame(cam);
 })();
 
@@ -483,18 +468,12 @@ function buildCards(sites){
     el.className='pcard';
     el.dataset.c=s.color!==undefined?s.color:0;
     el.innerHTML=`
-      <div class="bbar">
-        <div class="bd" style="background:#ff5f57"></div>
-        <div class="bd" style="background:#febc2e"></div>
-        <div class="bd" style="background:#28c840"></div>
-        <div class="burl">${url}</div>
-      </div>
       <div class="pw" id="pw${i}">
         <iframe src="${path}" title="${s.title||s.file}" loading="lazy"
           sandbox="allow-same-origin allow-scripts" scrolling="no"></iframe>
       </div>
-      <div class="clabel">
-        <div>
+      <div class="cinfo">
+        <div class="cinfo-main">
           <div class="ctag">${s.tag||'Website'}</div>
           <div class="ctitle">${s.title||s.file}</div>
         </div>
@@ -505,14 +484,15 @@ function buildCards(sites){
       document.getElementById('pw'+i)?.classList.add('loaded');
     });
 
-    el.addEventListener('click',e=>{
+    el.addEventListener('click',()=>{
+      if(currentLayout==='table'){
+        window.location.href = url;
+        return;
+      }
       if(el.classList.contains('exp')){
         window.location.href = url;
         return;
       }
-
-      if(e.target.closest('.bbar')) return;
-
       toggleExpand(el);
     });
 
@@ -520,23 +500,13 @@ function buildCards(sites){
     el.addEventListener('mouseleave',smC);
 
     el.style.opacity='0';
-    el.style.transition='none';
+    el.style.transition='opacity .5s';
     sc.appendChild(el);
     cards.push(el);
   });
 
   requestAnimationFrame(()=>{
-    cards.forEach(c=>{
-      const rx2=(Math.random()-.5)*1400;
-      const ry2=(Math.random()-.5)*900;
-      const rz2=(Math.random()-.5)*1400;
-      c.style.position='absolute';c.style.left='50%';c.style.top='50%';
-      c.style.marginLeft=(-CW/2)+'px';c.style.marginTop=(-CH/2)+'px';
-      c.style.transform=`translate3d(${rx2}px,${ry2}px,${rz2}px)`;
-    });
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>applyLayout('table',true));
-    });
+    requestAnimationFrame(()=>applyLayout(currentLayout||'table',true));
   });
 }
 
@@ -576,7 +546,8 @@ function posFor(layout,i,isExp){
 function applyLayout(layout, animated=true){
   currentLayout=layout;
   sc.dataset.layout=layout;
-  if(layout==='table'){tRotX=12;tRotY=16;}
+  document.body.classList.toggle('scene-locked', layout!=='table');
+  if(layout==='table'){tRotX=0;tRotY=0;}
   else if(layout==='sphere'){tRotX=40;tRotY=360;}
   else if(layout==='helix'){tRotX=30;tRotY=300;}
   else if(layout==='grid'){tRotX=10;tRotY=55;}
@@ -585,11 +556,9 @@ function applyLayout(layout, animated=true){
     cards.forEach(c=>{
       c.style.position='';c.style.left='';c.style.top='';
       c.style.marginLeft='';c.style.marginTop='';
-      const dur=animated?1500:0;
-      const delay=animated?Math.random()*700:0;
-      c.style.transition=`transform ${dur}ms ${delay}ms cubic-bezier(.77,0,.175,1), opacity ${dur}ms ${delay}ms`;
+      c.style.transition='opacity .4s';
       c.style.opacity='1';
-      c.style.transform=`translateZ(${c.classList.contains('exp')?50:6}px)`;
+      c.style.transform='';
     });
   } else {
     cards.forEach((c,i)=>{

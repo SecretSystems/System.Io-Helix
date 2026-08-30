@@ -100,18 +100,29 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   grid-template-columns:repeat(6,var(--cw));
   grid-auto-rows:var(--ch);
   gap:.5rem;
-  place-content:center;
+  justify-content:center;
+  align-content:start;
+  overflow-y:auto;
+  overflow-x:hidden;
+  pointer-events:auto;
   padding-top:calc(var(--hh) + 12px);
   padding-bottom:40px;
 }
 @media(max-width:768px){
   #sc[data-layout="table"]{
-    --cw:130px;
-    --ch:112px;
-    grid-template-columns:repeat(4,var(--cw));
-    gap:.35rem;
-    padding-top:calc(var(--hh) + 10px);
-    padding-bottom:70px;
+    --ch:150px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:.6rem;
+    justify-content:stretch;
+    padding:calc(var(--hh) + 10px) .6rem 70px;
+  }
+  #sc[data-layout="table"] .pcard{width:auto;}
+}
+@media(max-width:480px){
+  #sc[data-layout="table"]{
+    --ch:220px;
+    grid-template-columns:1fr;
   }
 }
 
@@ -153,7 +164,6 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   flex:1;
   background:#010406;
   overflow:hidden;
-  border-radius:6px 6px 0 0;
 }
 .pw iframe{
   position:absolute;
@@ -179,30 +189,6 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 }
 .pw.loaded::after{opacity:0;pointer-events:none;}
 @keyframes shim{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
-
-/* ── project info: below the preview, never overlapping it ── */
-.cinfo{
-  display:flex;align-items:flex-start;justify-content:space-between;gap:.4rem;
-  padding:.5rem .6rem .6rem;
-  flex:1;
-  min-width:0;
-  min-height:0;
-  overflow:hidden;
-}
-.cinfo-main{display:flex;flex-direction:column;gap:.2rem;min-width:0;}
-.ctag{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;}
-.pcard[data-c="0"] .ctag{color:#00c8ff;}
-.pcard[data-c="1"] .ctag{color:#c9a84c;}
-.pcard[data-c="2"] .ctag{color:#ff4060;}
-.pcard[data-c="3"] .ctag{color:#00ff88;}
-.pcard[data-c="4"] .ctag{color:#a855f7;}
-.ctitle{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;color:var(--white);
-  line-height:1.3;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-  overflow:hidden;
-}
-.cnum{font-family:'JetBrains Mono',monospace;font-size:.48rem;color:var(--muted);flex-shrink:0;}
 
 /* ── EXPANDED card (3D modes only — table mode navigates directly) ── */
 .pcard.exp{
@@ -468,13 +454,6 @@ function buildCards(sites){
       <div class="pw" id="pw${i}">
         <iframe src="${path}" title="${s.title||s.file}" loading="lazy"
           sandbox="allow-same-origin allow-scripts" scrolling="no"></iframe>
-      </div>
-      <div class="cinfo">
-        <div class="cinfo-main">
-          <div class="ctag">${s.tag||'Website'}</div>
-          <div class="ctitle">${s.title||s.file}</div>
-        </div>
-        <div class="cnum">${String(i+1).padStart(2,'0')}</div>
       </div>`;
 
     el.querySelector('iframe').addEventListener('load',()=>{

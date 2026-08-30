@@ -112,17 +112,17 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
   #sc[data-layout="table"]{
     --ch:150px;
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:.6rem;
+    grid-template-columns:repeat(3,1fr);
+    gap:.5rem;
     justify-content:stretch;
-    padding:calc(var(--hh) + 10px) .6rem 70px;
+    padding:calc(var(--hh) + 10px) .5rem 70px;
   }
   #sc[data-layout="table"] .pcard{width:auto;}
 }
 @media(max-width:480px){
   #sc[data-layout="table"]{
-    --ch:220px;
-    grid-template-columns:1fr;
+    --ch:120px;
+    gap:.4rem;
   }
 }
 

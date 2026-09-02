@@ -1077,6 +1077,12 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   transform:scale(.4);transform-origin:top left;
   border:none;background:#050a10;
 }
+/* Full-bleed preview: the embedded page is built to fill whatever box it's
+   given (e.g. /map-embed), so it renders at the card's real size instead of
+   being force-scaled down from an assumed full desktop viewport. */
+.portfolio-card.full-bleed-preview .portfolio-preview iframe{
+  width:100%;height:100%;transform:none;
+}
 
 /* loading state while the active iframe initializes */
 .portfolio-loading{
@@ -1103,16 +1109,17 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 .portfolio-preview iframe{pointer-events:none;}
 
 .portfolio-exit-btn{
-  position:absolute;top:.9rem;right:.9rem;z-index:7;display:none;
-  align-items:center;gap:.4rem;
-  background:rgba(2,4,8,.82);backdrop-filter:blur(10px);
-  border:1px solid rgba(0,200,255,.3);color:var(--white);
-  font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  padding:.5rem .9rem;border-radius:999px;cursor:pointer;
+  position:absolute;top:.7rem;right:.7rem;z-index:9;display:none;
+  align-items:center;justify-content:center;
+  width:34px;height:34px;padding:0;
+  background:rgba(2,4,8,.78);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.16);color:var(--white);
+  border-radius:50%;cursor:pointer;
 }
 .portfolio-card.is-interactive .portfolio-exit-btn{display:inline-flex;}
 .portfolio-exit-btn:hover{border-color:var(--cyan);color:var(--cyan);}
 .portfolio-exit-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+.portfolio-exit-btn svg{width:13px;height:13px;display:block;}
 
 /* browser-chrome strip along the very top edge — reinforces "this is a real site" without covering content */
 .portfolio-chrome{

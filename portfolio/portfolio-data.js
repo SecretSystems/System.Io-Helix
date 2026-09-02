@@ -92,6 +92,7 @@ var SS_PORTFOLIO = {
         secondaryLabel: "Open Live Map",
         previewUrl: "https://et.fireservicetools.com/map-embed",
         previewMode: "live",
+        fullBleedPreview: true,
         poster: "/portfolio/assets/poster-exchange-time.webp",
         posterAlt: "911 Operations Map split-screen view: a compact list of recent public Lafayette911 incidents on the left, and an interactive map on the right showing fire station, hydrant, and road closure markers over Lafayette, Louisiana."
       },

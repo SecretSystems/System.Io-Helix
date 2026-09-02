@@ -93,7 +93,9 @@
       var exitBtn = document.createElement("button");
       exitBtn.type = "button";
       exitBtn.className = "portfolio-exit-btn";
-      exitBtn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Exit Preview';
+      exitBtn.setAttribute("aria-label", "Exit preview");
+      exitBtn.title = "Exit preview";
+      exitBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
       exitBtn.addEventListener("click", function(e){ e.stopPropagation(); exitInteraction(group); });
 
       inner.appendChild(chrome);
@@ -197,6 +199,13 @@
     iframe.sandbox = SANDBOX;
     iframe.referrerPolicy = "no-referrer";
     iframe.setAttribute("tabindex", "-1");
+    // Most preview sites are real external pages at their own desktop width,
+    // shown shrunk-to-fit via the 250%/scale(.4) CSS below. A project whose
+    // previewUrl is a dedicated embed route (built to fill whatever box it's
+    // given, like /map-embed) opts out of that hack with full-bleed-preview
+    // so it renders at the card's actual size instead of a scaled-down
+    // full desktop layout.
+    active.el.classList.toggle("full-bleed-preview", !!active.project.fullBleedPreview);
 
     active.loading.classList.remove("is-hidden");
     active.poster.style.opacity = "1"; // stays the visible fallback until load actually succeeds

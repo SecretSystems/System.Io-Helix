@@ -191,7 +191,7 @@
     if(!sectionNearViewport && !idleFired) return; // wait for perf gate before any network request
 
     var iframe = document.createElement("iframe");
-    iframe.src = active.project.url;
+    iframe.src = active.project.previewUrl || active.project.url;
     iframe.loading = "lazy";
     iframe.title = active.project.name + " live preview";
     iframe.sandbox = SANDBOX;
@@ -199,16 +199,67 @@
     iframe.setAttribute("tabindex", "-1");
 
     active.loading.classList.remove("is-hidden");
-    iframe.addEventListener("load", function(){
+    active.poster.style.opacity = "1"; // stays the visible fallback until load actually succeeds
+
+    function markLoaded(){
+      if(active.iframeLoaded) return; // guard against the load+timeout race firing twice
       active.iframeLoaded = true;
       active.loading.classList.add("is-hidden");
       active.poster.style.opacity = "0";
+      updateInteractAvailability(ctrl, idx);
+    }
+    function markFailed(){
+      if(active.iframeLoaded) return;
+      active.loading.classList.add("is-hidden");
+      active.poster.style.opacity = "1"; // explicit fallback: never leave a broken/blank iframe visible
+      updateInteractAvailability(ctrl, idx);
+    }
+
+    // A frame-ancestors/X-Frame-Options block does NOT reliably fire a
+    // network "error" event — Chromium still fires "load" for the blocked
+    // navigation, just with an empty/inaccessible document instead of the
+    // real page. So `load` alone can't be trusted as success: check that
+    // the iframe actually reached its real document before treating it as
+    // loaded. `contentDocument` throws/returns null across an origin
+    // boundary in a genuinely cross-origin *successful* load too — that's
+    // expected and fine, it just means the check below can't run and this
+    // falls through to trusting `load` (the normal, common case for these
+    // preview URLs). The check only exists to catch the specific same-
+    // origin-looking-but-actually-blocked case Chromium produces.
+    function looksBlocked(){
+      try{
+        var doc = iframe.contentDocument;
+        return !!doc && doc.URL === "about:blank";
+      }catch(e){
+        return false; // real cross-origin page — can't inspect it, and don't need to
+      }
+    }
+
+    iframe.addEventListener("load", function(){
+      if(looksBlocked()) markFailed();
+      else markLoaded();
     });
-    // safety: if a load event never fires (blocked mid-flight), stop showing the spinner
-    setTimeout(function(){ active.loading.classList.add("is-hidden"); }, 6000);
+    iframe.addEventListener("error", markFailed);
+    var failSafeTimer = setTimeout(function(){
+      if(!active.iframeLoaded) markFailed();
+    }, 6000);
+    iframe.addEventListener("load", function(){ clearTimeout(failSafeTimer); });
 
     active.preview.appendChild(iframe);
     active.iframeEl = iframe;
+  }
+
+  /* "Interact With Preview" only becomes usable once the iframe has actually
+     finished loading — never for a fallback poster, and never for a live
+     project whose iframe is still loading or failed to load. */
+  function updateInteractAvailability(ctrl, idx){
+    if(state.index[ctrl.group] !== idx) return; // slide changed while this was pending
+    var interactBtn = ctrl.metaWrap.querySelector("[data-interact-btn]");
+    if(!interactBtn) return;
+    var card = ctrl.cards[idx];
+    var ready = card.project.previewMode === "live" && card.iframeLoaded;
+    interactBtn.disabled = !ready;
+    interactBtn.title = ready ? "" : "A live preview isn't available for this project — use Open Live Site instead.";
   }
 
   function renderMeta(ctrl){
@@ -225,12 +276,15 @@
       '</div>';
 
     var interactBtn = ctrl.metaWrap.querySelector("[data-interact-btn]");
-    if(p.previewMode !== "live"){
-      interactBtn.disabled = true;
-      interactBtn.title = "A live preview isn't available for this project — use Open Live Site instead.";
-    } else {
-      interactBtn.addEventListener("click", function(){ enterInteraction(ctrl.group); });
-    }
+    // Disabled until the iframe actually finishes loading (see
+    // updateInteractAvailability, called from activateSlide's load/error/
+    // timeout handlers) — never enabled for a project that only has a
+    // fallback poster, and never enabled speculatively while a live
+    // project's iframe is still in flight or failed.
+    interactBtn.disabled = true;
+    interactBtn.title = "A live preview isn't available for this project — use Open Live Site instead.";
+    interactBtn.addEventListener("click", function(){ enterInteraction(ctrl.group); });
+    updateInteractAvailability(ctrl, idx);
 
     announce(p.name + ", " + (idx + 1) + " of " + ctrl.cards.length);
   }

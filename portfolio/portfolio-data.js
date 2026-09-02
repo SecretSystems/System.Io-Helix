@@ -11,6 +11,11 @@
    @property {string} category      - short category label shown above the name
    @property {string} description   - one-sentence description
    @property {string} url           - live site URL ("Open Live Site" target)
+   @property {string} [previewUrl]  - URL loaded in the sandboxed iframe when
+                    previewMode is "live", if different from `url` (e.g. a
+                    dedicated embed-safe route on the same project that
+                    permits framing from this site). Falls back to `url`
+                    when omitted.
    @property {'live'|'fallback'} previewMode
        'live'     - safe to load in a sandboxed iframe (verified: no
                     X-Frame-Options/CSP block, no console-breaking errors)
@@ -36,8 +41,8 @@ var SS_PORTFOLIO = {
         category: "Seasonal Service Website",
         description: "Professional Christmas light installation website built for local SEO, conversion, and seasonal visual impact.",
         url: "https://www.lighttheseasons.com/",
-        previewMode: "fallback",
-        fallbackReason: "Site sends X-Frame-Options: SAMEORIGIN, which blocks iframe embedding entirely.",
+        previewUrl: "https://www.lighttheseasons.com/portfolio-preview",
+        previewMode: "live",
         poster: "/portfolio/assets/poster-light-the-season.webp",
         posterAlt: "Light The Season homepage: a nighttime photo of a house with warm white Christmas lights along the roofline and driveway, with the headline \"Christmas lights designed to stop traffic — not ruin your weekend.\""
       },
@@ -73,8 +78,8 @@ var SS_PORTFOLIO = {
         category: "Workforce Coordination System",
         description: "Fire-department exchange-time, scheduling, approval, and workforce coordination system.",
         url: "https://et.fireservicetools.com/",
-        previewMode: "fallback",
-        fallbackReason: "Site sends X-Frame-Options: DENY and CSP frame-ancestors 'none', which blocks iframe embedding entirely. A live view also renders real crew schedule data, so a generic branded poster is used instead of a screenshot even for the fallback image.",
+        previewUrl: "https://et.fireservicetools.com/portfolio-demo",
+        previewMode: "live",
         poster: "/portfolio/assets/poster-exchange-time.webp",
         posterAlt: "Exchange Time brand mark — an orange rounded-square icon with a cycle/exchange glyph on a dark background, with the name \"Exchange Time\" and the tagline \"Fire-department scheduling & workforce coordination.\""
       },

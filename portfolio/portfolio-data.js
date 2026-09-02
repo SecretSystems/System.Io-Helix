@@ -84,6 +84,18 @@ var SS_PORTFOLIO = {
         posterAlt: "Exchange Time brand mark — an orange rounded-square icon with a cycle/exchange glyph on a dark background, with the name \"Exchange Time\" and the tagline \"Fire-department scheduling & workforce coordination.\""
       },
       {
+        id: "911-operations-map",
+        name: "911 Operations Map",
+        category: "Apps & Systems",
+        description: "A live operational map connecting public emergency calls with stations, hydrants, traffic conditions, and road closures.",
+        url: "https://et.fireservicetools.com/map-embed",
+        secondaryLabel: "Open Live Map",
+        previewUrl: "https://et.fireservicetools.com/map-embed",
+        previewMode: "live",
+        poster: "/portfolio/assets/poster-exchange-time.webp",
+        posterAlt: "911 Operations Map split-screen view: a compact list of recent public Lafayette911 incidents on the left, and an interactive map on the right showing fire station, hydrant, and road closure markers over Lafayette, Louisiana."
+      },
+      {
         id: "light-the-season-fireworks",
         name: "Light The Season Fireworks",
         category: "E-Commerce Storefront",

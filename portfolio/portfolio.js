@@ -273,7 +273,7 @@
       '<p class="portfolio-meta-position">' + (idx + 1) + ' / ' + ctrl.cards.length + '</p>' +
       '<div class="portfolio-actions">' +
         '<button type="button" class="btn-ghost" data-interact-btn>Interact With Preview</button>' +
-        '<a class="btn-primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener noreferrer">Open Live Site →</a>' +
+        '<a class="btn-primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(p.secondaryLabel || "Open Live Site") + ' →</a>' +
       '</div>';
 
     var interactBtn = ctrl.metaWrap.querySelector("[data-interact-btn]");

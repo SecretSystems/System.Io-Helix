@@ -42,9 +42,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 /* ════════ NAV ════════ */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem;height:var(--hh);background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nl{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--white);text-decoration:none;letter-spacing:.05em;}
-.nl .d{color:var(--cyan);}
-.nl .i{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);opacity:.8;font-weight:300;}
+.nl{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
+.nl .site-logo{display:block;width:auto;height:auto;max-width:190px;max-height:42px;object-fit:contain;}
+@media(max-width:768px){.nl .site-logo{max-width:145px;max-height:34px;}}
 nav ul{display:flex;gap:1.4rem;list-style:none;align-items:center;}
 nav ul a{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s;position:relative;}
 nav ul a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
@@ -275,7 +275,7 @@ nav ul a:hover::after,nav ul a.act::after{transform:scaleX(1);}
 </head>
 <body>
 <nav>
-  <a href="/" class="nl">Secret Systems<span class="d">.</span><span class="i">io</span></a>
+  <a href="/" class="nl" aria-label="Secret Systems.io home"><img src="/assets/branding/secret-systems-logo-dark.png" alt="Secret Systems.io" class="site-logo" width="2135" height="736" loading="eager"></a>
   <ul>
     <li><a href="/services/">Services</a></li>
     <li><a href="/secret-suite/">Secret Suite</a></li>

@@ -9,9 +9,9 @@ body{background:var(--void);color:var(--white);font-family:'Outfit',sans-serif;o
 
 canvas#bg{display:none;}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;padding:1.1rem 1.75rem;background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--white);text-decoration:none;letter-spacing:.05em;white-space:nowrap;flex-shrink:0;}
-.nav-logo .dot{color:var(--cyan);}
-.nav-logo .io{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--cyan);opacity:.8;font-weight:300;}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
+.site-logo{display:block;width:auto;height:auto;max-width:190px;max-height:42px;object-fit:contain;}
+@media(max-width:1400px){.nav-logo .site-logo{max-width:145px;max-height:34px;}}
 .nav-links{display:flex;gap:1.25rem;list-style:none;align-items:center;flex-wrap:nowrap;}
 .nav-links a{font-size:.74rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s;position:relative;white-space:nowrap;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
@@ -110,9 +110,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .site-footer{background:#020407;border-top:1px solid var(--border);padding:3rem 0;}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;}
-.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--white);text-decoration:none;display:block;margin-bottom:1rem;}
-.foot-logo .dot{color:var(--cyan);}
-.foot-logo .io{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--cyan);opacity:.8;font-weight:300;}
+.foot-logo{display:block;margin-bottom:1rem;text-decoration:none;}
+.foot-logo .site-logo{max-width:180px;max-height:none;}
 .foot-brand p{font-size:.83rem;color:var(--muted);line-height:1.6;max-width:230px;}
 .foot-col h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text);margin-bottom:1.2rem;}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}

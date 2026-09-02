@@ -77,10 +77,9 @@ button{font:inherit;color:inherit;}
 .sac-header{position:sticky;top:0;z-index:500;background:rgba(5,7,8,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .sac-header-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;max-width:1360px;margin:0 auto;}
 @media(min-width:768px){.sac-header-row{padding:1.1rem 2.5rem;}}
-.sac-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;}
-.sac-logo b{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.02em;color:var(--text);}
-.sac-logo span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:var(--muted);display:none;}
-@media(min-width:520px){.sac-logo span{display:inline;}}
+.sac-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
+.sac-logo .site-logo{display:block;width:auto;height:auto;max-width:145px;max-height:34px;object-fit:contain;}
+@media(min-width:768px){.sac-logo .site-logo{max-width:190px;max-height:42px;}}
 .sac-header-center{display:none;}
 @media(min-width:900px){
   .sac-header-center{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--border);padding:.5rem 1rem;background:none;cursor:pointer;transition:border-color .2s;}
@@ -241,8 +240,8 @@ body{padding-bottom:0;}
 <!-- ── HEADER ── -->
 <header class="sac-header">
   <div class="sac-header-row">
-    <a href="/" class="sac-logo focus-ring">
-      <b>SS//</b><span class="mono">SECRET&nbsp;SYSTEMS</span>
+    <a href="/" class="sac-logo focus-ring" aria-label="Secret Systems.io home">
+      <img src="/assets/branding/secret-systems-logo-dark.png" alt="Secret Systems.io" class="site-logo" width="2135" height="736" loading="eager">
     </a>
     <button type="button" class="sac-header-center focus-ring" id="sacDirectoryOpenCenter">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2"/></svg>
@@ -542,7 +541,7 @@ body{padding-bottom:0;}
 <footer class="sac-footer">
   <div class="wrap">
     <div class="sac-footer-top">
-      <a href="/" class="sac-logo focus-ring"><b>SS//</b><span class="mono">SECRET SYSTEMS</span></a>
+      <a href="/" class="sac-logo focus-ring" aria-label="Secret Systems.io home"><img src="/assets/branding/secret-systems-logo-dark.png" alt="Secret Systems.io" class="site-logo" width="2135" height="736" loading="lazy"></a>
       <nav class="sac-footer-links" aria-label="Footer">
         <a href="/services/">Automation</a>
         <a href="/software-development/">Software</a>

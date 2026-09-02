@@ -217,26 +217,27 @@
 
     // A frame-ancestors/X-Frame-Options block does NOT reliably fire a
     // network "error" event — Chromium still fires "load" for the blocked
-    // navigation, just with an empty/inaccessible document instead of the
-    // real page. So `load` alone can't be trusted as success: check that
-    // the iframe actually reached its real document before treating it as
-    // loaded. `contentDocument` throws/returns null across an origin
-    // boundary in a genuinely cross-origin *successful* load too — that's
-    // expected and fine, it just means the check below can't run and this
-    // falls through to trusting `load` (the normal, common case for these
-    // preview URLs). The check only exists to catch the specific same-
-    // origin-looking-but-actually-blocked case Chromium produces.
-    function looksBlocked(){
-      try{
-        var doc = iframe.contentDocument;
-        return !!doc && doc.URL === "about:blank";
-      }catch(e){
-        return false; // real cross-origin page — can't inspect it, and don't need to
-      }
-    }
+    // navigation, just for an empty page instead of the real one. `load`
+    // alone can't be trusted as success. contentDocument inspection isn't
+    // a reliable signal either: with this sandbox policy, a genuinely
+    // successful cross-origin load *also* reports contentDocument as null
+    // (confirmed empirically against a known-working embed), so a null/
+    // inaccessible document can't distinguish blocked from working.
+    //
+    // What does reliably distinguish them is timing: a blocked navigation
+    // resolves `load` in a couple of milliseconds (no real network request
+    // ever happens), while every one of these preview sites takes at least
+    // several hundred milliseconds to actually fetch and render over a
+    // real network connection — confirmed empirically: a blocked load
+    // resolved in ~2ms, a genuine one in ~3760ms. MIN_REAL_LOAD_MS sits
+    // far below the fast end of that gap so it can't misfire on a
+    // legitimately fast CDN response, while still catching same-tick
+    // blocked loads.
+    var MIN_REAL_LOAD_MS = 150;
+    var iframeCreatedAt = Date.now();
 
     iframe.addEventListener("load", function(){
-      if(looksBlocked()) markFailed();
+      if(Date.now() - iframeCreatedAt < MIN_REAL_LOAD_MS) markFailed();
       else markLoaded();
     });
     iframe.addEventListener("error", markFailed);
@@ -467,9 +468,12 @@
      or main-thread time during first paint. ── */
   var sectionNearViewport = false;
   var idleFired = false;
+  var gateOpened = false;
 
   function onPerfGateOpen(){
-    if(sectionNearViewport || idleFired) return;
+    if(gateOpened) return; // whichever of viewport/idle fires first wins; ignore the second
+    if(!sectionNearViewport && !idleFired) return;
+    gateOpened = true;
     GROUPS.forEach(function(g){ activateSlide(carousels[g], state.index[g]); });
   }
 

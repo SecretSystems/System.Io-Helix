@@ -269,7 +269,18 @@
     var card = ctrl.cards[idx];
     var ready = card.project.previewMode === "live" && card.iframeLoaded;
     interactBtn.disabled = !ready;
-    interactBtn.title = ready ? "" : "A live preview isn't available for this project — use Open Live Site instead.";
+    if(ready){
+      interactBtn.textContent = "Interact With Preview";
+      interactBtn.title = "";
+    } else if(card.project.previewMode === "live"){
+      // Loading, not broken -- distinct label so the disabled state reads as
+      // "still connecting" rather than "this feature doesn't work here".
+      interactBtn.textContent = "Loading Live Preview…";
+      interactBtn.title = "Connecting to the live preview…";
+    } else {
+      interactBtn.textContent = "Interact With Preview";
+      interactBtn.title = "A live preview isn't available for this project — use Open Live Site instead.";
+    }
   }
 
   function renderMeta(ctrl){

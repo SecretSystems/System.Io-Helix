@@ -572,9 +572,16 @@ nav{
   font-family:'Outfit',sans-serif;font-weight:500;
   font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;
   padding:0.9rem 2rem;text-decoration:none;
+  background:transparent;cursor:pointer;
   transition:all 0.25s;
 }
 .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+/* Explicit disabled state (loading-only, brief) instead of the browser's
+   default pale-gray button styling, which reads as "broken" rather than
+   "loading" — keeps the same dark card background and cyan-tinted border,
+   just dimmer and non-interactive. */
+.btn-ghost:disabled{opacity:0.55;cursor:progress;border-color:rgba(0,200,255,0.16);color:var(--muted);}
+.btn-ghost:disabled:hover{border-color:rgba(0,200,255,0.16);color:var(--muted);}
 
 /* scrolling ticker removed */
 

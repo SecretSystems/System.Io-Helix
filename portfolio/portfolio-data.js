@@ -93,8 +93,8 @@ var SS_PORTFOLIO = {
         previewUrl: "https://et.fireservicetools.com/map-embed",
         previewMode: "live",
         fullBleedPreview: true,
-        poster: "/portfolio/assets/poster-exchange-time.webp",
-        posterAlt: "911 Operations Map split-screen view: a compact list of recent public Lafayette911 incidents on the left, and an interactive map on the right showing fire station, hydrant, and road closure markers over Lafayette, Louisiana."
+        poster: "/portfolio/assets/poster-911-operations-map.webp",
+        posterAlt: "Exchange Time 911 Operations Map centered on a recent public Lafayette911 call, showing the real map with a fire station marker, the selected incident highlighted, and native incident cards along the bottom."
       },
       {
         id: "light-the-season-fireworks",

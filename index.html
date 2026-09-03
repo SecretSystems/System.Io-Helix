@@ -600,6 +600,98 @@ nav{
   margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;
 }
 .eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--cyan);}
+
+/* ── FEATURED VIDEO ("Meet the System") ── */
+/* Sits directly after the pinned 300vh hero-scroll-container and before the
+   portfolio section. A restrained negative margin pulls it up under the
+   hero's bottom edge so the transition reads as connected rather than two
+   separate blocks stacked with a hard seam. */
+.intro-video-section{
+  position:relative;z-index:2;
+  padding:0 3rem 4.5rem;
+  margin-top:-48px;
+}
+.intro-video-wrap{
+  max-width:1100px;margin:0 auto;
+  text-align:center;
+}
+.intro-video-eyebrow{justify-content:center;margin-bottom:1.1rem;}
+.intro-video-card{
+  border-radius:28px;
+  background:#050a10;
+  box-shadow:
+    0 40px 90px -20px rgba(0,0,0,.65),
+    0 0 0 1px rgba(0,200,255,.14),
+    0 2px 0 rgba(255,255,255,.04) inset;
+  overflow:hidden;
+  position:relative;
+}
+.intro-video-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#050a10;
+}
+.intro-video-play{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;
+  padding:0;margin:0;
+  border:0;background:none;cursor:pointer;
+  overflow:hidden;
+}
+.intro-video-thumb{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+.intro-video-play-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:84px;height:84px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,4,8,.72);
+  border:1px solid rgba(0,200,255,.4);
+  color:var(--white);
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.6);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.intro-video-play-icon svg{margin-left:3px;} /* optical centering for the play triangle */
+.intro-video-play:hover .intro-video-play-icon,
+.intro-video-play:focus-visible .intro-video-play-icon{
+  transform:translate(-50%,-50%) scale(1.08);
+  border-color:var(--cyan);
+  background:rgba(0,200,255,.16);
+}
+.intro-video-play:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;}
+.intro-video-frame iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;display:block;
+}
+.intro-video-fallback{
+  margin-top:.9rem;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  letter-spacing:.06em;
+}
+.intro-video-fallback a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.intro-video-fallback a:hover,.intro-video-fallback a:focus-visible{color:var(--cyan);}
+
+@media(max-width:900px){
+  /* No negative overlap on mobile: the hero's own stacked CTA buttons can run
+     right up against the sticky hero container's bottom edge at short/narrow
+     viewports, and covering "Book a Consult" / "See What We Build" is worse
+     than losing the overlap effect here. */
+  .intro-video-section{padding:1.25rem 1.5rem 3rem;margin-top:0;}
+  .intro-video-card{border-radius:20px;}
+  .intro-video-play-icon{width:64px;height:64px;}
+  .intro-video-play-icon svg{width:24px;height:24px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro-video-play-icon{transition:none;}
+}
+
 .big-title{
   font-family:'Syne',sans-serif;font-weight:800;
   font-size:clamp(2.2rem,4vw,3.8rem);line-height:1;
@@ -1337,6 +1429,24 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   </div>
 </div>
 
+<!-- FEATURED VIDEO — "Meet the System" -->
+<section id="intro-video-section" class="intro-video-section" aria-label="Featured video">
+  <div class="intro-video-wrap reveal">
+    <p class="eyebrow intro-video-eyebrow">Meet the System</p>
+    <div class="intro-video-card" id="introVideoCard">
+      <div class="intro-video-frame" id="introVideoFrame">
+        <button type="button" class="intro-video-play" id="introVideoPlayBtn" aria-label="Play video">
+          <img id="introVideoThumb" class="intro-video-thumb" alt="" loading="lazy" decoding="async">
+          <span class="intro-video-play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+          </span>
+        </button>
+      </div>
+      <p class="intro-video-fallback"><a id="introVideoFallbackLink" href="https://www.youtube.com/watch?v=S1WWzdyGquE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- SELECTED WORK — live portfolio carousel -->
 <section id="portfolio-section" aria-labelledby="portfolio-heading">
   <div class="section">
@@ -1890,6 +2000,68 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
   },{threshold:0.12});
   reveals.forEach(function(r){obs.observe(r);});
+
+  /* ── FEATURED VIDEO ("Meet the System") ──
+     Config holds both videos; only the edited cut is ever shown to regular
+     visitors. ?intro=raw is an unlisted comparison URL for internal review
+     -- there is no public toggle on the page. One lightweight YouTube
+     facade (thumbnail + button) swaps for a single real iframe on click;
+     the raw version's iframe is never created unless that query param is
+     present, so at most one video ever loads. */
+  var SS_INTRO_VIDEOS = {
+    edited: {
+      id: 'S1WWzdyGquE',
+      title: 'I Built an AI Version of Myself to Run My Website'
+    },
+    raw: {
+      id: 'hVqUEshFc00',
+      title: 'This AI Assistant Runs My Website | Secret Systems'
+    }
+  };
+  (function(){
+    var params, requested, video;
+    try { params = new URLSearchParams(window.location.search); } catch(e) { params = null; }
+    requested = params ? params.get('intro') : null;
+    video = (requested === 'raw') ? SS_INTRO_VIDEOS.raw : SS_INTRO_VIDEOS.edited; /* missing/invalid -> edited */
+
+    var card = document.getElementById('introVideoCard');
+    var frame = document.getElementById('introVideoFrame');
+    var playBtn = document.getElementById('introVideoPlayBtn');
+    var thumb = document.getElementById('introVideoThumb');
+    var fallbackLink = document.getElementById('introVideoFallbackLink');
+    if (!card || !frame || !playBtn || !thumb) return;
+
+    var watchUrl = 'https://www.youtube.com/watch?v=' + video.id;
+    thumb.src = 'https://i.ytimg.com/vi/' + video.id + '/maxresdefault.jpg';
+    thumb.alt = video.title + ' — video thumbnail';
+    thumb.onerror = function(){
+      thumb.onerror = null;
+      thumb.src = 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg';
+    };
+    playBtn.setAttribute('aria-label', 'Play ' + video.title);
+    if (fallbackLink) fallbackLink.href = watchUrl;
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+    function loadVideo(){
+      if (frame.dataset.loaded) return;
+      frame.dataset.loaded = '1';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + video.id +
+        '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+      iframe.title = video.title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'eager'; /* only created after an explicit click, so eager here is correct */
+      iframe.onerror = function(){
+        frame.innerHTML = '<div class="intro-video-fallback" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)"><a href="' +
+          watchUrl + '" target="_blank" rel="noopener" style="color:var(--cyan)">Watch on YouTube ↗</a></div>';
+      };
+      frame.innerHTML = '';
+      frame.appendChild(iframe);
+    }
+    playBtn.addEventListener('click', loadVideo);
+  })();
 
   /* ── NAV HIGHLIGHT ── */
   window.addEventListener('scroll',function(){

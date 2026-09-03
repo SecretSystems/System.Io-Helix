@@ -173,7 +173,10 @@ nav{
 /* ── HERO WRAPPER (scroll container) ── */
 .hero-scroll-container{
   position:relative;
-  height:300vh;
+  height:300vh; /* fallback for no-JS; overridden by JS to the exact
+                   scroll distance the frame animation + hold need, so
+                   the sticky hero releases immediately with no dead
+                   space after the final frame */
   z-index:1;
 }
 
@@ -1316,6 +1319,14 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 }
 </style>
 <script>if(location.pathname==="/index.html"){location.replace("/"+location.search+location.hash);}</script>
+<script>
+  /* Prevent the browser from restoring a prior scroll position (e.g. after
+     reload) — a fresh homepage load must start at the hero, not wherever
+     the visitor last scrolled to. Only skip the reset when the URL carries
+     an intentional section hash, so real deep links still work. */
+  if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+  if(!location.hash){ window.scrollTo(0, 0); }
+</script>
 </head>
 <body>
 
@@ -2123,11 +2134,26 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   }
   resizeVaultCanvas();
 
+  /* Set the scroll container's height to the exact distance the frame
+     animation + hold need — no more, no less — so the sticky hero
+     releases the instant the hold ends, with zero trailing dead space.
+     getScrollProgress() reaches 1 when scrollY-containerTop hits
+     SPEED_FACTOR*scrollable, and text reveals HERO_HOLD_PX after that;
+     solving scrollable = SPEED_FACTOR*scrollable + HERO_HOLD_PX gives
+     scrollable = HERO_HOLD_PX / (1 - SPEED_FACTOR). Container height is
+     that scrollable distance plus one viewport (the sticky's own 100vh). */
+  function sizeHeroScrollContainer(){
+    var scrollable = HERO_HOLD_PX / (1 - SPEED_FACTOR);
+    heroScrollContainer.style.height = (window.innerHeight + scrollable) + 'px';
+  }
+  sizeHeroScrollContainer();
+
   /* only resize on actual screen orientation/size change, not scroll */
   var resizeTimer;
   window.addEventListener('resize', function(){
     var newW = window.innerWidth;
-    /* only trigger if width changed — height changes are just mobile toolbar */
+    sizeHeroScrollContainer();
+    /* only trigger canvas re-render if width changed — height changes are just mobile toolbar */
     if(newW !== lockedW){
       lockedW = newW;
       lockedH = window.innerHeight;
@@ -2286,6 +2312,13 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       img.src = FRAME_PREFIX + pad3(idx+1) + '.webp';
       frames[idx] = img;
     })(f);
+  }
+
+  /* Re-assert the top-of-page position once layout has settled. Guards
+     against late-loading webfonts/images shifting page height and causing
+     a restored/anchor scroll offset to drift after the initial paint. */
+  if(!location.hash){
+    window.addEventListener('load', function(){ window.scrollTo(0, 0); });
   }
 
   /* ── CONTACT FORM (provider-agnostic; sends only when an endpoint is configured) ── */

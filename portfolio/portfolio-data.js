@@ -70,19 +70,8 @@ var SS_PORTFOLIO = {
   },
   apps: {
     label: "Apps & Systems",
-    defaultId: "exchange-time",
+    defaultId: "911-operations-map",
     projects: [
-      {
-        id: "exchange-time",
-        name: "Exchange Time",
-        category: "Workforce Coordination System",
-        description: "Fire-department exchange-time, scheduling, approval, and workforce coordination system.",
-        url: "https://et.fireservicetools.com/",
-        previewUrl: "https://et.fireservicetools.com/portfolio-demo",
-        previewMode: "live",
-        poster: "/portfolio/assets/poster-exchange-time.webp",
-        posterAlt: "Exchange Time brand mark — an orange rounded-square icon with a cycle/exchange glyph on a dark background, with the name \"Exchange Time\" and the tagline \"Fire-department scheduling & workforce coordination.\""
-      },
       {
         id: "911-operations-map",
         name: "911 Operations Map",
@@ -95,6 +84,17 @@ var SS_PORTFOLIO = {
         fullBleedPreview: true,
         poster: "/portfolio/assets/poster-911-operations-map.webp",
         posterAlt: "Exchange Time 911 Operations Map centered on a recent public Lafayette911 call, showing the real map with a fire station marker, the selected incident highlighted, and native incident cards along the bottom."
+      },
+      {
+        id: "exchange-time",
+        name: "Exchange Time",
+        category: "Workforce Coordination System",
+        description: "Fire-department exchange-time, scheduling, approval, and workforce coordination system.",
+        url: "https://et.fireservicetools.com/",
+        previewUrl: "https://et.fireservicetools.com/portfolio-demo",
+        previewMode: "live",
+        poster: "/portfolio/assets/poster-exchange-time.webp",
+        posterAlt: "Exchange Time brand mark — an orange rounded-square icon with a cycle/exchange glyph on a dark background, with the name \"Exchange Time\" and the tagline \"Fire-department scheduling & workforce coordination.\""
       },
       {
         id: "light-the-season-fireworks",

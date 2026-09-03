@@ -107,16 +107,6 @@ var SS_PORTFOLIO = {
         posterAlt: "Light The Season Fireworks shop page showing a dark red-and-gold \"Shop All Fireworks\" header above a grid of Black Cat firework product photos."
       },
       {
-        id: "loan-ready-os",
-        name: "Loan Ready OS",
-        category: "Operating System",
-        description: "A guided operating system for organizing the information and steps required to become loan-ready.",
-        url: "https://loan-ready-os.vercel.app/",
-        previewMode: "live",
-        poster: "/portfolio/assets/poster-loan-ready-os.webp",
-        posterAlt: "Loan Ready OS landing page with the headline \"The credit improvement operating system\" beside a loan-readiness dashboard showing progress bars and credit scores."
-      },
-      {
         id: "commandroom-os",
         name: "CommandRoom OS",
         category: "Operating System",

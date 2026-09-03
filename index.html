@@ -1067,36 +1067,18 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
    SELECTED WORK — portfolio carousel
    ════════════════════════════════════════════════════════════ */
 #portfolio-section{background:var(--void);position:relative;z-index:1;border-bottom:1px solid var(--border);}
-.portfolio-intro{max-width:640px;margin-bottom:3rem;}
+.portfolio-intro{max-width:640px;margin-bottom:2.5rem;}
 .portfolio-intro .sub-text{max-width:560px;}
 
-/* ── Segmented tab control ── */
-.portfolio-tabs{
-  position:relative;display:inline-flex;gap:.25rem;padding:.3rem;
-  background:var(--surface);border:1px solid var(--border);border-radius:999px;
-  margin-bottom:3rem;
+/* ── Group label (replaces the old Websites/Apps switch — both groups show
+   at once now, so this is just a section sub-heading, not a control) ── */
+.portfolio-group{margin-bottom:1rem;}
+.portfolio-group-apps{margin-top:3.5rem;}
+.portfolio-group-label{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.25rem;
 }
-.portfolio-tab{
-  position:relative;z-index:2;
-  font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;
-  letter-spacing:.02em;color:var(--text);background:transparent;border:none;
-  border-radius:999px;padding:.7rem 1.5rem;cursor:pointer;
-  transition:color .25s;white-space:nowrap;
-}
-.portfolio-tab:hover{color:var(--white);}
-.portfolio-tab.is-active{color:var(--void);}
-.portfolio-tab:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
-.portfolio-tab-indicator{
-  position:absolute;top:.3rem;bottom:.3rem;left:.3rem;
-  width:calc(50% - .3rem);border-radius:999px;
-  background:linear-gradient(120deg,var(--cyan),var(--cyan2));
-  transition:transform .35s cubic-bezier(.65,0,.35,1);
-  z-index:1;
-}
-.portfolio-tabs[data-active="apps"] .portfolio-tab-indicator{transform:translateX(100%);}
-
-/* ── Panels ── */
-.portfolio-panel[hidden]{display:none;}
 
 /* ── Carousel shell ── */
 .portfolio-carousel{
@@ -1209,18 +1191,48 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 .portfolio-card.is-interactive .portfolio-preview iframe{pointer-events:auto;}
 .portfolio-preview iframe{pointer-events:none;}
 
-.portfolio-exit-btn{
-  position:absolute;top:.7rem;right:.7rem;z-index:9;display:none;
-  align-items:center;justify-content:center;
-  width:34px;height:34px;padding:0;
-  background:rgba(2,4,8,.78);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.16);color:var(--white);
-  border-radius:50%;cursor:pointer;
+/* ── Corner action controls (replaces the old full-width "Interact With
+   Preview" / "Open Live Site" buttons under the description) ──
+   Compact pills sit on the preview's own lower corners: Interact/Exit on
+   the left, Open Live on the right. Each pill's real hit area is only
+   ~30-34px tall, so a transparent padded wrapper extends the actual
+   touch/click target to 44x44px without inflating the visible control. */
+.portfolio-corner{
+  position:absolute;bottom:10px;z-index:9;
+  display:none;
 }
-.portfolio-card.is-interactive .portfolio-exit-btn{display:inline-flex;}
-.portfolio-exit-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-.portfolio-exit-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
-.portfolio-exit-btn svg{width:13px;height:13px;display:block;}
+.portfolio-corner-left{left:12px;}
+.portfolio-corner-right{right:12px;}
+.portfolio-card.is-active .portfolio-corner{display:block;}
+/* The <button>/<a> itself IS the touch target -- min 44x44 via padding, with
+   a visibly smaller ~32px pill drawn by the inner span so it reads as
+   compact while the real clickable box stays accessible-sized. Centering
+   the visual pill inside a taller/wider invisible box, anchored so the
+   pill still sits ~10-14px from the card's corner as specified. */
+.portfolio-corner-btn{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  min-width:44px;min-height:44px;
+  background:none;border:none;padding:0;margin:0;
+  cursor:pointer;text-decoration:none;
+}
+.portfolio-corner-left .portfolio-corner-btn{justify-content:flex-start;}
+.portfolio-corner-right .portfolio-corner-btn{justify-content:flex-end;}
+.portfolio-corner-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:999px;}
+.portfolio-corner-pill{
+  display:inline-flex;align-items:center;gap:.4rem;
+  height:32px;padding:0 .85rem;border-radius:999px;
+  background:rgba(2,4,8,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(0,200,255,.32);color:var(--white);
+  font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.02em;
+  white-space:nowrap;pointer-events:none; /* the parent button/link handles the click */
+  transition:border-color .2s,background .2s,color .2s;
+}
+.portfolio-corner-btn:hover .portfolio-corner-pill{border-color:var(--cyan);background:rgba(0,200,255,.14);}
+.portfolio-corner-pill svg{width:13px;height:13px;flex-shrink:0;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+/* Exit state reuses the same pill/position -- only the label+icon change. */
+.portfolio-corner-pill.is-exit{border-color:rgba(255,255,255,.28);}
+.portfolio-corner-btn:hover .portfolio-corner-pill.is-exit{border-color:var(--cyan);}
 
 /* browser-chrome strip along the very top edge — reinforces "this is a real site" without covering content */
 .portfolio-chrome{
@@ -1256,25 +1268,23 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 }
 
 /* ── Meta row: name / category / description / actions — always below the preview ── */
+/* Tightened: the actions row is gone (moved to the card's own corners), so
+   there's no reason for a tall reserved meta block any more. */
 .portfolio-meta{
-  max-width:680px;margin:2.2rem auto 0;text-align:center;
-  min-height:168px;
+  max-width:680px;margin:1.3rem auto 0;text-align:center;
 }
 .portfolio-meta-category{
   font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);
-  margin-bottom:.6rem;
+  margin-bottom:.5rem;
 }
 .portfolio-meta-name{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.6vw,1.9rem);
-  margin-bottom:.6rem;letter-spacing:-.01em;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.3rem,2.4vw,1.7rem);
+  margin-bottom:.5rem;letter-spacing:-.01em;
 }
-.portfolio-meta-desc{color:var(--text);font-size:.95rem;line-height:1.65;margin-bottom:.4rem;}
+.portfolio-meta-desc{color:var(--text);font-size:.92rem;line-height:1.6;margin-bottom:.4rem;}
 .portfolio-meta-position{
-  font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.08em;
-  margin-bottom:1.4rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em;
 }
-.portfolio-actions{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
-.portfolio-actions .btn-ghost,.portfolio-actions .btn-primary{padding:.75rem 1.6rem;font-size:.8rem;}
 
 /* ── Dots ── */
 .portfolio-dots{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.6rem;}
@@ -1286,24 +1296,23 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 .portfolio-dot:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
 
 @media(prefers-reduced-motion:reduce){
-  .portfolio-card,.portfolio-tab-indicator,.portfolio-dot,.portfolio-loading{transition:none!important;}
+  .portfolio-card,.portfolio-dot,.portfolio-loading{transition:none!important;}
 }
 
 /* ── Mobile ── */
 @media(max-width:900px){
-  .portfolio-intro{margin-bottom:2rem;}
-  .portfolio-tabs{margin-bottom:2rem;width:100%;}
-  .portfolio-tab{flex:1;text-align:center;padding:.65rem 1rem;font-size:.78rem;}
+  .portfolio-intro{margin-bottom:1.75rem;}
+  .portfolio-group-apps{margin-top:2.5rem;}
   .portfolio-track{height:clamp(220px,62vw,320px);}
   .portfolio-card{width:88vw;border-radius:20px;}
   .portfolio-nav{width:38px;height:38px;}
   .portfolio-nav svg{width:16px;height:16px;}
   .portfolio-nav-prev{left:.35rem;}
   .portfolio-nav-next{right:.35rem;}
-  .portfolio-meta{margin-top:1.6rem;min-height:150px;}
-  .portfolio-meta-desc{font-size:.88rem;}
-  .portfolio-actions{gap:.7rem;}
-  .portfolio-actions .btn-ghost,.portfolio-actions .btn-primary{padding:.7rem 1.2rem;font-size:.74rem;flex:1;justify-content:center;}
+  .portfolio-meta{margin-top:1rem;}
+  .portfolio-meta-desc{font-size:.86rem;}
+  .portfolio-corner-pill{height:30px;font-size:.68rem;padding:0 .7rem;}
+  .portfolio-corner-pill svg{width:12px;height:12px;}
 }
 </style>
 <script>if(location.pathname==="/index.html"){location.replace("/"+location.search+location.hash);}</script>
@@ -1456,33 +1465,32 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       <p class="sub-text">Websites, applications, and operating systems built by Secret Systems.</p>
     </div>
 
-    <!-- Segmented tab control -->
-    <div class="portfolio-tabs reveal" role="tablist" aria-label="Portfolio category">
-      <button type="button" class="portfolio-tab is-active" id="portfolio-tab-websites" role="tab" aria-selected="true" aria-controls="portfolio-panel-websites" data-group="websites">Websites</button>
-      <button type="button" class="portfolio-tab" id="portfolio-tab-apps" role="tab" aria-selected="false" aria-controls="portfolio-panel-apps" tabindex="-1" data-group="apps">Apps &amp; Systems</button>
-      <span class="portfolio-tab-indicator" aria-hidden="true"></span>
-    </div>
-
     <!-- Websites panel -->
-    <div class="portfolio-panel" id="portfolio-panel-websites" role="tabpanel" aria-labelledby="portfolio-tab-websites" data-group-panel="websites">
-      <div class="portfolio-carousel" data-carousel="websites">
-        <div class="portfolio-track" data-track></div>
-        <button type="button" class="portfolio-nav portfolio-nav-prev" data-nav="prev" aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button type="button" class="portfolio-nav portfolio-nav-next" data-nav="next" aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="portfolio-group">
+      <p class="portfolio-group-label reveal">Websites</p>
+      <div class="portfolio-panel" id="portfolio-panel-websites" data-group-panel="websites">
+        <div class="portfolio-carousel" data-carousel="websites">
+          <div class="portfolio-track" data-track></div>
+          <button type="button" class="portfolio-nav portfolio-nav-prev" data-nav="prev" aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button type="button" class="portfolio-nav portfolio-nav-next" data-nav="next" aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="portfolio-meta" data-meta></div>
+        <div class="portfolio-dots" data-dots role="tablist" aria-label="Website projects"></div>
       </div>
-      <div class="portfolio-meta" data-meta></div>
-      <div class="portfolio-dots" data-dots role="tablist" aria-label="Website projects"></div>
     </div>
 
     <!-- Apps & Systems panel -->
-    <div class="portfolio-panel" id="portfolio-panel-apps" hidden role="tabpanel" aria-labelledby="portfolio-tab-apps" data-group-panel="apps">
-      <div class="portfolio-carousel" data-carousel="apps">
-        <div class="portfolio-track" data-track></div>
-        <button type="button" class="portfolio-nav portfolio-nav-prev" data-nav="prev" aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button type="button" class="portfolio-nav portfolio-nav-next" data-nav="next" aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="portfolio-group portfolio-group-apps">
+      <p class="portfolio-group-label reveal">Apps &amp; Systems</p>
+      <div class="portfolio-panel" id="portfolio-panel-apps" data-group-panel="apps">
+        <div class="portfolio-carousel" data-carousel="apps">
+          <div class="portfolio-track" data-track></div>
+          <button type="button" class="portfolio-nav portfolio-nav-prev" data-nav="prev" aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button type="button" class="portfolio-nav portfolio-nav-next" data-nav="next" aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="portfolio-meta" data-meta></div>
+        <div class="portfolio-dots" data-dots role="tablist" aria-label="Apps and systems projects"></div>
       </div>
-      <div class="portfolio-meta" data-meta></div>
-      <div class="portfolio-dots" data-dots role="tablist" aria-label="Apps and systems projects"></div>
     </div>
 
     <p class="sr-only" aria-live="polite" data-portfolio-announce></p>

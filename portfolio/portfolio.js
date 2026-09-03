@@ -1,16 +1,22 @@
 /* ============================================================
-   Secret Systems — Selected Work portfolio carousel
+   Secret Systems — Selected Work portfolio carousels
    ------------------------------------------------------------
    Reads SS_PORTFOLIO (portfolio/portfolio-data.js). Renders two
-   independent carousels (Websites / Apps & Systems) sharing one
-   segmented tab control. Vanilla JS, no dependencies — matches
-   this repo's static-site architecture (no bundler, no npm).
+   independent, always-visible carousels (Websites, then Apps &
+   Systems) stacked in one Selected Work section -- no category
+   switch. Vanilla JS, no dependencies — matches this repo's
+   static-site architecture (no bundler, no npm).
+
+   Each carousel keeps its own drag/pointer state, its own active
+   index, its own dots/arrows, so swiping one row never affects the
+   other (see initDrag: state is captured per-controller closure,
+   not shared/global).
 
    Performance: the whole module is deferred until the section is
    near the viewport (IntersectionObserver) or the page has gone
    idle, so it never competes with the hero's frame animation for
-   the main thread on first paint. Only the single active card's
-   iframe is ever loaded; every other card shows its poster image.
+   the main thread on first paint. Only the single active card in
+   EACH row is ever loaded; every other card shows its poster image.
    ============================================================ */
 (function(){
   "use strict";
@@ -28,7 +34,6 @@
 
   var GROUPS = ["websites", "apps"];
   var state = {
-    activeGroup: "websites",
     index: { websites: 0, apps: 0 }
   };
 
@@ -90,24 +95,63 @@
       var sheen = document.createElement("div");
       sheen.className = "portfolio-card-corner-sheen";
 
-      var exitBtn = document.createElement("button");
-      exitBtn.type = "button";
-      exitBtn.className = "portfolio-exit-btn";
-      exitBtn.setAttribute("aria-label", "Exit preview");
-      exitBtn.title = "Exit preview";
-      exitBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-      exitBtn.addEventListener("click", function(e){ e.stopPropagation(); exitInteraction(group); });
+      /* ── Corner actions: Interact/Exit (bottom-left) + Open Live (bottom-right) ──
+         Small pills anchored to the preview's own corners instead of a large
+         button row under the description. Both live INSIDE portfolio-card-inner
+         so they sit above the iframe (z-index) and are excluded from the
+         drag/pointerdown handler the same way the old exit button was. */
+      var interactWrap = document.createElement("div");
+      interactWrap.className = "portfolio-corner portfolio-corner-left";
+      var interactBtn = document.createElement("button");
+      interactBtn.type = "button";
+      interactBtn.className = "portfolio-corner-btn portfolio-interact-btn";
+      var interactPill = document.createElement("span");
+      interactPill.className = "portfolio-corner-pill";
+      interactBtn.appendChild(interactPill);
+      interactBtn.addEventListener("click", function(e){
+        e.stopPropagation();
+        if(card_.el.classList.contains("is-interactive")) exitInteraction(group);
+        else enterInteraction(group);
+      });
+      interactWrap.appendChild(interactBtn);
+
+      var openLiveWrap = document.createElement("div");
+      openLiveWrap.className = "portfolio-corner portfolio-corner-right";
+      var openLiveLink = document.createElement("a");
+      openLiveLink.className = "portfolio-corner-btn portfolio-open-btn";
+      openLiveLink.href = project.url;
+      openLiveLink.target = "_blank";
+      openLiveLink.rel = "noopener noreferrer";
+      openLiveLink.addEventListener("click", function(e){ e.stopPropagation(); });
+      openLiveLink.addEventListener("pointerdown", function(e){ e.stopPropagation(); });
+      var openLivePill = document.createElement("span");
+      openLivePill.className = "portfolio-corner-pill";
+      openLivePill.innerHTML = 'Open Live<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>';
+      openLiveLink.appendChild(openLivePill);
+      var openLiveLabel = escapeHtml(project.secondaryLabel || (group === "websites" ? "Open Live Site" : "Open Live App"));
+      openLiveLink.setAttribute("aria-label", openLiveLabel);
+      openLiveWrap.appendChild(openLiveLink);
 
       inner.appendChild(chrome);
       inner.appendChild(preview);
       inner.appendChild(loading);
       inner.appendChild(cover);
       inner.appendChild(sheen);
-      inner.appendChild(exitBtn);
+      inner.appendChild(interactWrap);
+      inner.appendChild(openLiveWrap);
       card.appendChild(inner);
       track.appendChild(card);
 
-      return { el: card, inner: inner, preview: preview, poster: poster, loading: loading, cover: cover, exitBtn: exitBtn, project: project, iframeEl: null, iframeLoaded: false };
+      var card_ = { el: card, inner: inner, preview: preview, poster: poster, loading: loading, cover: cover,
+        interactBtn: interactBtn, interactPill: interactPill, openLiveWrap: openLiveWrap,
+        project: project, iframeEl: null, iframeLoaded: false };
+
+      // A project with no live preview at all never gets an Interact control --
+      // omit it outright rather than show a button that can never do anything.
+      if(project.previewMode !== "live") interactWrap.style.display = "none";
+      else setInteractLabel(card_, group, "loading"); // disabled until the iframe actually loads
+
+      return card_;
     });
 
     dotsWrap.innerHTML = cfg.projects.map(function(p, i){
@@ -183,6 +227,7 @@
         c.iframeLoaded = false;
         c.loading.classList.add("is-hidden");
         c.poster.style.opacity = "1";
+        if(c.project.previewMode === "live") setInteractLabel(c, ctrl.group, "loading");
       }
       c.el.classList.remove("is-interactive");
     });
@@ -259,28 +304,48 @@
     active.iframeEl = iframe;
   }
 
-  /* "Interact With Preview" only becomes usable once the iframe has actually
-     finished loading — never for a fallback poster, and never for a live
-     project whose iframe is still loading or failed to load. */
+  var PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>';
+
+  /* Sets the corner pill's visible content + the real button's accessible
+     name/title for whichever state Interact is currently in. Full descriptive
+     labels are preserved for screen readers even though the visible pill
+     text is always just "Interact" / "Exit". */
+  function setInteractLabel(card, group, state_){
+    var fullInteractLabel = "Interact With Preview: " + card.project.name;
+    if(state_ === "exit"){
+      card.interactPill.className = "portfolio-corner-pill is-exit";
+      card.interactPill.innerHTML = 'Exit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+      card.interactBtn.setAttribute("aria-label", "Exit preview: " + card.project.name);
+      card.interactBtn.title = "";
+      card.interactBtn.disabled = false;
+    } else if(state_ === "loading"){
+      card.interactPill.className = "portfolio-corner-pill";
+      card.interactPill.innerHTML = 'Interact' + PLAY_ICON;
+      card.interactBtn.setAttribute("aria-label", "Loading live preview: " + card.project.name);
+      card.interactBtn.title = "Connecting to the live preview…";
+      card.interactBtn.disabled = true;
+    } else {
+      // "ready" -- normal Interact state
+      card.interactPill.className = "portfolio-corner-pill";
+      card.interactPill.innerHTML = 'Interact' + PLAY_ICON;
+      card.interactBtn.setAttribute("aria-label", fullInteractLabel);
+      card.interactBtn.title = "";
+      card.interactBtn.disabled = false;
+    }
+  }
+
+  /* Interact only becomes usable once the iframe has actually finished
+     loading — never for a fallback poster (the wrapper is display:none for
+     those, see buildCarousel), and shown as a disabled "loading" state
+     while a live project's iframe is still in flight. Never a bare disabled
+     control with no explanation -- the pill still reads "Interact" but the
+     button carries an accessible "loading" label + a non-empty title. */
   function updateInteractAvailability(ctrl, idx){
     if(state.index[ctrl.group] !== idx) return; // slide changed while this was pending
-    var interactBtn = ctrl.metaWrap.querySelector("[data-interact-btn]");
-    if(!interactBtn) return;
     var card = ctrl.cards[idx];
-    var ready = card.project.previewMode === "live" && card.iframeLoaded;
-    interactBtn.disabled = !ready;
-    if(ready){
-      interactBtn.textContent = "Interact With Preview";
-      interactBtn.title = "";
-    } else if(card.project.previewMode === "live"){
-      // Loading, not broken -- distinct label so the disabled state reads as
-      // "still connecting" rather than "this feature doesn't work here".
-      interactBtn.textContent = "Loading Live Preview…";
-      interactBtn.title = "Connecting to the live preview…";
-    } else {
-      interactBtn.textContent = "Interact With Preview";
-      interactBtn.title = "A live preview isn't available for this project — use Open Live Site instead.";
-    }
+    if(card.project.previewMode !== "live") return; // no Interact control exists at all
+    var ready = card.iframeLoaded;
+    setInteractLabel(card, ctrl.group, ready ? "ready" : "loading");
   }
 
   function renderMeta(ctrl){
@@ -290,22 +355,7 @@
       '<p class="portfolio-meta-category">' + escapeHtml(p.category) + '</p>' +
       '<h3 class="portfolio-meta-name">' + escapeHtml(p.name) + '</h3>' +
       '<p class="portfolio-meta-desc">' + escapeHtml(p.description) + '</p>' +
-      '<p class="portfolio-meta-position">' + (idx + 1) + ' / ' + ctrl.cards.length + '</p>' +
-      '<div class="portfolio-actions">' +
-        '<button type="button" class="btn-ghost" data-interact-btn>Interact With Preview</button>' +
-        '<a class="btn-primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(p.secondaryLabel || "Open Live Site") + ' →</a>' +
-      '</div>';
-
-    var interactBtn = ctrl.metaWrap.querySelector("[data-interact-btn]");
-    // Disabled until the iframe actually finishes loading (see
-    // updateInteractAvailability, called from activateSlide's load/error/
-    // timeout handlers) — never enabled for a project that only has a
-    // fallback poster, and never enabled speculatively while a live
-    // project's iframe is still in flight or failed.
-    interactBtn.disabled = true;
-    interactBtn.title = "A live preview isn't available for this project — use Open Live Site instead.";
-    interactBtn.addEventListener("click", function(){ enterInteraction(ctrl.group); });
-    updateInteractAvailability(ctrl, idx);
+      '<p class="portfolio-meta-position">' + (idx + 1) + ' / ' + ctrl.cards.length + '</p>';
 
     announce(p.name + ", " + (idx + 1) + " of " + ctrl.cards.length);
   }
@@ -331,16 +381,19 @@
   function enterInteraction(group){
     var ctrl = carousels[group];
     var idx = state.index[group];
-    ctrl.cards[idx].el.classList.add("is-interactive");
-    var iframe = ctrl.cards[idx].iframeEl;
-    if(iframe) iframe.setAttribute("tabindex", "0");
+    var card = ctrl.cards[idx];
+    if(!card.iframeLoaded) return; // Interact is disabled/loading -- nothing to enter yet
+    card.el.classList.add("is-interactive");
+    if(card.iframeEl) card.iframeEl.setAttribute("tabindex", "0");
+    setInteractLabel(card, group, "exit");
   }
   function exitInteraction(group){
     var ctrl = carousels[group];
     var idx = state.index[group];
-    ctrl.cards[idx].el.classList.remove("is-interactive");
-    var iframe = ctrl.cards[idx].iframeEl;
-    if(iframe) iframe.setAttribute("tabindex", "-1");
+    var card = ctrl.cards[idx];
+    card.el.classList.remove("is-interactive");
+    if(card.iframeEl) card.iframeEl.setAttribute("tabindex", "-1");
+    setInteractLabel(card, group, card.iframeLoaded ? "ready" : "loading");
     ctrl.root.focus({ preventScroll: true });
   }
 
@@ -351,7 +404,7 @@
     var moved = 0;
 
     function pointerDown(e){
-      if(e.target.closest(".portfolio-nav, .portfolio-exit-btn, [data-interact-btn]")) return;
+      if(e.target.closest(".portfolio-nav, .portfolio-corner")) return;
       var activeCard = ctrl.cards[state.index[ctrl.group]];
       if(activeCard.el.classList.contains("is-interactive")) return; // let interaction mode own the gesture
       pointerId = e.pointerId;
@@ -441,47 +494,6 @@
     });
   }
 
-  /* ── Tabs ── */
-  function initTabs(){
-    var tabsWrap = section.querySelector(".portfolio-tabs");
-    var tabs = Array.prototype.slice.call(section.querySelectorAll(".portfolio-tab"));
-    tabs.forEach(function(tab){
-      tab.addEventListener("click", function(){ switchGroup(tab.dataset.group); });
-    });
-    tabsWrap.addEventListener("keydown", function(e){
-      if(e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      e.preventDefault();
-      var otherGroup = state.activeGroup === "websites" ? "apps" : "websites";
-      switchGroup(otherGroup);
-      section.querySelector('#portfolio-tab-' + (otherGroup === "websites" ? "websites" : "apps")).focus();
-    });
-  }
-
-  function switchGroup(group){
-    if(group === state.activeGroup) return;
-    state.activeGroup = group;
-    var tabsWrap = section.querySelector(".portfolio-tabs");
-    tabsWrap.dataset.active = group;
-
-    GROUPS.forEach(function(g){
-      var tab = document.getElementById("portfolio-tab-" + g);
-      var panel = document.getElementById("portfolio-panel-" + g);
-      var isActive = g === group;
-      tab.classList.toggle("is-active", isActive);
-      tab.setAttribute("aria-selected", isActive ? "true" : "false");
-      tab.tabIndex = isActive ? 0 : -1;
-      panel.hidden = !isActive;
-    });
-
-    // (re)activate the correct iframe for the now-visible group, none for the hidden one
-    var hiddenGroup = group === "websites" ? "apps" : "websites";
-    carousels[hiddenGroup].cards.forEach(function(c){
-      if(c.iframeEl){ c.iframeEl.remove(); c.iframeEl = null; c.iframeLoaded = false; c.loading.classList.add("is-hidden"); }
-      c.el.classList.remove("is-interactive");
-    });
-    layout(carousels[group], false);
-  }
-
   /* ── Perf gate: don't touch the network for any preview until the section is
      near the viewport OR the browser reports idle (whichever comes first),
      so the hero's own scroll/canvas work is never competing for bandwidth
@@ -520,7 +532,6 @@
 
   function init(){
     GROUPS.forEach(buildCarousel);
-    initTabs();
     initPerfGate();
     window.addEventListener("resize", function(){
       GROUPS.forEach(function(g){ layout(carousels[g], false); });

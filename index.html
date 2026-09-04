@@ -2736,21 +2736,36 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
     /* ── Active-project tracking ──
        A single IntersectionObserver watches every project section at once
-       and keeps a live visibleRatio per section; the active project is
-       whichever currently occupies the largest visible area (not just
-       "first one that started intersecting"), which is what keeps the
-       choice stable while two sections briefly overlap at a boundary. */
-    var visibleRatio = new Array(projects.length).fill(0);
+       and keeps a live visiblePx (viewport pixels actually covered, from
+       intersectionRect.height -- NOT intersectionRatio, which is
+       normalized against each element's own total height and so isn't
+       comparable between a very tall section and a short one). The active
+       project is whichever currently covers the most viewport pixels,
+       which is what keeps the choice stable while two sections briefly
+       overlap at a boundary -- using intersectionRatio here previously
+       caused a tall section to occasionally out-rank a shorter one it was
+       only marginally overlapping, producing a real (verified) flicker
+       during an ordinary scroll through their shared edge.
+       A small margin (STABILITY_PX) before a new section is allowed to
+       take over damps any remaining near-tie noise between two candidates
+       whose visible heights are essentially equal. */
+    var STABILITY_PX = 24;
+    var visiblePx = new Array(projects.length).fill(0);
     var activeIndex = -1;
     var switching = false;
     var pendingIndex = null;
 
     function pickActiveIndex(){
-      var best = -1, bestRatio = 0;
-      for (var i = 0; i < visibleRatio.length; i++){
-        if (visibleRatio[i] > bestRatio){ bestRatio = visibleRatio[i]; best = i; }
+      var best = -1, bestPx = 0;
+      for (var i = 0; i < visiblePx.length; i++){
+        if (visiblePx[i] > bestPx){ bestPx = visiblePx[i]; best = i; }
       }
-      return bestRatio > 0.01 ? best : -1;
+      if (best === -1) return -1;
+      if (activeIndex !== -1 && best !== activeIndex){
+        var activePx = visiblePx[activeIndex] || 0;
+        if (bestPx < activePx + STABILITY_PX) return activeIndex; /* not a clear enough win -- stay put */
+      }
+      return bestPx > 0 ? best : -1;
     }
 
     function applyProject(index){
@@ -2819,17 +2834,16 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       if (next !== activeIndex || (next !== pendingIndex && switching)) goTo(next);
     }
 
-    /* Many small thresholds (not just 0/1) so intersectionRatio updates
-       smoothly as a section scrolls through, giving pickActiveIndex() a
-       genuinely comparable "how much of each section is visible right
-       now" reading instead of a single coarse in/out flag -- this is
-       what prevents flicker when two sections partially overlap. */
+    /* Many small thresholds (not just 0/1) so callbacks fire smoothly as a
+       section scrolls through, giving pickActiveIndex() a genuinely
+       up-to-date "how many viewport pixels of each section are visible
+       right now" reading instead of a single coarse in/out flag. */
     var THRESHOLDS = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1];
     var projectIo = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         var idx = projects.findIndex(function(p){ return p.el === entry.target; });
         if (idx === -1) return;
-        visibleRatio[idx] = entry.isIntersecting ? entry.intersectionRatio : 0;
+        visiblePx[idx] = entry.isIntersecting ? entry.intersectionRect.height : 0;
       });
       updateActive();
     }, { threshold: THRESHOLDS });

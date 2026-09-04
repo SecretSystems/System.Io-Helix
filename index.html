@@ -227,20 +227,29 @@ nav{
   transform:translateX(-50%);
   pointer-events:none;
 }
-.hero-label{
-  font-family:'JetBrains Mono',monospace;font-size:0.78rem;
-  font-weight:400;letter-spacing:0.25em;color:var(--cyan);
-  text-transform:uppercase;margin-bottom:2rem;
-  display:flex;align-items:center;justify-content:center;gap:0.8rem;
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity 0.7s ease, transform 0.7s ease;
-}
-.hero-label::before{
-  content:'';display:block;width:30px;height:1px;background:var(--cyan);
-}
 /* centered editorial column over the full-bleed canvas backdrop */
 .hero-copy{max-width:680px;width:100%;margin:0 auto;}
+
+/* ── Final hero stage ──
+   Replaces the old "Louisiana Software & Systems Studio" label at the exact
+   same position and the exact same reveal trigger: heroContent gets
+   .text-visible (see the vault RAF loop) once the frame animation finishes
+   and the visitor has held HERO_HOLD_PX further -- the identical condition
+   that used to fade the label in. A subtle opacity+scale entrance instead
+   of the label's slide, since the video is the primary visual now, not a
+   caption. pointer-events:all so Play is clickable despite .hero's own
+   pointer-events:none. */
+.final-hero-stage{
+  width:100%;
+  opacity:0;
+  transform:scale(0.97);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+  pointer-events:all;
+}
+.hero.text-visible .final-hero-stage{
+  opacity:1;
+  transform:scale(1);
+}
 
 /* ── Growth section: heading, supporting copy, and lead form -- an
    ordinary static section (not pinned/scroll-controlled) that follows
@@ -305,12 +314,6 @@ nav{
   flex-basis:100%;width:100%;
   margin-top:.85rem;text-align:center;
   max-width:520px;margin-left:auto;margin-right:auto;
-}
-
-/* hero text revealed state */
-.hero.text-visible .hero-label{
-  opacity:1;
-  transform:translateY(0);
 }
 
 /* canvas vignette overlay */
@@ -653,17 +656,17 @@ nav{
 .eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--cyan);}
 
 /* ── FEATURED VIDEO ── */
-/* Sits directly after the pinned 300vh hero-scroll-container and before the
-   portfolio section. A restrained negative margin pulls it up under the
-   hero's bottom edge so the transition reads as connected rather than two
-   separate blocks stacked with a hard seam. */
+/* Lives inside the pinned hero's own overlay (.final-hero-stage), at the
+   exact spot the old "Louisiana Software & Systems Studio" label used to
+   occupy -- not a separate section after the hero. pointer-events:all so
+   Play is clickable through .hero's own pointer-events:none. */
 .intro-video-section{
   position:relative;z-index:2;
-  padding:0 3rem 4.5rem;
-  margin-top:-48px;
+  width:100%;
+  pointer-events:all;
 }
 .intro-video-wrap{
-  max-width:1100px;margin:0 auto;
+  max-width:640px;margin:0 auto;
   text-align:center;
 }
 .intro-video-card{
@@ -736,10 +739,6 @@ nav{
 }
 
 @media(max-width:900px){
-  /* No negative overlap on mobile: the hero's own compact lead form can run
-     right up against the sticky hero container's bottom edge at short/narrow
-     viewports, and covering it is worse than losing the overlap effect here. */
-  .intro-video-section{padding:1.25rem 1.5rem 3rem;margin-top:0;}
   .intro-video-card{border-radius:20px;}
   .intro-video-play-icon{width:64px;height:64px;}
   .intro-video-play-icon svg{width:24px;height:24px;}
@@ -1067,7 +1066,9 @@ footer{
   .nav-links{display:none;}
   .nav-hamburger{display:flex;}
   nav .site-logo{max-width:145px;max-height:34px;}
-  .hero{padding:7rem 1.5rem 3rem;}
+  /* The video is now the hero's only overlay content -- 1.25rem (20px)
+     side padding keeps it within the required 16-24px mobile margins. */
+  .hero{padding:7rem 1.25rem 3rem;}
   .section{padding:4rem 1.5rem;}
   .services-intro,.auto-grid,.contact-grid,.why-grid{grid-template-columns:1fr;gap:2rem;}
   .services-grid,.pricing-grid{grid-template-columns:1fr;}
@@ -1083,7 +1084,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
   #particle-canvas,#vault-canvas{display:none!important;}
-  .hero .hero-label{opacity:1!important;transform:none!important;}
+  .hero .final-hero-stage{opacity:1!important;transform:none!important;}
 }
 /* ── Touch / coarse pointers: native cursor ── */
 @media (hover:none),(pointer:coarse){
@@ -1491,29 +1492,33 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <!-- HERO CONTENT -->
     <div class="hero" id="hero-content">
       <div class="hero-copy">
-        <p class="hero-label">Louisiana Software &amp; Systems Studio</p>
+        <!-- Final hero stage: replaces the old "Louisiana Software & Systems
+             Studio" label at the exact same reveal trigger (heroContent
+             .text-visible, toggled by the vault RAF loop below once
+             scrollY >= revealAt). The video is the last thing the pinned
+             hero shows before it releases into normal flow. -->
+        <div class="final-hero-stage">
+          <section id="intro-video-section" class="intro-video-section" aria-label="Featured video">
+            <div class="intro-video-wrap">
+              <div class="intro-video-card" id="introVideoCard">
+                <div class="intro-video-frame" id="introVideoFrame">
+                  <button type="button" class="intro-video-play" id="introVideoPlayBtn" aria-label="Play video">
+                    <img id="introVideoThumb" class="intro-video-thumb" alt="" loading="lazy" decoding="async">
+                    <span class="intro-video-play-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+                    </span>
+                  </button>
+                </div>
+                <p class="intro-video-fallback"><a id="introVideoFallbackLink" class="sr-only-focusable" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
-
-<!-- FEATURED VIDEO -->
-<section id="intro-video-section" class="intro-video-section" aria-label="Featured video">
-  <div class="intro-video-wrap reveal">
-    <div class="intro-video-card" id="introVideoCard">
-      <div class="intro-video-frame" id="introVideoFrame">
-        <button type="button" class="intro-video-play" id="introVideoPlayBtn" aria-label="Play video">
-          <img id="introVideoThumb" class="intro-video-thumb" alt="" loading="lazy" decoding="async">
-          <span class="intro-video-play-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
-          </span>
-        </button>
-      </div>
-      <p class="intro-video-fallback"><a id="introVideoFallbackLink" class="sr-only-focusable" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
-    </div>
-  </div>
-</section>
 
 <!-- GROWTH SECTION -->
 <section id="growth-section" aria-labelledby="growth-heading">
@@ -2170,7 +2175,10 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
   var TOTAL_FRAMES  = 145;
   var FRAME_PREFIX  = 'frames/ezgif-frame-';
-  var HERO_HOLD_PX  = 230;    /* after frames hit the final frame, hold + scroll this far before the hero text reveals */
+  var HERO_HOLD_PX  = 230;    /* after frames hit the final frame, hold + scroll this far before the video reveals */
+  var POST_REVEAL_HOLD_PX = 260; /* after the video reveals, hold this much further before the sticky hero releases,
+                                     so the video is stably visible (not a single-frame flash) before it scrolls
+                                     into normal flow with the next section */
   var SPEED_FACTOR  = 0.75;
   var WATERMARK_CROP= 0.08;   /* crop the bottom strip of each source frame so the generator watermark never draws */
 
@@ -2211,15 +2219,19 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   resizeVaultCanvas();
 
   /* Set the scroll container's height to the exact distance the frame
-     animation + hold need — no more, no less — so the sticky hero
-     releases the instant the hold ends, with zero trailing dead space.
-     getScrollProgress() reaches 1 when scrollY-containerTop hits
-     SPEED_FACTOR*scrollable, and text reveals HERO_HOLD_PX after that;
-     solving scrollable = SPEED_FACTOR*scrollable + HERO_HOLD_PX gives
-     scrollable = HERO_HOLD_PX / (1 - SPEED_FACTOR). Container height is
-     that scrollable distance plus one viewport (the sticky's own 100vh). */
+     animation + both holds need — no more, no less — so the sticky hero
+     releases the instant the second hold ends, with zero trailing dead
+     space. getScrollProgress() reaches 1 when scrollY-containerTop hits
+     SPEED_FACTOR*scrollable; the video reveals HERO_HOLD_PX after that,
+     and release happens POST_REVEAL_HOLD_PX after the reveal -- so the
+     video gets a real, stable hold on screen before the container
+     releases into normal flow (never a single-frame flash).
+     Solving scrollable = SPEED_FACTOR*scrollable + HERO_HOLD_PX + POST_REVEAL_HOLD_PX
+     gives scrollable = (HERO_HOLD_PX + POST_REVEAL_HOLD_PX) / (1 - SPEED_FACTOR).
+     Container height is that scrollable distance plus one viewport (the
+     sticky's own 100vh). */
   function sizeHeroScrollContainer(){
-    var scrollable = HERO_HOLD_PX / (1 - SPEED_FACTOR);
+    var scrollable = (HERO_HOLD_PX + POST_REVEAL_HOLD_PX) / (1 - SPEED_FACTOR);
     heroScrollContainer.style.height = (window.innerHeight + scrollable) + 'px';
   }
   sizeHeroScrollContainer();

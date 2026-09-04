@@ -58,7 +58,6 @@
     var root = section.querySelector('.portfolio-carousel[data-carousel="' + group + '"]');
     var track = root.querySelector("[data-track]");
     var panel = root.closest(".portfolio-panel");
-    var dotsWrap = panel.querySelector("[data-dots]");
     var metaWrap = panel.querySelector("[data-meta]");
 
     var cards = cfg.projects.map(function(project, i){
@@ -154,20 +153,16 @@
       return card_;
     });
 
-    dotsWrap.innerHTML = cfg.projects.map(function(p, i){
-      return '<button type="button" class="portfolio-dot" role="tab" aria-label="Go to ' + escapeHtml(p.name) + '" data-dot-index="' + i + '"></button>';
-    }).join("");
-    var dotEls = Array.prototype.slice.call(dotsWrap.querySelectorAll(".portfolio-dot"));
-
     var ctrl = {
       group: group,
       cfg: cfg,
       root: root,
       track: track,
       cards: cards,
-      dotEls: dotEls,
       metaWrap: metaWrap,
       panel: panel,
+      navPrev: root.querySelector('[data-nav="prev"]'),
+      navNext: root.querySelector('[data-nav="next"]'),
       dragging: false,
       dragAxisLocked: null, // 'x' | 'y' | null
       startX: 0, startY: 0,
@@ -180,7 +175,6 @@
 
     initDrag(ctrl);
     initNav(ctrl);
-    initDots(ctrl);
     initKeyboard(ctrl);
 
     layout(ctrl, false);
@@ -211,7 +205,8 @@
       c.el.style.pointerEvents = Math.abs(rel) <= 1 ? "auto" : "none";
     });
 
-    ctrl.dotEls.forEach(function(d, i){ d.classList.toggle("is-active", i === idx); d.setAttribute("aria-selected", i === idx ? "true" : "false"); });
+    if(ctrl.navPrev) ctrl.navPrev.style.display = idx <= 0 ? "none" : "flex";
+    if(ctrl.navNext) ctrl.navNext.style.display = idx >= n - 1 ? "none" : "flex";
 
     activateSlide(ctrl, idx);
   }
@@ -351,11 +346,7 @@
   function renderMeta(ctrl){
     var idx = state.index[ctrl.group];
     var p = ctrl.cards[idx].project;
-    ctrl.metaWrap.innerHTML =
-      '<p class="portfolio-meta-category">' + escapeHtml(p.category) + '</p>' +
-      '<h3 class="portfolio-meta-name">' + escapeHtml(p.name) + '</h3>' +
-      '<p class="portfolio-meta-desc">' + escapeHtml(p.description) + '</p>' +
-      '<p class="portfolio-meta-position">' + (idx + 1) + ' / ' + ctrl.cards.length + '</p>';
+    ctrl.metaWrap.innerHTML = '<h3 class="portfolio-meta-name">' + escapeHtml(p.name) + '</h3>';
 
     announce(p.name + ", " + (idx + 1) + " of " + ctrl.cards.length);
   }
@@ -475,12 +466,6 @@
   function initNav(ctrl){
     ctrl.root.querySelector('[data-nav="prev"]').addEventListener("click", function(){ goTo(ctrl.group, state.index[ctrl.group] - 1); });
     ctrl.root.querySelector('[data-nav="next"]').addEventListener("click", function(){ goTo(ctrl.group, state.index[ctrl.group] + 1); });
-  }
-
-  function initDots(ctrl){
-    ctrl.dotEls.forEach(function(d, i){
-      d.addEventListener("click", function(){ goTo(ctrl.group, i); });
-    });
   }
 
   function initKeyboard(ctrl){

@@ -771,6 +771,98 @@ nav{
 .intro-video-fallback{margin:0;text-align:center;padding-top:.75rem;}
 .intro-video-fallback a{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.8rem;}
 .intro-video-fallback.hide{display:none;}
+
+/* ── Floating assistant bubble ──
+   Fixed, bottom-left (chat widgets conventionally live bottom-right, so
+   this deliberately avoids that corner). Hidden/inert until JS adds
+   .is-visible once the visitor scrolls past Apps & Systems -- see the
+   IntersectionObserver on #appsSystemsEndSentinel below. */
+.floating-assistant{
+  position:fixed;
+  left:max(16px, env(safe-area-inset-left));
+  bottom:max(16px, env(safe-area-inset-bottom));
+  z-index:40; /* above page content, but not fighting a chat widget's own stacking */
+  width:112px;height:112px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(10px) scale(.82);
+  transition:opacity .32s cubic-bezier(.22,.9,.32,1),transform .32s cubic-bezier(.22,.9,.32,1),visibility 0s linear .32s;
+}
+.floating-assistant.is-visible{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translateY(0) scale(1);
+  transition:opacity .32s cubic-bezier(.22,.9,.32,1),transform .32s cubic-bezier(.22,.9,.32,1);
+}
+@media(prefers-reduced-motion:reduce){
+  .floating-assistant{transition:opacity .2s ease;transform:none;}
+  .floating-assistant.is-visible{transform:none;}
+}
+.floating-assistant-circle{
+  position:relative;
+  width:100%;height:100%;border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
+  background:#050a10;
+  border:1.5px solid rgba(0,200,255,.55);
+  box-shadow:
+    0 10px 28px -8px rgba(0,0,0,.55),
+    0 0 0 1px rgba(232,244,255,.08),
+    0 0 22px -4px rgba(0,200,255,.35);
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.floating-assistant-circle:hover,.floating-assistant-circle:focus-within{
+  border-color:var(--cyan);
+  box-shadow:
+    0 12px 32px -8px rgba(0,0,0,.6),
+    0 0 0 1px rgba(232,244,255,.12),
+    0 0 28px -2px rgba(0,200,255,.5);
+}
+.floating-assistant-video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  background:#050a10;
+}
+/* Discreet controls: invisible until hover/focus/first-tap (.show-controls,
+   toggled by JS on touch), never dominating the circle. */
+.floating-assistant-controls{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:rgba(2,4,8,.42);
+  opacity:0;visibility:hidden;
+  transition:opacity .18s ease;
+}
+.floating-assistant-circle:hover .floating-assistant-controls,
+.floating-assistant-circle:focus-within .floating-assistant-controls,
+.floating-assistant-circle.show-controls .floating-assistant-controls{
+  opacity:1;visibility:visible;
+}
+.floating-assistant-btn{
+  width:30px;height:30px;min-width:30px;min-height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,4,8,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(0,200,255,.5);color:var(--white);
+  cursor:pointer;padding:0;margin:0;
+  transition:border-color .2s ease,background .2s ease;
+}
+.floating-assistant-btn svg{width:14px;height:14px;display:block;}
+.floating-assistant-btn:hover,.floating-assistant-btn:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.22);}
+.floating-assistant-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+#floatingAssistantPause .ico-pause{display:none;}
+#floatingAssistantPause.is-paused .ico-play{display:block;}
+#floatingAssistantPause.is-paused .ico-pause{display:none;}
+#floatingAssistantPause .ico-play{display:none;}
+.floating-assistant.is-closed{display:none;}
+
+@media(max-width:1150px){
+  .floating-assistant{width:96px;height:96px;}
+}
+@media(max-width:900px){
+  .floating-assistant{width:80px;height:80px;}
+  .floating-assistant-btn{width:26px;height:26px;min-width:26px;min-height:26px;}
+  .floating-assistant-btn svg{width:12px;height:12px;}
+}
+
 .sr-only-focusable{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0;
@@ -1565,9 +1657,9 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
                     playsinline
                     muted
                     preload="metadata"
-                    poster="/assets/video/secret-systems-ai-assistant-poster.jpg"
+                    poster="/assets/video/secret-systems-main-studio-poster.jpg"
                   >
-                    <source data-src="/assets/video/secret-systems-ai-assistant.mp4" type="video/mp4">
+                    <source data-src="/assets/video/secret-systems-main-studio.mp4" type="video/mp4">
                   </video>
                   <!-- Compact custom controls -- deliberately not the
                        browser's native control bar (which would show a
@@ -1663,6 +1755,12 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         <div class="portfolio-meta" data-meta></div>
       </div>
     </div>
+
+    <!-- Sentinel: marks the point immediately after the complete Apps &
+         Systems carousel. The floating assistant bubble's IntersectionObserver
+         watches this element (not a hardcoded scroll number) so the trigger
+         stays accurate if content above the portfolio changes. -->
+    <div id="appsSystemsEndSentinel" aria-hidden="true" style="height:1px;"></div>
 
     <p class="sr-only" aria-live="polite" data-portfolio-announce></p>
   </div>
@@ -2091,6 +2189,35 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   <span>Built in Louisiana</span>
 </div>
 
+<!-- Floating assistant bubble -- fixed, bottom-left. Hidden until the
+     visitor scrolls past the Apps & Systems portfolio cards (see
+     #appsSystemsEndSentinel). Silent looping white-background avatar,
+     never the technology-background main video. -->
+<div class="floating-assistant" id="floatingAssistant" aria-hidden="true">
+  <div class="floating-assistant-circle" id="floatingAssistantCircle" role="group" aria-label="Secret Systems assistant preview" tabindex="0">
+    <video
+      id="floatingAssistantVideo"
+      class="floating-assistant-video"
+      playsinline
+      muted
+      loop
+      preload="none"
+      poster="/assets/video/secret-systems-floating-assistant-poster.jpg"
+    >
+      <source data-src="/assets/video/secret-systems-floating-assistant.mp4" type="video/mp4">
+    </video>
+    <div class="floating-assistant-controls">
+      <button type="button" class="floating-assistant-btn" id="floatingAssistantPause" aria-label="Pause assistant video">
+        <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+        <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+      <button type="button" class="floating-assistant-btn" id="floatingAssistantClose" aria-label="Close assistant preview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
 <script src="ss-config.js"></script>
 <script>
 (function(){
@@ -2195,7 +2322,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
      same gate the old YouTube facade used. YouTube stays only as a hidden
      failure fallback if the MP4 itself can't play at all. */
   (function(){
-    var VIDEO_SRC = '/assets/video/secret-systems-ai-assistant.mp4';
+    var VIDEO_SRC = '/assets/video/secret-systems-main-studio.mp4';
     var WATCH_URL = 'https://www.youtube.com/watch?v=-YNaeEOT2DE';
     var POSITION_KEY = 'ss_intro_video_t';
 
@@ -2415,6 +2542,126 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
           if (playPauseBtn) playPauseBtn.click();
         }
       }
+    });
+  })();
+
+  /* ── FLOATING ASSISTANT BUBBLE ──
+     Silent, looping, circular preview of the white-background avatar video
+     -- fully independent from the main technology-background player above.
+     Triggered by a sentinel placed immediately after the complete Apps &
+     Systems carousel (not a hardcoded scroll offset), so it stays accurate
+     if content above the portfolio changes. Lazy-loaded: the MP4 <source>
+     stays empty until the bubble is about to become visible. */
+  (function(){
+    var VIDEO_SRC = '/assets/video/secret-systems-floating-assistant.mp4';
+    var CLOSED_KEY = 'ss_floating_assistant_closed';
+
+    var sentinel = document.getElementById('appsSystemsEndSentinel');
+    var bubble = document.getElementById('floatingAssistant');
+    var circle = document.getElementById('floatingAssistantCircle');
+    var videoEl = document.getElementById('floatingAssistantVideo');
+    var sourceEl = videoEl ? videoEl.querySelector('source') : null;
+    var pauseBtn = document.getElementById('floatingAssistantPause');
+    var closeBtn = document.getElementById('floatingAssistantClose');
+    if (!sentinel || !bubble || !circle || !videoEl || !sourceEl) return;
+
+    var closedThisSession = false;
+    try { closedThisSession = sessionStorage.getItem(CLOSED_KEY) === '1'; } catch(e){}
+    if (closedThisSession){
+      bubble.classList.add('is-closed');
+      return; /* stays closed for the rest of this visit -- no observer needed */
+    }
+
+    /* prefers-reduced-motion is handled purely in CSS (see the
+       @media(prefers-reduced-motion:reduce) override on .floating-assistant
+       above, which drops the scale/translateY and just cross-fades) -- the
+       show/hide gating itself is identical either way. */
+
+    var sourceLoaded = false;
+    function loadSource(){
+      if (sourceLoaded) return;
+      sourceLoaded = true;
+      sourceEl.src = VIDEO_SRC;
+      videoEl.load();
+    }
+
+    var userPaused = false;
+    function playBubble(){
+      if (userPaused) return;
+      loadSource();
+      var p = videoEl.play();
+      if (p && p.catch) p.catch(function(){ /* autoplay blocked -- pause icon stays available */ });
+    }
+    function pauseBubble(){
+      videoEl.pause();
+    }
+
+    var isPastApps = false;
+    function updateVisibility(){
+      bubble.classList.toggle('is-visible', isPastApps);
+      bubble.setAttribute('aria-hidden', isPastApps ? 'false' : 'true');
+      if (isPastApps){
+        playBubble();
+      } else {
+        pauseBubble(); /* don't keep consuming resources while hidden */
+      }
+    }
+
+    var sentinelIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        /* Sentinel sits right after Apps & Systems: once its top has
+           scrolled above the viewport (boundingClientRect.top < 0) while
+           intersecting is false, the visitor has scrolled past it going
+           down; if it's below the viewport, they're still above/at it. */
+        if (entry.isIntersecting){
+          isPastApps = false;
+        } else {
+          isPastApps = entry.boundingClientRect.top < 0;
+        }
+        updateVisibility();
+      });
+    }, { threshold: 0, rootMargin: '0px' });
+    sentinelIo.observe(sentinel);
+
+    if (pauseBtn){
+      pauseBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if (videoEl.paused){
+          userPaused = false;
+          pauseBtn.classList.remove('is-paused');
+          pauseBtn.setAttribute('aria-label', 'Pause assistant video');
+          playBubble();
+        } else {
+          userPaused = true;
+          pauseBtn.classList.add('is-paused');
+          pauseBtn.setAttribute('aria-label', 'Play assistant video');
+          pauseBubble();
+        }
+      });
+    }
+
+    if (closeBtn){
+      closeBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        pauseBubble();
+        bubble.classList.remove('is-visible');
+        bubble.classList.add('is-closed');
+        bubble.setAttribute('aria-hidden', 'true');
+        try { sessionStorage.setItem(CLOSED_KEY, '1'); } catch(err){}
+        sentinelIo.disconnect();
+      });
+    }
+
+    /* Touch devices: first tap on the circle (not its buttons) reveals the
+       controls instead of immediately doing nothing; a second tap on a
+       button then activates it normally. */
+    circle.addEventListener('click', function(e){
+      if (e.target === circle || e.target === videoEl){
+        circle.classList.toggle('show-controls');
+      }
+    });
+    circle.addEventListener('focusout', function(e){
+      if (!circle.contains(e.relatedTarget)) circle.classList.remove('show-controls');
     });
   })();
 

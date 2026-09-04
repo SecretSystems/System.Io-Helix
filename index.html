@@ -694,67 +694,83 @@ nav{
   width:100%;
   aspect-ratio:16/9;
   background:#050a10;
+  outline:none;
 }
-.intro-video-play{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  display:block;
-  padding:0;margin:0;
-  border:0;background:none;cursor:pointer;
-  overflow:hidden;
-}
-.intro-video-thumb{
+.intro-video-frame:focus-visible{box-shadow:inset 0 0 0 2px var(--cyan);}
+.intro-video-el{
   position:absolute;inset:0;
   width:100%;height:100%;
   object-fit:cover;
   display:block;
+  background:#050a10;
 }
-.intro-video-play-icon{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:84px;height:84px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(2,4,8,.72);
-  border:1px solid rgba(0,200,255,.4);
-  color:var(--white);
-  box-shadow:0 12px 32px -8px rgba(0,0,0,.6);
-  transition:transform .22s ease,border-color .22s ease,background .22s ease;
-}
-.intro-video-play-icon svg{margin-left:3px;} /* optical centering for the play triangle */
-.intro-video-play:hover .intro-video-play-icon,
-.intro-video-play:focus-visible .intro-video-play-icon{
-  transform:translate(-50%,-50%) scale(1.08);
-  border-color:var(--cyan);
-  background:rgba(0,200,255,.16);
-}
-.intro-video-play:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;}
-.intro-video-frame iframe{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  border:0;display:block;
-}
-/* Mobile autoplay starts muted (required for browsers to allow autoplay at
-   all); this is the visible control that lets the visitor turn sound on.
-   Only shown once the muted-autoplay iframe is actually active. */
-.intro-video-unmute{
+/* Native browser control bar (timeline, fullscreen, cast, etc) is never
+   used -- only the custom bar below -- but these hide any vendor default
+   affordances that can appear on long-press / right-click in some browsers. */
+.intro-video-el::-webkit-media-controls{display:none !important;}
+.intro-video-el::-webkit-media-controls-enclosure{display:none !important;}
+
+/* ── Custom controls ──
+   Compact bar (play/pause + mute) pinned to the lower-right, well clear of
+   burned-in caption space at the bottom of frame. Fades out ~1s after
+   playback starts (JS toggles .is-idle), reappears on hover/focus/tap. */
+.intro-video-controls{
   position:absolute;bottom:14px;right:14px;z-index:5;
-  width:38px;height:38px;border-radius:50%;
+  display:flex;gap:8px;
+  opacity:1;visibility:visible;
+  transition:opacity .35s ease;
+  pointer-events:auto;
+}
+.intro-video-frame.is-idle .intro-video-controls{
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease,visibility 0s linear .35s;
+}
+.intro-video-frame.is-idle:hover .intro-video-controls,
+.intro-video-frame.is-idle:focus-within .intro-video-controls,
+.intro-video-frame.is-idle.force-show .intro-video-controls{
+  opacity:1;visibility:visible;
+  transition:opacity .2s ease;
+}
+.intro-video-btn{
+  width:38px;height:38px;min-width:44px;min-height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:rgba(2,4,8,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border:1px solid rgba(0,200,255,.4);color:var(--white);
-  cursor:pointer;padding:0;
+  cursor:pointer;padding:0;margin:0;
   transition:border-color .2s ease,background .2s ease;
 }
-.intro-video-unmute svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;}
-.intro-video-unmute .ico-unmuted{display:none;}
-.intro-video-unmute.is-unmuted .ico-muted{display:none;}
-.intro-video-unmute.is-unmuted .ico-unmuted{display:block;}
-.intro-video-unmute:hover,.intro-video-unmute:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.16);}
-.intro-video-unmute:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
-.intro-video-unmute.hide{display:none;}
-/* Accessible fallback link: invisible until it receives keyboard focus, so
-   there's no permanent "Watch on YouTube" text under the player, but the
-   direct link is still reachable for keyboard users and screen readers. */
-.intro-video-fallback{margin:0;}
+.intro-video-btn svg{width:18px;height:18px;display:block;}
+.intro-video-btn:hover,.intro-video-btn:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.16);}
+.intro-video-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+#introVideoPlayPause .ico-pause{display:none;}
+#introVideoPlayPause.is-playing .ico-play{display:none;}
+#introVideoPlayPause.is-playing .ico-pause{display:block;}
+#introVideoMute .ico-unmuted{display:none;}
+#introVideoMute.is-unmuted .ico-muted{display:none;}
+#introVideoMute.is-unmuted .ico-unmuted{display:block;}
+
+/* Replay control: only shown once playback has actually finished, centered,
+   not a permanent overlay. */
+.intro-video-replay{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:6;
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,4,8,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(0,200,255,.4);color:var(--white);
+  cursor:pointer;padding:0;
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.6);
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.intro-video-replay:hover,.intro-video-replay:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.16);transform:translate(-50%,-50%) scale(1.06);}
+.intro-video-replay:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;}
+.intro-video-replay.hide{display:none;}
+
+/* Accessible fallback: hidden during normal playback, shown only if the
+   MP4 source genuinely fails to load. */
+.intro-video-fallback{margin:0;text-align:center;padding-top:.75rem;}
+.intro-video-fallback a{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.8rem;}
+.intro-video-fallback.hide{display:none;}
 .sr-only-focusable{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0;
@@ -769,12 +785,11 @@ nav{
 
 @media(max-width:900px){
   .intro-video-card{border-radius:20px;}
-  .intro-video-play-icon{width:64px;height:64px;}
-  .intro-video-play-icon svg{width:24px;height:24px;}
+  .intro-video-replay{width:56px;height:56px;}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .intro-video-play-icon{transition:none;}
+  .intro-video-controls,.intro-video-replay,.intro-video-btn{transition:none;}
 }
 
 .big-title{
@@ -1543,23 +1558,37 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
           <section id="intro-video-section" class="intro-video-section" aria-label="Featured video">
             <div class="intro-video-wrap">
               <div class="intro-video-card" id="introVideoCard">
-                <div class="intro-video-frame" id="introVideoFrame">
-                  <button type="button" class="intro-video-play" id="introVideoPlayBtn" aria-label="Play video">
-                    <img id="introVideoThumb" class="intro-video-thumb" alt="" loading="lazy" decoding="async">
-                    <span class="intro-video-play-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
-                    </span>
+                <div class="intro-video-frame" id="introVideoFrame" tabindex="0" role="group" aria-label="Featured video: I Built an AI Version of Myself to Run My Website">
+                  <video
+                    id="introVideoEl"
+                    class="intro-video-el"
+                    playsinline
+                    muted
+                    preload="metadata"
+                    poster="/assets/video/secret-systems-ai-assistant-poster.jpg"
+                  >
+                    <source data-src="/assets/video/secret-systems-ai-assistant.mp4" type="video/mp4">
+                  </video>
+                  <!-- Compact custom controls -- deliberately not the
+                       browser's native control bar (which would show a
+                       permanent timeline/fullscreen/etc). Fade logic lives
+                       in the script below. -->
+                  <div class="intro-video-controls" id="introVideoControls">
+                    <button type="button" class="intro-video-btn" id="introVideoPlayPause" aria-label="Pause video">
+                      <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                      <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+                    </button>
+                    <button type="button" class="intro-video-btn" id="introVideoMute" aria-label="Unmute video" aria-pressed="true">
+                      <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
+                      <svg class="ico-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
+                    </button>
+                  </div>
+                  <button type="button" class="intro-video-replay hide" id="introVideoReplay" aria-label="Replay video">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor"/></svg>
                   </button>
                 </div>
-                <!-- Sibling of #introVideoFrame, not inside it: loadVideo()
-                     clears and replaces the frame's own contents when the
-                     real iframe loads, which would wipe out this control
-                     too if it lived inside that container. -->
-                <button type="button" class="intro-video-unmute hide" id="introVideoUnmuteBtn" aria-pressed="true" aria-label="Unmute video">
-                  <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
-                  <svg class="ico-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
-                </button>
-                <p class="intro-video-fallback"><a id="introVideoFallbackLink" class="sr-only-focusable" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+                <!-- Hidden unless the MP4 source fails to load at all. -->
+                <p class="intro-video-fallback hide" id="introVideoFallback"><a id="introVideoFallbackLink" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch the video on YouTube ↗</a></p>
               </div>
             </div>
           </section>
@@ -2156,224 +2185,237 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   reveals.forEach(function(r){obs.observe(r);});
 
   /* ── FEATURED VIDEO ("Meet the System") ──
-     Config holds both videos; only the edited cut is ever shown to regular
-     visitors. ?intro=raw is an unlisted comparison URL for internal review
-     -- there is no public toggle on the page. One lightweight YouTube
-     facade (thumbnail + button) swaps for a single real iframe on click;
-     the raw version's iframe is never created unless that query param is
-     present, so at most one video ever loads. */
-  var SS_INTRO_VIDEOS = {
-    edited: {
-      id: '-YNaeEOT2DE',
-      title: 'I Built an AI Version of Myself to Run My Website'
-    },
-    raw: {
-      id: 'hVqUEshFc00',
-      title: 'This AI Assistant Runs My Website | Secret Systems'
-    }
-  };
+     Native <video> player -- no YouTube iframe on the primary homepage
+     experience. The MP4 <source> starts with no src (data-src holds the
+     real URL) so nothing downloads on initial page load; the real src is
+     attached and .load() is called only once the player is about to enter
+     the viewport (see the lazy-load IntersectionObserver below), and
+     playback itself only starts once ~60% of the player is actually
+     visible AND the hero has revealed it (.text-visible), matching the
+     same gate the old YouTube facade used. YouTube stays only as a hidden
+     failure fallback if the MP4 itself can't play at all. */
   (function(){
-    var params, requested, video;
-    try { params = new URLSearchParams(window.location.search); } catch(e) { params = null; }
-    requested = params ? params.get('intro') : null;
-    video = (requested === 'raw') ? SS_INTRO_VIDEOS.raw : SS_INTRO_VIDEOS.edited; /* missing/invalid -> edited */
+    var VIDEO_SRC = '/assets/video/secret-systems-ai-assistant.mp4';
+    var WATCH_URL = 'https://www.youtube.com/watch?v=-YNaeEOT2DE';
+    var POSITION_KEY = 'ss_intro_video_t';
 
     var card = document.getElementById('introVideoCard');
     var frame = document.getElementById('introVideoFrame');
-    var playBtn = document.getElementById('introVideoPlayBtn');
-    var thumb = document.getElementById('introVideoThumb');
+    var videoEl = document.getElementById('introVideoEl');
+    var sourceEl = videoEl ? videoEl.querySelector('source') : null;
+    var controls = document.getElementById('introVideoControls');
+    var playPauseBtn = document.getElementById('introVideoPlayPause');
+    var muteBtn = document.getElementById('introVideoMute');
+    var replayBtn = document.getElementById('introVideoReplay');
+    var fallbackEl = document.getElementById('introVideoFallback');
     var fallbackLink = document.getElementById('introVideoFallbackLink');
-    var unmuteBtn = document.getElementById('introVideoUnmuteBtn');
     /* Looked up directly here (not via the shared `heroContent` var the
        vault animation block below declares) so this works regardless of
        script execution order -- this IIFE runs before that block assigns
        its own copy. */
     var heroContentEl = document.getElementById('hero-content');
-    if (!card || !frame || !playBtn || !thumb) return;
+    if (!card || !frame || !videoEl || !sourceEl) return;
 
-    var watchUrl = 'https://www.youtube.com/watch?v=' + video.id;
-    thumb.src = 'https://i.ytimg.com/vi/' + video.id + '/maxresdefault.jpg';
-    thumb.alt = video.title + ' — video thumbnail';
-    thumb.onerror = function(){
-      thumb.onerror = null;
-      thumb.src = 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg';
-    };
-    playBtn.setAttribute('aria-label', 'Play ' + video.title);
-    if (fallbackLink) fallbackLink.href = watchUrl;
+    if (fallbackLink) fallbackLink.href = WATCH_URL;
 
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var mobileMq = window.matchMedia && window.matchMedia('(max-width:900px)');
-    var iframeEl = null;
-    var isMuted = false;
+    var sessionPos = 0;
+    try { sessionPos = parseFloat(sessionStorage.getItem(POSITION_KEY)) || 0; } catch(e){}
 
-    /* postMessage command helper -- talks to the already-loaded YouTube
-       iframe without pulling in the full IFrame Player API script. Requires
-       enablejsapi=1 on the embed URL.
+    var fallbackShown = false;
+    function showFallback(){
+      if (fallbackShown) return;
+      fallbackShown = true;
+      if (fallbackEl) fallbackEl.classList.remove('hide');
+      frame.style.display = 'none';
+    }
+    /* Only the <video> element's own 'error' reflects a genuinely failed
+       load -- the <source> child can fire a spurious 'error' of its own
+       during normal resource-selection (e.g. before its src is assigned),
+       which would otherwise hide a perfectly working player. */
+    videoEl.addEventListener('error', showFallback);
 
-       The embedded player only accepts 'command' messages once its own
-       script has finished initializing; sending one earlier is harmless to
-       playback but logs a benign "isExternalMethodAvailable is not a
-       function" warning from YouTube's own code. Queue commands sent before
-       that point and flush them once the player's ready signal arrives
-       (see the window 'message' listener below), instead of guessing a
-       fixed delay. */
-    var playerReady = false;
-    var pendingCommands = [];
-
-    function ytCommand(func, args){
-      if (!iframeEl || !iframeEl.contentWindow) return;
-      if (!playerReady){ pendingCommands.push([func, args]); return; }
-      try {
-        iframeEl.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: args || [] }), '*');
-      } catch(e){}
+    function isRevealed(){
+      return heroContentEl.classList.contains('text-visible');
     }
 
-    window.addEventListener('message', function(e){
-      if (!iframeEl || e.source !== iframeEl.contentWindow) return;
-      var data = e.data;
-      try { if (typeof data === 'string') data = JSON.parse(data); } catch(e2){ return; }
-      if (!data || (data.event !== 'onReady' && data.event !== 'initialDelivery')) return;
-      if (playerReady) return;
-      playerReady = true;
-      pendingCommands.forEach(function(cmd){ ytCommand(cmd[0], cmd[1]); });
-      pendingCommands = [];
+    /* ── Lazy-load the source shortly before the player enters the
+       viewport -- never during initial load while far below the fold.
+       The video card's DOM position never moves during the pin (same as
+       the old YouTube facade), so on a fresh load it can already sit
+       inside a geometric "intersecting" bound at scrollY 0 before the
+       hero has revealed it -- gating on isRevealed() too (with a
+       MutationObserver, since a visitor already stationary at that exact
+       scroll point won't fire another scroll/intersection event) is what
+       stops the MP4 from fetching while still off-stage. */
+    var sourceLoaded = false;
+    var lazyIntersecting = false;
+    function loadSource(){
+      if (sourceLoaded) return;
+      sourceLoaded = true;
+      sourceEl.src = VIDEO_SRC;
+      videoEl.load();
+      /* Chrome doesn't always dispatch a proper 'error' event with a
+         populated MediaError when the underlying request is aborted before
+         any response headers arrive -- it can just leave the element at
+         networkState NETWORK_NO_SOURCE (3) silently. Poll for that as a
+         backstop so a fully-blocked request still reaches the fallback. */
+      setTimeout(function(){
+        if (videoEl.networkState === 3 && videoEl.readyState === 0) showFallback();
+      }, 4000);
+      if (sessionPos > 0.5){
+        videoEl.addEventListener('loadedmetadata', function once(){
+          videoEl.removeEventListener('loadedmetadata', once);
+          try { videoEl.currentTime = sessionPos; } catch(e){}
+        });
+      }
+    }
+    function maybeLazyLoad(){
+      if (lazyIntersecting && isRevealed()) loadSource();
+    }
+    var lazyIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        lazyIntersecting = entry.isIntersecting;
+        if (lazyIntersecting) maybeLazyLoad();
+      });
+    }, { rootMargin: '600px 0px 600px 0px' });
+    lazyIo.observe(card);
+    if (window.MutationObserver){
+      var lazyRevealObs = new MutationObserver(maybeLazyLoad);
+      lazyRevealObs.observe(heroContentEl, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* ── Playback gate: both intersecting >=60% AND hero-revealed. ──
+       userPaused tracks a deliberate pause via the custom control (as
+       opposed to the auto-pause-on-scroll-away below) so a redundant
+       IntersectionObserver/MutationObserver re-fire never fights a visitor
+       who just tapped pause. */
+    var isIntersecting = false;
+    var pauseTimer = null;
+    var userPaused = false;
+
+    function maybeActivate(){
+      if (reduceMotion || userPaused) return;
+      if (!isIntersecting || !isRevealed()) return;
+      if (pauseTimer){ clearTimeout(pauseTimer); pauseTimer = null; }
+      loadSource();
+      if (videoEl.paused && !videoEl.ended){
+        var p = videoEl.play();
+        if (p && p.catch) p.catch(function(){ /* autoplay blocked -- controls still let the visitor tap play */ });
+      }
+    }
+
+    var activateIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting){
+          maybeActivate();
+        } else if (!videoEl.paused) {
+          /* short grace period so a fast scroll-past doesn't pause instantly */
+          pauseTimer = setTimeout(function(){
+            videoEl.pause();
+            try { sessionStorage.setItem(POSITION_KEY, String(videoEl.currentTime)); } catch(e){}
+          }, 1500);
+        }
+      });
+    }, { threshold: 0.6 });
+    activateIo.observe(card);
+
+    if (window.MutationObserver){
+      var revealObs = new MutationObserver(function(){ maybeActivate(); });
+      revealObs.observe(heroContentEl, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* ── Custom controls ── */
+    function updatePlayPauseUi(){
+      if (playPauseBtn){
+        playPauseBtn.classList.toggle('is-playing', !videoEl.paused && !videoEl.ended);
+        playPauseBtn.setAttribute('aria-label', videoEl.paused ? 'Play video' : 'Pause video');
+      }
+    }
+    function updateMuteUi(){
+      if (muteBtn){
+        muteBtn.classList.toggle('is-unmuted', !videoEl.muted);
+        muteBtn.setAttribute('aria-pressed', String(videoEl.muted));
+        muteBtn.setAttribute('aria-label', videoEl.muted ? 'Unmute video' : 'Mute video');
+      }
+    }
+    updatePlayPauseUi();
+    updateMuteUi();
+
+    if (playPauseBtn){
+      playPauseBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        loadSource();
+        if (videoEl.paused){
+          userPaused = false;
+          var p = videoEl.play();
+          if (p && p.catch) p.catch(function(){});
+        } else {
+          userPaused = true;
+          videoEl.pause();
+        }
+      });
+    }
+    if (muteBtn){
+      muteBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        videoEl.muted = !videoEl.muted;
+        if (!videoEl.muted) videoEl.volume = 1;
+        updateMuteUi();
+      });
+    }
+    if (replayBtn){
+      replayBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        userPaused = false;
+        videoEl.currentTime = 0;
+        replayBtn.classList.add('hide');
+        var p = videoEl.play();
+        if (p && p.catch) p.catch(function(){});
+      });
+    }
+    videoEl.addEventListener('play', updatePlayPauseUi);
+    videoEl.addEventListener('pause', updatePlayPauseUi);
+    videoEl.addEventListener('volumechange', updateMuteUi);
+    videoEl.addEventListener('ended', function(){
+      updatePlayPauseUi();
+      if (replayBtn) replayBtn.classList.remove('hide');
+      try { sessionStorage.removeItem(POSITION_KEY); } catch(e){}
+    });
+    videoEl.addEventListener('timeupdate', function(){
+      /* throttle to roughly once a second via currentTime's own precision */
+      try { sessionStorage.setItem(POSITION_KEY, String(videoEl.currentTime)); } catch(e){}
     });
 
-    /* Builds and inserts the real iframe once, in either mode:
-       - explicit (Play tapped/clicked): unmuted autoplay, user-initiated.
-       - auto (mobile, video stage ≥60% visible): muted autoplay, so the
-         browser's autoplay policy allows it without a gesture. */
-    function loadVideo(opts){
-      opts = opts || {};
-      if (frame.dataset.loaded) return;
-      frame.dataset.loaded = '1';
-      isMuted = !!opts.muted;
-      var iframe = document.createElement('iframe');
-      var originParam = '';
-      try { originParam = '&origin=' + encodeURIComponent(window.location.origin); } catch(e){}
-      iframe.src = 'https://www.youtube-nocookie.com/embed/' + video.id +
-        '?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1' + originParam +
-        (opts.muted ? '&mute=1' : '');
-      iframe.title = video.title;
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-      iframe.loading = 'eager'; /* only created once the facade is actually replaced, so eager here is correct */
-      iframe.onerror = function(){
-        frame.innerHTML = '<div class="intro-video-fallback" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)"><a href="' +
-          watchUrl + '" target="_blank" rel="noopener" style="color:var(--cyan)">Watch on YouTube ↗</a></div>';
-      };
-      playerReady = false;
-      pendingCommands = [];
-      /* "listening" tells the embedded player an external script wants
-         updates -- it responds with 'onReady'/'initialDelivery' once its
-         own script has actually finished initializing, which is what
-         flips playerReady above and flushes any queued commands. */
-      iframe.addEventListener('load', function(){
-        try { iframe.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: video.id }), '*'); } catch(e){}
-        /* Fallback in case the player never posts an onReady/initialDelivery
-           message back (seen on some embed variants) -- without this, a
-           queued mute/pause/play command would wait forever. */
-        setTimeout(function(){
-          if (playerReady) return;
-          playerReady = true;
-          pendingCommands.forEach(function(cmd){ ytCommand(cmd[0], cmd[1]); });
-          pendingCommands = [];
-        }, 1200);
-      });
-      frame.innerHTML = '';
-      frame.appendChild(iframe);
-      iframeEl = iframe;
-      if (unmuteBtn){
-        if (opts.muted){
-          unmuteBtn.classList.remove('hide', 'is-unmuted');
-          unmuteBtn.setAttribute('aria-pressed', 'true');
-          unmuteBtn.setAttribute('aria-label', 'Unmute video');
-        } else {
-          unmuteBtn.classList.add('hide');
-        }
+    /* ── Controls fade ──
+       Visible while paused/idle-before-play; fades ~1s after playback
+       starts; reappears on hover/focus/tap/keyboard activity, then fades
+       again after a short period of inactivity. */
+    var idleTimer = null;
+    function showControls(){
+      frame.classList.remove('is-idle');
+      if (idleTimer) clearTimeout(idleTimer);
+      if (!videoEl.paused && !videoEl.ended){
+        idleTimer = setTimeout(function(){ frame.classList.add('is-idle'); }, 1000);
       }
     }
-
-    playBtn.addEventListener('click', function(){ loadVideo({ muted: false }); });
-
-    if (unmuteBtn){
-      unmuteBtn.addEventListener('click', function(e){
-        e.stopPropagation();
-        if (isMuted){
-          ytCommand('unMute');
-          ytCommand('setVolume', [100]);
-          isMuted = false;
-          unmuteBtn.classList.add('is-unmuted');
-          unmuteBtn.setAttribute('aria-pressed', 'false');
-          unmuteBtn.setAttribute('aria-label', 'Mute video');
-        } else {
-          ytCommand('mute');
-          isMuted = true;
-          unmuteBtn.classList.remove('is-unmuted');
-          unmuteBtn.setAttribute('aria-pressed', 'true');
-          unmuteBtn.setAttribute('aria-label', 'Unmute video');
-        }
-      });
-    }
-
-    /* ── Mobile auto-load + muted autoplay ──
-       Only on mobile (desktop keeps the deliberate click-to-load facade).
-       Loads the real iframe -- never a GIF or fake preview -- once the
-       video stage is BOTH substantially (>=60%) on screen AND actually
-       revealed (heroContent has .text-visible -- the same scroll-progress
-       gate that fades the video facade in). The video's DOM position never
-       moves during the pin, so on a fresh load it already sits inside the
-       observer's geometric bounds at opacity:0 -- checking .text-visible
-       too is what stops it from fetching while still off-stage / far below
-       the meaningful fold. A MutationObserver on that class (not just the
-       IntersectionObserver's own entry events) catches the moment reveal
-       happens while already geometrically intersecting, so the video isn't
-       stuck waiting for a scroll event that never comes once already
-       in view. If the browser still blocks autoplay despite mute, the real
-       Play button stays live on top of the thumbnail (loadVideo() is a
-       no-op once frame.dataset.loaded is set, so a stalled auto-attempt
-       never double-loads on a later manual tap -- the iframe itself is
-       already there and playable). Pausing on scroll-away uses YouTube's
-       postMessage API rather than tearing the iframe down, so resuming
-       doesn't need a second network fetch. */
-    if (mobileMq && mobileMq.matches && !reduceMotion){
-      var pauseTimer = null;
-      var isIntersecting = false;
-
-      function isRevealed(){
-        return heroContentEl.classList.contains('text-visible');
-      }
-
-      function maybeActivate(){
-        if (!isIntersecting || !isRevealed()) return;
-        if (pauseTimer){ clearTimeout(pauseTimer); pauseTimer = null; }
-        if (!frame.dataset.loaded){
-          loadVideo({ muted: true });
-        } else {
-          ytCommand('playVideo');
+    videoEl.addEventListener('play', function(){
+      idleTimer = setTimeout(function(){ frame.classList.add('is-idle'); }, 1000);
+    });
+    videoEl.addEventListener('pause', showControls);
+    ['pointermove','pointerdown','touchstart','focusin'].forEach(function(evt){
+      frame.addEventListener(evt, showControls, { passive: true });
+    });
+    frame.addEventListener('keydown', function(e){
+      showControls();
+      if (e.key === ' ' || e.key === 'Enter'){
+        if (e.target === frame){
+          e.preventDefault();
+          if (playPauseBtn) playPauseBtn.click();
         }
       }
-
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          isIntersecting = entry.isIntersecting;
-          if (isIntersecting){
-            maybeActivate();
-          } else if (frame.dataset.loaded) {
-            /* give a short grace period (fast scroll-past shouldn't pause
-               instantly) before actually pausing playback that's left the
-               viewport for a meaningful period. */
-            pauseTimer = setTimeout(function(){ ytCommand('pauseVideo'); }, 1500);
-          }
-        });
-      }, { threshold: 0.6 });
-      io.observe(card);
-
-      if (window.MutationObserver){
-        var revealObs = new MutationObserver(function(){ maybeActivate(); });
-        revealObs.observe(heroContentEl, { attributes: true, attributeFilter: ['class'] });
-      }
-    }
+    });
   })();
 
   /* ── NAV HIGHLIGHT ── */

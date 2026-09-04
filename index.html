@@ -1234,43 +1234,62 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 @keyframes portfolioSpin{to{transform:rotate(360deg);}}
 
 /* interaction cover — sits over the iframe until "Interact With Preview" */
+/* ── Interaction shield ──
+   Sits over the live iframe until a deliberate tap/click. While present,
+   the shield (not the iframe) receives pointer events, so page scroll and
+   carousel swipe/drag both keep working normally. Removed on
+   is-interactive (pointer-events:none, not display:none, so it can still
+   fade instead of popping) and the iframe itself becomes interactive. */
 .portfolio-cover{
   position:absolute;inset:0;z-index:6;
-  background:linear-gradient(180deg,rgba(2,4,8,0) 60%,rgba(2,4,8,.55) 100%);
-  cursor:grab;
+  background:linear-gradient(180deg,rgba(2,4,8,0) 55%,rgba(2,4,8,.5) 100%);
+  cursor:pointer;
+  display:flex;align-items:flex-end;justify-content:center;
+  transition:opacity .25s ease;
 }
-.portfolio-card:active .portfolio-cover{cursor:grabbing;}
-.portfolio-card.is-interactive .portfolio-cover{display:none;}
+.portfolio-card.is-interactive .portfolio-cover{opacity:0;pointer-events:none;}
 .portfolio-card.is-interactive .portfolio-preview iframe{pointer-events:auto;}
 .portfolio-preview iframe{pointer-events:none;}
 
-/* ── Corner action controls (replaces the old full-width "Interact With
-   Preview" / "Open Live Site" buttons under the description) ──
-   Compact pills sit on the preview's own lower corners: Interact/Exit on
-   the left, Open Live on the right. Each pill's real hit area is only
-   ~30-34px tall, so a transparent padded wrapper extends the actual
-   touch/click target to 44x44px without inflating the visible control. */
+/* Small, tasteful "Tap to interact" hint centered low on the preview --
+   visible only on the active card so inactive neighbors stay uncluttered. */
+.portfolio-tap-hint{
+  margin-bottom:14px;
+  opacity:0;visibility:hidden;transform:translateY(4px);
+  transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s;
+  pointer-events:none;
+}
+.portfolio-card.is-active:not(.is-interactive):not(.is-failed) .portfolio-tap-hint{
+  opacity:1;visibility:visible;transform:translateY(0);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.portfolio-tap-hint-pill{
+  display:inline-flex;align-items:center;gap:.4rem;
+  height:32px;padding:0 .9rem;border-radius:999px;
+  background:rgba(2,4,8,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(0,200,255,.32);color:var(--white);
+  font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.02em;
+  white-space:nowrap;
+}
+.portfolio-tap-hint-pill svg{width:13px;height:13px;flex-shrink:0;display:block;}
+
+/* ── Open Live control (lower-right corner) — the only remaining button. ── */
 .portfolio-corner{
   position:absolute;bottom:10px;z-index:9;
   display:none;
 }
-.portfolio-corner-left{left:12px;}
 .portfolio-corner-right{right:12px;}
 .portfolio-card.is-active .portfolio-corner{display:block;}
-/* The <button>/<a> itself IS the touch target -- min 44x44 via padding, with
-   a visibly smaller ~32px pill drawn by the inner span so it reads as
-   compact while the real clickable box stays accessible-sized. Centering
-   the visual pill inside a taller/wider invisible box, anchored so the
-   pill still sits ~10-14px from the card's corner as specified. */
+/* The <a> itself IS the touch target -- min 44x44 via padding, with a
+   visibly smaller ~32px pill drawn by the inner span so it reads as
+   compact while the real clickable box stays accessible-sized. */
 .portfolio-corner-btn{
   position:relative;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-end;
   min-width:44px;min-height:44px;
   background:none;border:none;padding:0;margin:0;
   cursor:pointer;text-decoration:none;
 }
-.portfolio-corner-left .portfolio-corner-btn{justify-content:flex-start;}
-.portfolio-corner-right .portfolio-corner-btn{justify-content:flex-end;}
 .portfolio-corner-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:999px;}
 .portfolio-corner-pill{
   display:inline-flex;align-items:center;gap:.4rem;
@@ -1278,14 +1297,18 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   background:rgba(2,4,8,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:1px solid rgba(0,200,255,.32);color:var(--white);
   font-family:'Outfit',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.02em;
-  white-space:nowrap;pointer-events:none; /* the parent button/link handles the click */
+  white-space:nowrap;pointer-events:none; /* the parent link handles the click */
   transition:border-color .2s,background .2s,color .2s;
 }
 .portfolio-corner-btn:hover .portfolio-corner-pill{border-color:var(--cyan);background:rgba(0,200,255,.14);}
 .portfolio-corner-pill svg{width:13px;height:13px;flex-shrink:0;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-/* Exit state reuses the same pill/position -- only the label+icon change. */
-.portfolio-corner-pill.is-exit{border-color:rgba(255,255,255,.28);}
-.portfolio-corner-btn:hover .portfolio-corner-pill.is-exit{border-color:var(--cyan);}
+
+/* ── Failure fallback: never claim the preview is interactive if the
+   iframe genuinely failed (blocked framing, network error, timeout). The
+   branded poster stays visible (see markFailed in portfolio.js), the tap
+   hint is hidden by the :not(.is-failed) selector above, and Open Live
+   remains the only working control. ── */
+.portfolio-card.is-failed .portfolio-preview{cursor:default;}
 
 /* browser-chrome strip along the very top edge — reinforces "this is a real site" without covering content */
 .portfolio-chrome{
@@ -1347,6 +1370,8 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   .portfolio-meta{margin-top:.5rem;}
   .portfolio-corner-pill{height:30px;font-size:.68rem;padding:0 .7rem;}
   .portfolio-corner-pill svg{width:12px;height:12px;}
+  .portfolio-tap-hint{margin-bottom:12px;}
+  .portfolio-tap-hint-pill{height:30px;font-size:.68rem;padding:0 .75rem;}
 }
 </style>
 <script>if(location.pathname==="/index.html"){location.replace("/"+location.search+location.hash);}</script>

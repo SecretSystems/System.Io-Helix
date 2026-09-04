@@ -28,6 +28,10 @@
    @property {string} posterAlt     - descriptive alt text for the poster image
    @property {string} [fallbackReason] - human-readable reason recorded for the
                     implementation report when previewMode is 'fallback'
+   @property {string} [sandbox]     - iframe sandbox token list for this project's
+                    preview, scoped to only what that site actually needs.
+                    Falls back to the module default (allow-scripts
+                    allow-same-origin) when omitted.
    ============================================================ */
 
 var SS_PORTFOLIO = {
@@ -43,6 +47,9 @@ var SS_PORTFOLIO = {
         url: "https://www.lighttheseasons.com/",
         previewUrl: "https://www.lighttheseasons.com/portfolio-preview",
         previewMode: "live",
+        // Marketing site with a real contact form and links that open in a
+        // new tab -- needs forms + popups on top of the module default.
+        sandbox: "allow-scripts allow-same-origin allow-forms allow-popups",
         poster: "/portfolio/assets/poster-light-the-season.webp",
         posterAlt: "Light The Season homepage: a nighttime photo of a house with warm white Christmas lights along the roofline and driveway, with the headline \"Christmas lights designed to stop traffic — not ruin your weekend.\""
       },
@@ -53,6 +60,7 @@ var SS_PORTFOLIO = {
         description: "Local service website for pressure washing and exterior cleaning in Lafayette, Louisiana.",
         url: "https://cajunpressure.com/",
         previewMode: "live",
+        sandbox: "allow-scripts allow-same-origin allow-forms allow-popups",
         poster: "/portfolio/assets/poster-cajun-pressure.webp",
         posterAlt: "Cajun Pressure homepage with a bold \"Exterior Cleaning Done Right\" headline over a photo of a pressure-washing crew cleaning a metal building."
       },
@@ -63,6 +71,7 @@ var SS_PORTFOLIO = {
         description: "Bathroom-remodeling and construction website designed to present services and generate local leads.",
         url: "https://fineline-construction-of-louisiana.vercel.app/",
         previewMode: "live",
+        sandbox: "allow-scripts allow-same-origin allow-forms allow-popups",
         poster: "/portfolio/assets/poster-fineline-construction.webp",
         posterAlt: "Fineline Construction of Louisiana homepage with the headline \"The Difference Is The Fine Line\" over a warmly lit bathroom remodel photo."
       }
@@ -82,6 +91,9 @@ var SS_PORTFOLIO = {
         previewUrl: "https://et.fireservicetools.com/map-embed",
         previewMode: "live",
         fullBleedPreview: true,
+        // Read-only map: pan/zoom/click only, no forms, nothing that should
+        // ever open a new tab from inside the preview.
+        sandbox: "allow-scripts allow-same-origin",
         poster: "/portfolio/assets/poster-911-operations-map.webp",
         posterAlt: "Exchange Time 911 Operations Map centered on a recent public Lafayette911 call, showing the real map with a fire station marker, the selected incident highlighted, and native incident cards along the bottom."
       },
@@ -91,8 +103,14 @@ var SS_PORTFOLIO = {
         category: "Workforce Coordination System",
         description: "Fire-department exchange-time, scheduling, approval, and workforce coordination system.",
         url: "https://et.fireservicetools.com/",
-        previewUrl: "https://et.fireservicetools.com/portfolio-demo",
+        previewUrl: "https://et.fireservicetools.com/portfolio-preview",
         previewMode: "live",
+        // Dedicated This Hitch + Daily Training preview: needs its own
+        // Supabase fetch (public training videos) and allow-popups so the
+        // real "Watch on YouTube" link inside a training card still opens
+        // in a new tab. No allow-forms -- nothing in this preview submits
+        // a form.
+        sandbox: "allow-scripts allow-same-origin allow-popups",
         poster: "/portfolio/assets/poster-exchange-time.webp",
         posterAlt: "Exchange Time brand mark — an orange rounded-square icon with a cycle/exchange glyph on a dark background, with the name \"Exchange Time\" and the tagline \"Fire-department scheduling & workforce coordination.\""
       },
@@ -103,6 +121,7 @@ var SS_PORTFOLIO = {
         description: "Online fireworks storefront created for America's 250th celebration.",
         url: "https://fireworks.lighttheseasons.com/shop",
         previewMode: "live",
+        sandbox: "allow-scripts allow-same-origin allow-forms allow-popups",
         poster: "/portfolio/assets/poster-fireworks.webp",
         posterAlt: "Light The Season Fireworks shop page showing a dark red-and-gold \"Shop All Fireworks\" header above a grid of Black Cat firework product photos."
       },
@@ -113,6 +132,7 @@ var SS_PORTFOLIO = {
         description: "A centralized operating dashboard designed to manage multiple business functions from one command room.",
         url: "https://commandroom-os.vercel.app/",
         previewMode: "live",
+        sandbox: "allow-scripts allow-same-origin",
         poster: "/portfolio/assets/poster-commandroom-os.webp",
         posterAlt: "CommandRoom OS dashboard showing a \"Today\" view with business alerts, a trade board entry, a weekly hitch calendar, and an inbox of triage items."
       }

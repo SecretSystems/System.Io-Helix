@@ -23,11 +23,15 @@
 
   var ssReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-  var SANDBOX = "allow-scripts allow-same-origin allow-forms allow-popups";
-  /* Deliberately excludes: allow-modals, allow-downloads, allow-popups-to-escape-sandbox,
-     allow-top-navigation, microphone/camera/geolocation permissions, and clipboard access.
-     None of the seven preview sites need those for their public marketing/demo pages, so
-     they're left out rather than granted "just in case". */
+  /* Minimal default sandbox for any project that doesn't declare its own
+     (see portfolio-data.js's per-project `sandbox`): scripts + same-origin
+     only, no forms, no popups. Every current project sets an explicit
+     value scoped to what it actually needs -- e.g. a marketing site with a
+     real contact form gets allow-forms, a read-only map does not. None of
+     them are granted allow-modals, allow-downloads,
+     allow-popups-to-escape-sandbox, allow-top-navigation, or any device
+     permission (camera/mic/geolocation/clipboard). */
+  var DEFAULT_SANDBOX = "allow-scripts allow-same-origin";
 
   var section = document.getElementById("portfolio-section");
   if(!section || typeof SS_PORTFOLIO === "undefined") return;
@@ -88,32 +92,27 @@
       loading.className = "portfolio-loading is-hidden";
       loading.innerHTML = '<span class="spin" aria-hidden="true"></span>';
 
+      /* ── Interaction shield ──
+         Sits over the live iframe until the visitor deliberately taps/clicks
+         the preview. While the shield is present, pointer events land on the
+         card (not the iframe), so the page keeps scrolling and the carousel
+         keeps swiping normally. A small "Tap to interact" hint communicates
+         what a tap on the preview will do. Removing the shield (see
+         enterInteraction) hands pointer events to the iframe itself. */
       var cover = document.createElement("div");
       cover.className = "portfolio-cover";
+      var hint = document.createElement("div");
+      hint.className = "portfolio-tap-hint";
+      hint.innerHTML = '<span class="portfolio-tap-hint-pill">' + PLAY_ICON + 'Tap to interact</span>';
+      hint.setAttribute("aria-hidden", "true"); // decorative; the card itself carries the real label
+      cover.appendChild(hint);
 
       var sheen = document.createElement("div");
       sheen.className = "portfolio-card-corner-sheen";
 
-      /* ── Corner actions: Interact/Exit (bottom-left) + Open Live (bottom-right) ──
-         Small pills anchored to the preview's own corners instead of a large
-         button row under the description. Both live INSIDE portfolio-card-inner
-         so they sit above the iframe (z-index) and are excluded from the
-         drag/pointerdown handler the same way the old exit button was. */
-      var interactWrap = document.createElement("div");
-      interactWrap.className = "portfolio-corner portfolio-corner-left";
-      var interactBtn = document.createElement("button");
-      interactBtn.type = "button";
-      interactBtn.className = "portfolio-corner-btn portfolio-interact-btn";
-      var interactPill = document.createElement("span");
-      interactPill.className = "portfolio-corner-pill";
-      interactBtn.appendChild(interactPill);
-      interactBtn.addEventListener("click", function(e){
-        e.stopPropagation();
-        if(card_.el.classList.contains("is-interactive")) exitInteraction(group);
-        else enterInteraction(group);
-      });
-      interactWrap.appendChild(interactBtn);
-
+      /* ── Open Live (bottom-right) — the only remaining corner control.
+         Lives INSIDE portfolio-card-inner so it sits above the iframe
+         (z-index) and is excluded from the drag/pointerdown handler. ── */
       var openLiveWrap = document.createElement("div");
       openLiveWrap.className = "portfolio-corner portfolio-corner-right";
       var openLiveLink = document.createElement("a");
@@ -136,19 +135,24 @@
       inner.appendChild(loading);
       inner.appendChild(cover);
       inner.appendChild(sheen);
-      inner.appendChild(interactWrap);
       inner.appendChild(openLiveWrap);
       card.appendChild(inner);
       track.appendChild(card);
 
       var card_ = { el: card, inner: inner, preview: preview, poster: poster, loading: loading, cover: cover,
-        interactBtn: interactBtn, interactPill: interactPill, openLiveWrap: openLiveWrap,
+        openLiveWrap: openLiveWrap,
         project: project, iframeEl: null, iframeLoaded: false };
 
-      // A project with no live preview at all never gets an Interact control --
-      // omit it outright rather than show a button that can never do anything.
-      if(project.previewMode !== "live") interactWrap.style.display = "none";
-      else setInteractLabel(card_, group, "loading"); // disabled until the iframe actually loads
+      /* The shield itself is the activation control: a deliberate tap/click
+         on the preview (not hover) removes it and hands the gesture to the
+         real iframe. This is wired inside initDrag's pointerUp (not a
+         `click` listener here) because setPointerCapture on the carousel
+         root redirects the synthesized click away from this element --
+         pointerUp instead treats a near-zero-movement release that started
+         on .portfolio-cover as the tap, so a genuine swipe can never
+         accidentally activate the card. */
+
+      updateCardInteractLabel(card_, group);
 
       return card_;
     });
@@ -222,7 +226,7 @@
         c.iframeLoaded = false;
         c.loading.classList.add("is-hidden");
         c.poster.style.opacity = "1";
-        if(c.project.previewMode === "live") setInteractLabel(c, ctrl.group, "loading");
+        updateCardInteractLabel(c, ctrl.group);
       }
       c.el.classList.remove("is-interactive");
     });
@@ -236,7 +240,7 @@
     iframe.src = active.project.previewUrl || active.project.url;
     iframe.loading = "lazy";
     iframe.title = active.project.name + " live preview";
-    iframe.sandbox = SANDBOX;
+    iframe.sandbox = active.project.sandbox || DEFAULT_SANDBOX;
     iframe.referrerPolicy = "no-referrer";
     iframe.setAttribute("tabindex", "-1");
     // Most preview sites are real external pages at their own desktop width,
@@ -253,15 +257,21 @@
     function markLoaded(){
       if(active.iframeLoaded) return; // guard against the load+timeout race firing twice
       active.iframeLoaded = true;
+      active.loadFailed = false;
       active.loading.classList.add("is-hidden");
       active.poster.style.opacity = "0";
-      updateInteractAvailability(ctrl, idx);
+      active.el.classList.remove("is-failed");
+      if(state.index[ctrl.group] === idx) updateCardInteractLabel(active, ctrl.group);
     }
     function markFailed(){
       if(active.iframeLoaded) return;
+      active.loadFailed = true;
       active.loading.classList.add("is-hidden");
       active.poster.style.opacity = "1"; // explicit fallback: never leave a broken/blank iframe visible
-      updateInteractAvailability(ctrl, idx);
+      active.el.classList.add("is-failed"); // Open Live stays the only working control
+      console.error("[portfolio] live preview failed to load: " + active.project.name + " (" + (active.project.previewUrl || active.project.url) + ")");
+      if(active.iframeEl){ active.iframeEl.remove(); active.iframeEl = null; }
+      if(state.index[ctrl.group] === idx) updateCardInteractLabel(active, ctrl.group);
     }
 
     // A frame-ancestors/X-Frame-Options block does NOT reliably fire a
@@ -301,46 +311,22 @@
 
   var PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>';
 
-  /* Sets the corner pill's visible content + the real button's accessible
-     name/title for whichever state Interact is currently in. Full descriptive
-     labels are preserved for screen readers even though the visible pill
-     text is always just "Interact" / "Exit". */
-  function setInteractLabel(card, group, state_){
-    var fullInteractLabel = "Interact With Preview: " + card.project.name;
-    if(state_ === "exit"){
-      card.interactPill.className = "portfolio-corner-pill is-exit";
-      card.interactPill.innerHTML = 'Exit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-      card.interactBtn.setAttribute("aria-label", "Exit preview: " + card.project.name);
-      card.interactBtn.title = "";
-      card.interactBtn.disabled = false;
-    } else if(state_ === "loading"){
-      card.interactPill.className = "portfolio-corner-pill";
-      card.interactPill.innerHTML = 'Interact' + PLAY_ICON;
-      card.interactBtn.setAttribute("aria-label", "Loading live preview: " + card.project.name);
-      card.interactBtn.title = "Connecting to the live preview…";
-      card.interactBtn.disabled = true;
-    } else {
-      // "ready" -- normal Interact state
-      card.interactPill.className = "portfolio-corner-pill";
-      card.interactPill.innerHTML = 'Interact' + PLAY_ICON;
-      card.interactBtn.setAttribute("aria-label", fullInteractLabel);
-      card.interactBtn.title = "";
-      card.interactBtn.disabled = false;
+  /* Sets the card's own accessible name/title for whichever interaction
+     state it's in. There's no separate Interact button any more -- the
+     preview itself is the control, so the label lives on the card element
+     (already role="group"/aria-roledescription="slide" from buildCarousel). */
+  function updateCardInteractLabel(card, group, state_){
+    if(card.project.previewMode !== "live"){
+      card.el.title = "";
+      return;
     }
-  }
-
-  /* Interact only becomes usable once the iframe has actually finished
-     loading — never for a fallback poster (the wrapper is display:none for
-     those, see buildCarousel), and shown as a disabled "loading" state
-     while a live project's iframe is still in flight. Never a bare disabled
-     control with no explanation -- the pill still reads "Interact" but the
-     button carries an accessible "loading" label + a non-empty title. */
-  function updateInteractAvailability(ctrl, idx){
-    if(state.index[ctrl.group] !== idx) return; // slide changed while this was pending
-    var card = ctrl.cards[idx];
-    if(card.project.previewMode !== "live") return; // no Interact control exists at all
-    var ready = card.iframeLoaded;
-    setInteractLabel(card, ctrl.group, ready ? "ready" : "loading");
+    if(state_ === "interactive"){
+      card.el.title = "Interacting with " + card.project.name + " — press Escape or tap outside to exit.";
+    } else if(!card.iframeLoaded){
+      card.el.title = "Connecting to the live preview of " + card.project.name + "…";
+    } else {
+      card.el.title = "Tap to interact with " + card.project.name;
+    }
   }
 
   function renderMeta(ctrl){
@@ -369,23 +355,33 @@
     renderMeta(carousels[group]);
   }
 
+  /* Tapping/clicking the preview shield is the ONLY way in -- there is no
+     separate Interact button any more. Removing "is-interactive" restores
+     the shield (portfolio-cover); adding it removes the shield's pointer
+     capture (see the .portfolio-cover CSS: is-interactive sets
+     pointer-events:none on the cover) and hands the gesture to the real
+     iframe underneath. */
   function enterInteraction(group){
     var ctrl = carousels[group];
     var idx = state.index[group];
     var card = ctrl.cards[idx];
-    if(!card.iframeLoaded) return; // Interact is disabled/loading -- nothing to enter yet
+    if(!card.iframeLoaded) return; // nothing loaded yet -- ignore the tap
     card.el.classList.add("is-interactive");
     if(card.iframeEl) card.iframeEl.setAttribute("tabindex", "0");
-    setInteractLabel(card, group, "exit");
+    updateCardInteractLabel(card, group, "interactive");
   }
   function exitInteraction(group){
     var ctrl = carousels[group];
     var idx = state.index[group];
     var card = ctrl.cards[idx];
+    if(!card.el.classList.contains("is-interactive")) return;
     card.el.classList.remove("is-interactive");
     if(card.iframeEl) card.iframeEl.setAttribute("tabindex", "-1");
-    setInteractLabel(card, group, card.iframeLoaded ? "ready" : "loading");
+    updateCardInteractLabel(card, group);
     ctrl.root.focus({ preventScroll: true });
+  }
+  function exitAllInteraction(){
+    GROUPS.forEach(function(g){ exitInteraction(g); });
   }
 
   /* ── Drag / swipe physics: 1:1 tracking, vertical-scroll preserved until axis is clearly horizontal ── */
@@ -393,6 +389,8 @@
     var el = ctrl.root;
     var pointerId = null;
     var moved = 0;
+    var movedTotal = 0; // absolute distance in any direction, for tap-vs-drag detection
+    var downOnCover = false;
 
     function pointerDown(e){
       if(e.target.closest(".portfolio-nav, .portfolio-corner")) return;
@@ -403,6 +401,14 @@
       ctrl.dragAxisLocked = null;
       ctrl.startX = e.clientX; ctrl.startY = e.clientY;
       moved = 0;
+      movedTotal = 0;
+      downOnCover = !!e.target.closest(".portfolio-cover");
+      // Note: el.setPointerCapture below redirects ALL subsequent pointer
+      // events (and the synthesized click) to `el` regardless of where the
+      // pointer physically is, which is why "tap to interact" can't be a
+      // separate click listener on .portfolio-cover -- it has to be
+      // detected here in the same drag gesture, as a release with near-zero
+      // movement that started on the cover (see pointerUp below).
       el.setPointerCapture && el.setPointerCapture(pointerId);
     }
 
@@ -410,6 +416,7 @@
       if(!ctrl.dragging || e.pointerId !== pointerId) return;
       var dx = e.clientX - ctrl.startX;
       var dy = e.clientY - ctrl.startY;
+      movedTotal = Math.max(movedTotal, Math.abs(dx), Math.abs(dy));
 
       if(ctrl.dragAxisLocked === null){
         if(Math.abs(dx) > 6 || Math.abs(dy) > 6){
@@ -433,6 +440,18 @@
       if(!ctrl.dragging || e.pointerId !== pointerId) return;
       ctrl.dragging = false;
       pointerId = null;
+      // A release with negligible movement that started on the shield is a
+      // deliberate tap, not a swipe -- the spec explicitly requires this be
+      // an intentional click/tap, never hover, so the <6px axis-lock
+      // threshold above doubles as the tap-vs-drag distinction here too.
+      if(downOnCover && movedTotal < 6){
+        downOnCover = false;
+        ctrl.currentDX = 0;
+        ctrl.dragAxisLocked = null;
+        enterInteraction(ctrl.group);
+        return;
+      }
+      downOnCover = false;
       if(ctrl.dragAxisLocked === "x"){
         var cardWidth = ctrl.cards[0].el.offsetWidth || 1;
         var threshold = cardWidth * 0.16;
@@ -515,9 +534,24 @@
     idleCb(function(){ idleFired = true; onPerfGateOpen(); });
   }
 
+  /* ── Exit interaction mode from outside the carousel entirely ──
+     Escape always works regardless of which element has focus. A tap/click
+     anywhere outside every .portfolio-card also exits, per spec ("tapping
+     outside the card exits interaction mode"). */
+  function initGlobalExit(){
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape") exitAllInteraction();
+    });
+    document.addEventListener("pointerdown", function(e){
+      if(e.target.closest(".portfolio-card")) return; // inside a card -- its own handlers decide
+      exitAllInteraction();
+    });
+  }
+
   function init(){
     GROUPS.forEach(buildCarousel);
     initPerfGate();
+    initGlobalExit();
     window.addEventListener("resize", function(){
       GROUPS.forEach(function(g){ layout(carousels[g], false); });
     });

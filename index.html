@@ -209,16 +209,19 @@ nav{
 /* Only the small caption label lives here now -- the growth heading,
    supporting copy, and lead form are their own independent #growth-section
    that follows #intro-video-section in the DOM, not part of the pinned
-   scroll-controlled hero. */
+   scroll-controlled hero. Anchored toward the bottom (not centered) so the
+   video sits close to the pinned viewport's lower edge instead of leaving
+   a large empty band beneath it that would show up as dead space the
+   instant the sticky hero releases into #growth-section. */
 .hero{
   position:absolute;
   inset:0;
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-end;
   align-items:center;
   text-align:center;
-  padding:9rem 3rem 4rem;
+  padding:9rem 3rem 2rem;
   z-index:2;
   max-width:1400px;
   margin:0 auto;
@@ -256,6 +259,13 @@ nav{
    the video, using the same .reveal/.visible scroll-in pattern as the
    rest of the page instead of the hero's scroll-progress-gated reveal. ── */
 #growth-section{background:var(--void);position:relative;z-index:1;border-bottom:1px solid var(--border);}
+/* Tightened top padding: combined with the hero's own bottom-anchored
+   video (see .hero justify-content:flex-end above), this keeps the total
+   visible gap between the video and the growth heading in the ~40-72px
+   desktop / ~24-48px mobile range instead of the generic .section's
+   112px/64px top padding, which was the other major contributor to the
+   old full-screen gap. */
+#growth-section > .section{padding-top:2rem;}
 .growth-copy{max-width:680px;margin:0 auto;text-align:center;}
 .growth-copy .big-title{margin-bottom:0;}
 .growth-copy .big-title .accent{color:var(--cyan);}
@@ -722,6 +732,25 @@ nav{
   width:100%;height:100%;
   border:0;display:block;
 }
+/* Mobile autoplay starts muted (required for browsers to allow autoplay at
+   all); this is the visible control that lets the visitor turn sound on.
+   Only shown once the muted-autoplay iframe is actually active. */
+.intro-video-unmute{
+  position:absolute;bottom:14px;right:14px;z-index:5;
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,4,8,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(0,200,255,.4);color:var(--white);
+  cursor:pointer;padding:0;
+  transition:border-color .2s ease,background .2s ease;
+}
+.intro-video-unmute svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;}
+.intro-video-unmute .ico-unmuted{display:none;}
+.intro-video-unmute.is-unmuted .ico-muted{display:none;}
+.intro-video-unmute.is-unmuted .ico-unmuted{display:block;}
+.intro-video-unmute:hover,.intro-video-unmute:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.16);}
+.intro-video-unmute:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+.intro-video-unmute.hide{display:none;}
 /* Accessible fallback link: invisible until it receives keyboard focus, so
    there's no permanent "Watch on YouTube" text under the player, but the
    direct link is still reachable for keyboard users and screen readers. */
@@ -761,9 +790,9 @@ nav{
   background:linear-gradient(180deg,var(--void) 0%,var(--deep) 100%);
 }
 .services-intro{
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;
-  align-items:end;margin-bottom:5rem;
+  max-width:640px;margin:0 auto 3rem;text-align:center;
 }
+.services-intro .sub-text{max-width:640px;margin:0 auto;}
 .services-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -1067,9 +1096,13 @@ footer{
   .nav-hamburger{display:flex;}
   nav .site-logo{max-width:145px;max-height:34px;}
   /* The video is now the hero's only overlay content -- 1.25rem (20px)
-     side padding keeps it within the required 16-24px mobile margins. */
-  .hero{padding:7rem 1.25rem 3rem;}
+     side padding keeps it within the required 16-24px mobile margins.
+     A modest 1.5rem (24px) bottom padding, paired with the growth
+     section's own tightened top padding below, keeps the combined
+     visible gap within the ~24-48px mobile target. */
+  .hero{padding:7rem 1.25rem 1.25rem;}
   .section{padding:4rem 1.5rem;}
+  #growth-section > .section{padding-top:1.25rem;}
   .services-intro,.auto-grid,.contact-grid,.why-grid{grid-template-columns:1fr;gap:2rem;}
   .services-grid,.pricing-grid{grid-template-columns:1fr;}
   .steps-grid{grid-template-columns:1fr 1fr;gap:2rem;}
@@ -1149,16 +1182,22 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 }
 .portfolio-track{
   position:relative;
-  width:100%;height:clamp(260px,32vw,380px);
+  width:100%;height:clamp(320px,44vw,460px);
   display:flex;align-items:center;justify-content:center;
   overflow:visible;
 }
 
-/* ── Individual glass-bubble card ── */
+/* ── Individual glass-bubble card ──
+   Sized from height (the track's own clamp above), width derived via
+   aspect-ratio so the preview reads as a tall object rather than the old
+   wide/short strip -- 1/1 gives more of each embedded site's vertical
+   content without cropping or stretching the iframe (see the iframe's
+   uniform 250%/.4 scale below, which is aspect-ratio agnostic). */
 .portfolio-card{
   position:absolute;
-  width:min(880px,72vw);
   height:100%;
+  aspect-ratio:1/1;
+  max-width:min(460px,72vw);
   border-radius:28px;
   will-change:transform,opacity,filter;
   transform:translate3d(0,0,0);
@@ -1346,8 +1385,8 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 .portfolio-nav-prev{left:.5rem;}
 .portfolio-nav-next{right:.5rem;}
 @media(min-width:1150px){
-  .portfolio-nav-prev{left:calc(50% - min(440px,36vw) - 54px);}
-  .portfolio-nav-next{right:calc(50% - min(440px,36vw) - 54px);}
+  .portfolio-nav-prev{left:calc(50% - min(230px,36vw) - 54px);}
+  .portfolio-nav-next{right:calc(50% - min(230px,36vw) - 54px);}
 }
 
 /* ── Meta row: just the project name, centered under the preview ── */
@@ -1367,8 +1406,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 @media(max-width:900px){
   .portfolio-intro{margin-bottom:1rem;}
   .portfolio-group-apps{margin-top:1.1rem;}
-  .portfolio-track{height:clamp(190px,58vw,280px);}
-  .portfolio-card{width:88vw;border-radius:20px;}
+  /* Portrait on mobile: 4/5 ratio, with side margins so the card reads as
+     a distinct floating object instead of touching the viewport edges
+     (target ~16-24px visible gap on each side). */
+  .portfolio-track{height:clamp(360px,108vw,460px);}
+  .portfolio-card{height:100%;aspect-ratio:4/5;max-width:calc(100vw - 40px);width:auto;border-radius:20px;}
   .portfolio-nav{width:32px;height:32px;}
   .portfolio-nav svg{width:14px;height:14px;}
   .portfolio-nav-prev{left:.35rem;}
@@ -1509,6 +1551,14 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
                     </span>
                   </button>
                 </div>
+                <!-- Sibling of #introVideoFrame, not inside it: loadVideo()
+                     clears and replaces the frame's own contents when the
+                     real iframe loads, which would wipe out this control
+                     too if it lived inside that container. -->
+                <button type="button" class="intro-video-unmute hide" id="introVideoUnmuteBtn" aria-pressed="true" aria-label="Unmute video">
+                  <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
+                  <svg class="ico-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
+                </button>
                 <p class="intro-video-fallback"><a id="introVideoFallbackLink" class="sr-only-focusable" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
               </div>
             </div>
@@ -1691,8 +1741,10 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 <!-- HOW IT WORKS -->
 <div id="how" style="padding:0;">
 <div class="section">
-  <p class="eyebrow reveal">The Process</p>
-  <h2 class="big-title reveal">From Zero to <span>Automated</span></h2>
+  <div style="max-width:640px;margin:0 auto 1.5rem;text-align:center;">
+    <p class="eyebrow reveal" style="justify-content:center;">The Process</p>
+    <h2 class="big-title reveal" style="margin-bottom:0;">From Zero to <span>Automated</span></h2>
+  </div>
   <div class="steps-grid reveal">
     <div class="step">
       <div class="step-num">01</div>
@@ -1721,10 +1773,12 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 <!-- AUTOMATION SHOWCASE -->
 <div id="automation" style="background:var(--void);border-top:1px solid var(--border);padding:0;">
 <div class="section">
+  <div style="max-width:640px;margin:0 auto 3rem;text-align:center;">
+    <p class="eyebrow reveal" style="justify-content:center;">How the Automation Works</p>
+    <h2 class="big-title reveal" style="margin-bottom:0;">Fast, Consistent<br><span>Follow-Up</span></h2>
+  </div>
   <div class="auto-grid">
     <div>
-      <p class="eyebrow reveal">How the Automation Works</p>
-      <h2 class="big-title reveal">Fast, Consistent<br><span>Follow-Up</span></h2>
       <div class="auto-list reveal">
         <div class="auto-item">
           <div class="auto-icon"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M13 3L5.5 13H11l-1 8 8.5-11H13z"/></svg></div>
@@ -1889,11 +1943,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
 <!-- PROOF -->
 <div id="proof" style="padding:0;border-top:1px solid var(--border);">
-<div class="section">
-  <p class="eyebrow reveal">Proof</p>
+<div class="section" style="text-align:center;">
+  <p class="eyebrow reveal" style="justify-content:center;">Proof</p>
   <h2 class="big-title reveal">See the Work, <span>Not Just Claims</span></h2>
-  <p class="sub-text reveal" style="max-width:640px;">We'd rather show you real work than post invented reviews. Browse example builds in our portfolio, and ask us for client references and a live walkthrough on your call.</p>
-  <div class="reveal" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+  <p class="sub-text reveal" style="max-width:640px;margin:0 auto;">We'd rather show you real work than post invented reviews. Browse example builds in our portfolio, and ask us for client references and a live walkthrough on your call.</p>
+  <div class="reveal" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;justify-content:center;">
     <a href="/work/" class="btn-primary">View Our Work →</a>
     <a href="/contact/" class="btn-ghost">Ask for References</a>
   </div>
@@ -1905,8 +1959,8 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 <div class="section">
   <div class="contact-grid">
     <div>
-      <p class="eyebrow reveal">Contact</p>
-      <h2 class="big-title reveal">Let's Build Your<br><span>System</span></h2>
+      <p class="eyebrow reveal" style="justify-content:center;text-align:center;">Contact</p>
+      <h2 class="big-title reveal" style="text-align:center;">Let's Build Your<br><span>System</span></h2>
       <p class="sub-text reveal">Tell us what your business does and what's slowing you down. We'll reply within one business day with a straight assessment — not a sales pitch.</p>
       <div class="contact-details reveal">
         <div class="cd-item"><div class="cd-icon" aria-hidden="true"><svg class="ss-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></div> <a href="mailto:info@secretsystems.io" style="color:var(--text);text-decoration:none;">info@secretsystems.io</a></div>
@@ -2129,6 +2183,12 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     var playBtn = document.getElementById('introVideoPlayBtn');
     var thumb = document.getElementById('introVideoThumb');
     var fallbackLink = document.getElementById('introVideoFallbackLink');
+    var unmuteBtn = document.getElementById('introVideoUnmuteBtn');
+    /* Looked up directly here (not via the shared `heroContent` var the
+       vault animation block below declares) so this works regardless of
+       script execution order -- this IIFE runs before that block assigns
+       its own copy. */
+    var heroContentEl = document.getElementById('hero-content');
     if (!card || !frame || !playBtn || !thumb) return;
 
     var watchUrl = 'https://www.youtube.com/watch?v=' + video.id;
@@ -2142,25 +2202,178 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     if (fallbackLink) fallbackLink.href = watchUrl;
 
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var mobileMq = window.matchMedia && window.matchMedia('(max-width:900px)');
+    var iframeEl = null;
+    var isMuted = false;
 
-    function loadVideo(){
+    /* postMessage command helper -- talks to the already-loaded YouTube
+       iframe without pulling in the full IFrame Player API script. Requires
+       enablejsapi=1 on the embed URL.
+
+       The embedded player only accepts 'command' messages once its own
+       script has finished initializing; sending one earlier is harmless to
+       playback but logs a benign "isExternalMethodAvailable is not a
+       function" warning from YouTube's own code. Queue commands sent before
+       that point and flush them once the player's ready signal arrives
+       (see the window 'message' listener below), instead of guessing a
+       fixed delay. */
+    var playerReady = false;
+    var pendingCommands = [];
+
+    function ytCommand(func, args){
+      if (!iframeEl || !iframeEl.contentWindow) return;
+      if (!playerReady){ pendingCommands.push([func, args]); return; }
+      try {
+        iframeEl.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: args || [] }), '*');
+      } catch(e){}
+    }
+
+    window.addEventListener('message', function(e){
+      if (!iframeEl || e.source !== iframeEl.contentWindow) return;
+      var data = e.data;
+      try { if (typeof data === 'string') data = JSON.parse(data); } catch(e2){ return; }
+      if (!data || (data.event !== 'onReady' && data.event !== 'initialDelivery')) return;
+      if (playerReady) return;
+      playerReady = true;
+      pendingCommands.forEach(function(cmd){ ytCommand(cmd[0], cmd[1]); });
+      pendingCommands = [];
+    });
+
+    /* Builds and inserts the real iframe once, in either mode:
+       - explicit (Play tapped/clicked): unmuted autoplay, user-initiated.
+       - auto (mobile, video stage ≥60% visible): muted autoplay, so the
+         browser's autoplay policy allows it without a gesture. */
+    function loadVideo(opts){
+      opts = opts || {};
       if (frame.dataset.loaded) return;
       frame.dataset.loaded = '1';
+      isMuted = !!opts.muted;
       var iframe = document.createElement('iframe');
+      var originParam = '';
+      try { originParam = '&origin=' + encodeURIComponent(window.location.origin); } catch(e){}
       iframe.src = 'https://www.youtube-nocookie.com/embed/' + video.id +
-        '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+        '?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1' + originParam +
+        (opts.muted ? '&mute=1' : '');
       iframe.title = video.title;
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       iframe.allowFullscreen = true;
-      iframe.loading = 'eager'; /* only created after an explicit click, so eager here is correct */
+      iframe.loading = 'eager'; /* only created once the facade is actually replaced, so eager here is correct */
       iframe.onerror = function(){
         frame.innerHTML = '<div class="intro-video-fallback" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)"><a href="' +
           watchUrl + '" target="_blank" rel="noopener" style="color:var(--cyan)">Watch on YouTube ↗</a></div>';
       };
+      playerReady = false;
+      pendingCommands = [];
+      /* "listening" tells the embedded player an external script wants
+         updates -- it responds with 'onReady'/'initialDelivery' once its
+         own script has actually finished initializing, which is what
+         flips playerReady above and flushes any queued commands. */
+      iframe.addEventListener('load', function(){
+        try { iframe.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: video.id }), '*'); } catch(e){}
+        /* Fallback in case the player never posts an onReady/initialDelivery
+           message back (seen on some embed variants) -- without this, a
+           queued mute/pause/play command would wait forever. */
+        setTimeout(function(){
+          if (playerReady) return;
+          playerReady = true;
+          pendingCommands.forEach(function(cmd){ ytCommand(cmd[0], cmd[1]); });
+          pendingCommands = [];
+        }, 1200);
+      });
       frame.innerHTML = '';
       frame.appendChild(iframe);
+      iframeEl = iframe;
+      if (unmuteBtn){
+        if (opts.muted){
+          unmuteBtn.classList.remove('hide', 'is-unmuted');
+          unmuteBtn.setAttribute('aria-pressed', 'true');
+          unmuteBtn.setAttribute('aria-label', 'Unmute video');
+        } else {
+          unmuteBtn.classList.add('hide');
+        }
+      }
     }
-    playBtn.addEventListener('click', loadVideo);
+
+    playBtn.addEventListener('click', function(){ loadVideo({ muted: false }); });
+
+    if (unmuteBtn){
+      unmuteBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if (isMuted){
+          ytCommand('unMute');
+          ytCommand('setVolume', [100]);
+          isMuted = false;
+          unmuteBtn.classList.add('is-unmuted');
+          unmuteBtn.setAttribute('aria-pressed', 'false');
+          unmuteBtn.setAttribute('aria-label', 'Mute video');
+        } else {
+          ytCommand('mute');
+          isMuted = true;
+          unmuteBtn.classList.remove('is-unmuted');
+          unmuteBtn.setAttribute('aria-pressed', 'true');
+          unmuteBtn.setAttribute('aria-label', 'Unmute video');
+        }
+      });
+    }
+
+    /* ── Mobile auto-load + muted autoplay ──
+       Only on mobile (desktop keeps the deliberate click-to-load facade).
+       Loads the real iframe -- never a GIF or fake preview -- once the
+       video stage is BOTH substantially (>=60%) on screen AND actually
+       revealed (heroContent has .text-visible -- the same scroll-progress
+       gate that fades the video facade in). The video's DOM position never
+       moves during the pin, so on a fresh load it already sits inside the
+       observer's geometric bounds at opacity:0 -- checking .text-visible
+       too is what stops it from fetching while still off-stage / far below
+       the meaningful fold. A MutationObserver on that class (not just the
+       IntersectionObserver's own entry events) catches the moment reveal
+       happens while already geometrically intersecting, so the video isn't
+       stuck waiting for a scroll event that never comes once already
+       in view. If the browser still blocks autoplay despite mute, the real
+       Play button stays live on top of the thumbnail (loadVideo() is a
+       no-op once frame.dataset.loaded is set, so a stalled auto-attempt
+       never double-loads on a later manual tap -- the iframe itself is
+       already there and playable). Pausing on scroll-away uses YouTube's
+       postMessage API rather than tearing the iframe down, so resuming
+       doesn't need a second network fetch. */
+    if (mobileMq && mobileMq.matches && !reduceMotion){
+      var pauseTimer = null;
+      var isIntersecting = false;
+
+      function isRevealed(){
+        return heroContentEl.classList.contains('text-visible');
+      }
+
+      function maybeActivate(){
+        if (!isIntersecting || !isRevealed()) return;
+        if (pauseTimer){ clearTimeout(pauseTimer); pauseTimer = null; }
+        if (!frame.dataset.loaded){
+          loadVideo({ muted: true });
+        } else {
+          ytCommand('playVideo');
+        }
+      }
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          isIntersecting = entry.isIntersecting;
+          if (isIntersecting){
+            maybeActivate();
+          } else if (frame.dataset.loaded) {
+            /* give a short grace period (fast scroll-past shouldn't pause
+               instantly) before actually pausing playback that's left the
+               viewport for a meaningful period. */
+            pauseTimer = setTimeout(function(){ ytCommand('pauseVideo'); }, 1500);
+          }
+        });
+      }, { threshold: 0.6 });
+      io.observe(card);
+
+      if (window.MutationObserver){
+        var revealObs = new MutationObserver(function(){ maybeActivate(); });
+        revealObs.observe(heroContentEl, { attributes: true, attributeFilter: ['class'] });
+      }
+    }
   })();
 
   /* ── NAV HIGHLIGHT ── */
@@ -2175,10 +2388,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
   var TOTAL_FRAMES  = 145;
   var FRAME_PREFIX  = 'frames/ezgif-frame-';
-  var HERO_HOLD_PX  = 230;    /* after frames hit the final frame, hold + scroll this far before the video reveals */
-  var POST_REVEAL_HOLD_PX = 260; /* after the video reveals, hold this much further before the sticky hero releases,
-                                     so the video is stably visible (not a single-frame flash) before it scrolls
-                                     into normal flow with the next section */
+  var HERO_HOLD_PX  = 100;    /* after frames hit the final frame, hold + scroll this far before the video reveals --
+                                  sized to one ordinary wheel notch / one short swipe (target ~60-140px), not
+                                  multiple scroll movements */
+  var POST_REVEAL_HOLD_PX = 60; /* after the video reveals, hold this much further before the sticky hero releases --
+                                    just enough to avoid a single-frame flash, not a long dead-scroll stage */
   var SPEED_FACTOR  = 0.75;
   var WATERMARK_CROP= 0.08;   /* crop the bottom strip of each source frame so the generator watermark never draws */
 

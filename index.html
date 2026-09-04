@@ -711,16 +711,20 @@ nav{
 .intro-video-el::-webkit-media-controls-enclosure{display:none !important;}
 
 /* ── Custom controls ──
-   Compact bar (play/pause + mute) pinned to the lower-right, well clear of
-   burned-in caption space at the bottom of frame. Fades out ~1s after
-   playback starts (JS toggles .is-idle), reappears on hover/focus/tap. */
+   Play/pause sits in the lower-LEFT corner, mute/unmute in the lower-RIGHT
+   -- deliberately split to opposite corners (not grouped together) so
+   neither button sits over the center-bottom caption area, which is where
+   burned-in subtitles run. Both fade out ~1s after playback starts (JS
+   toggles .is-idle on the shared .intro-video-frame), reappear together on
+   hover/focus/tap. Identical size/inset on both sides for visual balance. */
 .intro-video-controls{
-  position:absolute;bottom:14px;right:14px;z-index:5;
-  display:flex;gap:8px;
+  position:absolute;z-index:5;
   opacity:1;visibility:visible;
   transition:opacity .35s ease;
   pointer-events:auto;
 }
+.intro-video-controls-left{bottom:14px;left:14px;}
+.intro-video-controls-right{bottom:14px;right:14px;}
 .intro-video-frame.is-idle .intro-video-controls{
   opacity:0;visibility:hidden;
   transition:opacity .35s ease,visibility 0s linear .35s;
@@ -732,7 +736,7 @@ nav{
   transition:opacity .2s ease;
 }
 .intro-video-btn{
-  width:38px;height:38px;min-width:44px;min-height:44px;border-radius:50%;
+  width:44px;height:44px;min-width:44px;min-height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:rgba(2,4,8,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border:1px solid rgba(0,200,255,.4);color:var(--white);
@@ -772,29 +776,51 @@ nav{
 .intro-video-fallback a{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:.8rem;}
 .intro-video-fallback.hide{display:none;}
 
-/* ── Floating assistant bubble ──
-   Fixed, bottom-left (chat widgets conventionally live bottom-right, so
-   this deliberately avoids that corner). Hidden/inert until JS adds
-   .is-visible once the Selected Work cards section enters the viewport --
-   see the IntersectionObserver on #portfolioCardsStartSentinel below. */
+/* ── Floating project-explainer bubble ──
+   One bubble element, repositioned bottom-left or bottom-right and its
+   video source swapped as the visitor's active project section changes
+   (see the projectExplainers config + IntersectionObserver below) --
+   never multiple stacked bubbles. Hidden/inert until JS adds .is-visible
+   once the first project section enters the viewport.
+
+   Right-side placement sits higher off the bottom edge than left (72px
+   vs 16px) to leave clear space above a bottom-right chat widget; adjust
+   --explainer-right-bottom if a real chat widget's actual height differs. */
+:root{ --explainer-right-bottom: 88px; }
 .floating-assistant{
   position:fixed;
-  left:max(16px, env(safe-area-inset-left));
   bottom:max(16px, env(safe-area-inset-bottom));
+  left:max(16px, env(safe-area-inset-left));
+  right:auto;
   z-index:40; /* above page content, but not fighting a chat widget's own stacking */
   width:160px;height:160px;
   opacity:0;visibility:hidden;pointer-events:none;
   transform:translateY(10px) scale(.82);
-  transition:opacity .32s cubic-bezier(.22,.9,.32,1),transform .32s cubic-bezier(.22,.9,.32,1),visibility 0s linear .32s;
+  transition:opacity .26s cubic-bezier(.22,.9,.32,1),transform .26s cubic-bezier(.22,.9,.32,1),left .26s cubic-bezier(.22,.9,.32,1),right .26s cubic-bezier(.22,.9,.32,1),bottom .26s cubic-bezier(.22,.9,.32,1),visibility 0s linear .26s;
+}
+.floating-assistant.side-right{
+  left:auto;
+  right:max(16px, env(safe-area-inset-right));
+  bottom:max(var(--explainer-right-bottom), calc(env(safe-area-inset-bottom) + var(--explainer-right-bottom) - 16px));
 }
 .floating-assistant.is-visible{
   opacity:1;visibility:visible;pointer-events:auto;
   transform:translateY(0) scale(1);
-  transition:opacity .32s cubic-bezier(.22,.9,.32,1),transform .32s cubic-bezier(.22,.9,.32,1);
+  transition:opacity .26s cubic-bezier(.22,.9,.32,1),transform .26s cubic-bezier(.22,.9,.32,1),left .26s cubic-bezier(.22,.9,.32,1),right .26s cubic-bezier(.22,.9,.32,1),bottom .26s cubic-bezier(.22,.9,.32,1);
+}
+/* .is-switching plays only the brief exit half of a project-to-project
+   transition (see goTo()/settleTransition() in JS) -- content is swapped
+   and the side class flips while opacity is at 0, then .is-visible
+   re-adds to play the entrance from the new side, so the bubble never
+   visibly teleports. */
+.floating-assistant.is-switching{
+  opacity:0;transform:translateY(6px) scale(.88);
+  transition:opacity .18s ease,transform .18s ease;
 }
 @media(prefers-reduced-motion:reduce){
-  .floating-assistant{transition:opacity .2s ease;transform:none;}
+  .floating-assistant{transition:opacity .15s ease,left 0s,right 0s,bottom 0s;transform:none;}
   .floating-assistant.is-visible{transform:none;}
+  .floating-assistant.is-switching{transform:none;transition:opacity .12s ease;}
 }
 .floating-assistant-circle{
   position:relative;
@@ -1688,13 +1714,17 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
                   </video>
                   <!-- Compact custom controls -- deliberately not the
                        browser's native control bar (which would show a
-                       permanent timeline/fullscreen/etc). Fade logic lives
-                       in the script below. -->
-                  <div class="intro-video-controls" id="introVideoControls">
+                       permanent timeline/fullscreen/etc). Split across the
+                       lower-left (play/pause) and lower-right (mute) so
+                       neither sits over the center-bottom caption area.
+                       Fade logic lives in the script below. -->
+                  <div class="intro-video-controls intro-video-controls-left" id="introVideoControlsLeft">
                     <button type="button" class="intro-video-btn" id="introVideoPlayPause" aria-label="Pause video">
                       <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
                       <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
                     </button>
+                  </div>
+                  <div class="intro-video-controls intro-video-controls-right" id="introVideoControlsRight">
                     <button type="button" class="intro-video-btn" id="introVideoMute" aria-label="Unmute video" aria-pressed="true">
                       <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
                       <svg class="ico-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
@@ -1754,13 +1784,6 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <div class="portfolio-intro reveal">
       <h2 class="big-title" id="portfolio-heading">Selected <span>Work</span></h2>
     </div>
-
-    <!-- Sentinel: marks the beginning of the Selected Work / website-and-app
-         cards section (right before the first carousel). The floating
-         assistant bubble's IntersectionObserver watches this element (not a
-         hardcoded scroll number) so it appears as soon as the cards enter
-         the viewport, not after the visitor has scrolled past them. -->
-    <div id="portfolioCardsStartSentinel" aria-hidden="true" style="height:1px;"></div>
 
     <!-- Websites panel -->
     <div class="portfolio-group">
@@ -2215,12 +2238,12 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   <span>Built in Louisiana</span>
 </div>
 
-<!-- Floating assistant bubble -- fixed, bottom-left. Hidden until the
-     visitor scrolls past the Apps & Systems portfolio cards (see
-     #appsSystemsEndSentinel). Silent looping white-background avatar,
-     never the technology-background main video. -->
+<!-- Floating project-explainer bubble -- one reusable element, repositioned
+     left/right and its video source swapped as the visitor's active
+     project section changes (see the projectExplainers config in the
+     script below). Never the technology-background main video. -->
 <div class="floating-assistant" id="floatingAssistant" aria-hidden="true">
-  <div class="floating-assistant-circle" id="floatingAssistantCircle" role="group" aria-label="Secret Systems assistant preview" tabindex="0">
+  <div class="floating-assistant-circle" id="floatingAssistantCircle" role="group" aria-label="Secret Systems project explainer" tabindex="0">
     <video
       id="floatingAssistantVideo"
       class="floating-assistant-video"
@@ -2378,7 +2401,6 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     var frame = document.getElementById('introVideoFrame');
     var videoEl = document.getElementById('introVideoEl');
     var sourceEl = videoEl ? videoEl.querySelector('source') : null;
-    var controls = document.getElementById('introVideoControls');
     var playPauseBtn = document.getElementById('introVideoPlayPause');
     var muteBtn = document.getElementById('introVideoMute');
     var replayBtn = document.getElementById('introVideoReplay');
@@ -2611,19 +2633,47 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     });
   })();
 
-  /* ── FLOATING ASSISTANT BUBBLE ──
-     Silent, looping, circular preview of the white-background avatar video
-     -- fully independent from the main technology-background player above.
-     Triggered by a sentinel placed at the BEGINNING of the Selected Work
-     cards section (not a hardcoded scroll offset), so the bubble appears
-     as soon as the cards enter the viewport rather than after the visitor
-     has scrolled all the way past them. Lazy-loaded: the MP4 <source>
-     stays empty until the bubble is about to become visible. */
-  (function(){
-    var VIDEO_SRC = '/assets/video/secret-systems-floating-assistant.mp4';
-    var CLOSED_KEY = 'ss_floating_assistant_closed';
+  /* ── PROJECT EXPLAINER BUBBLE SYSTEM ──
+     One reusable circular bubble whose video source, side (left/right),
+     and accessible label swap as the visitor's active project section
+     changes. To add a real per-project video later, edit ONLY the
+     videoSrc (and optionally label) fields below -- the observer/swap
+     logic never needs to change.
 
-    var sentinel = document.getElementById('portfolioCardsStartSentinel');
+     Section order matches the real page top-to-bottom (Websites cards,
+     Apps & Systems cards, the Services section, then "From Zero to
+     Automated"), alternating sides starting left per project 1/2/3/4. */
+  var projectExplainers = [
+    {
+      sectionId: 'portfolio-panel-websites',
+      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
+      label: 'Websites explainer',
+      side: 'left'
+    },
+    {
+      sectionId: 'portfolio-panel-apps',
+      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
+      label: 'Apps & Systems explainer',
+      side: 'right'
+    },
+    {
+      sectionId: 'services-section',
+      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
+      label: 'Websites, Software & Systems explainer',
+      side: 'left'
+    },
+    {
+      sectionId: 'how',
+      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
+      label: 'From Zero to Automated explainer',
+      side: 'right'
+    }
+  ];
+
+  (function(){
+    var CLOSED_KEY = 'ss_floating_assistant_closed';
+    var SWITCH_MS = 220; /* exit-half of the transition; matches the CSS .is-switching duration */
+
     var bubble = document.getElementById('floatingAssistant');
     var circle = document.getElementById('floatingAssistantCircle');
     var videoEl = document.getElementById('floatingAssistantVideo');
@@ -2631,7 +2681,15 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     var pauseBtn = document.getElementById('floatingAssistantPause');
     var muteBtn = document.getElementById('floatingAssistantMute');
     var closeBtn = document.getElementById('floatingAssistantClose');
-    if (!sentinel || !bubble || !circle || !videoEl || !sourceEl) return;
+    if (!bubble || !circle || !videoEl || !sourceEl) return;
+
+    /* Resolve each config entry's real DOM element up front; entries whose
+       sectionId doesn't exist on the page are skipped rather than breaking
+       the whole system. */
+    var projects = projectExplainers
+      .map(function(p){ return { config: p, el: document.getElementById(p.sectionId) }; })
+      .filter(function(p){ return !!p.el; });
+    if (!projects.length) return;
 
     var closedThisSession = false;
     try { closedThisSession = sessionStorage.getItem(CLOSED_KEY) === '1'; } catch(e){}
@@ -2640,23 +2698,17 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       return; /* stays closed for the rest of this visit -- no observer needed */
     }
 
-    /* prefers-reduced-motion is handled purely in CSS (see the
-       @media(prefers-reduced-motion:reduce) override on .floating-assistant
-       above, which drops the scale/translateY and just cross-fades) -- the
-       show/hide gating itself is identical either way. */
-
-    var sourceLoaded = false;
-    function loadSource(){
-      if (sourceLoaded) return;
-      sourceLoaded = true;
-      sourceEl.src = VIDEO_SRC;
+    var currentSrc = null;
+    function loadSource(src){
+      if (currentSrc === src) return;
+      currentSrc = src;
+      sourceEl.src = src;
       videoEl.load();
     }
 
     var userPaused = false;
     function playBubble(){
       if (userPaused) return;
-      loadSource();
       var p = videoEl.play();
       if (p && p.catch) p.catch(function(){ /* autoplay blocked -- pause icon stays available */ });
     }
@@ -2665,8 +2717,9 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     }
 
     /* Forcibly mutes the bubble (called by the coordinator when the main
-       video is unmuted, and always on first appearance regardless of the
-       main video's prior state). Never restarts on a forced mute. */
+       video is unmuted, and always on every appearance/project-switch
+       regardless of the main video's or a prior project's audio state).
+       Never restarts on a forced mute. */
     function forceMute(){
       videoEl.muted = true;
       updateMuteUi();
@@ -2681,41 +2734,106 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       }
     }
 
-    /* Once shown, the bubble stays visible/fixed for the rest of the page
-       -- isPastStart only ever flips back to false if the visitor scrolls
-       back up above the start of the cards section (never by scrolling
-       further down past some *other* boundary). */
-    var isPastStart = false;
-    function updateVisibility(){
-      bubble.classList.toggle('is-visible', isPastStart);
-      bubble.setAttribute('aria-hidden', isPastStart ? 'false' : 'true');
-      if (isPastStart){
-        forceMute(); /* always enters muted, even if the main video was audible a moment ago */
-        playBubble();
-      } else {
-        pauseBubble(); /* don't keep consuming resources while hidden */
+    /* ── Active-project tracking ──
+       A single IntersectionObserver watches every project section at once
+       and keeps a live visibleRatio per section; the active project is
+       whichever currently occupies the largest visible area (not just
+       "first one that started intersecting"), which is what keeps the
+       choice stable while two sections briefly overlap at a boundary. */
+    var visibleRatio = new Array(projects.length).fill(0);
+    var activeIndex = -1;
+    var switching = false;
+    var pendingIndex = null;
+
+    function pickActiveIndex(){
+      var best = -1, bestRatio = 0;
+      for (var i = 0; i < visibleRatio.length; i++){
+        if (visibleRatio[i] > bestRatio){ bestRatio = visibleRatio[i]; best = i; }
       }
+      return bestRatio > 0.01 ? best : -1;
     }
 
-    /* threshold:0 with no rootMargin fires as soon as any part of the 1px
-       sentinel crosses the viewport edge in either direction -- exact and
-       flicker-free, since IntersectionObserver only calls back on an
-       actual state change, never repeatedly while stationary near the
-       boundary. */
-    var sentinelIo = new IntersectionObserver(function(entries){
+    function applyProject(index){
+      var project = projects[index].config;
+      bubble.classList.remove('side-left', 'side-right');
+      bubble.classList.add(project.side === 'right' ? 'side-right' : 'side-left');
+      circle.setAttribute('aria-label', project.label || 'Secret Systems project explainer');
+      loadSource(project.videoSrc);
+      forceMute(); /* every new/replacement bubble always starts muted */
+      userPaused = false;
+      if (pauseBtn){
+        pauseBtn.classList.remove('is-paused');
+        pauseBtn.setAttribute('aria-label', 'Pause assistant video');
+      }
+      playBubble();
+    }
+
+    /* Applies whatever `pendingIndex` currently holds (a project index, or
+       -1 for "hidden") once the exit transition finishes -- reading it
+       fresh at that moment (rather than trusting whatever was requested
+       when the timer was started) so a later request that arrives mid-
+       transition (e.g. "actually, hide it" right after "switch to project
+       2") is never silently dropped. */
+    function settleTransition(){
+      var index = pendingIndex;
+      pendingIndex = null;
+      switching = false;
+      activeIndex = index;
+      if (index === -1){
+        bubble.classList.remove('is-switching');
+        bubble.setAttribute('aria-hidden', 'true');
+        pauseBubble(); /* don't keep consuming resources while hidden */
+        return;
+      }
+      applyProject(index);
+      bubble.classList.remove('is-switching');
+      bubble.classList.add('is-visible');
+      bubble.setAttribute('aria-hidden', 'false');
+    }
+
+    /* Begins (or redirects an in-flight) transition toward `index`
+       (a project index, or -1 to hide). The bubble fades/scales out,
+       swaps content/side (or just hides) while invisible, then fades back
+       in -- never a visible teleport across the screen. Reduced-motion
+       collapses this to an immediate, non-animated state change. */
+    function goTo(index){
+      if (index === activeIndex && !switching) return;
+      pendingIndex = index;
+
+      if (ssReduce){
+        switching = false;
+        settleTransition();
+        return;
+      }
+
+      if (switching) return; /* already fading out; settleTransition() will read the latest pendingIndex */
+
+      switching = true;
+      bubble.classList.add('is-switching');
+      bubble.classList.remove('is-visible');
+      setTimeout(settleTransition, SWITCH_MS);
+    }
+
+    function updateActive(){
+      var next = pickActiveIndex();
+      if (next !== activeIndex || (next !== pendingIndex && switching)) goTo(next);
+    }
+
+    /* Many small thresholds (not just 0/1) so intersectionRatio updates
+       smoothly as a section scrolls through, giving pickActiveIndex() a
+       genuinely comparable "how much of each section is visible right
+       now" reading instead of a single coarse in/out flag -- this is
+       what prevents flicker when two sections partially overlap. */
+    var THRESHOLDS = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1];
+    var projectIo = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting){
-          isPastStart = true; /* sentinel now in view -- cards section reached */
-        } else {
-          /* Not intersecting: above the viewport (top < 0) means scrolled
-             past going down -- still past; below the viewport (top > 0)
-             means scrolled back up above the section -- not past. */
-          isPastStart = entry.boundingClientRect.top < 0;
-        }
-        updateVisibility();
+        var idx = projects.findIndex(function(p){ return p.el === entry.target; });
+        if (idx === -1) return;
+        visibleRatio[idx] = entry.isIntersecting ? entry.intersectionRatio : 0;
       });
-    }, { threshold: 0, rootMargin: '0px' });
-    sentinelIo.observe(sentinel);
+      updateActive();
+    }, { threshold: THRESHOLDS });
+    projects.forEach(function(p){ projectIo.observe(p.el); });
 
     if (pauseBtn){
       pauseBtn.addEventListener('click', function(e){
@@ -2740,7 +2858,6 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         var turningOn = videoEl.muted;
         if (turningOn){
           SSVideoCoord.notifyUnmuted(forceMute); /* silence the main video first */
-          loadSource();
           videoEl.muted = false;
           videoEl.volume = 1;
           videoEl.currentTime = 0;
@@ -2757,11 +2874,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       closeBtn.addEventListener('click', function(e){
         e.stopPropagation();
         pauseBubble();
-        bubble.classList.remove('is-visible');
+        bubble.classList.remove('is-visible', 'is-switching');
         bubble.classList.add('is-closed');
         bubble.setAttribute('aria-hidden', 'true');
         try { sessionStorage.setItem(CLOSED_KEY, '1'); } catch(err){}
-        sentinelIo.disconnect();
+        projectIo.disconnect();
       });
     }
 

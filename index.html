@@ -775,14 +775,14 @@ nav{
 /* ── Floating assistant bubble ──
    Fixed, bottom-left (chat widgets conventionally live bottom-right, so
    this deliberately avoids that corner). Hidden/inert until JS adds
-   .is-visible once the visitor scrolls past Apps & Systems -- see the
-   IntersectionObserver on #appsSystemsEndSentinel below. */
+   .is-visible once the Selected Work cards section enters the viewport --
+   see the IntersectionObserver on #portfolioCardsStartSentinel below. */
 .floating-assistant{
   position:fixed;
   left:max(16px, env(safe-area-inset-left));
   bottom:max(16px, env(safe-area-inset-bottom));
   z-index:40; /* above page content, but not fighting a chat widget's own stacking */
-  width:112px;height:112px;
+  width:160px;height:160px;
   opacity:0;visibility:hidden;pointer-events:none;
   transform:translateY(10px) scale(.82);
   transition:opacity .32s cubic-bezier(.22,.9,.32,1),transform .32s cubic-bezier(.22,.9,.32,1),visibility 0s linear .32s;
@@ -838,29 +838,52 @@ nav{
   opacity:1;visibility:visible;
 }
 .floating-assistant-btn{
-  width:30px;height:30px;min-width:30px;min-height:30px;border-radius:50%;
+  width:36px;height:36px;min-width:36px;min-height:36px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:rgba(2,4,8,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid rgba(0,200,255,.5);color:var(--white);
   cursor:pointer;padding:0;margin:0;
   transition:border-color .2s ease,background .2s ease;
 }
-.floating-assistant-btn svg{width:14px;height:14px;display:block;}
+.floating-assistant-btn svg{width:16px;height:16px;display:block;}
 .floating-assistant-btn:hover,.floating-assistant-btn:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.22);}
 .floating-assistant-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
 #floatingAssistantPause .ico-pause{display:none;}
 #floatingAssistantPause.is-paused .ico-play{display:block;}
 #floatingAssistantPause.is-paused .ico-pause{display:none;}
 #floatingAssistantPause .ico-play{display:none;}
+#floatingAssistantMute .ico-unmuted{display:none;}
+#floatingAssistantMute.is-unmuted .ico-muted{display:none;}
+#floatingAssistantMute.is-unmuted .ico-unmuted{display:block;}
 .floating-assistant.is-closed{display:none;}
 
+/* Close: a distinct top-right corner badge, deliberately separated from
+   the centered pause/volume row so it can't be mis-tapped as a playback
+   control. Same hover/focus/tap reveal as the rest of the controls. */
+.floating-assistant-close{
+  position:absolute;top:6px;right:6px;z-index:2;
+  width:26px;height:26px;min-width:26px;min-height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(2,4,8,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(0,200,255,.5);color:var(--white);
+  cursor:pointer;padding:0;margin:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .18s ease,border-color .2s ease,background .2s ease;
+}
+.floating-assistant-close svg{width:12px;height:12px;display:block;}
+.floating-assistant-close:hover,.floating-assistant-close:focus-visible{border-color:var(--cyan);background:rgba(0,200,255,.22);}
+.floating-assistant-close:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+.floating-assistant-circle:hover .floating-assistant-close,
+.floating-assistant-circle:focus-within .floating-assistant-close,
+.floating-assistant-circle.show-controls .floating-assistant-close{
+  opacity:1;visibility:visible;
+}
+
 @media(max-width:1150px){
-  .floating-assistant{width:96px;height:96px;}
+  .floating-assistant{width:145px;height:145px;}
 }
 @media(max-width:900px){
-  .floating-assistant{width:80px;height:80px;}
-  .floating-assistant-btn{width:26px;height:26px;min-width:26px;min-height:26px;}
-  .floating-assistant-btn svg{width:12px;height:12px;}
+  .floating-assistant{width:128px;height:128px;}
 }
 
 .sr-only-focusable{
@@ -1513,11 +1536,13 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 @media(max-width:900px){
   .portfolio-intro{margin-bottom:1rem;}
   .portfolio-group-apps{margin-top:1.1rem;}
-  /* Portrait on mobile: 4/5 ratio, with side margins so the card reads as
-     a distinct floating object instead of touching the viewport edges
-     (target ~16-24px visible gap on each side). */
-  .portfolio-track{height:clamp(360px,108vw,460px);}
-  .portfolio-card{height:100%;aspect-ratio:4/5;max-width:calc(100vw - 40px);width:auto;border-radius:20px;}
+  /* Square on mobile too: side margins keep the card reading as a distinct
+     floating object instead of touching the viewport edges (target
+     ~16-24px visible gap on each side). Track height is capped to the same
+     max-width so height:100% never forces the square wider than the
+     viewport allows. */
+  .portfolio-track{height:min(clamp(320px,108vw,460px),calc(100vw - 40px));}
+  .portfolio-card{height:100%;aspect-ratio:1/1;max-width:calc(100vw - 40px);width:auto;border-radius:20px;}
   .portfolio-nav{width:32px;height:32px;}
   .portfolio-nav svg{width:14px;height:14px;}
   .portfolio-nav-prev{left:.35rem;}
@@ -1730,6 +1755,13 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       <h2 class="big-title" id="portfolio-heading">Selected <span>Work</span></h2>
     </div>
 
+    <!-- Sentinel: marks the beginning of the Selected Work / website-and-app
+         cards section (right before the first carousel). The floating
+         assistant bubble's IntersectionObserver watches this element (not a
+         hardcoded scroll number) so it appears as soon as the cards enter
+         the viewport, not after the visitor has scrolled past them. -->
+    <div id="portfolioCardsStartSentinel" aria-hidden="true" style="height:1px;"></div>
+
     <!-- Websites panel -->
     <div class="portfolio-group">
       <p class="portfolio-group-label reveal">Websites</p>
@@ -1755,12 +1787,6 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         <div class="portfolio-meta" data-meta></div>
       </div>
     </div>
-
-    <!-- Sentinel: marks the point immediately after the complete Apps &
-         Systems carousel. The floating assistant bubble's IntersectionObserver
-         watches this element (not a hardcoded scroll number) so the trigger
-         stays accurate if content above the portfolio changes. -->
-    <div id="appsSystemsEndSentinel" aria-hidden="true" style="height:1px;"></div>
 
     <p class="sr-only" aria-live="polite" data-portfolio-announce></p>
   </div>
@@ -2211,10 +2237,18 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
         <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
       </button>
-      <button type="button" class="floating-assistant-btn" id="floatingAssistantClose" aria-label="Close assistant preview">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <!-- Volume control: video always enters muted (browser autoplay
+           policy); sound only ever starts from a deliberate tap here. -->
+      <button type="button" class="floating-assistant-btn" id="floatingAssistantMute" aria-label="Turn video sound on" aria-pressed="true">
+        <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
+        <svg class="ico-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
       </button>
     </div>
+    <!-- Close: a separate corner badge, deliberately not grouped with the
+         playback controls so it can't be mistaken for a volume/pause action. -->
+    <button type="button" class="floating-assistant-close" id="floatingAssistantClose" aria-label="Close assistant preview">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </div>
 
@@ -2310,6 +2344,20 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
   },{threshold:0.12});
   reveals.forEach(function(r){obs.observe(r);});
+
+  /* ── Cross-video audio coordination ──
+     The two videos (main studio player, floating assistant bubble) must
+     never both be audible at once. Each registers a mute() callback here;
+     when one unmutes, it calls notifyUnmuted(itself) and every other
+     registered video gets forcibly muted (with its own UI kept in sync via
+     its own mute() implementation, not by reaching into its DOM directly). */
+  var SSVideoCoord = {
+    muters: [],
+    register: function(muteFn){ this.muters.push(muteFn); },
+    notifyUnmuted: function(exceptFn){
+      this.muters.forEach(function(muteFn){ if (muteFn !== exceptFn) muteFn(); });
+    }
+  };
 
   /* ── FEATURED VIDEO ("Meet the System") ──
      Native <video> player -- no YouTube iframe on the primary homepage
@@ -2484,11 +2532,29 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         }
       });
     }
+    /* Forcibly mutes this video (called by the coordinator when the other
+       video is unmuted) -- never restarts on a forced mute, only a
+       deliberate visitor unmute does that (see the click handler below). */
+    function forceMute(){
+      videoEl.muted = true;
+      updateMuteUi();
+    }
+    SSVideoCoord.register(forceMute);
+
     if (muteBtn){
       muteBtn.addEventListener('click', function(e){
         e.stopPropagation();
-        videoEl.muted = !videoEl.muted;
-        if (!videoEl.muted) videoEl.volume = 1;
+        var turningOn = videoEl.muted; /* about to go from muted -> unmuted */
+        if (turningOn){
+          SSVideoCoord.notifyUnmuted(forceMute); /* silence the other video first */
+          videoEl.muted = false;
+          videoEl.volume = 1;
+          videoEl.currentTime = 0;
+          var p = videoEl.play();
+          if (p && p.catch) p.catch(function(){ /* rejected autoplay-with-sound promise -- UI already reflects intent, no console noise */ });
+        } else {
+          videoEl.muted = true;
+        }
         updateMuteUi();
       });
     }
@@ -2548,20 +2614,22 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
   /* ── FLOATING ASSISTANT BUBBLE ──
      Silent, looping, circular preview of the white-background avatar video
      -- fully independent from the main technology-background player above.
-     Triggered by a sentinel placed immediately after the complete Apps &
-     Systems carousel (not a hardcoded scroll offset), so it stays accurate
-     if content above the portfolio changes. Lazy-loaded: the MP4 <source>
+     Triggered by a sentinel placed at the BEGINNING of the Selected Work
+     cards section (not a hardcoded scroll offset), so the bubble appears
+     as soon as the cards enter the viewport rather than after the visitor
+     has scrolled all the way past them. Lazy-loaded: the MP4 <source>
      stays empty until the bubble is about to become visible. */
   (function(){
     var VIDEO_SRC = '/assets/video/secret-systems-floating-assistant.mp4';
     var CLOSED_KEY = 'ss_floating_assistant_closed';
 
-    var sentinel = document.getElementById('appsSystemsEndSentinel');
+    var sentinel = document.getElementById('portfolioCardsStartSentinel');
     var bubble = document.getElementById('floatingAssistant');
     var circle = document.getElementById('floatingAssistantCircle');
     var videoEl = document.getElementById('floatingAssistantVideo');
     var sourceEl = videoEl ? videoEl.querySelector('source') : null;
     var pauseBtn = document.getElementById('floatingAssistantPause');
+    var muteBtn = document.getElementById('floatingAssistantMute');
     var closeBtn = document.getElementById('floatingAssistantClose');
     if (!sentinel || !bubble || !circle || !videoEl || !sourceEl) return;
 
@@ -2596,27 +2664,53 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       videoEl.pause();
     }
 
-    var isPastApps = false;
+    /* Forcibly mutes the bubble (called by the coordinator when the main
+       video is unmuted, and always on first appearance regardless of the
+       main video's prior state). Never restarts on a forced mute. */
+    function forceMute(){
+      videoEl.muted = true;
+      updateMuteUi();
+    }
+    SSVideoCoord.register(forceMute);
+
+    function updateMuteUi(){
+      if (muteBtn){
+        muteBtn.classList.toggle('is-unmuted', !videoEl.muted);
+        muteBtn.setAttribute('aria-pressed', String(videoEl.muted));
+        muteBtn.setAttribute('aria-label', videoEl.muted ? 'Turn video sound on' : 'Mute video');
+      }
+    }
+
+    /* Once shown, the bubble stays visible/fixed for the rest of the page
+       -- isPastStart only ever flips back to false if the visitor scrolls
+       back up above the start of the cards section (never by scrolling
+       further down past some *other* boundary). */
+    var isPastStart = false;
     function updateVisibility(){
-      bubble.classList.toggle('is-visible', isPastApps);
-      bubble.setAttribute('aria-hidden', isPastApps ? 'false' : 'true');
-      if (isPastApps){
+      bubble.classList.toggle('is-visible', isPastStart);
+      bubble.setAttribute('aria-hidden', isPastStart ? 'false' : 'true');
+      if (isPastStart){
+        forceMute(); /* always enters muted, even if the main video was audible a moment ago */
         playBubble();
       } else {
         pauseBubble(); /* don't keep consuming resources while hidden */
       }
     }
 
+    /* threshold:0 with no rootMargin fires as soon as any part of the 1px
+       sentinel crosses the viewport edge in either direction -- exact and
+       flicker-free, since IntersectionObserver only calls back on an
+       actual state change, never repeatedly while stationary near the
+       boundary. */
     var sentinelIo = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        /* Sentinel sits right after Apps & Systems: once its top has
-           scrolled above the viewport (boundingClientRect.top < 0) while
-           intersecting is false, the visitor has scrolled past it going
-           down; if it's below the viewport, they're still above/at it. */
         if (entry.isIntersecting){
-          isPastApps = false;
+          isPastStart = true; /* sentinel now in view -- cards section reached */
         } else {
-          isPastApps = entry.boundingClientRect.top < 0;
+          /* Not intersecting: above the viewport (top < 0) means scrolled
+             past going down -- still past; below the viewport (top > 0)
+             means scrolled back up above the section -- not past. */
+          isPastStart = entry.boundingClientRect.top < 0;
         }
         updateVisibility();
       });
@@ -2637,6 +2731,25 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
           pauseBtn.setAttribute('aria-label', 'Play assistant video');
           pauseBubble();
         }
+      });
+    }
+
+    if (muteBtn){
+      muteBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var turningOn = videoEl.muted;
+        if (turningOn){
+          SSVideoCoord.notifyUnmuted(forceMute); /* silence the main video first */
+          loadSource();
+          videoEl.muted = false;
+          videoEl.volume = 1;
+          videoEl.currentTime = 0;
+          var p = videoEl.play();
+          if (p && p.catch) p.catch(function(){ /* rejected autoplay-with-sound promise -- UI already reflects intent, no console noise */ });
+        } else {
+          videoEl.muted = true;
+        }
+        updateMuteUi();
       });
     }
 

@@ -201,6 +201,10 @@ nav{
 }
 
 /* ── HERO CONTENT (overlaid) ── */
+/* Only the small caption label lives here now -- the growth heading,
+   supporting copy, and lead form are their own independent #growth-section
+   that follows #intro-video-section in the DOM, not part of the pinned
+   scroll-controlled hero. */
 .hero{
   position:absolute;
   inset:0;
@@ -230,33 +234,25 @@ nav{
 .hero-label::before{
   content:'';display:block;width:30px;height:1px;background:var(--cyan);
 }
-.hero h1{
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2.3rem,4.4vw,4.1rem);line-height:1.08;
-  letter-spacing:-0.02em;
-  opacity:0;
-  transform:translateY(32px);
-  transition:opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
-}
-.hero h1 .accent{color:var(--cyan);}
-.hero-desc{
-  font-size:1.05rem;font-weight:300;color:var(--text);
-  max-width:440px;line-height:1.75;margin-top:1.75rem;margin-bottom:3.25rem;
-  margin-left:auto;margin-right:auto;
-  opacity:0;
-  transform:translateY(28px);
-  transition:opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
-}
-.hero-actions{
-  display:flex;flex-direction:column;align-items:center;
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  pointer-events:all;
-  width:100%;
-}
 /* centered editorial column over the full-bleed canvas backdrop */
 .hero-copy{max-width:680px;width:100%;margin:0 auto;}
+
+/* ── Growth section: heading, supporting copy, and lead form -- an
+   ordinary static section (not pinned/scroll-controlled) that follows
+   the video, using the same .reveal/.visible scroll-in pattern as the
+   rest of the page instead of the hero's scroll-progress-gated reveal. ── */
+#growth-section{background:var(--void);position:relative;z-index:1;border-bottom:1px solid var(--border);}
+.growth-copy{max-width:680px;margin:0 auto;text-align:center;}
+.growth-copy .big-title{margin-bottom:0;}
+.growth-copy .big-title .accent{color:var(--cyan);}
+.growth-desc{
+  font-size:1.05rem;font-weight:300;color:var(--text);
+  max-width:440px;line-height:1.75;margin:1.75rem auto 2.5rem;
+}
+.growth-copy .hero-actions{
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;
+}
 
 /* ── Compact inline lead form (replaces the old large CTA buttons) ──
    Wider than .hero-copy's 680px editorial column so three fields + submit
@@ -307,10 +303,7 @@ nav{
 }
 
 /* hero text revealed state */
-.hero.text-visible .hero-label,
-.hero.text-visible h1,
-.hero.text-visible .hero-desc,
-.hero.text-visible .hero-actions{
+.hero.text-visible .hero-label{
   opacity:1;
   transform:translateY(0);
 }
@@ -355,6 +348,7 @@ nav{
   .hero-form{flex-direction:column;align-items:stretch;gap:.7rem;max-width:340px;}
   .hero-form-field,.hero-form-field-wide{flex:1 1 auto;min-width:0;}
   .hero-form-submit{width:100%;}
+  .growth-desc{margin:1.25rem auto 1.75rem;}
 }
 
 /* ── CINEMATIC LOADER ── */
@@ -1084,7 +1078,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:0
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
   #particle-canvas,#vault-canvas{display:none!important;}
-  .hero .hero-label,.hero h1,.hero-desc,.hero-actions{opacity:1!important;transform:none!important;}
+  .hero .hero-label{opacity:1!important;transform:none!important;}
 }
 /* ── Touch / coarse pointers: native cursor ── */
 @media (hover:none),(pointer:coarse){
@@ -1468,32 +1462,6 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <div class="hero" id="hero-content">
       <div class="hero-copy">
         <p class="hero-label">Louisiana Software &amp; Systems Studio</p>
-        <h1>
-          The Systems<br>
-          Behind Your<br>
-          <span class="accent">Growth.</span>
-        </h1>
-        <p class="hero-desc">
-          The websites, custom software, dashboards, automation, and security that small and mid-size businesses actually run on — built and maintained by one Louisiana team you can reach.
-        </p>
-        <div class="hero-actions">
-          <form class="hero-form" id="ssHeroForm" data-ss-form novalidate aria-label="Start the conversation">
-            <div class="hero-form-field">
-              <label for="hero-name">Name</label>
-              <input type="text" id="hero-name" name="name" autocomplete="name" required/>
-            </div>
-            <div class="hero-form-field">
-              <label for="hero-contact">Phone or email</label>
-              <input type="text" id="hero-contact" name="contact" autocomplete="email" required/>
-            </div>
-            <div class="hero-form-field hero-form-field-wide">
-              <label for="hero-need">What do you want to build or improve?</label>
-              <input type="text" id="hero-need" name="need" required/>
-            </div>
-            <button type="submit" class="hero-form-submit">Start the Conversation</button>
-            <p class="ss-form-status" data-ss-status role="status" aria-live="polite"></p>
-          </form>
-        </div>
       </div>
     </div>
 
@@ -1513,6 +1481,38 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
         </button>
       </div>
       <p class="intro-video-fallback"><a id="introVideoFallbackLink" class="sr-only-focusable" href="https://www.youtube.com/watch?v=-YNaeEOT2DE" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH SECTION -->
+<section id="growth-section" aria-labelledby="growth-heading">
+  <div class="section growth-copy reveal">
+    <h2 class="big-title" id="growth-heading">
+      The Systems<br>
+      Behind Your<br>
+      <span class="accent">Growth.</span>
+    </h2>
+    <p class="sub-text growth-desc">
+      The websites, custom software, dashboards, automation, and security that small and mid-size businesses actually run on — built and maintained by one Louisiana team you can reach.
+    </p>
+    <div class="hero-actions">
+      <form class="hero-form" id="ssHeroForm" data-ss-form novalidate aria-label="Start the conversation">
+        <div class="hero-form-field">
+          <label for="hero-name">Name</label>
+          <input type="text" id="hero-name" name="name" autocomplete="name" required/>
+        </div>
+        <div class="hero-form-field">
+          <label for="hero-contact">Phone or email</label>
+          <input type="text" id="hero-contact" name="contact" autocomplete="email" required/>
+        </div>
+        <div class="hero-form-field hero-form-field-wide">
+          <label for="hero-need">What do you want to build or improve?</label>
+          <input type="text" id="hero-need" name="need" required/>
+        </div>
+        <button type="submit" class="hero-form-submit">Start the Conversation</button>
+        <p class="ss-form-status" data-ss-status role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>

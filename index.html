@@ -48,6 +48,21 @@ body{
   color:var(--white);
   font-family:'Outfit',sans-serif;
   overflow-x:hidden;
+  /* Locks touch-drag panning to vertical only -- prevents the whole page
+     from being draggable left/right on mobile (a real bug: some wide/
+     absolutely-positioned element was letting a horizontal swipe pan the
+     entire viewport). Elements that need horizontal touch gestures of
+     their own (e.g. .portfolio-carousel) already set their own
+     touch-action and are unaffected since touch-action doesn't inherit.
+     NOTE: overflow-x:hidden stays on body only, not html -- adding it to
+     html as well was tried and reverted: it makes html itself an overflow
+     container, which changes how the hero's position:sticky computes its
+     nearest scrolling ancestor in Chromium and broke the scroll-math-based
+     sticky release timing (video-to-growth-heading gap ballooned from
+     ~76px to ~700px+). body's own overflow-x:hidden is sufficient to clip
+     the horizontal overflow either way. */
+  touch-action:pan-y;
+  overscroll-behavior-x:none;
 }
 
 
@@ -1338,7 +1353,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 }
 .portfolio-track{
   position:relative;
-  width:100%;height:clamp(320px,44vw,460px);
+  width:100%;height:clamp(280px,38vw,400px);
   display:flex;align-items:center;justify-content:center;
   overflow:visible;
 }
@@ -1348,12 +1363,15 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
    aspect-ratio so the preview reads as a tall object rather than the old
    wide/short strip -- 1/1 gives more of each embedded site's vertical
    content without cropping or stretching the iframe (see the iframe's
-   uniform 250%/.4 scale below, which is aspect-ratio agnostic). */
+   uniform 250%/.4 scale below, which is aspect-ratio agnostic). Sized a
+   little smaller than the track's own max so the next/previous card is
+   clearly visible peeking in from each side (see portfolio.js layout(),
+   which offsets neighbor cards by a fraction of this width). */
 .portfolio-card{
   position:absolute;
   height:100%;
   aspect-ratio:1/1;
-  max-width:min(460px,72vw);
+  max-width:min(400px,62vw);
   border-radius:28px;
   will-change:transform,opacity,filter;
   transform:translate3d(0,0,0);
@@ -1562,13 +1580,13 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 @media(max-width:900px){
   .portfolio-intro{margin-bottom:1rem;}
   .portfolio-group-apps{margin-top:1.1rem;}
-  /* Square on mobile too: side margins keep the card reading as a distinct
-     floating object instead of touching the viewport edges (target
-     ~16-24px visible gap on each side). Track height is capped to the same
-     max-width so height:100% never forces the square wider than the
-     viewport allows. */
-  .portfolio-track{height:min(clamp(320px,108vw,460px),calc(100vw - 40px));}
-  .portfolio-card{height:100%;aspect-ratio:1/1;max-width:calc(100vw - 40px);width:auto;border-radius:20px;}
+  /* Square on mobile too, sized a little smaller than the viewport (not
+     just a 20px margin) so the next/previous card visibly peeks in from
+     each side instead of being almost entirely off-screen. Track height
+     is capped to the same max-width so height:100% never forces the
+     square wider than the viewport allows. */
+  .portfolio-track{height:min(clamp(260px,88vw,360px),calc(100vw - 88px));}
+  .portfolio-card{height:100%;aspect-ratio:1/1;max-width:calc(100vw - 88px);width:auto;border-radius:20px;}
   .portfolio-nav{width:32px;height:32px;}
   .portfolio-nav svg{width:14px;height:14px;}
   .portfolio-nav-prev{left:.35rem;}
@@ -2635,38 +2653,37 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
   /* ── PROJECT EXPLAINER BUBBLE SYSTEM ──
      One reusable circular bubble whose video source, side (left/right),
-     and accessible label swap as the visitor's active project section
-     changes. To add a real per-project video later, edit ONLY the
-     videoSrc (and optionally label) fields below -- the observer/swap
-     logic never needs to change.
+     and accessible label swap as the visitor's active "zone" changes. To
+     add a real per-zone video later, edit ONLY the videoSrc (and
+     optionally label) fields below -- the observer/swap logic never
+     needs to change.
 
-     Section order matches the real page top-to-bottom (Websites cards,
-     Apps & Systems cards, the Services section, then "From Zero to
-     Automated"), alternating sides starting left per project 1/2/3/4. */
+     Only 3 bubbles total, each zone spanning multiple real sections
+     (sectionIds is an array so one bubble can cover more than one DOM
+     section) -- the active zone is whichever currently covers the most
+     combined viewport pixels across all of its sectionIds:
+       1. Websites cards + Apps & Systems cards -- left
+       2. Services section + "From Zero to Automated" -- right
+       3. Automation showcase onward (rest of the page) -- left, and
+          never switches away once reached. */
   var projectExplainers = [
     {
-      sectionId: 'portfolio-panel-websites',
+      sectionIds: ['portfolio-panel-websites', 'portfolio-panel-apps'],
       videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Websites explainer',
+      label: 'Selected Work explainer',
       side: 'left'
     },
     {
-      sectionId: 'portfolio-panel-apps',
+      sectionIds: ['services-section', 'how'],
       videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Apps & Systems explainer',
+      label: 'Websites, Software & Systems / Zero to Automated explainer',
       side: 'right'
     },
     {
-      sectionId: 'services-section',
+      sectionIds: ['automation'],
       videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Websites, Software & Systems explainer',
+      label: 'Automation explainer',
       side: 'left'
-    },
-    {
-      sectionId: 'how',
-      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'From Zero to Automated explainer',
-      side: 'right'
     }
   ];
 
@@ -2683,13 +2700,28 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     var closeBtn = document.getElementById('floatingAssistantClose');
     if (!bubble || !circle || !videoEl || !sourceEl) return;
 
-    /* Resolve each config entry's real DOM element up front; entries whose
-       sectionId doesn't exist on the page are skipped rather than breaking
-       the whole system. */
+    /* Resolve each zone's real DOM elements up front; a sectionId that
+       doesn't exist on the page is skipped rather than breaking the whole
+       zone, and a zone left with zero resolved elements is dropped
+       entirely rather than breaking the whole system. */
     var projects = projectExplainers
-      .map(function(p){ return { config: p, el: document.getElementById(p.sectionId) }; })
-      .filter(function(p){ return !!p.el; });
+      .map(function(p){
+        var els = p.sectionIds
+          .map(function(id){ return document.getElementById(id); })
+          .filter(function(el){ return !!el; });
+        return { config: p, els: els };
+      })
+      .filter(function(p){ return p.els.length > 0; });
     if (!projects.length) return;
+
+    /* Flat list of every observed DOM element paired with the zone index
+       it belongs to, so the IntersectionObserver callback below can sum
+       visible pixels per zone even though a zone may span several
+       sections. */
+    var observedEls = [];
+    projects.forEach(function(p, zoneIdx){
+      p.els.forEach(function(el){ observedEls.push({ el: el, zoneIdx: zoneIdx }); });
+    });
 
     var closedThisSession = false;
     try { closedThisSession = sessionStorage.getItem(CLOSED_KEY) === '1'; } catch(e){}
@@ -2750,17 +2782,37 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
        take over damps any remaining near-tie noise between two candidates
        whose visible heights are essentially equal. */
     var STABILITY_PX = 24;
+    var LAST_ZONE_IDX = projects.length - 1;
     var visiblePx = new Array(projects.length).fill(0);
     var activeIndex = -1;
     var switching = false;
     var pendingIndex = null;
+    /* Once the final zone (bubble 3: Automation onward) is reached, it
+       latches -- area-based comparison stops and it simply stays active
+       for the rest of the page, since nothing further down the page
+       competes for "largest visible area" against it. The latch only
+       releases once the visitor has scrolled back far enough that that
+       zone's own first section hasn't started yet (its top edge is still
+       below the viewport's top, i.e. below y=0) -- not merely "still
+       partially visible somewhere in the viewport", since Automation sits
+       directly against the bottom of the previous section (#how) with no
+       gap, so "any part visible" would never release while #how is still
+       in view at all. */
+    var latched = false;
 
     function pickActiveIndex(){
+      if (latched){
+        var topEl = projects[LAST_ZONE_IDX].els[0];
+        var notYetReached = topEl.getBoundingClientRect().top > 0;
+        if (!notYetReached) return LAST_ZONE_IDX;
+        latched = false; /* scrolled back above the last zone -- fall through to normal comparison */
+      }
       var best = -1, bestPx = 0;
       for (var i = 0; i < visiblePx.length; i++){
         if (visiblePx[i] > bestPx){ bestPx = visiblePx[i]; best = i; }
       }
       if (best === -1) return -1;
+      if (best === LAST_ZONE_IDX) latched = true;
       if (activeIndex !== -1 && best !== activeIndex){
         var activePx = visiblePx[activeIndex] || 0;
         if (bestPx < activePx + STABILITY_PX) return activeIndex; /* not a clear enough win -- stay put */
@@ -2839,15 +2891,25 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
        up-to-date "how many viewport pixels of each section are visible
        right now" reading instead of a single coarse in/out flag. */
     var THRESHOLDS = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1];
+    /* Per-element visible px, keyed by element -- summed per zone (via
+       observedEls' zoneIdx mapping) into `visiblePx` on every callback,
+       so a zone spanning multiple sections adds their visible heights
+       together instead of only ever seeing one section at a time. */
+    var elementPx = new Map();
+    function recomputeZonePx(){
+      for (var z = 0; z < visiblePx.length; z++) visiblePx[z] = 0;
+      observedEls.forEach(function(o){
+        visiblePx[o.zoneIdx] += elementPx.get(o.el) || 0;
+      });
+    }
     var projectIo = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        var idx = projects.findIndex(function(p){ return p.el === entry.target; });
-        if (idx === -1) return;
-        visiblePx[idx] = entry.isIntersecting ? entry.intersectionRect.height : 0;
+        elementPx.set(entry.target, entry.isIntersecting ? entry.intersectionRect.height : 0);
       });
+      recomputeZonePx();
       updateActive();
     }, { threshold: THRESHOLDS });
-    projects.forEach(function(p){ projectIo.observe(p.el); });
+    observedEls.forEach(function(o){ projectIo.observe(o.el); });
 
     if (pauseBtn){
       pauseBtn.addEventListener('click', function(e){

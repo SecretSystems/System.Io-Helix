@@ -190,7 +190,7 @@
     var n = ctrl.cards.length;
     var idx = state.index[ctrl.group];
     var isMobile = window.innerWidth <= 900;
-    var gap = isMobile ? 0.86 : 0.62; // fraction of card width between slide centers
+    var gap = isMobile ? 0.72 : 0.5; // fraction of card width between slide centers -- smaller pulls neighbors in for a clearer peek
 
     ctrl.cards.forEach(function(c, i){
       var rel = i - idx;
@@ -201,7 +201,7 @@
       c.el.classList.toggle("is-active", isActive);
       c.el.setAttribute("aria-hidden", isActive ? "false" : "true");
       var scale = isActive ? 1 : 0.86;
-      var opacity = Math.abs(rel) > 1 ? 0 : (isActive ? 1 : 0.55);
+      var opacity = Math.abs(rel) > 1 ? 0 : (isActive ? 1 : 0.7);
       c.el.style.transition = animated && !ssReduce ? "transform .5s cubic-bezier(.22,1,.36,1), opacity .4s" : "none";
       c.el.style.transform = "translate3d(" + x + "px,0,0) scale(" + scale + ")";
       c.el.style.opacity = String(opacity);

@@ -2732,6 +2732,18 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       videoEl.load();
     }
 
+    /* Per-project playback memory for the rest of this visit: each project
+       (bubble 1, bubble 2) remembers its own currentTime and mute state
+       independently, so scrolling away and back -- or switching to the
+       other bubble and later returning to this one -- resumes right where
+       it was left rather than restarting from 0/muted every time. A fresh
+       page load always starts every project at {0, muted}. */
+    var savedState = projects.map(function(){ return { time: 0, muted: true }; });
+    function saveActiveState(){
+      if (activeIndex === -1) return;
+      savedState[activeIndex] = { time: videoEl.currentTime || 0, muted: videoEl.muted };
+    }
+
     var userPaused = false;
     function playBubble(){
       if (userPaused) return;
@@ -2813,11 +2825,35 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
     function applyProject(index){
       var project = projects[index].config;
+      var resume = savedState[index];
       bubble.classList.remove('side-left', 'side-right');
       bubble.classList.add(project.side === 'right' ? 'side-right' : 'side-left');
       circle.setAttribute('aria-label', project.label || 'Secret Systems project explainer');
+      var wasAlreadyLoaded = currentSrc === project.videoSrc;
       loadSource(project.videoSrc);
-      forceMute(); /* every new/replacement bubble always starts muted */
+      /* Restore this project's own saved position/mute state (resets to
+         {0, muted} on a fresh page load, or once loadedmetadata fires for
+         a freshly (re)loaded source). If unmuting on resume, coordinate
+         with the main video the same way the mute button does. */
+      function restore(){
+        try { videoEl.currentTime = resume.time || 0; } catch(e){}
+        if (resume.muted){
+          videoEl.muted = true;
+        } else {
+          SSVideoCoord.notifyUnmuted(forceMute);
+          videoEl.muted = false;
+          videoEl.volume = 1;
+        }
+        updateMuteUi();
+      }
+      if (wasAlreadyLoaded){
+        restore();
+      } else {
+        videoEl.addEventListener('loadedmetadata', function once(){
+          videoEl.removeEventListener('loadedmetadata', once);
+          restore();
+        });
+      }
       userPaused = false;
       if (pauseBtn){
         pauseBtn.classList.remove('is-paused');
@@ -2836,6 +2872,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
       var index = pendingIndex;
       pendingIndex = null;
       switching = false;
+      saveActiveState(); /* remember the outgoing project's position/mute before it changes */
       activeIndex = index;
       if (index === -1){
         bubble.classList.remove('is-switching');

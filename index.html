@@ -2661,9 +2661,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
 
      Two zones only:
        1. Services grid ("Websites, Software & Systems That Work") -- right
-       2. "From Zero to Automated" -- left
-     Hidden above the first zone and hidden again once scrolled past the
-     second (no "stays active for the rest of the page" zone here). */
+       2. "From Zero to Automated" -- left, and latches: once reached it
+          stays active (and playing) for the rest of the page, including
+          all the way down to the footer.
+     Hidden above the first zone; once the second zone is reached it never
+     hides again on this visit. */
   var projectExplainers = [
     {
       sectionIds: ['services-section'],
@@ -2774,21 +2776,34 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
        take over damps any remaining near-tie noise between two candidates
        whose visible heights are essentially equal. */
     var STABILITY_PX = 24;
+    var LAST_ZONE_IDX = projects.length - 1;
     var visiblePx = new Array(projects.length).fill(0);
     var activeIndex = -1;
     var switching = false;
     var pendingIndex = null;
+    /* Once the final zone ("From Zero to Automated") is reached, it
+       latches -- area-based comparison stops and it simply stays active
+       for the rest of the page (through Automation/Pricing/Proof/Contact/
+       footer), since nothing further down the page should compete for
+       "largest visible area" against it. The latch only releases if the
+       visitor scrolls back far enough that that zone's own top edge is
+       still below the viewport's top (i.e. not yet reached again) --
+       not merely "still partially visible somewhere in the viewport". */
+    var latched = false;
 
-    /* No latch: with only these two tracked zones (Services grid, From
-       Zero to Automated), the bubble is meant to hide again once the
-       visitor scrolls past both -- unlike the earlier 3-zone build, there
-       is no "stays active for the rest of the page" zone anymore. */
     function pickActiveIndex(){
+      if (latched){
+        var topEl = projects[LAST_ZONE_IDX].els[0];
+        var notYetReached = topEl.getBoundingClientRect().top > 0;
+        if (!notYetReached) return LAST_ZONE_IDX;
+        latched = false; /* scrolled back above the last zone -- fall through to normal comparison */
+      }
       var best = -1, bestPx = 0;
       for (var i = 0; i < visiblePx.length; i++){
         if (visiblePx[i] > bestPx){ bestPx = visiblePx[i]; best = i; }
       }
       if (best === -1) return -1;
+      if (best === LAST_ZONE_IDX) latched = true;
       if (activeIndex !== -1 && best !== activeIndex){
         var activePx = visiblePx[activeIndex] || 0;
         if (bestPx < activePx + STABILITY_PX) return activeIndex; /* not a clear enough win -- stay put */

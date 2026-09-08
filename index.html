@@ -2660,7 +2660,11 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
      than one DOM section if ever needed.
 
      Two zones only:
-       1. Services grid ("Websites, Software & Systems That Work") -- right
+       1. Selected Work (portfolio) + Services grid ("Websites, Software &
+          Systems That Work") -- right. Spanning both sections means the
+          bubble now appears as soon as Selected Work is meaningfully in
+          view, noticeably earlier than waiting for the services grid
+          itself to dominate the viewport.
        2. "From Zero to Automated" -- left, and latches: once reached it
           stays active (and playing) for the rest of the page, including
           all the way down to the footer.
@@ -2668,7 +2672,7 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
      hides again on this visit. */
   var projectExplainers = [
     {
-      sectionIds: ['services-section'],
+      sectionIds: ['portfolio-section', 'services-section'],
       videoSrc: '/assets/video/your-website-should-work-for-you.mp4',
       label: 'Your Website Should Work For You explainer',
       side: 'right'

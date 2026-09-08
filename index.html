@@ -2656,33 +2656,25 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
      and accessible label swap as the visitor's active "zone" changes. To
      add a real per-zone video later, edit ONLY the videoSrc (and
      optionally label) fields below -- the observer/swap logic never
-     needs to change.
+     needs to change. sectionIds is an array so a zone could span more
+     than one DOM section if ever needed.
 
-     Only 3 bubbles total, each zone spanning multiple real sections
-     (sectionIds is an array so one bubble can cover more than one DOM
-     section) -- the active zone is whichever currently covers the most
-     combined viewport pixels across all of its sectionIds:
-       1. Websites cards + Apps & Systems cards -- left
-       2. Services section + "From Zero to Automated" -- right
-       3. Automation showcase onward (rest of the page) -- left, and
-          never switches away once reached. */
+     Two zones only:
+       1. Services grid ("Websites, Software & Systems That Work") -- right
+       2. "From Zero to Automated" -- left
+     Hidden above the first zone and hidden again once scrolled past the
+     second (no "stays active for the rest of the page" zone here). */
   var projectExplainers = [
     {
-      sectionIds: ['portfolio-panel-websites', 'portfolio-panel-apps'],
-      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Selected Work explainer',
-      side: 'left'
-    },
-    {
-      sectionIds: ['services-section', 'how'],
-      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Websites, Software & Systems / Zero to Automated explainer',
+      sectionIds: ['services-section'],
+      videoSrc: '/assets/video/your-website-should-work-for-you.mp4',
+      label: 'Your Website Should Work For You explainer',
       side: 'right'
     },
     {
-      sectionIds: ['automation'],
-      videoSrc: '/assets/video/secret-systems-floating-assistant.mp4',
-      label: 'Automation explainer',
+      sectionIds: ['how'],
+      videoSrc: '/assets/video/from-zero-to-automated-explainer.mp4',
+      label: 'From Zero to Automated explainer',
       side: 'left'
     }
   ];
@@ -2782,37 +2774,21 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
        take over damps any remaining near-tie noise between two candidates
        whose visible heights are essentially equal. */
     var STABILITY_PX = 24;
-    var LAST_ZONE_IDX = projects.length - 1;
     var visiblePx = new Array(projects.length).fill(0);
     var activeIndex = -1;
     var switching = false;
     var pendingIndex = null;
-    /* Once the final zone (bubble 3: Automation onward) is reached, it
-       latches -- area-based comparison stops and it simply stays active
-       for the rest of the page, since nothing further down the page
-       competes for "largest visible area" against it. The latch only
-       releases once the visitor has scrolled back far enough that that
-       zone's own first section hasn't started yet (its top edge is still
-       below the viewport's top, i.e. below y=0) -- not merely "still
-       partially visible somewhere in the viewport", since Automation sits
-       directly against the bottom of the previous section (#how) with no
-       gap, so "any part visible" would never release while #how is still
-       in view at all. */
-    var latched = false;
 
+    /* No latch: with only these two tracked zones (Services grid, From
+       Zero to Automated), the bubble is meant to hide again once the
+       visitor scrolls past both -- unlike the earlier 3-zone build, there
+       is no "stays active for the rest of the page" zone anymore. */
     function pickActiveIndex(){
-      if (latched){
-        var topEl = projects[LAST_ZONE_IDX].els[0];
-        var notYetReached = topEl.getBoundingClientRect().top > 0;
-        if (!notYetReached) return LAST_ZONE_IDX;
-        latched = false; /* scrolled back above the last zone -- fall through to normal comparison */
-      }
       var best = -1, bestPx = 0;
       for (var i = 0; i < visiblePx.length; i++){
         if (visiblePx[i] > bestPx){ bestPx = visiblePx[i]; best = i; }
       }
       if (best === -1) return -1;
-      if (best === LAST_ZONE_IDX) latched = true;
       if (activeIndex !== -1 && best !== activeIndex){
         var activePx = visiblePx[activeIndex] || 0;
         if (bestPx < activePx + STABILITY_PX) return activeIndex; /* not a clear enough win -- stay put */

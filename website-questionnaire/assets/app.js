@@ -837,49 +837,49 @@
     SCHEMA.forEach(function(section, idx){
       var status = sectionStatusFor(idx);
       var card = document.createElement("div");
-      card.className = "qn-card" + (status === "complete" ? " is-complete" : status === "in_progress" ? " is-in-progress" : "");
+      card.className = "qn-dcard" + (status === "complete" ? " is-complete" : status === "in_progress" ? " is-in-progress" : "");
       card.setAttribute("role", "listitem");
 
       var top = document.createElement("div");
-      top.className = "qn-card-top";
+      top.className = "qn-dcard-top";
       var num = document.createElement("span");
-      num.className = "qn-card-number";
+      num.className = "qn-dcard-number";
       num.textContent = "0" + (idx + 1);
       top.appendChild(num);
       if (status === "complete"){
         var check = document.createElement("span");
-        check.className = "qn-card-check";
+        check.className = "qn-dcard-check";
         check.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>';
         top.appendChild(check);
       } else {
         var tag = document.createElement("span");
-        tag.className = "qn-card-tag" + (section.required ? " is-required" : "");
+        tag.className = "qn-dcard-tag" + (section.required ? " is-required" : "");
         tag.textContent = section.required ? "Required" : "Optional";
         top.appendChild(tag);
       }
       card.appendChild(top);
 
       var title = document.createElement("div");
-      title.className = "qn-card-title";
+      title.className = "qn-dcard-title";
       title.textContent = section.title;
       card.appendChild(title);
 
       var desc = document.createElement("p");
-      desc.className = "qn-card-desc";
+      desc.className = "qn-dcard-desc";
       desc.textContent = section.cardDescription || "";
       card.appendChild(desc);
 
       var statusRow = document.createElement("div");
-      statusRow.className = "qn-card-status-row";
-      statusRow.innerHTML = '<span class="qn-card-status-dot"></span><span class="qn-card-status-text"></span>';
-      statusRow.querySelector(".qn-card-status-text").textContent = cardStatusLabel(status);
+      statusRow.className = "qn-dcard-status-row";
+      statusRow.innerHTML = '<span class="qn-dcard-status-dot"></span><span class="qn-dcard-status-text"></span>';
+      statusRow.querySelector(".qn-dcard-status-text").textContent = cardStatusLabel(status);
       card.appendChild(statusRow);
 
       var actions = document.createElement("div");
-      actions.className = "qn-card-actions";
+      actions.className = "qn-dcard-actions";
       var actionBtn = document.createElement("button");
       actionBtn.type = "button";
-      actionBtn.className = "qn-card-action" + (status === "complete" ? " is-edit" : "");
+      actionBtn.className = "qn-dcard-action" + (status === "complete" ? " is-edit" : "");
       actionBtn.textContent = cardActionLabel(idx, status);
       actionBtn.addEventListener("click", function(){ openSectionFromDashboard(idx); });
       actions.appendChild(actionBtn);
@@ -914,7 +914,7 @@
 
     var grid = els.cardsGrid;
     var updateActive = function(){
-      var cards = grid.querySelectorAll(".qn-card");
+      var cards = grid.querySelectorAll(".qn-dcard");
       var dots = els.cardsDots.querySelectorAll(".qn-cards-dot");
       var center = grid.scrollLeft + grid.clientWidth / 2;
       var activeIdx = 0;
@@ -934,7 +934,7 @@
   function scrollCardIntoView(idx){
     if (window.innerWidth > 640) return;
     var grid = els.cardsGrid;
-    var card = grid.querySelectorAll(".qn-card")[idx];
+    var card = grid.querySelectorAll(".qn-dcard")[idx];
     if (card) card.scrollIntoView({ block: "nearest", inline: "start", behavior: ssReduce ? "auto" : "smooth" });
   }
 

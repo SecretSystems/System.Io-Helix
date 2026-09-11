@@ -301,21 +301,6 @@
   }
 
   /* ============================================================
-     Mobile bottom CTA — hides once the real checkout control is visible
-     ============================================================ */
-  function initMobileCta(){
-    var cta = els.mobileCta;
-    var target = document.getElementById("gs-final-cta");
-    if (!cta || !target || !("IntersectionObserver" in window)) return;
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        cta.classList.toggle("is-hidden", entry.isIntersecting);
-      });
-    }, { threshold: 0.1 });
-    observer.observe(target);
-  }
-
-  /* ============================================================
      Wire up
      ============================================================ */
   function collectEls(){
@@ -345,7 +330,6 @@
     els.finalCta = document.getElementById("gs-final-cta");
     els.trackA = document.getElementById("gs-track-a");
     els.trackB = document.getElementById("gs-track-b");
-    els.mobileCta = document.getElementById("gs-mobile-cta");
   }
 
   function openPromoForm(){
@@ -435,7 +419,6 @@
 
     initGallery();
     initMainVideoObserver();
-    initMobileCta();
 
     // Promo URL support: https://secretsystems.io/get-started/?promo=five
     var params = new URLSearchParams(window.location.search);

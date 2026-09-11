@@ -27,8 +27,12 @@ window.SS_CHECKOUT_CONFIG = {
   /* Four HighLevel checkout destinations, one per package/promo
      combination. Each must be a HighLevel-hosted checkout page (or
      payment link) configured with the matching one-time + recurring
-     prices, and its own post-purchase redirect pointed at:
-       https://secretsystems.io/get-started/thank-you/
+     prices, and its own post-successful-payment redirect pointed at:
+       https://secretsystems.io/website-questionnaire/
+     This redirect must only fire on a confirmed successful payment —
+     never on checkout page load or an abandoned/failed payment. If
+     payment is cancelled or fails, the customer should stay in
+     HighLevel's payment flow or return to /get-started/ instead.
      See the owner-action checklist in the final report for exact
      setup steps. */
   HIGHLEVEL_URLS: {

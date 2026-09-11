@@ -576,6 +576,27 @@
     return block;
   }
 
+  /* ============================================================
+     Scroll + focus management
+     The page itself (documentElement/body) is the scrolling
+     element here — there is no inner overflow container — so we
+     reset window scroll on every section change. html has global
+     `scroll-behavior:smooth` (ss-shared.css) which would make a
+     plain scrollTo(0,0) animate and feel delayed on navigation, so
+     navigation resets go through the native element property
+     instead, which ignores CSS smooth-scroll.
+     ============================================================ */
+  function resetScrollToTop(){
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  function focusHeading(el){
+    if (!el) return;
+    resetScrollToTop();
+    el.focus({ preventScroll: true });
+  }
+
   function refreshConditionalVisibility(){
     if (!els.sectionBody) return;
     els.sectionBody.querySelectorAll(".qn-conditional").forEach(function(node){
@@ -619,10 +640,11 @@
     updateRail();
     updateProgress();
     updateControls();
-    window.scrollTo({ top: 0, behavior: ssReduce ? "auto" : "smooth" });
+    focusHeading(els.sectionTitle);
   }
 
   function transitionToSection(newIndex){
+    showScreen("questionnaire");
     if (ssReduce){
       state.sectionIndex = newIndex;
       renderSection();
@@ -687,7 +709,9 @@
   }
 
   function updateControls(){
-    els.btnPrev.disabled = state.sectionIndex === 0;
+    var isFirst = state.sectionIndex === 0;
+    els.btnPrev.hidden = isFirst;
+    els.controls.classList.toggle("qn-controls-first", isFirst);
     var isLast = state.sectionIndex === SCHEMA.length - 1;
     els.btnNext.textContent = isLast ? "Review Answers →" : "Continue →";
   }
@@ -825,10 +849,10 @@
     });
   }
 
-  function transitionToReview(scrollTop){
+  function transitionToReview(focus){
     renderReview();
     showScreen("review");
-    if (scrollTop !== false) window.scrollTo({ top: 0, behavior: ssReduce ? "auto" : "smooth" });
+    if (focus !== false) focusHeading(els.reviewTitle);
     saveLocalImmediate();
   }
 
@@ -901,6 +925,9 @@
     els.mobilePct = document.getElementById("qnMobilePct");
     els.btnPrev = document.getElementById("qnBtnPrev");
     els.btnNext = document.getElementById("qnBtnNext");
+    els.controls = document.querySelector(".qn-controls");
+    els.backToIntro = document.getElementById("qnBackToIntro");
+    els.reviewTitle = document.getElementById("qnReviewTitle");
     els.reviewList = document.getElementById("qnReviewList");
     els.btnSubmit = document.getElementById("qnBtnSubmit");
     els.btnBackToEdit = document.getElementById("qnBtnBackToEdit");
@@ -948,6 +975,11 @@
     });
     els.btnSubmit.addEventListener("click", handleSubmit);
     els.btnRetry.addEventListener("click", handleSubmit);
+
+    els.backToIntro.addEventListener("click", function(){
+      showScreen("welcome");
+      resetScrollToTop();
+    });
 
     requestAnimationFrame(function(){ els.welcomeInner.classList.add("is-shown"); });
   }

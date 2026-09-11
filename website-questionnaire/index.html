@@ -40,6 +40,9 @@
 
   <!-- ══ QUESTIONNAIRE ══ -->
   <div id="qnQuestionnaire" hidden>
+    <div class="qn-back-row">
+      <button type="button" class="qn-back-link" id="qnBackToIntro">← Back to introduction</button>
+    </div>
     <div class="qn-mobile-progress">
       <div class="qn-mobile-progress-top">
         <span class="qn-mobile-progress-section" id="qnMobileSectionLabel">Section 1 of 9</span>
@@ -61,7 +64,7 @@
       <div class="qn-content">
         <div class="qn-content-inner">
           <p class="qn-section-eyebrow" id="qnSectionEyebrow">Section 1 of 9</p>
-          <h1 class="qn-section-title" id="qnSectionTitle"></h1>
+          <h1 class="qn-section-title" id="qnSectionTitle" tabindex="-1"></h1>
           <div class="qn-progress-track" style="max-width:34rem;margin-bottom:2.5rem;"><div class="qn-progress-fill" id="qnProgressFill"></div></div>
 
           <div class="qn-section-body" id="qnSectionBody"></div>
@@ -81,7 +84,7 @@
       <div class="qn-content-inner" style="max-width:760px;">
         <div class="qn-review-header">
           <p class="qn-section-eyebrow">Almost Done</p>
-          <h1 class="qn-section-title">Review &amp; Submit</h1>
+          <h1 class="qn-section-title" id="qnReviewTitle" tabindex="-1">Review &amp; Submit</h1>
           <p style="color:var(--text);font-size:.92rem;line-height:1.7;max-width:34rem;">Review anything you'd like to change, then send it to Secret Systems.</p>
         </div>
         <div id="qnReviewList"></div>

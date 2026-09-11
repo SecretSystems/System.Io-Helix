@@ -8,6 +8,11 @@
 
 .qn-body{background:var(--void);min-height:100vh;}
 .qn-shell{min-height:100vh;display:flex;flex-direction:column;}
+/* Only one top-level screen (welcome/questionnaire/review/success) may
+   be visible at a time. Several of them set their own `display` (flex,
+   grid) which otherwise beats the UA [hidden] rule by specificity —
+   this guards every current and future screen wrapper in one place. */
+.qn-shell>[hidden]{display:none!important;}
 
 /* ── Minimal top bar (not the full marketing nav — this is a tool, not a page) ── */
 .qn-topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.75rem;background:rgba(2,4,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
@@ -64,7 +69,7 @@
 
 /* ── Content column ── */
 .qn-content{padding:3rem 0 3rem 2rem;min-width:0;}
-@media(max-width:1000px){.qn-content{padding:1.75rem 0 7rem;}}
+@media(max-width:1000px){.qn-content{padding:1.75rem 0 2.5rem;}}
 .qn-content-inner{max-width:640px;}
 
 /* ── Mobile top progress ── */
@@ -78,7 +83,8 @@
 
 /* ── Section header ── */
 .qn-section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem;}
-.qn-section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.1rem);letter-spacing:-.01em;margin-bottom:.5rem;line-height:1.15;}
+.qn-section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.1rem);letter-spacing:-.01em;margin-bottom:.5rem;line-height:1.15;scroll-margin-top:90px;}
+.qn-section-title:focus-visible{outline:none;}
 .qn-section-intro{margin-bottom:2.5rem;padding:1.75rem;background:var(--card);border:1px solid var(--border);}
 .qn-section-intro-headline{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:.6rem;color:var(--cyan);}
 .qn-section-intro-body{font-size:.9rem;color:var(--text);line-height:1.7;}
@@ -182,19 +188,28 @@
 .qn-file-remove:hover{color:#ff3c6e;}
 .qn-uploader-disabled-note{font-size:.78rem;color:var(--muted);margin-top:.6rem;max-width:38rem;}
 
-/* ── Nav controls (Previous / Continue) ── */
+/* ── Nav controls (Previous / Continue) ──
+   Natural flow at the bottom of the section content — never
+   sticky/fixed, so it can't cover fields or mobile browser UI. */
 .qn-controls{display:flex;justify-content:space-between;align-items:center;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border);}
 @media(max-width:1000px){
-  .qn-controls{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(2,4,8,.96);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:1rem 1.25rem;margin-top:0;padding-bottom:calc(1rem + env(safe-area-inset-bottom));}
-  .qn-content{padding-bottom:6.5rem;}
+  .qn-controls{padding:1.5rem 0 .5rem;}
 }
+.qn-controls.qn-controls-first{justify-content:flex-end;}
 .qn-btn-prev{background:none;border:1px solid var(--border);color:var(--text);font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.04em;padding:.85rem 1.5rem;cursor:pointer;transition:border-color .2s,color .2s;}
 .qn-btn-prev:hover{border-color:rgba(0,200,255,.3);color:var(--white);}
 .qn-btn-prev:disabled{opacity:.3;cursor:default;}
+.qn-btn-prev[hidden]{display:none;}
 .qn-btn-next{background:var(--cyan);color:var(--void);border:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.04em;padding:.9rem 2rem;cursor:pointer;transition:background .2s,transform .15s;}
 .qn-btn-next:hover{background:var(--cyan2);}
 .qn-btn-next:active{transform:scale(.98);}
 .qn-btn-next:disabled{opacity:.5;cursor:default;}
+
+/* ── Back-to-introduction (restrained, top of active questionnaire) ── */
+.qn-back-row{padding:.85rem 1.75rem 0;max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box;}
+@media(max-width:1000px){.qn-back-row{padding:.75rem 1.25rem 0;}}
+.qn-back-link{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;color:var(--muted);background:none;border:none;cursor:pointer;padding:.4rem .2rem;transition:color .2s;}
+.qn-back-link:hover{color:var(--cyan);}
 
 /* ── Review screen ── */
 .qn-review-header{margin-bottom:2.5rem;}
@@ -223,7 +238,6 @@
 
 /* ── Success screen ── */
 .qn-success{flex:1;display:flex;align-items:center;justify-content:center;padding:5rem 1.75rem;}
-.qn-success[hidden]{display:none;}
 .qn-success-inner{max-width:560px;width:100%;text-align:center;opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
 .qn-success-inner.is-shown{opacity:1;transform:translateY(0);}
 .qn-success-icon{width:56px;height:56px;border-radius:50%;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.3);display:grid;place-items:center;margin:0 auto 2rem;}

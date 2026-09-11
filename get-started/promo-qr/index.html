@@ -10,7 +10,7 @@
 <style>
 /* This is an internal/admin utility page — not part of the customer
    sales journey — for generating a printable QR code that points at
-   the promotional checkout URL (https://secretsystems.io/get-started/?promo=5).
+   the promotional checkout URL (https://secretsystems.io/get-started/?promo=five).
    Not linked from site navigation or the checkout page itself. */
 .qr-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;}
 .qr-card{max-width:26rem;width:100%;background:var(--card);border:1px solid var(--border);padding:2.5rem;text-align:center;}
@@ -25,7 +25,7 @@
 <div class="qr-wrap">
   <div class="qr-card">
     <h1>Promo QR Code</h1>
-    <p>Scan or print this code for the promo-code-5 checkout link. Right-click the code to save it as an image for flyers, business cards, or signage.</p>
+    <p>Scan or print this code for the promo-code-five checkout link. Right-click the code to save it as an image for flyers, business cards, or signage.</p>
     <div id="qr-canvas-holder"></div>
     <p class="qr-url" id="qr-url-display"></p>
     <div class="qr-actions">
@@ -36,7 +36,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
-  var PROMO_URL = "https://secretsystems.io/get-started/?promo=5";
+  var PROMO_URL = "https://secretsystems.io/get-started/?promo=five";
   document.getElementById("qr-url-display").textContent = PROMO_URL;
   if (typeof QRCode !== "undefined"){
     new QRCode(document.getElementById("qr-canvas-holder"), {

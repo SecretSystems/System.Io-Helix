@@ -23,23 +23,21 @@
    One rule guards every hidden-capable element on this page. */
 [hidden]{display:none!important;}
 
-/* ── Hero ── */
-.gs-hero{padding:10.5rem 0 4rem;position:relative;z-index:1;background:radial-gradient(ellipse at 50% 20%,rgba(0,200,255,.06) 0%,var(--void) 65%);text-align:center;}
+/* ── Hero ──
+   Tightened so the main demo video lands within the first mobile
+   viewport instead of requiring a scroll to reach it. */
+.gs-hero{padding:7.5rem 0 2rem;position:relative;z-index:1;background:radial-gradient(ellipse at 50% 20%,rgba(0,200,255,.06) 0%,var(--void) 65%);text-align:center;}
 .gs-hero-inner{max-width:46rem;margin:0 auto;}
-.gs-hero-inner .h1{font-size:clamp(2rem,4.6vw,3.8rem);}
-.gs-hero .lead{margin:1.25rem auto 2rem;text-align:center;}
-.gs-trust{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-top:1.25rem;}
-.gs-hero-price{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2.25rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);}
+.gs-hero-inner .h1{font-size:clamp(1.7rem,4.2vw,3.4rem);}
+.gs-hero .eyebrow{margin-bottom:.6rem;}
+.gs-hero .lead{margin:.85rem auto 1.5rem;text-align:center;}
+.gs-trust{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-top:1rem;}
+.gs-hero-price{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);}
 .gs-hero-price strong{color:var(--white);font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;}
 
 /* ── Main video frame ── */
 .gs-frame-wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem;}
 .gs-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#050a10;box-shadow:0 30px 80px -20px rgba(0,0,0,.6),0 0 0 1px rgba(0,200,255,.06);}
-.gs-frame-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem 1rem;background:rgba(0,200,255,.05);border-bottom:1px solid var(--border);}
-.gs-frame-dot{width:9px;height:9px;border-radius:50%;background:var(--border);}
-.gs-frame-dot:nth-child(1){background:#ff5f57;}
-.gs-frame-dot:nth-child(2){background:#febc2e;}
-.gs-frame-dot:nth-child(3){background:#28c840;}
 .gs-frame video,.gs-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#050a10;}
 
 /* ── Package configurator ── */
@@ -52,7 +50,7 @@
 .gs-price-strike{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted);text-decoration:line-through;}
 .gs-price-now{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--white);}
 .gs-price-sub{font-size:.78rem;color:var(--muted);}
-.gs-benefit-list{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin:1.5rem 0;}
+.gs-benefit-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin:1.1rem 0;}
 .gs-benefit-list li{font-size:.88rem;color:var(--text);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5;}
 .gs-benefit-list li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;}
 .gs-care-note{font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;line-height:1.6;}
@@ -104,7 +102,7 @@
 .gs-checkout-error[hidden]{display:none;}
 
 /* ── Growth Suite feature cards ── */
-.gs-growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+.gs-growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
 @media(max-width:900px){.gs-growth-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.gs-growth-grid{grid-template-columns:1fr;}}
 .gs-growth-card{background:var(--card);border:1px solid var(--border);padding:1.75rem;}
@@ -131,16 +129,16 @@
 }
 
 /* ── Process ── */
-.gs-process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:2.5rem;}
+.gs-process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
 @media(max-width:800px){.gs-process-grid{grid-template-columns:1fr;}}
-.gs-process-step{background:var(--void);padding:2.25rem;text-align:center;}
+.gs-process-step{background:var(--void);padding:1.75rem;text-align:center;}
 .gs-process-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:1rem;}
 .gs-process-step h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:.6rem;}
 .gs-process-step p{font-size:.86rem;color:var(--text);line-height:1.6;}
 
 /* ── FAQ (shares .faq-* pattern from pricing page) ── */
-.faq-list{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;}
-.faq-item{border-bottom:1px solid var(--border);padding:1.6rem 0;}
+.faq-list{display:flex;flex-direction:column;gap:0;margin-top:1.75rem;}
+.faq-item{border-bottom:1px solid var(--border);padding:1.1rem 0;}
 button.faq-q{width:100%;text-align:left;background:none;border:none;color:inherit;font:inherit;cursor:pointer;padding:0;}
 .faq-q{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .faq-q .arrow{color:var(--cyan);font-size:1.1rem;transition:transform .3s;flex-shrink:0;}
@@ -153,8 +151,19 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
 @media(max-width:720px){.gs-mobile-cta{display:block;}}
 .gs-mobile-cta.is-hidden{opacity:0;transform:translateY(20px);pointer-events:none;}
 
+/* ── General page tightening — more visible per view everywhere ── */
+.section{padding:4rem 0;}
+.gs-hero+.section{padding-top:0;}
+
 @media(max-width:720px){
-  .gs-hero{padding:9rem 0 3rem;}
+  .gs-hero{padding:5.5rem 0 1rem;}
+  .gs-hero .eyebrow{margin-bottom:.4rem;}
+  .gs-hero-inner .h1{font-size:clamp(1.35rem,6.2vw,1.8rem);margin-bottom:0;}
+  .gs-hero .lead{font-size:.85rem;line-height:1.55;margin:.6rem auto .9rem;}
+  .gs-trust{display:none;}
+  .gs-hero-price{display:none;}
+  .gs-hero .btn{padding:.75rem 1.6rem;font-size:.8rem;}
+  .section{padding:2.75rem 0;}
   .gs-package-card,.gs-summary,.gs-addon-card{padding:1.5rem;}
 }
 </style>
@@ -203,10 +212,9 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
 </section>
 
 <!-- ══ MAIN DEMO VIDEO ══ -->
-<section class="section" style="padding-top:0;">
+<section class="section">
   <div class="gs-frame-wrap">
     <div class="gs-frame">
-      <div class="gs-frame-bar" aria-hidden="true"><span class="gs-frame-dot"></span><span class="gs-frame-dot"></span><span class="gs-frame-dot"></span></div>
       <video
         id="gs-main-video"
         poster="/assets/video/optimized/main-website-demo-poster.jpg"
@@ -216,16 +224,16 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
         <source src="/assets/video/optimized/main-website-demo.mp4" type="video/mp4">
       </video>
     </div>
-    <p style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:1rem;">A real website build — not a template preview.</p>
+    <p style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:.6rem;">A real website build — not a template preview.</p>
   </div>
 </section>
 
 <!-- ══ PACKAGE + PRICING + SUMMARY ══ -->
 <section class="section" id="gs-config" style="background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="wrap">
-    <div style="text-align:center;max-width:38rem;margin:0 auto 3rem;">
-      <p class="eyebrow" style="justify-content:center;">Your Website</p>
-      <h2 class="h2">One core purchase.<br>Clear, honest pricing.</h2>
+    <div style="text-align:center;max-width:38rem;margin:0 auto 2rem;">
+      <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Your Website</p>
+      <h2 class="h2" style="margin-bottom:0;">One core purchase. Clear, honest pricing.</h2>
     </div>
 
     <div class="gs-config-grid">
@@ -270,7 +278,7 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
             </label>
           </div>
           <p class="gs-addon-price" id="gs-addon-price">+ $297/month if added</p>
-          <p class="gs-addon-usage-note">Where texting, calling, email, or AI usage draws on your own phone, carrier, or account limits, actual usage costs depend on your plan and volume — this is explained fully before you rely on it.</p>
+          <p class="gs-addon-usage-note">Texting, calling, and AI-assisted usage carry per-message and per-minute carrier fees passed through at cost — for example, published carrier fees of roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute (rates vary by carrier and route, and change from time to time). These are not included in the $297/month price. Full current rates are published in the underlying platform's pricing documentation, and we'll walk through expected usage costs for your business before you rely on it.</p>
         </div>
       </div>
 
@@ -325,10 +333,10 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
 <!-- ══ GROWTH SUITE DETAIL ══ -->
 <section class="section">
   <div class="wrap" style="max-width:56rem;margin:0 auto;text-align:center;">
-    <p class="eyebrow" style="justify-content:center;">Optional Add-On</p>
-    <h2 class="h2">Turn new leads into<br>real conversations.</h2>
+    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Optional Add-On</p>
+    <h2 class="h2" style="margin-bottom:1rem;">Turn new leads into real conversations.</h2>
     <p class="lead" style="margin:0 auto;text-align:center;">The Secret Systems Growth Suite gives you one organized place to track prospects, follow up automatically, manage conversations, and keep opportunities from slipping through the cracks.</p>
-    <div class="gs-growth-grid">
+    <div class="gs-growth-grid" style="margin-top:1.75rem;">
       <div class="gs-growth-card"><h4>See every lead in one place</h4><p>A single pipeline replaces scattered notes, texts, and sticky notes.</p></div>
       <div class="gs-growth-card"><h4>Follow up while interest is high</h4><p>Automated text and email follow-up reaches new leads right after they show interest.</p></div>
       <div class="gs-growth-card"><h4>Keep conversations organized</h4><p>Calls, texts, and emails stay together instead of spread across apps.</p></div>
@@ -336,15 +344,15 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
       <div class="gs-growth-card"><h4>Reduce repetitive administrative work</h4><p>Appointment reminders and basic pipeline automation cut down manual follow-up.</p></div>
       <div class="gs-growth-card"><h4>Add it whenever you're ready</h4><p>The Growth Suite is optional now and can be added later — it's never required for your website.</p></div>
     </div>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:2rem;line-height:1.6;">Features depend on your account setup. Where a feature draws on calling, texting, email, or AI usage, actual availability and cost depend on your phone, carrier, and usage volume — never assumed to be unlimited.</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:1.5rem;line-height:1.6;">Features depend on your account setup. Calling, texting, and AI-assisted usage carry carrier fees passed through at cost — roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute — on top of the $297/month price, and are never assumed to be unlimited.</p>
   </div>
 </section>
 
 <!-- ══ MOVING DEMO GALLERY ══ -->
 <section class="section" style="background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div class="wrap" style="text-align:center;margin-bottom:2.5rem;">
-    <p class="eyebrow" style="justify-content:center;">See The Work</p>
-    <h2 class="h2">Real websites, in motion.</h2>
+  <div class="wrap" style="text-align:center;margin-bottom:1.75rem;">
+    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">See The Work</p>
+    <h2 class="h2" style="margin-bottom:0;">Real websites, in motion.</h2>
   </div>
   <div class="gs-gallery" id="gs-gallery">
     <div class="gs-track-row animate-left" id="gs-track-a"></div>
@@ -355,9 +363,9 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
 <!-- ══ PROCESS ══ -->
 <section class="section">
   <div class="wrap" style="text-align:center;">
-    <p class="eyebrow" style="justify-content:center;">Simple Process</p>
-    <h2 class="h2">Three steps to launch.</h2>
-    <div class="gs-process-grid">
+    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Simple Process</p>
+    <h2 class="h2" style="margin-bottom:0;">Three steps to launch.</h2>
+    <div class="gs-process-grid" style="margin-top:1.75rem;">
       <div class="gs-process-step"><div class="gs-process-num">01</div><h4>Choose your system</h4><p>Pick your website package and decide whether to add the Growth Suite.</p></div>
       <div class="gs-process-step"><div class="gs-process-num">02</div><h4>Complete secure checkout</h4><p>Enter your details and complete payment through secure checkout.</p></div>
       <div class="gs-process-step"><div class="gs-process-num">03</div><h4>Tell us about your business</h4><p>Answer our short questionnaire so we can start building right away.</p></div>
@@ -393,7 +401,7 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are calls, texts, emails, phone numbers, and AI usage included? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">The Growth Suite provides the system for calling, texting, email, and AI-assisted follow-up. Actual usage costs depend on your account, carrier, phone number, and volume — usage is never assumed to be unlimited, and we'll explain what applies to your account before you rely on it.</div>
+        <div class="faq-a">The Growth Suite provides the system for calling, texting, email, and AI-assisted follow-up. Usage is billed at cost, passed through from the underlying carriers — roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute, depending on carrier and route. These carrier fees are not included in the $297/month price and are never assumed to be unlimited. We'll walk through expected usage costs for your volume before you rely on it.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Can I add the Growth Suite later? <span class="arrow" aria-hidden="true">▾</span></button>
@@ -404,8 +412,8 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
         <div class="faq-a">After checkout you'll be taken to a confirmation page, then into our short onboarding questionnaire so we can start learning about your business and begin your build.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does promo code "5" change? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Promo code 5 changes the website to a $500 one-time promotional price and Website Care to $59/month. It is a promotional price, not a deposit or a discount off the regular price. It does not change the Growth Suite price if you add it.</div>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does promo code "five" change? <span class="arrow" aria-hidden="true">▾</span></button>
+        <div class="faq-a">Promo code five changes the website to a $500 one-time promotional price and Website Care to $59/month. It is a promotional price, not a deposit or a discount off the regular price. It does not change the Growth Suite price if you add it.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are there refunds or cancellation terms? <span class="arrow" aria-hidden="true">▾</span></button>

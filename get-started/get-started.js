@@ -437,7 +437,7 @@
     initMainVideoObserver();
     initMobileCta();
 
-    // Promo URL support: https://secretsystems.io/get-started/?promo=5
+    // Promo URL support: https://secretsystems.io/get-started/?promo=five
     var params = new URLSearchParams(window.location.search);
     var urlPromo = params.get("promo");
     var storedPromo = loadLocalPromo();

@@ -36,9 +36,9 @@ window.SS_CHECKOUT_CONFIG = {
     regular_website: "",
     // $3,500 once + $149/mo Website Care + $297/mo Growth Suite
     regular_website_growth: "",
-    // $500 once + $59/mo Website Care (promo code "5")
+    // $500 once + $59/mo Website Care (promo code "five")
     promo_website: "",
-    // $500 once + $59/mo Website Care + $297/mo Growth Suite (promo code "5")
+    // $500 once + $59/mo Website Care + $297/mo Growth Suite (promo code "five")
     promo_website_growth: ""
   },
 
@@ -54,5 +54,5 @@ window.SS_CHECKOUT_CONFIG = {
     growthSuiteMonthly: 297
   },
 
-  PROMO_CODE_DISPLAY: "5"
+  PROMO_CODE_DISPLAY: "five"
 };

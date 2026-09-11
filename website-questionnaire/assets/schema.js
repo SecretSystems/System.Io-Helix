@@ -21,6 +21,8 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
     id: "basics",
     title: "The Basics",
     short: "Basics",
+    required: true,
+    cardDescription: "Business name, contact information, hours, and existing website.",
     questions: [
       { id: "businessName", type: "text", star: true,
         label: "What's the business name, exactly as you want it to appear?" },
@@ -75,8 +77,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "whatYouDo",
-    title: "What You Do",
+    title: "Services",
     short: "Services",
+    required: true,
+    cardDescription: "What you offer, which services matter most, and how they should be presented.",
     questions: [
       { id: "businessDescription", type: "textarea", star: true,
         label: "Describe your business in a couple of sentences, like you'd tell a neighbor." },
@@ -121,8 +125,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "serviceArea",
-    title: "Where You Work",
+    title: "Service Area",
     short: "Service Area",
+    required: true,
+    cardDescription: "The cities, regions, or locations your business serves.",
     questions: [
       { id: "mainArea", type: "text", star: true,
         label: "What's your main city or area?" },
@@ -141,8 +147,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "customerContact",
-    title: "How You Want Customers to Reach You",
+    title: "Customer Contact",
     short: "Contact",
+    required: true,
+    cardDescription: "How visitors should contact you and what information you need from them.",
     questions: [
       { id: "primaryAction", type: "select-cards", star: true,
         label: "What's the single most important thing a visitor should do?",
@@ -210,8 +218,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "differentiators",
-    title: "Why Customers Pick You",
+    title: "What Makes You Different",
     short: "Differentiators",
+    required: false,
+    cardDescription: "Your experience, process, guarantees, and competitive advantages.",
     questions: [
       { id: "whyChooseYou", type: "textarea", star: true,
         label: "Why do customers choose you over the other guys?",
@@ -248,8 +258,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "branding",
-    title: "Look & Feel",
+    title: "Branding",
     short: "Branding",
+    required: false,
+    cardDescription: "Your colors, style preferences, logo direction, and visual identity.",
     questions: [
       { id: "hasLogo", type: "fileupload",
         label: "Do you have a logo?",
@@ -300,6 +312,8 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
     id: "assets",
     title: "Photos & Materials",
     short: "Photos",
+    required: false,
+    cardDescription: "Upload your logos, photographs, videos, documents, and brand materials.",
     emphasis: true,
     intro: {
       headline: "Your real photos matter.",
@@ -368,8 +382,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "technical",
-    title: "Accounts & Technical",
+    title: "Technical Details",
     short: "Technical",
+    required: false,
+    cardDescription: "Domain, email, integrations, booking tools, and technical requirements.",
     securityNotice: "Never send passwords through this form.",
     questions: [
       { id: "gbp", type: "radio-cards",
@@ -414,8 +430,10 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
   },
   {
     id: "growth",
-    title: "Growth",
+    title: "Growth & Marketing",
     short: "Growth",
+    required: false,
+    cardDescription: "Your goals, advertising plans, competitors, and future opportunities.",
     questions: [
       { id: "growthServices", type: "textarea",
         label: "What services do you want more calls for?" },

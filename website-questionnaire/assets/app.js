@@ -22,10 +22,14 @@
     started: false,
     submitted: false,
     sectionIndex: 0,
-    answers: {},        // { [questionId]: value }
-    files: {},          // { [questionId]: [{name,size,type,path,fileId,status,progress,localPreview}] }
-    draftId: null,       // submission row id (also the storage path segment)
-    remoteStatus: "idle" // idle | saving | saved | offline | error
+    answers: {},         // { [questionId]: value }
+    files: {},           // { [questionId]: [{name,size,type,path,fileId,status,progress,localPreview}] }
+    sectionStatus: {},   // { [sectionId]: "not_started" | "in_progress" | "complete" }
+                          // Explicit only for optional sections (set when the client
+                          // confirms them). Required sections are always derived live
+                          // from their star-question answers -- see sectionStatusFor().
+    draftId: null,        // submission row id (also the storage path segment)
+    remoteStatus: "idle"  // idle | saving | saved | offline | error
   };
 
   var els = {};
@@ -59,6 +63,7 @@
         sectionIndex: state.sectionIndex,
         answers: state.answers,
         files: state.files,
+        sectionStatus: state.sectionStatus,
         savedAt: Date.now(),
         version: VERSION
       }));
@@ -430,7 +435,23 @@
       renderFileList(q, fileListEl);
       return;
     }
-    uploadWithRetry(q, entry, file, fileListEl, 0);
+    ensureDraftRowExists().then(function(){
+      uploadWithRetry(q, entry, file, fileListEl, 0);
+    });
+  }
+
+  /* A file's metadata row has a foreign key to the submission row, so
+     opening a section straight from a dashboard card and uploading a
+     file as the very first action (before any question autosave has
+     had a chance to create that row) would otherwise 409 on insert.
+     scheduleSave() alone isn't enough here because it debounces the
+     remote write; this awaits one immediately, once, before upload. */
+  var draftRowEnsured = false;
+  function ensureDraftRowExists(){
+    if (draftRowEnsured) return Promise.resolve();
+    return backend.upsertDraft(state.draftId, buildDraftFields()).then(function(){
+      draftRowEnsured = true;
+    });
   }
 
   function uploadWithRetry(q, entry, file, fileListEl, attempt){
@@ -636,11 +657,36 @@
       els.sectionBody.appendChild(renderQuestion(q));
     });
 
+    els.sectionValidation.hidden = true;
+
     refreshConditionalVisibility();
     updateRail();
     updateProgress();
     updateControls();
     focusHeading(els.sectionTitle);
+  }
+
+  /* ── Required-question validation (blocks Continue on required sections) ── */
+  function validateCurrentSection(){
+    var sIdx = state.sectionIndex;
+    if (!isSectionRequired(sIdx)) return { ok: true };
+    var missing = missingRequiredQuestions(sIdx);
+    els.sectionBody.querySelectorAll(".qn-question.has-error").forEach(function(n){ n.classList.remove("has-error"); });
+    if (missing.length === 0){
+      els.sectionValidation.hidden = true;
+      return { ok: true };
+    }
+    missing.forEach(function(q){
+      var block = els.sectionBody.querySelector('.qn-question[data-qid="' + q.id + '"]');
+      if (block) block.classList.add("has-error");
+    });
+    els.sectionValidation.hidden = false;
+    els.sectionValidation.textContent = missing.length === 1
+      ? "Please answer “" + missing[0].label + "” before continuing."
+      : "Please answer the " + missing.length + " highlighted required questions before continuing.";
+    var firstBlock = els.sectionBody.querySelector('.qn-question[data-qid="' + missing[0].id + '"]');
+    if (firstBlock) firstBlock.scrollIntoView({ block: "center", behavior: ssReduce ? "auto" : "smooth" });
+    return { ok: false };
   }
 
   function transitionToSection(newIndex){
@@ -663,13 +709,6 @@
   /* ============================================================
      Progress / rail
      ============================================================ */
-  function sectionCompletion(sIdx){
-    var section = SCHEMA[sIdx];
-    var starQs = section.questions.filter(function(q){ return q.star && q.type !== "heading"; });
-    if (starQs.length === 0) return isAnySectionAnswered(sIdx) ? 1 : 0;
-    var answered = starQs.filter(function(q){ return isAnswered(q.id); }).length;
-    return answered / starQs.length;
-  }
   function isAnswered(id){
     var v = state.answers[id];
     if (Array.isArray(v)) return v.length > 0;
@@ -690,14 +729,60 @@
     return total ? Math.round((done/total)*100) : 0;
   }
 
+  /* ============================================================
+     Dashboard card status
+     Required sections: status is always derived live from the
+     star-question answers (never stored as an explicit flag), so a
+     required card can never say "Complete" while a required answer
+     is actually missing.
+     Optional sections: "complete" only exists once the client
+     explicitly confirms the section (Continue at its bottom), and
+     that confirmation is what's persisted in state.sectionStatus.
+     Editing an already-confirmed optional section keeps it complete.
+     ============================================================ */
+  function requiredQuestionsFor(sIdx){
+    return SCHEMA[sIdx].questions.filter(function(q){ return q.star && q.type !== "heading"; });
+  }
+  function missingRequiredQuestions(sIdx){
+    return requiredQuestionsFor(sIdx).filter(function(q){ return !isAnswered(q.id); });
+  }
+  function isSectionRequired(sIdx){
+    return !!SCHEMA[sIdx].required;
+  }
+  function sectionStatusFor(sIdx){
+    var section = SCHEMA[sIdx];
+    if (isSectionRequired(sIdx)){
+      var required = requiredQuestionsFor(sIdx);
+      if (required.length === 0) return isAnySectionAnswered(sIdx) ? "complete" : "not_started";
+      var missing = missingRequiredQuestions(sIdx);
+      if (missing.length === 0) return "complete";
+      return missing.length < required.length || isAnySectionAnswered(sIdx) ? "in_progress" : "not_started";
+    }
+    var stored = state.sectionStatus[section.id];
+    if (stored === "complete") return "complete";
+    return isAnySectionAnswered(sIdx) ? "in_progress" : "not_started";
+  }
+  function allRequiredComplete(){
+    return SCHEMA.every(function(section, idx){
+      return !isSectionRequired(idx) || sectionStatusFor(idx) === "complete";
+    });
+  }
+  function completedSectionCount(){
+    return SCHEMA.filter(function(section, idx){ return sectionStatusFor(idx) === "complete"; }).length;
+  }
+  function confirmOptionalSectionComplete(sIdx){
+    var section = SCHEMA[sIdx];
+    if (isSectionRequired(sIdx)) return;
+    state.sectionStatus[section.id] = "complete";
+  }
+
   function updateRail(){
     if (!els.rail) return;
     els.rail.querySelectorAll(".qn-rail-item").forEach(function(item, idx){
       item.classList.toggle("is-active", idx === state.sectionIndex);
-      item.classList.toggle("is-complete", sectionCompletion(idx) >= 1 && idx !== state.sectionIndex);
+      item.classList.toggle("is-complete", sectionStatusFor(idx) === "complete" && idx !== state.sectionIndex);
     });
-    var pct = overallPercent();
-    els.railPct.textContent = pct + "%";
+    els.railPct.textContent = Math.round((completedSectionCount() / SCHEMA.length) * 100) + "%";
   }
 
   function updateProgress(){
@@ -730,6 +815,138 @@
       item.addEventListener("click", function(){ transitionToSection(idx); });
       els.rail.querySelector(".qn-rail-list").appendChild(item);
     });
+  }
+
+  /* ============================================================
+     Dashboard (nine-card home screen)
+     ============================================================ */
+  function cardActionLabel(idx, status){
+    if (status === "complete") return "Edit";
+    if (status === "in_progress") return "Continue →";
+    return idx === 0 ? "Start Here →" : "Start Section →";
+  }
+  function cardStatusLabel(status){
+    if (status === "complete") return "Complete";
+    if (status === "in_progress") return "In progress";
+    return "Not started";
+  }
+
+  function renderDashboard(){
+    var grid = els.cardsGrid;
+    grid.innerHTML = "";
+    SCHEMA.forEach(function(section, idx){
+      var status = sectionStatusFor(idx);
+      var card = document.createElement("div");
+      card.className = "qn-card" + (status === "complete" ? " is-complete" : status === "in_progress" ? " is-in-progress" : "");
+      card.setAttribute("role", "listitem");
+
+      var top = document.createElement("div");
+      top.className = "qn-card-top";
+      var num = document.createElement("span");
+      num.className = "qn-card-number";
+      num.textContent = "0" + (idx + 1);
+      top.appendChild(num);
+      if (status === "complete"){
+        var check = document.createElement("span");
+        check.className = "qn-card-check";
+        check.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>';
+        top.appendChild(check);
+      } else {
+        var tag = document.createElement("span");
+        tag.className = "qn-card-tag" + (section.required ? " is-required" : "");
+        tag.textContent = section.required ? "Required" : "Optional";
+        top.appendChild(tag);
+      }
+      card.appendChild(top);
+
+      var title = document.createElement("div");
+      title.className = "qn-card-title";
+      title.textContent = section.title;
+      card.appendChild(title);
+
+      var desc = document.createElement("p");
+      desc.className = "qn-card-desc";
+      desc.textContent = section.cardDescription || "";
+      card.appendChild(desc);
+
+      var statusRow = document.createElement("div");
+      statusRow.className = "qn-card-status-row";
+      statusRow.innerHTML = '<span class="qn-card-status-dot"></span><span class="qn-card-status-text"></span>';
+      statusRow.querySelector(".qn-card-status-text").textContent = cardStatusLabel(status);
+      card.appendChild(statusRow);
+
+      var actions = document.createElement("div");
+      actions.className = "qn-card-actions";
+      var actionBtn = document.createElement("button");
+      actionBtn.type = "button";
+      actionBtn.className = "qn-card-action" + (status === "complete" ? " is-edit" : "");
+      actionBtn.textContent = cardActionLabel(idx, status);
+      actionBtn.addEventListener("click", function(){ openSectionFromDashboard(idx); });
+      actions.appendChild(actionBtn);
+      card.appendChild(actions);
+
+      grid.appendChild(card);
+    });
+
+    updateDashboardProgress();
+    renderCardDots();
+  }
+
+  function updateDashboardProgress(){
+    var done = completedSectionCount();
+    els.dashProgressFill.style.width = Math.round((done / SCHEMA.length) * 100) + "%";
+    els.dashProgressLabel.textContent = done + " of " + SCHEMA.length + " sections complete";
+  }
+
+  function renderCardDots(){
+    if (!els.cardsDots) return;
+    els.cardsDots.innerHTML = "";
+    if (window.innerWidth > 640) return;
+    SCHEMA.forEach(function(section, idx){
+      var dot = document.createElement("span");
+      dot.className = "qn-cards-dot" + (idx === 0 ? " is-active" : "");
+      els.cardsDots.appendChild(dot);
+    });
+    var count = document.createElement("span");
+    count.className = "qn-cards-dots-count";
+    count.textContent = "1 / " + SCHEMA.length;
+    els.cardsDots.appendChild(count);
+
+    var grid = els.cardsGrid;
+    var updateActive = function(){
+      var cards = grid.querySelectorAll(".qn-card");
+      var dots = els.cardsDots.querySelectorAll(".qn-cards-dot");
+      var center = grid.scrollLeft + grid.clientWidth / 2;
+      var activeIdx = 0;
+      cards.forEach(function(c, i){
+        if (c.offsetLeft <= center) activeIdx = i;
+      });
+      dots.forEach(function(d, i){ d.classList.toggle("is-active", i === activeIdx); });
+      var countEl = els.cardsDots.querySelector(".qn-cards-dots-count");
+      if (countEl) countEl.textContent = (activeIdx + 1) + " / " + SCHEMA.length;
+    };
+    if (!grid.dataset.dotsBound){
+      grid.addEventListener("scroll", function(){ updateActive(); }, { passive: true });
+      grid.dataset.dotsBound = "1";
+    }
+  }
+
+  function scrollCardIntoView(idx){
+    if (window.innerWidth > 640) return;
+    var grid = els.cardsGrid;
+    var card = grid.querySelectorAll(".qn-card")[idx];
+    if (card) card.scrollIntoView({ block: "nearest", inline: "start", behavior: ssReduce ? "auto" : "smooth" });
+  }
+
+  function openSectionFromDashboard(idx){
+    transitionToSection(idx);
+  }
+
+  function returnToDashboard(fromIdx){
+    showScreen("welcome");
+    resetScrollToTop();
+    renderDashboard();
+    if (typeof fromIdx === "number") scrollCardIntoView(fromIdx);
   }
 
   /* ============================================================
@@ -769,17 +986,23 @@
   function renderReview(){
     els.reviewList.innerHTML = "";
     SCHEMA.forEach(function(section, sIdx){
+      var status = sectionStatusFor(sIdx);
       var card = document.createElement("div");
       card.className = "qn-review-card";
-      var flagCount = section.questions.filter(function(q){ return q.star && !isAnswered(q.id); }).length;
+
+      var badgeClass = status === "complete" ? "is-complete" : status === "in_progress" ? "is-in-progress" : "is-skipped";
+      var badgeText = status === "complete" ? "Complete" : status === "in_progress" ? "In progress" : (section.required ? "Incomplete" : "Skipped");
 
       var head = document.createElement("div");
       head.className = "qn-review-card-head";
       head.innerHTML =
         '<div class="qn-review-card-title"><span class="qn-review-check"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></span><span></span></div>' +
-        (flagCount ? '<span class="qn-review-flag">' + flagCount + ' starred question' + (flagCount > 1 ? 's' : '') + ' skipped</span>' : '') +
+        '<span class="qn-review-status-badge ' + badgeClass + '"></span>' +
+        (section.required ? '' : '<span class="qn-review-flag" style="color:var(--muted);">Optional</span>') +
         '<button type="button" class="qn-review-edit">Edit</button>';
       head.querySelector(".qn-review-card-title span:last-child").textContent = section.title;
+      head.querySelector(".qn-review-status-badge").textContent = badgeText;
+      head.querySelector(".qn-review-check").style.opacity = status === "complete" ? "1" : ".25";
       head.querySelector(".qn-review-edit").addEventListener("click", function(){
         transitionToReview(false);
         transitionToSection(sIdx);
@@ -802,6 +1025,10 @@
       card.appendChild(body);
       els.reviewList.appendChild(card);
     });
+
+    var ready = allRequiredComplete();
+    els.btnSubmit.hidden = !ready;
+    els.reviewIncompleteNotice.hidden = ready;
   }
 
   /* ============================================================
@@ -835,7 +1062,8 @@
     out.metadata = {
       submittedAt: new Date().toISOString(),
       questionnaireVersion: VERSION,
-      draftId: state.draftId
+      draftId: state.draftId,
+      sectionStatus: state.sectionStatus
     };
     return out;
   }
@@ -912,13 +1140,16 @@
     els.screen_review = document.getElementById("qnReview");
     els.screen_success = document.getElementById("qnSuccess");
     els.welcomeInner = document.getElementById("qnWelcomeInner");
-    els.btnStart = document.getElementById("qnStartBtn");
-    els.resumeLink = document.getElementById("qnResumeLink");
+    els.cardsGrid = document.getElementById("qnCardsGrid");
+    els.cardsDots = document.getElementById("qnCardsDots");
+    els.dashProgressFill = document.getElementById("qnDashProgressFill");
+    els.dashProgressLabel = document.getElementById("qnDashProgressLabel");
     els.rail = document.getElementById("qnRail");
     els.railPct = document.getElementById("qnRailPct");
     els.sectionEyebrow = document.getElementById("qnSectionEyebrow");
     els.sectionTitle = document.getElementById("qnSectionTitle");
     els.sectionBody = document.getElementById("qnSectionBody");
+    els.sectionValidation = document.getElementById("qnSectionValidation");
     els.progressFill = document.getElementById("qnProgressFill");
     els.mobileProgressFill = document.getElementById("qnMobileProgressFill");
     els.mobileSectionLabel = document.getElementById("qnMobileSectionLabel");
@@ -927,8 +1158,10 @@
     els.btnNext = document.getElementById("qnBtnNext");
     els.controls = document.querySelector(".qn-controls");
     els.backToIntro = document.getElementById("qnBackToIntro");
+    els.backToIntroBottom = document.getElementById("qnBackToIntroBottom");
     els.reviewTitle = document.getElementById("qnReviewTitle");
     els.reviewList = document.getElementById("qnReviewList");
+    els.reviewIncompleteNotice = document.getElementById("qnReviewIncompleteNotice");
     els.btnSubmit = document.getElementById("qnBtnSubmit");
     els.btnBackToEdit = document.getElementById("qnBtnBackToEdit");
     els.submitError = document.getElementById("qnSubmitError");
@@ -946,48 +1179,46 @@
 
     var saved = loadLocal();
     if (saved && (Object.keys(saved.answers||{}).length || Object.keys(saved.files||{}).length)){
-      els.resumeLink.hidden = false;
-      els.resumeLink.addEventListener("click", function(){
-        state.answers = saved.answers || {};
-        state.files = saved.files || {};
-        state.sectionIndex = saved.sectionIndex || 0;
-        enterQuestionnaire();
-      });
+      state.answers = saved.answers || {};
+      state.files = saved.files || {};
+      state.sectionStatus = saved.sectionStatus || {};
+      state.sectionIndex = saved.sectionIndex || 0;
     }
 
-    els.btnStart.addEventListener("click", function(){ enterQuestionnaire(); });
-
     buildRail();
+    renderDashboard();
 
     els.btnPrev.addEventListener("click", function(){
       if (state.sectionIndex > 0) transitionToSection(state.sectionIndex - 1);
     });
     els.btnNext.addEventListener("click", function(){
-      if (state.sectionIndex < SCHEMA.length - 1){
-        transitionToSection(state.sectionIndex + 1);
+      var current = state.sectionIndex;
+      if (isSectionRequired(current)){
+        var v = validateCurrentSection();
+        if (!v.ok) return;
+      } else {
+        confirmOptionalSectionComplete(current);
+      }
+      scheduleSave();
+      if (current < SCHEMA.length - 1){
+        transitionToSection(current + 1);
       } else {
         transitionToReview();
       }
     });
     els.btnBackToEdit.addEventListener("click", function(){
-      showScreen("questionnaire");
-      renderSection();
+      returnToDashboard(null);
     });
     els.btnSubmit.addEventListener("click", handleSubmit);
     els.btnRetry.addEventListener("click", handleSubmit);
 
-    els.backToIntro.addEventListener("click", function(){
-      showScreen("welcome");
-      resetScrollToTop();
-    });
+    var backToOverview = function(){
+      returnToDashboard(state.sectionIndex);
+    };
+    els.backToIntro.addEventListener("click", backToOverview);
+    els.backToIntroBottom.addEventListener("click", backToOverview);
 
     requestAnimationFrame(function(){ els.welcomeInner.classList.add("is-shown"); });
-  }
-
-  function enterQuestionnaire(){
-    state.started = true;
-    showScreen("questionnaire");
-    renderSection();
   }
 
   if (document.readyState !== "loading") init();

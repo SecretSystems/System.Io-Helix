@@ -21,27 +21,30 @@
     <div class="qn-save-indicator" id="qnSaveIndicator"><span class="qn-save-dot"></span><span class="qn-save-text">Saved</span></div>
   </div>
 
-  <!-- ══ WELCOME ══ -->
-  <div id="qnWelcome" class="qn-welcome">
-    <div class="qn-welcome-inner" id="qnWelcomeInner">
-      <p class="qn-welcome-eyebrow">Client Onboarding</p>
-      <h1 class="qn-welcome-h1">Website Questionnaire</h1>
-      <p class="qn-welcome-lead">Tell us about your business, services, goals, and the website you want us to build. Answer what you can—we'll handle the writing and organization.</p>
-
-      <p class="qn-welcome-time">About 20–30 minutes</p>
-
-      <div class="qn-welcome-actions">
-        <button type="button" class="btn btn-cyan" id="qnStartBtn">Start Questionnaire →</button>
-        <p class="qn-welcome-hint">Skip anything that doesn't apply. Your progress saves automatically.</p>
-        <button type="button" class="qn-resume-link" id="qnResumeLink" hidden>Continue where I left off</button>
+  <!-- ══ DASHBOARD (home screen) ══ -->
+  <div id="qnWelcome" class="qn-dashboard">
+    <div class="qn-dashboard-inner" id="qnWelcomeInner">
+      <div class="qn-dashboard-intro">
+        <h1 class="qn-dashboard-h1">Let&rsquo;s Get Your Website Live</h1>
+        <p class="qn-dashboard-lead">Complete the sections below so we have everything needed to plan, design, and build your website.</p>
+        <p class="qn-dashboard-hint">Skip anything that doesn't apply. Your progress saves automatically.</p>
+        <div class="qn-dashboard-progress">
+          <div class="qn-progress-track qn-dashboard-progress-track"><div class="qn-progress-fill" id="qnDashProgressFill"></div></div>
+          <p class="qn-dashboard-progress-label" id="qnDashProgressLabel">0 of 9 sections complete</p>
+        </div>
       </div>
+
+      <div class="qn-cards-viewport">
+        <div class="qn-cards-grid" id="qnCardsGrid" role="list" aria-label="Questionnaire sections"></div>
+      </div>
+      <div class="qn-cards-dots" id="qnCardsDots" aria-hidden="true"></div>
     </div>
   </div>
 
   <!-- ══ QUESTIONNAIRE ══ -->
   <div id="qnQuestionnaire" hidden>
     <div class="qn-back-row">
-      <button type="button" class="qn-back-link" id="qnBackToIntro">← Back to introduction</button>
+      <button type="button" class="qn-back-link" id="qnBackToIntro">← Back to overview</button>
     </div>
     <div class="qn-mobile-progress">
       <div class="qn-mobile-progress-top">
@@ -68,10 +71,14 @@
           <div class="qn-progress-track" style="max-width:34rem;margin-bottom:2.5rem;"><div class="qn-progress-fill" id="qnProgressFill"></div></div>
 
           <div class="qn-section-body" id="qnSectionBody"></div>
+          <div class="qn-section-validation" id="qnSectionValidation" hidden></div>
 
           <div class="qn-controls">
             <button type="button" class="qn-btn-prev" id="qnBtnPrev">← Previous</button>
             <button type="button" class="qn-btn-next" id="qnBtnNext">Continue →</button>
+          </div>
+          <div class="qn-back-row qn-back-row-bottom">
+            <button type="button" class="qn-back-link" id="qnBackToIntroBottom">← Back to overview</button>
           </div>
         </div>
       </div>
@@ -88,9 +95,12 @@
           <p style="color:var(--text);font-size:.92rem;line-height:1.7;max-width:34rem;">Review anything you'd like to change, then send it to Secret Systems.</p>
         </div>
         <div id="qnReviewList"></div>
+        <div class="qn-review-incomplete-notice" id="qnReviewIncompleteNotice" hidden>
+          Finish the required sections above before submitting.
+        </div>
         <div class="qn-review-cta">
           <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-            <button type="button" class="qn-btn-prev" id="qnBtnBackToEdit">← Back to Questionnaire</button>
+            <button type="button" class="qn-btn-prev" id="qnBtnBackToEdit">← Back to Overview</button>
             <button type="button" class="qn-btn-next" id="qnBtnSubmit">Send Questionnaire</button>
           </div>
           <div class="qn-submit-error" id="qnSubmitError" hidden>

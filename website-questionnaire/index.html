@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Website Questionnaire | Secret Systems .io</title>
+<meta name="description" content="Client onboarding questionnaire for Secret Systems website builds."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="canonical" href="https://secretsystems.io/website-questionnaire/"/>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/ss-shared.css"/>
+<link rel="stylesheet" href="/website-questionnaire/assets/questionnaire.css"/>
+</head>
+<body class="qn-body">
+<div class="qn-shell">
+
+  <div class="qn-topbar">
+    <a href="/" class="qn-topbar-logo" aria-label="Secret Systems.io home"><img src="/assets/branding/secret-systems-logo-dark.png" alt="Secret Systems.io"></a>
+    <div class="qn-save-indicator" id="qnSaveIndicator"><span class="qn-save-dot"></span><span class="qn-save-text">Saved</span></div>
+  </div>
+
+  <!-- ══ WELCOME ══ -->
+  <div id="qnWelcome" class="qn-welcome">
+    <div class="qn-welcome-inner" id="qnWelcomeInner">
+      <p class="qn-welcome-eyebrow">Client Onboarding</p>
+      <h1 class="qn-welcome-h1">Website Questionnaire</h1>
+      <p class="qn-welcome-lead">Thanks for working with us on your new website. Answer what you can, in your own words. Bullet points and half-sentences are perfect — we handle the wording.</p>
+
+      <div class="qn-principles">
+        <div class="qn-principle">
+          <span class="qn-principle-num">01</span>
+          <div>
+            <div class="qn-principle-title">Skip anything that doesn't apply.</div>
+            <p class="qn-principle-body">Blank is a real answer. We'd rather leave something off your website than publish something inaccurate.</p>
+          </div>
+        </div>
+        <div class="qn-principle">
+          <span class="qn-principle-num">02</span>
+          <div>
+            <div class="qn-principle-title">Don't polish your writing.</div>
+            <p class="qn-principle-body">Bullet points, rough notes, and half-sentences are perfect.</p>
+          </div>
+        </div>
+        <div class="qn-principle">
+          <span class="qn-principle-num">03</span>
+          <div>
+            <div class="qn-principle-title">We never make anything up.</div>
+            <p class="qn-principle-body">No invented reviews, fake experience claims, certifications, service areas, or promises.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="qn-welcome-meta">
+        <span class="qn-welcome-meta-label">Estimated time</span>
+        <span class="qn-welcome-meta-value">20–30 minutes</span>
+        <p class="qn-welcome-hint">Short on time? Answer the ★ questions first.</p>
+      </div>
+
+      <div class="qn-welcome-actions">
+        <button type="button" class="btn btn-cyan" id="qnStartBtn">Start Questionnaire →</button>
+        <button type="button" class="qn-resume-link" id="qnResumeLink" hidden>Continue where I left off</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ QUESTIONNAIRE ══ -->
+  <div id="qnQuestionnaire" hidden>
+    <div class="qn-mobile-progress">
+      <div class="qn-mobile-progress-top">
+        <span class="qn-mobile-progress-section" id="qnMobileSectionLabel">Section 1 of 9</span>
+        <span class="qn-mobile-progress-pct" id="qnMobilePct">0% complete</span>
+      </div>
+      <div class="qn-progress-track"><div class="qn-progress-fill" id="qnMobileProgressFill"></div></div>
+    </div>
+
+    <div class="qn-main">
+      <nav class="qn-rail" id="qnRail" aria-label="Questionnaire sections">
+        <p class="qn-rail-title">Sections</p>
+        <ul class="qn-rail-list"></ul>
+        <div class="qn-rail-progress-wrap">
+          <div class="qn-rail-progress-pct" id="qnRailPct">0%</div>
+          <div class="qn-rail-progress-label">complete</div>
+        </div>
+      </nav>
+
+      <div class="qn-content">
+        <div class="qn-content-inner">
+          <p class="qn-section-eyebrow" id="qnSectionEyebrow">Section 1 of 9</p>
+          <h1 class="qn-section-title" id="qnSectionTitle"></h1>
+          <div class="qn-progress-track" style="max-width:34rem;margin-bottom:2.5rem;"><div class="qn-progress-fill" id="qnProgressFill"></div></div>
+
+          <div class="qn-section-body" id="qnSectionBody"></div>
+
+          <div class="qn-controls">
+            <button type="button" class="qn-btn-prev" id="qnBtnPrev">← Previous</button>
+            <button type="button" class="qn-btn-next" id="qnBtnNext">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ REVIEW ══ -->
+  <div id="qnReview" hidden>
+    <div class="qn-content" style="padding-left:0;">
+      <div class="qn-content-inner" style="max-width:760px;">
+        <div class="qn-review-header">
+          <p class="qn-section-eyebrow">Almost Done</p>
+          <h1 class="qn-section-title">Review &amp; Submit</h1>
+          <p style="color:var(--text);font-size:.92rem;line-height:1.7;max-width:34rem;">Review anything you'd like to change, then send it to Secret Systems.</p>
+        </div>
+        <div id="qnReviewList"></div>
+        <div class="qn-review-cta">
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+            <button type="button" class="qn-btn-prev" id="qnBtnBackToEdit">← Back to Questionnaire</button>
+            <button type="button" class="qn-btn-next" id="qnBtnSubmit">Send Questionnaire</button>
+          </div>
+          <div class="qn-submit-error" id="qnSubmitError" hidden>
+            <div class="qn-submit-error-title">We couldn't send the questionnaire yet.</div>
+            <div class="qn-submit-error-body">Your answers are still saved on this device. Please try again.</div>
+            <div><button type="button" class="qn-btn-prev" id="qnBtnRetry">Try Again</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SUCCESS ══ -->
+  <div id="qnSuccess" hidden class="qn-success">
+    <div class="qn-success-inner" id="qnSuccessInner">
+      <div class="qn-success-icon"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
+      <h1 class="qn-success-h1">You're all set.</h1>
+      <p class="qn-success-body">We've received your website questionnaire. We'll review everything you sent and reach out if we need anything specific before we start building.</p>
+      <div class="qn-success-note" id="qnSuccessFilesNote">
+        <div class="qn-success-note-title">Thanks — we received your files too.</div>
+        <div class="qn-success-note-body">Your uploaded photos and materials are attached to this submission.</div>
+      </div>
+      <div class="qn-success-note" id="qnSuccessAddPhotos">
+        <div class="qn-success-note-title">Want to help us move even faster?</div>
+        <div class="qn-success-note-body">Real project photos are the most valuable thing you can send us. You're welcome to email them to us anytime — <a href="mailto:info@secretsystems.io" style="color:var(--cyan);">info@secretsystems.io</a>.</div>
+      </div>
+      <a href="/" class="btn btn-outline">Return to Secret Systems</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Supabase client (only loaded — not required unless SUPABASE_URL/KEY are configured in supabase-adapter.js) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/website-questionnaire/assets/schema.js"></script>
+<script src="/website-questionnaire/assets/supabase-adapter.js"></script>
+<script src="/website-questionnaire/assets/app.js"></script>
+</body></html>

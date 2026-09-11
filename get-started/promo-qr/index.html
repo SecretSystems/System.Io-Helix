@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Promo QR Code | Secret Systems .io</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+/* This is an internal/admin utility page — not part of the customer
+   sales journey — for generating a printable QR code that points at
+   the promotional checkout URL (https://secretsystems.io/get-started/?promo=5).
+   Not linked from site navigation or the checkout page itself. */
+.qr-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;}
+.qr-card{max-width:26rem;width:100%;background:var(--card);border:1px solid var(--border);padding:2.5rem;text-align:center;}
+.qr-card h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:.5rem;}
+.qr-card p{font-size:.85rem;color:var(--text);line-height:1.6;margin-bottom:1.5rem;}
+#qr-canvas-holder{background:#fff;padding:1.25rem;display:inline-block;border-radius:8px;margin-bottom:1.5rem;}
+.qr-url{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--cyan);word-break:break-all;margin-bottom:1.5rem;}
+.qr-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="qr-wrap">
+  <div class="qr-card">
+    <h1>Promo QR Code</h1>
+    <p>Scan or print this code for the promo-code-5 checkout link. Right-click the code to save it as an image for flyers, business cards, or signage.</p>
+    <div id="qr-canvas-holder"></div>
+    <p class="qr-url" id="qr-url-display"></p>
+    <div class="qr-actions">
+      <button type="button" class="btn btn-outline" id="qr-print-btn">Print</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  var PROMO_URL = "https://secretsystems.io/get-started/?promo=5";
+  document.getElementById("qr-url-display").textContent = PROMO_URL;
+  if (typeof QRCode !== "undefined"){
+    new QRCode(document.getElementById("qr-canvas-holder"), {
+      text: PROMO_URL,
+      width: 220,
+      height: 220,
+      colorDark: "#020408",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+  document.getElementById("qr-print-btn").addEventListener("click", function(){ window.print(); });
+})();
+</script>
+</body></html>

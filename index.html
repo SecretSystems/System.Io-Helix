@@ -98,7 +98,7 @@ nav{
 .nav-links a{
   font-size:0.82rem;font-weight:500;letter-spacing:0.1em;
   text-transform:uppercase;color:var(--text);text-decoration:none;
-  transition:color 0.2s;position:relative;
+  transition:color 0.2s;position:relative;white-space:nowrap;
 }
 .nav-links a::after{
   content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
@@ -1261,10 +1261,17 @@ footer{
 /* terminal type-in animation removed with the terminal mockup */
 
 /* bottom ticker banner removed — hero watermark is now cropped at draw time (see drawFrame) */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
+/* Adding the Start Your Website CTA brings the nav to 19 items —
+   already tight before that (nav-links alone measures ~1329px wide
+   at 1440px viewport width, before the logo and page padding are
+   even counted). Switch to the hamburger well before desktop nav
+   items start clipping off the right edge, e.g. Contact. */
+@media(max-width:1650px){
   .nav-links{display:none;}
   .nav-hamburger{display:flex;}
+}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
   nav .site-logo{max-width:145px;max-height:34px;}
   /* The video is now the hero's only overlay content -- 1.25rem (20px)
      side padding keeps it within the required 16-24px mobile margins.
@@ -1654,7 +1661,8 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <li><a href="/work/">Work</a></li>
     <li><a href="/pricing/">Pricing</a></li>
     <li><a href="/about/">About</a></li>
-    <li><a href="/contact/" class="nav-cta">Contact</a></li>
+    <li><a href="/get-started/" class="nav-cta">Start Your Website</a></li>
+    <li><a href="/contact/">Contact</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -1690,7 +1698,8 @@ footer .foot-brand p,footer .foot-contact,footer .foot-col ul a{color:#85a0b8;}
     <li><a href="/work/">Work</a></li>
     <li><a href="/pricing/">Pricing</a></li>
     <li><a href="/about/">About</a></li>
-    <li class="mobile-cta"><a href="/contact/">Contact</a></li>
+    <li class="mobile-cta"><a href="/get-started/">Start Your Website</a></li>
+    <li><a href="/contact/">Contact</a></li>
   </ul>
 </div>
 

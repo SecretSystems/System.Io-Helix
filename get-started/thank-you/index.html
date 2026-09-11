@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>You're All Set | Secret Systems .io</title>
+<meta name="description" content="Thank you for choosing Secret Systems. Continue to the onboarding questionnaire to get your website build started."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="canonical" href="https://secretsystems.io/get-started/thank-you/"/>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/ss-shared.css"/>
+<style>
+.ty-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem;text-align:center;}
+.ty-inner{max-width:34rem;}
+.ty-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.3);display:grid;place-items:center;margin:0 auto 2rem;}
+.ty-icon svg{width:28px;height:28px;stroke:var(--cyan);stroke-width:2.2;fill:none;}
+.ty-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:1rem;}
+.ty-body{font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:2.5rem;}
+</style>
+</head>
+<body class="ty-body-tag">
+<div class="ty-wrap">
+  <div class="ty-inner">
+    <div class="ty-icon"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
+    <h1 class="ty-h1">You're all set.</h1>
+    <p class="ty-body">Thanks for choosing Secret Systems. Your order is confirmed — next, tell us about your business so we can start building right away.</p>
+    <a href="/website-questionnaire/" class="btn btn-cyan" id="ty-continue-btn">Continue to Onboarding →</a>
+  </div>
+</div>
+<script src="/ss-config.js"></script>
+<script src="/ss-shared.js"></script>
+<script>
+(function(){
+  try {
+    if (typeof window.gtag === "function") window.gtag("event", "checkout_completed", {});
+  } catch (e){}
+})();
+</script>
+</body></html>

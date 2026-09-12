@@ -325,9 +325,7 @@
     els.promoStatus = document.getElementById("gs-promo-status");
     els.summaryCta = document.getElementById("gs-summary-cta");
     els.heroCta = document.getElementById("gs-hero-cta");
-    els.contactForm = document.getElementById("gs-contact-form");
     els.formError = document.getElementById("gs-form-error");
-    els.finalCta = document.getElementById("gs-final-cta");
     els.trackA = document.getElementById("gs-track-a");
     els.trackB = document.getElementById("gs-track-b");
   }
@@ -372,26 +370,24 @@
     if (els.heroCta){
       els.heroCta.addEventListener("click", function(){ trackEvent("main_cta_clicked", { location: "hero" }); });
     }
-    if (els.summaryCta){
-      els.summaryCta.addEventListener("click", function(){ trackEvent("main_cta_clicked", { location: "summary" }); });
-    }
 
-    if (els.contactForm){
-      els.contactForm.addEventListener("submit", function(e){
+    if (els.summaryCta){
+      els.summaryCta.addEventListener("click", function(e){
         e.preventDefault();
+        trackEvent("main_cta_clicked", { location: "summary" });
         els.formError.hidden = true;
 
-        if (els.finalCta.disabled) return; // guard against duplicate submits
-        els.finalCta.disabled = true;
-        var originalText = els.finalCta.textContent;
-        els.finalCta.textContent = "Redirecting to checkout…";
+        if (els.summaryCta.getAttribute("aria-disabled") === "true") return; // guard against duplicate clicks
+        els.summaryCta.setAttribute("aria-disabled", "true");
+        var originalText = els.summaryCta.textContent;
+        els.summaryCta.textContent = "Redirecting to checkout…";
 
         beginCheckout().then(function(result){
           if (result.ok){
             window.location.href = result.url;
           } else {
-            els.finalCta.disabled = false;
-            els.finalCta.textContent = originalText;
+            els.summaryCta.removeAttribute("aria-disabled");
+            els.summaryCta.textContent = originalText;
             els.formError.hidden = false;
             els.formError.textContent = result.message;
           }

@@ -1,30 +1,10 @@
 /* ============================================================
    Secret Systems — /get-started checkout page
    Vanilla JS, no framework/build step (matches the rest of the
-   site). Handles: two-package selection (Website / Website +
-   Growth), promo-code validation via the Supabase edge function,
-   order summary, the "Judge for Yourself" video gallery, main-video
-   offscreen pause, and redirecting to the configured HighLevel
-   checkout destination.
-
-   Security notes:
-   - Promo eligibility is decided server-side by the existing
-     validate-checkout Supabase Edge Function, every time. This file
-     never decides eligibility on its own.
-   - `state.promoApplied` lives ONLY in an in-memory JS variable for
-     the current loaded page. It is never written to localStorage,
-     sessionStorage, a cookie, or any other client-persisted store,
-     and is never read from one. A page refresh or reopen always
-     starts with promoApplied = false — the customer must re-enter
-     and re-validate the code in that session before any promotional
-     price or checkout URL is used.
-   - The promo code is NEVER accepted from, read from, or written to
-     the URL. It can only enter this page's memory via the visible
-     input field, submitted through the form.
-   - Raw promo codes are never sent to analytics or shown in visible
-     page content.
-   - HighLevel URLs are centralized in ss-checkout-config.js and are
-     never modified here.
+   site). Handles: package/add-on state, promo-code validation via
+   the Supabase edge function, order summary, the moving demo
+   gallery, main-video offscreen pause, and redirecting to the
+   configured HighLevel checkout destination.
    ============================================================ */
 (function(){
   "use strict";
@@ -32,9 +12,11 @@
   var cfg = window.SS_CHECKOUT_CONFIG || {};
   var ssReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
+  var LS_PROMO_KEY = "ss_checkout_promo";
+
   var state = {
-    addGrowthSuite: false, // false = Website only, true = Website + Growth (recommended, default selected)
-    promoApplied: false,   // in-memory only for this page load — never persisted, never read from storage or URL
+    addGrowthSuite: false,
+    promoApplied: false,
     promoCode: "",
     pricing: null // set once validated by the edge function; falls back to DISPLAY_PRICING until then
   };
@@ -58,68 +40,41 @@
   function currentDisplayPricing(){
     if (state.pricing) return state.pricing;
     var tier = state.promoApplied ? cfg.DISPLAY_PRICING.promo : cfg.DISPLAY_PRICING.regular;
-    if (state.addGrowthSuite){
-      return {
-        websiteOnce: tier.websiteOnce,
-        careMonthly: 0,
-        growthSuiteMonthly: cfg.DISPLAY_PRICING.growthSuiteMonthly,
-        dueToday: tier.websiteOnce + cfg.DISPLAY_PRICING.growthSuiteMonthly,
-        monthlyRecurring: cfg.DISPLAY_PRICING.growthSuiteMonthly
-      };
-    }
+    var growthMonthly = state.addGrowthSuite ? cfg.DISPLAY_PRICING.growthSuiteMonthly : 0;
     return {
       websiteOnce: tier.websiteOnce,
       careMonthly: tier.careMonthly,
-      growthSuiteMonthly: 0,
+      growthSuiteMonthly: growthMonthly,
       dueToday: tier.websiteOnce,
-      monthlyRecurring: tier.careMonthly
+      monthlyRecurring: tier.careMonthly + growthMonthly
     };
   }
 
-  function renderCardPricing(){
-    var regular = cfg.DISPLAY_PRICING.regular;
-    var promo = cfg.DISPLAY_PRICING.promo;
-    var tier = state.promoApplied ? promo : regular;
-
-    // Website-only card
-    els.websitePrice.textContent = fmtMoney(tier.websiteOnce);
-    els.carePriceInline.textContent = fmtMoney(tier.careMonthly) + "/mo";
-    els.carePrice.textContent = fmtMoney(tier.careMonthly) + "/month";
-    if (state.promoApplied){
-      els.websiteStrike.textContent = fmtMoney(regular.websiteOnce);
-      els.websiteStrike.hidden = false;
-    } else {
-      els.websiteStrike.hidden = true;
-    }
-
-    // Website + Growth card
-    els.growthWebsitePrice.textContent = fmtMoney(tier.websiteOnce);
-    if (state.promoApplied){
-      els.growthWebsiteStrike.textContent = fmtMoney(regular.websiteOnce);
-      els.growthWebsiteStrike.hidden = false;
-    } else {
-      els.growthWebsiteStrike.hidden = true;
-    }
-    els.growthDueTodayNote.textContent = fmtMoney(tier.websiteOnce + cfg.DISPLAY_PRICING.growthSuiteMonthly) + " due today";
-  }
-
-  function renderSummary(){
+  function renderPricing(){
     var p = currentDisplayPricing();
     var regular = cfg.DISPLAY_PRICING.regular;
 
-    els.summaryPackageName.textContent = state.addGrowthSuite ? "Website + Growth" : "Website";
+    els.websitePrice.textContent = fmtMoney(p.websiteOnce);
+    els.carePrice.textContent = fmtMoney(p.careMonthly) + "/mo";
+
+    if (state.promoApplied){
+      els.websiteStrike.textContent = fmtMoney(regular.websiteOnce);
+      els.websiteStrike.hidden = false;
+      els.careStrike.textContent = fmtMoney(regular.careMonthly) + "/mo";
+      els.careStrike.hidden = false;
+    } else {
+      els.websiteStrike.hidden = true;
+      els.careStrike.hidden = true;
+    }
+
+    els.sumWebsite.textContent = fmtMoney(p.websiteOnce);
+    els.sumCare.textContent = fmtMoney(p.careMonthly) + "/mo";
 
     if (state.addGrowthSuite){
-      els.sumWebsiteLabel.textContent = "Website (one time)";
-      els.sumWebsite.textContent = fmtMoney(p.websiteOnce);
       els.sumGrowthRow.hidden = false;
-      els.sumGrowth.textContent = fmtMoney(p.growthSuiteMonthly);
-      els.summaryMonthlyNote.innerHTML = "Then <strong>" + fmtMoney(p.monthlyRecurring) + "/mo</strong> — Website Care is included.";
+      els.sumGrowth.textContent = fmtMoney(cfg.DISPLAY_PRICING.growthSuiteMonthly) + "/mo";
     } else {
-      els.sumWebsiteLabel.textContent = "Website (one time)";
-      els.sumWebsite.textContent = fmtMoney(p.websiteOnce);
       els.sumGrowthRow.hidden = true;
-      els.summaryMonthlyNote.innerHTML = "Then <strong>" + fmtMoney(p.careMonthly) + "/mo</strong> after your 30-day Website Care trial.";
     }
 
     if (state.promoApplied){
@@ -131,34 +86,34 @@
     }
 
     els.totalToday.textContent = fmtMoney(p.dueToday);
-  }
+    els.totalMonthly.textContent = fmtMoney(p.monthlyRecurring) + "/mo";
 
-  function renderSelectedState(){
-    els.cardWebsite.classList.toggle("is-selected", !state.addGrowthSuite);
-    els.cardWebsite.setAttribute("aria-pressed", String(!state.addGrowthSuite));
-    els.cardGrowth.classList.toggle("is-selected", state.addGrowthSuite);
-    els.cardGrowth.setAttribute("aria-pressed", String(state.addGrowthSuite));
-  }
-
-  function renderAll(){
-    renderCardPricing();
-    renderSelectedState();
-    renderSummary();
+    els.addonPrice.textContent = state.addGrowthSuite
+      ? "+ " + fmtMoney(cfg.DISPLAY_PRICING.growthSuiteMonthly) + "/month added"
+      : "+ " + fmtMoney(cfg.DISPLAY_PRICING.growthSuiteMonthly) + "/month if added";
   }
 
   /* ============================================================
-     Promo code — server is the sole source of truth
+     Promo code
      ============================================================ */
-  function showPromoStatus(message, kind){
-    els.promoStatus.hidden = false;
-    els.promoStatus.textContent = message;
-    els.promoStatus.className = "gs-promo-status" + (kind ? " " + kind : "");
+  function saveLocalPromo(){
+    try {
+      if (state.promoApplied){
+        localStorage.setItem(LS_PROMO_KEY, state.promoCode);
+      } else {
+        localStorage.removeItem(LS_PROMO_KEY);
+      }
+    } catch (e){}
   }
 
-  function setPromoLoading(isLoading){
-    els.promoBtn.disabled = isLoading;
-    els.promoBtn.textContent = isLoading ? "Checking…" : "Apply";
-    els.promoBtn.setAttribute("aria-busy", isLoading ? "true" : "false");
+  function loadLocalPromo(){
+    try { return localStorage.getItem(LS_PROMO_KEY) || ""; } catch (e){ return ""; }
+  }
+
+  function showPromoStatus(message, isOk){
+    els.promoStatus.hidden = false;
+    els.promoStatus.textContent = message;
+    els.promoStatus.className = "gs-promo-status " + (isOk ? "ok" : "err");
   }
 
   function currentPackageKey(){
@@ -182,68 +137,54 @@
     });
   }
 
-  function applyPromoCode(code){
-    var trimmed = (code || "").trim();
-    if (!trimmed) return Promise.resolve(false);
-
-    trackEvent("promo_validation_started", {});
-    setPromoLoading(true);
-
-    return validateSelection(trimmed).then(function(result){
-      setPromoLoading(false);
-      if (!result.data.ok || !result.data.promoApplied){
+  function applyPromoCode(code, opts){
+    var silent = opts && opts.silent;
+    return validateSelection(code).then(function(result){
+      if (!result.data.ok){
+        if (!silent){
+          showPromoStatus("That code isn't valid. Double-check it and try again.", false);
+        }
         state.promoApplied = false;
         state.promoCode = "";
         state.pricing = null;
-        showPromoStatus("That promotional code could not be verified. Check the code and try again.", "err");
-        trackEvent("promo_validation_failed", {});
-        renderAll();
+        renderPricing();
         return false;
       }
       state.pricing = result.data.pricing;
-      state.promoApplied = true;
-      state.promoCode = trimmed;
-      showPromoStatus("Promo verified. Your eligible launch pricing has been applied.", "ok");
-      trackEvent("promo_validation_success", {});
-      renderAll();
-      return true;
+      state.promoApplied = !!result.data.promoApplied;
+      state.promoCode = state.promoApplied ? code.trim() : "";
+      if (state.promoApplied){
+        showPromoStatus("Promo applied — pricing updated below.", true);
+        trackEvent("promo_code_applied", { promo_valid: true });
+      } else if (!silent && code) {
+        showPromoStatus("That code isn't valid. Double-check it and try again.", false);
+      }
+      saveLocalPromo();
+      renderPricing();
+      return state.promoApplied;
     }).catch(function(){
-      setPromoLoading(false);
-      state.promoApplied = false;
-      state.promoCode = "";
-      state.pricing = null;
-      showPromoStatus("That promotional code could not be verified. Check the code and try again.", "err");
-      renderAll();
+      if (!silent) showPromoStatus("Couldn't check that code right now — please try again.", false);
       return false;
     });
   }
 
   /* Re-validate (silently) whenever the package selection changes, so
      an already-applied promo code's numbers stay correct against the
-     new selection. */
+     new selection, and so the Growth Suite price is never affected by
+     the promo per the pricing rules. */
   function revalidateCurrentSelection(){
-    if (!state.promoApplied) { state.pricing = null; renderAll(); return; }
-    validateSelection(state.promoCode).then(function(result){
-      if (result.data.ok && result.data.promoApplied){
-        state.pricing = result.data.pricing;
-      } else {
-        state.promoApplied = false;
-        state.promoCode = "";
-        state.pricing = null;
-      }
-      renderAll();
-    }).catch(function(){
-      renderAll();
-    });
+    if (!state.promoApplied) { renderPricing(); return; }
+    applyPromoCode(state.promoCode, { silent: true });
   }
 
   /* ============================================================
-     Package selection
+     Growth Suite toggle
      ============================================================ */
-  function selectPackage(addGrowth){
-    if (state.addGrowthSuite === addGrowth) return;
-    state.addGrowthSuite = addGrowth;
-    trackEvent("package_selected", { package: addGrowth ? "website_growth" : "website" });
+  function onGrowthToggle(){
+    state.addGrowthSuite = els.growthToggle.checked;
+    if (state.addGrowthSuite){
+      trackEvent("growth_suite_selected", {});
+    }
     revalidateCurrentSelection();
   }
 
@@ -264,7 +205,7 @@
       if (!url){
         return { ok: false, message: "Checkout isn't connected yet for this option. Please contact us directly to get started." };
       }
-      trackEvent("checkout_redirect_started", { destination: result.data.destinationKey });
+      trackEvent("checkout_completed_redirect", { destination: result.data.destinationKey });
       return { ok: true, url: url };
     }).catch(function(){
       return { ok: false, message: "We couldn't reach checkout right now. Please try again in a moment." };
@@ -272,31 +213,76 @@
   }
 
   /* ============================================================
-     Judge for Yourself: video gallery
-     Native controls, no autoplay. Starting one video pauses the
-     others so only one ever plays at a time. Scroll-triggered
-     reveal reuses the site's existing .reveal/.reveal.visible
-     pattern (see ss-shared.js/ss-shared.css) with a small stagger.
+     Moving demo gallery
      ============================================================ */
-  function initGalleryVideos(){
-    var videos = document.querySelectorAll(".gs-gallery-video");
-    videos.forEach(function(v){
-      v.addEventListener("play", function(){
-        videos.forEach(function(other){
-          if (other !== v && !other.paused) other.pause();
-        });
-      });
-    });
+  var GALLERY_CLIPS = [
+    { base: "clip-1" }, { base: "clip-2" }, { base: "clip-3" },
+    { base: "clip-4" }, { base: "clip-5" }, { base: "gateway" }
+  ];
+  var CLIP_BASE_PATH = "/assets/video/Demo video small/optimized/";
+
+  function makeClipEl(clip){
+    var wrap = document.createElement("div");
+    wrap.className = "gs-clip";
+    if (ssReduce){
+      var img = document.createElement("img");
+      img.src = CLIP_BASE_PATH + clip.base + "-poster.jpg";
+      img.alt = "";
+      img.loading = "lazy";
+      wrap.appendChild(img);
+      return wrap;
+    }
+    var video = document.createElement("video");
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = "none";
+    video.setAttribute("aria-hidden", "true");
+    video.poster = CLIP_BASE_PATH + clip.base + "-poster.jpg";
+    var sourceWebm = document.createElement("source");
+    sourceWebm.src = CLIP_BASE_PATH + clip.base + ".webm";
+    sourceWebm.type = "video/webm";
+    var sourceMp4 = document.createElement("source");
+    sourceMp4.src = CLIP_BASE_PATH + clip.base + ".mp4";
+    sourceMp4.type = "video/mp4";
+    video.appendChild(sourceWebm);
+    video.appendChild(sourceMp4);
+    wrap.appendChild(video);
+    return wrap;
   }
 
-  function initGalleryReveal(){
-    var cards = document.querySelectorAll("#gs-video-grid .gs-video-card");
-    cards.forEach(function(card, idx){
-      card.style.transitionDelay = ssReduce ? "0ms" : (idx * 90) + "ms";
-    });
-    // ss-shared.js already observes every .reveal element on the page
-    // and adds .visible once when it enters the viewport (threshold
-    // 0.1, no re-triggering), so no separate observer is needed here.
+  function buildGalleryTrack(container, clips){
+    // duplicate the clip list once so the loop can reset invisibly at 50% scroll
+    var doubled = clips.concat(clips);
+    doubled.forEach(function(clip){ container.appendChild(makeClipEl(clip)); });
+  }
+
+  function lazyLoadGalleryVideos(){
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".gs-clip video").forEach(function(v){ v.preload = "auto"; v.play().catch(function(){}); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var video = entry.target;
+        if (entry.isIntersecting){
+          if (!video.src && video.preload === "none") video.preload = "auto";
+          video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: "200px" });
+    document.querySelectorAll(".gs-clip video").forEach(function(v){ observer.observe(v); });
+  }
+
+  function initGallery(){
+    if (!els.trackA || !els.trackB) return;
+    // Split the six clips across two rows moving in opposite directions.
+    var half = Math.ceil(GALLERY_CLIPS.length / 2);
+    buildGalleryTrack(els.trackA, GALLERY_CLIPS.slice(0, half));
+    buildGalleryTrack(els.trackB, GALLERY_CLIPS.slice(half));
+    lazyLoadGalleryVideos();
   }
 
   /* ============================================================
@@ -319,43 +305,31 @@
      ============================================================ */
   function collectEls(){
     els.mainVideo = document.getElementById("gs-main-video");
-
-    els.cardWebsite = document.getElementById("gs-card-website");
-    els.cardGrowth = document.getElementById("gs-card-growth");
-
     els.websitePrice = document.getElementById("gs-website-price");
     els.websiteStrike = document.getElementById("gs-website-strike");
-    els.carePriceInline = document.getElementById("gs-care-price-inline");
     els.carePrice = document.getElementById("gs-care-price");
-
-    els.growthWebsitePrice = document.getElementById("gs-growth-website-price");
-    els.growthWebsiteStrike = document.getElementById("gs-growth-website-strike");
-    els.growthDueTodayNote = document.getElementById("gs-growth-due-today-note");
-
-    els.summaryPackageName = document.getElementById("gs-summary-package-name");
-    els.sumWebsiteLabel = document.getElementById("gs-sum-website-label");
+    els.careStrike = document.getElementById("gs-care-strike");
+    els.growthToggle = document.getElementById("gs-growth-toggle");
+    els.addonPrice = document.getElementById("gs-addon-price");
     els.sumWebsite = document.getElementById("gs-sum-website");
+    els.sumCare = document.getElementById("gs-sum-care");
     els.sumGrowthRow = document.getElementById("gs-sum-growth-row");
     els.sumGrowth = document.getElementById("gs-sum-growth");
     els.sumSavingsRow = document.getElementById("gs-sum-savings-row");
     els.sumSavings = document.getElementById("gs-sum-savings");
     els.totalToday = document.getElementById("gs-total-today");
-    els.summaryMonthlyNote = document.getElementById("gs-summary-monthly-note");
-
+    els.totalMonthly = document.getElementById("gs-total-monthly");
     els.promoToggleBtn = document.getElementById("gs-promo-toggle-btn");
     els.promoForm = document.getElementById("gs-promo-form");
     els.promoInput = document.getElementById("gs-promo-input");
-    els.promoBtn = document.getElementById("gs-promo-btn");
     els.promoStatus = document.getElementById("gs-promo-status");
-
     els.summaryCta = document.getElementById("gs-summary-cta");
     els.heroCta = document.getElementById("gs-hero-cta");
-    els.ctaWebsite = document.getElementById("gs-cta-website");
-    els.ctaGrowth = document.getElementById("gs-cta-growth");
-
     els.contactForm = document.getElementById("gs-contact-form");
     els.formError = document.getElementById("gs-form-error");
     els.finalCta = document.getElementById("gs-final-cta");
+    els.trackA = document.getElementById("gs-track-a");
+    els.trackB = document.getElementById("gs-track-b");
   }
 
   function openPromoForm(){
@@ -365,46 +339,12 @@
     els.promoInput.focus();
   }
 
-  function initCardSelection(){
-    [
-      { el: els.cardWebsite, addGrowth: false },
-      { el: els.cardGrowth, addGrowth: true }
-    ].forEach(function(item){
-      if (!item.el) return;
-      item.el.setAttribute("role", "button");
-      item.el.setAttribute("tabindex", "0");
-      item.el.addEventListener("click", function(e){
-        if (e.target.closest("a,button")) return;
-        selectPackage(item.addGrowth);
-      });
-      item.el.addEventListener("keydown", function(e){
-        if (e.target.closest("a,button")) return;
-        if (e.key === "Enter" || e.key === " "){
-          e.preventDefault();
-          selectPackage(item.addGrowth);
-        }
-      });
-    });
-  }
-
   function init(){
     collectEls();
-    renderAll();
-    initCardSelection();
+    renderPricing();
 
-    if (els.ctaWebsite){
-      els.ctaWebsite.addEventListener("click", function(e){
-        e.preventDefault();
-        selectPackage(false);
-        document.getElementById("gs-checkout-form").scrollIntoView({ behavior: ssReduce ? "auto" : "smooth" });
-      });
-    }
-    if (els.ctaGrowth){
-      els.ctaGrowth.addEventListener("click", function(e){
-        e.preventDefault();
-        selectPackage(true);
-        document.getElementById("gs-checkout-form").scrollIntoView({ behavior: ssReduce ? "auto" : "smooth" });
-      });
+    if (els.growthToggle){
+      els.growthToggle.addEventListener("change", onGrowthToggle);
     }
 
     if (els.promoToggleBtn){
@@ -477,16 +417,19 @@
       });
     }
 
-    initGalleryVideos();
-    initGalleryReveal();
+    initGallery();
     initMainVideoObserver();
 
-    // Deliberately no promo restoration of any kind here. Every fresh
-    // page load starts at standard pricing (promoApplied = false) and
-    // stays that way until the customer types a code into the visible
-    // input and it is validated by the server during this page session.
-    // No ?promo= URL parameter is ever read, and no stored value from
-    // localStorage/sessionStorage is ever consulted.
+    // Promo URL support: https://secretsystems.io/get-started/?promo=five
+    var params = new URLSearchParams(window.location.search);
+    var urlPromo = params.get("promo");
+    var storedPromo = loadLocalPromo();
+    var promoToTry = urlPromo || storedPromo;
+    if (promoToTry){
+      if (els.promoForm) openPromoForm();
+      if (els.promoInput) els.promoInput.value = promoToTry;
+      applyPromoCode(promoToTry, { silent: !urlPromo });
+    }
 
     trackEvent("checkout_page_viewed", {});
   }

@@ -10,12 +10,8 @@
 <style>
 /* This is an internal/admin utility page — not part of the customer
    sales journey — for generating a printable QR code that points at
-   /get-started/. The promo code itself is never in this URL: for
-   security, /get-started/ no longer accepts a promo code via URL
-   parameter, so the code must be told to customers separately (e.g.
-   printed on the same flyer/card as this QR code) and typed into the
-   page's own promo field. Not linked from site navigation or the
-   checkout page itself. */
+   the promotional checkout URL (https://secretsystems.io/get-started/?promo=five).
+   Not linked from site navigation or the checkout page itself. */
 .qr-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;}
 .qr-card{max-width:26rem;width:100%;background:var(--card);border:1px solid var(--border);padding:2.5rem;text-align:center;}
 .qr-card h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:.5rem;}
@@ -29,7 +25,7 @@
 <div class="qr-wrap">
   <div class="qr-card">
     <h1>Promo QR Code</h1>
-    <p>Scan or print this code to open the checkout page. For security, the promo code is never in this URL — print or share the code separately so customers can type it into the page's own promo field.</p>
+    <p>Scan or print this code for the promo-code-five checkout link. Right-click the code to save it as an image for flyers, business cards, or signage.</p>
     <div id="qr-canvas-holder"></div>
     <p class="qr-url" id="qr-url-display"></p>
     <div class="qr-actions">
@@ -40,7 +36,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
-  var PROMO_URL = "https://secretsystems.io/get-started/";
+  var PROMO_URL = "https://secretsystems.io/get-started/?promo=five";
   document.getElementById("qr-url-display").textContent = PROMO_URL;
   if (typeof QRCode !== "undefined"){
     new QRCode(document.getElementById("qr-canvas-holder"), {

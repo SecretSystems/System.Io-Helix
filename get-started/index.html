@@ -40,101 +40,69 @@
 .gs-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#050a10;box-shadow:0 30px 80px -20px rgba(0,0,0,.6),0 0 0 1px rgba(0,200,255,.06);}
 .gs-frame video,.gs-frame img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#050a10;}
 
-/* ── Package configurator ── */
-.gs-config-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:2.5rem;align-items:start;}
-@media(max-width:960px){.gs-config-grid{grid-template-columns:1fr;}}
-.gs-package-card{background:var(--card);border:1px solid var(--border);padding:2.25rem;}
+/* ── Two-package cards ── */
+.gs-cards-grid{display:grid;grid-template-columns:1fr 1.06fr;gap:1.5rem;align-items:stretch;margin-top:2rem;}
+@media(max-width:820px){.gs-cards-grid{grid-template-columns:1fr;}}
+.gs-package-card{background:var(--card);border:1px solid var(--border);padding:2.25rem;display:flex;flex-direction:column;cursor:pointer;transition:border-color .2s,box-shadow .2s;position:relative;}
+.gs-package-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
+.gs-package-card.is-selected{border-color:rgba(0,200,255,.4);}
+.gs-package-card.gs-recommended{background:#0d1e30;border-color:rgba(0,200,255,.35);box-shadow:0 20px 50px -25px rgba(0,200,255,.25);}
+.gs-recommended-badge{position:absolute;top:-.8rem;left:2rem;background:var(--cyan);color:var(--void);font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;}
 .gs-package-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:.5rem;}
 .gs-package-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;}
 .gs-price-row{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;}
 .gs-price-strike{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted);text-decoration:line-through;}
 .gs-price-now{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--white);}
 .gs-price-sub{font-size:.78rem;color:var(--muted);}
-.gs-benefit-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin:1.1rem 0;}
+.gs-billing-note{font-size:.78rem;color:var(--text);margin-top:.35rem;line-height:1.5;}
+.gs-benefit-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin:1.1rem 0;flex:1;}
 .gs-benefit-list li{font-size:.88rem;color:var(--text);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5;}
 .gs-benefit-list li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;}
-.gs-care-note{font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;line-height:1.6;}
+.gs-plus-label{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin:.4rem 0 .5rem;}
+.gs-care-note{font-size:.8rem;color:var(--text);border-top:1px solid var(--border);padding-top:1rem;margin-top:auto;line-height:1.6;}
+.gs-usage-note{font-size:.76rem;color:var(--muted);line-height:1.6;margin-top:.75rem;}
+.gs-card-cta{display:block;width:100%;text-align:center;margin-top:1.25rem;}
 
-/* ── Add-on toggle ── */
-.gs-addon-card{background:var(--card);border:1px solid var(--border);padding:1.75rem;margin-top:1.5rem;}
-.gs-addon-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
-.gs-addon-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:.35rem;}
-.gs-addon-desc{font-size:.85rem;color:var(--text);line-height:1.6;max-width:32rem;}
-.gs-toggle{position:relative;display:inline-flex;align-items:center;flex-shrink:0;}
-.gs-toggle input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;}
-.gs-toggle-track{width:48px;height:28px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid var(--border);transition:background .2s,border-color .2s;position:relative;}
-.gs-toggle-track::after{content:'';position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:var(--text);transition:transform .2s,background .2s;}
-.gs-toggle input:checked+.gs-toggle-track{background:rgba(0,200,255,.25);border-color:var(--cyan);}
-.gs-toggle input:checked+.gs-toggle-track::after{transform:translateX(20px);background:var(--cyan);}
-.gs-toggle input:focus-visible+.gs-toggle-track{outline:2px solid var(--cyan);outline-offset:2px;}
-.gs-addon-price{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--cyan);margin-top:.9rem;}
-.gs-addon-usage-note{font-size:.76rem;color:var(--muted);line-height:1.6;margin-top:.75rem;border-top:1px solid var(--border);padding-top:.75rem;}
-
-/* ── Order summary ── */
-.gs-summary{background:var(--card);border:1px solid rgba(0,200,255,.2);padding:2rem;position:sticky;top:6.5rem;}
-@media(max-width:960px){.gs-summary{position:static;}}
-.gs-summary h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:1.25rem;}
+/* ── Order summary + promo ── */
+.gs-summary-wrap{margin-top:2rem;max-width:26rem;margin-left:auto;margin-right:auto;}
+.gs-summary{background:var(--card);border:1px solid rgba(0,200,255,.2);padding:2rem;}
+.gs-summary h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:1.25rem;text-align:center;}
+.gs-summary-package{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);text-align:center;margin-bottom:1rem;}
 .gs-summary-row{display:flex;justify-content:space-between;gap:1rem;font-size:.88rem;color:var(--text);padding:.55rem 0;border-bottom:1px solid var(--border);}
 .gs-summary-row.gs-savings{color:#4eff9f;}
 .gs-summary-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:1rem;margin-top:.25rem;}
 .gs-summary-total .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
 .gs-summary-total .value{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--white);}
-.gs-summary-monthly{display:flex;justify-content:space-between;align-items:baseline;padding-top:.6rem;}
-.gs-summary-monthly .value{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--cyan);}
+.gs-summary-monthly{font-size:.8rem;color:var(--text);padding-top:.6rem;line-height:1.5;}
+.gs-summary-monthly strong{color:var(--cyan);font-family:'Syne',sans-serif;font-weight:700;}
 
-/* ── Promo code ── */
 .gs-promo{margin-top:1.5rem;}
 .gs-promo-toggle{background:none;border:none;color:var(--cyan);font-size:.82rem;font-weight:600;cursor:pointer;padding:.4rem 0;text-decoration:underline;text-underline-offset:3px;}
 .gs-promo-form{display:none;gap:.6rem;margin-top:.75rem;}
 .gs-promo-form.is-open{display:flex;}
 .gs-promo-form input{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(0,200,255,.14);color:var(--white);font-family:'Outfit',sans-serif;font-size:.9rem;padding:.7rem .9rem;outline:none;min-width:0;}
 .gs-promo-form input:focus{border-color:var(--cyan);}
-.gs-promo-form button{flex-shrink:0;background:var(--cyan);color:var(--void);border:none;font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;padding:.7rem 1.1rem;cursor:pointer;}
+.gs-promo-form button{flex-shrink:0;background:var(--cyan);color:var(--void);border:none;font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;padding:.7rem 1.1rem;cursor:pointer;min-height:44px;}
+.gs-promo-form button:disabled{opacity:.6;cursor:wait;}
 .gs-promo-status{font-size:.82rem;margin-top:.6rem;min-height:1.3em;}
 .gs-promo-status.ok{color:#4eff9f;}
 .gs-promo-status.err{color:#ff3c6e;}
 .gs-promo-status[hidden]{display:none;}
 
-/* ── CTA button in summary ── */
 .gs-checkout-btn{display:block;width:100%;text-align:center;margin-top:1.5rem;}
 .gs-checkout-note{font-size:.76rem;color:var(--muted);text-align:center;margin-top:.75rem;line-height:1.5;}
 .gs-checkout-error{font-size:.82rem;color:#ff3c6e;margin-top:.75rem;text-align:center;}
 .gs-checkout-error[hidden]{display:none;}
 
-/* ── Growth Suite feature cards ── */
-.gs-growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
-@media(max-width:900px){.gs-growth-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:560px){.gs-growth-grid{grid-template-columns:1fr;}}
-.gs-growth-card{background:var(--card);border:1px solid var(--border);padding:1.75rem;}
-.gs-growth-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:.5rem;}
-.gs-growth-card p{font-size:.84rem;color:var(--text);line-height:1.6;}
-
-/* ── Moving gallery ── */
-.gs-gallery{overflow:hidden;position:relative;}
-.gs-gallery::before,.gs-gallery::after{content:'';position:absolute;top:0;bottom:0;width:6rem;z-index:2;pointer-events:none;}
-.gs-gallery::before{left:0;background:linear-gradient(90deg,var(--void),transparent);}
-.gs-gallery::after{right:0;background:linear-gradient(270deg,var(--void),transparent);}
-.gs-track-row{display:flex;gap:1rem;margin-bottom:1rem;width:max-content;}
-.gs-track-row.rev{animation-direction:reverse;}
-.gs-track-row.animate-left{animation:gsScrollLeft 38s linear infinite;}
-.gs-track-row.animate-right{animation:gsScrollRight 38s linear infinite;}
-@keyframes gsScrollLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-@keyframes gsScrollRight{from{transform:translateX(-50%);}to{transform:translateX(0);}}
-.gs-clip{position:relative;flex-shrink:0;width:200px;aspect-ratio:9/16;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#050a10;}
-.gs-clip video,.gs-clip img{width:100%;height:100%;object-fit:cover;display:block;}
-@media(max-width:640px){.gs-clip{width:140px;}}
-@media(prefers-reduced-motion:reduce){
-  .gs-track-row.animate-left,.gs-track-row.animate-right{animation:none;}
-  .gs-gallery{overflow-x:auto;}
-}
-
-/* ── Process ── */
-.gs-process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
-@media(max-width:800px){.gs-process-grid{grid-template-columns:1fr;}}
-.gs-process-step{background:var(--void);padding:1.75rem;text-align:center;}
-.gs-process-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:1rem;}
-.gs-process-step h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:.6rem;}
-.gs-process-step p{font-size:.86rem;color:var(--text);line-height:1.6;}
+/* ── Judge for Yourself: video gallery ── */
+.gs-video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+@media(max-width:900px){.gs-video-grid{grid-template-columns:1fr;max-width:32rem;margin:0 auto;}}
+.gs-video-card{background:var(--card);border:1px solid var(--border);overflow:hidden;}
+.gs-video-frame{position:relative;background:#050a10;}
+.gs-video-frame video{display:block;width:100%;height:auto;}
+.gs-video-caption{padding:1rem 1.25rem;font-size:.85rem;color:var(--text);}
+.gs-video-card.reveal{transition-property:opacity,transform;transition-duration:.6s;transition-timing-function:ease-out;}
+@media(prefers-reduced-motion:reduce){.gs-video-card.reveal{transition:none;}}
 
 /* ── FAQ (shares .faq-* pattern from pricing page) ── */
 .faq-list{display:flex;flex-direction:column;gap:0;margin-top:1.75rem;}
@@ -159,7 +127,7 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
   .gs-hero-price{display:none;}
   .gs-hero .btn{padding:.75rem 1.6rem;font-size:.8rem;}
   .section{padding:2.75rem 0;}
-  .gs-package-card,.gs-summary,.gs-addon-card{padding:1.5rem;}
+  .gs-package-card,.gs-summary{padding:1.5rem;}
 }
 </style>
 </head>
@@ -227,198 +195,201 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
   <div class="wrap">
     <div style="text-align:center;max-width:38rem;margin:0 auto 2rem;">
       <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Your Website</p>
-      <h2 class="h2" style="margin-bottom:0;">What you see below is what you pay. Nothing hidden, nothing added later.</h2>
+      <h2 class="h2" style="margin-bottom:0;">Choose your package.</h2>
     </div>
 
-    <div class="gs-config-grid">
-      <!-- LEFT: package + addon -->
-      <div>
-        <div class="gs-package-card">
-          <div class="gs-package-head">
-            <div class="gs-package-name">The Website</div>
-          </div>
-          <div class="gs-price-row">
-            <span class="gs-price-strike" id="gs-website-strike" hidden>$3,500</span>
-            <span class="gs-price-now" id="gs-website-price">$3,500</span>
-            <span class="gs-price-sub">one time</span>
-          </div>
-          <div class="gs-price-row" style="margin-top:.35rem;">
-            <span class="gs-price-strike" id="gs-care-strike" hidden>$149/mo</span>
-            <span class="gs-price-now" style="font-size:1.2rem;" id="gs-care-price">$149/mo</span>
-            <span class="gs-price-sub">Website Care — billed monthly starting at launch</span>
-          </div>
-          <ul class="gs-benefit-list">
-            <li>Custom, professional website</li>
-            <li>Responsive mobile design</li>
-            <li>Conversion-focused page structure</li>
-            <li>Contact and lead-capture forms</li>
-            <li>Essential search-engine foundations</li>
-            <li>Performance optimization</li>
-            <li>Secure deployment</li>
-            <li>Launch support</li>
-          </ul>
-          <p class="gs-care-note">A website you never touch again is a website that quietly breaks. Website Care is the ongoing subscription that keeps yours hosted, updated, and working — billing starts once your site goes live, and continues monthly until you cancel.</p>
+    <div class="gs-cards-grid">
+      <!-- Website only -->
+      <div class="gs-package-card" id="gs-card-website" aria-pressed="false" aria-label="Select the Website package">
+        <div class="gs-package-head">
+          <div class="gs-package-name">Website</div>
         </div>
-
-        <div class="gs-addon-card">
-          <div class="gs-addon-head">
-            <div>
-              <div class="gs-addon-title">Want the leads followed up on too?</div>
-              <p class="gs-addon-desc">A great website still loses business if no one follows up fast. The Growth Suite is the system that does — optional, and never required to get your website.</p>
-            </div>
-            <label class="gs-toggle">
-              <input type="checkbox" id="gs-growth-toggle" aria-describedby="gs-addon-price">
-              <span class="gs-toggle-track" aria-hidden="true"></span>
-            </label>
-          </div>
-          <p class="gs-addon-price" id="gs-addon-price">+ $297/month if added</p>
-          <p class="gs-addon-usage-note">Texting, calling, and AI-assisted usage carry per-message and per-minute carrier fees passed through at cost — for example, published carrier fees of roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute (rates vary by carrier and route, and change from time to time). These are not included in the $297/month price. Full current rates are published in the underlying platform's pricing documentation, and we'll walk through expected usage costs for your business before you rely on it.</p>
+        <div class="gs-price-row">
+          <span class="gs-price-strike" id="gs-website-strike" hidden>$3,500</span>
+          <span class="gs-price-now" id="gs-website-price">$3,500</span>
+          <span class="gs-price-sub">due today</span>
         </div>
+        <p class="gs-billing-note">Then <strong id="gs-care-price-inline" style="color:var(--white);">$149/mo</strong> after your 30-day Website Care trial</p>
+        <ul class="gs-benefit-list">
+          <li>Professionally designed, mobile-responsive website</li>
+          <li>Google Business Profile setup or optimization</li>
+          <li>Lead-capture forms</li>
+          <li>Search-engine foundations</li>
+          <li>Secure deployment</li>
+          <li>Launch support</li>
+        </ul>
+        <p class="gs-care-note">Ongoing Website Care is <span id="gs-care-price">$149/month</span>, billed after a 30-day trial, and continues monthly until cancelled.</p>
+        <a href="#" class="btn btn-outline gs-card-cta" id="gs-cta-website">Launch My Website</a>
       </div>
 
-      <!-- RIGHT: order summary -->
-      <div>
-        <div class="gs-summary">
-          <h3>Order Summary</h3>
-          <div class="gs-summary-row">
-            <span>Website (one time)</span>
-            <span id="gs-sum-website">$3,500</span>
-          </div>
-          <div class="gs-summary-row">
-            <span>Website Care (monthly)</span>
-            <span id="gs-sum-care">$149/mo</span>
-          </div>
-          <div class="gs-summary-row" id="gs-sum-growth-row" hidden>
-            <span>Growth Suite (monthly)</span>
-            <span id="gs-sum-growth">$297/mo</span>
-          </div>
-          <div class="gs-summary-row gs-savings" id="gs-sum-savings-row" hidden>
-            <span>Promo savings</span>
-            <span id="gs-sum-savings">&minus;$3,000 today</span>
-          </div>
-
-          <div class="gs-summary-total">
-            <span class="label">Due Today</span>
-            <span class="value" id="gs-total-today">$3,500</span>
-          </div>
-          <div class="gs-summary-monthly">
-            <span class="label">Recurs Monthly</span>
-            <span class="value" id="gs-total-monthly">$149/mo</span>
-          </div>
-
-          <div class="gs-promo">
-            <button type="button" class="gs-promo-toggle" id="gs-promo-toggle-btn" aria-expanded="false" aria-controls="gs-promo-form">Have a promo code?</button>
-            <form class="gs-promo-form" id="gs-promo-form" aria-hidden="true">
-              <label for="gs-promo-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Promo code</label>
-              <input type="text" id="gs-promo-input" name="promo" placeholder="Enter code" autocomplete="off" inputmode="text">
-              <button type="submit">Apply</button>
-            </form>
-            <p class="gs-promo-status" id="gs-promo-status" hidden role="status"></p>
-          </div>
-
-          <a href="#gs-checkout-form" class="btn btn-cyan gs-checkout-btn" id="gs-summary-cta">Get Started</a>
-          <p class="gs-checkout-note">A few details, then straight to secure checkout — no surprises waiting for you there.</p>
+      <!-- Website + Growth (recommended) -->
+      <div class="gs-package-card gs-recommended" id="gs-card-growth" aria-pressed="true" aria-label="Select the Website + Growth package — recommended">
+        <span class="gs-recommended-badge">Recommended</span>
+        <div class="gs-package-head">
+          <div class="gs-package-name">Website + Growth</div>
         </div>
+        <div class="gs-price-row">
+          <span class="gs-price-strike" id="gs-growth-website-strike" hidden>$3,500</span>
+          <span class="gs-price-now" id="gs-growth-website-price">$3,500</span>
+          <span class="gs-price-sub">+ first month due today</span>
+        </div>
+        <p class="gs-billing-note" id="gs-growth-due-today-note">$3,797 due today</p>
+        <div class="gs-price-row" style="margin-top:.5rem;">
+          <span class="gs-price-strike">$497/mo</span>
+          <span class="gs-price-now" style="font-size:1.2rem;">$297/mo</span>
+          <span class="gs-price-sub">limited-time rate</span>
+        </div>
+        <p class="gs-plus-label">Everything in Website, plus</p>
+        <ul class="gs-benefit-list">
+          <li>CRM and sales pipeline</li>
+          <li>Missed-call text-back</li>
+          <li>Text and email follow-up</li>
+          <li>Appointment reminders</li>
+          <li>Five-star review request system</li>
+          <li>Basic automation and follow-up tools</li>
+        </ul>
+        <p class="gs-care-note">Website Care is included with the Growth Suite. You will not be charged an additional Website Care subscription.</p>
+        <p class="gs-usage-note">Carrier, messaging, email, advertising, and other usage-based charges may be billed separately based on actual usage.</p>
+        <a href="#" class="btn btn-cyan gs-card-cta" id="gs-cta-growth">Build My Growth System</a>
+      </div>
+    </div>
+
+    <!-- Order summary + promo -->
+    <div class="gs-summary-wrap">
+      <div class="gs-summary">
+        <h3>Order Summary</h3>
+        <p class="gs-summary-package" id="gs-summary-package-name">Website + Growth</p>
+
+        <div class="gs-summary-row">
+          <span id="gs-sum-website-label">Website (one time)</span>
+          <span id="gs-sum-website">$3,500</span>
+        </div>
+        <div class="gs-summary-row" id="gs-sum-growth-row" hidden>
+          <span>Growth Suite (first month)</span>
+          <span id="gs-sum-growth">$297</span>
+        </div>
+        <div class="gs-summary-row gs-savings" id="gs-sum-savings-row" hidden>
+          <span>Promo savings</span>
+          <span id="gs-sum-savings">&minus;$3,000 today</span>
+        </div>
+
+        <div class="gs-summary-total">
+          <span class="label">Due Today</span>
+          <span class="value" id="gs-total-today">$3,500</span>
+        </div>
+        <p class="gs-summary-monthly" id="gs-summary-monthly-note">Then <strong>$149/mo</strong> after your 30-day Website Care trial.</p>
+
+        <div class="gs-promo">
+          <button type="button" class="gs-promo-toggle" id="gs-promo-toggle-btn" aria-expanded="false" aria-controls="gs-promo-form">Have a promo code?</button>
+          <form class="gs-promo-form" id="gs-promo-form" aria-hidden="true">
+            <label for="gs-promo-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Promo code</label>
+            <input type="text" id="gs-promo-input" name="promo" placeholder="Enter promotional code" autocomplete="off" inputmode="text">
+            <button type="submit" id="gs-promo-btn">Apply</button>
+          </form>
+          <p class="gs-promo-status" id="gs-promo-status" hidden aria-live="polite" role="status"></p>
+        </div>
+
+        <a href="#gs-checkout-form" class="btn btn-cyan gs-checkout-btn" id="gs-summary-cta">Get Started</a>
+        <p class="gs-checkout-note">A few details, then straight to secure checkout — no surprises waiting for you there.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ GROWTH SUITE DETAIL ══ -->
-<section class="section">
-  <div class="wrap" style="max-width:56rem;margin:0 auto;text-align:center;">
-    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Optional Add-On</p>
-    <h2 class="h2" style="margin-bottom:1rem;">Most leads go cold before anyone calls them back.</h2>
-    <p class="lead" style="margin:0 auto;text-align:center;">The Secret Systems Growth Suite gives you one organized place to track prospects, follow up automatically, manage conversations, and keep opportunities from slipping through the cracks.</p>
-    <div class="gs-growth-grid" style="margin-top:1.75rem;">
-      <div class="gs-growth-card"><h4>Stop losing leads in sticky notes</h4><p>Every prospect lands in one pipeline — nothing tracked by memory, nothing forgotten in a drawer.</p></div>
-      <div class="gs-growth-card"><h4>Reach them while they're still interested</h4><p>Automated text and email follow-up goes out the moment a new lead shows interest, not hours later.</p></div>
-      <div class="gs-growth-card"><h4>Stop hunting across five apps</h4><p>Calls, texts, and emails live in one place instead of scattered across your phone and inbox.</p></div>
-      <div class="gs-growth-card"><h4>Win back the ones you almost lost</h4><p>Missed-call text-back and reminders bring a lead back before they've already called the next guy.</p></div>
-      <div class="gs-growth-card"><h4>Get your evenings back</h4><p>Appointment reminders and basic pipeline automation take the repetitive follow-up off your plate.</p></div>
-      <div class="gs-growth-card"><h4>No pressure to decide today</h4><p>The Growth Suite is optional now and can be added later — it's never required for your website.</p></div>
-    </div>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:1.5rem;line-height:1.6;">Features depend on your account setup. Calling, texting, and AI-assisted usage carry carrier fees passed through at cost — roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute — on top of the $297/month price, and are never assumed to be unlimited.</p>
-  </div>
-</section>
-
-<!-- ══ MOVING DEMO GALLERY ══ -->
+<!-- ══ JUDGE FOR YOURSELF: VIDEO GALLERY ══ -->
 <section class="section" style="background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div class="wrap" style="text-align:center;margin-bottom:1.75rem;">
-    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">See The Work</p>
-    <h2 class="h2" style="margin-bottom:0;">Judge for yourself.</h2>
-  </div>
-  <div class="gs-gallery" id="gs-gallery">
-    <div class="gs-track-row animate-left" id="gs-track-a"></div>
-    <div class="gs-track-row animate-right" id="gs-track-b"></div>
-  </div>
-</section>
-
-<!-- ══ PROCESS ══ -->
-<section class="section">
-  <div class="wrap" style="text-align:center;">
-    <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">Simple Process</p>
-    <h2 class="h2" style="margin-bottom:0;">Three steps between here and launched.</h2>
-    <div class="gs-process-grid" style="margin-top:1.75rem;">
-      <div class="gs-process-step"><div class="gs-process-num">01</div><h4>Choose your system</h4><p>Pick your website package and decide whether to add the Growth Suite.</p></div>
-      <div class="gs-process-step"><div class="gs-process-num">02</div><h4>Complete secure checkout</h4><p>Enter your details and complete payment through secure checkout.</p></div>
-      <div class="gs-process-step"><div class="gs-process-num">03</div><h4>Tell us about your business</h4><p>Answer our short questionnaire so we can start building right away.</p></div>
+  <div class="wrap" style="max-width:70rem;margin:0 auto;">
+    <div style="text-align:center;max-width:36rem;margin:0 auto 2.5rem;">
+      <p class="eyebrow" style="justify-content:center;margin-bottom:.6rem;">See The Work</p>
+      <h2 class="h2" style="margin-bottom:.75rem;">Judge for Yourself</h2>
+      <p class="lead" style="margin:0 auto;text-align:center;">Explore a few of the digital experiences we can build for modern businesses.</p>
+    </div>
+    <div class="gs-video-grid" id="gs-video-grid">
+      <div class="gs-video-card reveal">
+        <div class="gs-video-frame">
+          <video
+            id="gs-video-1"
+            class="gs-gallery-video"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/video/Demo video small/optimized/tripleo-poster.jpg"
+            aria-label="Demo website build: AI-powered trip-planning site">
+            <source src="/assets/video/Demo video small/optimized/tripleo.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="gs-video-caption">AI-powered trip-planning website</p>
+      </div>
+      <div class="gs-video-card reveal">
+        <div class="gs-video-frame">
+          <video
+            id="gs-video-2"
+            class="gs-gallery-video"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/video/Demo video small/optimized/luxterra-poster.jpg"
+            aria-label="Demo website build: luxury real-estate showcase site">
+            <source src="/assets/video/Demo video small/optimized/luxterra.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="gs-video-caption">Luxury real-estate showcase website</p>
+      </div>
+      <div class="gs-video-card reveal">
+        <div class="gs-video-frame">
+          <video
+            id="gs-video-3"
+            class="gs-gallery-video"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/video/Demo video small/optimized/averra-poster.jpg"
+            aria-label="Demo website build: fashion e-commerce site">
+            <source src="/assets/video/Demo video small/optimized/averra.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="gs-video-caption">Fashion e-commerce website</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ FAQ ══ -->
-<section class="section" style="background:var(--deep);border-top:1px solid var(--border);">
+<section class="section">
   <div class="wrap" style="max-width:44rem;margin:0 auto;">
     <p class="eyebrow" style="justify-content:center;text-align:center;">Questions</p>
     <h2 class="h2" style="text-align:center;">Before you decide, the honest answers.</h2>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What is included in the website? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">A custom, professional website with responsive mobile design, a conversion-focused page structure, contact and lead-capture forms, essential search-engine foundations, performance optimization, secure deployment, and launch support.</div>
+        <div class="faq-a">A professionally designed, mobile-responsive website with Google Business Profile setup or optimization, lead-capture forms, search-engine foundations, secure deployment, and launch support.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">How long does a website normally take? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Timelines vary by project scope and how quickly we receive your content and feedback. We'll share a specific estimate once we understand your business through the onboarding questionnaire.</div>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does Website Care cost, and when does it start? <span class="arrow" aria-hidden="true">▾</span></button>
+        <div class="faq-a">Website Care is $149/month (or $59/month under Promo 5). On the Website-only package, your first Website Care payment begins after a 30-day trial and continues monthly until cancelled. On Website + Growth, Website Care is included in the $297/month Growth Suite price — there is no separate charge.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does Website Care include? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Website Care covers ongoing hosting, updates, and support after your site launches, so your website keeps running smoothly.</div>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are texting, calling, and email usage included? <span class="arrow" aria-hidden="true">▾</span></button>
+        <div class="faq-a">Growth Suite provides the system for texting, calling, and email. Usage carries per-message and per-minute carrier fees passed through at cost — for example, published carrier fees of roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute (rates vary by carrier and route, and change from time to time). These are not included in the $297/month price. Carrier, messaging, email, advertising, and other usage-based charges may be billed separately based on actual usage. We'll walk through expected usage costs for your business before you rely on it.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is Website Care billed monthly? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Yes. Website Care is a recurring monthly subscription that begins billing once your website launches and continues monthly until cancelled.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What is the Secret Systems Growth Suite? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">It's one integrated system for capturing, organizing, and following up with leads — a CRM and pipeline, automated follow-up, and centralized conversations in one place. It's optional and billed separately at $297/month.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are calls, texts, emails, phone numbers, and AI usage included? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">The Growth Suite provides the system for calling, texting, email, and AI-assisted follow-up. Usage is billed at cost, passed through from the underlying carriers — roughly $0.003–$0.005 per outbound text segment and $0.012–$0.018 per call minute, depending on carrier and route. These carrier fees are not included in the $297/month price and are never assumed to be unlimited. We'll walk through expected usage costs for your volume before you rely on it.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Can I add the Growth Suite later? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Yes. The Growth Suite is never required to get your website, and you can add it whenever you're ready.</div>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Do you guarantee rankings, leads, or five-star reviews? <span class="arrow" aria-hidden="true">▾</span></button>
+        <div class="faq-a">No. The Growth Suite includes a five-star review request system and follow-up tools designed to help you get more reviews and respond to leads faster, but we do not guarantee search rankings, leads, revenue, or five-star reviews.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What happens after checkout? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">After checkout you'll be taken to a confirmation page, then into our short onboarding questionnaire so we can start learning about your business and begin your build.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does promo code "five" change? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">Promo code five changes the website to a $500 one-time promotional price and Website Care to $59/month. It is a promotional price, not a deposit or a discount off the regular price. It does not change the Growth Suite price if you add it.</div>
+        <div class="faq-a">After a successful payment, you'll be taken directly to our website questionnaire so we can start learning about your business and begin your build.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Are there refunds or cancellation terms? <span class="arrow" aria-hidden="true">▾</span></button>
-        <div class="faq-a">[Owner action needed: publish verified refund, cancellation, and subscription-terms language here and in /terms/ before this page goes live for real customers. No refund or cancellation policy has been invented for this placeholder.]</div>
+        <div class="faq-a">Monthly services continue until cancelled according to your signed service agreement. Contact Secret Systems before purchasing if you need clarification about cancellation, website ownership, or service transfer terms.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══ CHECKOUT / CONTACT DETAILS ══ -->
-<section class="section" id="gs-checkout-form" style="border-top:1px solid var(--border);">
+<section class="section" id="gs-checkout-form" style="background:var(--deep);border-top:1px solid var(--border);">
   <div class="wrap" style="max-width:34rem;margin:0 auto;">
     <p class="eyebrow" style="justify-content:center;text-align:center;">Almost There</p>
     <h2 class="h2" style="text-align:center;">Last step. Tell us where to send it.</h2>
@@ -443,7 +414,7 @@ button.faq-q{width:100%;text-align:left;background:none;border:none;color:inheri
       </div>
       <p class="gs-checkout-error" id="gs-form-error" hidden></p>
       <button type="submit" class="btn btn-cyan gs-checkout-btn" id="gs-final-cta">Build My Website</button>
-      <p class="gs-checkout-note">Clicking continue takes you to secure checkout to complete your purchase. Nothing is charged on this page.</p>
+      <p class="gs-checkout-note">Clicking continue takes you to secure checkout to complete your purchase. Nothing is charged on this page. Your selected service renews monthly until cancelled according to your service agreement. Review our <a href="/terms/" style="color:var(--cyan);">Terms</a> and <a href="/privacy/" style="color:var(--cyan);">Privacy Policy</a> before checkout.</p>
     </form>
   </div>
 </section>

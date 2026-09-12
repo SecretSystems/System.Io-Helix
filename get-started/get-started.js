@@ -195,7 +195,7 @@
     return (cfg.HIGHLEVEL_URLS || {})[key] || "";
   }
 
-  function beginCheckout(contact){
+  function beginCheckout(){
     trackEvent("checkout_initiated", { has_growth_suite: state.addGrowthSuite, promo_applied: state.promoApplied });
     return validateSelection(state.promoApplied ? state.promoCode : "").then(function(result){
       if (!result.data.ok){
@@ -380,31 +380,13 @@
       els.contactForm.addEventListener("submit", function(e){
         e.preventDefault();
         els.formError.hidden = true;
-        var businessName = document.getElementById("gs-business-name").value.trim();
-        var contactName = document.getElementById("gs-contact-name").value.trim();
-        var email = document.getElementById("gs-email").value.trim();
-        var phone = document.getElementById("gs-phone").value.trim();
-
-        var invalid = [];
-        if (!businessName) invalid.push(document.getElementById("gs-business-name"));
-        if (!contactName) invalid.push(document.getElementById("gs-contact-name"));
-        if (!email || email.indexOf("@") === -1) invalid.push(document.getElementById("gs-email"));
-
-        document.querySelectorAll("#gs-contact-form input").forEach(function(i){ i.removeAttribute("aria-invalid"); });
-        if (invalid.length){
-          invalid.forEach(function(i){ i.setAttribute("aria-invalid", "true"); });
-          els.formError.hidden = false;
-          els.formError.textContent = "Please fill in your business name, name, and a valid email before continuing.";
-          invalid[0].focus();
-          return;
-        }
 
         if (els.finalCta.disabled) return; // guard against duplicate submits
         els.finalCta.disabled = true;
         var originalText = els.finalCta.textContent;
         els.finalCta.textContent = "Redirecting to checkout…";
 
-        beginCheckout({ businessName: businessName, contactName: contactName, email: email, phone: phone }).then(function(result){
+        beginCheckout().then(function(result){
           if (result.ok){
             window.location.href = result.url;
           } else {

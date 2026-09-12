@@ -87,7 +87,12 @@ window.SS_QUESTIONNAIRE_CONFIG = {
         phone: fields.phone || null,
         answers: fields.answers || {},
         current_section: fields.currentSection || null,
-        completion_percentage: fields.completionPercentage || 0
+        completion_percentage: fields.completionPercentage || 0,
+        google_business_help: fields.googleBusinessHelp || null,
+        google_business_authorized: !!fields.googleBusinessAuthorized,
+        google_business_authorized_name: fields.googleBusinessAuthorizedName || null,
+        google_business_authorized_role: fields.googleBusinessAuthorizedRole || null,
+        google_business_authorized_at: fields.googleBusinessAuthorizedAt || null
       };
       return client.from(cfg.TABLE_SUBMISSIONS).upsert(row, { onConflict: "id" }).then(function(res){
         if (res.error) return { ok: false, reason: "error", error: res.error };
@@ -207,6 +212,11 @@ window.SS_QUESTIONNAIRE_CONFIG = {
         answers: fields.answers || {},
         current_section: fields.currentSection || null,
         completion_percentage: fields.completionPercentage || 0,
+        google_business_help: fields.googleBusinessHelp || null,
+        google_business_authorized: !!fields.googleBusinessAuthorized,
+        google_business_authorized_name: fields.googleBusinessAuthorizedName || null,
+        google_business_authorized_role: fields.googleBusinessAuthorizedRole || null,
+        google_business_authorized_at: fields.googleBusinessAuthorizedAt || null,
         status: "submitted",
         submitted_at: new Date().toISOString()
       }).eq("id", submissionId).eq("owner_id", session.userId).eq("status", "draft")

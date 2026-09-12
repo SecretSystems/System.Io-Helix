@@ -429,6 +429,41 @@ window.SS_QUESTIONNAIRE_SCHEMA = [
     ]
   },
   {
+    id: "googleBusiness",
+    title: "Google Business Profile",
+    short: "Google Profile",
+    required: false,
+    cardDescription: "Optional authorization for Secret Systems to manage your Google Business Profile.",
+    questions: [
+      { id: "googleBusinessHelp", type: "radio-cards", star: true,
+        label: "Do you want Secret Systems to help set up or manage your Google Business Profile?",
+        options: [
+          { value: "yes", label: "Yes" },
+          { value: "no", label: "No" }
+        ] },
+      { id: "googleBusinessAuthHeading", type: "heading",
+        label: "Authorization",
+        helper: "I authorize Secret Systems to create, claim, verify, edit, and manage my Google Business Profile on behalf of my business. I confirm I have authority to give this permission. My business will remain the owner of the profile, and I can revoke Secret Systems’ access at any time.",
+        condition: { field: "googleBusinessHelp", equals: "yes" } },
+      { id: "googleBusinessAuthorized", type: "checkboxes", star: true,
+        label: "Confirm your authorization",
+        condition: { field: "googleBusinessHelp", equals: "yes" },
+        options: [
+          { value: "agree", label: "I agree and authorize Secret Systems to manage my Google Business Profile." }
+        ] },
+      { id: "googleBusinessAuthorizedName", type: "text", star: true,
+        label: "Full name",
+        condition: { field: "googleBusinessHelp", equals: "yes" } },
+      { id: "googleBusinessAuthorizedRole", type: "text", star: true,
+        label: "Role with business",
+        condition: { field: "googleBusinessHelp", equals: "yes" } },
+      { id: "googleBusinessPasswordNote", type: "heading",
+        label: "A quick note",
+        helper: "Never send us your Google password. If Google requires verification, we'll guide you through it.",
+        condition: { field: "googleBusinessHelp", equals: "yes" } }
+    ]
+  },
+  {
     id: "growth",
     title: "Growth & Marketing",
     short: "Growth",

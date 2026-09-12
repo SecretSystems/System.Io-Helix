@@ -29,7 +29,8 @@
                           // confirms them). Required sections are always derived live
                           // from their star-question answers -- see sectionStatusFor().
     draftId: null,        // submission row id (also the storage path segment)
-    remoteStatus: "idle"  // idle | saving | saved | offline | error
+    remoteStatus: "idle", // idle | saving | saved | offline | error
+    googleBusinessAuthorizedAt: null // ISO timestamp set once, the first time the authorization checkbox is checked
   };
 
   var els = {};
@@ -64,6 +65,7 @@
         answers: state.answers,
         files: state.files,
         sectionStatus: state.sectionStatus,
+        googleBusinessAuthorizedAt: state.googleBusinessAuthorizedAt,
         savedAt: Date.now(),
         version: VERSION
       }));
@@ -88,7 +90,20 @@
     }
   }
 
+  /* True only if the client selected "Yes" to Google Business Profile help
+     AND checked the required authorization checkbox. Selecting "Yes" alone
+     is never treated as authorization. */
+  function isGoogleBusinessAuthorized(){
+    var authorizedBox = state.answers.googleBusinessAuthorized;
+    return state.answers.googleBusinessHelp === "yes" &&
+      Array.isArray(authorizedBox) && authorizedBox.indexOf("agree") !== -1;
+  }
+
   function buildDraftFields(){
+    var authorized = isGoogleBusinessAuthorized();
+    if (authorized && !state.googleBusinessAuthorizedAt){
+      state.googleBusinessAuthorizedAt = new Date().toISOString();
+    }
     return {
       businessName: state.answers.businessName || null,
       contactName: state.answers.contactName || null,
@@ -96,7 +111,12 @@
       phone: state.answers.phone || null,
       answers: buildStructuredPayload(),
       currentSection: SCHEMA[state.sectionIndex] ? SCHEMA[state.sectionIndex].id : null,
-      completionPercentage: overallPercent()
+      completionPercentage: overallPercent(),
+      googleBusinessHelp: state.answers.googleBusinessHelp || null,
+      googleBusinessAuthorized: authorized,
+      googleBusinessAuthorizedName: authorized ? (state.answers.googleBusinessAuthorizedName || null) : null,
+      googleBusinessAuthorizedRole: authorized ? (state.answers.googleBusinessAuthorizedRole || null) : null,
+      googleBusinessAuthorizedAt: authorized ? state.googleBusinessAuthorizedAt : null
     };
   }
 
@@ -541,6 +561,10 @@
         hh.textContent = q.helper;
         hb.appendChild(hh);
       }
+      if (q.condition){
+        hb.classList.add("qn-conditional");
+        hb.dataset.condField = q.condition.field;
+      }
       return hb;
     }
 
@@ -666,10 +690,16 @@
     focusHeading(els.sectionTitle);
   }
 
-  /* ── Required-question validation (blocks Continue on required sections) ── */
+  /* ── Required-question validation ──
+     Always blocks Continue on required sections. On optional sections it
+     only blocks when a star question is both currently visible (its
+     condition is met) and unanswered -- e.g. the Google Business Profile
+     authorization checkbox/name/role, which only become required once the
+     client opts in. An optional section with no such visible star
+     questions is never blocked, exactly as before. */
   function validateCurrentSection(){
     var sIdx = state.sectionIndex;
-    if (!isSectionRequired(sIdx)) return { ok: true };
+    if (!isSectionRequired(sIdx) && requiredQuestionsFor(sIdx).length === 0) return { ok: true };
     var missing = missingRequiredQuestions(sIdx);
     els.sectionBody.querySelectorAll(".qn-question.has-error").forEach(function(n){ n.classList.remove("has-error"); });
     if (missing.length === 0){
@@ -741,7 +771,12 @@
      Editing an already-confirmed optional section keeps it complete.
      ============================================================ */
   function requiredQuestionsFor(sIdx){
-    return SCHEMA[sIdx].questions.filter(function(q){ return q.star && q.type !== "heading"; });
+    // A star question whose condition isn't currently met (e.g. it's only
+    // required when a prior answer was "Yes") isn't actually required
+    // right now, and must never block Continue while it's hidden.
+    return SCHEMA[sIdx].questions.filter(function(q){
+      return q.star && q.type !== "heading" && conditionMet(q.condition);
+    });
   }
   function missingRequiredQuestions(sIdx){
     return requiredQuestionsFor(sIdx).filter(function(q){ return !isAnswered(q.id); });
@@ -844,7 +879,7 @@
       top.className = "qn-dcard-top";
       var num = document.createElement("span");
       num.className = "qn-dcard-number";
-      num.textContent = "0" + (idx + 1);
+      num.textContent = (idx + 1 < 10 ? "0" : "") + (idx + 1);
       top.appendChild(num);
       if (status === "complete"){
         var check = document.createElement("span");
@@ -1183,6 +1218,7 @@
       state.files = saved.files || {};
       state.sectionStatus = saved.sectionStatus || {};
       state.sectionIndex = saved.sectionIndex || 0;
+      state.googleBusinessAuthorizedAt = saved.googleBusinessAuthorizedAt || null;
     }
 
     buildRail();
@@ -1193,10 +1229,11 @@
     });
     els.btnNext.addEventListener("click", function(){
       var current = state.sectionIndex;
-      if (isSectionRequired(current)){
+      if (isSectionRequired(current) || requiredQuestionsFor(current).length > 0){
         var v = validateCurrentSection();
         if (!v.ok) return;
-      } else {
+      }
+      if (!isSectionRequired(current)){
         confirmOptionalSectionComplete(current);
       }
       scheduleSave();
